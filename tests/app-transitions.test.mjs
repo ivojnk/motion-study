@@ -22,9 +22,11 @@ const source = fs.readFileSync(new URL('../src/main.js', import.meta.url), 'utf8
       select(...args) { globalThis.viewerCalls.push(['select', ...args]); },
       showModelChoices(...args) { globalThis.viewerCalls.push(['model-choice', ...args]); return true; },
       highlight(...args) { globalThis.lastHighlight = args; globalThis.viewerCalls.push(['highlight', ...args]); },
-      setPickingEnabled(value) { globalThis.pickingEnabled = value; }, setIsolated() {} }; },
+      setPickingEnabled(value) { globalThis.pickingEnabled = value; }, setIsolated(value) { globalThis.viewerIsolation = value; } }; },
     lastHighlight: () => globalThis.lastHighlight,
     pickingEnabled: () => globalThis.pickingEnabled,
+    isolated: () => globalThis.viewerIsolation,
+    toggleIsolation: value => { $('#isolate').checked = value; viewer?.setIsolated(value); },
     viewerCalls: () => globalThis.viewerCalls
   };`;
 
@@ -45,7 +47,7 @@ function app(data = {}, locks, options = {}) {
     if (!elements.has(selector)) elements.set(selector, { innerHTML: '', setAttribute() {}, focus() {}, scrollIntoView() {} });
     return elements.get(selector);
   };
-  const fixed = new Set(['#learning', '#intro', '#model-prompt', '#muscle-select', '#isolate', '#orientation', '#selection-card', '.atlas-panel', '#storage-warning', '#main']);
+  const fixed = new Set(['#learning', '#intro', '#model-prompt', '#muscle-select', '#isolate', '#bones', '#orientation', '#selection-card', '.atlas-panel', '#storage-warning', '#main']);
   const querySelector = selector => {
     if (fixed.has(selector)) return node(selector);
     const html = node('#learning').innerHTML;
@@ -265,7 +267,7 @@ for (const mode of ['choice', 'binary']) {
     instance.viewerReady(); instance.renderLesson();
     assert.equal(instance.element('.atlas-panel').hidden, false);
     assert.equal(instance.pickingEnabled(), false);
-    assert.equal(instance.element('#isolate').disabled, true);
+    assert.equal(instance.element('#isolate').disabled, false);
     assert.deepEqual(Array.from(instance.viewerCalls().at(-1)[1]), q.modelContext.muscleIds);
     assert.match(instance.html(), /data-model-question/);
     assert.ok(instance.html().includes(q.prompt));
@@ -338,16 +340,17 @@ test('confirmed atlas picks preserve the camera and orientation for mapped and u
   assert.equal(instance.element('#orientation').textContent, 'ACHTERZIJDE');
 });
 
-test('point questions clear isolation, keep answer buttons available and restore controls after grading or navigation', () => {
+test('point questions preserve isolation with controls available through grading and navigation', () => {
   const q = curriculum.questions.find(q => q.type === 'recognition' && q.muscleId === 'pectoralis');
   const session = { ids: [q.id, q.id], index: 1, correct: 0, answered: 1, retryIds: [], region: q.region,
     options: learning.optionsFor(q), response: null, finished: false, prepared: true, pairingDone: true };
   const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) });
   instance.viewerReady();
   instance.element('#isolate').checked = true;
+  instance.element('#bones').checked = false;
   instance.go('#les/' + q.region);
-  assert.equal(instance.element('#isolate').disabled, true);
-  assert.equal(instance.element('#isolate').checked, false);
+  assert.equal(instance.element('#isolate').disabled, false);
+  assert.equal(instance.element('#isolate').checked, true);
   const answers = [...instance.html().matchAll(/<button[^>]*data-answer="[^"]*"[^>]*>/g)].map(match => match[0]);
   assert.equal(answers.length, 4);
   assert.ok(answers.every(button => !button.includes('disabled')));
@@ -355,7 +358,40 @@ test('point questions clear isolation, keep answer buttons available and restore
   assert.equal(instance.element('#isolate').disabled, false);
   instance.go('#atlas');
   assert.equal(instance.element('#isolate').disabled, false);
-  assert.equal(instance.element('#isolate').checked, false);
+  assert.equal(instance.element('#isolate').checked, true);
+  assert.equal(instance.isolated(), true);
+  assert.equal(instance.element('#bones').checked, false);
+});
+
+test('model questions preserve both display settings through rendering, feedback, the next question and atlas navigation', () => {
+  const plain = curriculum.questions.find(q => q.type === 'choice' && !learning.usesModel(q));
+  const recognition = curriculum.questions.find(q => q.type === 'recognition' && q.muscleId === 'biceps');
+  const examples = [
+    [recognition, 'model-choice'], [recognition, 'point'],
+    [curriculum.questions.find(q => q.id === 'pectoralis-functie'), 'choice'],
+    [curriculum.questions.find(q => q.type === 'exercise-recognition'), 'recognition'],
+    [curriculum.questions.find(q => q.type === 'model-fact'), 'choice']
+  ];
+  for (const [q, mode] of examples) for (const isolated of [true, false]) {
+    const options = learning.optionsFor(q, Math.random, mode);
+    const session = { ids: [q.id, plain.id], exerciseModes: [mode, 'choice'], index: 0, initialCount: 2,
+      correct: 0, answered: 0, retryIds: [], region: 'daily', options, response: null, finished: false, prepared: true };
+    const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) });
+    instance.toggleIsolation(isolated);
+    instance.element('#bones').checked = !isolated;
+    const assertSettings = () => {
+      assert.equal(instance.element('#isolate').disabled, false, mode);
+      assert.notEqual(instance.element('#bones').disabled, true, mode);
+      assert.equal(instance.element('#isolate').checked, isolated, mode);
+      assert.equal(instance.isolated(), isolated, mode);
+      assert.equal(instance.element('#bones').checked, !isolated, mode);
+    };
+    instance.go('#les/daily'); assertSettings();
+    instance.renderLesson({ preserveCamera: true }); assertSettings();
+    instance.play(); assertSettings();
+    instance.next(); assertSettings();
+    instance.go('#atlas'); assertSettings();
+  }
 });
 
 function pointLesson(locks) {
@@ -1100,7 +1136,7 @@ test('four highlighted candidates map anonymous buttons to muscles and preserve 
   for (let index = 0; index < 4; index++) assert.ok(instance.html().includes('Spier ' + (index + 1) + ' · ' + choicePalette[index].name));
   assert.deepEqual(Array.from(instance.viewerCalls().at(-1)[1]), ids);
   assert.equal(instance.pickingEnabled(), false);
-  assert.equal(instance.element('#isolate').disabled, true);
+  assert.equal(instance.element('#isolate').disabled, false);
   instance.element('#orientation').textContent = 'ZIJAANZICHT';
   instance.chooseAnswer(options.indexOf(q.answer));
   assert.equal(instance.read().session.correct, 1);

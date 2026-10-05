@@ -222,9 +222,8 @@ function resetAtlas() {
   $('#model-prompt')?.setAttribute('hidden', '');
   $('#muscle-select').disabled = false;
   $('#muscle-select').value = '';
-  $('#isolate').checked = false;
   $('#isolate').disabled = false;
-  viewer?.setIsolated(false);
+  viewer?.setIsolated($('#isolate').checked);
   viewer?.setPickingEnabled?.(true);
   viewer?.select(null);
   setOrientation('front');
@@ -438,11 +437,7 @@ function renderLesson({ preserveCamera = false } = {}) {
     '</article>';
   const card = curriculum.cards.find(c => c.id === q.muscleId);
   $('#muscle-select').disabled = !response;
-  $('#isolate').disabled = mode === 'model-choice' || (mode === 'point' || Boolean(modelContext)) && !response;
-  if ($('#isolate').disabled) {
-    $('#isolate').checked = false;
-    viewer?.setIsolated(false);
-  }
+  $('#isolate').disabled = false;
   if (mode === 'model-choice') {
     if (modelChoices) viewer?.showModelChoices?.(modelChoices.map(card => card.id), card?.view || 'front', preserveCamera);
     if (!preserveCamera) setOrientation(card?.view || 'front');
@@ -451,8 +446,6 @@ function renderLesson({ preserveCamera = false } = {}) {
   } else if (combination) {
     if (preserveCamera) viewer?.highlight(q.muscleIds, null, q.highlightPatterns);
     else {
-      $('#isolate').checked = false;
-      viewer?.setIsolated(false);
       viewer?.select(q.muscleIds, q.view, true, true, q.highlightPatterns);
       setOrientation(q.view);
     }
@@ -461,8 +454,6 @@ function renderLesson({ preserveCamera = false } = {}) {
   } else if (modelContext) {
     if (preserveCamera) viewer?.highlight(modelContext.muscleIds);
     else {
-      $('#isolate').checked = false;
-      viewer?.setIsolated(false);
       viewer?.select(modelContext.muscleIds, modelContext.view, false);
       setOrientation(modelContext.view);
     }
@@ -754,6 +745,7 @@ async function initViewer() {
   try {
     const { createViewer } = await import('./viewer.js');
     viewer = await createViewer($('#body'), showMuscle, () => { $('#viewer-status').hidden = true; });
+    viewer.setIsolated($('#isolate').checked);
     for (const option of $('#muscle-select').options) if (option.value && !viewer.available.has(option.value)) option.disabled = true;
     if (route.startsWith('les/')) renderLesson();
     await viewer.showSkeleton($('#bones').checked);
