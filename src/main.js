@@ -361,7 +361,7 @@ function filterQuestionBank() {
     section.open = Boolean(query || chapter) && Boolean(visible);
     count += visible;
   });
-  $('#bank-count').textContent = count ? count + ' vragen gevonden' : 'Geen vragen gevonden. Probeer een ander woord of hoofdstuk.';
+  $('#bank-count').textContent = count ? count + (count === 1 ? ' vraag gevonden' : ' vragen gevonden') : 'Geen vragen gevonden. Probeer een ander woord of hoofdstuk.';
 }
 function navigate() {
   pendingPointSelection = null;
