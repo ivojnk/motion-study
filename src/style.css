@@ -207,7 +207,6 @@ textarea.open-answer-input{min-height:132px;resize:vertical}
 }
 
 .lesson-hud .lesson-top{margin-bottom:0;gap:12px;align-items:center}
-.lesson-progress-label{font-size:12px;line-height:1.5;color:var(--muted)}
 .answer-shortcut{font-size:11px;line-height:1.5;text-align:center;color:var(--muted)}
 
 /* The number and shape keep quiz choices readable without colour perception. */
