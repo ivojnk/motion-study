@@ -172,22 +172,24 @@ test('halfway waits for feedback continuation, survives reload and dismisses wit
   assert.deepEqual(Array.from(instance.read().session.dismissedInterludes), ['halfway']);
 });
 
-test('mistakes keep the original progress total stable and start a separate retry round after original questions', () => {
+test('mistakes hold progress steady and corrected retries complete the original total', () => {
   let instance = sequentialLesson();
   for (let index = 0; index < 6; index++) {
     instance.dismissInterlude(); confirmCurrent(instance, index !== 0);
-    assert.match(instance.html(), /class="lesson-progress" max="6"/);
+    assert.match(instance.html(), new RegExp('class="lesson-progress" max="6" value="' + index + '"'));
     assert.equal(instance.read().session.index, index);
     assert.equal(instance.read().session.ids.length, 7);
     instance.next();
   }
   assert.equal(instance.read().session.index, 6); assert.equal(instance.read().session.answered, 6);
-  assert.match(instance.html(), /Herkansing/); assert.match(instance.html(), /class="lesson-progress" max="1"[^>]*aria-label="Herhaling"/);
+  assert.match(instance.html(), /Herkansing/); assert.match(instance.html(), /class="lesson-progress" max="6" value="5"[^>]*aria-label="Lesvoortgang"/);
   assert.equal(xp(instance), 25);
   instance = app(instance.data); instance.go('#les/daily'); assert.match(instance.html(), /Herkansing/);
   instance.dismissInterlude(); assert.equal(xp(instance), 25);
   instance = app(instance.data); instance.go('#les/daily'); assert.doesNotMatch(instance.html(), /id="continue-interlude"/);
-  confirmCurrent(instance); instance.next();
+  confirmCurrent(instance);
+  assert.match(instance.html(), /class="lesson-progress" max="6" value="6"/);
+  instance.next();
   assert.equal(instance.read().session.finished, true); assert.equal(instance.read().session.firstCorrect, 5); assert.equal(xp(instance), 40);
 });
 
