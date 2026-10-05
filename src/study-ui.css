@@ -535,3 +535,5 @@ nav a > .icon { width: 20px; height: 20px; }
 .result-card .goal-result { margin-top: 0; padding: 10px 8px; font-size: 12px; }
 .result-card .primary { width: 100%; margin-top: 14px; min-height: 48px; }
 .result-card .text-link { display: flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 4px; }
+
+.storage-warning { padding: 16px; border: 1px solid var(--red); border-radius: 12px; background: var(--paper); color: var(--ink); line-height: 1.5; overflow-wrap: anywhere; }

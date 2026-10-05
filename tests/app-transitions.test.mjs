@@ -31,7 +31,7 @@ function controlledLocks() {
     get pending() { return queue.length; }
   };
 }
-function app(data = {}, locks) {
+function app(data = {}, locks, options = {}) {
   const elements = new Map();
   const analyticsEvents = [];
   const events = [];
@@ -40,7 +40,7 @@ function app(data = {}, locks) {
     if (!elements.has(selector)) elements.set(selector, { innerHTML: '', setAttribute() {}, focus() {}, scrollIntoView() {} });
     return elements.get(selector);
   };
-  const fixed = new Set(['#learning', '#intro', '#model-prompt', '#muscle-select', '#isolate', '#orientation', '#selection-card', '.atlas-panel']);
+  const fixed = new Set(['#learning', '#intro', '#model-prompt', '#muscle-select', '#isolate', '#orientation', '#selection-card', '.atlas-panel', '#storage-warning', '#main']);
   const querySelector = selector => {
     if (fixed.has(selector)) return node(selector);
     const html = node('#learning').innerHTML;
@@ -49,15 +49,16 @@ function app(data = {}, locks) {
     if (selector.startsWith('[data-side=')) return node(selector);
     return null;
   };
-  const storage = { getItem: key => data[key] || null, setItem: (key, value) => { data[key] = value; } };
+  const storage = { getItem: key => data[key] || null, setItem: (key, value) => { if (options.blocked) throw new Error('QuotaExceededError'); data[key] = value; } };
+  let reloads = 0;
   const context = { ...learning, ...progression, ...motivation, ...groups, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean, Event,
-    location: { hash: '' }, navigator: locks ? { locks } : {},
+    location: { hash: '', reload() { reloads++; } }, navigator: locks ? { locks } : {},
     document: { body: { classList: { toggle(name, active) { if (active) bodyClasses.add(name); else bodyClasses.delete(name); } } }, querySelector, querySelectorAll: () => [], dispatchEvent(event) { events.push({ type: event.type, html: node('#learning').innerHTML }); } },
     window: { localStorage: storage, motionStudyAnalytics: { lessonFinished: session => analyticsEvents.push(session) }, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
   vm.createContext(context);
   vm.runInContext(source, context);
   const api = context.api;
-  return { ...api, data, storage, events, analyticsEvents, focused: () => bodyClasses.has('lesson-focus'), html: () => node('#learning').innerHTML, element: node,
+  return { ...api, data, storage, events, analyticsEvents, reloads: () => reloads, focused: () => bodyClasses.has('lesson-focus'), html: () => node('#learning').innerHTML, element: node,
     startLesson(region = 'basis', levelId = 'basis:0') { api.start(region, levelId); api.navigate(); api.prepare(); },
     go(hash) { context.location.hash = hash; api.navigate(); },
     play(correct = true) { const session = api.read().session; const q = curriculum.questions.find(q => q.id === session.ids[session.index]); return api.answer(session.options.indexOf(correct ? q.answer : q.distractors[0])); }
@@ -347,14 +348,14 @@ test('the home card only recommends the next lesson once the current lesson is f
 
 test('stale tabs merge reward and question progress instead of overwriting other tab', () => {
   const data = {}; const first = app(data); const second = app(data);
-  first.startLesson(); second.startLesson(); first.play(); second.play();
+  first.startLesson(); second.startLesson('daily', null); first.play(); second.play();
   assert.equal(xp(first), 10);
   assert.equal(Object.values(learning.readProgress(first.storage).questions).reduce((total, q) => total + q.attempts, 0), 2);
 });
 
 test('async shared Web Locks serialize rewards and suppress duplicate queued answers', async () => {
   const locks = controlledLocks(); const data = {}; const first = app(data, locks); const second = app(data, locks);
-  first.startLesson(); second.startLesson();
+  first.startLesson(); second.startLesson('daily', null);
   const requests = [first.play(), first.play(), second.play()];
   assert.equal(xp(first), 0); assert.equal(locks.pending, 3);
   await locks.drain(); await Promise.all(requests);
@@ -640,4 +641,53 @@ test('installation invitation starts after the lesson result and does not fire f
   instance = app(instance.data);
   instance.go('#les/basis/0');
   assert.equal(instance.events.length, 0);
+});
+
+test('a stale tab cannot overwrite newer feedback or lesson position', () => {
+  const data = {}; const active = app(data); active.startLesson();
+  const stale = app(data); stale.go('#les/basis/0');
+  active.play(); active.next();
+  const before = JSON.stringify(data);
+  stale.prepare();
+  assert.equal(JSON.stringify(data), before);
+  assert.equal(stale.reloads(), 1);
+  const reopened = app(data); reopened.go('#les/basis/0');
+  assert.equal(reopened.read().session.index, 1);
+  assert.equal(xp(reopened), 5);
+});
+
+test('a stale tab cannot grade an answer already saved by another tab', () => {
+  const data = {}; const active = app(data); active.startLesson();
+  const stale = app(data); stale.go('#les/basis/0');
+  active.play();
+  const before = JSON.stringify(data);
+  stale.play();
+  assert.equal(JSON.stringify(data), before);
+  assert.equal(stale.reloads(), 1);
+  assert.equal(xp(active), 5);
+});
+
+test('a stale tab on the same lesson cannot resurrect its completed draft', () => {
+  const data = {}; const active = app(data); active.startLesson();
+  const stale = app(data); stale.go('#les/basis/0');
+  while (!active.read().session.finished) { active.play(); active.next(); }
+  const before = JSON.stringify(data);
+  stale.prepare();
+  assert.equal(JSON.stringify(data), before);
+  assert.equal(stale.reloads(), 1);
+  assert.equal(learning.readDrafts(active.storage, new Map(curriculum.questions.map(q => [q.id, q])))['basis:0'], undefined);
+});
+
+test('storage failures warn visibly and a later successful save keeps in-memory progress', () => {
+  const options = { blocked: true }; const instance = app({}, undefined, options);
+  instance.startLesson(); instance.play();
+  assert.equal(instance.element('#storage-warning').hidden, false);
+  assert.equal(instance.read().session.answered, 1);
+  options.blocked = false;
+  instance.next();
+  assert.equal(instance.element('#storage-warning').hidden, true);
+  const reopened = app(instance.data);
+  assert.equal(reopened.read().session.index, 1);
+  assert.equal(xp(reopened), 5);
+  assert.equal(Object.values(reopened.read().progress.questions).reduce((sum, q) => sum + q.attempts, 0), 1);
 });
