@@ -95,7 +95,6 @@ function renderHome() {
   const lessonLabel = topic ? 'Hoofdstuk ' + (topics.findIndex(item => item.id === topic.id) + 1) + ' · ' + (pending ? 'lopende les' : 'volgende les') : pending ? 'Lopende les' : 'Leerpad afgerond';
   const description = (current ? current.label + ' van ' + current.count + ' · ' : '') + (current || pending ? (pending?.initialCount || LESSON_SIZE) + ' vragen' : 'Gemengde les');
   const action = current ? 'data-level="' + current.id + '"' : 'data-start="' + (pending?.region || 'daily') + '"';
-  const due = dueCount();
   const stats = gameStats(game);
   const homeStats = $('#home-stats');
   if (homeStats) {
@@ -130,7 +129,7 @@ function renderHome() {
       '<ol aria-label="Lessen in ' + escape(topic.title) + '">' + lessons + '</ol></details>';
   });
   const path = chapters.slice(activeChapter).join('') + (activeChapter ? '<details class="earlier-chapters"><summary>Eerdere hoofdstukken</summary>' + chapters.slice(0, activeChapter).join('') + '</details>' : '');
-  $('#learning').innerHTML = '<div class="daily-card home-chapter-header"><span class="eyebrow">' + lessonLabel + '</span><h2>' + escape(title) + '</h2><p>' + description + '</p><button class="primary" ' + action + '>' + (pending ? 'Ga verder' : current ? 'Start les' : 'Gemengde les') + icon('arrow-right') + '</button></div><div class="study-status"><div class="learning-path">' + path + '</div></div><div class="practice-actions"><button class="text-button" data-start="daily">Gemengde les</button><button class="text-button" data-start="review" ' + (!due ? 'disabled' : '') + '>Herhalen (' + due + ')</button></div>';
+  $('#learning').innerHTML = '<div class="daily-card home-chapter-header"><span class="eyebrow">' + lessonLabel + '</span><h2>' + escape(title) + '</h2><p>' + description + '</p><button class="primary" ' + action + '>' + (pending ? 'Ga verder' : current ? 'Start les' : 'Gemengde les') + icon('arrow-right') + '</button></div><div class="study-status"><div class="learning-path">' + path + '</div></div>';
   resetAtlas();
   $('.atlas-panel').hidden = true;
 }
@@ -427,9 +426,10 @@ function finish() {
       refreshProgress();
       const bonus = session.answered > 0 ? 10 : 0;
       game = completeLevel(awardXP(game, bonus), session.levelId, session.correct, session.initialCount || session.ids.length);
-      session = { ...session, finished: true, xp: (session.xp || 0) + bonus };
+      session = { ...session, finished: true, finishedAt: Date.now(), xp: (session.xp || 0) + bonus };
       progress = { ...progress, sessions: [...progress.sessions, { at: Date.now(), correct: session.correct, total: session.answered }].slice(-200) };
       save(true);
+      window.motionStudyAnalytics?.lessonFinished(session);
     }
     if (route !== endingRoute) { if (route === 'leren') renderHome(); else if (route === 'voortgang') renderProgress();
   else if (route === 'vragen') renderQuestionBank(); return; }
@@ -558,8 +558,12 @@ document.addEventListener('click', event => {
   if (event.target.closest('#next-question')) next();
   if (event.target.closest('#all-muscles')) { resetAtlas(); renderAtlas(); }
   if (event.target.closest('#reset-view')) { viewer?.view('front'); setOrientation('front'); }
-  if (event.target.closest('#credits-button')) $('#credits').showModal();
-  if (event.target.closest('.close-dialog')) $('#credits').close();
+  if (event.target.closest('#credits-button')) {
+    $('#account-controls').open = false;
+    $('#account-controls > summary').focus();
+    $('#credits').showModal();
+  }
+  if (event.target.closest('#credits .close-dialog')) $('#credits').close();
 });
 document.addEventListener('submit', event => { if (event.target.id === 'open-answer-form') { event.preventDefault(); submitOpenAnswer(); } });
 document.addEventListener('input', event => {

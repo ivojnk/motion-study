@@ -16,3 +16,5 @@ Validation on 2026-10-05:
 - Screenshots: output/playwright/focused-home-390.png, focused-home-320.png and focused-home-desktop.png.
 
 Checks used an isolated local test account. Physical touch devices and actual screen readers were not tested. No deployment was performed.
+
+The duplicate mixed-lesson and review links below the path were removed. Sources and licenses now open from the account dropdown, alongside logout. The dropdown uses existing licensed icons, 48px action rows and visible keyboard focus. Local checks passed at 320, 390 and 1280 pixels without horizontal overflow. Enter opens the sources dialog; closing it restores focus to the account trigger. Escape, outside clicks and emulated mobile taps dismiss the menu. Review remains available under Progress. All 127 tests and the production build passed. Screenshot: output/playwright/account-menu-390.png. No deployment was performed.

@@ -1,0 +1,22 @@
+#account-form .account-check, .legal-dialog .account-check { display: flex; align-items: flex-start; gap: 10px; min-height: 44px; padding: 10px 0; font-size: 13px; font-weight: 400; line-height: 1.55; cursor: pointer; }
+.account-check input { flex: 0 0 20px; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--accent); }
+.account-check small { color: var(--muted); font-size: inherit; }
+.login-storage-note, .login-analytics-help { font-size: 12px; line-height: 1.65; }
+.login-storage-note { margin-top: 6px; }
+.login-analytics-help { margin-top: -8px; padding-left: 30px; }
+.login-legal-links { display: flex; flex-wrap: wrap; gap: 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.login-legal-links button, .legal-inline-link { min-height: 44px; padding: 8px 0; background: transparent; border: 0; color: var(--accent); font: inherit; font-size: 12px; text-align: left; text-decoration: underline; text-underline-offset: 4px; }
+.legal-inline-link { display: inline; font-size: inherit; }
+.legal-dialog { width: min(600px, calc(100% - 32px)); max-height: calc(100dvh - 32px); overflow-y: auto; overflow-wrap: anywhere; border-radius: 16px; }
+.legal-dialog h2 { margin-top: 8px; padding-right: 32px; font-size: 30px; }
+.legal-dialog h3 { margin-top: 26px; font-family: 'DM Sans Variable', sans-serif; font-size: 16px; font-weight: 700; }
+.legal-dialog p { line-height: 1.7; }
+.legal-dialog .legal-date { font-size: 12px; margin-top: -12px; }
+.privacy-preferences { padding: 12px 16px; margin: 20px 0; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
+.privacy-preferences p { margin: 0 0 8px 30px; font-size: 12px; }
+#privacy-choice-status:empty { display: none; }
+.account-menu { max-height: calc(100dvh - 100px); overflow-y: auto; }
+@media (max-width: 620px) {
+  .legal-dialog { padding: 24px; }
+  .legal-dialog h2 { font-size: 26px; }
+}

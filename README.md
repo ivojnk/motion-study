@@ -51,12 +51,13 @@ Entering an existing name signs you in. Names are case-insensitive and use
 2–24 letters, numbers, dots, hyphens or underscores. There is no password:
 anyone who knows a username can use that account.
 
-Accounts and 30-day sessions are stored on the server in SQLite. Progress,
+Accounts and 30-day sessions are stored on the server in SQLite (a Durable Object
+on Cloudflare, a local file when running Node). Progress,
 XP and unfinished lessons stay in your browser, separately for each account.
 They do not sync between devices. Clearing site data clears your progress,
 but you can still enter your username again. Existing progress from before
 accounts is preserved in browser storage and is not automatically assigned
-to an account. There is no analytics or live AI request.
+to an account. Optional usage statistics collect account activity and lesson counts, without answers or scores. There is no live AI request.
 
 ## Add to your home screen
 
@@ -112,9 +113,25 @@ Third-party components retain their own terms.
 ## Deployment and checks
 
 GitHub Actions runs tests and builds the app. Automatic GitHub Pages deployment
-is disabled because a static host cannot run the account server. This account
-version has not been deployed. Host it at the root of a domain on a Node server
-with a persistent disk and an HTTPS reverse proxy:
+is disabled because a static host cannot run the account server.
+
+Cloudflare URL: https://lottequiz-motionstudy.jonkersivo.workers.dev
+
+The Worker serves the production build and uses one SQLite-backed Durable Object
+for accounts and sessions. Atlas files require a valid session. Only `dist/` is
+uploaded as public assets. `APP_ORIGIN` must match the exact public URL.
+
+```sh
+npm run build
+npm run cloudflare:dev
+# In another terminal:
+npm run cloudflare:check
+# Publish using your Wrangler login:
+npm run deploy
+CHECK_ORIGIN=https://lottequiz-motionstudy.jonkersivo.workers.dev npm run cloudflare:check
+```
+
+For alternative Node hosting, use a persistent disk and an HTTPS reverse proxy:
 
 ```sh
 npm ci
@@ -162,3 +179,32 @@ Duolingo design publications. Research and implementation choices are in
 [rewards and rhythm](docs/duolingo-rewards-research.md) and
 [feedback design](docs/duolingo-feedback-research.md). Native buttons, progress
 bars and locally served MIT-licensed Phosphor Duotone icons keep the flow lightweight.
+
+## Analytics and owner access
+
+Open `/beheer/` to enroll the owner passkey, then `/analytics/` for account,
+activity and completed-lesson totals plus a daily table. Use a strong, one-time
+`OWNER_SETUP_KEY` Worker secret to enable enrollment. Only the first credential
+can enroll. No username account can access the dashboard. After enrollment,
+remove the setup secret. Losing the passkey requires an administrator to reset
+owner access through Cloudflare.
+
+Account totals include existing registrations. Activity and lessons only include
+users who enable statistics in their current session. Measurement starts when
+this version first initializes the analytics tables. Past browser-only lessons
+are not imported. A repeated lesson counts as a new completion, while retries
+and duplicate submissions count once. `deploy-check-*` and the existing
+`cloudflare-browser-check` account are reserved test fixtures and excluded.
+
+Existing accounts keep only the last activity date/time and completed-lesson
+count. Daily totals are retained for 90 days. Salted completion receipts contain
+no usernames, account IDs, question IDs, scores or answers and are retained for
+35 days, with cleanup on the next usage event. Reports older than 30 days are rejected. Overall lesson totals remain.
+Failed reports retry from a small queue in the account's browser storage. These
+are observed usage counts and may miss offline reports or cleared storage.
+
+The dashboard uses Amsterdam calendar days and has 7/30/90-day filters. Owner
+sessions expire after one hour. Passkey verification uses the MIT-licensed
+SimpleWebAuthn library. Its browser code loads only on the owner login page.
+Use `npm run cloudflare:dev` for full local owner/auth testing. Node hosting
+continues to serve the learning app but does not provide owner analytics routes.

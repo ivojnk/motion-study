@@ -76,3 +76,9 @@ in `public/licenses/third-party.txt` and exposed in the app's credits.
 The app icons render the existing Manrope brand mark; its OFL notice is preserved.
 
 Source: https://github.com/khmyznikov/pwa-install/tree/ef1bd3ec440d711e3eaafb796914566817f976a6
+
+## Passkey authentication
+
+SimpleWebAuthn browser 14.0.0 and server 14.0.3, by Matthew Miller, MIT.
+Source: https://github.com/MasterKale/SimpleWebAuthn
+License: `public/licenses/simplewebauthn-LICENSE.txt`. Browser code is limited to the owner login page.

@@ -33,6 +33,7 @@ function controlledLocks() {
 }
 function app(data = {}, locks) {
   const elements = new Map();
+  const analyticsEvents = [];
   const events = [];
   const bodyClasses = new Set();
   const node = selector => {
@@ -52,17 +53,32 @@ function app(data = {}, locks) {
   const context = { ...learning, ...progression, ...motivation, ...groups, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean, Event,
     location: { hash: '' }, navigator: locks ? { locks } : {},
     document: { body: { classList: { toggle(name, active) { if (active) bodyClasses.add(name); else bodyClasses.delete(name); } } }, querySelector, querySelectorAll: () => [], dispatchEvent(event) { events.push({ type: event.type, html: node('#learning').innerHTML }); } },
-    window: { localStorage: storage, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
+    window: { localStorage: storage, motionStudyAnalytics: { lessonFinished: session => analyticsEvents.push(session) }, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
   vm.createContext(context);
   vm.runInContext(source, context);
   const api = context.api;
-  return { ...api, data, storage, events, focused: () => bodyClasses.has('lesson-focus'), html: () => node('#learning').innerHTML, element: node,
+  return { ...api, data, storage, events, analyticsEvents, focused: () => bodyClasses.has('lesson-focus'), html: () => node('#learning').innerHTML, element: node,
     startLesson(region = 'basis', levelId = 'basis:0') { api.start(region, levelId); api.navigate(); api.prepare(); },
     go(hash) { context.location.hash = hash; api.navigate(); },
     play(correct = true) { const session = api.read().session; const q = curriculum.questions.find(q => q.id === session.ids[session.index]); return api.answer(session.options.indexOf(correct ? q.answer : q.distractors[0])); }
   };
 }
 const xp = instance => learning.gameStats(learning.readGame(instance.storage)).xp;
+
+test('actual lesson completion reports analytics once and restores its completion time after reload', () => {
+  const instance = app();
+  instance.startLesson();
+  for (let i = 0; i < 20 && !instance.read().session.finished; i++) { instance.play(true); instance.next(); }
+  assert.equal(instance.read().session.finished, true);
+  assert.equal(instance.analyticsEvents.length, 1);
+  assert.ok(Number.isSafeInteger(instance.analyticsEvents[0].finishedAt));
+  instance.finish(); instance.finish();
+  assert.equal(instance.analyticsEvents.length, 1);
+  const restored = app(instance.data);
+  assert.equal(restored.read().session.finishedAt, instance.read().session.finishedAt);
+  restored.finish();
+  assert.equal(restored.analyticsEvents.length, 0);
+});
 
 test('confirmed atlas picks preserve the camera and orientation for mapped and unmapped muscles', () => {
   const instance = app();

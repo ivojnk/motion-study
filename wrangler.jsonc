@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lottequiz-motionstudy",
+  "account_id": "a14be90199dbe48ed00a53f7fcb5efeb",
+  "main": "server/worker.mjs",
+  "compatibility_date": "2026-10-05",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "preview_urls": false,
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "vars": {
+    "APP_ORIGIN": "https://lottequiz-motionstudy.jonkersivo.workers.dev"
+  },
+  "durable_objects": {
+    "bindings": [
+      { "name": "ACCOUNTS", "class_name": "Accounts" },
+      { "name": "OWNER_AUTH", "class_name": "OwnerAuth" }
+    ]
+  },
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["Accounts"] },
+    { "tag": "v2", "new_sqlite_classes": ["OwnerAuth"] }
+  ]
+}
