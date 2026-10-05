@@ -90,7 +90,7 @@ export async function createViewer(canvas, onSelect, onStatus) {
   const distance = height / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))) * 1.12;
   let currentView = 'front';
   function view(direction = currentView, targetBox = null) {
-    clearChoice(false);
+    clearChoice();
     currentView = direction;
     const target = targetBox?.getCenter(new THREE.Vector3()) || center;
     const span = targetBox ? Math.max(...targetBox.getSize(new THREE.Vector3()).toArray()) : height;
@@ -117,13 +117,13 @@ export async function createViewer(canvas, onSelect, onStatus) {
     render();
   }
   function highlight(id, anatomyName = null) {
-    clearChoice(false);
+    clearChoice();
     selected = id || null;
     selectedAnatomyName = id ? null : anatomyName || null;
     updateMaterials();
   }
   function select(id, direction = 'front', focus = false, highlight = true) {
-    clearChoice(false);
+    clearChoice();
     selected = highlight ? id : null;
     selectedAnatomyName = null;
     updateMaterials();
@@ -133,18 +133,13 @@ export async function createViewer(canvas, onSelect, onStatus) {
   }
   const raycaster = new THREE.Raycaster();
   raycaster.firstHitOnly = true;
-  function clearChoice(restoreCamera) {
+  function clearChoice() {
     if (!choiceState) return;
     const previous = choiceState;
     choiceState = null;
     previous.marks.forEach(mark => mark.remove());
     previous.lines.remove();
     choicePanel?.close();
-    if (restoreCamera) {
-      camera.position.copy(previous.position);
-      controls.target.copy(previous.target);
-      controls.update();
-    }
     updateMaterials();
   }
   function updateChoiceMarks() {
@@ -179,14 +174,14 @@ export async function createViewer(canvas, onSelect, onStatus) {
       updateMaterials();
     },
     confirm(choice) {
-      clearChoice(true);
+      clearChoice();
       canvas.focus({ preventScroll: true });
       onSelect(choice.hit.object.userData.courseMuscleId, choice.hit.object.userData.anatomyName, true);
     },
-    cancel() { clearChoice(true); canvas.focus({ preventScroll: true }); }
+    cancel() { clearChoice(); canvas.focus({ preventScroll: true }); }
   });
   const unbindTapSelection = bindTapSelection(canvas, event => {
-    clearChoice(false);
+    clearChoice();
     const rect = canvas.getBoundingClientRect();
     const visibleMeshes = muscleMeshes.filter(mesh => mesh.visible);
     const samples = [];
@@ -222,20 +217,12 @@ export async function createViewer(canvas, onSelect, onStatus) {
       canvas.parentElement.append(mark);
       return mark;
     });
-    choiceState = { choices, marks, lines, preview: null, position: camera.position.clone(), target: controls.target.clone() };
-    if (choices.length > 1) {
-      const target = choices.reduce((point, choice) => point.add(choice.hit.point), new THREE.Vector3()).divideScalar(choices.length);
-      const offset = camera.position.clone().sub(controls.target);
-      offset.setLength(Math.min(offset.length(), Math.max(0.35, offset.length() * 0.5)));
-      controls.target.copy(target);
-      camera.position.copy(target).add(offset);
-      controls.update();
-    }
+    choiceState = { choices, marks, lines, preview: null };
     updateMaterials();
     choicePanel.open(choices);
   });
   canvas.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && choiceState) { event.preventDefault(); clearChoice(true); return; }
+    if (event.key === 'Escape' && choiceState) { event.preventDefault(); clearChoice(); return; }
     const delta = camera.position.clone().sub(controls.target);
     const spherical = new THREE.Spherical().setFromVector3(delta);
     let handled = true;
@@ -264,6 +251,6 @@ export async function createViewer(canvas, onSelect, onStatus) {
     render();
   }
   onStatus('ready');
-  return { available, select, highlight, view, render, showSkeleton, setIsolated(value) { clearChoice(true); isolated = value; updateMaterials(); },
-    dispose() { clearChoice(false); choicePanel?.dispose(); unbindTapSelection(); observer.disconnect(); controls.dispose(); draco.dispose(); if (frame !== null) cancelAnimationFrame(frame); scene.traverse(n => n.geometry?.dispose()); [muscleMaterial, boneMaterial, focusMaterial, dimMaterial, ...choiceMaterials].forEach(m => m.dispose()); renderer.dispose(); } };
+  return { available, select, highlight, view, render, showSkeleton, setIsolated(value) { clearChoice(); isolated = value; updateMaterials(); },
+    dispose() { clearChoice(); choicePanel?.dispose(); unbindTapSelection(); observer.disconnect(); controls.dispose(); draco.dispose(); if (frame !== null) cancelAnimationFrame(frame); scene.traverse(n => n.geometry?.dispose()); [muscleMaterial, boneMaterial, focusMaterial, dimMaterial, ...choiceMaterials].forEach(m => m.dispose()); renderer.dispose(); } };
 }

@@ -14,8 +14,11 @@ const source = fs.readFileSync(new URL('../src/main.js', import.meta.url), 'utf8
   globalThis.api = { start, answer, next, finish, choosePair, renderLesson, navigate, chooseAnswer, confirmPointSelection, showMuscle,
     read: () => ({ session, game, progress, route, pendingPointSelection }),
     prepare: () => { session = { ...session, prepared: true }; save(); renderLesson(); },
-    viewerReady: () => { viewer = { available: new Set(curriculum.cards.map(c => c.id)), select() {}, highlight(...args) { globalThis.lastHighlight = args; }, setIsolated() {} }; },
-    lastHighlight: () => globalThis.lastHighlight
+    viewerReady: () => { globalThis.viewerCalls = []; viewer = { available: new Set(curriculum.cards.map(c => c.id)),
+      select(...args) { globalThis.viewerCalls.push(['select', ...args]); },
+      highlight(...args) { globalThis.lastHighlight = args; globalThis.viewerCalls.push(['highlight', ...args]); }, setIsolated() {} }; },
+    lastHighlight: () => globalThis.lastHighlight,
+    viewerCalls: () => globalThis.viewerCalls
   };`;
 
 function controlledLocks() {
@@ -386,4 +389,36 @@ test('a confirmed colour choice grades once without a second confirmation', () =
   assert.equal(instance.read().session.answered, 2);
   assert.equal(xp(instance), 5);
   assert.equal(instance.read().pendingPointSelection, null);
+});
+
+test('confirmed atlas picks preserve the camera and orientation for mapped and unmapped muscles', () => {
+  const instance = app();
+  instance.viewerReady(); instance.go('#atlas');
+  instance.element('#orientation').textContent = 'ZIJAANZICHT';
+  const before = instance.viewerCalls().length;
+  const card = curriculum.cards.find(card => card.view === 'back');
+  instance.showMuscle(card.id, 'Picked mesh', true);
+  instance.showMuscle(null, 'Small anatomical muscle', true);
+  assert.deepEqual(Array.from(instance.viewerCalls().slice(before), call => Array.from(call)), [
+    ['highlight', card.id], ['highlight', null, 'Small anatomical muscle']
+  ]);
+  assert.equal(instance.element('#orientation').textContent, 'ZIJAANZICHT');
+  assert.match(instance.element('#selection-card').innerHTML, /Small anatomical muscle/);
+  instance.showMuscle(card.id);
+  assert.equal(instance.viewerCalls().at(-1)[0], 'select');
+  assert.equal(instance.element('#orientation').textContent, 'ACHTERZIJDE');
+});
+
+test('point grading preserves the camera while showing the correct muscle, and the next question resets it', () => {
+  const { instance, q } = pointLesson();
+  const before = instance.viewerCalls().length;
+  const wrong = curriculum.cards.find(card => card.id !== q.muscleId);
+  instance.element('#orientation').textContent = 'ZIJAANZICHT';
+  instance.showMuscle(wrong.id, 'Picked mesh', true);
+  assert.equal(instance.read().session.response, wrong.name);
+  assert.ok(instance.viewerCalls().slice(before).every(call => call[0] === 'highlight'));
+  assert.equal(instance.lastHighlight()[0], q.muscleId);
+  assert.equal(instance.element('#orientation').textContent, 'ZIJAANZICHT');
+  instance.next();
+  assert.equal(instance.viewerCalls().at(-1)[0], 'select');
 });

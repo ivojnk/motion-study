@@ -195,7 +195,7 @@ function selfAssessOpenAnswer(correct) {
   const q = byId.get(session.ids[session.index]);
   if (currentExercise(q) === 'open-self') answer(null, session.openDraft.trim(), correct);
 }
-function renderLesson() {
+function renderLesson({ preserveCamera = false } = {}) {
   restoreAtlasLayout();
   const [, region = 'daily', stage] = route.split('/');
   const levelId = stage !== undefined ? region + ':' + stage : null;
@@ -234,8 +234,9 @@ function renderLesson() {
   }
   if (card) {
     if (mode === 'point' && pendingPointSelection && !response) viewer?.highlight(pendingPointSelection.muscleId, pendingPointSelection.anatomyName);
+    else if (preserveCamera) viewer?.highlight(card.id);
     else viewer?.select(card.id, card.view, q.type === 'recognition' && mode !== 'point', mode !== 'point' || Boolean(response));
-    $('#orientation').textContent = card.view === 'back' ? 'ACHTERZIJDE' : card.view === 'side' ? 'ZIJAANZICHT' : 'VOORZIJDE';
+    if (!preserveCamera) $('#orientation').textContent = card.view === 'back' ? 'ACHTERZIJDE' : card.view === 'side' ? 'ZIJAANZICHT' : 'VOORZIJDE';
     $('#selection-card').innerHTML = response ? cardMarkup(card) : q.type === 'recognition' || isOpenExercise(mode) ? '' : '<h3>' + escape(card.name) + '</h3>';
   } else { resetAtlas(); $('#muscle-select').disabled = !response; }
   const modelPrompt = $('#model-prompt');
@@ -294,7 +295,7 @@ function answer(index, pickedMuscle = null, selfAssessment = null) {
     session = { ...session, xp: (session.xp || 0) + xp, firstCorrect: (session.firstCorrect || 0) + Number(correct && session.index < (session.initialCount || session.ids.length)) };
     progress = recordAnswer(progress, q.id, correct, Date.now(), mode);
     save(true);
-    if (route === expectedRoute) { renderLesson(); $('#next-question').focus(); }
+    if (route === expectedRoute) { renderLesson({ preserveCamera: true }); $('#next-question').focus(); }
     else if (route === 'leren') renderHome();
     else if (route === 'voortgang') renderProgress();
   else if (route === 'vragen') renderQuestionBank();
@@ -352,10 +353,14 @@ function showMuscle(id, originalName, confirmed = false) {
   }
   const card = curriculum.cards.find(c => c.id === id);
   if (!card) {
+    if (confirmed) viewer?.highlight(null, originalName);
     $('#selection-card').innerHTML = '<span class="eyebrow">ANATOMISCHE STRUCTUUR</span><h3>' + escape(originalName || 'Kies een spier') + '</h3><p>Geen spierkaart beschikbaar.</p>'; return;
   }
-  viewer?.select(card.id, card.view);
-  $('#orientation').textContent = card.view === 'back' ? 'ACHTERZIJDE' : card.view === 'side' ? 'ZIJAANZICHT' : 'VOORZIJDE';
+  if (confirmed) viewer?.highlight(card.id);
+  else {
+    viewer?.select(card.id, card.view);
+    $('#orientation').textContent = card.view === 'back' ? 'ACHTERZIJDE' : card.view === 'side' ? 'ZIJAANZICHT' : 'VOORZIJDE';
+  }
   $('#muscle-select').value = card.id;
   $('#selection-card').innerHTML = cardMarkup(card);
   if (route === 'atlas') renderAtlas(card);
