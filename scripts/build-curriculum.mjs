@@ -5,8 +5,11 @@ import { extraBasis, basisCoverage } from '../src/data/extra-basis.js';
 import { extraMuscles, muscleCoverage } from '../src/data/extra-muscles.js';
 import { extraPatterns, patternCoverage } from '../src/data/extra-patterns.js';
 import { profileQuestions, lengthProfiles } from '../src/data/length-profiles.js';
+import { exerciseCombinationQuestions } from '../src/data/exercise-combinations.js';
+import { additionalMuscleCards, modelKnowledgeQuestions } from '../src/data/model-knowledge.js';
 import { coachingQuestions } from '../src/data/coaching-cues.js';
 import { courseDetailQuestions } from '../src/data/course-details.js';
+import { withModelContexts } from '../src/data/model-contexts.js';
 // Optional local import; the public build uses the checked-in question bank.
 const raw = (await readFile('sources/course.txt', 'utf8')).replace(/\r/g, '');
 const clean = value => value.replace(/[\u0000-\u0008]/g, '').replace(/\s+/g, ' ').trim();
@@ -44,16 +47,19 @@ for (const concept of [...concepts, ...extraBasis, ...extraMuscles, ...extraPatt
 // Recognition uses the same source-linked muscle cards and verified mesh names.
 for (const card of cards) questions.push({ id: card.id + '-recognition', region: card.region, muscleId: card.id, type: 'recognition', prompt: 'Welke spier is paars gemarkeerd?', answer: card.name, distractors: cards.filter(other => other.id !== card.id).map(other => other.name), source: card.source });
 questions.push(...profileQuestions);
+cards.push(...additionalMuscleCards(questions));
+questions.push(...exerciseCombinationQuestions(questions));
+questions.push(...modelKnowledgeQuestions(questions, cards));
 questions.push(...coachingQuestions(questions));
 questions.push(...courseDetailQuestions);
 const coverage = [
   ...basisCoverage, ...muscleCoverage, ...patternCoverage,
-  ...cards.map(card => ({ id: 'card-' + card.id, label: card.name + ': spierkennis en herkenning', questionIds: [...Object.keys(card.fields).map(field => card.id + '-' + field), card.id + '-recognition'] })),
+  ...cards.filter(card => muscles.some(muscle => muscle.id === card.id)).map(card => ({ id: 'card-' + card.id, label: card.name + ': spierkennis en herkenning', questionIds: [...Object.keys(card.fields).map(field => card.id + '-' + field), card.id + '-recognition'] })),
   ...lengthProfiles.map(row => ({ id: 'visual-' + row.id, label: row.name + ': visueel lengteprofiel', questionIds: [row.id] }))
 ];
 const coveredIds = new Set(coverage.flatMap(unit => unit.questionIds));
 for (const question of questions) {
-  if (!coveredIds.has(question.id)) coverage.push({ id: 'question-' + question.id, label: question.prompt, questionIds: [question.id] });
+  if (!coveredIds.has(question.id)) coverage.push({ id: 'question-' + question.id, label: question.type === 'exercise-recognition' ? question.answer + ': 3D-spiercombinatie' : question.prompt, questionIds: [question.id] });
 }
 const ids = new Set(questions.map(question => question.id));
 if (ids.size !== questions.length) throw new Error('Duplicate question IDs');
@@ -61,6 +67,9 @@ for (const unit of coverage) {
   if (!unit.questionIds.length || unit.questionIds.some(id => !ids.has(id))) throw new Error('Uncovered unit: ' + unit.id);
 }
 await mkdir('src/data', { recursive: true });
-for (const item of [...cards, ...questions]) { if (item.source.kind !== 'supplement') item.source = { ...(item.source.kind === 'course-detail' ? { kind: 'course-detail' } : {}), title: 'Anatomie & Biomechanica · Milo module 6.6', section: item.source.section, page: item.source.page }; delete item.anchor; delete item.end; }
-await writeFile('src/data/curriculum.json', JSON.stringify({ license: 'CC-BY-SA-4.0', title: 'Anatomie & Biomechanica', sourceUrl: 'https://drive.google.com/file/d/1cUNMc6m7fZT2LA6F1iY5G0g2Io7OstmW/view', fetchedAt: '2026-10-05', sourcePages: 28, coverage, cards, questions }, null, 2));
+for (const item of [...cards, ...questions]) {
+  if (item.source.kind !== 'supplement') item.source = { ...(item.source.kind === 'course-detail' ? { kind: 'course-detail' } : {}), title: 'Anatomie & Biomechanica · Milo module 6.6', section: item.source.section, page: item.source.page };
+  delete item.anchor; delete item.end;
+}
+await writeFile('src/data/curriculum.json', JSON.stringify({ license: 'CC-BY-SA-4.0', title: 'Anatomie & Biomechanica', sourceUrl: 'https://drive.google.com/file/d/1cUNMc6m7fZT2LA6F1iY5G0g2Io7OstmW/view', fetchedAt: '2026-10-05', sourcePages: 28, coverage, cards, questions: withModelContexts(questions) }, null, 2));
 console.log(cards.length + ' muscle cards, ' + questions.length + ' source-linked questions');

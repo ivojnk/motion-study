@@ -14,11 +14,12 @@ existing fonts and Phosphor Icons in the Duotone variant. See
 - Tap near a muscle to preview nearby choices with matching colours and symbols.
   Ambiguous taps zoom into the area. Choice buttons hide muscle names; confirm
   with “Deze bedoel ik” or restore the previous view with “Opnieuw kiezen”.
-- Study 31 muscle cards and 653 questions across eleven chapters.
-- Practise 41 additional coaching questions about external focus, analogy cues and energy leaks. Each correction includes a cue, an observable check and an exercise adjustment. Original applications are labelled as supplemental, with research references for the learning principles.
-- Search all questions, answers and coaching explanations by chapter. The 593 course questions have PDF page references; coaching examples link to related course facts and learning research.
+- Study 39 muscle/structure cards and 1125 questions across thirteen chapters.
+- Recognise 118 exercises and variants from highlighted muscles in 3D, covering every one of the 64 exercise-table rows and 52 named variants. A movement hint distinguishes exercises with the same muscle emphasis. Practise these questions in the chapter lessons, then type exercise names in spaced reviews. Feedback names the muscles and explains the course emphasis.
+- Practise 41 additional coaching questions about external focus, analogy cues and energy leaks. Each correction includes a cue, an observable check and an exercise adjustment. These original examples are labelled as supplemental, with research references for the learning principles.
+- Search all questions, answers and coaching explanations by chapter. The 1084 course questions have PDF page references; coaching examples link to the related course facts and learning research.
   See [COURSE_COVERAGE.md](COURSE_COVERAGE.md) for the source coverage checklist.
-- Follow 101 sequential lessons across eleven chapters. Each lesson starts with seven
+- Follow 169 sequential lessons across thirteen chapters. Each lesson starts with seven
   course questions plus up to two earlier mistakes; the final lesson in a chapter adds earlier questions as review. Wrong
   answers return until corrected, then the next lesson unlocks. The result keeps
   the first-attempt score separate from corrections. Existing completed chapters
@@ -29,10 +30,21 @@ existing fonts and Phosphor Icons in the Duotone variant. See
   recently practised mistakes return first. Existing errors carry over, and this
   recovery stays in the account's browser storage. Spaced mastery still requires
   the existing time intervals. Explicit review also includes unresolved mistakes.
+- Body-direction and sidedness definitions use text only, without model hints that
+  could reveal the answer. Muscle-chain questions can use the 3D atlas.
+  All eight muscle chapters introduce relevant recognition from their first lesson,
+  with one extra existing recognition question where appropriate. The original seven
+  questions, lesson IDs, completed lessons and saved drafts stay intact. Selected
+  anatomy, muscle-role and movement-pattern questions also show the discussed
+  muscles. These keep their original answers and exercise forms. The atlas shows
+  static anatomy; it does not demonstrate exercise technique or stretch positions.
 - Each question has several exercise forms, tied to its own review progress. Start
   with multiple choice or highlighted-muscle recognition, then practise pointing
   in 3D and recalling the answer without hints in later reviews. Wrong answers
   bring back assistance, and practising early does not unlock harder forms.
+- Early muscle lessons also ask which of four highlighted muscles matches a name.
+  Each candidate has a matching number, colour and shape in the model and answer
+  button. Candidate names appear after answering; saved lessons keep their order.
 - Type short terms and muscle names for automatic checking. Small, unambiguous
   spelling errors are accepted, with the correct spelling shown in feedback. Longer explanations
   reveal the course answer after you write yours. Compare the two and explicitly
@@ -112,7 +124,7 @@ The model exports come from
 [Z-Anatomy](https://www.z-anatomy.com/) and
 [BodyParts3D](https://lifesciencedb.jp/bp3d/).
 The learning topics follow the supplied Anatomie-Biomechanica-Cheatsheet,
-Milo module 6.6. Question references link to that document. The full PDF and
+Milo module 6.6. Course-question references link to that document. Supplemental coaching applications cite research on external focus and analogy learning, without claiming that those studies validate every exercise correction. The full PDF and
 extracted source passages are not redistributed.
 
 See [ATTRIBUTION.md](ATTRIBUTION.md) for exact credits, immutable model
@@ -184,8 +196,7 @@ tested.
 
 The question bank covers the teachable content of the supplied 28-page cheatsheet,
 including 64 exercise rows and 57 visual length profiles. It is not a guarantee
-about questions in an external exam. Questions recall the supplied course rather than providing
-personal training or medical advice.
+about questions in an external exam. The original questions recall the supplied course. Additional coaching examples teach how to try a cue and observe its effect. They are not individual training prescriptions.
 
 The imported atlas has no animation rig. Exercise animation remains a future
 stage requiring a licensed rig and validated muscle deformation. This version

@@ -1,14 +1,17 @@
 import './style.css';
 import './study-ui.css';
 import curriculum from './data/curriculum.json';
-import { LESSON_SIZE, fillLesson, interleaveMistakes, needsMistakeReview, recordLessonAnswer, topics, readProgress, readSession, recordAnswer, lessonQueue, optionsFor, masteryFor, PROGRESS_KEY, SESSION_KEY, GAME_KEY, DAILY_GOAL, readGame, awardXP, gameStats, levelPath, levelQuestions, completeLevel, exerciseFor, matchingPairs, shuffled, binaryResponses, varyLesson, DRAFTS_KEY, draftKey, readDrafts, isOpenAnswerCorrect, checkOpenAnswer } from './learning.js';
+import { LESSON_SIZE, fillLesson, interleaveMistakes, needsMistakeReview, recordLessonAnswer, topics, readProgress, readSession, recordAnswer, lessonQueue, optionsFor, masteryFor, PROGRESS_KEY, SESSION_KEY, GAME_KEY, DAILY_GOAL, readGame, awardXP, gameStats, levelPath, levelQuestions, completeLevel, exerciseFor, matchingPairs, shuffled, binaryResponses, varyLesson, DRAFTS_KEY, draftKey, readDrafts, isOpenAnswerCorrect, checkOpenAnswer, isModelQuestion, usesModel, modelAvailable, modelMuscleIds, modelChoiceCards } from './learning.js';
 import { lessonMomentum, lessonInterlude } from './lesson-motivation.js';
 import { exerciseForProgress, availableExercises } from './exercise-progression.js';
 import { lessonGroups } from './lesson-groups.js';
+import { withLessonModels } from './lesson-models.js';
+import { choicePalette } from './muscle-choice.js';
 import { setupViewerFullscreen } from './viewer-fullscreen.js';
 
 const $ = selector => document.querySelector(selector);
 const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const modelChoiceLabel = index => 'Spier ' + (index + 1) + ' · ' + choicePalette[index].name;
 const iconNames = { school: 'school', stretch: 'stretching', barbell: 'barbell', target: 'target-arrow', arrows: 'arrows-move', growth: 'chart-bar' };
 const icon = name => '<img class="icon" src="' + import.meta.env.BASE_URL + 'icons/' + (iconNames[name] || name) + '.svg" alt="" />';
 let storage;
@@ -137,7 +140,7 @@ function renderHome() {
   const topic = current?.topic || topics.find(topic => topic.id === pending?.region);
   const title = topic?.title || (pending?.region === 'review' ? 'Herhalen' : pending ? 'Gemengde les' : 'Alle hoofdstukken afgerond');
   const lessonLabel = topic ? 'Hoofdstuk ' + (topics.findIndex(item => item.id === topic.id) + 1) + ' · ' + (pending ? 'lopende les' : 'volgende les') : pending ? 'Lopende les' : 'Leerpad afgerond';
-  const questionCount = pending?.initialCount || (current ? interleaveMistakes(levelQuestions(curriculum.questions, current.topic.id, current.stage), curriculum.questions, progress).length : LESSON_SIZE);
+  const questionCount = pending?.initialCount || (current ? interleaveMistakes(withLessonModels(levelQuestions(curriculum.questions, current.topic.id, current.stage), curriculum.questions), curriculum.questions, progress).length : LESSON_SIZE);
   const description = (current ? current.label + ' van ' + current.count + ' · ' : '') + (current || pending ? questionCount + ' vragen' : 'Gemengde les');
   const action = current ? 'data-level="' + current.id + '"' : 'data-start="' + (pending?.region || 'daily') + '"';
   const stats = gameStats(game);
@@ -199,11 +202,14 @@ function restoreAtlasLayout() {
 }
 function arrangeModelQuestion() {
   if (viewerFullscreen?.isOpen()) return;
+  const choice = $('.muscle-choice[popover]:not([hidden])');
+  choice?.hidePopover();
   restoreAtlasLayout();
   const answers = $('.question-card .answers');
   if (!$('.atlas-panel').hidden && answers) {
     answers.before($('.atlas-panel'));
   }
+  choice?.showPopover();
 }
 function setOrientation(direction) {
   $('#orientation').textContent = { front: 'VOORZIJDE', back: 'ACHTERZIJDE', side: 'ZIJAANZICHT' }[direction] || 'VOORZIJDE';
@@ -219,6 +225,7 @@ function resetAtlas() {
   $('#isolate').checked = false;
   $('#isolate').disabled = false;
   viewer?.setIsolated(false);
+  viewer?.setPickingEnabled?.(true);
   viewer?.select(null);
   setOrientation('front');
   $('#selection-card').innerHTML = '<h3>Kies een spier</h3>';
@@ -233,10 +240,12 @@ function start(region, levelId = null) {
     const pending = drafts[levelId || region];
     const stage = levelId ? Number(levelId.split(':')[1]) : null;
     const pool = levelId ? levelQuestions(curriculum.questions, region, stage) : curriculum.questions;
-    const originals = varyLesson(levelId ? shuffled(pool) : fillLesson(lessonQueue(pool, progress, { region, availableMuscles: viewer?.available })));
-    const queue = region === 'review' ? originals : interleaveMistakes(originals, curriculum.questions, progress, levelId ? {} : { availableMuscles: viewer?.available || new Set() });
+    const visualPractice = ['combinaties', 'verdieping'].includes(region);
+    const availableMuscles = viewer?.available || (visualPractice ? new Set(pool.flatMap(modelMuscleIds)) : undefined);
+    const originals = varyLesson(levelId ? shuffled(withLessonModels(pool, curriculum.questions)) : fillLesson(lessonQueue(pool, progress, { region, availableMuscles })));
+    const queue = region === 'review' ? originals : interleaveMistakes(originals, visualPractice ? pool.filter(q => q.region === region) : curriculum.questions, progress, levelId ? {} : { availableMuscles: viewer?.available || new Set() });
     session = pending ? { ...pending, exerciseModes: pending.exerciseModes || pending.ids.map((id, index) => exerciseFor(byId.get(id), index)), levelId: pending.levelId || null } : { region, levelId, stage, startedAt: Date.now(), answerHistory: [], dismissedInterludes: [], xp: 0, firstCorrect: 0, answerStreak: 0, bestAnswerStreak: 0, lessonSize: LESSON_SIZE, initialCount: queue.length, exerciseModes: queue.map((q, index) => exerciseForProgress(q, progress.questions[q.id], { index })), openDraft: '', openRevealed: false, selfAssessmentCorrect: null, prepared: false, matched: [], pairingDone: false, ids: queue.map(q => q.id), index: 0, correct: 0, answered: 0, retryIds: [], options: [], response: null, finished: false };
-    if (!pending && queue.length) session.options = optionsFor(queue[0]);
+    if (!pending && queue.length) session.options = optionsFor(queue[0], Math.random, session.exerciseModes[0]);
     save();
   }
   const nextHash = '#les/' + region + (levelId ? '/' + session.stage : '');
@@ -244,7 +253,7 @@ function start(region, levelId = null) {
   else location.hash = nextHash;
 }
 function needsMatching() {
-  return session && session.lessonSize !== LESSON_SIZE && !session.pairingDone && (session.stage === 1 || (!session.levelId && topics.some(t => t.id === session.region))) && matchingPairs(curriculum.cards, session.region).length >= 2;
+  return session && !['combinaties', 'verdieping'].includes(session.region) && session.lessonSize !== LESSON_SIZE && !session.pairingDone && (session.stage === 1 || (!session.levelId && topics.some(t => t.id === session.region))) && matchingPairs(curriculum.cards, session.region).length >= 2;
 }
 function renderMatching() {
   const pairs = matchingPairs(curriculum.cards, session.region);
@@ -261,7 +270,7 @@ function renderMatching() {
   $('.atlas-panel').hidden = true;
 }
 function choosePair(id, side) {
-  if (!pairSelection || pairSelection.side === side) { pairSelection = { id, side }; pairMessage = 'Kies de bijbehorende ' + (side === 'name' ? 'functie.' : 'spier.'); }
+  if (!pairSelection || pairSelection.side === side) { pairSelection = { id, side }; pairMessage = ''; }
   else {
     const correct = pairSelection.id === id;
     pairSelection = null;
@@ -281,9 +290,9 @@ function currentExercise(question, index = session.index) {
 function isOpenExercise(mode) {
   return ['open', 'recognition-open', 'open-self'].includes(mode);
 }
-function openAnswerMarkup(mode, response, blocked) {
+function openAnswerMarkup(mode, response, blocked, question = null) {
   const revealed = mode === 'open-self' && session.openRevealed;
-  return '<div class="answers"><form id="open-answer-form" class="open-answer-form"><label class="open-answer-label visually-hidden" for="open-answer">' + (mode === 'recognition-open' ? 'Welke spier is paars? Typ de naam.' : 'Schrijf je antwoord') + '</label>' + (mode === 'open-self' ? '<textarea id="open-answer" class="open-answer-input" rows="4" maxlength="2000" autocomplete="off" aria-describedby="open-answer-help" ' + (response || revealed || blocked ? 'disabled' : '') + '>' + escape(session.openDraft || response || '') + '</textarea>' : '<input id="open-answer" class="open-answer-input" type="text" maxlength="200" autocomplete="off" spellcheck="false" aria-describedby="open-answer-help" value="' + escape(session.openDraft || response || '') + '" ' + (response || revealed || blocked ? 'disabled' : '') + '>') + '<p id="open-answer-help" class="open-answer-help visually-hidden">' + (mode === 'open-self' ? 'Leg het in je eigen woorden uit. Daarna vergelijk je met het voorbeeldantwoord en beoordeel je jezelf.' : 'Hoofdletters en leestekens maken niet uit. Kleine typefouten zijn oké. Controleer met Enter of de knop hieronder.') + '</p>' + '</form></div>';
+  return '<div class="answers"><form id="open-answer-form" class="open-answer-form"><label class="open-answer-label visually-hidden" for="open-answer">' + (mode === 'recognition-open' ? question?.type === 'exercise-recognition' ? 'Welke oefening past hierbij? Typ de naam.' : 'Welke spier is paars? Typ de naam.' : 'Schrijf je antwoord') + '</label>' + (mode === 'open-self' ? '<textarea id="open-answer" class="open-answer-input" rows="4" maxlength="2000" autocomplete="off" aria-describedby="open-answer-help" ' + (response || revealed || blocked ? 'disabled' : '') + '>' + escape(session.openDraft || response || '') + '</textarea>' : '<input id="open-answer" class="open-answer-input" type="text" maxlength="200" autocomplete="off" spellcheck="false" aria-describedby="open-answer-help" value="' + escape(session.openDraft || response || '') + '" ' + (response || revealed || blocked ? 'disabled' : '') + '>') + '<p id="open-answer-help" class="open-answer-help visually-hidden">' + (mode === 'open-self' ? 'Leg het in je eigen woorden uit. Daarna vergelijk je met het voorbeeldantwoord en beoordeel je jezelf.' : 'Hoofdletters en leestekens maken niet uit. Kleine typefouten zijn oké. Controleer met Enter of de knop hieronder.') + '</p>' + '</form></div>';
 }
 function openAnswerActionsMarkup(mode, blocked) {
   const revealed = mode === 'open-self' && session.openRevealed;
@@ -296,13 +305,13 @@ function updateOpenDraft(value) {
   session = { ...session, openDraft: value.slice(0, currentExercise(q) === 'open-self' ? 2000 : 200) };
   save();
   const button = $('#check-open-answer');
-  if (button) button.disabled = !session.openDraft.trim() || (q.type === 'recognition' && !viewer?.available.has(q.muscleId));
+  if (button) button.disabled = !session.openDraft.trim() || (usesModel(q) && !modelAvailable(q, viewer?.available, session.options, currentExercise(q)));
 }
 function submitOpenAnswer() {
   if (!route.startsWith('les/') || !session?.prepared || session.response || session.finished || session.openRevealed) return;
   const q = byId.get(session.ids[session.index]);
   const mode = currentExercise(q);
-  if (!isOpenExercise(mode) || !session.openDraft?.trim() || (q.type === 'recognition' && !viewer?.available.has(q.muscleId))) return;
+  if (!isOpenExercise(mode) || !session.openDraft?.trim() || (usesModel(q) && !modelAvailable(q, viewer?.available, session.options, currentExercise(q)))) return;
   if (mode === 'open-self') {
     session = { ...session, openRevealed: true };
     save(); renderLesson(); $('#self-assess-correct')?.focus({ preventScroll: true });
@@ -336,10 +345,62 @@ function dismissInterlude() {
   session = { ...session, dismissedInterludes: [...(session.dismissedInterludes || []), interlude.key] };
   save(); renderLesson(); focusLessonContent();
 }
+function highlightedMuscleNames(question) {
+  const labels = { 'Clavicular head': 'Pectoralis major · bovenste vezels', 'Abdominal part': 'Pectoralis major · onderste vezels', 'Long head': 'Triceps brachii · lange kop', 'Gluteus medius muscle': 'Gluteus medius' };
+  return question.muscleIds.map(id => question.highlightPatterns?.[id]?.length
+    ? question.highlightPatterns[id].map(part => labels[part] || curriculum.cards.find(card => card.id === id)?.name).join(', ')
+    : curriculum.cards.find(card => card.id === id)?.name).join(', ');
+}
+function compactMuscleFeedback(question, muscles) {
+  const aliases = {
+    pectoralis: ['Bovenste borst (pars clavicularis)', 'Onderste borst (pars abdominalis)'],
+    'delt-front': ['Voorste deltoideus'], 'delt-mid': ['Middelste deltoideus'], 'delt-back': ['Achterste deltoideus', 'achterste delt'],
+    lats: ['Latissimus'], 'traps-upper': ['Bovenste trapezius'], 'traps-mid': ['Middelste trapezius'], 'traps-lower': ['Onderste trapezius'],
+    triceps: ['Lange tricepskop'], 'rectus-abd': ['Rectus'], 'oblique-ext': ['Obliques', 'Externe en interne obliques'],
+    'oblique-int': ['Obliques', 'Externe en interne obliques'], transversus: ['Transversus'], erector: ['Erector'],
+    'glute-max': ['Gluteus'], 'glute-med': ['Gluteus medius'], 'biceps-fem': ['Hamstrings'], semis: ['Semi-spieren', 'Hamstrings'], vasti: ['Vasti']
+  };
+  const ids = question.muscleIds || question.modelContext?.muscleIds || [];
+  const namesFor = id => [curriculum.cards.find(card => card.id === id)?.name, ...(aliases[id] || [])].filter(Boolean).map(name => name.toLocaleLowerCase('nl'));
+  const knownNames = [...new Set([...ids.flatMap(namesFor), ...(muscles ? [muscles.toLocaleLowerCase('nl')] : [])])].sort((a, b) => b.length - a.length);
+  const withoutNames = text => knownNames.reduce((remaining, name) => remaining.replaceAll(name, ''), text.toLocaleLowerCase('nl')).replace(/\ben\b|[\s,;&/]+/g, '');
+  let labels = muscles;
+  const compact = text => {
+    if (!muscles || !text?.includes(': ')) return text;
+    const separator = text.indexOf(': ');
+    const heading = text.slice(0, separator);
+    const role = heading.match(/(?:,?\s+)met (.+) als (stabilisator|synergisten)$/i);
+    const subject = role ? heading.slice(0, role.index) + ', ' + role[1] : heading;
+    if (withoutNames(subject) === '') {
+      if (role) {
+        for (const id of ids.filter(id => namesFor(id).some(name => role[1].toLocaleLowerCase('nl').includes(name)))) {
+          const name = curriculum.cards.find(card => card.id === id)?.name;
+          const label = name + ' (' + (role[2] === 'synergisten' ? 'synergist' : 'stabilisator') + ')';
+          if (!labels.includes(label)) labels = labels.replace(name, label);
+        }
+      }
+      return text.slice(separator + 2);
+    }
+    return text;
+  };
+  const answer = compact(question.answer);
+  let explanation = compact(question.explanation);
+  if (explanation === answer) explanation = null;
+  const rowMovements = explanation?.match(/^Middelste trapezius en rhomboideus via (.+), achterste delt via (.+)$/);
+  if (muscles && rowMovements && ids.length === 3 && ['traps-mid', 'rhomboids', 'delt-back'].every(id => ids.includes(id))) {
+    labels = ids.map(id => curriculum.cards.find(card => card.id === id).name + ' (' + rowMovements[id === 'delt-back' ? 2 : 1] + ')').join(', ');
+    explanation = null;
+  }
+  // When the answer itself already identifies every highlighted muscle, one list is enough.
+  if (muscles && ids.length && ids.every(id => namesFor(id).some(name => question.answer.toLocaleLowerCase('nl').includes(name))) && withoutNames(question.answer) === '') labels = null;
+  return { modelMuscles: labels, answer, explanation };
+}
 function feedbackMarkup(q, isCorrect, answerCheck) {
   const momentum = lessonMomentum(session);
   const title = isCorrect ? answerCheck?.typo ? 'Goed! Kleine typefout.' : momentum.run >= 3 ? momentum.run + ' op rij' : 'Goed' : 'Onjuist';
-  return '<div class="lesson-dock ' + (isCorrect ? 'success' : 'retry') + '"><div class="feedback ' + (isCorrect ? 'success' : 'retry') + ' lesson-feedback" role="status" aria-live="polite"><div class="feedback-heading"><span class="feedback-symbol" aria-hidden="true">' + (isCorrect ? icon('check') : icon('refresh')) + '</span><strong>' + title + '</strong>' + (isCorrect ? '<span class="feedback-reward">+5 XP</span>' : '') + '</div><p>' + (isCorrect ? escape(q.answer) : '<strong>Het juiste antwoord:</strong> ' + escape(q.answer)) + '</p>' + (q.explanation ? '<p>' + escape(q.explanation) + '</p>' : '') + (q.source.kind === 'supplement' ? '<p>Aanvullend coachingvoorbeeld</p>' : '') + '</div>' + (session.lessonSize === LESSON_SIZE ? '' : sourceMarkup(q.source)) + '<div class="lesson-actions"><button class="primary next-button" id="next-question">' + (session.index + 1 >= session.ids.length ? 'Bekijk je resultaat' : 'Verder') + icon('arrow-right') + '</button></div></div>';
+  const muscles = ['exercise-recognition', 'model-fact'].includes(q.type) ? highlightedMuscleNames(q) : q.modelContext ? q.modelContext.muscleIds.map(id => curriculum.cards.find(card => card.id === id)?.name).join(', ') : null;
+  const { modelMuscles, answer: displayAnswer, explanation } = compactMuscleFeedback(q, muscles);
+  return '<div class="lesson-dock ' + (isCorrect ? 'success' : 'retry') + '"><div class="feedback ' + (isCorrect ? 'success' : 'retry') + ' lesson-feedback" role="status" aria-live="polite"><div class="feedback-heading"><span class="feedback-symbol" aria-hidden="true">' + (isCorrect ? icon('check') : icon('refresh')) + '</span><strong>' + title + '</strong>' + (isCorrect ? '<span class="feedback-reward">+5 XP</span>' : '') + '</div><p>' + (isCorrect ? escape(displayAnswer) : '<strong>Het juiste antwoord:</strong> ' + escape(displayAnswer)) + '</p>' + (modelMuscles ? '<p><strong>Gemarkeerde spieren:</strong> ' + escape(modelMuscles) + '</p>' : '') + (explanation ? '<p>' + escape(explanation) + '</p>' : '') + (q.source.kind === 'supplement' ? '<p>Aanvullend coachingvoorbeeld</p>' : '') + '</div><div class="lesson-actions"><button class="primary next-button" id="next-question">' + (session.index + 1 >= session.ids.length ? 'Bekijk je resultaat' : 'Verder') + icon('arrow-right') + '</button></div></div>';
 }
 function renderLesson({ preserveCamera = false } = {}) {
   restoreAtlasLayout();
@@ -364,34 +425,61 @@ function renderLesson({ preserveCamera = false } = {}) {
   const response = session.response;
   const answerCheck = response && ['open', 'recognition-open'].includes(mode) ? checkOpenAnswer(q, response) : null;
   const isCorrect = mode === 'open-self' ? session.selfAssessmentCorrect === true : answerCheck ? answerCheck.correct : response === q.answer;
-  const recognitionBlocked = q.type === 'recognition' && !viewer?.available.has(q.muscleId);
-  const earlierMistake = !response && session.index < session.initialCount && needsMistakeReview(progress.questions[q.id]);
+  const recognitionBlocked = !modelAvailable(q, viewer?.available, session.options, currentExercise(q));
+  const combination = ['exercise-recognition', 'model-fact'].includes(q.type);
+  const modelContext = q.modelContext;
+  const modelChoices = mode === 'model-choice' ? modelChoiceCards(session.options) : null;
+  viewer?.setPickingEnabled?.(!combination && !modelContext && mode !== 'model-choice');
   $('#learning').innerHTML = lessonHud() +
-    '<article class="question-card" data-exercise="' + mode + '"' + (q.type === 'recognition' ? ' data-model-question' : '') + '>' + (earlierMistake ? '<p class="open-answer-help">Eerder fout · nog eens oefenen</p>' : '') + '<h2 tabindex="-1" id="question-title">' + escape(mode === 'point' ? 'Wijs ' + q.answer + ' aan.' : mode === 'recognition-open' ? 'Welke spier is paars gemarkeerd?' : q.prompt) + '</h2>' +
-    (recognitionBlocked ? '<p role="status">3D-model laden…</p>' : '') +
-    (mode === 'binary' ? '<div class="statement"><p>' + escape(session.options[0]) + '</p></div>' : '') + (isOpenExercise(mode) ? openAnswerMarkup(mode, response, recognitionBlocked) : '<div class="answers">' + (mode === 'binary' ? binaryResponses(q, session.options) : session.options).map((option, i) => '<button data-key="' + (i + 1) + '" data-answer="' + session.options.indexOf(option) + '" class="answer ' + (response ? option === q.answer ? 'correct' : option === response ? 'incorrect' : '' : (mode === 'point' ? pendingPointSelection : null)?.response === option ? 'selected' : '') + '" ' + (!response && mode === 'point' ? 'aria-pressed="' + ((mode === 'point' ? pendingPointSelection : null)?.response === option) + '" ' : '') + (response || recognitionBlocked ? 'disabled' : '') + '><span class="answer-key">' + (i + 1) + '</span><span>' + (mode === 'binary' ? (i === 0 ? 'Klopt' : 'Klopt niet') : mode === 'point' && !response ? 'Bekijk spier ' + (i + 1) : escape(option)) + '</span>' + (response && option === q.answer ? icon('check') : '') + '</button>').join('') + '</div>') +
+    '<article class="question-card" data-exercise="' + mode + '"' + (usesModel(q) ? ' data-model-question' : '') + '><h2 tabindex="-1" id="question-title">' + escape(mode === 'model-choice' ? 'Welke gemarkeerde spier is ' + q.answer + '?' : mode === 'point' ? 'Wijs ' + q.answer + ' aan.' : mode === 'recognition-open' && !combination ? 'Welke spier is paars gemarkeerd?' : modelContext?.prompt || q.prompt) + '</h2>' +
+    (recognitionBlocked ? '<p role="status">' + (viewer ? 'Niet alle spieren zijn beschikbaar in het 3D-model.' : '3D-model laden…') + '</p>' : '') +
+    (mode === 'binary' ? '<div class="statement"><p>' + escape(session.options[0]) + '</p></div>' : '') + (isOpenExercise(mode) ? openAnswerMarkup(mode, response, recognitionBlocked, q) : '<div class="answers">' + (mode === 'binary' ? binaryResponses(q, session.options) : session.options).map((option, i) => '<button data-key="' + (i + 1) + '" data-answer="' + session.options.indexOf(option) + '" class="answer ' + (mode === 'model-choice' ? 'model-choice-answer choice-color-' + i + ' ' : '') + (response ? option === q.answer ? 'correct' : option === response ? 'incorrect' : '' : (mode === 'point' ? pendingPointSelection : null)?.response === option ? 'selected' : '') + '" ' + (!response && mode === 'point' ? 'aria-pressed="' + ((mode === 'point' ? pendingPointSelection : null)?.response === option) + '" ' : '') + (response || recognitionBlocked ? 'disabled' : '') + '><span class="answer-key">' + (i + 1) + '</span><span>' + (mode === 'binary' ? (i === 0 ? 'Klopt' : 'Klopt niet') : mode === 'model-choice' ? '<span class="choice-swatch" aria-hidden="true">' + choicePalette[i].symbol + '</span>' + escape(modelChoiceLabel(i)) : mode === 'point' && !response ? 'Bekijk spier ' + (i + 1) : escape(option)) + '</span>' + (response && option === q.answer ? icon('check') : '') + '</button>').join('') + '</div>') +
     (mode === 'point' && !response ? '<div class="point-confirmation lesson-dock"><p id="point-selection-status" class="visually-hidden" role="status" aria-live="polite">' + (pendingPointSelection ? 'Keuze gemarkeerd. Je kunt je keuze nog wijzigen.' : 'Kies een spier in het model of met een antwoordknop.') + '</p><button id="confirm-answer" class="primary" ' + (!pendingPointSelection || recognitionBlocked ? 'disabled' : '') + '>Bevestig antwoord ' + icon('check') + '</button></div>' : '') +
-    (!isOpenExercise(mode) && mode !== 'point' ? '<p class="answer-shortcut' + (response ? ' is-answered' : '') + '"' + (response ? ' aria-hidden="true"' : '') + '>' + (mode === 'binary' ? '1–2' : '1–4') + ' om direct te antwoorden</p>' : '') +
     (response ? feedbackMarkup(q, isCorrect, answerCheck) : isOpenExercise(mode) ? openAnswerActionsMarkup(mode, recognitionBlocked) : '') +
     '</article>';
   const card = curriculum.cards.find(c => c.id === q.muscleId);
   $('#muscle-select').disabled = !response;
-  $('#isolate').disabled = mode === 'point' && !response;
+  $('#isolate').disabled = mode === 'model-choice' || (mode === 'point' || Boolean(modelContext)) && !response;
   if ($('#isolate').disabled) {
     $('#isolate').checked = false;
     viewer?.setIsolated(false);
   }
-  if (card) {
+  if (mode === 'model-choice') {
+    if (modelChoices) viewer?.showModelChoices?.(modelChoices.map(card => card.id), card?.view || 'front', preserveCamera);
+    if (!preserveCamera) setOrientation(card?.view || 'front');
+    $('#muscle-select').disabled = true;
+    $('#selection-card').innerHTML = response ? '<h3>' + escape(modelChoiceLabel(session.options.indexOf(q.answer))) + '</h3><p>' + escape(q.answer) + '</p>' : '';
+  } else if (combination) {
+    if (preserveCamera) viewer?.highlight(q.muscleIds, null, q.highlightPatterns);
+    else {
+      $('#isolate').checked = false;
+      viewer?.setIsolated(false);
+      viewer?.select(q.muscleIds, q.view, true, true, q.highlightPatterns);
+      setOrientation(q.view);
+    }
+    $('#muscle-select').disabled = true;
+    $('#selection-card').innerHTML = response ? '<h3>Gemarkeerde spieren</h3><p>' + escape(highlightedMuscleNames(q)) + '</p>' : '';
+  } else if (modelContext) {
+    if (preserveCamera) viewer?.highlight(modelContext.muscleIds);
+    else {
+      $('#isolate').checked = false;
+      viewer?.setIsolated(false);
+      viewer?.select(modelContext.muscleIds, modelContext.view, false);
+      setOrientation(modelContext.view);
+    }
+    $('#muscle-select').disabled = true;
+    $('#selection-card').innerHTML = response ? '<h3>Gemarkeerde spieren</h3><p>' + escape(modelContext.muscleIds.map(id => curriculum.cards.find(card => card.id === id)?.name).join(', ')) + '</p>' : '';
+  } else if (card) {
     if (mode === 'point' && pendingPointSelection && !response) viewer?.highlight(pendingPointSelection.muscleId, pendingPointSelection.anatomyName);
     else if (preserveCamera) viewer?.highlight(card.id);
     else viewer?.select(card.id, card.view, q.type === 'recognition' && mode !== 'point', mode !== 'point' || Boolean(response));
     if (!preserveCamera) setOrientation(card.view || 'front');
-    $('#selection-card').innerHTML = !response ? q.type === 'recognition' ? '<h3>' + (mode === 'point' ? 'Waar ligt ' + escape(card.name) + '?' : 'Welke spier is dit?') + '</h3><p>' + (mode === 'point' ? 'Tik een spier aan of gebruik de antwoordknoppen.' : 'Paars markeert de spier, ook onder andere spieren.') + '</p>' : '<span class="eyebrow">SPIER IN BEELD</span><h3>' + (isOpenExercise(mode) ? 'Gebruik wat je weet' : escape(card.name)) + '</h3>' : cardMarkup(card);
+    $('#selection-card').innerHTML = response ? cardMarkup(card) : '';
   } else { resetAtlas(); $('#muscle-select').disabled = !response; }
   const modelPrompt = $('#model-prompt');
-  modelPrompt.hidden = q.type !== 'recognition';
-  modelPrompt.textContent = mode === 'point' ? 'Wijs ' + q.answer + ' aan.' : 'Welke spier is paars gemarkeerd?';
-  $('.atlas-panel').hidden = q.type !== 'recognition';
+  modelPrompt.hidden = true;
+  modelPrompt.textContent = '';
+  $('.atlas-panel').hidden = !usesModel(q);
   arrangeModelQuestion();
 }
 
@@ -413,7 +501,7 @@ function chooseAnswer(index) {
   if (!session || session.response || session.finished) return;
   const q = byId.get(session.ids[session.index]);
   if (currentExercise(q) !== 'point') {
-    if (!route.startsWith('les/') || !session.prepared || isOpenExercise(currentExercise(q)) || needsMatching() || activeInterlude() || (q.type === 'recognition' && !viewer?.available.has(q.muscleId))) return;
+    if (!route.startsWith('les/') || !session.prepared || isOpenExercise(currentExercise(q)) || needsMatching() || activeInterlude() || (usesModel(q) && !modelAvailable(q, viewer?.available, session.options, currentExercise(q)))) return;
     const response = session.options[index];
     if (!response || (currentExercise(q) === 'binary' && !binaryResponses(q, session.options).includes(response))) return;
     return answer(index);
@@ -437,7 +525,7 @@ function answer(index, pickedMuscle = null, selfAssessment = null) {
     if (!canSaveLesson()) return;
     if (!session || session !== expectedSession || session.index !== expectedIndex || !session.prepared || session.response || session.finished) return;
     const q = byId.get(session.ids[session.index]);
-    if (q.type === 'recognition' && !viewer?.available.has(q.muscleId)) return;
+    if (usesModel(q) && !modelAvailable(q, viewer?.available, session.options, currentExercise(q))) return;
     const response = pickedMuscle || session.options[index];
     if (!response) return;
     refreshProgress();
@@ -464,7 +552,7 @@ function next() {
   pendingPointSelection = null;
   const index = session.index + 1;
   const exerciseModes = session.exerciseModes || session.ids.map((id, slot) => currentExercise(byId.get(id), slot));
-  session = { ...session, index, response: null, openDraft: '', openRevealed: false, selfAssessmentCorrect: null, exerciseModes, options: index < session.ids.length ? optionsFor(byId.get(session.ids[index])) : [] };
+  session = { ...session, index, response: null, openDraft: '', openRevealed: false, selfAssessmentCorrect: null, exerciseModes, options: index < session.ids.length ? optionsFor(byId.get(session.ids[index]), Math.random, exerciseModes[index]) : [] };
   save(); renderLesson();
   focusLessonContent();
 }
@@ -557,7 +645,7 @@ function renderQuestionBank() {
   resetAtlas();
   $('.atlas-panel').hidden = true;
   intro('Vragenbank');
-  $('#learning').innerHTML = '<div class="bank-filters"><label for="question-search">Zoeken</label><input id="question-search" type="search" placeholder="Spier of onderwerp"><label for="question-chapter">Hoofdstuk</label><select id="question-chapter"><option value="">Alle hoofdstukken</option>' + topics.map(topic => '<option value="' + topic.id + '">' + escape(topic.title) + '</option>').join('') + '</select></div><p id="bank-count" role="status">' + curriculum.questions.length + ' vragen</p><div class="question-bank">' + topics.map(topic => '<details class="bank-chapter" data-chapter="' + topic.id + '"><summary>' + escape(topic.title) + ' · ' + curriculum.questions.filter(q => q.region === topic.id).length + ' vragen</summary><button class="text-button" data-start="' + topic.id + '">Oefen dit hoofdstuk</button><ol>' + curriculum.questions.filter(q => q.region === topic.id).map(q => '<li data-search="' + escape((q.prompt + ' ' + q.answer + ' ' + (q.explanation || '')).toLocaleLowerCase('nl')) + '"><details><summary>' + escape(q.type === 'recognition' ? '3D-herkenning: ' + q.answer : q.prompt) + '</summary><p><strong>Antwoord:</strong> ' + escape(q.answer) + '</p>' + (q.explanation ? '<p>' + escape(q.explanation) + '</p>' : '') + sourceMarkup(q.source) + '</details></li>').join('') + '</ol></details>').join('') + '</div><a class="text-link" href="#leren">Terug naar je leerpad</a>';
+  $('#learning').innerHTML = '<div class="bank-filters"><label for="question-search">Zoeken</label><input id="question-search" type="search" placeholder="Spier of onderwerp"><label for="question-chapter">Hoofdstuk</label><select id="question-chapter"><option value="">Alle hoofdstukken</option>' + topics.map(topic => '<option value="' + topic.id + '">' + escape(topic.title) + '</option>').join('') + '</select></div><p id="bank-count" role="status">' + curriculum.questions.length + ' vragen</p><div class="question-bank">' + topics.map(topic => '<details class="bank-chapter" data-chapter="' + topic.id + '"><summary>' + escape(topic.title) + ' · ' + curriculum.questions.filter(q => q.region === topic.id).length + ' vragen</summary><button class="text-button" data-start="' + topic.id + '">Oefen dit hoofdstuk</button><ol>' + curriculum.questions.filter(q => q.region === topic.id).map(q => '<li data-search="' + escape((q.prompt + ' ' + q.answer + ' ' + (q.explanation || '')).toLocaleLowerCase('nl')) + '"><details><summary>' + escape(q.type === 'model-fact' ? '3D: ' + q.prompt : isModelQuestion(q) ? '3D-herkenning: ' + q.answer : q.prompt) + '</summary>' + '<p><strong>Antwoord:</strong> ' + escape(q.answer) + '</p>' + (q.explanation ? '<p>' + escape(q.explanation) + '</p>' : '') + sourceMarkup(q.source) + '</details></li>').join('') + '</ol></details>').join('') + '</div><a class="text-link" href="#leren">Terug naar je leerpad</a>';
 }
 function filterQuestionBank() {
   const query = $('#question-search').value.trim().toLocaleLowerCase('nl');

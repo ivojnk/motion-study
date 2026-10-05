@@ -2,15 +2,16 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { courseDetailQuestions } from '../src/data/course-details.js';
+import { withModelContexts } from '../src/data/model-contexts.js';
 import { levelPath, levelQuestions, readGame, isOpenAnswerCorrect } from '../src/learning.js';
 
 const curriculum = JSON.parse(readFileSync(new URL('../src/data/curriculum.json', import.meta.url)));
-const details = curriculum.questions.filter(q => q.source.kind === 'course-detail');
+const details = curriculum.questions.filter(q => q.source.kind === 'course-detail' && q.type === 'choice');
 const earlier = curriculum.questions.filter(q => q.source.kind !== 'course-detail');
 const question = suffix => details.find(q => q.id === 'course-detail-' + suffix);
 
 test('audit additions survive import and recall accepts names without confusing anatomical parts', () => {
-  assert.deepEqual(details, courseDetailQuestions);
+  assert.deepEqual(details, withModelContexts(courseDetailQuestions));
   assert.equal(details.length, 19);
   assert.equal(isOpenAnswerCorrect(question('sternocostalis'), 'pars sternocostalis'), true);
   assert.equal(isOpenAnswerCorrect(question('sternocostalis'), 'pars clavicularis'), false);
@@ -40,7 +41,7 @@ test('new detail lessons preserve all existing lessons and require their own com
     const queue = levelQuestions(curriculum.questions, level.topic.id, level.stage);
     assert.equal(queue.length, 7);
     assert.equal(new Set(queue.map(q => q.id)).size, 7);
-    return queue.filter(q => q.source.kind === 'course-detail').map(q => q.id);
+    return queue.filter(q => q.source.kind === 'course-detail' && q.type === 'choice').map(q => q.id);
   }));
   assert.deepEqual(reached, new Set(details.map(q => q.id)));
 });

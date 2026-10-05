@@ -8,10 +8,11 @@ const pointableMuscles = new Set([
 ]);
 
 export function availableExercises(question) {
+  if (question.type === 'exercise-recognition') return ['recognition', 'recognition-open'];
   if (question.type === 'recognition') {
     return pointableMuscles.has(question.muscleId)
-      ? ['recognition', 'point', 'recognition-open']
-      : ['recognition', 'recognition-open'];
+      ? ['recognition', 'model-choice', 'point', 'recognition-open']
+      : ['recognition', 'model-choice', 'recognition-open'];
   }
   return ['choice', 'binary', supportsOpenAnswer(question) ? 'open' : 'open-self'];
 }
@@ -23,8 +24,8 @@ function spacedSuccess(stats, mode) {
 export function exerciseForProgress(question, questionProgress, { index = 0, now = Date.now() } = {}) {
   const modes = availableExercises(question);
   const turn = Number.isInteger(index) ? Math.abs(index) : 0;
-  const recognition = question.type === 'recognition';
-  const easy = recognition ? 'recognition' : turn % 3 === 1 ? 'binary' : 'choice';
+  const recognition = ['recognition', 'exercise-recognition'].includes(question.type);
+  const easy = recognition ? (question.type === 'recognition' ? 'model-choice' : 'recognition') : turn % 3 === 1 ? 'binary' : 'choice';
   if (needsMistakeReview(questionProgress)) {
     if (!questionProgress?.lastCorrect) return easy;
     if (questionProgress.mistakeReview?.successes >= 1) {

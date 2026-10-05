@@ -1,5 +1,6 @@
 import './style.css';
 import './study-ui.css';
+import './viewer-model-controls.css';
 import './install-app.css';
 import './app-update.css';
 import { setupAppUpdates } from './app-update.js';
@@ -52,6 +53,7 @@ async function openApp(user, preferences = {}) {
     throw new Error('De app kon niet laden. Probeer opnieuw.');
   }
   $('#account-screen').hidden = true;
+  $('#login-install').hidden = true;
   $('#main').hidden = false;
   $('nav').hidden = false;
   $('.skip').hidden = false;

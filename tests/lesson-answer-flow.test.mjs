@@ -6,6 +6,8 @@ import * as learning from '../src/learning.js';
 import * as progression from '../src/exercise-progression.js';
 import * as motivation from '../src/lesson-motivation.js';
 import * as groups from '../src/lesson-groups.js';
+import * as lessonModels from '../src/lesson-models.js';
+import { choicePalette } from '../src/muscle-choice.js';
 
 const curriculum = JSON.parse(fs.readFileSync(new URL('../src/data/curriculum.json', import.meta.url)));
 const main = fs.readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
@@ -50,11 +52,11 @@ function app(data = {}, locks) {
     return null;
   };
   const storage = { getItem: key => data[key] || null, setItem: (key, value) => { data[key] = value; } };
-  const context = { ...learning, ...progression, ...motivation, ...groups, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
+  const context = { ...learning, ...progression, ...motivation, ...groups, ...lessonModels, choicePalette, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
     location: { hash: '' }, navigator: locks ? { locks } : {},
     document: { querySelector, querySelectorAll: () => [], addEventListener(type, listener) { listeners.set(type, listener); } },
     window: { localStorage: storage, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
-  vm.createContext(context); vm.runInContext(source, context);
+  vm.createContext(context); vm.runInContext(source, context); context.api.viewerReady();
   vm.runInContext(main.slice(main.indexOf("document.addEventListener('click'"), main.indexOf("document.addEventListener('submit'")), context);
   vm.runInContext(main.slice(main.indexOf("document.addEventListener('submit'"), main.indexOf("$('#muscle-select').addEventListener")), context);
   return { ...context.api, data, html: () => node('#learning').innerHTML,
