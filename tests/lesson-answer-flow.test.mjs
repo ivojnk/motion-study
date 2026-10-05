@@ -29,7 +29,7 @@ function app(data = {}, locks) {
     if (!nodes.has(selector)) nodes.set(selector, { innerHTML: '', dataset: {}, classList: { toggle() {} }, setAttribute() {}, focus() {}, scrollIntoView() {}, closest() { return null; }, click() {} });
     return nodes.get(selector);
   };
-  const fixed = new Set(['#learning', '#intro', '#model-prompt', '#muscle-select', '#isolate', '#orientation', '#selection-card', '.atlas-panel', '#credits']);
+  const fixed = new Set(['#learning', '#intro', '#model-prompt', '#isolate', '#orientation', '#selection-card', '.atlas-panel', '#credits']);
   const querySelector = selector => {
     if (fixed.has(selector)) return node(selector);
     const html = node('#learning').innerHTML;
@@ -58,7 +58,7 @@ function app(data = {}, locks) {
     window: { localStorage: storage, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
   vm.createContext(context); vm.runInContext(source, context); context.api.viewerReady();
   vm.runInContext(main.slice(main.indexOf("document.addEventListener('click'"), main.indexOf("document.addEventListener('submit'")), context);
-  vm.runInContext(main.slice(main.indexOf("document.addEventListener('submit'"), main.indexOf("$('#muscle-select').addEventListener")), context);
+  vm.runInContext(main.slice(main.indexOf("document.addEventListener('submit'"), main.indexOf("$('#bones').addEventListener")), context);
   return { ...context.api, data, html: () => node('#learning').innerHTML,
     fire(type, event) { listeners.get(type)(event); }, go(hash) { context.location.hash = hash; context.api.navigate(); } };
 }
