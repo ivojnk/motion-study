@@ -506,3 +506,30 @@ nav a > .icon { width: 20px; height: 20px; }
   .lesson-focus .lesson-dock { padding-inline: 16px; }
   .lesson-focus .feedback-heading { font-size: 19px; }
 }
+
+/* Keep the complete lesson summary and both actions in one mobile viewport. */
+.lesson-focus main:has(.result-card) { padding: 0; }
+.lesson-focus #learning:has(> .result-card) {
+  justify-content: center;
+  padding: max(12px, env(safe-area-inset-top)) 16px max(12px, env(safe-area-inset-bottom));
+}
+.lesson-focus .result-card {
+  width: 100%;
+  max-width: 520px;
+  align-self: center;
+  padding: clamp(14px, 2.5svh, 24px);
+}
+.result-card .result-icon { width: 40px; height: 40px; margin-bottom: 10px; }
+.result-card .result-icon .icon { width: 24px; height: 24px; }
+.result-card h2 { font-size: 26px; }
+.result-card .reward-xp { font-size: 42px; line-height: 1.1; margin: 10px 0 14px; }
+.result-card .result-breakdown { margin: 0 0 12px; padding: 2px 12px; }
+.result-card .result-breakdown > div { padding: 8px 0; font-size: 12px; }
+.result-card .result-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin: 0 0 12px; }
+.result-card .result-metrics > span { padding: 10px 4px; font-size: 11px; line-height: 1.4; }
+.result-card .result-metrics > span:last-child:nth-child(3) { grid-column: auto; }
+.result-card .result-metrics strong { font-size: 22px; margin-bottom: 4px; }
+.result-card > p { margin: 0 0 12px; font-size: 12px; line-height: 1.4; }
+.result-card .goal-result { margin-top: 0; padding: 10px 8px; font-size: 12px; }
+.result-card .primary { width: 100%; margin-top: 14px; min-height: 48px; }
+.result-card .text-link { display: flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 4px; }
