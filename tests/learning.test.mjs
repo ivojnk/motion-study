@@ -9,7 +9,10 @@ const serialized = JSON.stringify(curriculum);
 test('every question has a unique id, four distinct options and a course reference', () => {
   assert.equal(new Set(curriculum.questions.map(q => q.id)).size, curriculum.questions.length);
   for (const q of curriculum.questions) {
-    assert.ok(q.source.title.includes('Milo module 6.6'), q.id);
+    if (q.source.kind === 'supplement') {
+      assert.equal(q.source.title, 'Aanvullende coachingvoorbeelden', q.id);
+      assert.ok(q.source.references.length >= 2, q.id);
+    } else assert.ok(q.source.title.includes('Milo module 6.6'), q.id);
     assert.ok(q.source.section, q.id);
     const options = optionsFor(q);
     assert.equal(options.length, 4, q.id);
@@ -105,7 +108,7 @@ test('XP calendar streak survives reload, crosses month boundary and expires aft
 });
 test('short lessons cover the whole course and unlock only after every question is corrected', () => {
   const empty = { days: {}, completed: [] };
-  assert.equal(levelPath(empty).length, 88);
+  assert.equal(levelPath(empty).length, 95);
   assert.equal(levelPath(empty).filter(level => !level.locked).length, 1);
   assert.deepEqual(completeLevel(empty, 'basis:0', 0, 0), empty);
   assert.deepEqual(completeLevel(empty, 'basis:0', NaN, 7), empty);
@@ -119,7 +122,8 @@ test('short lessons cover the whole course and unlock only after every question 
   assert.equal(completeLevel(first, 'basis:0', 5, 5).completed.length, 1);
   for (const topic of topics) {
     const lessons = levelPath(empty).filter(level => level.topic.id === topic.id);
-    assert.equal(lessons.length, Math.ceil(curriculum.questions.filter(q => q.region === topic.id).length / LESSON_SIZE));
+    const chapter = curriculum.questions.filter(q => q.region === topic.id);
+    assert.equal(lessons.length, [false, true].reduce((count, supplement) => count + Math.ceil(chapter.filter(q => (q.source.kind === 'supplement') === supplement).length / LESSON_SIZE), 0));
     assert.ok(lessons.length > 3);
     const partitions = lessons.flatMap(level => {
       const questions = levelQuestions(curriculum.questions, topic.id, level.stage);
@@ -171,6 +175,7 @@ test('source coverage maps every question and every PDF page without dangling re
   assert.deepEqual(covered, ids);
   const pages = new Set();
   for (const q of curriculum.questions) {
+    if (q.source.kind === 'supplement') { assert.equal(q.source.page, undefined, q.id); continue; }
     assert.ok(Number.isInteger(q.source.page) && q.source.page >= 1 && q.source.page <= 28, q.id);
     pages.add(q.source.page);
   }
@@ -223,5 +228,6 @@ test('answer streak counters and later lesson stages validate on reload', () => 
   for (const counters of [{ answerStreak: -1 }, { answerStreak: 4 }, { bestAnswerStreak: 2 }, { bestAnswerStreak: 3.5 }]) {
     assert.equal(readSession(storage({ ...session, ...counters }), lookup), null);
   }
-  assert.equal(readSession(storage({ ...session, levelId: 'core:15', stage: 15 }), lookup), null);
+  const invalidStage = levelPath({ completed: [] }).filter(level => level.topic.id === 'core').length;
+  assert.equal(readSession(storage({ ...session, levelId: 'core:' + invalidStage, stage: invalidStage }), lookup), null);
 });

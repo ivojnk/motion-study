@@ -82,3 +82,7 @@ Source: https://github.com/khmyznikov/pwa-install/tree/ef1bd3ec440d711e3eaafb796
 SimpleWebAuthn browser 14.0.0 and server 14.0.3, by Matthew Miller, MIT.
 Source: https://github.com/MasterKale/SimpleWebAuthn
 License: `public/licenses/simplewebauthn-LICENSE.txt`. Browser code is limited to the owner login page.
+
+## Supplemental coaching questions
+
+Original coaching examples are released with the question bank under CC BY-SA 4.0. They apply learning principles described by [Grgic, Mikulic & Mikulic (2021)](https://pubmed.ncbi.nlm.nih.gov/34822352/) and [Zacks & Friedman (2020)](https://www.nature.com/articles/s41598-020-63999-1). Research references support external-focus and analogy definitions, rather than proving each correction. No article text or third-party assets are reproduced.
