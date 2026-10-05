@@ -145,6 +145,9 @@ select { font-size: 13px; border-radius: 5px; background: var(--white); color: v
 .atlas-back-button:hover { background: var(--soft); border-color: var(--accent); }
 @media (max-width: 620px) { .atlas-back-button { bottom: calc(96px + env(safe-area-inset-bottom)); } }
 .explore-card h2 { font-size: 32px; margin: 0 0 22px; }
+.muscle-search { display: block; width: 100%; min-width: 0; min-height: 48px; margin-bottom: 20px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 5px; background: var(--white); color: var(--ink); font: inherit; font-size: 16px; }
+.muscle-search::placeholder { color: var(--muted); opacity: 1; }
+.muscle-search-empty { margin: 0; padding: 20px 4px; font-size: 14px; }
 .atlas-muscles { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: 0; border-top: 1px solid var(--line); }
 .muscle-chip { font-size: 14px; padding: 12px 4px; background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; text-align: left; min-height: 48px; }
 .muscle-chip:hover { background: var(--soft); border-color: var(--line); }

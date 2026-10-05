@@ -25,6 +25,7 @@ let session = null;
 let viewer = null;
 let viewerFullscreen = null;
 let route = '';
+let atlasSearchQuery = '';
 let storageAvailable = true;
 const byId = new Map(curriculum.questions.map(q => [q.id, q]));
 let drafts = readDrafts(storage, byId);
@@ -593,11 +594,45 @@ function showMuscle(id, originalName, confirmed = false) {
   $('#selection-card').innerHTML = cardMarkup(card);
   if (route === 'atlas') renderAtlas(card);
 }
+function muscleMatchesSearch(name, query) {
+  const normalize = value => value.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+  const words = normalize(name).split(' ');
+  return normalize(query).split(' ').filter(Boolean).every(token => words.some(word => {
+    if (word.includes(token)) return true;
+    if (token.length < 4) return false;
+    const budget = token.length >= 8 ? 2 : 1;
+    if (token.length > word.length + budget) return false;
+    // Match a word prefix while typing; neighboring letter swaps count as one typo.
+    const target = word.slice(0, token.length + budget);
+    const rows = Array.from({ length: token.length + 1 }, (_, row) =>
+      Array.from({ length: target.length + 1 }, (_, col) => row === 0 ? col : col === 0 ? row : 0));
+    for (let row = 1; row <= token.length; row++) {
+      for (let col = 1; col <= target.length; col++) {
+        rows[row][col] = Math.min(rows[row - 1][col] + 1, rows[row][col - 1] + 1,
+          rows[row - 1][col - 1] + Number(token[row - 1] !== target[col - 1]));
+        if (row > 1 && col > 1 && token[row - 1] === target[col - 2] && token[row - 2] === target[col - 1]) {
+          rows[row][col] = Math.min(rows[row][col], rows[row - 2][col - 2] + 1);
+        }
+      }
+    }
+    return Math.min(...rows[token.length]) <= budget;
+  }));
+}
+function atlasMusclesMarkup(cards) {
+  return cards.length ? cards.map(c => '<button class="muscle-chip" data-muscle="' + c.id + '">' + escape(c.name) + '</button>').join('') : '<p class="muscle-search-empty">Geen spieren gevonden.</p>';
+}
+function filterAtlasMuscles() {
+  atlasSearchQuery = $('#muscle-search').value;
+  const cards = curriculum.cards.filter(card => muscleMatchesSearch(card.name, atlasSearchQuery));
+  $('#muscle-search-results').innerHTML = atlasMusclesMarkup(cards);
+  $('#muscle-search-status').textContent = cards.length ? cards.length + (cards.length === 1 ? ' spier gevonden' : ' spieren gevonden') : 'Geen spieren gevonden.';
+}
 function renderAtlas(card = null) {
   restoreAtlasLayout();
   intro('3D-atlas');
   if (!card) {
-    $('#learning').innerHTML = '<article class="explore-card"><h2 id="muscle-list-title" tabindex="-1">Spieren</h2><div class="atlas-muscles">' + curriculum.cards.map(c => '<button class="muscle-chip" data-muscle="' + c.id + '">' + escape(c.name) + '</button>').join('') + '</div></article>'; return;
+    const cards = curriculum.cards.filter(card => muscleMatchesSearch(card.name, atlasSearchQuery));
+    $('#learning').innerHTML = '<article class="explore-card"><h2 id="muscle-list-title" tabindex="-1">Spieren</h2><label for="muscle-search" class="visually-hidden">Zoek een spier</label><input id="muscle-search" class="muscle-search" type="search" placeholder="Zoek een spier…" value="' + escape(atlasSearchQuery) + '" autocomplete="off" spellcheck="false" aria-controls="muscle-search-results"><p id="muscle-search-status" class="visually-hidden" role="status" aria-atomic="true"></p><div id="muscle-search-results" class="atlas-muscles">' + atlasMusclesMarkup(cards) + '</div></article>'; return;
   }
   $('#learning').innerHTML = '<article class="explore-card muscle-detail"><span class="tag">' + escape(topics.find(t => t.id === card.region).title) + '</span><h2 id="muscle-card-title" tabindex="-1">' + escape(card.name) + '</h2><dl>' + Object.entries(card.fields).map(([field, value]) => '<div><dt>' + escape(field) + '</dt><dd>' + escape(value) + '</dd></div>').join('') + '</dl>' + '<button class="primary" data-start="' + card.region + '">Oefen dit hoofdstuk ' + icon('arrow-right') + '</button><button type="button" class="atlas-back-button" id="all-muscles">' + icon('arrow-left') + 'Terug naar alle spierkaarten</button></article>';
 }
@@ -685,6 +720,7 @@ document.addEventListener('click', event => {
 });
 document.addEventListener('submit', event => { if (event.target.id === 'open-answer-form') { event.preventDefault(); submitOpenAnswer(); } });
 document.addEventListener('input', event => {
+  if (event.target.id === 'muscle-search') filterAtlasMuscles();
   if (event.target.id === 'question-search') filterQuestionBank();
   if (event.target.id === 'open-answer') updateOpenDraft(event.target.value);
 });
