@@ -5,14 +5,15 @@ import vm from 'node:vm';
 import * as learning from '../src/learning.js';
 import * as progression from '../src/exercise-progression.js';
 import * as motivation from '../src/lesson-motivation.js';
+import * as groups from '../src/lesson-groups.js';
 
 const curriculum = JSON.parse(fs.readFileSync(new URL('../src/data/curriculum.json', import.meta.url)));
 const main = fs.readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
 const source = main.split("document.addEventListener('click'")[0]
   .replace(/^import .*;\n/gm, '')
   .replaceAll('import.meta.env.BASE_URL', "'/'") + `
- globalThis.api = { chooseAnswer, confirmChoiceSelection, answer, next, start, navigate, renderLesson, dismissInterlude,
-   read: () => ({ session, game, progress, route, pendingChoiceSelection }),
+ globalThis.api = { chooseAnswer, answer, next, start, navigate, renderLesson, dismissInterlude,
+   read: () => ({ session, game, progress, route }),
    viewerReady: () => { viewer = { available: new Set(curriculum.cards.map(c => c.id)), select() {}, highlight() {}, setIsolated() {} }; } };`;
 
 function controlledLocks() {
@@ -36,7 +37,7 @@ function app(data = {}, locks) {
       if (!markup) return null;
       const element = node('#' + id);
       if (element.disabled === undefined) element.disabled = /\sdisabled(?:\s|>)/.test(markup[0]);
-      element.click = () => { if (id === 'confirm-choice-answer') context.api.confirmChoiceSelection(); else if (id === 'next-question') context.api.next(); else if (id === 'continue-interlude') context.api.dismissInterlude(); };
+      element.click = () => { if (id === 'next-question') context.api.next(); else if (id === 'continue-interlude') context.api.dismissInterlude(); };
       return selector.includes(':not(:disabled)') && element.disabled ? null : element;
     }
     const key = selector.match(/^\[data-key="([1-4])"\]/)?.[1];
@@ -49,7 +50,7 @@ function app(data = {}, locks) {
     return null;
   };
   const storage = { getItem: key => data[key] || null, setItem: (key, value) => { data[key] = value; } };
-  const context = { ...learning, ...progression, ...motivation, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
+  const context = { ...learning, ...progression, ...motivation, ...groups, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
     location: { hash: '' }, navigator: locks ? { locks } : {},
     document: { querySelector, querySelectorAll: () => [], addEventListener(type, listener) { listeners.set(type, listener); } },
     window: { localStorage: storage, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
@@ -71,51 +72,56 @@ function lesson(question = q, mode = 'choice', locks) {
 const xp = instance => learning.gameStats(learning.readGame({ getItem: key => instance.data[key] || null })).xp;
 
 for (const [mode, question] of [['choice', q], ['binary', q], ['recognition', recognition]]) {
-  test(mode + ' selection is changeable and only confirmation records an answer', () => {
+  test(mode + ' choices immediately record one answer and show feedback', () => {
     const instance = lesson(question, mode);
-    assert.match(instance.html(), /id="confirm-choice-answer"[^>]*disabled/);
-    instance.confirmChoiceSelection(); assert.equal(instance.read().session.answered, 0);
+    assert.doesNotMatch(instance.html(), /id="confirm-choice-answer"|aria-pressed/);
+    const correct = instance.read().session.options.indexOf(question.answer);
+    instance.chooseAnswer(correct);
+    instance.chooseAnswer(correct);
     instance.chooseAnswer(instance.read().session.options.findIndex(option => option !== question.answer));
-    assert.equal(instance.read().session.response, null); assert.equal(xp(instance), 0);
-    instance.chooseAnswer(instance.read().session.options.indexOf(question.answer)); instance.renderLesson();
-    assert.equal(instance.read().pendingChoiceSelection.response, question.answer);
-    assert.match(instance.html(), /answer selected/); assert.match(instance.html(), /aria-pressed="true"/);
-    instance.confirmChoiceSelection(); instance.confirmChoiceSelection();
-    assert.equal(instance.read().session.response, question.answer); assert.equal(instance.read().session.answered, 1); assert.equal(xp(instance), 5);
+    assert.equal(instance.read().session.response, question.answer);
+    assert.equal(instance.read().session.answered, 1);
+    assert.equal(instance.read().session.index, 0);
+    assert.equal(xp(instance), 5);
+    assert.match(instance.html(), /feedback success/);
+    assert.match(instance.html(), /class="answer correct" disabled/);
   });
 }
 
-test('unconfirmed choices disappear on reload and navigation, confirmed feedback survives without rewards', () => {
-  let instance = lesson(); instance.chooseAnswer(instance.read().session.options.indexOf(q.answer));
-  let reloaded = app(instance.data); reloaded.viewerReady(); reloaded.go('#les/' + q.region);
-  assert.equal(reloaded.read().pendingChoiceSelection, null); reloaded.confirmChoiceSelection(); assert.equal(xp(reloaded), 0);
-  instance.go('#atlas'); assert.equal(instance.read().pendingChoiceSelection, null); instance.confirmChoiceSelection(); assert.equal(xp(instance), 0);
-  instance.go('#les/' + q.region); instance.chooseAnswer(instance.read().session.options.indexOf(q.answer)); instance.confirmChoiceSelection();
-  reloaded = app(instance.data); reloaded.viewerReady(); reloaded.go('#les/' + q.region);
-  assert.equal(reloaded.read().session.response, q.answer); assert.match(reloaded.html(), /feedback success/); reloaded.confirmChoiceSelection(); assert.equal(xp(reloaded), 5);
-  reloaded.next(); assert.equal(reloaded.read().pendingChoiceSelection, null); assert.equal(reloaded.read().session.response, null);
+test('immediate feedback survives reload and navigation without extra rewards', () => {
+  const instance = lesson(); instance.chooseAnswer(instance.read().session.options.indexOf(q.answer));
+  const reloaded = app(instance.data); reloaded.viewerReady(); reloaded.go('#les/' + q.region);
+  assert.equal(reloaded.read().session.response, q.answer); assert.match(reloaded.html(), /feedback success/);
+  reloaded.chooseAnswer(reloaded.read().session.options.indexOf(q.answer)); assert.equal(xp(reloaded), 5);
+  reloaded.go('#atlas'); reloaded.go('#les/' + q.region);
+  assert.equal(reloaded.read().session.response, q.answer); assert.equal(xp(reloaded), 5);
+  reloaded.next(); assert.equal(reloaded.read().session.response, null);
 });
 
-test('queued duplicate confirmations grant one reward and cannot grade a replacement lesson', async () => {
+test('queued duplicate choices grant one reward and cannot grade a replacement lesson', async () => {
   const locks = controlledLocks(); const instance = lesson(q, 'choice', locks);
-  instance.chooseAnswer(instance.read().session.options.indexOf(q.answer)); instance.confirmChoiceSelection(); instance.confirmChoiceSelection();
+  const index = instance.read().session.options.indexOf(q.answer);
+  instance.chooseAnswer(index); instance.chooseAnswer(index);
   await locks.drain(); assert.equal(xp(instance), 5); assert.equal(instance.read().session.answered, 1);
-  const changed = lesson(q, 'choice', locks); changed.chooseAnswer(changed.read().session.options.indexOf(q.answer)); changed.confirmChoiceSelection(); changed.start('daily');
+  const changed = lesson(q, 'choice', locks); changed.chooseAnswer(changed.read().session.options.indexOf(q.answer)); changed.start('daily');
   await locks.drain(); assert.equal(xp(changed), 0); assert.equal(changed.read().session.answered, 0);
 });
 
-test('wrong confirmation queues one retry and leaves the question until explicitly continuing', () => {
-  const instance = lesson(); instance.chooseAnswer(instance.read().session.options.findIndex(option => option !== q.answer)); instance.confirmChoiceSelection();
-  assert.equal(instance.read().session.index, 0); assert.equal(instance.read().session.retryIds.length, 1); assert.equal(xp(instance), 0);
+test('wrong choice queues one retry and leaves the question until explicitly continuing', () => {
+  const instance = lesson(); instance.chooseAnswer(instance.read().session.options.findIndex(option => option !== q.answer));
+  instance.chooseAnswer(instance.read().session.options.indexOf(q.answer));
+  assert.equal(instance.read().session.index, 0); assert.equal(instance.read().session.answered, 1);
+  assert.equal(instance.read().session.retryIds.length, 1); assert.equal(xp(instance), 0);
   assert.match(instance.html(), /feedback retry/); assert.match(instance.html(), /Het juiste antwoord:/);
   instance.next(); assert.equal(instance.read().session.index, 1); assert.equal(instance.read().session.response, null);
 });
 
-test('numeric shortcuts select, Enter confirms and key repeat cannot skip the feedback', () => {
+test('numeric shortcuts answer immediately and key repeat cannot skip feedback', () => {
   const instance = lesson(); const key = String(instance.read().session.options.indexOf(q.answer) + 1);
   const keyboard = (key, extra = {}) => ({ key, target: { tagName: 'BODY', closest() { return null; } }, preventDefault() {}, ...extra });
-  instance.fire('keydown', keyboard(key)); assert.equal(instance.read().session.response, null); assert.equal(xp(instance), 0);
-  instance.fire('keydown', keyboard('Enter')); assert.equal(instance.read().session.response, q.answer); assert.equal(xp(instance), 5);
+  instance.fire('keydown', keyboard(key, { repeat: true })); assert.equal(instance.read().session.response, null);
+  instance.fire('keydown', keyboard(key)); assert.equal(instance.read().session.response, q.answer); assert.equal(xp(instance), 5);
+  instance.fire('keydown', keyboard(key)); assert.equal(instance.read().session.answered, 1);
   instance.fire('keydown', keyboard('Enter', { repeat: true })); assert.equal(instance.read().session.index, 0);
   instance.fire('keydown', keyboard('Enter')); assert.equal(instance.read().session.index, 1);
 });
@@ -123,10 +129,14 @@ test('numeric shortcuts select, Enter confirms and key repeat cannot skip the fe
 test('typing and native button activation stay out of global answer shortcuts', () => {
   const instance = lesson(); let prevented = false;
   for (const tagName of ['INPUT', 'TEXTAREA', 'SELECT']) instance.fire('keydown', { key: '1', target: { tagName }, preventDefault() { prevented = true; } });
-  assert.equal(prevented, false); assert.equal(instance.read().pendingChoiceSelection, null); assert.equal(xp(instance), 0);
-  instance.chooseAnswer(instance.read().session.options.indexOf(q.answer));
+  assert.equal(prevented, false); assert.equal(instance.read().session.response, null); assert.equal(xp(instance), 0);
   instance.fire('keydown', { key: 'Enter', target: { tagName: 'BUTTON', closest() { return this; } }, preventDefault() { prevented = true; } });
   assert.equal(instance.read().session.response, null); assert.equal(prevented, false);
+});
+
+test('invalid answer indices cannot record an attempt', () => {
+  const instance = lesson(); instance.chooseAnswer(-1); instance.chooseAnswer(99);
+  assert.equal(instance.read().session.answered, 0); assert.equal(xp(instance), 0);
 });
 
 function sequentialLesson() {
@@ -139,7 +149,7 @@ function sequentialLesson() {
 function confirmCurrent(instance, correct = true) {
   const session = instance.read().session;
   const question = curriculum.questions.find(question => question.id === session.ids[session.index]);
-  instance.chooseAnswer(session.options.findIndex(option => correct ? option === question.answer : option !== question.answer)); instance.confirmChoiceSelection();
+  instance.chooseAnswer(session.options.findIndex(option => correct ? option === question.answer : option !== question.answer));
 }
 
 test('halfway waits for feedback continuation, survives reload and dismisses without extra XP', () => {
@@ -168,9 +178,9 @@ test('mistakes keep the original progress total stable and start a separate retr
     instance.next();
   }
   assert.equal(instance.read().session.index, 6); assert.equal(instance.read().session.answered, 6);
-  assert.match(instance.html(), /Nog één oefenronde/); assert.match(instance.html(), /class="lesson-progress" max="1"[^>]*aria-label="Herhaling"/);
+  assert.match(instance.html(), /Herkansing/); assert.match(instance.html(), /class="lesson-progress" max="1"[^>]*aria-label="Herhaling"/);
   assert.equal(xp(instance), 25);
-  instance = app(instance.data); instance.go('#les/daily'); assert.match(instance.html(), /Nog één oefenronde/);
+  instance = app(instance.data); instance.go('#les/daily'); assert.match(instance.html(), /Herkansing/);
   instance.dismissInterlude(); assert.equal(xp(instance), 25);
   instance = app(instance.data); instance.go('#les/daily'); assert.doesNotMatch(instance.html(), /id="continue-interlude"/);
   confirmCurrent(instance); instance.next();
@@ -195,29 +205,20 @@ test('session restore rejects malformed reward history and interlude state while
 });
 
 
-test('unconfirmed answers cannot be skipped or earn rewards, and reload clears only the selection', () => {
-  const instance = lesson();
-  instance.chooseAnswer(instance.read().session.options.indexOf(q.answer));
-  instance.next(true);
-  assert.equal(instance.read().session.index, 0);
-  assert.equal(instance.read().session.response, null);
-  assert.equal(instance.read().session.answered, 0);
-  assert.equal(xp(instance), 0);
+test('unanswered questions cannot be skipped or earn rewards after reload', () => {
+  const instance = lesson(); instance.next(true);
+  assert.equal(instance.read().session.index, 0); assert.equal(instance.read().session.response, null);
+  assert.equal(instance.read().session.answered, 0); assert.equal(xp(instance), 0);
   assert.doesNotMatch(instance.html(), /id="skip-question"/);
   const restored = app(instance.data); restored.viewerReady(); restored.go('#les/' + q.region);
-  assert.equal(restored.read().session.index, 0);
-  assert.equal(restored.read().pendingChoiceSelection, null);
-  restored.confirmChoiceSelection();
-  assert.equal(xp(restored), 0);
+  restored.next(); assert.equal(restored.read().session.index, 0); assert.equal(xp(restored), 0);
 });
 
-
-test('the actual confirmation click handler records a selected answer once', () => {
+test('the actual answer click handler immediately records the first choice once', () => {
   const instance = lesson();
-  instance.chooseAnswer(instance.read().session.options.indexOf(q.answer));
-  const click = { target: { closest(selector) { return selector === '#confirm-choice-answer:not(:disabled)' ? {} : null; } } };
+  const button = { dataset: { answer: String(instance.read().session.options.indexOf(q.answer)) }, disabled: false };
+  const click = { target: { closest(selector) { return selector === '[data-answer]' ? button : null; } } };
   instance.fire('click', click); instance.fire('click', click);
   assert.equal(instance.read().session.response, q.answer);
-  assert.equal(instance.read().session.answered, 1);
-  assert.equal(xp(instance), 5);
+  assert.equal(instance.read().session.answered, 1); assert.equal(xp(instance), 5);
 });

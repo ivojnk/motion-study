@@ -8,7 +8,9 @@ Onderzocht op 5 oktober 2026 voor MotionStudy. De voorstellen hieronder zijn onz
 - Duolingo meldt dat uitleg over de leerwaarde van moeilijkere oefeningen leidde tot meer oefenen, terugkeer en keuze voor moeilijker materiaal. Een tussenstuk moet daarom zeggen wat je straks leert. Bron: [How Difficult Lessons Motivate Learners](https://blog.duolingo.com/duolingo-difficult-exercises/).
 - Grammar Lessons bouwen van makkelijk naar moeilijk op. Tips verschijnen na fouten. Duolingo beschrijft minder fouten bij gebruikers die deze aanvullende lessen volgden. Bron: [Grammar Lessons](https://blog.duolingo.com/language-rules-learning-grammar-on-duolingo/).
 
-## Toepassing op de huidige app
+## Eerder voorstel voor de app
+
+Bijgesteld op verzoek van de gebruiker: meerkeuze en binaire vragen beoordelen nu direct bij kiezen. De bevestigingsstap hieronder beschrijft het eerdere voorstel. Aanwijsvragen en open antwoorden behouden hun bestaande controle.
 
 Vóór deze wijziging beoordeelde `chooseAnswer()` meerkeuze en binaire vragen meteen. Aanwijsvragen laten al eerst een veranderbare selectie zien. Open antwoorden hebben een controleknop en lange antwoorden een aparte zelfbeoordeling. Trek de meerkeuzevragen gelijk met die bestaande, bewuste bevestiging.
 

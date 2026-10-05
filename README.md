@@ -29,7 +29,7 @@ existing fonts and Tabler icons; see [UI references](docs/ui-design-research.md)
   spelling errors are accepted, with the correct spelling shown in feedback. Longer explanations
   reveal the course answer after you write yours. Compare the two and explicitly
   mark whether you knew it. This self-assessment uses no AI grading.
-- Choose an answer, change your selection if needed, then explicitly check it. Use 1–4 to select and Enter to check from the question; Tab and Enter also work on the buttons.
+- Multiple-choice answers are checked immediately when clicked or selected with 1–4. Feedback stays visible until you continue. Tab and Enter also work on the answer buttons.
 - See clear answer feedback with earned XP and a session-local run of correct answers.
   Wrong answers return until corrected.
 - Start each short lesson directly with the question. The result shows your

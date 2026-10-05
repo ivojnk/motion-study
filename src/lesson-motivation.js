@@ -21,8 +21,8 @@ export function lessonInterlude(session) {
     const { run } = lessonMomentum(session);
     return {
       key: 'halfway', kind: 'halfway',
-      title: run >= 3 ? 'Je hebt je ritme te pakken!' : 'Je bent halverwege!',
-      description: session.index + ' van de ' + session.initialCount + ' vragen gedaan. Nog ' + (session.initialCount - session.index) + ' te gaan.',
+      title: 'Halverwege',
+      description: session.index + '/' + session.initialCount + ' vragen · nog ' + (session.initialCount - session.index),
       icon: run >= 3 ? 'sparkles' : 'target'
     };
   }
@@ -30,8 +30,8 @@ export function lessonInterlude(session) {
   if (session.index === session.initialCount && session.ids.length > session.initialCount && !dismissed.has('retry')) {
     const remaining = session.ids.length - session.initialCount;
     return {
-      key: 'retry', kind: 'retry', title: 'Nog één oefenronde',
-      description: remaining === 1 ? 'Deze vraag krijgt nog één kans. Neem mee wat je net hebt geleerd.' : 'Deze ' + remaining + ' vragen krijgen nog één kans. Neem mee wat je net hebt geleerd.',
+      key: 'retry', kind: 'retry', title: 'Herkansing',
+      description: remaining + (remaining === 1 ? ' vraag' : ' vragen'),
       icon: 'refresh'
     };
   }
