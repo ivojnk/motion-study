@@ -84,7 +84,7 @@ progress::-moz-progress-bar { background: var(--accent); border-radius: 2px; }
 .chapter-heading > .chapter-toggle { width: 20px; height: 20px; background: transparent; color: inherit; border-radius: 0; transform: rotate(90deg); flex-shrink: 0; }
 .chapter-toggle .icon { width: 20px; height: 20px; }
 .path-chapter[open] .chapter-toggle { transform: rotate(-90deg); }
-.path-chapter ol { --path-sway: 70px; width: 100%; max-width: 360px; margin: 0 auto; padding: 72px 0 42px; gap: 36px; justify-items: center; }
+.path-chapter ol { --path-sway: 70px; width: 100%; max-width: 360px; margin: 0 auto; padding: 72px 0 42px; gap: 66px; justify-items: center; }
 .path-chapter ol::before { display: none; }
 .path-step, .path-step:nth-child(2) { --step-offset: 0px; margin: 0; display: grid; justify-items: center; gap: 20px; width: 130px; transform: translateX(var(--step-offset)); }
 .path-step:nth-child(8n + 2), .path-step:nth-child(8n + 4) { --step-offset: calc(var(--path-sway) * -.7); }
@@ -100,8 +100,6 @@ progress::-moz-progress-bar { background: var(--accent); border-radius: 2px; }
 .path-step.done .ring-segment.filled { stroke: #a17c2a; }
 .level-copy { font-size: 12px; font-weight: 700; color: #596253; text-align: center; }
 .level-caption { font-size: 11px; color: #596253; text-align: center; margin-top: -14px; }
-.path-step.current { margin-bottom: 5px; }
-.path-step.current:not(:first-child) { margin-top: 30px; }
 .path-step.current .level-node { box-shadow: 0 7px 0 var(--path-shadow); }
 .path-step.current .level-copy { color: var(--path-ink); font-weight: 800; }
 .level-callout { position: absolute; bottom: calc(100% + 24px); left: 50%; transform: translateX(-50%); padding: 9px 14px; border: 2px solid #dce3d5; border-radius: 10px; background: #fff; color: var(--path-ink); font-size: 13px; font-weight: 800; line-height: 1; text-transform: uppercase; letter-spacing: .6px; white-space: nowrap; pointer-events: none; }

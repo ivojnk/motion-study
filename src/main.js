@@ -144,21 +144,23 @@ function renderHome() {
       '<span class="home-metric metric-points" title="Verzamelde punten">' + icon('sparkles') + '<strong>' + stats.xp + '</strong><span class="visually-hidden"> verzamelde punten</span></span>';
   }
   const activeTopic = topic || levels.find(level => !level.done)?.topic || topics.at(-1);
+  const activeLevel = current || levels.find(level => !level.done);
   const activeChapter = topics.findIndex(item => item.id === activeTopic.id);
   const chapters = topics.map((topic, chapter) => {
     const chapterLevels = levels.filter(level => level.topic.id === topic.id);
     const completed = chapterLevels.filter(level => level.done).length;
     const lessons = lessonGroups(chapterLevels).map(group => {
-      const state = group.done ? 'done' : group.locked ? 'locked' : 'current';
-      const level = group.next;
-      const resume = !group.locked && !group.done && drafts[draftKey({ region: topic.id, levelId: level.id })];
+      const active = group.lessons.some(level => level.id === activeLevel?.id);
+      const state = group.done ? 'done' : group.locked ? 'locked' : active ? 'current' : 'available';
+      const level = active ? activeLevel : group.next;
+      const resume = drafts[draftKey({ region: topic.id, levelId: level.id })];
       const label = resume ? 'Verder' : 'Start';
       return '<li class="path-step ' + state + ' group-' + group.type + '">' +
         '<button class="level-node" data-level="' + level.id + '" ' + (group.locked ? 'disabled' : '') +
-        (!group.locked && !group.done ? ' aria-current="step"' : '') +
+        (active ? ' aria-current="step"' : '') +
         ' aria-label="' + escape(topic.title + ': ' + group.label + ', groep ' + (group.index + 1) + ', ' + group.completed + ' van ' + group.lessons.length + ' lessen voltooid' + (group.done ? ', opnieuw oefenen' : group.locked ? ', vergrendeld' : ', volgende: ' + level.label)) + '">' +
         groupProgressMarkup(group) +
-        (state === 'current' ? '<span class="level-callout" aria-hidden="true">' + label + '</span>' : '') +
+        (active ? '<span class="level-callout" aria-hidden="true">' + label + '</span>' : '') +
         '<span class="level-symbol" aria-hidden="true">' + icon(group.icon) + '</span></button>' +
         '<span class="level-copy" aria-hidden="true">' + group.label + '</span>' +
         '<span class="level-caption" aria-hidden="true">' + group.completed + '/' + group.lessons.length + ' lessen</span>' + '</li>';
