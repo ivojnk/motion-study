@@ -12,16 +12,30 @@ lessons. Works in desktop and mobile browsers.
 - Study 31 muscle cards and 593 questions across eleven chapters.
 - Search all questions and answers by chapter, with a PDF page reference for every question.
   See [COURSE_COVERAGE.md](COURSE_COVERAGE.md) for the source coverage checklist.
-- Follow 33 sequential levels: discover, practise and pass a checkpoint in each chapter.
-  Score at least 80% on original questions to unlock the next level. Skips count
-  against that score, and retries help learning without inflating it.
-- Alternate multiple choice, judging suggested answers, muscle recognition and pointing in 3D.
-  Practise matching muscle names to their course-defined functions.
-- Read a short lesson introduction and see XP and progress when you finish.
+- Follow 88 sequential lessons across eleven chapters. Each lesson starts with seven
+  questions; the final lesson in a chapter adds earlier questions as review. Wrong
+  answers return until corrected, then the next lesson unlocks. The result keeps
+  the first-attempt score separate from corrections. Existing completed chapters
+  and XP carry over to the new path.
+- Each question has several exercise forms, tied to its own review progress. Start
+  with multiple choice or highlighted-muscle recognition, then practise pointing
+  in 3D and recalling the answer without hints in later reviews. Wrong answers
+  bring back assistance, and practising early does not unlock harder forms.
+- The 3D model appears in quiz questions only when you need to recognise or point
+  to a muscle. Text questions use the question card alone.
+- Type short terms and muscle names for automatic checking. Small, unambiguous
+  spelling errors are accepted, with the correct spelling shown in feedback. Longer explanations
+  reveal the course answer after you write yours; compare the two and explicitly
+  mark whether you knew it. This self-assessment uses no AI grading.
+- Start lessons directly with the question, answer controls and a progress bar.
+  XP and results appear when you finish.
 - Earn 5 XP per correct answer and 10 XP per completed lesson with an answer.
   Reach 30 XP per local calendar day to build a streak. Replaying earns XP,
   while spaced mastery remains based on actual review intervals.
-- Practise mixed ten-question lessons with feedback and one retry per wrong question.
+- Practise mixed seven-question lessons and seven-question reviews. Small review
+  pools repeat due questions to reach seven. Mistakes extend the lesson until corrected.
+- Track consecutive correct answers during a lesson and see the best answer streak
+  in the result. The answer streak resets on a mistake and survives reloads.
 - Review questions with increasing intervals. Switch between lessons and resume each unfinished lesson.
 - Use the keyboard: arrows and +/− control the model, 1–4 answer quiz questions.
 
@@ -70,7 +84,8 @@ license URLs support that project subpath. To host at another subpath, set
 
 Tests cover question integrity, chapter coverage, real anatomical mesh
 mappings, asset provenance, review scheduling and invalid stored progress.
-Tests also cover sequential unlocks, XP persistence, calendar streaks and course-grounded matching.
+Tests also cover sequential unlocks, XP persistence, calendar streaks, course-grounded matching,
+adaptive difficulty, open-answer grading and restoring unfinished recall attempts.
 Browser checks cover desktop and 320/390px mobile layouts, quiz feedback,
 reload, keyboard controls and 3D selection. Integration checks run the actual app
 transitions with simulated browser boundaries to cover lesson switching, history,

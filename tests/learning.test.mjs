@@ -89,7 +89,7 @@ test('saved lessons restore only valid question options, counters and references
   assert.equal(readSession({ getItem() { throw Error('blocked'); } }, lookup), null);
 });
 
-import { readGame, awardXP, gameStats, dayKey, DAILY_GOAL, levelPath, levelQuestions, completeLevel, exerciseFor, matchingPairs, binaryResponses } from '../src/learning.js';
+import { readGame, awardXP, gameStats, dayKey, DAILY_GOAL, levelPath, levelQuestions, completeLevel, exerciseFor, matchingPairs, binaryResponses, LESSON_SIZE, fillLesson } from '../src/learning.js';
 test('XP calendar streak survives reload, crosses month boundary and expires after missed goal', () => {
   const time = new Date(2026, 9, 1, 12).getTime();
   const empty = { days: {}, completed: [] };
@@ -103,20 +103,34 @@ test('XP calendar streak survives reload, crosses month boundary and expires aft
   assert.equal(dayKey(time), '2026-10-01');
   assert.deepEqual(readGame({getItem: () => '{"days":{"bad":100,"2026-10-01":-2},"completed":["fake"]}'}), empty);
 });
-test('levels unlock sequentially at 80 percent; skipped, failed and locked levels cannot unlock', () => {
+test('short lessons cover the whole course and unlock only after every question is corrected', () => {
   const empty = { days: {}, completed: [] };
-  assert.equal(levelPath(empty).length, 33);
+  assert.equal(levelPath(empty).length, 88);
   assert.equal(levelPath(empty).filter(level => !level.locked).length, 1);
   assert.deepEqual(completeLevel(empty, 'basis:0', 0, 0), empty);
+  assert.deepEqual(completeLevel(empty, 'basis:0', NaN, 7), empty);
+  assert.deepEqual(completeLevel(empty, 'basis:0', 7, Infinity), empty);
   assert.deepEqual(completeLevel(empty, 'basis:0', 3, 5), empty);
   assert.deepEqual(completeLevel(empty, 'basis:1', 5, 5), empty);
-  const first = completeLevel(empty, 'basis:0', 4, 5);
+  assert.deepEqual(completeLevel(empty, 'basis:0', 4, 5), empty);
+  const first = completeLevel(empty, 'basis:0', 7, 7);
   assert.equal(levelPath(first).find(level => level.id === 'basis:1').locked, false);
   assert.equal(levelPath(first).find(level => level.id === 'basis:2').locked, true);
   assert.equal(completeLevel(first, 'basis:0', 5, 5).completed.length, 1);
   for (const topic of topics) {
-    const partitions = [0,1,2].flatMap(stage => levelQuestions(curriculum.questions, topic.id, stage));
+    const lessons = levelPath(empty).filter(level => level.topic.id === topic.id);
+    assert.equal(lessons.length, Math.ceil(curriculum.questions.filter(q => q.region === topic.id).length / LESSON_SIZE));
+    assert.ok(lessons.length > 3);
+    const partitions = lessons.flatMap(level => {
+      const questions = levelQuestions(curriculum.questions, topic.id, level.stage);
+      assert.equal(questions.length, 7);
+      assert.equal(new Set(questions.map(q => q.id)).size, 7);
+      assert.ok(questions.every(q => q.region === topic.id));
+      return questions;
+    });
     assert.equal(new Set(partitions.map(q => q.id)).size, curriculum.questions.filter(q => q.region === topic.id).length);
+    assert.deepEqual(levelQuestions(curriculum.questions, topic.id, lessons.length), []);
+    assert.deepEqual(levelQuestions(curriculum.questions, topic.id, -1), []);
   }
 });
 test('varied exercise modes and matching functions preserve course-grounded answers', () => {
@@ -171,4 +185,43 @@ test('all 64 exercise rows and 57 visual length profiles are tested explicitly',
   assert.equal(answer('profile-27'), 'Middenpositie tot verkorte positie');
   assert.equal(answer('profile-29'), 'Verlengde tot middenpositie');
   assert.equal(answer('ql-maximale rek'), 'Lateroflexie andere zijde');
+});
+
+
+test('old completed thirds migrate only fully covered short lessons and preserve XP', () => {
+  const completed = ['basis:0'];
+  const days = { '2026-10-05': 55 };
+  const stored = { 'motionstudy.game.v1': JSON.stringify({ days, completed }) };
+  const storage = { getItem: key => stored[key] || null };
+  const migrated = readGame(storage);
+  assert.deepEqual(migrated.days, days);
+  assert.deepEqual(migrated.completed, ['basis:0', 'basis:1', 'basis:2', 'basis:3']);
+  assert.equal(levelPath(migrated).find(level => !level.done).id, 'basis:4');
+  stored['motionstudy.game.v1'] = JSON.stringify({ days, completed: topics.flatMap(t => [0, 1, 2].map(stage => t.id + ':' + stage)) });
+  assert.equal(readGame(storage).completed.length, 88);
+  stored['motionstudy.game.v2'] = JSON.stringify({ days, completed: ['basis:0', 'basis:10', 'fake', 'basis:99'] });
+  assert.deepEqual(readGame(storage).completed, ['basis:0', 'basis:10']);
+});
+
+test('seven-question review fills only from the due pool and empty review stays empty', () => {
+  const pool = curriculum.questions.slice(0, 3);
+  const filled = fillLesson(pool);
+  assert.equal(filled.length, 7);
+  assert.ok(filled.every(q => pool.includes(q)));
+  assert.deepEqual(fillLesson([]), []);
+});
+
+test('answer streak counters and later lesson stages validate on reload', () => {
+  const questions = levelQuestions(curriculum.questions, 'core', 14);
+  const question = questions[0];
+  const lookup = new Map(questions.map(q => [q.id, q]));
+  const session = { ids: questions.map(q => q.id), index: 3, correct: 3, answered: 3, retryIds: [], region: 'core',
+    levelId: 'core:14', stage: 14, initialCount: 7, firstCorrect: 3, answerStreak: 3, bestAnswerStreak: 3,
+    options: optionsFor(questions[3]), response: null, finished: false };
+  const storage = value => ({ getItem: () => JSON.stringify(value) });
+  assert.deepEqual(readSession(storage(session), lookup), session);
+  for (const counters of [{ answerStreak: -1 }, { answerStreak: 4 }, { bestAnswerStreak: 2 }, { bestAnswerStreak: 3.5 }]) {
+    assert.equal(readSession(storage({ ...session, ...counters }), lookup), null);
+  }
+  assert.equal(readSession(storage({ ...session, levelId: 'core:15', stage: 15 }), lookup), null);
 });
