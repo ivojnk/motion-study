@@ -275,6 +275,11 @@ export async function createViewer(canvas, onSelect, onStatus) {
     }
     const choices = nearbyChoices(samples);
     if (!choices.length) return;
+    if (choices.length === 1) {
+      const { courseMuscleId, anatomyName } = choices[0].hit.object.userData;
+      onSelect(courseMuscleId, anatomyName, true);
+      return;
+    }
     const lines = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     lines.classList.add('choice-lines');
     lines.setAttribute('aria-hidden', 'true');
