@@ -68,3 +68,16 @@ textarea.open-answer-input{min-height:132px;resize:vertical}
 
 /* No empty card when the question already identifies the task. */
 .selection-card:empty{display:none}
+/* Give compact mobile controls enough room for a finger. */
+@media(max-width:900px){
+  nav a,.viewer-tools button,.atlas-controls label,.muscle-picker select,
+  .lesson-top a,.text-link,.source summary{min-height:44px}
+  .lesson-top a,.text-link,.source summary{display:flex;align-items:center}
+  .text-link{justify-content:center}
+}
+
+/* Keep closing the scrollable credits dialog possible on touch screens. */
+.close-dialog{position:sticky;top:0;float:right;margin:-14px -10px 0 8px;background:var(--white);border-radius:50%;z-index:1}
+
+.question-card h2,.feedback p,.statement p{overflow-wrap:anywhere}
+.answer>span:nth-child(2){min-width:0;overflow-wrap:anywhere}

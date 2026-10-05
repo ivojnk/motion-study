@@ -377,3 +377,13 @@ test('new anatomy reviews use pointing only after earlier recognition progress',
   assert.equal(instance.read().session.correct, 1);
   assert.equal(instance.read().progress.questions[q.id].lastExercise, 'point');
 });
+
+test('a confirmed colour choice grades once without a second confirmation', () => {
+  const { instance, q } = pointLesson();
+  instance.showMuscle(q.muscleId, 'Target mesh', true);
+  instance.showMuscle(q.muscleId, 'Target mesh', true);
+  assert.equal(instance.read().session.response, q.answer);
+  assert.equal(instance.read().session.answered, 2);
+  assert.equal(xp(instance), 5);
+  assert.equal(instance.read().pendingPointSelection, null);
+});
