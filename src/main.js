@@ -326,11 +326,10 @@ function activeInterlude() { return session?.lessonSize === LESSON_SIZE ? null :
 function lessonHud() {
   if (session.lessonSize === LESSON_SIZE) return lessonProgressMarkup();
   const initialCount = session.initialCount || session.ids.length;
-  const inRetry = session.index >= initialCount;
   const total = initialCount;
   const completed = Math.min(total, session.correct);
   const momentum = lessonMomentum(session);
-  return '<div class="lesson-hud"><div class="lesson-top"><a href="#leren">' + icon('arrow-left') + ' Leerpad</a><div class="lesson-status">' + lessonRetriesMarkup() + '<span class="lesson-run">' + icon('growth') + momentum.run + ' op rij</span><span class="lesson-xp">' + icon('sparkles') + (session.xp || 0) + ' XP</span></div></div><progress class="lesson-progress" max="' + total + '" value="' + completed + '" aria-label="Lesvoortgang" aria-valuetext="' + completed + ' van ' + total + ' vragen goed beantwoord"></progress><p class="lesson-progress-label">' + (inRetry ? 'Fouten oefenen' : 'Je les') + ' · ' + completed + '/' + total + '</p></div>';
+  return '<div class="lesson-hud"><div class="lesson-top"><a href="#leren">' + icon('arrow-left') + ' Leerpad</a><div class="lesson-status">' + lessonRetriesMarkup() + '<span class="lesson-run">' + icon('growth') + momentum.run + ' op rij</span><span class="lesson-xp">' + icon('sparkles') + (session.xp || 0) + ' XP</span></div></div><progress class="lesson-progress" max="' + total + '" value="' + completed + '" aria-label="Lesvoortgang" aria-valuetext="' + completed + ' van ' + total + ' vragen goed beantwoord"></progress></div>';
 }
 function renderInterlude(interlude) {
   resetAtlas();
