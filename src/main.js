@@ -59,7 +59,7 @@ function withProgressLock(action) {
   return typeof navigator !== 'undefined' && navigator.locks ? navigator.locks.request('motionstudy-progress' + (window.motionStudyAccount ? ':' + window.motionStudyAccount.id : ''), action) : action();
 }
 function save(rewards = false) {
-  if (!canSaveLesson()) return;
+  if (!canSaveLesson()) return false;
   try {
     if (rewards || !storageAvailable) {
       storage.setItem(PROGRESS_KEY, JSON.stringify(progress));
@@ -77,8 +77,11 @@ function save(rewards = false) {
     storageAvailable = true;
     const warning = $('#storage-warning');
     if (warning) warning.hidden = true;
-  } catch { storageFailed(); }
+    return true;
+  } catch { storageFailed(); return false; }
 }
+// Use the same account-scoped lock and persistence path as lesson answers.
+window.motionStudyPrepareUpdate = () => withProgressLock(() => save());
 function focusLessonContent() {
   if ($('#interlude-title')) { $('#interlude-title').focus(); return; }
   if ($('#result-title')) { window.scrollTo(0, 0); $('#result-title').focus({ preventScroll: true }); }

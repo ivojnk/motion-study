@@ -2,6 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
+  <meta name="app-version" content="development" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f5f3ed" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -147,6 +148,13 @@
       <button id="install-back" class="install-button" type="button" hidden><span>Terug</span></button>
       <button class="install-continue" data-install-close type="button">Verder leren</button>
     </div>
+  </dialog>
+  <dialog id="app-update" class="update-dialog" aria-labelledby="app-update-title" aria-describedby="app-update-description">
+    <h2 id="app-update-title">Nieuwe versie beschikbaar</h2>
+    <p id="app-update-description">Er staat een update klaar voor MotionStudy. Werk bij om de nieuwste versie te gebruiken.</p>
+    <p>Je voortgang wordt eerst opgeslagen.</p>
+    <p id="app-update-status" role="status" hidden></p>
+    <div class="update-actions"><button id="app-update-confirm" class="primary" type="button">Bijwerken</button><button id="app-update-later" type="button" autofocus>Later</button></div>
   </dialog>
   <script type="module" src="/src/bootstrap.js"></script>
 </body>

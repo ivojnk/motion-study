@@ -58,7 +58,7 @@ function app(data = {}, locks, options = {}) {
   vm.createContext(context);
   vm.runInContext(source, context);
   const api = context.api;
-  return { ...api, data, storage, events, analyticsEvents, reloads: () => reloads, focused: () => bodyClasses.has('lesson-focus'), html: () => node('#learning').innerHTML, element: node,
+  return { ...api, data, storage, events, analyticsEvents, prepareUpdate: () => context.window.motionStudyPrepareUpdate(), reloads: () => reloads, focused: () => bodyClasses.has('lesson-focus'), html: () => node('#learning').innerHTML, element: node,
     startLesson(region = 'basis', levelId = 'basis:0') { api.start(region, levelId); api.navigate(); api.prepare(); },
     go(hash) { context.location.hash = hash; api.navigate(); },
     play(correct = true) { const session = api.read().session; const q = curriculum.questions.find(q => q.id === session.ids[session.index]); return api.answer(session.options.indexOf(correct ? q.answer : q.distractors[0])); }
@@ -767,4 +767,51 @@ test('actual later lessons ask for recall, retire recovered errors and stop appe
   instance.startLesson('basis', 'basis:3');
   assert.equal(instance.read().session.initialCount, 7);
   assert.ok(!instance.read().session.ids.includes(q.id));
+});
+
+test('update preparation preserves exact feedback, mistake memory, XP and unfinished drafts across reload', async () => {
+  const instance = app(); instance.startLesson(); instance.play(false); instance.next(); instance.play(true);
+  const before = JSON.parse(JSON.stringify(instance.read()));
+  instance.go('#leren');
+  assert.equal(await instance.prepareUpdate(), true);
+  const stored = JSON.stringify(instance.data);
+  const restored = app(instance.data); restored.go('#les/basis/0');
+  assert.equal(JSON.stringify(restored.read().session), JSON.stringify(before.session));
+  assert.equal(JSON.stringify(restored.read().game), JSON.stringify(before.game));
+  assert.equal(JSON.stringify(restored.read().progress), JSON.stringify(before.progress));
+  assert.equal(JSON.stringify(instance.data), stored);
+});
+
+test('update preparation waits behind queued answer rewards in the same Web Lock', async () => {
+  const locks = controlledLocks(); const instance = app({}, locks); instance.startLesson();
+  const answer = instance.play(); const update = instance.prepareUpdate();
+  assert.equal(locks.pending, 2); assert.equal(xp(instance), 0);
+  await locks.drain(); await answer; assert.equal(await update, true);
+  const restored = app(instance.data);
+  assert.equal(restored.read().session.answered, 1); assert.equal(xp(restored), 5);
+});
+
+test('update preparation rejects blocked storage and recovers all in-memory progress when storage returns', async () => {
+  const options = { blocked: true }; const instance = app({}, undefined, options); instance.startLesson(); instance.play(true);
+  assert.equal(await instance.prepareUpdate(), false);
+  assert.equal(instance.read().session.answered, 1);
+  options.blocked = false; assert.equal(await instance.prepareUpdate(), true);
+  const restored = app(instance.data); assert.equal(restored.read().session.answered, 1); assert.equal(xp(restored), 5);
+});
+
+test('updating a stale tab cannot overwrite the latest saved lesson or duplicate rewards', async () => {
+  const data = {}; const active = app(data); active.startLesson();
+  const stale = app(data); stale.go('#les/basis/0');
+  active.play(true); active.next(); const stored = JSON.stringify(data);
+  assert.equal(await stale.prepareUpdate(), false);
+  assert.equal(JSON.stringify(data), stored); assert.equal(stale.reloads(), 1);
+});
+
+test('update preparation at the result preserves completion and never grants rewards twice', async () => {
+  const instance = app(); instance.startLesson();
+  for (let i = 0; i < 20 && !instance.read().session.finished; i++) { instance.play(true); instance.next(); }
+  const before = JSON.stringify(instance.data);
+  assert.equal(await instance.prepareUpdate(), true); assert.equal(JSON.stringify(instance.data), before);
+  const restored = app(instance.data); restored.go('#les/basis/0'); restored.finish();
+  assert.equal(JSON.stringify(instance.data), before);
 });
