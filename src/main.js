@@ -5,6 +5,7 @@ import { LESSON_SIZE, fillLesson, interleaveMistakes, needsMistakeReview, record
 import { lessonMomentum, lessonInterlude } from './lesson-motivation.js';
 import { exerciseForProgress, availableExercises } from './exercise-progression.js';
 import { lessonGroups } from './lesson-groups.js';
+import { setupViewerFullscreen } from './viewer-fullscreen.js';
 
 const $ = selector => document.querySelector(selector);
 const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -19,6 +20,7 @@ let pairMessage = "";
 let pendingPointSelection = null;
 let session = null;
 let viewer = null;
+let viewerFullscreen = null;
 let route = '';
 let storageAvailable = true;
 const byId = new Map(curriculum.questions.map(q => [q.id, q]));
@@ -182,6 +184,7 @@ function groupProgressMarkup(group) {
   }).join('') + '</svg>';
 }
 function restoreAtlasLayout() {
+  viewerFullscreen?.close({ immediate: true, restoreFocus: false });
   const workspace = $('.workspace');
   if (workspace) {
     if (route === 'atlas' && window.matchMedia('(max-width:620px)').matches) workspace.prepend($('.atlas-panel'));
@@ -189,6 +192,7 @@ function restoreAtlasLayout() {
   }
 }
 function arrangeModelQuestion() {
+  if (viewerFullscreen?.isOpen()) return;
   restoreAtlasLayout();
   const answers = $('.question-card .answers');
   if (!$('.atlas-panel').hidden && answers) {
@@ -566,6 +570,7 @@ function filterQuestionBank() {
   $('#bank-count').textContent = count ? count + (count === 1 ? ' vraag gevonden' : ' vragen gevonden') : 'Geen vragen gevonden.';
 }
 function navigate() {
+  viewerFullscreen?.close({ immediate: true, restoreFocus: false });
   pendingPointSelection = null;
   window.scrollTo(0, 0);
   route = location.hash.slice(1) || 'leren';
@@ -645,6 +650,7 @@ window.addEventListener('storage', event => {
 const modelPrompt = document.createElement('p');
 modelPrompt.id = 'model-prompt'; modelPrompt.tabIndex = -1; modelPrompt.className = 'model-prompt'; modelPrompt.hidden = true;
 $('.atlas-top').after(modelPrompt);
+viewerFullscreen = setupViewerFullscreen({ document, window, onClose: arrangeModelQuestion });
 if (session?.levelId && location.hash === '#les/' + session.region) history.replaceState(null, '', location.hash + '/' + session.stage);
 navigate();
 for (const card of curriculum.cards) {

@@ -80,15 +80,19 @@
           <canvas id="body" tabindex="0" aria-label="3D-anatomiemodel. Draai met de pijltjestoetsen, zoom met plus en min. Gebruik de antwoordknoppen in een les of de spierlijst in de atlas."></canvas>
           <div class="viewer-status" id="viewer-status" role="status">Spieren laden…</div>
           <span class="orientation" id="orientation">VOORZIJDE</span>
+          <button id="viewer-fullscreen" class="viewer-fullscreen-toggle" type="button" aria-label="3D-weergave op volledig scherm" title="Volledig scherm" aria-expanded="false" aria-controls="viewer-fullscreen-dialog"><img class="icon fullscreen-open-icon" src="./icons/corners-out.svg" alt="" /><img class="icon fullscreen-close-icon" src="./icons/corners-in.svg" alt="" /></button>
         </div>
-        <div class="viewer-tools"><button data-view="front" aria-pressed="true" aria-label="Vooraanzicht">Voor</button><button data-view="back" aria-pressed="false" aria-label="Achteraanzicht">Achter</button><button data-view="side" aria-pressed="false" aria-label="Zijaanzicht">Zij</button><button id="reset-view" aria-label="Hele lichaam tonen"><img class="icon" src="./icons/refresh.svg" alt="" /></button></div>
-        <div class="atlas-controls"><label><input id="bones" type="checkbox" checked /> Skelet tonen</label><label><input id="isolate" type="checkbox" /> Spier isoleren</label></div>
+        <div class="viewer-controls" role="group" aria-label="3D-bediening">
+          <div class="viewer-tools"><button data-view="front" aria-pressed="true" aria-label="Vooraanzicht">Voor</button><button data-view="back" aria-pressed="false" aria-label="Achteraanzicht">Achter</button><button data-view="side" aria-pressed="false" aria-label="Zijaanzicht">Zij</button><button id="reset-view" aria-label="Hele lichaam tonen"><img class="icon" src="./icons/refresh.svg" alt="" /></button></div>
+          <div class="atlas-controls"><label><input id="bones" type="checkbox" checked /> Skelet tonen</label><label><input id="isolate" type="checkbox" /> Spier isoleren</label></div>
+        </div>
         <div class="selection-card" id="selection-card" aria-live="polite"><h3>Kies een spier</h3></div>
         <label class="muscle-picker">Kies een spier <select id="muscle-select"><option value="">Alle spieren</option></select></label>
         <p class="viewer-help">Sleep om te draaien · knijp of scroll om te zoomen</p>
       </section>
     </div>
   </main>
+  <dialog id="viewer-fullscreen-dialog" class="viewer-fullscreen-dialog" aria-label="3D-weergave op volledig scherm"></dialog>
   <dialog id="privacy" class="legal-dialog" aria-labelledby="privacy-title">
     <button class="close-dialog" data-legal-close type="button" aria-label="Sluiten" autofocus><img class="icon" src="./icons/x.svg" alt="" /></button>
     <h2 id="privacy-title">Privacy & opslag</h2>
