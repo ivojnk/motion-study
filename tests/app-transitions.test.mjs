@@ -15,7 +15,8 @@ const source = fs.readFileSync(new URL('../src/main.js', import.meta.url), 'utf8
   .split("document.addEventListener('click'")[0]
   .replace(/^import .*;\n/gm, '')
   .replaceAll('import.meta.env.BASE_URL', "'/'") + `
-  globalThis.api = { start, answer, next, finish, choosePair, renderLesson, navigate, chooseAnswer, confirmPointSelection, showMuscle,
+  globalThis.api = { start, answer, next, finish, choosePair, renderLesson, navigate, chooseAnswer, confirmPointSelection, showMuscle, muscleMatchesSearch,
+    searchAtlas: query => { $('#muscle-search').value = query; filterAtlasMuscles(); },
     read: () => ({ session, game, progress, route, pendingPointSelection }),
     prepare: () => { session = { ...session, prepared: true }; save(); renderLesson(); },
     viewerReady: (availableIds = curriculum.cards.map(c => c.id)) => { globalThis.viewerCalls = []; viewer = { available: new Set(availableIds),
@@ -72,6 +73,38 @@ function app(data = {}, locks, options = {}) {
     play(correct = true) { const session = api.read().session; const q = curriculum.questions.find(q => q.id === session.ids[session.index]); return api.answer(session.options.indexOf(correct ? q.answer : q.distractors[0])); }
   };
 }
+
+test('muscle search matches partial names, accents, word order and small typing errors', () => {
+  const { muscleMatchesSearch: matches } = app();
+  for (const query of ['', '  ', 'PECTÓRALIS', 'pect', 'pectorails', 'pecctoralis', 'pectorlis', 'pectro', 'major pectorails']) {
+    assert.equal(matches('Pectoralis major', query), true, query);
+  }
+  assert.equal(matches('Deltoideus · voorste kop', 'deltoidus voorst'), true);
+  assert.equal(matches('Pectoralis minor', 'pectoralis major'), false);
+  assert.equal(matches('Deltoideus · achterste kop', 'deltoideus voorste'), false);
+  assert.equal(matches('Pectoralis major', 'xyz'), false);
+  assert.equal(matches('Pectoralis major', 'helemaal onbekend'), false);
+  assert.equal(matches('Pectoralis major', 'a'.repeat(10000)), false);
+});
+
+test('atlas search filters cards, handles no matches and keeps its query after opening a card', () => {
+  const instance = app(); instance.go('#atlas');
+  assert.match(instance.html(), /type="search"/);
+  instance.searchAtlas('pectorails');
+  assert.match(instance.element('#muscle-search-results').innerHTML, /Pectoralis major/);
+  assert.match(instance.element('#muscle-search-results').innerHTML, /Pectoralis minor/);
+  assert.doesNotMatch(instance.element('#muscle-search-results').innerHTML, /Deltoideus/);
+  assert.equal(instance.element('#muscle-search-status').textContent, '2 spieren gevonden');
+  const saved = JSON.stringify(instance.data);
+  instance.showMuscle('pectoralis'); instance.go('#atlas');
+  assert.match(instance.html(), /value="pectorails"/);
+  assert.doesNotMatch(instance.html(), /Deltoideus/);
+  instance.searchAtlas('xyzxyz');
+  assert.match(instance.element('#muscle-search-results').innerHTML, /Geen spieren gevonden\./);
+  instance.searchAtlas('');
+  assert.equal((instance.element('#muscle-search-results').innerHTML.match(/data-muscle=/g) || []).length, curriculum.cards.length);
+  assert.equal(JSON.stringify(instance.data), saved);
+});
 
 test('coaching feedback shows the control point and preserves it after reload', () => {
   const originalCount = curriculum.questions.filter(q => q.region === 'patronen' && q.source.kind !== 'supplement').length;
