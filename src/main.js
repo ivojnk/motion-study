@@ -1,7 +1,7 @@
 import './style.css';
 import './study-ui.css';
 import curriculum from './data/curriculum.json';
-import { LESSON_SIZE, fillLesson, recordLessonAnswer, topics, readProgress, readSession, recordAnswer, lessonQueue, optionsFor, masteryFor, PROGRESS_KEY, SESSION_KEY, GAME_KEY, DAILY_GOAL, readGame, awardXP, gameStats, levelPath, levelQuestions, completeLevel, exerciseFor, matchingPairs, shuffled, binaryResponses, varyLesson, DRAFTS_KEY, draftKey, readDrafts, isOpenAnswerCorrect, checkOpenAnswer } from './learning.js';
+import { LESSON_SIZE, fillLesson, interleaveMistakes, needsMistakeReview, recordLessonAnswer, topics, readProgress, readSession, recordAnswer, lessonQueue, optionsFor, masteryFor, PROGRESS_KEY, SESSION_KEY, GAME_KEY, DAILY_GOAL, readGame, awardXP, gameStats, levelPath, levelQuestions, completeLevel, exerciseFor, matchingPairs, shuffled, binaryResponses, varyLesson, DRAFTS_KEY, draftKey, readDrafts, isOpenAnswerCorrect, checkOpenAnswer } from './learning.js';
 import { lessonMomentum, lessonInterlude } from './lesson-motivation.js';
 import { exerciseForProgress, availableExercises } from './exercise-progression.js';
 import { lessonGroups } from './lesson-groups.js';
@@ -87,7 +87,7 @@ function focusLessonContent() {
   }
 }
 function dueCount() {
-  return curriculum.questions.filter(q => progress.questions[q.id]?.due <= Date.now()).length;
+  return curriculum.questions.filter(q => needsMistakeReview(progress.questions[q.id]) || progress.questions[q.id]?.due <= Date.now()).length;
 }
 function sourceMarkup(source) {
   return '<details class="source"><summary>' + icon('book-2') + ' Bron</summary><p>' + escape(source.title) + ' · ' + escape(source.section) + (source.page ? ' · pagina ' + source.page : '') + '</p><a href="' + curriculum.sourceUrl + '" target="_blank" rel="noreferrer">Cheatsheet ' + icon('arrow-square-out') + '</a></details>';
@@ -121,7 +121,8 @@ function renderHome() {
   const topic = current?.topic || topics.find(topic => topic.id === pending?.region);
   const title = topic?.title || (pending?.region === 'review' ? 'Herhalen' : pending ? 'Gemengde les' : 'Alle hoofdstukken afgerond');
   const lessonLabel = topic ? 'Hoofdstuk ' + (topics.findIndex(item => item.id === topic.id) + 1) + ' · ' + (pending ? 'lopende les' : 'volgende les') : pending ? 'Lopende les' : 'Leerpad afgerond';
-  const description = (current ? current.label + ' van ' + current.count + ' · ' : '') + (current || pending ? (pending?.initialCount || LESSON_SIZE) + ' vragen' : 'Gemengde les');
+  const questionCount = pending?.initialCount || (current ? interleaveMistakes(levelQuestions(curriculum.questions, current.topic.id, current.stage), curriculum.questions, progress).length : LESSON_SIZE);
+  const description = (current ? current.label + ' van ' + current.count + ' · ' : '') + (current || pending ? questionCount + ' vragen' : 'Gemengde les');
   const action = current ? 'data-level="' + current.id + '"' : 'data-start="' + (pending?.region || 'daily') + '"';
   const stats = gameStats(game);
   const homeStats = $('#home-stats');
@@ -214,7 +215,8 @@ function start(region, levelId = null) {
     const pending = drafts[levelId || region];
     const stage = levelId ? Number(levelId.split(':')[1]) : null;
     const pool = levelId ? levelQuestions(curriculum.questions, region, stage) : curriculum.questions;
-    const queue = varyLesson(levelId ? shuffled(pool) : fillLesson(lessonQueue(pool, progress, { region, availableMuscles: viewer?.available })));
+    const originals = varyLesson(levelId ? shuffled(pool) : fillLesson(lessonQueue(pool, progress, { region, availableMuscles: viewer?.available })));
+    const queue = region === 'review' ? originals : interleaveMistakes(originals, curriculum.questions, progress, levelId ? {} : { availableMuscles: viewer?.available || new Set() });
     session = pending ? { ...pending, exerciseModes: pending.exerciseModes || pending.ids.map((id, index) => exerciseFor(byId.get(id), index)), levelId: pending.levelId || null } : { region, levelId, stage, startedAt: Date.now(), answerHistory: [], dismissedInterludes: [], xp: 0, firstCorrect: 0, answerStreak: 0, bestAnswerStreak: 0, lessonSize: LESSON_SIZE, initialCount: queue.length, exerciseModes: queue.map((q, index) => exerciseForProgress(q, progress.questions[q.id], { index })), openDraft: '', openRevealed: false, selfAssessmentCorrect: null, prepared: false, matched: [], pairingDone: false, ids: queue.map(q => q.id), index: 0, correct: 0, answered: 0, retryIds: [], options: [], response: null, finished: false };
     if (!pending && queue.length) session.options = optionsFor(queue[0]);
     save();
@@ -345,8 +347,9 @@ function renderLesson({ preserveCamera = false } = {}) {
   const answerCheck = response && ['open', 'recognition-open'].includes(mode) ? checkOpenAnswer(q, response) : null;
   const isCorrect = mode === 'open-self' ? session.selfAssessmentCorrect === true : answerCheck ? answerCheck.correct : response === q.answer;
   const recognitionBlocked = q.type === 'recognition' && !viewer?.available.has(q.muscleId);
+  const earlierMistake = !response && session.index < session.initialCount && needsMistakeReview(progress.questions[q.id]);
   $('#learning').innerHTML = lessonHud() +
-    '<article class="question-card" data-exercise="' + mode + '"' + (q.type === 'recognition' ? ' data-model-question' : '') + '><h2 tabindex="-1" id="question-title">' + escape(mode === 'point' ? 'Wijs ' + q.answer + ' aan.' : mode === 'recognition-open' ? 'Welke spier is paars gemarkeerd?' : q.prompt) + '</h2>' +
+    '<article class="question-card" data-exercise="' + mode + '"' + (q.type === 'recognition' ? ' data-model-question' : '') + '>' + (earlierMistake ? '<p class="open-answer-help">Eerder fout · nog eens oefenen</p>' : '') + '<h2 tabindex="-1" id="question-title">' + escape(mode === 'point' ? 'Wijs ' + q.answer + ' aan.' : mode === 'recognition-open' ? 'Welke spier is paars gemarkeerd?' : q.prompt) + '</h2>' +
     (recognitionBlocked ? '<p role="status">3D-model laden…</p>' : '') +
     (mode === 'binary' ? '<div class="statement"><p>' + escape(session.options[0]) + '</p></div>' : '') + (isOpenExercise(mode) ? openAnswerMarkup(mode, response, recognitionBlocked) : '<div class="answers">' + (mode === 'binary' ? binaryResponses(q, session.options) : session.options).map((option, i) => '<button data-key="' + (i + 1) + '" data-answer="' + session.options.indexOf(option) + '" class="answer ' + (response ? option === q.answer ? 'correct' : option === response ? 'incorrect' : '' : (mode === 'point' ? pendingPointSelection : null)?.response === option ? 'selected' : '') + '" ' + (!response && mode === 'point' ? 'aria-pressed="' + ((mode === 'point' ? pendingPointSelection : null)?.response === option) + '" ' : '') + (response || recognitionBlocked ? 'disabled' : '') + '><span class="answer-key">' + (i + 1) + '</span><span>' + (mode === 'binary' ? (i === 0 ? 'Klopt' : 'Klopt niet') : mode === 'point' && !response ? 'Bekijk spier ' + (i + 1) : escape(option)) + '</span>' + (response && option === q.answer ? icon('check') : '') + '</button>').join('') + '</div>') +
     (mode === 'point' && !response ? '<div class="point-confirmation lesson-dock"><p id="point-selection-status" class="visually-hidden" role="status" aria-live="polite">' + (pendingPointSelection ? 'Keuze gemarkeerd. Je kunt je keuze nog wijzigen.' : 'Kies een spier in het model of met een antwoordknop.') + '</p><button id="confirm-answer" class="primary" ' + (!pendingPointSelection || recognitionBlocked ? 'disabled' : '') + '>Bevestig antwoord ' + icon('check') + '</button></div>' : '') +
@@ -423,11 +426,14 @@ function answer(index, pickedMuscle = null, selfAssessment = null) {
     const mode = currentExercise(q);
     if (mode === 'open-self' && (!session.openRevealed || typeof selfAssessment !== 'boolean')) return;
     const correct = mode === 'open-self' ? selfAssessment : isOpenExercise(mode) ? isOpenAnswerCorrect(q, response) : response === q.answer;
+    const retry = session.index >= session.initialCount || session.ids.slice(0, session.index).includes(q.id);
+    const reviewLessonId = session.reviewLessonId || globalThis.crypto?.randomUUID?.() || Date.now() + ':' + Math.random();
+    session = { ...session, reviewLessonId };
     session = { ...recordLessonAnswer(session, correct, availableExercises(q)[0]), response, selfAssessmentCorrect: mode === 'open-self' ? selfAssessment : null };
     const xp = correct ? 5 : 0;
     game = awardXP(game, xp);
     session = { ...session, xp: (session.xp || 0) + xp };
-    progress = recordAnswer(progress, q.id, correct, Date.now(), mode);
+    progress = recordAnswer(progress, q.id, correct, Date.now(), mode, { lessonId: reviewLessonId, retry });
     save(true);
     if (route === expectedRoute) { renderLesson({ preserveCamera: true }); $('#next-question').focus({ preventScroll: true }); }
     else if (route === 'leren') renderHome();

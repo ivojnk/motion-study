@@ -1,4 +1,4 @@
-import { supportsOpenAnswer } from './learning.js';
+import { supportsOpenAnswer, needsMistakeReview } from './learning.js';
 
 // Deep muscles are deliberately excluded: pointing must be possible without
 // highlighting the correct answer through an overlying structure.
@@ -25,6 +25,12 @@ export function exerciseForProgress(question, questionProgress, { index = 0, now
   const turn = Number.isInteger(index) ? Math.abs(index) : 0;
   const recognition = question.type === 'recognition';
   const easy = recognition ? 'recognition' : turn % 3 === 1 ? 'binary' : 'choice';
+  if (needsMistakeReview(questionProgress)) {
+    if (!questionProgress?.lastCorrect) return easy;
+    if (questionProgress.mistakeReview?.successes >= 1) {
+      return recognition && modes.includes('point') && questionProgress.mistakeReview.successes === 1 ? 'point' : modes.at(-1);
+    }
+  }
   if (!questionProgress?.lastCorrect || !(questionProgress.interval >= 1)) return easy;
 
   // An interval describes completed spaced practice. The NEXT harder form is

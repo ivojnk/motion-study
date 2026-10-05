@@ -18,10 +18,16 @@ existing fonts and Phosphor Icons in the Duotone variant. See
 - Search all questions and answers by chapter, with a PDF page reference for every question.
   See [COURSE_COVERAGE.md](COURSE_COVERAGE.md) for the source coverage checklist.
 - Follow 88 sequential lessons across eleven chapters. Each lesson starts with seven
-  questions; the final lesson in a chapter adds earlier questions as review. Wrong
+  course questions plus up to two earlier mistakes; the final lesson in a chapter adds earlier questions as review. Wrong
   answers return until corrected, then the next lesson unlocks. The result keeps
   the first-attempt score separate from corrections. Existing completed chapters
   and XP carry over to the new path.
+- Earlier mistakes return across chapters until answered correctly on the first
+  attempt in three distinct later lessons, including one answer without choices.
+  Immediate retries do not count; a new mistake resets this recovery. The least
+  recently practised mistakes return first. Existing errors carry over, and this
+  recovery stays in the account's browser storage. Spaced mastery still requires
+  the existing time intervals. Explicit review also includes unresolved mistakes.
 - Each question has several exercise forms, tied to its own review progress. Start
   with multiple choice or highlighted-muscle recognition, then practise pointing
   in 3D and recalling the answer without hints in later reviews. Wrong answers

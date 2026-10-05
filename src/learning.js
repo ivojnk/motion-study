@@ -4,6 +4,8 @@ export const DAY = 86400000;
 export const PROGRESS_KEY = 'motionstudy.progress.v1';
 export const SESSION_KEY = 'motionstudy.session.v2';
 export const LESSON_SIZE = 7;
+export const MISTAKE_REVIEW_SUCCESSES = 3;
+export const MISTAKE_REVIEW_LIMIT = 2;
 export const EXERCISE_MODES = ['choice', 'binary', 'recognition', 'point', 'open', 'recognition-open', 'open-self'];
 const POINTABLE_MUSCLES = new Set(['pectoralis', 'delt-front', 'delt-mid', 'delt-back', 'lats', 'traps-upper', 'biceps', 'triceps', 'rectus-abd', 'glute-max', 'rectus-fem', 'gastrocnemius']);
 // Only fixed, short concepts are automatically graded. Explanations use a model
@@ -149,13 +151,48 @@ export function shuffled(items, random = Math.random) {
 export function optionsFor(question, random = Math.random) {
   return shuffled([question.answer, ...shuffled([...new Set(question.distractors)].filter(x => x !== question.answer), random).slice(0, 3)], random);
 }
+function validMistakeReview(review) {
+  return review && Number.isInteger(review.successes) && review.successes >= 0 && review.successes <= MISTAKE_REVIEW_SUCCESSES &&
+    typeof review.recalled === 'boolean' && (review.lastLesson === null || (typeof review.lastLesson === 'string' && review.lastLesson.length > 0 && review.lastLesson.length <= 100)) &&
+    Number.isFinite(review.lastPracticedAt) && review.lastPracticedAt >= 0;
+}
+function mistakeReviewFor(entry) {
+  if (!entry) return null;
+  if (validMistakeReview(entry.mistakeReview)) return entry.mistakeReview;
+  // Earlier versions kept error totals, but no cross-lesson recovery history.
+  const recalled = Object.entries(entry.exerciseStats || {}).some(([mode, stats]) =>
+    ['open', 'open-self', 'recognition-open'].includes(mode) && stats.spacedCorrect > 0);
+  return entry.attempts > entry.correct && !(entry.lastCorrect && entry.interval >= 4 && (!entry.exerciseStats || recalled))
+    ? { successes: 0, recalled: false, lastLesson: null, lastPracticedAt: 0 } : null;
+}
+export function needsMistakeReview(entry) {
+  const review = mistakeReviewFor(entry);
+  return Boolean(review && (review.successes < MISTAKE_REVIEW_SUCCESSES || !review.recalled));
+}
+export function mistakeQuestions(questions, progress, { excludeIds = [], limit = MISTAKE_REVIEW_LIMIT, availableMuscles = null } = {}) {
+  const excluded = new Set(excludeIds);
+  return questions.filter(q => !excluded.has(q.id) && needsMistakeReview(progress.questions[q.id]) &&
+    (q.type !== 'recognition' || availableMuscles === null || availableMuscles.has(q.muscleId)))
+    .sort((left, right) => mistakeReviewFor(progress.questions[left.id]).lastPracticedAt - mistakeReviewFor(progress.questions[right.id]).lastPracticedAt || left.id.localeCompare(right.id))
+    .slice(0, limit);
+}
+export function interleaveMistakes(queue, questions, progress, options = {}) {
+  if (!queue.length) return [];
+  const reviews = mistakeQuestions(questions, progress, { ...options, excludeIds: queue.map(q => q.id) });
+  // Retain every new question and distribute at most two extra reviews.
+  return queue.flatMap((q, index) => [q, ...reviews.filter((_, slot) => index === Math.floor((slot + 1) * queue.length / (reviews.length + 1)))]);
+}
 export function readProgress(storage) {
   try {
     const data = JSON.parse(storage.getItem(PROGRESS_KEY) || storage.getItem('lottequiz.v1') || '{}');
     const valid = Object.fromEntries(Object.entries(data.questions || {}).filter(([, entry]) =>
       entry && Number.isInteger(entry.correct) && entry.correct >= 0 && Number.isFinite(entry.due) && Number.isInteger(entry.attempts) && entry.attempts >= entry.correct &&
       Number.isInteger(entry.interval) && entry.interval >= 0 && entry.interval <= 30 && typeof entry.lastCorrect === 'boolean' && validExerciseStats(entry)
-    ));
+    ).map(([id, entry]) => {
+      const { mistakeReview: ignored, ...rest } = entry;
+      const review = mistakeReviewFor(entry);
+      return [id, review ? { ...rest, mistakeReview: review } : rest];
+    }));
     return { questions: valid, sessions: Array.isArray(data.sessions) ? data.sessions.filter(s => Number.isFinite(s.at) && Number.isFinite(s.correct) && Number.isFinite(s.total)) : [] };
   } catch { return { questions: {}, sessions: [] }; }
 }
@@ -174,6 +211,7 @@ export function readSession(storage, questions) {
     if (['answerStreak', 'bestAnswerStreak'].some(key => value[key] != null && (!Number.isInteger(value[key]) || value[key] < 0 || value[key] > value.correct)) ||
       (value.answerStreak || 0) > (value.bestAnswerStreak || 0)) return null;
     if (value.xp != null && (!Number.isInteger(value.xp) || value.xp < 0)) return null;
+    if (value.reviewLessonId != null && (typeof value.reviewLessonId !== 'string' || !value.reviewLessonId.length || value.reviewLessonId.length > 100)) return null;
     if (value.answerHistory != null && (!Array.isArray(value.answerHistory) || value.answerHistory.length > value.ids.length ||
       !value.answerHistory.every(attempt => attempt && typeof attempt.correct === 'boolean' && typeof attempt.skipped === 'boolean' &&
         typeof attempt.retry === 'boolean' && !(attempt.correct && attempt.skipped)))) return null;
@@ -204,12 +242,21 @@ export function readSession(storage, questions) {
     return value;
   } catch { return null; }
 }
-export function recordAnswer(progress, id, correct, now = Date.now(), exercise = null) {
+export function recordAnswer(progress, id, correct, now = Date.now(), exercise = null, { lessonId = null, retry = false } = {}) {
   const previous = progress.questions[id] || { correct: 0, attempts: 0, interval: 0 };
   // Practising early is useful, but must not manufacture spaced mastery.
   const early = correct && previous.lastCorrect && previous.due > now;
   const interval = correct ? early ? previous.interval : Math.min(30, previous.interval ? previous.interval * 2 : 1) : 0;
   const mode = EXERCISE_MODES.includes(exercise) ? exercise : null;
+  const priorReview = mistakeReviewFor(previous);
+  const laterSuccess = correct && priorReview && lessonId && !retry && lessonId !== priorReview.lastLesson;
+  const mistakeReview = !correct ? { successes: 0, recalled: false, lastLesson: lessonId, lastPracticedAt: now }
+    : priorReview ? {
+      ...priorReview, lastPracticedAt: now,
+      successes: Math.min(MISTAKE_REVIEW_SUCCESSES, priorReview.successes + Number(Boolean(laterSuccess))),
+      recalled: priorReview.recalled || Boolean(laterSuccess && ['open', 'open-self', 'recognition-open'].includes(mode)),
+      lastLesson: laterSuccess ? lessonId : priorReview.lastLesson
+    } : null;
   const priorStats = previous.exerciseStats?.[mode] || { attempts: 0, correct: 0, spacedCorrect: 0 };
   const exerciseProgress = mode ? {
     lastExercise: mode,
@@ -220,6 +267,7 @@ export function recordAnswer(progress, id, correct, now = Date.now(), exercise =
   } : previous.exerciseStats ? { exerciseStats: previous.exerciseStats, lastExercise: previous.lastExercise } : {};
   return { ...progress, questions: { ...progress.questions, [id]: {
     ...exerciseProgress,
+    ...(mistakeReview ? { mistakeReview } : {}),
     correct: previous.correct + Number(correct), attempts: previous.attempts + 1,
     interval, due: early ? previous.due : now + (correct ? interval * DAY : 10 * 60000), lastCorrect: correct
   } } };
@@ -230,14 +278,17 @@ export function lessonQueue(questions, progress, { region = 'daily', limit = LES
   const due = shuffled(pool.filter(q => progress.questions[q.id] && progress.questions[q.id].due <= now));
   const fresh = shuffled(pool.filter(q => !progress.questions[q.id]));
   const future = shuffled(pool.filter(q => progress.questions[q.id]?.due > now));
-  if (region === 'review') return due.slice(0, limit);
+  if (region === 'review') {
+    const mistakes = mistakeQuestions(pool, progress, { limit, availableMuscles });
+    return [...mistakes, ...due.filter(q => !mistakes.some(mistake => mistake.id === q.id))].slice(0, limit);
+  }
   return [...due, ...fresh, ...future].slice(0, limit);
 }
 export function masteryFor(questions, progress) {
   if (!questions.length) return 0;
   return Math.round(100 * questions.filter(question => {
     const entry = progress.questions[question.id];
-    if (!entry || entry.interval < 4 || !entry.lastCorrect) return false;
+    if (!entry || needsMistakeReview(entry) || entry.interval < 4 || !entry.lastCorrect) return false;
     // Legacy records retain their mastery. New adaptive practice must also
     // demonstrate recall on a later, spaced repetition, not just recognition.
     if (!entry.exerciseStats || !Object.keys(entry.exerciseStats).length) return true;
