@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#faf9f6" />
+  <link rel="icon" type="image/svg+xml" href="/icons/school.svg" />
   <meta name="description" content="Leer anatomie en biomechanica met een interactieve 3D-atlas en korte quizlessen." />
   <title>MotionStudy · Leer het lichaam kennen</title>
 </head>
@@ -21,11 +22,11 @@
       <section class="atlas-panel" aria-labelledby="atlas-heading">
         <div class="atlas-top"><div><span class="eyebrow">ONTDEK IN 3D</span><h2 id="atlas-heading">Het lichaam, van dichtbij.</h2></div><span class="tag">Interactief</span></div>
         <div class="viewer-wrap">
-          <canvas id="body" tabindex="0" aria-label="3D-anatomiemodel. Draai met de pijltjestoetsen, zoom met plus en min. Kies een spier via de lijst onder het model."></canvas>
+          <canvas id="body" tabindex="0" aria-label="3D-anatomiemodel. Draai met de pijltjestoetsen, zoom met plus en min. Gebruik de antwoordknoppen in een les of de spierlijst in de atlas."></canvas>
           <div class="viewer-status" id="viewer-status" role="status">Spieren laden…</div>
           <span class="orientation" id="orientation">VOORZIJDE</span>
-          <div class="viewer-tools"><button data-view="front" aria-label="Vooraanzicht">Voor</button><button data-view="back" aria-label="Achteraanzicht">Achter</button><button data-view="side" aria-label="Zijaanzicht">Zij</button><button id="reset-view" aria-label="Hele lichaam tonen">↺</button></div>
         </div>
+        <div class="viewer-tools"><button data-view="front" aria-label="Vooraanzicht">Voor</button><button data-view="back" aria-label="Achteraanzicht">Achter</button><button data-view="side" aria-label="Zijaanzicht">Zij</button><button id="reset-view" aria-label="Hele lichaam tonen">↺</button></div>
         <div class="atlas-controls"><label><input id="bones" type="checkbox" checked /> Skelet tonen</label><label><input id="isolate" type="checkbox" /> Spier isoleren</label></div>
         <div class="selection-card" id="selection-card" aria-live="polite"><span class="eyebrow">BEGIN MET ONTDEKKEN</span><h3>Tik een spier aan</h3><p>Draai het lichaam en ontdek hoe alles samenwerkt.</p></div>
         <label class="muscle-picker">Kies een spier <select id="muscle-select"><option value="">Alle spieren</option></select></label>
