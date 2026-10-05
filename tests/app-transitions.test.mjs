@@ -659,6 +659,26 @@ function continueHomeLesson(instance) {
   instance.navigate();
 }
 
+test('the path shows one callout and current step across all chapters', () => {
+  const levels = learning.levelPath({ completed: [] });
+  const secondGroup = groups.lessonGroups(levels.filter(level => level.topic.id === 'basis'))[1];
+  for (const levelId of ['basis:0', secondGroup.next.id, 'rug:0']) {
+    const index = levels.findIndex(level => level.id === levelId);
+    const instance = app({ [learning.GAME_KEY]: JSON.stringify({ days: {}, completed: levels.slice(0, index).map(level => level.id) }) });
+    instance.go('#leren');
+    const callouts = [...instance.html().matchAll(/<button class="level-node" data-level="([^"]+)"[^>]*>[\s\S]*?<\/button>/g)]
+      .filter(match => match[0].includes('level-callout'));
+    assert.equal(callouts.length, 1);
+    assert.equal(callouts[0][1], levelId);
+    assert.match(callouts[0][0], />Start<\/span>/);
+    assert.equal((instance.html().match(/aria-current="step"/g) || []).length, 1);
+    assert.match(instance.html(), /data-level="verdieping:0"  aria-label=/);
+  }
+  const finished = app({ [learning.GAME_KEY]: JSON.stringify({ days: {}, completed: levels.map(level => level.id) }) });
+  finished.go('#leren');
+  assert.doesNotMatch(finished.html(), /level-callout|aria-current="step"/);
+});
+
 test('the home card resumes an unfinished replay before recommending the next lesson, including after reload', () => {
   const data = { [learning.GAME_KEY]: JSON.stringify({ days: {}, completed: ['basis:0', 'basis:1'] }) };
   let instance = app(data); instance.startLesson('basis', 'basis:1'); instance.play(); instance.next();
@@ -669,6 +689,8 @@ test('the home card resumes an unfinished replay before recommending the next le
     assert.match(homeCard(instance), /Hoofdstuk 1 · lopende les/);
     assert.match(homeCard(instance), /Les 2 van 15/);
     assert.match(homeCard(instance), /data-level="basis:1">Ga verder/);
+    assert.equal((instance.html().match(/class="level-callout"/g) || []).length, 1);
+    assert.match(instance.html(), /data-level="basis:1"[^>]*aria-current="step"[^>]*>[\s\S]*?class="level-callout" aria-hidden="true">Verder<\/span>/);
     continueHomeLesson(instance);
     assert.equal(instance.read().route, 'les/basis/1');
     assert.equal(JSON.stringify(instance.read().session), pending);
