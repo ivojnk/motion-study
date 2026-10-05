@@ -10,6 +10,7 @@ import { lessonGroups } from './lesson-groups.js';
 import { withLessonModels } from './lesson-models.js';
 import { choicePalette } from './muscle-choice.js';
 import { setupViewerFullscreen } from './viewer-fullscreen.js';
+import { setupProgressTransfer } from './progress-transfer.js';
 
 const $ = selector => document.querySelector(selector);
 const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -783,6 +784,11 @@ $('.atlas-top').after(modelPrompt);
 viewerFullscreen = setupViewerFullscreen({ document, window, onClose: arrangeModelQuestion });
 if (session?.levelId && location.hash === '#les/' + session.region) history.replaceState(null, '', location.hash + '/' + session.stage);
 navigate();
+setupProgressTransfer({ window, document, storage, withLock: withProgressLock,
+  prepareExport: () => save(),
+  beforeImport: () => canSaveLesson(),
+  afterImport: () => { reloadingProgress = true; history.replaceState(null, '', '#leren'); location.reload(); },
+});
 async function initViewer() {
   try {
     const { createViewer } = await import('./viewer.js');
