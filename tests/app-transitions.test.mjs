@@ -5,6 +5,7 @@ import vm from 'node:vm';
 import * as learning from '../src/learning.js';
 import * as progression from '../src/exercise-progression.js';
 import * as motivation from '../src/lesson-motivation.js';
+import * as groups from '../src/lesson-groups.js';
 
 const curriculum = JSON.parse(fs.readFileSync(new URL('../src/data/curriculum.json', import.meta.url)));
 // Execute the app's actual transitions; mock only browser boundaries, not grading/storage logic.
@@ -47,7 +48,7 @@ function app(data = {}, locks) {
     return null;
   };
   const storage = { getItem: key => data[key] || null, setItem: (key, value) => { data[key] = value; } };
-  const context = { ...learning, ...progression, ...motivation, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
+  const context = { ...learning, ...progression, ...motivation, ...groups, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
     location: { hash: '' }, navigator: locks ? { locks } : {},
     document: { body: { classList: { toggle(name, active) { if (active) bodyClasses.add(name); else bodyClasses.delete(name); } } }, querySelector, querySelectorAll: () => [] },
     window: { localStorage: storage, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
@@ -262,6 +263,69 @@ test('switching to mixed practice and browser history preserve independent lesso
   instance = app(instance.data); instance.go('#les/daily');
   assert.equal(instance.read().session.ids.join(','), mixed.ids.join(','));
   assert.equal(instance.read().session.response, mixed.response);
+});
+
+const homeCard = instance => instance.html().split('<div class="study-status">')[0];
+function continueHomeLesson(instance) {
+  const card = homeCard(instance);
+  const levelId = card.match(/data-level="([^"]+)"/)?.[1];
+  instance.start(levelId ? levelId.split(':')[0] : card.match(/data-start="([^"]+)"/)[1], levelId || null);
+  instance.navigate();
+}
+
+test('the home card resumes an unfinished replay before recommending the next lesson, including after reload', () => {
+  const data = { [learning.GAME_KEY]: JSON.stringify({ days: {}, completed: ['basis:0', 'basis:1'] }) };
+  let instance = app(data); instance.startLesson('basis', 'basis:1'); instance.play(); instance.next();
+  const pending = JSON.stringify(instance.read().session);
+  for (const reload of [false, true]) {
+    if (reload) instance = app(data);
+    instance.go('#leren');
+    assert.match(homeCard(instance), /Hoofdstuk 1 · lopende les/);
+    assert.match(homeCard(instance), /Les 2 van 15/);
+    assert.match(homeCard(instance), /data-level="basis:1">Ga verder/);
+    continueHomeLesson(instance);
+    assert.equal(instance.read().route, 'les/basis/1');
+    assert.equal(JSON.stringify(instance.read().session), pending);
+  }
+});
+
+test('the home card restores a saved course draft when the active session is finished', () => {
+  const data = { [learning.GAME_KEY]: JSON.stringify({ days: {}, completed: ['basis:0', 'basis:1'] }) };
+  let instance = app(data); instance.startLesson('basis', 'basis:1'); instance.play();
+  const pending = JSON.stringify(instance.read().session);
+  instance.startLesson('daily', null);
+  while (!instance.read().session.finished) { instance.play(); instance.next(); }
+  instance = app(data); instance.go('#leren');
+  assert.match(homeCard(instance), /data-level="basis:1">Ga verder/);
+  continueHomeLesson(instance);
+  assert.equal(JSON.stringify(instance.read().session), pending);
+});
+
+test('the home card resumes mixed and free chapter practice without replacing their questions', () => {
+  for (const region of ['daily', 'basis']) {
+    let instance = app(); instance.startLesson(region, null); instance.play(); instance.next();
+    const pending = JSON.stringify(instance.read().session);
+    instance = app(instance.data); instance.go('#leren');
+    assert.match(homeCard(instance), new RegExp('data-start="' + region + '">Ga verder'));
+    assert.match(homeCard(instance), /[Ll]opende les/);
+    continueHomeLesson(instance);
+    assert.equal(JSON.stringify(instance.read().session), pending);
+  }
+});
+
+test('the home card only recommends the next lesson once the current lesson is finished', () => {
+  const instance = app(); instance.go('#leren');
+  assert.match(homeCard(instance), /data-level="basis:0">Start les/);
+  continueHomeLesson(instance); instance.play();
+  const pending = JSON.stringify(instance.read().session);
+  instance.go('#leren');
+  assert.match(homeCard(instance), /data-level="basis:0">Ga verder/);
+  continueHomeLesson(instance);
+  assert.equal(JSON.stringify(instance.read().session), pending);
+  while (!instance.read().session.finished) { instance.play(); instance.next(); }
+  instance.go('#leren');
+  assert.match(homeCard(instance), /volgende les/);
+  assert.match(homeCard(instance), /data-level="basis:1">Start les/);
 });
 
 test('stale tabs merge reward and question progress instead of overwriting other tab', () => {

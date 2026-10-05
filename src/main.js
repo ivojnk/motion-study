@@ -4,6 +4,7 @@ import curriculum from './data/curriculum.json';
 import { LESSON_SIZE, fillLesson, recordLessonAnswer, topics, readProgress, readSession, recordAnswer, lessonQueue, optionsFor, masteryFor, PROGRESS_KEY, SESSION_KEY, GAME_KEY, DAILY_GOAL, readGame, awardXP, gameStats, levelPath, levelQuestions, completeLevel, exerciseFor, matchingPairs, shuffled, binaryResponses, varyLesson, DRAFTS_KEY, draftKey, readDrafts, isOpenAnswerCorrect, checkOpenAnswer } from './learning.js';
 import { lessonMomentum, lessonInterlude } from './lesson-motivation.js';
 import { exerciseForProgress, availableExercises } from './exercise-progression.js';
+import { lessonGroups } from './lesson-groups.js';
 
 const $ = selector => document.querySelector(selector);
 const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -80,28 +81,38 @@ function gameMarkup() {
   return '<div class="game-bar" aria-label="Je leerbeloningen"><span>' + icon('sparkles') + '<strong>' + stats.xp + ' XP</strong></span><span>' + icon('refresh') + '<strong>' + stats.streak + (stats.streak === 1 ? ' dag streak' : ' dagen streak') + '</strong></span><span>' + game.completed.length + '/' + levelPath(game).length + ' lessen</span></div><div class="goal-card"><div><strong>Dagdoel</strong><span>' + Math.min(stats.today, DAILY_GOAL) + '/' + DAILY_GOAL + ' XP' + (stats.today >= DAILY_GOAL ? ' · gehaald!' : '') + '</span></div><progress max="' + DAILY_GOAL + '" value="' + Math.min(stats.today, DAILY_GOAL) + '" aria-label="Dagdoel in XP"></progress></div>';
 }
 function renderHome() {
+  refreshProgress();
+  if (storageAvailable) drafts = readDrafts(storage, byId);
   restoreAtlasLayout();
   intro('Leerpad');
   const levels = levelPath(game);
-  const current = levels.find(level => !level.done);
+  const pending = [session, ...levels.filter(level => !level.locked).map(level => drafts[level.id]), ...Object.values(drafts)]
+    .find(draft => draft && !draft.finished && draft.ids.length &&
+      (!draft.levelId || levels.some(level => level.id === draft.levelId && !level.locked)));
+  const current = pending ? levels.find(level => level.id === pending.levelId) : levels.find(level => !level.done);
+  const topic = current?.topic || topics.find(topic => topic.id === pending?.region);
+  const title = topic?.title || (pending?.region === 'review' ? 'Herhalen' : pending ? 'Gemengde les' : 'Alle hoofdstukken afgerond');
+  const lessonLabel = topic ? 'Hoofdstuk ' + (topics.findIndex(item => item.id === topic.id) + 1) + ' · ' + (pending ? 'lopende les' : 'volgende les') : pending ? 'Lopende les' : 'Leerpad afgerond';
+  const description = (current ? current.label + ' van ' + current.count + ' · ' : '') + (current || pending ? (pending?.initialCount || LESSON_SIZE) + ' vragen' : 'Gemengde les');
+  const action = current ? 'data-level="' + current.id + '"' : 'data-start="' + (pending?.region || 'daily') + '"';
   const due = dueCount();
   const chapters = topics.map((topic, chapter) => {
     const chapterLevels = levels.filter(level => level.topic.id === topic.id);
     const completed = chapterLevels.filter(level => level.done).length;
-    const lessons = chapterLevels.map(level => {
-      const state = level.done ? 'done' : level.locked ? 'locked' : 'current';
-      const checkpoint = level.stage === level.count - 1;
-      const resume = !level.locked && !level.done && drafts[draftKey({ region: topic.id, levelId: level.id })];
+    const lessons = lessonGroups(chapterLevels).map(group => {
+      const state = group.done ? 'done' : group.locked ? 'locked' : 'current';
+      const level = group.next;
+      const resume = !group.locked && !group.done && drafts[draftKey({ region: topic.id, levelId: level.id })];
       const label = resume ? 'Verder' : 'Start';
-      const symbol = checkpoint ? 'trophy' : level.done ? 'check' : level.locked ? 'lock' : 'star';
-      return '<li class="path-step ' + state + (checkpoint ? ' checkpoint' : '') + '">' +
-        '<button class="level-node" data-level="' + level.id + '" ' + (level.locked ? 'disabled' : '') +
-        (!level.locked && !level.done ? ' aria-current="step"' : '') +
-        ' aria-label="' + escape(topic.title + ': ' + level.label + (level.done ? ', voltooid, opnieuw oefenen' : level.locked ? ', vergrendeld' : ', volgende les')) + '">' +
+      return '<li class="path-step ' + state + ' group-' + group.type + '">' +
+        '<button class="level-node" data-level="' + level.id + '" ' + (group.locked ? 'disabled' : '') +
+        (!group.locked && !group.done ? ' aria-current="step"' : '') +
+        ' aria-label="' + escape(topic.title + ': ' + group.label + ', groep ' + (group.index + 1) + ', ' + group.completed + ' van ' + group.lessons.length + ' lessen voltooid' + (group.done ? ', opnieuw oefenen' : group.locked ? ', vergrendeld' : ', volgende: ' + level.label)) + '">' +
+        groupProgressMarkup(group) +
         (state === 'current' ? '<span class="level-callout" aria-hidden="true">' + label + '</span>' : '') +
-        '<span class="level-symbol" aria-hidden="true">' + icon(symbol) + '</span></button>' +
-        '<span class="level-copy" aria-hidden="true">' + escape(level.label) + '</span>' +
-        (checkpoint ? '<span class="level-caption">Hoofdstuk afronden</span>' : '') + '</li>';
+        '<span class="level-symbol" aria-hidden="true">' + icon(group.icon) + '</span></button>' +
+        '<span class="level-copy" aria-hidden="true">' + group.label + '</span>' +
+        '<span class="level-caption" aria-hidden="true">' + group.completed + '/' + group.lessons.length + ' lessen</span>' + '</li>';
     }).join('');
     return '<details class="path-chapter' + (current?.topic.id === topic.id ? ' active-chapter' : '') + '" ' + (current?.topic.id === topic.id ? 'open' : '') + '>' +
       '<summary class="chapter-heading"><span class="chapter-copy"><span class="chapter-kicker">Hoofdstuk ' + (chapter + 1) + '</span><strong>' + escape(topic.title) + '</strong><small>' + escape(topic.subtitle) + '</small></span>' +
@@ -109,8 +120,19 @@ function renderHome() {
       '<span class="chapter-toggle" aria-hidden="true">' + icon('arrow-right') + '</span></summary>' +
       '<ol aria-label="Lessen in ' + escape(topic.title) + '">' + lessons + '</ol></details>';
   }).join('');
-  $('#learning').innerHTML = '<div class="daily-card"><span class="eyebrow">' + (current ? 'Hoofdstuk ' + (topics.findIndex(topic => topic.id === current.topic.id) + 1) + ' · volgende les' : 'Leerpad afgerond') + '</span><h2>' + (current ? escape(current.topic.title) : 'Alle hoofdstukken afgerond') + '</h2><p>' + (current ? current.label + ' van ' + current.count + ' · ' + LESSON_SIZE + ' vragen' : 'Gemengde les') + '</p><button class="primary" ' + (current ? 'data-level="' + current.id + '"' : 'data-start="daily"') + '>' + (session && !session.finished && session.levelId === current?.id ? 'Ga verder' : current ? 'Start les' : 'Gemengde les') + icon('arrow-right') + '</button></div><div class="study-status">' + gameMarkup() + '</div><div class="study-links"><a class="atlas-shortcut" href="#atlas">' + icon('stretch') + '<span><strong>3D-atlas</strong><small>' + curriculum.cards.length + ' spierkaarten</small></span>' + icon('arrow-right') + '</a><a class="atlas-shortcut" href="#vragen">' + icon('book-2') + '<span><strong>Vragenbank</strong><small>' + curriculum.questions.length + ' vragen</small></span>' + icon('arrow-right') + '</a></div><div class="section-heading"><h2>Hoofdstukken</h2><span>' + topics.length + ' hoofdstukken · ' + levels.length + ' lessen</span></div><div class="learning-path">' + chapters + '</div><div class="practice-actions"><button class="primary" data-start="daily">Gemengde les</button><button class="text-button" data-start="review" ' + (!due ? 'disabled' : '') + '>Herhalen (' + due + ')</button></div>';
+  $('#learning').innerHTML = '<div class="daily-card"><span class="eyebrow">' + lessonLabel + '</span><h2>' + escape(title) + '</h2><p>' + description + '</p><button class="primary" ' + action + '>' + (pending ? 'Ga verder' : current ? 'Start les' : 'Gemengde les') + icon('arrow-right') + '</button></div><div class="study-status">' + gameMarkup() + '</div><div class="study-links"><a class="atlas-shortcut" href="#atlas">' + icon('stretch') + '<span><strong>3D-atlas</strong><small>' + curriculum.cards.length + ' spierkaarten</small></span>' + icon('arrow-right') + '</a><a class="atlas-shortcut" href="#vragen">' + icon('book-2') + '<span><strong>Vragenbank</strong><small>' + curriculum.questions.length + ' vragen</small></span>' + icon('arrow-right') + '</a></div><div class="section-heading"><h2>Hoofdstukken</h2><span>' + topics.length + ' hoofdstukken · ' + levels.length + ' lessen</span></div><div class="learning-path">' + chapters + '</div><div class="practice-actions"><button class="primary" data-start="daily">Gemengde les</button><button class="text-button" data-start="review" ' + (!due ? 'disabled' : '') + '>Herhalen (' + due + ')</button></div>';
   resetAtlas();
+}
+function groupProgressMarkup(group) {
+  const position = degrees => {
+    const angle = degrees * Math.PI / 180;
+    return (50 + 45 * Math.cos(angle)).toFixed(3) + ' ' + (50 + 45 * Math.sin(angle)).toFixed(3);
+  };
+  return '<svg class="level-ring" viewBox="0 0 100 100" aria-hidden="true">' + group.lessons.map((lesson, index) => {
+    const start = -90 + index * 360 / group.lessons.length + 5;
+    const end = -90 + (index + 1) * 360 / group.lessons.length - 5;
+    return '<path class="ring-segment' + (lesson.done ? ' filled' : '') + '" d="M ' + position(start) + ' A 45 45 0 0 1 ' + position(end) + '" />';
+  }).join('') + '</svg>';
 }
 function restoreAtlasLayout() {
   const workspace = $('.workspace');
