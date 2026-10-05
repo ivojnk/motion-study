@@ -168,9 +168,9 @@ test('mistakes keep the original progress total stable and start a separate retr
     instance.next();
   }
   assert.equal(instance.read().session.index, 6); assert.equal(instance.read().session.answered, 6);
-  assert.match(instance.html(), /Nog één oefenronde/); assert.match(instance.html(), /class="lesson-progress" max="1"[^>]*aria-label="Herhaling"/);
+  assert.match(instance.html(), /Herkansing/); assert.match(instance.html(), /class="lesson-progress" max="1"[^>]*aria-label="Herhaling"/);
   assert.equal(xp(instance), 25);
-  instance = app(instance.data); instance.go('#les/daily'); assert.match(instance.html(), /Nog één oefenronde/);
+  instance = app(instance.data); instance.go('#les/daily'); assert.match(instance.html(), /Herkansing/);
   instance.dismissInterlude(); assert.equal(xp(instance), 25);
   instance = app(instance.data); instance.go('#les/daily'); assert.doesNotMatch(instance.html(), /id="continue-interlude"/);
   confirmCurrent(instance); instance.next();
