@@ -44,7 +44,7 @@ export function readSession(storage, questions) {
       !Number.isInteger(value.answered) || value.answered < 0 || value.answered > value.ids.length ||
       !Number.isInteger(value.correct) || value.correct < 0 || value.correct > value.answered ||
       !Array.isArray(value.retryIds) || !value.retryIds.every(id => value.ids.includes(id)) ||
-      typeof value.finished !== 'boolean' || !['daily', 'review', ...topics.map(t => t.id)].includes(value.region)) return null;
+      typeof value.finished !== 'boolean' || (value.finished && value.index !== value.ids.length) || !['daily', 'review', ...topics.map(t => t.id)].includes(value.region)) return null;
     if (value.levelId != null && (!topics.some(t => [0, 1, 2].some(stage => value.levelId === t.id + ':' + stage && value.region === t.id && value.stage === stage)) ||
       !Number.isInteger(value.initialCount) || value.initialCount < 1 || value.initialCount > value.ids.length ||
       !Number.isInteger(value.firstCorrect) || value.firstCorrect < 0 || value.firstCorrect > value.initialCount)) return null;
@@ -152,4 +152,16 @@ export function varyLesson(queue) {
   if (!point) return queue;
   const remaining = queue.filter(q => q.id !== point.id);
   return [remaining[0], point, ...remaining.slice(1)];
+}
+
+export const DRAFTS_KEY = 'motionstudy.drafts.v1';
+export function draftKey(session) { return session.levelId || session.region; }
+export function readDrafts(storage, questions) {
+  try {
+    const values = JSON.parse(storage.getItem(DRAFTS_KEY) || '{}');
+    return Object.fromEntries(Object.entries(values).flatMap(([key, value]) => {
+      const session = readSession({ getItem: () => JSON.stringify(value) }, questions);
+      return session && !session.finished && session.ids.length && draftKey(session) === key ? [[key, session]] : [];
+    }));
+  } catch { return {}; }
 }

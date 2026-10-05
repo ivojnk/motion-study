@@ -13,14 +13,14 @@ lessons. Works in desktop and mobile browsers.
 - Follow 33 sequential levels: discover, practise and pass a checkpoint in each chapter.
   Score at least 80% on original questions to unlock the next level. Skips count
   against that score, and retries help learning without inflating it.
-- Alternate multiple choice, true/false, muscle recognition and pointing in 3D.
+- Alternate multiple choice, judging suggested answers, muscle recognition and pointing in 3D.
   Practise matching muscle names to their course-defined functions.
 - Read a short lesson introduction and see XP and progress when you finish.
 - Earn 5 XP per correct answer and 10 XP per completed lesson with an answer.
   Reach 30 XP per local calendar day to build a streak. Replaying earns XP,
   while spaced mastery remains based on actual review intervals.
 - Practise mixed ten-question lessons with feedback and one retry per wrong question.
-- Review questions with increasing intervals and resume an unfinished lesson.
+- Review questions with increasing intervals. Switch between lessons and resume each unfinished lesson.
 - Use the keyboard: arrows and +/− control the model, 1–4 answer quiz questions.
 
 Progress stays in your browser. There is no account, analytics, cloud storage
@@ -70,7 +70,11 @@ Tests cover question integrity, chapter coverage, real anatomical mesh
 mappings, asset provenance, review scheduling and invalid stored progress.
 Tests also cover sequential unlocks, XP persistence, calendar streaks and course-grounded matching.
 Browser checks cover desktop and 320/390px mobile layouts, quiz feedback,
-reload, keyboard controls and 3D selection.
+reload, keyboard controls and 3D selection. Integration checks run the actual app
+transitions with simulated browser boundaries to cover lesson switching, history,
+stale tab state and queued reward updates. Browsers supporting Web Locks serialize
+reward writes across tabs. Physical touch devices and screen readers have not been
+tested.
 
 ## Current limits
 

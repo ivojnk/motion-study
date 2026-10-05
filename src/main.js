@@ -1,6 +1,6 @@
 import './style.css';
 import curriculum from './data/curriculum.json';
-import { topics, readProgress, readSession, recordAnswer, lessonQueue, optionsFor, masteryFor, PROGRESS_KEY, SESSION_KEY, GAME_KEY, DAILY_GOAL, readGame, awardXP, gameStats, levelPath, levelQuestions, completeLevel, exerciseFor, matchingPairs, shuffled, binaryResponses, varyLesson } from './learning.js';
+import { topics, readProgress, readSession, recordAnswer, lessonQueue, optionsFor, masteryFor, PROGRESS_KEY, SESSION_KEY, GAME_KEY, DAILY_GOAL, readGame, awardXP, gameStats, levelPath, levelQuestions, completeLevel, exerciseFor, matchingPairs, shuffled, binaryResponses, varyLesson, DRAFTS_KEY, draftKey, readDrafts } from './learning.js';
 
 const $ = selector => document.querySelector(selector);
 const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -17,14 +17,40 @@ let viewer = null;
 let route = '';
 let storageAvailable = true;
 const byId = new Map(curriculum.questions.map(q => [q.id, q]));
+let drafts = readDrafts(storage, byId);
 session = readSession(storage, byId);
-if (session) session = { ...session, matched: session.matched || [], initialCount: session.initialCount || session.ids.length, firstCorrect: session.firstCorrect || 0, xp: session.xp || 0 };
-function save() {
+if (session) session = { ...session, levelId: session.levelId || null, matched: session.matched || [], initialCount: session.initialCount || session.ids.length, firstCorrect: session.firstCorrect || 0, xp: session.xp || 0 };
+function refreshProgress() {
+  if (!storageAvailable) return;
   try {
-    storage.setItem(PROGRESS_KEY, JSON.stringify(progress));
-    storage.setItem(GAME_KEY, JSON.stringify(game));
+    if (storage.getItem(PROGRESS_KEY)) progress = readProgress(storage);
+    if (storage.getItem(GAME_KEY)) game = readGame(storage);
+  } catch { storageAvailable = false; }
+}
+function withProgressLock(action) {
+  return typeof navigator !== 'undefined' && navigator.locks ? navigator.locks.request('motionstudy-progress', action) : action();
+}
+function save(rewards = false) {
+  try {
+    if (rewards) {
+      storage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+      storage.setItem(GAME_KEY, JSON.stringify(game));
+    } else refreshProgress();
+    drafts = storageAvailable ? readDrafts(storage, byId) : drafts;
+    if (session) {
+      const key = draftKey(session);
+      if (!session.finished && session.ids.length) drafts = { ...drafts, [key]: session };
+      else drafts = Object.fromEntries(Object.entries(drafts).filter(([id]) => id !== key));
+    }
+    storage.setItem(DRAFTS_KEY, JSON.stringify(drafts));
     storage.setItem(SESSION_KEY, JSON.stringify(session));
   } catch { storageAvailable = false; }
+}
+function focusLessonContent() {
+  if ($('#result-title')) { window.scrollTo(0, 0); $('#result-title').focus({ preventScroll: true }); }
+  else if (window.matchMedia('(max-width:620px)').matches && document.querySelector('.question-hint')) {
+    $('#model-prompt').focus({ preventScroll: true }); $('.atlas-panel').scrollIntoView({ block: 'start' });
+  } else $('#question-title')?.focus();
 }
 function dueCount() {
   return curriculum.questions.filter(q => progress.questions[q.id]?.due <= Date.now()).length;
@@ -58,17 +84,20 @@ function resetAtlas() {
   $('#selection-card').innerHTML = '<span class="eyebrow">BEGIN MET ONTDEKKEN</span><h3>Tik een spier aan</h3><p>Draai het lichaam en ontdek hoe alles samenwerkt.</p>';
 }
 function start(region, levelId = null) {
+  refreshProgress();
   if (levelId && !levelPath(game).some(level => level.id === levelId && !level.locked)) return;
   if (!session || session.region !== region || session.finished || session.levelId !== levelId) {
+    save();
     pairSelection = null; pairMessage = '';
+    const pending = drafts[levelId || region];
     const stage = levelId ? Number(levelId.split(':')[1]) : null;
     const pool = levelId ? levelQuestions(curriculum.questions, region, stage) : curriculum.questions;
     const queue = varyLesson(levelId ? shuffled(pool) : lessonQueue(pool, progress, { region, availableMuscles: viewer?.available }));
-    session = { region, levelId, stage, startedAt: Date.now(), xp: 0, firstCorrect: 0, initialCount: queue.length, prepared: false, matched: [], pairingDone: false, ids: queue.map(q => q.id), index: 0, correct: 0, answered: 0, retryIds: [], options: [], response: null, finished: false };
-    if (queue.length) session.options = optionsFor(queue[0]);
+    session = pending ? { ...pending, levelId: pending.levelId || null } : { region, levelId, stage, startedAt: Date.now(), xp: 0, firstCorrect: 0, initialCount: queue.length, prepared: false, matched: [], pairingDone: false, ids: queue.map(q => q.id), index: 0, correct: 0, answered: 0, retryIds: [], options: [], response: null, finished: false };
+    if (!pending && queue.length) session.options = optionsFor(queue[0]);
     save();
   }
-  const nextHash = '#les/' + region;
+  const nextHash = '#les/' + region + (levelId ? '/' + session.stage : '');
   if (location.hash === nextHash) { renderLesson(); window.scrollTo(0, 0); }
   else location.hash = nextHash;
 }
@@ -104,7 +133,7 @@ function choosePair(id, side) {
     pairMessage = correct ? 'Ja, dit paar klopt!' : 'Deze horen niet bij elkaar. Probeer een ander paar.';
     if (correct) session = { ...session, matched: [...session.matched, id] };
     if (session.matched.length === matchingPairs(curriculum.cards, session.region).length) {
-      session = { ...session, pairingDone: true }; pairMessage = ''; save(); renderLesson(); $('#question-title')?.focus(); return;
+      session = { ...session, pairingDone: true }; pairMessage = ''; save(); renderLesson(); focusLessonContent(); return;
     }
   }
   save(); renderMatching();
@@ -112,7 +141,9 @@ function choosePair(id, side) {
   document.querySelector('[data-side="' + sideToFocus + '"]:not(:disabled)')?.focus();
 }
 function renderLesson() {
-  if (!session || session.region !== route.split('/')[1]) { start(route.split('/')[1] || 'daily'); return; }
+  const [, region = 'daily', stage] = route.split('/');
+  const levelId = stage !== undefined ? region + ':' + stage : null;
+  if (!session || session.region !== region || session.levelId !== levelId) { start(region, levelId); return; }
   if (!session.ids.length) {
     intro('Alles is nog <em>vers.</em>', 'Er zijn nu geen vragen die aan herhaling toe zijn.');
     $('#learning').innerHTML = '<div class="empty-card"><h2>Goed moment voor iets nieuws.</h2><p>Vragen komen na 1, 2, 4 en meer dagen terug. Je kunt intussen een hoofdstuk oefenen.</p><button class="primary" data-start="daily">Start een gemengde les</button><a class="text-link" href="#leren">Terug naar je leerpad</a></div>';
@@ -129,10 +160,10 @@ function renderLesson() {
   const isCorrect = response === q.answer;
   const recognitionBlocked = q.type === 'recognition' && !viewer?.available.has(q.muscleId);
   $('#learning').innerHTML = '<div class="lesson-top"><a href="#leren">← Leerpad</a><span>' + session.correct + ' goed · ' + (session.xp || 0) + ' XP</span></div><progress class="lesson-progress" max="' + session.ids.length + '" value="' + session.index + '" aria-label="Lesvoortgang"></progress>' +
-    '<article class="question-card"><span class="tag">' + (mode === 'point' ? 'WIJS DE SPIER AAN' : mode === 'binary' ? 'WAAR OF NIET WAAR?' : q.type === 'recognition' ? 'HERKEN DE SPIER' : q.muscleId ? 'SPIERKENNIS' : 'BEGRIJP DE BEWEGING') + '</span><h2 tabindex="-1" id="question-title">' + escape(mode === 'point' ? 'Wijs ' + q.answer + ' aan.' : q.prompt) + '</h2>' +
+    '<article class="question-card"><span class="tag">' + (mode === 'point' ? 'WIJS DE SPIER AAN' : mode === 'binary' ? 'KLOPT DIT ANTWOORD?' : q.type === 'recognition' ? 'HERKEN DE SPIER' : q.muscleId ? 'SPIERKENNIS' : 'BEGRIJP DE BEWEGING') + '</span><h2 tabindex="-1" id="question-title">' + escape(mode === 'point' ? 'Wijs ' + q.answer + ' aan.' : q.prompt) + '</h2>' +
     (q.type === 'recognition' ? '<p class="question-hint">' + (mode === 'point' ? 'Tik de gevraagde spier aan in het lichaam. Je kunt ook een antwoordknop gebruiken.' : 'Bekijk de paarse spier in het 3D-model. Je mag het lichaam draaien en de spier isoleren.') + '</p>' : '') +
     (recognitionBlocked ? '<p role="status">Het 3D-model is nog niet beschikbaar. Wacht even of sla deze vraag over.</p>' : '') +
-    (mode === 'binary' ? '<div class="statement"><span>Stelling</span><p>' + escape(session.options[0]) + '</p></div>' : '') + '<div class="answers">' + (mode === 'binary' ? binaryResponses(q, session.options) : session.options).map((option, i) => '<button data-key="' + (i + 1) + '" data-answer="' + session.options.indexOf(option) + '" class="answer ' + (response ? option === q.answer ? 'correct' : option === response ? 'incorrect' : '' : '') + '" ' + (response || recognitionBlocked ? 'disabled' : '') + '><span class="answer-key">' + (i + 1) + '</span><span>' + (mode === 'binary' ? (i === 0 ? 'Waar' : 'Niet waar') : escape(option)) + '</span>' + (response && option === q.answer ? icon('check') : '') + '</button>').join('') + '</div>' +
+    (mode === 'binary' ? '<div class="statement"><span>Voorgesteld antwoord</span><p>' + escape(session.options[0]) + '</p></div>' : '') + '<div class="answers">' + (mode === 'binary' ? binaryResponses(q, session.options) : session.options).map((option, i) => '<button data-key="' + (i + 1) + '" data-answer="' + session.options.indexOf(option) + '" class="answer ' + (response ? option === q.answer ? 'correct' : option === response ? 'incorrect' : '' : '') + '" ' + (response || recognitionBlocked ? 'disabled' : '') + '><span class="answer-key">' + (i + 1) + '</span><span>' + (mode === 'binary' ? (i === 0 ? 'Klopt' : 'Klopt niet') : escape(option)) + '</span>' + (response && option === q.answer ? icon('check') : '') + '</button>').join('') + '</div>' +
     (response ? '<div class="feedback ' + (isCorrect ? 'success' : 'retry') + '" role="status"><strong>' + (isCorrect ? 'Ja, die heb je!' : 'Bijna. Deze nemen we nog een keer mee.') + '</strong><p>' + (isCorrect ? escape(q.answer) : 'Het juiste antwoord: ' + escape(q.answer)) + '</p></div>' + sourceMarkup(q.source) + '<button class="primary next-button" id="next-question">' + (session.index + 1 >= session.ids.length ? 'Bekijk je resultaat' : 'Volgende vraag') + icon('arrow-right') + '</button>' : '<button class="text-button" id="skip-question">Deze vraag overslaan</button>') +
     '</article><p class="privacy-note">' + (storageAvailable ? 'Je voortgang wordt alleen in deze browser bewaard.' : 'Opslaan lukt niet. Je voortgang blijft alleen in deze sessie beschikbaar.') + '</p>';
   const card = curriculum.cards.find(c => c.id === q.muscleId);
@@ -148,44 +179,59 @@ function renderLesson() {
 }
 
 function answer(index, pickedMuscle = null) {
-  if (!session || !session.prepared || session.response || session.finished) return;
-  const q = byId.get(session.ids[session.index]);
-  if (q.type === 'recognition' && !viewer?.available.has(q.muscleId)) return;
-  const response = pickedMuscle || session.options[index];
-  if (!response) return;
-  const correct = response === q.answer;
-  session = { ...session, response, correct: session.correct + Number(correct), answered: session.answered + 1 };
-  if (!correct && !session.retryIds.includes(q.id)) session = { ...session, ids: [...session.ids, q.id], retryIds: [...session.retryIds, q.id] };
-  const xp = correct ? 5 : 0;
-  game = awardXP(game, xp);
-  session = { ...session, xp: (session.xp || 0) + xp, firstCorrect: (session.firstCorrect || 0) + Number(correct && session.index < (session.initialCount || session.ids.length)) };
-  progress = recordAnswer(progress, q.id, correct);
-  save(); renderLesson();
-  $('#next-question').focus();
+  const expectedSession = session;
+  const expectedIndex = session?.index;
+  const expectedRoute = route;
+  return withProgressLock(() => {
+    if (!session || session !== expectedSession || session.index !== expectedIndex || !session.prepared || session.response || session.finished) return;
+    const q = byId.get(session.ids[session.index]);
+    if (q.type === 'recognition' && !viewer?.available.has(q.muscleId)) return;
+    const response = pickedMuscle || session.options[index];
+    if (!response) return;
+    refreshProgress();
+    const correct = response === q.answer;
+    session = { ...session, response, correct: session.correct + Number(correct), answered: session.answered + 1 };
+    if (!correct && !session.retryIds.includes(q.id)) session = { ...session, ids: [...session.ids, q.id], retryIds: [...session.retryIds, q.id] };
+    const xp = correct ? 5 : 0;
+    game = awardXP(game, xp);
+    session = { ...session, xp: (session.xp || 0) + xp, firstCorrect: (session.firstCorrect || 0) + Number(correct && session.index < (session.initialCount || session.ids.length)) };
+    progress = recordAnswer(progress, q.id, correct);
+    save(true);
+    if (route === expectedRoute) { renderLesson(); $('#next-question').focus(); }
+    else if (route === 'leren') renderHome();
+    else if (route === 'voortgang') renderProgress();
+  });
 }
 function next(skip = false) {
   if (!session || (!skip && !session.response)) return;
   const index = session.index + 1;
   session = { ...session, index, response: null, options: index < session.ids.length ? optionsFor(byId.get(session.ids[index])) : [] };
   save(); renderLesson();
-  $('#question-title')?.focus({ preventScroll: true });
-  if (window.matchMedia('(max-width:620px)').matches && document.querySelector('.question-hint')) $('.atlas-panel').scrollIntoView({ block: 'start' });
+  focusLessonContent();
 }
 function finish() {
-  if (!session.finished) {
-    const bonus = session.answered > 0 ? 10 : 0;
-    game = completeLevel(awardXP(game, bonus), session.levelId, session.firstCorrect || 0, session.initialCount || session.ids.length);
-    session = { ...session, finished: true, xp: (session.xp || 0) + bonus };
-    progress = { ...progress, sessions: [...progress.sessions, { at: Date.now(), correct: session.correct, total: session.answered }].slice(-200) };
-    save();
-  }
-  const passed = session.levelId && game.completed.includes(session.levelId);
-  const stats = gameStats(game);
-  intro(passed ? 'Level <em>gehaald!</em>' : 'Goed <em>geoefend.</em>', passed ? 'Je volgende stap is nu open.' : 'Elke poging helpt. Bekijk wat je nu al weet.', 'LES AFGEROND');
-  const nextLevel = levelPath(game).find(level => !level.done);
-  $('#learning').innerHTML = '<div class="result-card celebration"><span class="result-icon">' + icon(passed ? 'target' : 'check') + '</span><h2>' + (passed ? 'Een stap verder!' : 'Les afgerond!') + '</h2><div class="reward-xp">+' + (session.xp || 0) + ' XP</div><div class="result-metrics"><span><strong>' + session.correct + '/' + session.answered + '</strong> goed met herhalingen</span><span><strong>' + (session.firstCorrect || 0) + '/' + (session.initialCount || session.ids.length) + '</strong> eerste poging</span></div><p>' + (session.levelId && !passed ? 'Voor dit level heb je minstens 80% goed op de eerste poging nodig. Probeer het opnieuw wanneer je er klaar voor bent.' : 'Je kennis groeit. Je herhalingen komen terug zodra het tijd is.') + '</p><div class="goal-result">' + (stats.today >= DAILY_GOAL ? 'Dagdoel gehaald · ' + stats.streak + (stats.streak === 1 ? ' dag streak' : ' dagen streak') : 'Nog ' + (DAILY_GOAL - stats.today) + ' XP tot je dagdoel') + '</div><button class="primary" ' + (session.levelId && !passed ? 'data-level="' + session.levelId + '"' : nextLevel ? 'data-level="' + nextLevel.id + '"' : 'data-start="daily"') + '>' + (session.levelId && !passed ? 'Oefen dit level opnieuw' : 'Volgende les') + icon('arrow-right') + '</button><a class="text-link" href="#leren">Terug naar je leerpad</a></div>';
+  const ending = session;
+  const endingRoute = route;
+  return withProgressLock(() => {
+    if (session !== ending) return;
+    if (!session.finished) {
+      refreshProgress();
+      const bonus = session.answered > 0 ? 10 : 0;
+      game = completeLevel(awardXP(game, bonus), session.levelId, session.firstCorrect || 0, session.initialCount || session.ids.length);
+      session = { ...session, finished: true, xp: (session.xp || 0) + bonus };
+      progress = { ...progress, sessions: [...progress.sessions, { at: Date.now(), correct: session.correct, total: session.answered }].slice(-200) };
+      save(true);
+    }
+    if (route !== endingRoute) { if (route === 'leren') renderHome(); else if (route === 'voortgang') renderProgress(); return; }
+    const passed = session.levelId && game.completed.includes(session.levelId);
+    const stats = gameStats(game);
+    intro(passed ? 'Level <em>gehaald!</em>' : 'Goed <em>geoefend.</em>', passed ? 'Je volgende stap is nu open.' : 'Elke poging helpt. Bekijk wat je nu al weet.', 'LES AFGEROND');
+    const nextLevel = levelPath(game).find(level => !level.done);
+    $('#learning').innerHTML = '<div class="result-card celebration"><span class="result-icon">' + icon(passed ? 'target' : 'check') + '</span><h2 id="result-title" tabindex="-1">' + (passed ? 'Een stap verder!' : 'Les afgerond!') + '</h2><div class="reward-xp">+' + (session.xp || 0) + ' XP</div><div class="result-metrics"><span><strong>' + session.correct + '/' + session.answered + '</strong> goed met herhalingen</span><span><strong>' + (session.firstCorrect || 0) + '/' + (session.initialCount || session.ids.length) + '</strong> eerste poging</span></div><p>' + (session.levelId && !passed ? 'Voor dit level heb je minstens 80% goed op de eerste poging nodig. Probeer het opnieuw wanneer je er klaar voor bent.' : 'Je kennis groeit. Je herhalingen komen terug zodra het tijd is.') + '</p><div class="goal-result">' + (stats.today >= DAILY_GOAL ? 'Dagdoel gehaald · ' + stats.streak + (stats.streak === 1 ? ' dag streak' : ' dagen streak') : 'Nog ' + (DAILY_GOAL - stats.today) + ' XP tot je dagdoel') + '</div><button class="primary" ' + (session.levelId && !passed ? 'data-level="' + session.levelId + '"' : nextLevel ? 'data-level="' + nextLevel.id + '"' : 'data-start="daily"') + '>' + (session.levelId && !passed ? 'Oefen dit level opnieuw' : 'Volgende les') + icon('arrow-right') + '</button><a class="text-link" href="#leren">Terug naar je leerpad</a></div>';
 
-  resetAtlas();
+    resetAtlas();
+    focusLessonContent();
+  });
 }
 function cardMarkup(card) {
   return '<span class="eyebrow">' + escape(topics.find(t => t.id === card.region)?.title || 'SPIER') + '</span><h3>' + escape(card.name) + '</h3><p>' + escape(card.fields.functie || '') + '</p>';
@@ -215,7 +261,7 @@ function renderAtlas(card = null) {
   if (!card) {
     $('#learning').innerHTML = '<article class="explore-card"><span class="tag">31 SPIERKAARTEN</span><h2>Van plaatje naar begrip.</h2><p>Kies een spier in het model of in de lijst. Je ziet de functie, oorsprong, aanhechting en maximale rek uit je lesmateriaal.</p><div class="atlas-muscles">' + curriculum.cards.map(c => '<button class="muscle-chip" data-muscle="' + c.id + '">' + escape(c.name) + '</button>').join('') + '</div></article>'; return;
   }
-  $('#learning').innerHTML = '<article class="explore-card"><span class="tag">' + escape(topics.find(t => t.id === card.region).title) + '</span><h2>' + escape(card.name) + '</h2><dl>' + Object.entries(card.fields).map(([field, value]) => '<div><dt>' + escape(field) + '</dt><dd>' + escape(value) + '</dd></div>').join('') + '</dl>' + sourceMarkup(card.source) + '<button class="primary" data-start="' + card.region + '">Oefen dit hoofdstuk ' + icon('arrow-right') + '</button><button class="text-button" id="all-muscles">Alle spierkaarten</button></article>';
+  $('#learning').innerHTML = '<article class="explore-card"><span class="tag">' + escape(topics.find(t => t.id === card.region).title) + '</span><h2 id="muscle-card-title" tabindex="-1">' + escape(card.name) + '</h2><dl>' + Object.entries(card.fields).map(([field, value]) => '<div><dt>' + escape(field) + '</dt><dd>' + escape(value) + '</dd></div>').join('') + '</dl>' + sourceMarkup(card.source) + '<button class="primary" data-start="' + card.region + '">Oefen dit hoofdstuk ' + icon('arrow-right') + '</button><button class="text-button" id="all-muscles">Alle spierkaarten</button></article>';
 }
 function renderProgress() {
   intro('Kijk eens hoe ver je <em>komt.</em>', 'Bekijk wat je hebt geoefend en welke vragen aan herhaling toe zijn. Vragen die je vaker goed beantwoordt, komen minder snel terug.', 'JOUW VOORTGANG');
@@ -239,9 +285,10 @@ function navigate() {
   else renderHome();
 }
 document.addEventListener('click', event => {
+  if (event.target.closest('.skip')) { event.preventDefault(); $('#main').focus(); $('#main').scrollIntoView({ block: 'start' }); return; }
   const levelButton = event.target.closest('[data-level]');
   if (levelButton && !levelButton.disabled) start(levelButton.dataset.level.split(':')[0], levelButton.dataset.level);
-  if (event.target.closest('#begin-exercises')) { session = { ...session, prepared: true }; save(); renderLesson(); $('#question-title')?.focus(); }
+  if (event.target.closest('#begin-exercises')) { session = { ...session, prepared: true }; save(); renderLesson(); focusLessonContent(); }
   const pairButton = event.target.closest('[data-pair]');
   if (pairButton && !pairButton.disabled) choosePair(pairButton.dataset.pair, pairButton.dataset.side);
   const startButton = event.target.closest('[data-start]');
@@ -250,7 +297,7 @@ document.addEventListener('click', event => {
   const viewButton = event.target.closest('[data-view]');
   if (startButton && !startButton.disabled) start(startButton.dataset.start);
   if (answerButton && !answerButton.disabled) answer(Number(answerButton.dataset.answer));
-  if (muscleButton) showMuscle(muscleButton.dataset.muscle);
+  if (muscleButton) { showMuscle(muscleButton.dataset.muscle); $('#muscle-card-title')?.focus(); }
   if (viewButton) { viewer?.view(viewButton.dataset.view); $('#orientation').textContent = { front: 'VOORZIJDE', back: 'ACHTERZIJDE', side: 'ZIJAANZICHT' }[viewButton.dataset.view]; }
   if (event.target.closest('#next-question')) next();
   if (event.target.closest('#skip-question')) next(true);
@@ -273,9 +320,13 @@ $('#bones').addEventListener('change', async event => {
 });
 $('#isolate').addEventListener('change', event => viewer?.setIsolated(event.target.checked));
 window.addEventListener('hashchange', navigate);
+window.addEventListener('storage', event => {
+  if ([PROGRESS_KEY, GAME_KEY].includes(event.key)) { refreshProgress(); if (route === 'leren') renderHome(); else if (route === 'voortgang') renderProgress(); }
+});
 const modelPrompt = document.createElement('p');
-modelPrompt.id = 'model-prompt'; modelPrompt.className = 'model-prompt'; modelPrompt.hidden = true;
+modelPrompt.id = 'model-prompt'; modelPrompt.tabIndex = -1; modelPrompt.className = 'model-prompt'; modelPrompt.hidden = true;
 $('.atlas-top').after(modelPrompt);
+if (session?.levelId && location.hash === '#les/' + session.region) history.replaceState(null, '', location.hash + '/' + session.stage);
 navigate();
 for (const card of curriculum.cards) {
   const option = document.createElement('option');
