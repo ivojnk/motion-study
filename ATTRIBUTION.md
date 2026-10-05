@@ -73,7 +73,7 @@ are local adaptations. The complete runtime library is not included.
 The five system icons are separate from the app's Phosphor Duotone icon set.
 Full notice: `public/licenses/pwa-install-LICENSE.txt`. The notice is also included
 in `public/licenses/third-party.txt` and exposed in the app's credits.
-The app icons render the existing Manrope brand mark; its OFL notice is preserved.
+The MotionStudy Leerblad logo, favicon, social-share artwork and app icons use original geometric artwork and an outlined Manrope wordmark. Manrope's OFL notice is preserved in `public/brand/Manrope-OFL.txt` and the existing font notices.
 
 Source: https://github.com/khmyznikov/pwa-install/tree/ef1bd3ec440d711e3eaafb796914566817f976a6
 

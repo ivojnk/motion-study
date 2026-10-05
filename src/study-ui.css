@@ -21,9 +21,7 @@ h1 em { color: inherit; }
 h2 { letter-spacing: -.5px; }
 p { color: var(--muted); }
 .topbar { max-width: 1248px; padding: 20px 36px; gap: 28px; min-height: 86px; }
-.brand { font-size: 21px; gap: 10px; letter-spacing: -.8px; }
-.brand-symbol { border-radius: 7px; background: var(--accent); width: 34px; height: 34px; }
-.brand-dot { color: var(--accent); }
+.brand-logo { width: 204px; }
 nav { gap: 26px; }
 nav a { font-size: 14px; color: var(--muted); }
 nav a[aria-current] { color: var(--ink); }
@@ -255,8 +253,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible
 @media (max-width: 620px) {
   .topbar, .topbar:has(.account-controls:not([hidden])) { padding: 14px 20px 0; gap: 8px; }
   .topbar:not(:has(nav:not([hidden]))) { padding-bottom: 14px; }
-  .brand, .topbar:has(.account-controls:not([hidden])) .brand { font-size: 19px; gap: 8px; }
-  .brand-symbol, .topbar:has(.account-controls:not([hidden])) .brand-symbol { width: 30px; height: 30px; }
+  .brand-logo { width: 180px; }
   .account-controls { max-width: 132px; gap: 4px; font-size: 11px; }
   #account-logout { min-height: 44px; padding: 6px; font-size: 11px; }
   .topbar nav { justify-content: space-between; gap: 8px; }
@@ -330,7 +327,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible
 @media (max-width: 360px) {
   main { padding-inline: 16px; }
   .topbar, .topbar:has(.account-controls:not([hidden])) { padding-inline: 16px; }
-  .brand, .topbar:has(.account-controls:not([hidden])) .brand { font-size: 17px; gap: 6px; }
+  .brand-logo { width: 170px; }
   .account-controls { max-width: 110px; }
   .daily-card { padding: 22px; }
   .daily-card h2 { font-size: 29px; }
@@ -364,9 +361,7 @@ nav a > .icon { width: 20px; height: 20px; }
 .account-menu .account-menu-action:focus-visible { outline-offset: -3px; }
 .account-menu [role=alert]:not(:empty) { padding: 8px 12px; font-size: 13px; color: var(--red); }
 .home-view .topbar, .home-view .topbar:has(.account-controls:not([hidden])) { position: sticky; top: 0; z-index: 10; max-width: 680px; min-height: 76px; padding: 14px 24px; flex-wrap: nowrap; gap: 16px; background: var(--paper); border-bottom: 1px solid var(--line); }
-.home-view .brand > span:last-child { display: none; }
-.home-view .brand, .home-view .topbar:has(.account-controls:not([hidden])) .brand { gap: 0; }
-.home-view .brand-symbol { width: 34px; height: 34px; }
+.home-view .brand-logo { width: 180px; }
 #home-stats { display: flex; justify-content: space-evenly; align-items: center; flex: 1; gap: 16px; }
 .home-metric { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .home-metric .icon { width: 22px; height: 22px; opacity: .8; }
@@ -401,7 +396,8 @@ nav a > .icon { width: 20px; height: 20px; }
 
 @media (max-width: 620px) {
   .home-view .topbar, .home-view .topbar:has(.account-controls:not([hidden])) { min-height: 68px; padding: 12px 20px; gap: 12px; }
-  .home-view .brand-symbol, .home-view .topbar:has(.account-controls:not([hidden])) .brand-symbol { width: 30px; height: 30px; }
+  .home-view .brand-logo { display: none; }
+  .home-view .brand-symbol { display: block; width: 40px; height: 40px; }
   .home-view .account-controls > summary { width: 44px; height: 44px; background: transparent; border: 0; }
   #home-stats { gap: 12px; }
   .home-metric { font-size: 13px; gap: 5px; }

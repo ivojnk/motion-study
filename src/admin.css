@@ -18,8 +18,8 @@ button:disabled { cursor: wait; opacity: .65; }
 .skip:focus { top: 8px; }
 .admin-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 84px; padding: 18px max(20px, calc((100vw - 1120px)/2)); border-bottom: 1px solid var(--line); }
 .admin-header > a:last-child { padding: 10px 0; }
-.brand { font-family: 'Manrope Variable', sans-serif; font-size: 23px; font-weight: 850; text-decoration: none; letter-spacing: -1px; }
-.brand span { color: var(--green); }
+.brand { display: inline-flex; align-items: center; min-height: 44px; flex-shrink: 0; border-radius: 4px; text-decoration: none; }
+.brand-logo { display: block; width: 204px; height: auto; }
 main { max-width: 1160px; padding: 42px 20px 64px; margin: auto; }
 h1, h2, p { margin: 0; }
 h1 { font-family: 'Manrope Variable', sans-serif; font-size: clamp(32px, 6vw, 50px); line-height: 1.13; letter-spacing: -1.5px; margin: 4px 0 14px; }
@@ -61,5 +61,5 @@ tbody tr:last-child > * { border-bottom: 0; }
 .login-panel button, .login-panel .button-link { width: 100%; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 @media (max-width: 760px) { .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } .login-layout { grid-template-columns: 1fr; gap: 28px; min-height: auto; } .login-panel { max-width: none; } .panel-heading { display: block; } .panel-heading p { margin-top: 6px; } }
-@media (max-width: 420px) { .admin-header { padding: 14px 16px; min-height: 72px; } .brand { font-size: 20px; } .admin-header > a:last-child { font-size: 13px; } main { padding: 28px 16px 48px; } .page-heading { flex-wrap: wrap; } .toolbar { align-items: stretch; flex-direction: column; } .metrics { gap: 10px; } .metric { padding: 16px 12px; } .metric h2 { font-size: 14px; } .metric p { font-size: 12px; } .panel { padding: 18px 12px; } th, td { padding-inline: 7px; } table { font-size: 12px; } .login-panel { padding: 24px 20px; } }
+@media (max-width: 420px) { .admin-header { padding: 14px 16px; min-height: 72px; } .brand-logo { width: 160px; } .admin-header > a:last-child { font-size: 13px; } main { padding: 28px 16px 48px; } .page-heading { flex-wrap: wrap; } .toolbar { align-items: stretch; flex-direction: column; } .metrics { gap: 10px; } .metric { padding: 16px 12px; } .metric h2 { font-size: 14px; } .metric p { font-size: 12px; } .panel { padding: 18px 12px; } th, td { padding-inline: 7px; } table { font-size: 12px; } .login-panel { padding: 24px 20px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
