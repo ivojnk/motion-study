@@ -25,19 +25,43 @@ const byId = new Map(curriculum.questions.map(q => [q.id, q]));
 let drafts = readDrafts(storage, byId);
 session = readSession(storage, byId);
 if (session) session = { ...session, exerciseModes: session.exerciseModes || session.ids.map((id, index) => exerciseFor(byId.get(id), index)), levelId: session.levelId || null, matched: session.matched || [], initialCount: session.initialCount || session.ids.length, firstCorrect: session.firstCorrect || 0, answerStreak: session.answerStreak || 0, bestAnswerStreak: session.bestAnswerStreak || 0, xp: session.xp || 0 };
+// Compare the last saved lesson, even when switching to another lesson.
+let savedLesson = session ? { key: draftKey(session), draft: JSON.stringify(drafts[draftKey(session)] || null) } : null;
+let reloadingProgress = false;
+function storageFailed() {
+  storageAvailable = false;
+  const warning = $('#storage-warning');
+  if (warning) warning.hidden = false;
+}
+function canSaveLesson() {
+  if (reloadingProgress) return false;
+  if (!storageAvailable || !savedLesson) return true;
+  try {
+    const rawDrafts = storage.getItem(DRAFTS_KEY);
+    const stored = readDrafts({ getItem: () => rawDrafts }, byId);
+    if (JSON.stringify(stored[savedLesson.key] || null) === savedLesson.draft) return true;
+    // Another tab updated/completed this lesson. Reload before any stale write or reward.
+    reloadingProgress = true;
+    const main = $('#main');
+    if (main) main.hidden = true;
+    location.reload();
+    return false;
+  } catch { storageFailed(); return true; }
+}
 function refreshProgress() {
   if (!storageAvailable) return;
   try {
     if (storage.getItem(PROGRESS_KEY)) progress = readProgress(storage);
     if (storage.getItem(GAME_KEY)) game = readGame(storage);
-  } catch { storageAvailable = false; }
+  } catch { storageFailed(); }
 }
 function withProgressLock(action) {
   return typeof navigator !== 'undefined' && navigator.locks ? navigator.locks.request('motionstudy-progress' + (window.motionStudyAccount ? ':' + window.motionStudyAccount.id : ''), action) : action();
 }
 function save(rewards = false) {
+  if (!canSaveLesson()) return;
   try {
-    if (rewards) {
+    if (rewards || !storageAvailable) {
       storage.setItem(PROGRESS_KEY, JSON.stringify(progress));
       storage.setItem(GAME_KEY, JSON.stringify(game));
     } else refreshProgress();
@@ -49,7 +73,11 @@ function save(rewards = false) {
     }
     storage.setItem(DRAFTS_KEY, JSON.stringify(drafts));
     storage.setItem(SESSION_KEY, JSON.stringify(session));
-  } catch { storageAvailable = false; }
+    savedLesson = session ? { key: draftKey(session), draft: JSON.stringify(drafts[draftKey(session)] || null) } : null;
+    storageAvailable = true;
+    const warning = $('#storage-warning');
+    if (warning) warning.hidden = true;
+  } catch { storageFailed(); }
 }
 function focusLessonContent() {
   if ($('#interlude-title')) { $('#interlude-title').focus(); return; }
@@ -385,6 +413,7 @@ function answer(index, pickedMuscle = null, selfAssessment = null) {
   const expectedIndex = session?.index;
   const expectedRoute = route;
   return withProgressLock(() => {
+    if (!canSaveLesson()) return;
     if (!session || session !== expectedSession || session.index !== expectedIndex || !session.prepared || session.response || session.finished) return;
     const q = byId.get(session.ids[session.index]);
     if (q.type === 'recognition' && !viewer?.available.has(q.muscleId)) return;
@@ -420,6 +449,7 @@ function finish() {
   const ending = session;
   const endingRoute = route;
   return withProgressLock(() => {
+    if (!canSaveLesson()) return;
     if (session !== ending) return;
     const justFinished = !session.finished;
     if (!session.finished) {
@@ -594,6 +624,7 @@ $('#isolate').addEventListener('change', event => viewer?.setIsolated(event.targ
 window.addEventListener('hashchange', navigate);
 window.matchMedia('(max-width:620px)').addEventListener('change', arrangeModelQuestion);
 window.addEventListener('storage', event => {
+  if ([DRAFTS_KEY, SESSION_KEY].map(key => storage.keyFor ? storage.keyFor(key) : key).includes(event.key) && !canSaveLesson()) return;
   if ([PROGRESS_KEY, GAME_KEY].map(key => storage.keyFor ? storage.keyFor(key) : key).includes(event.key)) { refreshProgress(); if (route === 'leren') renderHome(); else if (route === 'voortgang') renderProgress();
   else if (route === 'vragen') renderQuestionBank(); }
 });
