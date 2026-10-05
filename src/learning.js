@@ -331,7 +331,7 @@ export function gameStats(game, now = Date.now()) {
 }
 export function levelPath(game, questions = curriculum.questions) {
   const levels = topics.flatMap(topic => {
-    const count = Math.ceil(questions.filter(q => q.region === topic.id).length / LESSON_SIZE);
+    const count = chapterPools(questions, topic.id).reduce((total, pool) => total + Math.ceil(pool.length / LESSON_SIZE), 0);
     return Array.from({ length: count }, (_, stage) => ({ id: topic.id + ':' + stage, topic, stage, count, label: 'Les ' + (stage + 1) }));
   });
   const first = levels.findIndex(level => !game.completed.includes(level.id));
@@ -348,19 +348,31 @@ export function fillLesson(questions, pool = questions) {
 }
 export function levelQuestions(questions, region, stage) {
   if (!Number.isInteger(stage) || stage < 0) return [];
-  const pool = questions.filter(q => q.region === region);
-  return fillLesson(pool.slice(stage * LESSON_SIZE, (stage + 1) * LESSON_SIZE), pool);
+  let remaining = stage;
+  for (const pool of chapterPools(questions, region)) {
+    const count = Math.ceil(pool.length / LESSON_SIZE);
+    if (remaining < count) return fillLesson(pool.slice(remaining * LESSON_SIZE, (remaining + 1) * LESSON_SIZE), pool);
+    remaining -= count;
+  }
+  return [];
 }
+// Add coaching after the original chapter's final lesson, keeping its review
+// fillers and completed lesson IDs unchanged.
+function chapterPools(questions, region) {
+  const pool = questions.filter(q => q.region === region);
+  return [pool.filter(q => q.source?.kind !== 'supplement'), pool.filter(q => q.source?.kind === 'supplement')];
+}
+
 function migrateCompletedLevels(completed) {
   if (!Array.isArray(completed)) return [];
   const covered = new Set(topics.flatMap(topic => {
-    const pool = curriculum.questions.filter(q => q.region === topic.id);
+    const pool = curriculum.questions.filter(q => q.region === topic.id && q.source?.kind !== 'supplement');
     return [0, 1, 2].flatMap(stage => completed.includes(topic.id + ':' + stage)
       ? pool.slice(Math.floor(stage * pool.length / 3), Math.floor((stage + 1) * pool.length / 3)).map(q => q.id) : []);
   }));
   return levelPath({ completed: [] }).filter(level => {
-    const originals = curriculum.questions.filter(q => q.region === level.topic.id).slice(level.stage * LESSON_SIZE, (level.stage + 1) * LESSON_SIZE);
-    return originals.every(q => covered.has(q.id));
+    const originals = levelQuestions(curriculum.questions, level.topic.id, level.stage);
+    return originals.length > 0 && originals.every(q => covered.has(q.id));
   }).map(level => level.id);
 }
 export function completeLevel(game, id, correct, total) {
