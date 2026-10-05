@@ -88,3 +88,60 @@ test('saved lessons restore only valid question options, counters and references
   assert.equal(readSession(storage({ ...session, response: 'not an option' }), lookup), null);
   assert.equal(readSession({ getItem() { throw Error('blocked'); } }, lookup), null);
 });
+
+import { readGame, awardXP, gameStats, dayKey, DAILY_GOAL, levelPath, levelQuestions, completeLevel, exerciseFor, matchingPairs, binaryResponses } from '../src/learning.js';
+test('XP calendar streak survives reload, crosses month boundary and expires after missed goal', () => {
+  const time = new Date(2026, 9, 1, 12).getTime();
+  const empty = { days: {}, completed: [] };
+  const game = awardXP(awardXP(empty, DAILY_GOAL, new Date(2026, 8, 30, 12).getTime()), DAILY_GOAL, time);
+  assert.deepEqual(empty.days, {});
+  assert.equal(gameStats(game, time).streak, 2);
+  assert.equal(gameStats(game, new Date(2026, 9, 2, 12).getTime()).streak, 2);
+  assert.equal(gameStats(game, new Date(2026, 9, 3, 12).getTime()).streak, 0);
+  assert.equal(gameStats(game, time).xp, 60);
+  assert.deepEqual(readGame({getItem: () => JSON.stringify(game)}), game);
+  assert.equal(dayKey(time), '2026-10-01');
+  assert.deepEqual(readGame({getItem: () => '{"days":{"bad":100,"2026-10-01":-2},"completed":["fake"]}'}), empty);
+});
+test('levels unlock sequentially at 80 percent; skipped, failed and locked levels cannot unlock', () => {
+  const empty = { days: {}, completed: [] };
+  assert.equal(levelPath(empty).length, 33);
+  assert.equal(levelPath(empty).filter(level => !level.locked).length, 1);
+  assert.deepEqual(completeLevel(empty, 'basis:0', 0, 0), empty);
+  assert.deepEqual(completeLevel(empty, 'basis:0', 3, 5), empty);
+  assert.deepEqual(completeLevel(empty, 'basis:1', 5, 5), empty);
+  const first = completeLevel(empty, 'basis:0', 4, 5);
+  assert.equal(levelPath(first).find(level => level.id === 'basis:1').locked, false);
+  assert.equal(levelPath(first).find(level => level.id === 'basis:2').locked, true);
+  assert.equal(completeLevel(first, 'basis:0', 5, 5).completed.length, 1);
+  for (const topic of topics) {
+    const partitions = [0,1,2].flatMap(stage => levelQuestions(curriculum.questions, topic.id, stage));
+    assert.equal(new Set(partitions.map(q => q.id)).size, curriculum.questions.filter(q => q.region === topic.id).length);
+  }
+});
+test('varied exercise modes and matching functions preserve course-grounded answers', () => {
+  assert.equal(exerciseFor({type:'recognition'}, 0), 'recognition');
+  assert.equal(exerciseFor({type:'recognition',muscleId:'pectoralis'}, 1), 'point');
+  assert.equal(exerciseFor({type:'choice'}, 1), 'binary');
+  for (const topic of topics) {
+    const pairs = matchingPairs(curriculum.cards, topic.id);
+    assert.equal(new Set(pairs.map(pair => pair.function)).size, pairs.length);
+    for (const pair of pairs) assert.equal(pair.function, curriculum.cards.find(card => card.id === pair.id).fields.functie);
+  }
+});
+
+test('true/false grades both possible claims and deep muscles retain visible highlighting', () => {
+  const q = { answer: 'Correct', type: 'recognition', muscleId: 'pec-minor' };
+  assert.deepEqual(binaryResponses(q, ['Wrong', 'Correct', 'Other', 'Last']), ['Wrong', 'Correct']);
+  assert.deepEqual(binaryResponses(q, ['Correct', 'Wrong', 'Other', 'Last']), ['Correct', 'Wrong']);
+  assert.equal(exerciseFor(q, 1), 'recognition');
+});
+
+test('pointing responses survive storage even when the clicked muscle is not a suggested option', () => {
+  const q = curriculum.questions.find(q => q.muscleId === 'pectoralis' && q.type === 'recognition');
+  const lookup = new Map([[q.id, q]]);
+  const lesson = { ids: [q.id,q.id], index: 1, correct: 0, answered: 1, retryIds: [], region: q.region,
+    options: optionsFor(q), response: 'Clicked different muscle', finished: false };
+  assert.deepEqual(readSession({getItem: () => JSON.stringify(lesson)}, lookup), lesson);
+  assert.equal(readSession({getItem: () => JSON.stringify({...lesson,index:0})}, lookup), null);
+});

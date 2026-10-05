@@ -10,7 +10,16 @@ lessons. Works in desktop and mobile browsers.
 - Explore real Z-Anatomy muscles and skeleton, rotate and zoom, select a muscle,
   highlight it and isolate it.
 - Study 31 muscle cards and 192 questions across eleven chapters.
-- Practise ten-question lessons with feedback and one retry per wrong question.
+- Follow 33 sequential levels: discover, practise and pass a checkpoint in each chapter.
+  Score at least 80% on original questions to unlock the next level. Skips count
+  against that score, and retries help learning without inflating it.
+- Alternate multiple choice, true/false, muscle recognition and pointing in 3D.
+  Practise matching muscle names to their course-defined functions.
+- Read a short lesson introduction and see XP and progress when you finish.
+- Earn 5 XP per correct answer and 10 XP per completed lesson with an answer.
+  Reach 30 XP per local calendar day to build a streak. Replaying earns XP,
+  while spaced mastery remains based on actual review intervals.
+- Practise mixed ten-question lessons with feedback and one retry per wrong question.
 - Review questions with increasing intervals and resume an unfinished lesson.
 - Use the keyboard: arrows and +/− control the model, 1–4 answer quiz questions.
 
@@ -59,6 +68,7 @@ license URLs support that project subpath. To host at another subpath, set
 
 Tests cover question integrity, chapter coverage, real anatomical mesh
 mappings, asset provenance, review scheduling and invalid stored progress.
+Tests also cover sequential unlocks, XP persistence, calendar streaks and course-grounded matching.
 Browser checks cover desktop and 320/390px mobile layouts, quiz feedback,
 reload, keyboard controls and 3D selection.
 

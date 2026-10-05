@@ -104,8 +104,8 @@ export async function createViewer(canvas, onSelect, onStatus) {
     }
     render();
   }
-  function select(id, direction = 'front', focus = false) {
-    selected = id;
+  function select(id, direction = 'front', focus = false, highlight = true) {
+    selected = highlight ? id : null;
     updateMaterials();
     const selectedBox = new THREE.Box3();
     if (focus && id) muscleMeshes.filter(mesh => mesh.userData.courseMuscleId === id).forEach(mesh => selectedBox.expandByObject(mesh));
