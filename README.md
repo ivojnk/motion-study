@@ -66,10 +66,13 @@ The panel also appears once after the first completed lesson. Dismissing it
 returns to the result, and the choice is remembered on this browser.
 Chrome and Edge can offer a native installation prompt. On iPhone/iPad, the
 app shows the Safari steps: Share → Zet op beginscherm → Voeg toe.
-Installed MotionStudy opens in its own window with the existing app mark.
+Installed MotionStudy opens in its own window with the approved Leerblad app icon.
 An internet connection is still required; installation does not sync progress
 between devices. The manifest, PNG icons and instructions are served locally,
 without an extra dependency. Manifest and icon URLs follow Vite's base path.
+
+The Leerblad logo is used across the app, Beheer and Analytics. Browser icons and
+the social-share image use the same artwork. See [logo implementation](docs/logo-implementation.md).
 
 Implementation references: [MDN installation guide](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable)
 and [Apple's iPhone guide](https://support.apple.com/nl-nl/guide/iphone/iphea86e5236/ios).

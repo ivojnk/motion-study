@@ -7,15 +7,36 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="MotionStudy" />
   <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
-  <link rel="apple-touch-icon" sizes="180x180" href="%BASE_URL%app-icons/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="%BASE_URL%app-icons/icon-192.png" />
+  <link rel="icon" type="image/svg+xml" href="%BASE_URL%app-icons/favicon.svg?v=leerblad-1" />
+  <link rel="icon" type="image/vnd.microsoft.icon" sizes="16x16 32x32 48x48" href="%BASE_URL%app-icons/favicon.ico?v=leerblad-1" />
+  <link rel="icon" type="image/png" sizes="16x16" href="%BASE_URL%app-icons/favicon-16.png?v=leerblad-1" />
+  <link rel="icon" type="image/png" sizes="32x32" href="%BASE_URL%app-icons/favicon-32.png?v=leerblad-1" />
+  <link rel="apple-touch-icon" sizes="180x180" href="%BASE_URL%app-icons/apple-touch-icon.png?v=leerblad-1" />
   <meta name="description" content="Leer anatomie en biomechanica met een interactieve 3D-atlas en korte quizlessen." />
+  <link rel="canonical" href="https://lottequiz-motionstudy.jonkersivo.workers.dev%BASE_URL%" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:site_name" content="MotionStudy" />
+  <meta property="og:title" content="MotionStudy · Leer het lichaam kennen" />
+  <meta property="og:description" content="Leer anatomie en biomechanica met een interactieve 3D-atlas en korte quizlessen." />
+  <meta property="og:url" content="https://lottequiz-motionstudy.jonkersivo.workers.dev%BASE_URL%" />
+  <meta property="og:image" content="https://lottequiz-motionstudy.jonkersivo.workers.dev%BASE_URL%brand/social-share.png?v=leerblad-1" />
+  <meta property="og:image:secure_url" content="https://lottequiz-motionstudy.jonkersivo.workers.dev%BASE_URL%brand/social-share.png?v=leerblad-1" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="MotionStudy Leerblad-logo met de tekst: Leer het lichaam kennen. Anatomie en biomechanica. Korte quizlessen en interactieve 3D-atlas." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MotionStudy · Leer het lichaam kennen" />
+  <meta name="twitter:description" content="Leer anatomie en biomechanica met een interactieve 3D-atlas en korte quizlessen." />
+  <meta name="twitter:image" content="https://lottequiz-motionstudy.jonkersivo.workers.dev%BASE_URL%brand/social-share.png?v=leerblad-1" />
+  <meta name="twitter:image:alt" content="MotionStudy Leerblad-logo met de tekst: Leer het lichaam kennen. Anatomie en biomechanica. Korte quizlessen en interactieve 3D-atlas." />
   <title>MotionStudy · Leer het lichaam kennen</title>
 </head>
 <body>
   <a class="skip" href="#main" hidden>Naar de inhoud</a>
   <header class="topbar">
-    <a class="brand" href="#leren" aria-label="MotionStudy start"><span class="brand-symbol">m<span>s</span></span><span>MotionStudy<span class="brand-dot">.</span></span></a>
+    <a class="brand" href="#leren" aria-label="MotionStudy start"><img class="brand-logo" src="%BASE_URL%brand/motionstudy-horizontal-color.svg" width="1139" height="256" alt="" /><img class="brand-symbol" src="%BASE_URL%brand/motionstudy-symbol-color.svg" width="256" height="256" alt="" /></a>
     <div id="home-stats" hidden></div>
     <nav aria-label="Hoofdnavigatie" hidden><a href="#leren" data-nav="leren"><img class="icon" src="./icons/school.svg" alt="" /><span>Leren</span></a><a href="#atlas" data-nav="atlas"><img class="icon" src="./icons/stretching.svg" alt="" /><span>3D-atlas</span></a><a href="#vragen" data-nav="vragen"><img class="icon" src="./icons/book-2.svg" alt="" /><span>Vragen</span></a><a href="#voortgang" data-nav="voortgang"><img class="icon" src="./icons/chart-bar.svg" alt="" /><span>Voortgang</span></a></nav>
     <details id="account-controls" class="account-controls" hidden>
@@ -105,14 +126,14 @@
   <dialog id="credits" aria-labelledby="credits-title"><button class="close-dialog" data-legal-close type="button" aria-label="Sluiten"><img class="icon" src="./icons/x.svg" alt="" /></button><h2 id="credits-title">Bronnen & licenties</h2><p>Lesstof: Anatomie-Biomechanica-Cheatsheet, Milo PT opleiding, module 6.6. De vragen zijn op deze lesstof gebaseerd.</p><p><a href="https://drive.google.com/file/d/1cUNMc6m7fZT2LA6F1iY5G0g2Io7OstmW/view" target="_blank" rel="noreferrer">Open de oorspronkelijke lesstof</a></p><p>BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan</p><p>Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0</p><p>Spier- en skeletmodellen overgenomen uit <a href="https://github.com/nqwrc/3d-anatomy" target="_blank" rel="noreferrer">nqwrc/3d-anatomy</a>. De geometrie is ongewijzigd. Kleur, selectie en zichtbaarheid worden in deze app aangepast.</p><p><a href="./models/License.txt">Modelvermelding</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> · <a href="./licenses/upstream-LICENSE.txt">Upstream-licenties</a> · <a href="./licenses/upstream-NOTICE.txt">Upstream-vermelding</a></p><p>Three.js & Three Mesh BVH: MIT. <a href="./licenses/draco-LICENSE.txt">Draco: Apache 2.0</a>. <a href="./licenses/phosphor-LICENSE.txt">Phosphor Icons Duotone: MIT</a>. <a href="./licenses/pwa-install-LICENSE.txt">PWA Install: MIT</a>. <a href="./licenses/third-party.txt">Softwarelicenties</a></p><p>Lettertypes: <a href="./licenses/dm-sans-LICENSE.txt">DM Sans</a> en <a href="./licenses/manrope-LICENSE.txt">Manrope</a>, SIL Open Font License.</p></dialog>
   <dialog id="install-app" class="install-dialog install-arriving" aria-labelledby="install-title" aria-describedby="install-description">
     <div class="install-header">
-      <img class="install-app-icon" src="%BASE_URL%app-icons/icon-192.png" width="60" height="60" alt="" />
+      <img class="install-app-icon" src="%BASE_URL%app-icons/icon-192.png?v=leerblad-1" width="60" height="60" alt="" />
       <div><h2 id="install-title">MotionStudy</h2><p>Op je beginscherm</p></div>
       <button class="install-close" data-install-close type="button" aria-label="Sluiten" autofocus></button>
     </div>
     <div class="install-body">
       <div id="install-preview">
         <p id="install-description" class="install-benefit">Een kort leermoment, altijd binnen handbereik.</p>
-        <div class="install-preview"><img src="%BASE_URL%app-icons/icon-192.png" width="36" height="36" alt="" /><div><span>MotionStudy</span><p>Open de app en leer verder.</p></div></div>
+        <div class="install-preview"><img src="%BASE_URL%app-icons/icon-192.png?v=leerblad-1" width="36" height="36" alt="" /><div><span>MotionStudy</span><p>Open de app en leer verder.</p></div></div>
         <p class="install-preview-note">Je eigen app-icoon op je telefoon, tablet of computer.</p>
       </div>
       <ol id="install-instructions" class="install-steps" hidden></ol>
