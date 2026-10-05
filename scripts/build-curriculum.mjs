@@ -68,8 +68,8 @@ for (const unit of coverage) {
 }
 await mkdir('src/data', { recursive: true });
 for (const item of [...cards, ...questions]) {
-  if (item.source.kind !== 'supplement') item.source = { ...(item.source.kind === 'course-detail' ? { kind: 'course-detail' } : {}), title: 'Anatomie & Biomechanica · Milo module 6.6', section: item.source.section, page: item.source.page };
+  if (item.source.kind !== 'supplement') item.source = { ...(item.source.kind === 'course-detail' ? { kind: 'course-detail' } : {}), title: 'Anatomie & Biomechanica', section: item.source.section, page: item.source.page };
   delete item.anchor; delete item.end;
 }
-await writeFile('src/data/curriculum.json', JSON.stringify({ license: 'CC-BY-SA-4.0', title: 'Anatomie & Biomechanica', sourceUrl: 'https://drive.google.com/file/d/1cUNMc6m7fZT2LA6F1iY5G0g2Io7OstmW/view', fetchedAt: '2026-10-05', sourcePages: 28, coverage, cards, questions: withModelContexts(questions) }, null, 2));
+await writeFile('src/data/curriculum.json', JSON.stringify({ license: 'CC-BY-SA-4.0', title: 'Anatomie & Biomechanica', fetchedAt: '2026-10-05', sourcePages: 28, coverage, cards, questions: withModelContexts(questions) }, null, 2));
 console.log(cards.length + ' muscle cards, ' + questions.length + ' source-linked questions');

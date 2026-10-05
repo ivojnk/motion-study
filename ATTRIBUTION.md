@@ -35,15 +35,11 @@ exporter application code or Wikipedia definitions were copied.
 
 ## Learning content
 
-The curriculum follows the supplied **Anatomie-Biomechanica-Cheatsheet**,
-Milo PT opleiding, module 6.6. Every question names a source chapter and links
-to the supplied study document.
-
 The public repository includes factual muscle profiles and authored quiz
 questions. It does not redistribute the PDF, extracted document or long
 source passages. Original contributions to the question bank are
-CC BY-SA 4.0. This does not relicense the original course document, endorse
-the app on behalf of Milo, or assert rights over third-party course prose.
+CC BY-SA 4.0. This does not relicense third-party course documents or assert rights over
+third-party course prose.
 
 ## Software, fonts and icons
 
