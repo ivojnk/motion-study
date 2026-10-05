@@ -586,7 +586,7 @@ test('every new lesson starts with seven questions without an extra matching rou
     instance.startLesson(region, id);
     assert.equal(instance.read().session.initialCount, 7);
     assert.equal(instance.read().session.ids.length, 7);
-    assert.match(instance.html(), /0\/7 vragen/);
+    assert.match(instance.html(), /aria-valuetext="0 van 7 vragen goed beantwoord"/);
     assert.doesNotMatch(instance.html(), /matching-grid/);
   }
 });
@@ -596,18 +596,24 @@ test('answer streak resets on mistakes, repeated mistakes keep extending, and al
   instance.play(); instance.next(); instance.play(); instance.next();
   assert.equal(instance.read().session.answerStreak, 2);
   assert.equal(instance.read().session.bestAnswerStreak, 2);
+  assert.match(instance.html(), /class="lesson-progress" max="7" value="2"/);
   instance.play(false);
+  assert.match(instance.html(), /class="lesson-progress" max="7" value="2"/);
   assert.equal(instance.read().session.answerStreak, 0);
   assert.equal(instance.read().session.ids.length, 8);
-  assert.match(instance.html(), /0 op rij/);
-  assert.match(instance.html(), /\+1 herhaling/);
+  assert.match(instance.html(), /0 streak/);
+  assert.match(instance.html(), /class="lesson-retries"[^>]*aria-label="\+1 herhaling"/);
+  assert.doesNotMatch(instance.html(), /class="lesson-status"/);
   instance = app(instance.data); instance.go('#les/basis/0');
   assert.equal(instance.read().session.bestAnswerStreak, 2);
   assert.equal(instance.read().session.ids.length, 8);
+  assert.match(instance.html(), /class="lesson-progress" max="7" value="2"/);
   instance.next();
+  assert.match(instance.html(), /class="lesson-progress" max="7" value="2"/);
   while (instance.read().session.index < 7) { instance.play(); instance.next(); }
   instance.play(false);
   assert.equal(instance.read().session.ids.length, 9);
+  assert.match(instance.html(), /class="lesson-progress" max="7" value="6"/);
   assert.equal(instance.read().session.answerStreak, 0);
   instance.next();
   assert.equal(instance.read().session.finished, false);
@@ -616,6 +622,7 @@ test('answer streak resets on mistakes, repeated mistakes keep extending, and al
   instance = app(instance.data); instance.go('#les/basis/0');
   instance.play();
   assert.equal(instance.read().session.answerStreak, 1);
+  assert.match(instance.html(), /class="lesson-progress" max="7" value="7"/);
   instance.next();
   assert.equal(instance.read().session.finished, true);
   assert.equal(instance.read().session.correct, 7);

@@ -106,9 +106,15 @@ function setLessonFocus(active) {
   document.body?.classList.toggle('lesson-focus', active);
   $('#intro').hidden = active;
 }
+function lessonRetriesMarkup() {
+  const retries = session.ids.length - (session.initialCount || session.ids.length);
+  const label = '+' + retries + ' herhaling' + (retries === 1 ? '' : 'en');
+  return retries > 0 ? '<span class="lesson-retries" role="status" aria-label="' + label + '" title="' + label + '">' + icon('refresh') + '<strong>+' + retries + '</strong></span>' : '';
+}
 function lessonProgressMarkup() {
-  const completed = session.index + Number(Boolean(session.response));
-  return '<div class="lesson-bar"><a href="#leren" class="lesson-close" aria-label="Les sluiten">' + icon('x') + '</a><progress class="lesson-progress" max="' + session.ids.length + '" value="' + completed + '" aria-label="Lesvoortgang" aria-valuetext="' + completed + ' van ' + session.ids.length + ' vragen afgerond"></progress><span class="answer-streak" role="status" aria-label="' + (session.answerStreak || 0) + ' antwoorden goed achter elkaar">' + icon('check') + '<strong>' + (session.answerStreak || 0) + ' op rij</strong></span></div><div class="lesson-status"><span>' + completed + '/' + session.ids.length + ' vragen</span>' + (session.ids.length > session.initialCount ? '<span>+' + (session.ids.length - session.initialCount) + ' herhaling' + (session.ids.length - session.initialCount === 1 ? '' : 'en') + '</span>' : '') + '</div>';
+  const total = session.initialCount || session.ids.length;
+  const completed = Math.min(total, session.correct);
+  return '<div class="lesson-bar"><a href="#leren" class="lesson-close" aria-label="Les sluiten">' + icon('x') + '</a><progress class="lesson-progress" max="' + total + '" value="' + completed + '" aria-label="Lesvoortgang" aria-valuetext="' + completed + ' van ' + total + ' vragen goed beantwoord"></progress><div class="lesson-bar-stats">' + lessonRetriesMarkup() + '<span class="answer-streak" role="status" aria-label="' + (session.answerStreak || 0) + ' antwoorden goed achter elkaar">' + icon('check') + '<strong>' + (session.answerStreak || 0) + ' streak</strong></span></div></div>';
 }
 function intro(title, description = '') {
   setLessonFocus(false);
@@ -312,10 +318,10 @@ function lessonHud() {
   if (session.lessonSize === LESSON_SIZE) return lessonProgressMarkup();
   const initialCount = session.initialCount || session.ids.length;
   const inRetry = session.index >= initialCount;
-  const total = inRetry ? session.ids.length - initialCount : initialCount;
-  const completed = Math.min(total, (inRetry ? session.index - initialCount : session.index) + Number(Boolean(session.response)));
+  const total = initialCount;
+  const completed = Math.min(total, session.correct);
   const momentum = lessonMomentum(session);
-  return '<div class="lesson-hud"><div class="lesson-top"><a href="#leren">' + icon('arrow-left') + ' Leerpad</a><div class="lesson-status"><span class="lesson-run">' + icon('growth') + momentum.run + ' op rij</span><span class="lesson-xp">' + icon('sparkles') + (session.xp || 0) + ' XP</span></div></div><progress class="lesson-progress" max="' + total + '" value="' + completed + '" aria-label="' + (inRetry ? 'Herhaling' : 'Lesvoortgang') + '"></progress><p class="lesson-progress-label">' + (inRetry ? 'Fouten oefenen' : 'Je les') + ' · ' + completed + '/' + total + '</p></div>';
+  return '<div class="lesson-hud"><div class="lesson-top"><a href="#leren">' + icon('arrow-left') + ' Leerpad</a><div class="lesson-status">' + lessonRetriesMarkup() + '<span class="lesson-run">' + icon('growth') + momentum.run + ' op rij</span><span class="lesson-xp">' + icon('sparkles') + (session.xp || 0) + ' XP</span></div></div><progress class="lesson-progress" max="' + total + '" value="' + completed + '" aria-label="Lesvoortgang" aria-valuetext="' + completed + ' van ' + total + ' vragen goed beantwoord"></progress><p class="lesson-progress-label">' + (inRetry ? 'Fouten oefenen' : 'Je les') + ' · ' + completed + '/' + total + '</p></div>';
 }
 function renderInterlude(interlude) {
   resetAtlas();
