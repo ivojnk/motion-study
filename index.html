@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f5f3ed" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="MotionStudy" />
+  <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
+  <link rel="apple-touch-icon" sizes="180x180" href="%BASE_URL%app-icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="%BASE_URL%app-icons/icon-192.png" />
   <meta name="description" content="Leer anatomie en biomechanica met een interactieve 3D-atlas en korte quizlessen." />
   <title>MotionStudy · Leer het lichaam kennen</title>
 </head>
@@ -13,12 +18,13 @@
     <a class="brand" href="#leren" aria-label="MotionStudy start"><span class="brand-symbol">m<span>s</span></span><span>MotionStudy<span class="brand-dot">.</span></span></a>
     <div id="home-stats" hidden></div>
     <nav aria-label="Hoofdnavigatie" hidden><a href="#leren" data-nav="leren"><img class="icon" src="./icons/school.svg" alt="" /><span>Leren</span></a><a href="#atlas" data-nav="atlas"><img class="icon" src="./icons/stretching.svg" alt="" /><span>3D-atlas</span></a><a href="#vragen" data-nav="vragen"><img class="icon" src="./icons/book-2.svg" alt="" /><span>Vragen</span></a><a href="#voortgang" data-nav="voortgang"><img class="icon" src="./icons/chart-bar.svg" alt="" /><span>Voortgang</span></a></nav>
-    <details id="account-controls" class="account-controls" hidden><summary aria-label="Accountmenu"><img class="icon" src="./icons/user-circle.svg" alt="" /></summary><div class="account-menu"><strong id="account-name"></strong><button id="account-logout">Uitloggen</button><span id="logout-message" role="alert"></span></div></details>
+    <details id="account-controls" class="account-controls" hidden><summary aria-label="Accountmenu"><img class="icon" src="./icons/user-circle.svg" alt="" /></summary><div class="account-menu"><strong id="account-name"></strong><button class="account-menu-action" data-install-app type="button" aria-haspopup="dialog" aria-controls="install-app" hidden><img class="icon" src="./icons/arrow-square-out.svg" alt="" />Op je beginscherm</button><button id="account-logout">Uitloggen</button><span id="logout-message" role="alert"></span></div></details>
   </header>
   <section id="account-screen" class="account-screen" aria-labelledby="account-title">
     <div class="account-intro"><span class="account-subject">Anatomie & biomechanica</span><h1 id="account-title">Leer het lichaam<br /><em>kennen.</em></h1><div class="account-course"><span>11 hoofdstukken</span><span>31 spierkaarten</span><span>593 vragen</span></div></div>
     <div class="account-card"><h2>Inloggen</h2><p id="account-loading" role="status">Laden…</p>
       <form id="account-form" hidden><label for="account-username">Gebruikersnaam</label><input id="account-username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="2" maxlength="24" pattern="[a-zA-Z0-9][a-zA-Z0-9._\-]{1,23}" aria-describedby="account-help account-message" required /><p id="account-help">2–24 tekens: letters, cijfers, . _ -</p><p id="account-message" role="alert" hidden></p><button id="account-submit" class="primary" type="submit">Verder</button></form><button id="account-reload" class="text-button" hidden>Opnieuw laden</button>
+      <button class="text-button install-link" data-install-app type="button" aria-haspopup="dialog" aria-controls="install-app" hidden><img class="icon" src="./icons/arrow-square-out.svg" alt="" />Op je beginscherm</button>
     </div>
   </section>
   <noscript><p class="account-screen">Zet JavaScript aan om MotionStudy te gebruiken.</p></noscript>
@@ -42,7 +48,30 @@
     </div>
     <footer><button id="credits-button">Bronnen & licenties</button></footer>
   </main>
-  <dialog id="credits"><button class="close-dialog" aria-label="Sluiten"><img class="icon" src="./icons/x.svg" alt="" /></button><h2>Bronnen & licenties</h2><p>Lesstof: Anatomie-Biomechanica-Cheatsheet, Milo PT opleiding, module 6.6. De vragen zijn op deze lesstof gebaseerd.</p><p><a href="https://drive.google.com/file/d/1cUNMc6m7fZT2LA6F1iY5G0g2Io7OstmW/view" target="_blank" rel="noreferrer">Open de oorspronkelijke lesstof</a></p><p>BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan</p><p>Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0</p><p>Spier- en skeletmodellen overgenomen uit <a href="https://github.com/nqwrc/3d-anatomy" target="_blank" rel="noreferrer">nqwrc/3d-anatomy</a>. De geometrie is ongewijzigd. Kleur, selectie en zichtbaarheid worden in deze app aangepast.</p><p><a href="./models/License.txt">Modelvermelding</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> · <a href="./licenses/upstream-LICENSE.txt">Upstream-licenties</a> · <a href="./licenses/upstream-NOTICE.txt">Upstream-vermelding</a></p><p>Three.js & Three Mesh BVH: MIT. <a href="./licenses/draco-LICENSE.txt">Draco: Apache 2.0</a>. <a href="./licenses/phosphor-LICENSE.txt">Phosphor Icons Duotone: MIT</a>. <a href="./licenses/third-party.txt">Softwarelicenties</a></p><p>Lettertypes: <a href="./licenses/dm-sans-LICENSE.txt">DM Sans</a> en <a href="./licenses/manrope-LICENSE.txt">Manrope</a>, SIL Open Font License.</p></dialog>
+  <dialog id="credits"><button class="close-dialog" aria-label="Sluiten"><img class="icon" src="./icons/x.svg" alt="" /></button><h2>Bronnen & licenties</h2><p>Lesstof: Anatomie-Biomechanica-Cheatsheet, Milo PT opleiding, module 6.6. De vragen zijn op deze lesstof gebaseerd.</p><p><a href="https://drive.google.com/file/d/1cUNMc6m7fZT2LA6F1iY5G0g2Io7OstmW/view" target="_blank" rel="noreferrer">Open de oorspronkelijke lesstof</a></p><p>BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan</p><p>Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0</p><p>Spier- en skeletmodellen overgenomen uit <a href="https://github.com/nqwrc/3d-anatomy" target="_blank" rel="noreferrer">nqwrc/3d-anatomy</a>. De geometrie is ongewijzigd. Kleur, selectie en zichtbaarheid worden in deze app aangepast.</p><p><a href="./models/License.txt">Modelvermelding</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> · <a href="./licenses/upstream-LICENSE.txt">Upstream-licenties</a> · <a href="./licenses/upstream-NOTICE.txt">Upstream-vermelding</a></p><p>Three.js & Three Mesh BVH: MIT. <a href="./licenses/draco-LICENSE.txt">Draco: Apache 2.0</a>. <a href="./licenses/phosphor-LICENSE.txt">Phosphor Icons Duotone: MIT</a>. <a href="./licenses/pwa-install-LICENSE.txt">PWA Install: MIT</a>. <a href="./licenses/third-party.txt">Softwarelicenties</a></p><p>Lettertypes: <a href="./licenses/dm-sans-LICENSE.txt">DM Sans</a> en <a href="./licenses/manrope-LICENSE.txt">Manrope</a>, SIL Open Font License.</p></dialog>
+  <dialog id="install-app" class="install-dialog install-arriving" aria-labelledby="install-title" aria-describedby="install-description">
+    <div class="install-header">
+      <img class="install-app-icon" src="%BASE_URL%app-icons/icon-192.png" width="60" height="60" alt="" />
+      <div><h2 id="install-title">MotionStudy</h2><p>Op je beginscherm</p></div>
+      <button class="install-close" data-install-close type="button" aria-label="Sluiten" autofocus></button>
+    </div>
+    <div class="install-body">
+      <div id="install-preview">
+        <p id="install-description" class="install-benefit">Een kort leermoment, altijd binnen handbereik.</p>
+        <div class="install-preview"><img src="%BASE_URL%app-icons/icon-192.png" width="36" height="36" alt="" /><div><span>MotionStudy</span><p>Open de app en leer verder.</p></div></div>
+        <p class="install-preview-note">Je eigen app-icoon op je telefoon, tablet of computer.</p>
+      </div>
+      <ol id="install-instructions" class="install-steps" hidden></ol>
+      <p id="install-status" class="dialog-note" role="status" hidden></p>
+      <p class="install-guide-note">Je hebt een internetverbinding nodig.</p>
+    </div>
+    <div class="install-actions">
+      <button id="install-confirm" class="install-button install-button-primary" type="button" hidden>App installeren</button>
+      <button id="install-how-to" class="install-button" type="button"><span>Toevoegen aan beginscherm</span></button>
+      <button id="install-back" class="install-button" type="button" hidden><span>Terug</span></button>
+      <button class="install-continue" data-install-close type="button">Verder leren</button>
+    </div>
+  </dialog>
   <script type="module" src="/src/bootstrap.js"></script>
 </body>
 </html>

@@ -62,3 +62,17 @@ The selected Duotone SVGs are served locally without an icon-library dependency.
 Full notices are distributed in `public/licenses/`. Dependencies are pinned
 by `package-lock.json`. Fonts and models are served from the app's own
 origin. No component-gallery implementation was copied.
+
+## Installation panel
+
+The installation panel uses selected Apple-template SVGs and adapted sheet CSS
+from PWA Install 0.7.0 by Gleb Khmyznikov, under the MIT license. Source commit:
+`ef1bd3ec440d711e3eaafb796914566817f976a6`. The MotionStudy app icon, learning
+copy, native dialog behavior, cream/green brand colors and responsive behavior
+are local adaptations. The complete runtime library is not included.
+The five system icons are separate from the app's Phosphor Duotone icon set.
+Full notice: `public/licenses/pwa-install-LICENSE.txt`. The notice is also included
+in `public/licenses/third-party.txt` and exposed in the app's credits.
+The app icons render the existing Manrope brand mark; its OFL notice is preserved.
+
+Source: https://github.com/khmyznikov/pwa-install/tree/ef1bd3ec440d711e3eaafb796914566817f976a6

@@ -1,6 +1,10 @@
 import './style.css';
 import './study-ui.css';
+import './install-app.css';
 import { accountStorage, ACCOUNT_EVENT_KEY } from './account-storage.js';
+import { setupAppInstall } from './install-app.js';
+
+setupAppInstall({ window, document, navigator });
 
 const $ = selector => document.querySelector(selector);
 let currentUser = null;

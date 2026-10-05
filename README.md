@@ -58,6 +58,21 @@ but you can still enter your username again. Existing progress from before
 accounts is preserved in browser storage and is not automatically assigned
 to an account. There is no analytics or live AI request.
 
+## Add to your home screen
+
+Choose **Op je beginscherm** on the sign-in screen or in the account menu.
+The panel also appears once after the first completed lesson. Dismissing it
+returns to the result, and the choice is remembered on this browser.
+Chrome and Edge can offer a native installation prompt. On iPhone/iPad, the
+app shows the Safari steps: Share → Zet op beginscherm → Voeg toe.
+Installed MotionStudy opens in its own window with the existing app mark.
+An internet connection is still required; installation does not sync progress
+between devices. The manifest, PNG icons and instructions are served locally,
+without an extra dependency. Manifest and icon URLs follow Vite's base path.
+
+Implementation references: [MDN installation guide](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable)
+and [Apple's iPhone guide](https://support.apple.com/nl-nl/guide/iphone/iphea86e5236/ios).
+
 ## Run locally
 
 Requires Node 22.13 or newer (for built-in SQLite).
