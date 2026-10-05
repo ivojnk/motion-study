@@ -47,7 +47,7 @@ function app(data = {}, locks, options = {}) {
     if (!elements.has(selector)) elements.set(selector, { innerHTML: '', setAttribute() {}, focus() {}, scrollIntoView() {} });
     return elements.get(selector);
   };
-  const fixed = new Set(['#learning', '#intro', '#model-prompt', '#muscle-select', '#isolate', '#bones', '#orientation', '#selection-card', '.atlas-panel', '#storage-warning', '#main']);
+  const fixed = new Set(['#learning', '#intro', '#model-prompt', '#isolate', '#bones', '#orientation', '#selection-card', '.atlas-panel', '#storage-warning', '#main']);
   const querySelector = selector => {
     if (fixed.has(selector)) return node(selector);
     const html = node('#learning').innerHTML;
@@ -121,7 +121,6 @@ test('combination practice waits for the atlas, renders the whole group and pres
   assert.equal(instance.viewerCalls().at(-1)[0], 'select');
   assert.deepEqual(Array.from(instance.viewerCalls().at(-1)[1]), q.muscleIds);
   assert.ok(!/data-answer="[^"]*"[^>]*disabled/.test(instance.html()));
-  assert.equal(instance.element('#muscle-select').disabled, true);
   assert.ok(!instance.element('#selection-card').innerHTML.includes(curriculum.cards.find(c => c.id === q.muscleIds[0]).name));
   instance.showMuscle('pectoralis', 'Pectoralis', true);
   assert.equal(instance.read().session.answered, 0);
