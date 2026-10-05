@@ -36,13 +36,10 @@
     <div class="account-card"><h2>Inloggen</h2><p id="account-loading" role="status">Laden…</p>
       <form id="account-form" hidden>
         <label for="account-username">Gebruikersnaam</label>
-        <input id="account-username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="2" maxlength="24" pattern="[a-zA-Z0-9][a-zA-Z0-9._\-]{1,23}" aria-describedby="account-help login-storage-note account-message" required />
-        <p id="account-help">2–24 tekens: letters, cijfers, . _ -</p>
-        <p id="login-storage-note" class="login-storage-note">Wie je gebruikersnaam kent, kan inloggen. Er is geen wachtwoord. Je antwoorden en voortgang blijven in deze browser.</p>
+        <input id="account-username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="2" maxlength="24" pattern="[a-zA-Z0-9][a-zA-Z0-9._\-]{1,23}" aria-describedby="account-message" required />
         <div class="login-legal-links"><button data-legal-dialog="privacy" type="button" aria-haspopup="dialog" aria-controls="privacy">Privacy & opslag</button><button data-legal-dialog="usage" type="button" aria-haspopup="dialog" aria-controls="usage">Gebruik & contact</button><button data-legal-dialog="credits" type="button" aria-haspopup="dialog" aria-controls="credits">Bronnen & licenties</button></div>
         <label class="account-check"><input id="account-acknowledgement" type="checkbox" required /><span>Ik heb de informatie over privacy en gebruik gelezen.</span></label>
-        <label class="account-check"><input id="account-analytics" type="checkbox" aria-describedby="login-analytics-help" /><span>Ik wil gebruiksstatistieken delen <small>(optioneel)</small></span></label>
-        <p id="login-analytics-help" class="login-analytics-help">Activiteit en lesaantallen worden aan je account gekoppeld. Antwoorden en scores worden niet gedeeld. Later aan te passen bij Privacy & opslag.</p>
+        <label class="account-check"><input id="account-analytics" type="checkbox" checked /><span>Ik wil gebruiksstatistieken delen <small>(optioneel)</small></span></label>
         <p id="account-message" role="alert" hidden></p>
         <button id="account-submit" class="primary" type="submit">Verder</button>
       </form><button id="account-reload" class="text-button" hidden>Opnieuw laden</button>
