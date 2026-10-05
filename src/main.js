@@ -163,13 +163,13 @@ function renderHome() {
         '<span class="level-copy" aria-hidden="true">' + group.label + '</span>' +
         '<span class="level-caption" aria-hidden="true">' + group.completed + '/' + group.lessons.length + ' lessen</span>' + '</li>';
     }).join('');
-    return '<details class="path-chapter' + (activeTopic.id === topic.id ? ' active-chapter' : '') + '" ' + (activeTopic.id === topic.id ? 'open' : '') + '>' +
+    return '<details class="path-chapter' + (activeTopic.id === topic.id ? ' active-chapter' : '') + '" ' + (chapter <= activeChapter ? 'open' : '') + '>' +
       '<summary class="chapter-heading"><span class="chapter-copy"><span class="chapter-kicker">Hoofdstuk ' + (chapter + 1) + '</span><strong>' + escape(topic.title) + '</strong><small>' + escape(topic.subtitle) + '</small></span>' +
       '<span class="chapter-count" aria-label="' + completed + ' van ' + chapterLevels.length + ' lessen voltooid">' + completed + '/' + chapterLevels.length + '</span>' +
       '<span class="chapter-toggle" aria-hidden="true">' + icon('arrow-right') + '</span></summary>' +
       '<ol aria-label="Lessen in ' + escape(topic.title) + '">' + lessons + '</ol></details>';
   });
-  const path = chapters.slice(activeChapter).join('') + (activeChapter ? '<details class="earlier-chapters"><summary>Eerdere hoofdstukken</summary>' + chapters.slice(0, activeChapter).join('') + '</details>' : '');
+  const path = chapters.join('');
   $('#learning').innerHTML = '<div class="daily-card home-chapter-header"><span class="eyebrow">' + lessonLabel + '</span><h2>' + escape(title) + '</h2><p>' + description + '</p><button class="primary" ' + action + '>' + (pending ? 'Ga verder' : current ? 'Start les' : 'Gemengde les') + icon('arrow-right') + '</button></div><div class="study-status"><div class="learning-path">' + path + '</div></div>';
   resetAtlas();
   $('.atlas-panel').hidden = true;
@@ -688,7 +688,14 @@ function navigate() {
   else if (route === 'atlas') { resetAtlas(); renderAtlas(); }
   else if (route === 'voortgang') renderProgress();
   else if (route === 'vragen') renderQuestionBank();
-  else renderHome();
+  else {
+    renderHome();
+    window.requestAnimationFrame(() => {
+      if (route !== 'leren') return;
+      const activeChapter = $('.active-chapter');
+      if (activeChapter?.previousElementSibling) $('.active-chapter .level-node')?.scrollIntoView({ block: 'start', behavior: 'instant' });
+    });
+  }
 }
 document.addEventListener('click', event => {
   if (event.target.closest('.skip')) { event.preventDefault(); $('#main').focus(); $('#main').scrollIntoView({ block: 'start' }); return; }

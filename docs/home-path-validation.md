@@ -1,6 +1,6 @@
 # Focused home page
 
-The supplied Duolingo screenshot informed the compact top metrics, chapter banner and bottom navigation. MotionStudy keeps its existing cream/forest palette and grouped lesson path. The homepage places the current chapter first, with earlier chapters available below the path. Atlas, question bank and progress stay in navigation.
+The supplied Duolingo screenshot informed the compact top metrics, chapter banner and bottom navigation. MotionStudy keeps its existing cream/forest palette and grouped lesson path. Chapters appear in course order, with earlier and current chapter lessons open. Opening the homepage positions the current chapter below the sticky banner, so earlier lessons are accessible by scrolling up. Atlas, question bank and progress stay in navigation.
 
 The existing lesson IDs, progress rings, saved-session selection and grading remain intact. No UI dependency or Duolingo artwork was added. Local icons follow the project's icon library and license notices.
 
@@ -18,3 +18,5 @@ Validation on 2026-10-05:
 Checks used an isolated local test account. Physical touch devices and actual screen readers were not tested. No deployment was performed.
 
 The duplicate mixed-lesson and review links below the path were removed. Sources and licenses now open from the account dropdown, alongside logout. The dropdown uses existing licensed icons, 48px action rows and visible keyboard focus. Local checks passed at 320, 390 and 1280 pixels without horizontal overflow. Enter opens the sources dialog; closing it restores focus to the account trigger. Escape, outside clicks and emulated mobile taps dismiss the menu. Review remains available under Progress. All 127 tests and the production build passed. Screenshot: output/playwright/account-menu-390.png. No deployment was performed.
+
+Earlier lesson scrolling checked on 2026-10-05: the bottom “Eerdere hoofdstukken” disclosure was removed. Earlier chapter lessons remain open above the current chapter. Initial positioning waits until the page becomes visible and uses an instant scroll. All 245 tests and the static production build passed. Browser checks at 320, 390 and 1280 pixels confirmed upward scrolling, current lesson visibility below the banner, no horizontal overflow, visible keyboard focus, Enter and emulated touch replay, closing a lesson and restoring its chapter after reload. The regression check preserves saved progress and the exact unfinished lesson. Screenshots: output/playwright/scroll-current-390.png and output/playwright/scroll-earlier-390.png. No deployment was performed.
