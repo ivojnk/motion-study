@@ -33,6 +33,7 @@ function controlledLocks() {
 }
 function app(data = {}, locks) {
   const elements = new Map();
+  const events = [];
   const bodyClasses = new Set();
   const node = selector => {
     if (!elements.has(selector)) elements.set(selector, { innerHTML: '', setAttribute() {}, focus() {}, scrollIntoView() {} });
@@ -48,14 +49,14 @@ function app(data = {}, locks) {
     return null;
   };
   const storage = { getItem: key => data[key] || null, setItem: (key, value) => { data[key] = value; } };
-  const context = { ...learning, ...progression, ...motivation, ...groups, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
+  const context = { ...learning, ...progression, ...motivation, ...groups, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean, Event,
     location: { hash: '' }, navigator: locks ? { locks } : {},
-    document: { body: { classList: { toggle(name, active) { if (active) bodyClasses.add(name); else bodyClasses.delete(name); } } }, querySelector, querySelectorAll: () => [] },
+    document: { body: { classList: { toggle(name, active) { if (active) bodyClasses.add(name); else bodyClasses.delete(name); } } }, querySelector, querySelectorAll: () => [], dispatchEvent(event) { events.push({ type: event.type, html: node('#learning').innerHTML }); } },
     window: { localStorage: storage, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
   vm.createContext(context);
   vm.runInContext(source, context);
   const api = context.api;
-  return { ...api, data, storage, focused: () => bodyClasses.has('lesson-focus'), html: () => node('#learning').innerHTML, element: node,
+  return { ...api, data, storage, events, focused: () => bodyClasses.has('lesson-focus'), html: () => node('#learning').innerHTML, element: node,
     startLesson(region = 'basis', levelId = 'basis:0') { api.start(region, levelId); api.navigate(); api.prepare(); },
     go(hash) { context.location.hash = hash; api.navigate(); },
     play(correct = true) { const session = api.read().session; const q = curriculum.questions.find(q => q.id === session.ids[session.index]); return api.answer(session.options.indexOf(correct ? q.answer : q.distractors[0])); }
@@ -606,4 +607,21 @@ test('answer streak continues after feedback reload and survives switching betwe
   assert.equal(instance.read().session.answerStreak, 2);
   instance.go('#les/daily');
   assert.equal(instance.read().session.answerStreak, 1);
+});
+
+
+test('installation invitation starts after the lesson result and does not fire for reloads or incomplete lessons', () => {
+  let instance = app();
+  instance.startLesson();
+  instance.finish();
+  assert.equal(instance.events.length, 0);
+  while (!instance.read().session.finished) { instance.play(); instance.next(); }
+  assert.equal(instance.events.length, 1);
+  assert.equal(instance.events[0].type, 'motionstudy:lesson-completed');
+  assert.match(instance.events[0].html, /id="result-title"/);
+  instance.finish();
+  assert.equal(instance.events.length, 1);
+  instance = app(instance.data);
+  instance.go('#les/basis/0');
+  assert.equal(instance.events.length, 0);
 });

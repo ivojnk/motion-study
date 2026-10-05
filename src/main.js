@@ -422,6 +422,7 @@ function finish() {
   const endingRoute = route;
   return withProgressLock(() => {
     if (session !== ending) return;
+    const justFinished = !session.finished;
     if (!session.finished) {
       refreshProgress();
       const bonus = session.answered > 0 ? 10 : 0;
@@ -443,6 +444,7 @@ function finish() {
     resetAtlas();
     $('.atlas-panel').hidden = true;
     focusLessonContent();
+    if (justFinished && session.answered > 0) document.dispatchEvent?.(new Event('motionstudy:lesson-completed'));
   });
 }
 function cardMarkup(card) {
@@ -567,7 +569,7 @@ document.addEventListener('input', event => {
 document.addEventListener('change', event => { if (event.target.id === 'question-chapter') filterQuestionBank(); });
 document.addEventListener('keydown', event => {
   if (event.repeat && event.key === 'Enter' && route.startsWith('les/') && !/INPUT|SELECT|TEXTAREA/.test(event.target.tagName)) { event.preventDefault(); return; }
-  if (event.repeat || event.isComposing || event.altKey || event.ctrlKey || event.metaKey || !session?.prepared || (needsMatching()) || !route.startsWith('les/') || $('#credits').open || /INPUT|SELECT|TEXTAREA/.test(event.target.tagName)) return;
+  if (event.repeat || event.isComposing || event.altKey || event.ctrlKey || event.metaKey || !session?.prepared || (needsMatching()) || !route.startsWith('les/') || document.querySelector('dialog[open]') || /INPUT|SELECT|TEXTAREA/.test(event.target.tagName)) return;
   if (event.key === 'Enter' && event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') {
     if ($('#continue-interlude')) { event.preventDefault(); dismissInterlude(); }
     else if (session.response) { event.preventDefault(); next(); }

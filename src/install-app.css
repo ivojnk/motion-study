@@ -1,0 +1,84 @@
+/* Sheet styling adapted from PWA Install 0.7.0, MIT.
+ * Copyright (c) 2023 Gleb Khmyznikov. See public/licenses/pwa-install-LICENSE.txt. */
+.install-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 24px; }
+.install-link .icon { width: 20px; height: 20px; }
+.install-dialog {
+  --install-ink: #1c1c1e; --install-muted: #55555b; --install-line: #00000020;
+  --install-surface: #f5f5f7f0; --install-button: #e2e2e7; --install-pressed: #d3d3d9;
+  --install-icon: #0000000d; --install-close: #ffffffa6; --install-blue: #285448;
+  color-scheme: light; color: var(--install-ink); background: var(--install-surface);
+  font: 400 1rem/1.45 system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  width: min(380px, calc(100vw - 24px)); max-width: calc(100vw - 24px);
+  max-height: calc(100dvh - 32px - env(safe-area-inset-bottom));
+  padding: 0; border: 1px solid #ffffff80; border-radius: 35px;
+  box-shadow: 0 16px 60px #0004, inset 1px 1px 1px #ffffff80;
+  backdrop-filter: blur(28px) saturate(1.3); -webkit-backdrop-filter: blur(28px) saturate(1.3);
+}
+.install-dialog[open] { display: flex; flex-direction: column; overflow: hidden; }
+.install-dialog::backdrop { background: #00000038; backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+.install-dialog.install-arriving[open] { animation: install-arrive 360ms cubic-bezier(.22, 1, .36, 1) both; }
+.install-dialog.install-arriving::backdrop { animation: install-backdrop-arrive 360ms ease-out both; }
+@keyframes install-arrive { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes install-backdrop-arrive { from { opacity: 0; } to { opacity: 1; } }
+@media(prefers-reduced-motion:reduce) { .install-dialog.install-arriving[open], .install-dialog.install-arriving::backdrop { animation: none; } }
+.install-header { display: flex; align-items: center; gap: 16px; flex-shrink: 0; margin: 0 24px; padding: 26px 0 22px; border-bottom: 1px solid var(--install-line); }
+.install-app-icon { width: 60px; height: 60px; border-radius: 14px; flex: none; box-shadow: 0 1px 3px #0002; }
+.install-header > div { min-width: 0; padding-right: 28px; }
+.install-header h2 { font: 600 1.0625rem/1.25 system-ui, -apple-system, BlinkMacSystemFont, sans-serif; letter-spacing: 0; text-wrap: initial; }
+.install-header h2:focus { outline: none; }
+.install-header p { font-size: .875rem; color: var(--install-muted); line-height: 1.35; margin-top: 5px; }
+.install-close { position: absolute; top: 12px; right: 12px; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid #ffffff80; border-radius: 50%; background: var(--install-close); color: var(--install-muted); }
+.install-system-icon { display: block; width: 26px; height: 26px; flex: none; }
+.install-close .install-system-icon { width: 28px; height: 28px; }
+.install-body { overflow-y: auto; min-height: 0; padding: 20px 24px 2px; overscroll-behavior: contain; }
+.install-benefit { font-size: 1rem; line-height: 1.45; margin-bottom: 16px; }
+.install-preview { display: flex; align-items: center; gap: 10px; padding: 14px 12px; border-radius: 19px; background: #ffffff80; box-shadow: 0 1px 5px #0000000a; }
+.install-preview > img { width: 36px; height: 36px; border-radius: 9px; flex: none; }
+.install-preview > div { min-width: 0; }
+.install-preview > div > span { display: block; font-size: .75rem; color: var(--install-muted); margin-bottom: 2px; }
+.install-preview p { font-size: .875rem; font-weight: 500; line-height: 1.35; }
+.install-preview-note { color: var(--install-muted); font-size: .8125rem; line-height: 1.45; margin: 10px 0 4px; }
+.install-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.install-steps li { display: flex; align-items: center; gap: 16px; }
+.install-step-icon { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--install-icon); flex: none; }
+.install-step-icon .install-system-icon { width: 25px; height: 28px; }
+.install-step-icon img { border-radius: 9px; }
+.install-steps strong { display: block; font-weight: 600; font-size: .9375rem; line-height: 1.35; }
+.install-steps li > div > span { display: block; color: var(--install-muted); font-size: .8125rem; line-height: 1.4; margin-top: 3px; }
+.install-guide-note { color: var(--install-muted); font-size: .8125rem; line-height: 1.45; margin-top: 16px; }
+.install-confirmed { display: flex; align-items: center; gap: 8px; margin: 18px 0 0; font-size: .875rem; }
+.install-confirmed .ui-icon { width: 24px; height: 24px; flex: none; color: #237944; }
+.install-body .dialog-note { color: var(--install-muted); font-size: .875rem; line-height: 1.5; margin-top: 14px; }
+.install-actions { display: grid; gap: 4px; flex-shrink: 0; padding: 18px 16px 10px; }
+.install-button { display: flex; align-items: center; justify-content: flex-start; gap: 12px; width: 100%; min-height: 50px; padding: 12px 18px; border: 0; border-radius: 26px; color: var(--install-ink); background: var(--install-button); font: inherit; font-size: .9375rem; font-weight: 500; line-height: 1.35; text-align: left; }
+.install-button .install-system-icon { width: 22px; height: 22px; }
+.install-button:hover:not(:disabled), .install-button:active:not(:disabled), .install-close:hover { background: var(--install-pressed); }
+.install-button-primary { background: var(--install-blue); color: #fff; justify-content: center; }
+.install-button-primary:hover:not(:disabled), .install-button-primary:active:not(:disabled) { background: #193e33; }
+.install-continue { width: 100%; min-height: 44px; padding: 10px 8px; border: 0; border-radius: 22px; background: transparent; color: var(--install-blue); font-size: .875rem; font-weight: 500; }
+.install-continue:hover { background: var(--install-icon); }
+.install-dialog button:focus-visible { outline: 3px solid var(--install-blue); outline-offset: 2px; }
+@media(max-width:700px) { .install-dialog { margin: auto auto max(12px, env(safe-area-inset-bottom)); } }
+@media(max-width:360px) { .install-header { gap: 12px; margin: 0 20px; padding: 24px 0 20px; } .install-app-icon { width: 52px; height: 52px; border-radius: 12px; } .install-body { padding: 18px 20px 2px; } .install-steps li { gap: 12px; } .install-step-icon { width: 48px; height: 48px; } }
+@media(prefers-color-scheme:dark) {
+  .install-dialog { --install-ink: #f5f5f7; --install-muted: #b8b8c0; --install-line: #ffffff24; --install-surface: #29292df2; --install-button: #434349; --install-pressed: #505057; --install-icon: #ffffff0d; --install-close: #424247cc; --install-blue: #a7d7bd; color-scheme: dark; border-color: #ffffff30; box-shadow: 0 16px 60px #0006, inset 1px 1px 1px #ffffff18; }
+  .install-close { border-color: #ffffff20; }
+  .install-preview { background: #ffffff0d; }
+  .install-button-primary { background: #285448; color: #fff; }
+  .install-button-primary:hover:not(:disabled), .install-button-primary:active:not(:disabled) { background: #193e33; }
+  .install-confirmed .ui-icon { color: #80c69a; }
+}
+
+.task-exchange{display:grid;gap:12px;margin-top:24px;width:100%;min-width:0}.task-exchange h3{font-size:1.25rem;margin:0}.task-exchange h4{margin:0;color:var(--sand)}.task-exchange p{margin:0;line-height:1.6}.task-exchange label{margin-top:8px}.task-exchange textarea{box-sizing:border-box;width:100%;min-height:100px;resize:vertical;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit;font-size:16px;line-height:1.5}.task-exchange textarea:focus-visible{outline:2px solid var(--sand);outline-offset:3px}.task-message-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.task-message{padding:16px;border:1px solid var(--line);border-radius:12px;min-width:0}.task-message p{white-space:pre-wrap;overflow-wrap:anywhere;margin-top:10px}.task-exchange-progress{font-size:.9rem}.task-agreed .task-exchange strong{font-family:inherit;font-size:inherit}@media(max-width:600px){.task-message-grid{grid-template-columns:1fr}}
+.install-dialog p { color: var(--install-ink); }
+.install-dialog .install-header p, .install-dialog .install-preview-note, .install-dialog .install-guide-note, .install-dialog .dialog-note, .install-dialog .install-preview span { color: var(--install-muted); }
+.install-steps li > div { font-size: .875rem; line-height: 1.45; }
+@media (display-mode: standalone) {
+  .topbar, .home-view .topbar, .home-view .topbar:has(.account-controls:not([hidden])) { padding-top: max(14px, env(safe-area-inset-top)); }
+  body { padding-bottom: env(safe-area-inset-bottom); }
+}
+
+/* Installation action in the existing account menu. */
+.account-menu [data-install-app] { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 48px; padding: 12px; border: 0; border-radius: 9px; background: transparent; color: var(--ink); font-size: 14px; text-align: left; }
+.account-menu [data-install-app]:hover, .account-menu [data-install-app]:focus-visible { background: var(--soft); }
+.account-menu [data-install-app] .icon { width: 20px; height: 20px; }
