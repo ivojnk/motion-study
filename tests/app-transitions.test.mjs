@@ -691,3 +691,59 @@ test('storage failures warn visibly and a later successful save keeps in-memory 
   assert.equal(xp(reopened), 5);
   assert.equal(Object.values(reopened.read().progress.questions).reduce((sum, q) => sum + q.attempts, 0), 1);
 });
+
+test('an error survives correction and reload, interleaves in the next lesson and advances only once there', () => {
+  let instance = app();
+  instance.startLesson();
+  const failedId = instance.read().session.ids[0];
+  instance.play(false); instance.next();
+  while (!instance.read().session.finished) { instance.play(true); instance.next(); }
+  assert.equal(instance.read().progress.questions[failedId].mistakeReview.successes, 0);
+  assert.equal(learning.needsMistakeReview(instance.read().progress.questions[failedId]), true);
+  const firstLessonId = instance.read().session.reviewLessonId;
+  instance = app(instance.data);
+  instance.startLesson('basis', 'basis:1');
+  const originals = learning.levelQuestions(curriculum.questions, 'basis', 1).map(q => q.id);
+  const ids = Array.from(instance.read().session.ids);
+  assert.equal(ids.length, 8);
+  assert.ok(originals.every(id => ids.includes(id)));
+  assert.equal(ids.filter(id => id === failedId).length, 1);
+  while (instance.read().session.ids[instance.read().session.index] !== failedId) { instance.play(true); instance.next(); }
+  assert.match(instance.html(), /Eerder fout/);
+  instance.play(true);
+  assert.equal(instance.read().progress.questions[failedId].mistakeReview.successes, 1);
+  assert.notEqual(instance.read().session.reviewLessonId, firstLessonId);
+  const laterLessonId = instance.read().session.reviewLessonId;
+  instance = app(instance.data); instance.go('#les/basis/1');
+  assert.equal(instance.read().session.reviewLessonId, laterLessonId);
+  instance.play(true);
+  assert.equal(instance.read().progress.questions[failedId].mistakeReview.successes, 1);
+  assert.equal(instance.read().session.initialCount, 8);
+});
+
+test('actual later lessons ask for recall, retire recovered errors and stop appending them', () => {
+  const q = curriculum.questions.find(q => q.id === 'concept-3');
+  let progress = learning.recordAnswer({ questions: {}, sessions: [] }, q.id, false, 1000, 'choice', { lessonId: 'origin' });
+  progress = learning.recordAnswer(progress, q.id, true, 1001, 'choice', { lessonId: 'origin', retry: true });
+  progress = learning.recordAnswer(progress, q.id, true, 1002, 'choice', { lessonId: 'later' });
+  let instance = app({ [learning.PROGRESS_KEY]: JSON.stringify(progress), [learning.GAME_KEY]: JSON.stringify({ days: {}, completed: ['basis:0'] }) });
+  for (const stage of [1, 2]) {
+    instance.startLesson('basis', 'basis:' + stage);
+    assert.equal(instance.read().session.initialCount, 8);
+    while (!instance.read().session.finished) {
+      if (instance.read().session.ids[instance.read().session.index] === q.id) {
+        assert.equal(instance.read().session.exerciseModes[instance.read().session.index], 'open');
+        assert.match(instance.html(), /id="open-answer"/);
+        assert.doesNotMatch(instance.html(), /data-answer=/);
+      }
+      instance.play(true); instance.next();
+    }
+    instance = app(instance.data);
+  }
+  assert.equal(learning.needsMistakeReview(instance.read().progress.questions[q.id]), false);
+  assert.equal(instance.read().progress.questions[q.id].mistakeReview.successes, 3);
+  assert.equal(instance.read().progress.questions[q.id].mistakeReview.recalled, true);
+  instance.startLesson('basis', 'basis:3');
+  assert.equal(instance.read().session.initialCount, 7);
+  assert.ok(!instance.read().session.ids.includes(q.id));
+});
