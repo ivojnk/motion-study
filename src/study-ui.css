@@ -141,7 +141,7 @@ select { font-size: 13px; border-radius: 5px; background: var(--white); color: v
 .atlas-view .viewer-wrap { height: 560px; }
 .explore-card { border: 0; background: transparent; border-radius: 0; padding: 0; }
 .explore-card.muscle-detail { padding-bottom: 88px; }
-.atlas-back-button { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 16; display: flex; align-items: center; justify-content: center; gap: 10px; width: max-content; max-width: calc(100% - 32px); min-height: 48px; padding: 12px 20px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); color: var(--ink); box-shadow: 0 6px 24px #252e2926; font-size: 14px; font-weight: 600; touch-action: manipulation; }
+.atlas-back-button { position: fixed; left: 50%; bottom: calc(104px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 16; display: flex; align-items: center; justify-content: center; gap: 10px; width: max-content; max-width: calc(100% - 32px); min-height: 48px; padding: 12px 20px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); color: var(--ink); box-shadow: 0 6px 24px #252e2926; font-size: 14px; font-weight: 600; touch-action: manipulation; }
 .atlas-back-button:hover { background: var(--soft); border-color: var(--accent); }
 @media (max-width: 620px) { .atlas-back-button { bottom: calc(96px + env(safe-area-inset-bottom)); } }
 .explore-card h2 { font-size: 32px; margin: 0 0 22px; }
@@ -384,11 +384,13 @@ nav a > .icon { width: 20px; height: 20px; }
 .home-view .path-chapter ol { padding-top: 80px; padding-bottom: 40px; }
 .home-view .path-chapter :is(button, summary) { scroll-margin-block: 250px 100px; }
 .home-view .chapter-heading { border-radius: 14px; background: var(--soft); }
-.home-view .topbar nav { position: fixed; inset: auto 0 0; display: grid; grid-template-columns: repeat(4, 1fr); width: min(680px, 100%); margin: 0 auto; gap: 8px; padding: 10px 20px max(10px, env(safe-area-inset-bottom)); background: var(--paper); border-top: 1px solid var(--line); z-index: 15; }
-.home-view .topbar nav a { min-height: 58px; flex-direction: column; justify-content: center; gap: 5px; font-size: 11px; border-radius: 12px; }
-.home-view .topbar nav a > .icon { width: 25px; height: 25px; }
-.home-view .topbar nav a[aria-current] { background: var(--soft); font-weight: 700; }
-.home-view .topbar nav a[aria-current]::after { display: none; }
+/* Keep the same bottom navigation on every main page. */
+main:not([hidden]) { padding-bottom: calc(112px + env(safe-area-inset-bottom)); }
+.topbar nav { position: fixed; inset: auto 0 0; display: grid; grid-template-columns: repeat(4, 1fr); width: min(680px, 100%); margin: 0 auto; gap: 8px; padding: 10px 20px max(10px, env(safe-area-inset-bottom)); background: var(--paper); border-top: 1px solid var(--line); z-index: 15; }
+.topbar nav a { min-height: 58px; flex-direction: column; justify-content: center; gap: 5px; font-size: 11px; border-radius: 12px; }
+.topbar nav a > .icon { width: 25px; height: 25px; }
+.topbar nav a[aria-current] { background: var(--soft); font-weight: 700; }
+.topbar nav a[aria-current]::after { display: none; }
 
 @media (max-width: 620px) {
   .home-view .topbar, .home-view .topbar:has(.account-controls:not([hidden])) { min-height: 68px; padding: 12px 20px; gap: 12px; }
@@ -403,12 +405,9 @@ nav a > .icon { width: 20px; height: 20px; }
   .home-chapter-header h2 { font-size: 19px; }
   .home-chapter-header .eyebrow { font-size: 10px; }
   .home-chapter-header .primary { min-width: 66px; padding-left: 14px; font-size: 11px; }
-  .topbar nav { position: fixed; inset: auto 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 10px 16px max(10px, env(safe-area-inset-bottom)); background: var(--paper); border-top: 1px solid var(--line); z-index: 15; }
-  .topbar nav a { min-height: 56px; flex-direction: column; justify-content: center; gap: 5px; font-size: 11px; border-radius: 12px; }
-  .topbar nav a > .icon { width: 25px; height: 25px; }
-  .topbar nav a[aria-current] { background: var(--soft); font-weight: 700; }
-  .topbar nav a[aria-current]::after { display: none; }
-  main:not([hidden]) { padding-bottom: 100px; }
+  .topbar nav { padding-inline: 16px; }
+  .topbar nav a { min-height: 56px; }
+  main:not([hidden]) { padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
   .lesson-focus main:not([hidden]) { padding-bottom: 20px; }
 }
 @media (max-width: 360px) {
