@@ -174,6 +174,12 @@ export function readSession(storage, questions) {
     if (['answerStreak', 'bestAnswerStreak'].some(key => value[key] != null && (!Number.isInteger(value[key]) || value[key] < 0 || value[key] > value.correct)) ||
       (value.answerStreak || 0) > (value.bestAnswerStreak || 0)) return null;
     if (value.xp != null && (!Number.isInteger(value.xp) || value.xp < 0)) return null;
+    if (value.answerHistory != null && (!Array.isArray(value.answerHistory) || value.answerHistory.length > value.ids.length ||
+      !value.answerHistory.every(attempt => attempt && typeof attempt.correct === 'boolean' && typeof attempt.skipped === 'boolean' &&
+        typeof attempt.retry === 'boolean' && !(attempt.correct && attempt.skipped)))) return null;
+    if (value.dismissedInterludes != null && (!Array.isArray(value.dismissedInterludes) || value.dismissedInterludes.length > 2 ||
+      new Set(value.dismissedInterludes).size !== value.dismissedInterludes.length ||
+      !value.dismissedInterludes.every(key => ['halfway', 'retry'].includes(key)))) return null;
     if (value.matched != null && (!Array.isArray(value.matched) || !value.matched.every(id => typeof id === 'string'))) return null;
     if (value.pairOrder != null && (!Array.isArray(value.pairOrder) || !value.pairOrder.every(id => typeof id === 'string'))) return null;
     if (value.exerciseModes != null && (!Array.isArray(value.exerciseModes) || value.exerciseModes.length !== value.ids.length ||
@@ -315,6 +321,7 @@ export function recordLessonAnswer(session, correct, retryMode) {
   const id = session.ids[session.index];
   return {
     ...session,
+    answerHistory: [...(session.answerHistory || []), { correct, skipped: false, retry: session.index >= session.initialCount }],
     correct: session.correct + Number(correct), answered: session.answered + 1,
     firstCorrect: (session.firstCorrect || 0) + Number(correct && session.index < session.initialCount),
     answerStreak, bestAnswerStreak: Math.max(session.bestAnswerStreak || 0, answerStreak),

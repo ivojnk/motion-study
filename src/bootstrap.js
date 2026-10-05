@@ -30,7 +30,11 @@ async function openApp(user) {
   }
   $('#account-name').textContent = user.username;
   $('#account-controls').hidden = false;
-  await import('./main.js');
+  try { await import('./main.js'); }
+  catch {
+    $('#account-reload').hidden = false;
+    throw new Error('De app kon niet laden. Probeer opnieuw.');
+  }
   $('#account-screen').hidden = true;
   $('#main').hidden = false;
   $('nav').hidden = false;
@@ -75,16 +79,19 @@ $('#account-logout').addEventListener('click', async () => {
     await request('logout', {});
     $('#main').hidden = true;
     broadcast(null);
+    history.replaceState(null, '', '#leren');
     location.reload();
   } catch {
     button.disabled = false;
     $('#logout-message').textContent = 'Uitloggen lukt niet. Probeer opnieuw.';
   }
 });
+$('#account-reload').addEventListener('click', () => location.reload());
 window.addEventListener('storage', event => {
   if (event.key !== ACCOUNT_EVENT_KEY) return;
   // Reload synchronously so queued lesson writes cannot continue on a different account.
   $('#main').hidden = true;
+  history.replaceState(null, '', '#leren');
   location.reload();
 });
 window.addEventListener('focus', () => { if (currentUser) checkSession(); });

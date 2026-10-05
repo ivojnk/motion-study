@@ -25,7 +25,7 @@ export function createChoicePanel(host, { preview, confirm, cancel }) {
   panel.className = 'muscle-choice';
   panel.hidden = true;
   panel.setAttribute('aria-label', 'Kies de bedoelde spier');
-  panel.innerHTML = '<h3>Welke bedoel je?</h3><p>Kies een kleur en controleer de spier in het model.</p><div class="muscle-choice-options" role="group" aria-label="Spieren op kleur en symbool"></div><div class="muscle-choice-actions"><button type="button" class="primary" data-choice-confirm disabled>Deze bedoel ik</button><button type="button" class="text-button" data-choice-cancel>Opnieuw kiezen</button></div>';
+  panel.innerHTML = '<h3>Kies een spier</h3><div class="muscle-choice-options" role="group" aria-label="Spieren op kleur en symbool"></div><div class="muscle-choice-actions"><button type="button" class="primary" data-choice-confirm disabled>Bevestigen</button><button type="button" class="text-button" data-choice-cancel>Opnieuw</button></div>';
   host.querySelector('.viewer-tools').after(panel);
   const options = panel.querySelector('.muscle-choice-options');
   const confirmButton = panel.querySelector('[data-choice-confirm]');

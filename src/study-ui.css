@@ -68,33 +68,50 @@ progress::-moz-progress-bar { background: var(--accent); border-radius: 2px; }
 .section-heading { margin: 30px 0 14px; align-items: baseline; gap: 12px; }
 .section-heading h2 { font-size: 25px; }
 .section-heading > span { font-size: 12px; }
-.learning-path { gap: 0; border-top: 1px solid var(--line); }
-.path-chapter { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; overflow: visible; }
-.chapter-heading { display: flex; align-items: center; gap: 14px; background: transparent; padding: 20px 0; cursor: pointer; list-style: none; min-height: 80px; }
+.learning-path { gap: 20px; border: 0; }
+.path-chapter { --path-green: #58cc02; --path-green-dark: #387c06; --path-ink: #254908; border: 2px solid #e4e8df; border-radius: 18px; background: #fff; overflow: visible; }
+.chapter-heading { display: flex; align-items: center; gap: 14px; background: #eef1e9; padding: 20px; border-radius: 15px; cursor: pointer; list-style: none; min-height: 110px; }
 .chapter-heading::-webkit-details-marker { display: none; }
-.chapter-heading:hover { background: #edf0e8; }
-.chapter-heading > .chapter-number { background: transparent; color: var(--muted); width: 28px; height: auto; border-radius: 0; font-size: 13px; font-weight: 400; font-variant-numeric: tabular-nums; }
-.chapter-heading > .chapter-copy { flex: 1; min-width: 0; width: auto; height: auto; background: transparent; display: block; place-items: normal; text-align: left; font-weight: 400; border-radius: 0; color: var(--ink); }
+.chapter-heading:hover { background: #e3e9da; }
+.active-chapter { border-color: var(--path-green); }
+.active-chapter > .chapter-heading { background: var(--path-green); color: var(--path-ink); }
+.active-chapter > .chapter-heading:hover { background: #64d711; }
+.path-chapter[open] > .chapter-heading { border-radius: 15px 15px 0 0; }
+.chapter-heading > .chapter-copy { flex: 1; min-width: 0; width: auto; height: auto; background: transparent; display: block; place-items: normal; text-align: left; font-weight: 400; border-radius: 0; color: inherit; }
 .chapter-copy { text-align: left; place-items: normal; font-weight: 400; }
-.chapter-copy strong { font-size: 15px; display: block; font-weight: 600; line-height: 1.5; }
-.chapter-copy small { font-size: 12px; color: var(--muted); display: block; margin-top: 3px; line-height: 1.5; }
-.chapter-heading > .chapter-count { width: auto; height: auto; border-radius: 0; background: transparent; color: var(--muted); font-size: 12px; font-weight: 400; }
-.chapter-heading > .chapter-toggle { width: 24px; height: 24px; background: transparent; color: var(--accent); font-size: 21px; border-radius: 0; font-weight: 400; }
-.path-chapter[open] .chapter-toggle { transform: rotate(45deg); }
-.path-chapter ol { padding: 0 0 16px 42px; gap: 0; }
+.chapter-kicker { display: block; font-size: 11px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; margin-bottom: 5px; }
+.chapter-copy strong { font-size: 18px; display: block; font-weight: 800; line-height: 1.3; }
+.chapter-copy small { font-size: 12px; color: inherit; display: block; margin-top: 6px; line-height: 1.5; }
+.chapter-heading > .chapter-count { width: auto; height: auto; padding: 6px 9px; border-radius: 8px; background: #fff; color: #374330; font-size: 12px; font-weight: 800; white-space: nowrap; }
+.chapter-heading > .chapter-toggle { width: 20px; height: 20px; background: transparent; color: inherit; border-radius: 0; transform: rotate(90deg); flex-shrink: 0; }
+.chapter-toggle .icon { width: 20px; height: 20px; }
+.path-chapter[open] .chapter-toggle { transform: rotate(-90deg); }
+.path-chapter ol { --path-sway: 70px; width: 100%; max-width: 360px; margin: 0 auto; padding: 60px 0 34px; gap: 24px; justify-items: center; }
 .path-chapter ol::before { display: none; }
-.path-step, .path-step:nth-child(2) { margin: 0; display: block; }
-.level-node { width: 100%; height: auto; min-height: 54px; padding: 9px 12px; border: 0; border-radius: 4px; background: transparent; display: flex; align-items: center; gap: 12px; text-align: left; }
-.level-symbol { width: 28px; height: 28px; display: grid; place-items: center; flex-shrink: 0; }
-.level-node .icon { width: 18px; height: 18px; filter: none; }
-.level-copy { flex: 1; font-size: 14px; font-weight: 500; }
-.level-state { font-size: 12px; color: var(--muted); }
-.path-step.current .level-node { box-shadow: none; background: var(--soft); color: var(--accent); }
-.path-step.current .level-state { color: var(--accent); font-weight: 600; }
-.path-step.done .level-node { background: transparent; color: var(--green); border: 0; }
-.path-step.locked .level-node { background: transparent; color: var(--muted); border: 0; }
-.path-step.locked .icon { opacity: .5; }
-.level-node:hover:not(:disabled) { transform: none; background: #dce6dc; }
+.path-step, .path-step:nth-child(2) { --step-offset: 0px; margin: 0; display: grid; justify-items: center; gap: 13px; width: 130px; transform: translateX(var(--step-offset)); }
+.path-step:nth-child(8n + 2), .path-step:nth-child(8n + 4) { --step-offset: calc(var(--path-sway) * -.7); }
+.path-step:nth-child(8n + 3) { --step-offset: calc(var(--path-sway) * -1); }
+.path-step:nth-child(8n + 6), .path-step:nth-child(8n + 8) { --step-offset: calc(var(--path-sway) * .7); }
+.path-step:nth-child(8n + 7) { --step-offset: var(--path-sway); }
+.level-node { position: relative; width: 78px; height: 70px; min-height: 70px; padding: 0; border: 0; border-radius: 50%; background: var(--path-green); display: grid; place-items: center; box-shadow: 0 7px 0 var(--path-green-dark); transition: transform .12s ease, box-shadow .12s ease; }
+.level-symbol { width: 36px; height: 36px; display: grid; place-items: center; }
+.level-node .icon { width: 34px; height: 34px; filter: brightness(0) saturate(100%) invert(21%) sepia(48%) saturate(1048%) hue-rotate(49deg) brightness(94%) contrast(97%); }
+.level-copy { font-size: 12px; font-weight: 700; color: #596253; text-align: center; }
+.level-caption { font-size: 11px; color: #596253; text-align: center; margin-top: -9px; }
+.path-step.current { margin-bottom: 5px; }
+.path-step.current .level-node { box-shadow: 0 7px 0 var(--path-green-dark), 0 0 0 9px #fff, 0 0 0 12px #d9ecc9; }
+.path-step.current .level-copy { color: var(--path-ink); font-weight: 800; }
+.level-callout { position: absolute; bottom: calc(100% + 17px); left: 50%; transform: translateX(-50%); padding: 9px 14px; border: 2px solid #dce3d5; border-radius: 10px; background: #fff; color: var(--path-ink); font-size: 13px; font-weight: 800; line-height: 1; text-transform: uppercase; letter-spacing: .6px; white-space: nowrap; pointer-events: none; }
+.level-callout::after { content: ''; position: absolute; top: 100%; left: calc(50% - 6px); width: 10px; height: 10px; background: #fff; border-right: 2px solid #dce3d5; border-bottom: 2px solid #dce3d5; transform: translateY(-4px) rotate(45deg); }
+.path-step.done .level-node { background: #ffc800; border: 0; box-shadow: 0 7px 0 #cf9800; }
+.path-step.done .level-node .icon { filter: brightness(0) saturate(100%) invert(26%) sepia(26%) saturate(2380%) hue-rotate(14deg) brightness(92%) contrast(103%); }
+.path-step.locked .level-node { background: #e5e5e5; border: 0; box-shadow: 0 7px 0 #c8ccc3; opacity: 1; }
+.path-step.locked .icon { filter: none; opacity: .55; }
+.level-node:hover:not(:disabled) { background: #68d817; transform: translateY(-2px); }
+.path-step.done .level-node:hover { background: #ffd329; }
+.level-node:active:not(:disabled) { transform: translateY(5px); box-shadow: 0 2px 0 var(--path-green-dark); }
+.path-step.done .level-node:active { box-shadow: 0 2px 0 #cf9800; }
+.level-node:focus-visible { outline: 3px solid var(--path-ink); outline-offset: 14px; }
 .practice-actions { padding-top: 12px; gap: 20px; }
 .text-button, .privacy-note, .text-link { font-size: 12px; }
 .text-button:disabled { opacity: .6; }
@@ -226,7 +243,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible
   .atlas-shortcut + .atlas-shortcut { border-left: 0; border-top: 1px solid var(--line); padding-left: 0; }
   .viewer-wrap { height: 420px; }
   .game-bar { gap: 12px; font-size: 12px; }
-  .chapter-copy strong { font-size: 14px; }
+  .chapter-copy strong { font-size: 17px; }
   .chapter-copy small { font-size: 11px; }
   .level-state { font-size: 11px; }
 }
@@ -256,16 +273,12 @@ button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible
   .atlas-shortcut small { font-size: 11px; }
   .section-heading h2 { font-size: 24px; }
   .section-heading > span { font-size: 11px; }
-  .chapter-heading { gap: 10px; padding: 18px 0; }
-  .chapter-heading > .chapter-number { width: 22px; }
-  .chapter-copy strong { font-size: 14px; }
+  .chapter-heading { gap: 10px; padding: 18px 16px; }
+  .chapter-copy strong { font-size: 17px; }
   .chapter-copy small { font-size: 12px; }
   .chapter-heading > .chapter-count { font-size: 11px; }
-  .path-chapter ol { padding-left: 32px; }
-  .level-node { padding-inline: 8px; gap: 8px; }
-  .level-copy { font-size: 13px; }
-  .level-state { font-size: 11px; }
-  .level-symbol { width: 22px; }
+  .path-chapter ol { --path-sway: clamp(44px, 14vw, 64px); }
+  .level-copy { font-size: 12px; }
   .home-view .atlas-panel { margin-top: 8px; }
   .atlas-panel { top: 0; }
   .viewer-wrap { height: 430px; }

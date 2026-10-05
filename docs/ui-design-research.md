@@ -28,6 +28,6 @@ Er zijn geen afbeeldingen, code of lettertypes uit de Dribbble-ontwerpen overgen
 
 De actuele lesopbouw wordt tegelijk elders aangepast. Lesaantallen komen uit de bestaande leerlogica. Deze wijziging past de regels voor beoordeling, herhaling en beloningen niet aan.
 
-De actuele tests zijn geslaagd: 98 tests. De productiebouw slaagt. Browsercontroles op 320, 390, 768 en 1280 pixels tonen geen horizontale overflow. Getest: zoeken, toetsenbordfocus, hoofdstukken openen met Space, antwoorden met cijfertoetsen, herladen van feedback, echte atlasselectie, les openen/sluiten en de bronnendialoog. De reduced-motion-instelling schakelt animaties en overgangen uit. Screenshots staan in output/playwright. Fysieke touchapparaten en echte schermlezers zijn niet getest.
+De actuele tests zijn geslaagd: 119 tests. De productiebouw slaagt. Browsercontroles op 320, 390, 768 en 1280 pixels tonen geen horizontale overflow. Getest: zoeken, toetsenbordfocus, hoofdstukken openen met Space, antwoorden met cijfertoetsen, herladen van feedback, echte atlasselectie, les openen/sluiten en de bronnendialoog. De reduced-motion-instelling schakelt animaties en overgangen uit. Screenshots staan in output/playwright. Fysieke touchapparaten en echte schermlezers zijn niet getest.
 
 De afzonderlijke onderzoeksrapporten staan in ui-audit-agent.md, design-inspiration-agent.md en opensource-ui-agent.md.

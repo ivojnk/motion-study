@@ -11,7 +11,7 @@ export async function startServer({ port = 5173, host = '127.0.0.1', origin = `h
   const url = new URL(origin);
   if (process.env.NODE_ENV === 'production' && url.protocol !== 'https:') throw new Error('Production requires an HTTPS APP_ORIGIN.');
   const accounts = createAccounts({ databasePath, origin });
-  const vite = dev ? await (await import('vite')).createServer({ root, server: { middlewareMode: true }, appType: 'spa' }) : null;
+  let vite = null;
   const server = createServer(async (req, res) => {
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Referrer-Policy', 'same-origin');
@@ -19,6 +19,7 @@ export async function startServer({ port = 5173, host = '127.0.0.1', origin = `h
     if (url.protocol === 'https:') res.setHeader('Strict-Transport-Security', 'max-age=31536000');
     try {
       const requestURL = new URL(req.url, url.origin);
+      const pathname = decodeURIComponent(requestURL.pathname);
       if (requestURL.pathname.startsWith('/api/')) {
         const chunks = [];
         let size = 0;
@@ -35,12 +36,11 @@ export async function startServer({ port = 5173, host = '127.0.0.1', origin = `h
       }
       // The public shell shows the username form. Large atlas assets load after entry.
       const sessionRequest = new Request(requestURL, { headers: req.headers });
-      if (/^\/(models|draco)\//.test(requestURL.pathname) && !accounts.userFor(sessionRequest)) {
+      if (/^\/+(models|draco)(\/|$)/.test(pathname) && !accounts.userFor(sessionRequest)) {
         res.writeHead(401, { 'Cache-Control': 'no-store' }); res.end('Vul eerst je gebruikersnaam in.'); return;
       }
       if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405); res.end(); return; }
       if (dev) { vite.middlewares(req, res); return; }
-      const pathname = decodeURIComponent(requestURL.pathname);
       const path = resolve(distPath, '.' + (pathname.endsWith('/') ? pathname + 'index.html' : pathname));
       const realRoot = await realpath(distPath);
       const realFile = await realpath(path);
@@ -52,6 +52,7 @@ export async function startServer({ port = 5173, host = '127.0.0.1', origin = `h
       res.end('De pagina kon niet worden geladen.');
     }
   });
+  if (dev) vite = await (await import('vite')).createServer({ root, server: { middlewareMode: true, ws: { server } }, appType: 'spa' });
   server.requestTimeout = 15_000;
   await new Promise((resolve, reject) => { server.once('error', reject); server.listen(port, host, resolve); });
   return { server, accounts, close: async () => { await vite?.close(); await new Promise(resolve => server.close(resolve)); accounts.close(); } };
