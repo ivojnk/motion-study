@@ -1,5 +1,7 @@
 import './style.css';
 import './study-ui.css';
+import './lesson-completion.css';
+import { animateLessonCompletion } from './lesson-completion.js';
 import curriculum from './data/curriculum.json';
 import { LESSON_SIZE, fillLesson, interleaveMistakes, needsMistakeReview, recordLessonAnswer, topics, readProgress, readSession, recordAnswer, lessonQueue, optionsFor, masteryFor, PROGRESS_KEY, SESSION_KEY, GAME_KEY, DAILY_GOAL, readGame, awardXP, gameStats, levelPath, levelQuestions, completeLevel, exerciseFor, matchingPairs, shuffled, binaryResponses, varyLesson, DRAFTS_KEY, draftKey, readDrafts, isOpenAnswerCorrect, checkOpenAnswer, isModelQuestion, usesModel, modelAvailable, modelMuscleIds, modelChoiceCards } from './learning.js';
 import { lessonMomentum, lessonInterlude } from './lesson-motivation.js';
@@ -27,6 +29,7 @@ let viewerFullscreen = null;
 let route = '';
 // A visual reward for the next path visit only; never stored with progress.
 let pathRewardLevelId = null;
+let stopCompletionAnimation = null;
 let atlasSearchQuery = '';
 let storageAvailable = true;
 const byId = new Map(curriculum.questions.map(q => [q.id, q]));
@@ -101,6 +104,8 @@ function dueCount() {
   return curriculum.questions.filter(q => needsMistakeReview(progress.questions[q.id]) || progress.questions[q.id]?.due <= Date.now()).length;
 }
 function setLessonFocus(active) {
+  stopCompletionAnimation?.();
+  stopCompletionAnimation = null;
   document.body?.classList.toggle('lesson-focus', active);
   $('#intro').hidden = active;
 }
@@ -568,11 +573,13 @@ function finish() {
     $('#intro').innerHTML = '';
     const nextLevel = levelPath(game).find(level => !level.done);
     restoreAtlasLayout();
-    $('#learning').innerHTML = '<div class="result-card celebration"><span class="result-icon">' + icon(passed ? 'target' : 'check') + '</span><h2 id="result-title" tabindex="-1">' + (passed ? 'Les gehaald' : 'Les afgerond') + '</h2><div class="reward-xp">+' + (session.xp || 0) + ' XP</div><div class="result-breakdown"><div><span>Goede antwoorden</span><strong>+' + Math.max(0, (session.xp || 0) - (session.answered > 0 ? 10 : 0)) + ' XP</strong></div><div><span>Les afgerond</span><strong>+' + (session.answered > 0 ? 10 : 0) + ' XP</strong></div></div><div class="result-metrics"><span><strong>' + session.correct + '/' + session.answered + '</strong> goed met herhalingen</span><span><strong>' + (session.firstCorrect || 0) + '/' + (session.initialCount || session.ids.length) + '</strong> eerste poging</span><span><strong>' + (session.bestAnswerStreak || 0) + '</strong> beste reeks</span></div>' + (session.levelId && !passed ? '<p>Verbeter alle fouten om deze les te halen.</p>' : '') + '<div class="goal-result">' + (stats.today >= DAILY_GOAL ? 'Dagdoel gehaald · ' + stats.streak + (stats.streak === 1 ? ' dag streak' : ' dagen streak') : 'Nog ' + (DAILY_GOAL - stats.today) + ' XP tot je dagdoel') + '</div><button class="primary" ' + (session.levelId && !passed ? 'data-level="' + session.levelId + '"' : nextLevel ? 'data-level="' + nextLevel.id + '"' : 'data-start="daily"') + '>' + (session.levelId && !passed ? 'Oefen deze les opnieuw' : 'Volgende les') + icon('arrow-right') + '</button><a class="text-link" href="#leren">Terug naar je leerpad</a></div>';
+    $('#learning').innerHTML = '<div class="result-card completion-card"><div class="completion-hero"><div class="completion-burst" aria-hidden="true">' + '<i></i>'.repeat(10) + '</div><span class="completion-medal" aria-hidden="true">' + icon('check') + '</span><h2 id="result-title" tabindex="-1">' + (passed ? 'Les gehaald' : 'Les afgerond') + '</h2></div><div class="reward-xp">' + icon('sparkles') + '<span aria-hidden="true">+<span class="xp-count">' + (session.xp || 0) + '</span> <span class="xp-unit">XP</span></span><span class="visually-hidden">' + (session.xp || 0) + ' XP verdiend</span></div><div class="completion-details"><div class="result-metrics"><span>' + icon('check') + '<strong>' + session.correct + '/' + session.answered + '</strong><small>goed met herhalingen</small></span><span>' + icon('target') + '<strong>' + (session.firstCorrect || 0) + '/' + (session.initialCount || session.ids.length) + '</strong><small>eerste poging</small></span><span>' + icon('growth') + '<strong>' + (session.bestAnswerStreak || 0) + '</strong><small>beste reeks</small></span></div><div class="result-breakdown"><div><span>Goede antwoorden</span><strong>+' + Math.max(0, (session.xp || 0) - (session.answered > 0 ? 10 : 0)) + ' XP</strong></div><div><span>Les afgerond</span><strong>+' + (session.answered > 0 ? 10 : 0) + ' XP</strong></div></div>' + (session.levelId && !passed ? '<p>Verbeter alle fouten om deze les te halen.</p>' : '') + '<div class="goal-result">' + (stats.today >= DAILY_GOAL ? 'Dagdoel gehaald · ' + stats.streak + (stats.streak === 1 ? ' dag streak' : ' dagen streak') : 'Nog ' + (DAILY_GOAL - stats.today) + ' XP tot je dagdoel') + '</div></div><button class="primary" ' + (session.levelId && !passed ? 'data-level="' + session.levelId + '"' : nextLevel ? 'data-level="' + nextLevel.id + '"' : 'data-start="daily"') + '>' + (session.levelId && !passed ? 'Oefen deze les opnieuw' : 'Volgende les') + icon('arrow-right') + '</button><a class="text-link" href="#leren">Terug naar je leerpad</a></div>';
 
     resetAtlas();
     $('.atlas-panel').hidden = true;
     focusLessonContent();
+    const completionCard = $('.completion-card');
+    if (completionCard) stopCompletionAnimation = animateLessonCompletion(completionCard, { xp: session.xp || 0, animate: justFinished && session.answered > 0 });
     if (justFinished && session.answered > 0) document.dispatchEvent?.(new Event('motionstudy:lesson-completed'));
   });
 }

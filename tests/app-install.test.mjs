@@ -1,7 +1,38 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { installInstructions } from '../src/install-app.js';
+import { installInstructions, setupInstallNudge } from '../src/install-app.js';
+
+test('installation nudge waits for the path, never covers the result, and opens once', () => {
+  const docEvents = new Map();
+  const windowEvents = new Map();
+  const frames = [];
+  const data = {};
+  let opens = 0;
+  let installed = false;
+  let dialogOpen = false;
+  const window = {
+    location: { hash: '#les/basis/0' },
+    localStorage: { getItem: key => data[key], setItem: (key, value) => { data[key] = value; } },
+    addEventListener: (type, callback) => windowEvents.set(type, callback),
+    requestAnimationFrame: callback => frames.push(callback),
+  };
+  const document = {
+    hidden: false,
+    querySelector: () => dialogOpen,
+    addEventListener: (type, callback) => docEvents.set(type, callback),
+  };
+  const navigate = hash => { window.location.hash = hash; windowEvents.get('hashchange')(); frames.splice(0).forEach(callback => callback()); };
+  setupInstallNudge({ window, document, openPanel: () => opens++, isInstalled: () => installed });
+  docEvents.get('motionstudy:lesson-completed')(); assert.equal(opens, 0);
+  navigate('#les/basis/1'); assert.equal(opens, 0);
+  dialogOpen = true; navigate('#leren'); assert.equal(opens, 0);
+  dialogOpen = false; document.hidden = true; navigate('#leren'); assert.equal(opens, 0);
+  document.hidden = false; installed = true; navigate('#leren'); assert.equal(opens, 0);
+  installed = false; navigate('#leren'); assert.equal(opens, 1);
+  assert.equal(data['motionstudy.install-nudge.v1'], 'seen');
+  docEvents.get('motionstudy:lesson-completed')(); navigate('#leren'); assert.equal(opens, 1);
+});
 
 test('home-screen guidance covers iPhone, desktop-mode iPad, Android and desktop browsers', () => {
   assert.match(installInstructions({ userAgent: 'iPhone Safari' }).join(' '), /Zet op beginscherm/);
