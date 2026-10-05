@@ -169,6 +169,12 @@ export function readSession(storage, questions) {
       !Number.isInteger(value.initialCount) || value.initialCount < 1 || value.initialCount > value.ids.length ||
       !Number.isInteger(value.firstCorrect) || value.firstCorrect < 0 || value.firstCorrect > value.initialCount)) return null;
     if (value.xp != null && (!Number.isInteger(value.xp) || value.xp < 0)) return null;
+    if (value.answerHistory != null && (!Array.isArray(value.answerHistory) || value.answerHistory.length > value.ids.length ||
+      !value.answerHistory.every(attempt => attempt && typeof attempt.correct === 'boolean' && typeof attempt.skipped === 'boolean' &&
+        typeof attempt.retry === 'boolean' && !(attempt.correct && attempt.skipped)))) return null;
+    if (value.dismissedInterludes != null && (!Array.isArray(value.dismissedInterludes) || value.dismissedInterludes.length > 2 ||
+      new Set(value.dismissedInterludes).size !== value.dismissedInterludes.length ||
+      !value.dismissedInterludes.every(key => ['halfway', 'retry'].includes(key)))) return null;
     if (value.matched != null && (!Array.isArray(value.matched) || !value.matched.every(id => typeof id === 'string'))) return null;
     if (value.pairOrder != null && (!Array.isArray(value.pairOrder) || !value.pairOrder.every(id => typeof id === 'string'))) return null;
     if (value.exerciseModes != null && (!Array.isArray(value.exerciseModes) || value.exerciseModes.length !== value.ids.length ||

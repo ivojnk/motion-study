@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import * as learning from '../src/learning.js';
 import * as progression from '../src/exercise-progression.js';
+import * as motivation from '../src/lesson-motivation.js';
 
 const curriculum = JSON.parse(fs.readFileSync(new URL('../src/data/curriculum.json', import.meta.url)));
 const main = fs.readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
@@ -16,7 +17,7 @@ function app(data) {
  const fixed = new Set(['#learning', '#intro', '#model-prompt', '#muscle-select', '#isolate', '#orientation', '#selection-card', '.atlas-panel', '#credits']);
  const querySelector = selector => fixed.has(selector) || selector.startsWith('#') && node('#learning').innerHTML.includes(`id="${selector.slice(1)}"`) ? node(selector) : null;
  const storage = { getItem: key => data[key] || null, setItem: (key, value) => { data[key] = value; } };
- const context = { ...learning, ...progression, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
+ const context = { ...learning, ...progression, ...motivation, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
  location: { hash: '' }, navigator: {}, document: { querySelector, querySelectorAll: () => [], addEventListener(type, listener) { listeners.set(type, listener); } },
  window: { localStorage: storage, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
  vm.createContext(context); vm.runInContext(source, context);
@@ -115,9 +116,9 @@ test('a minor spelling error earns XP with canonical spelling feedback that surv
  assert.match(instance.html(), /Kleine typefouten zijn oké/);
  instance.updateOpenDraft('Pectoraliss major'); instance.submitOpenAnswer();
  assert.equal(instance.read().session.correct, 1); assert.equal(instance.read().session.firstCorrect, 1); assert.equal(instance.read().session.retryIds.length, 0); assert.equal(xp(instance), 5);
- assert.match(instance.html(), /Goed! Kleine typefout\./); assert.match(instance.html(), /<p>Pectoralis major<\/p>/);
+ assert.match(instance.html(), /Goed! Let op de spelling\./); assert.match(instance.html(), /<p>Pectoralis major<\/p>/);
  instance = app(instance.data); instance.viewerReady(); instance.go('#les/' + recognition.region);
- assert.match(instance.html(), /Goed! Kleine typefout\./); assert.match(instance.html(), /feedback success/); assert.equal(xp(instance), 5);
+ assert.match(instance.html(), /Goed! Let op de spelling\./); assert.match(instance.html(), /feedback success/); assert.equal(xp(instance), 5);
  instance.submitOpenAnswer(); assert.equal(xp(instance), 5);
 });
 
@@ -125,7 +126,7 @@ test('a different muscle stays wrong rather than receiving typo feedback', () =>
  const instance = lesson(recognition, 'recognition-open');
  instance.updateOpenDraft('Pectoralis minor'); instance.submitOpenAnswer();
  assert.equal(instance.read().session.correct, 0); assert.equal(instance.read().session.firstCorrect, 0); assert.equal(instance.read().session.retryIds.length, 1); assert.equal(xp(instance), 0);
- assert.match(instance.html(), /feedback retry/); assert.doesNotMatch(instance.html(), /Goed! Kleine typefout\./);
+ assert.match(instance.html(), /feedback retry/); assert.doesNotMatch(instance.html(), /Goed! Let op de spelling\./);
 });
 
 test('short text recall accepts a small spelling slip without adding a retry', () => {
@@ -133,5 +134,5 @@ test('short text recall accepts a small spelling slip without adding a retry', (
  const instance = lesson(q, 'open');
  instance.updateOpenDraft('Voorkant humeruss'); instance.submitOpenAnswer();
  assert.equal(instance.read().session.correct, 1); assert.equal(instance.read().session.retryIds.length, 0); assert.equal(xp(instance), 5);
- assert.match(instance.html(), /Goed! Kleine typefout\./); assert.match(instance.html(), /<p>Voorkant humerus<\/p>/);
+ assert.match(instance.html(), /Goed! Let op de spelling\./); assert.match(instance.html(), /<p>Voorkant humerus<\/p>/);
 });

@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import * as learning from '../src/learning.js';
 import * as progression from '../src/exercise-progression.js';
+import * as motivation from '../src/lesson-motivation.js';
 
 const curriculum = JSON.parse(fs.readFileSync(new URL('../src/data/curriculum.json', import.meta.url)));
 // Execute the app's actual transitions; mock only browser boundaries, not grading/storage logic.
@@ -11,7 +12,7 @@ const source = fs.readFileSync(new URL('../src/main.js', import.meta.url), 'utf8
   .split("document.addEventListener('click'")[0]
   .replace(/^import .*;\n/gm, '')
   .replaceAll('import.meta.env.BASE_URL', "'/'") + `
-  globalThis.api = { start, answer, next, finish, choosePair, renderLesson, navigate, chooseAnswer, confirmPointSelection, showMuscle,
+  globalThis.api = { updateOpenDraft, submitOpenAnswer, selfAssessOpenAnswer, dismissInterlude, start, answer, next, finish, choosePair, renderLesson, navigate, chooseAnswer, confirmPointSelection, showMuscle,
     read: () => ({ session, game, progress, route, pendingPointSelection }),
     prepare: () => { session = { ...session, prepared: true }; save(); renderLesson(); },
     viewerReady: () => { globalThis.viewerCalls = []; viewer = { available: new Set(curriculum.cards.map(c => c.id)),
@@ -45,7 +46,7 @@ function app(data = {}, locks) {
     return null;
   };
   const storage = { getItem: key => data[key] || null, setItem: (key, value) => { data[key] = value; } };
-  const context = { ...learning, ...progression, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
+  const context = { ...learning, ...progression, ...motivation, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
     location: { hash: '' }, navigator: locks ? { locks } : {},
     document: { querySelector, querySelectorAll: () => [] },
     window: { localStorage: storage, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
@@ -55,7 +56,16 @@ function app(data = {}, locks) {
   return { ...api, data, storage, html: () => node('#learning').innerHTML, element: node,
     startLesson(region = 'basis', levelId = 'basis:0') { api.start(region, levelId); api.navigate(); api.prepare(); },
     go(hash) { context.location.hash = hash; api.navigate(); },
-    play(correct = true) { const session = api.read().session; const q = curriculum.questions.find(q => q.id === session.ids[session.index]); return api.answer(session.options.indexOf(correct ? q.answer : q.distractors[0])); }
+    play(correct = true) {
+      api.dismissInterlude();
+      const session = api.read().session;
+      const q = curriculum.questions.find(q => q.id === session.ids[session.index]);
+      const response = correct ? q.answer : session.options.find(option => option !== q.answer);
+      if (session.exerciseModes?.[session.index] === 'open-self') {
+        api.updateOpenDraft(response); api.submitOpenAnswer(); return api.selfAssessOpenAnswer(correct);
+      }
+      return api.answer(session.options.indexOf(response));
+    }
   };
 }
 const xp = instance => learning.gameStats(learning.readGame(instance.storage)).xp;
@@ -193,7 +203,8 @@ test('answer double clicks, feedback reload and result revisits never duplicate 
   instance = app(instance.data); instance.go('#les/basis/0');
   assert.ok(instance.read().session.response); assert.equal(xp(instance), 5);
   instance.next();
-  while (!instance.read().session.finished) { instance.play(); instance.next(); }
+  for (let turns = 0; turns <= instance.read().session.ids.length * 2 && !instance.read().session.finished; turns++) { instance.play(); instance.next(); }
+  assert.equal(instance.read().session.finished, true);
   const completedXP = instance.read().session.initialCount * 5 + 10;
   assert.equal(xp(instance), completedXP); assert.equal(instance.read().game.completed.join(','), 'basis:0');
   instance.finish(); assert.equal(xp(instance), completedXP);
@@ -205,7 +216,8 @@ test('retry success does not pass a failed first attempt and all skips earn noth
   const count = instance.read().session.initialCount;
   const wrongCount = Math.floor(count * 0.2) + 1;
   for (let index = 0; index < count; index++) { instance.play(index >= wrongCount); instance.next(); }
-  while (!instance.read().session.finished) { instance.play(); instance.next(); }
+  for (let turns = 0; turns <= instance.read().session.ids.length * 2 && !instance.read().session.finished; turns++) { instance.play(); instance.next(); }
+  assert.equal(instance.read().session.finished, true);
   assert.equal(instance.read().session.firstCorrect, count - wrongCount);
   assert.equal(instance.read().game.completed.length, 0);
   const skipped = app(); skipped.startLesson();
@@ -321,7 +333,8 @@ test('an older tab saving another lesson cannot resurrect a completed lesson dra
   const data = {}; const finishing = app(data); finishing.startLesson();
   const olderTab = app(data); olderTab.start('daily'); olderTab.navigate(); olderTab.prepare();
   assert.ok(JSON.parse(data[learning.DRAFTS_KEY])['basis:0']);
-  while (!finishing.read().session.finished) { finishing.play(); finishing.next(); }
+  for (let turns = 0; turns <= finishing.read().session.ids.length * 2 && !finishing.read().session.finished; turns++) { finishing.play(); finishing.next(); }
+  assert.equal(finishing.read().session.finished, true);
   assert.equal(JSON.parse(data[learning.DRAFTS_KEY])['basis:0'], undefined);
   olderTab.play(); olderTab.next();
   const storedDrafts = JSON.parse(data[learning.DRAFTS_KEY]);

@@ -1,6 +1,7 @@
 import './style.css';
 import curriculum from './data/curriculum.json';
 import { topics, readProgress, readSession, recordAnswer, lessonQueue, optionsFor, masteryFor, PROGRESS_KEY, SESSION_KEY, GAME_KEY, DAILY_GOAL, readGame, awardXP, gameStats, levelPath, levelQuestions, completeLevel, exerciseFor, matchingPairs, shuffled, binaryResponses, varyLesson, DRAFTS_KEY, draftKey, readDrafts, isOpenAnswerCorrect, checkOpenAnswer } from './learning.js';
+import { lessonMomentum, lessonInterlude } from './lesson-motivation.js';
 import { exerciseForProgress, availableExercises } from './exercise-progression.js';
 
 const $ = selector => document.querySelector(selector);
@@ -14,6 +15,7 @@ let game = readGame(storage);
 let pairSelection = null;
 let pairMessage = "";
 let pendingPointSelection = null;
+let pendingChoiceSelection = null;
 let session = null;
 let viewer = null;
 let route = '';
@@ -49,6 +51,7 @@ function save(rewards = false) {
   } catch { storageAvailable = false; }
 }
 function focusLessonContent() {
+  if ($('#interlude-title')) { $('#interlude-title').focus(); return; }
   if ($('#result-title')) { window.scrollTo(0, 0); $('#result-title').focus({ preventScroll: true }); }
   else if (window.matchMedia('(max-width:620px)').matches && document.querySelector('.question-hint')) {
     $('#question-title').focus({ preventScroll: true }); $('.question-card').scrollIntoView({ block: 'start' });
@@ -88,6 +91,7 @@ function arrangeModelQuestion() {
   }
 }
 function resetAtlas() {
+  $('.atlas-panel').hidden = false;
   pendingPointSelection = null;
   restoreAtlasLayout();
   $('#model-prompt')?.setAttribute('hidden', '');
@@ -101,6 +105,7 @@ function resetAtlas() {
   $('#selection-card').innerHTML = '<h3>Tik een spier aan</h3>';
 }
 function start(region, levelId = null) {
+  pendingChoiceSelection = null;
   pendingPointSelection = null;
   refreshProgress();
   if (levelId && !levelPath(game).some(level => level.id === levelId && !level.locked)) return;
@@ -111,7 +116,7 @@ function start(region, levelId = null) {
     const stage = levelId ? Number(levelId.split(':')[1]) : null;
     const pool = levelId ? levelQuestions(curriculum.questions, region, stage) : curriculum.questions;
     const queue = varyLesson(levelId ? shuffled(pool) : lessonQueue(pool, progress, { region, availableMuscles: viewer?.available }));
-    session = pending ? { ...pending, exerciseModes: pending.exerciseModes || pending.ids.map((id, index) => exerciseFor(byId.get(id), index)), levelId: pending.levelId || null } : { region, levelId, stage, startedAt: Date.now(), xp: 0, firstCorrect: 0, initialCount: queue.length, exerciseModes: queue.map((q, index) => exerciseForProgress(q, progress.questions[q.id], { index })), openDraft: '', openRevealed: false, selfAssessmentCorrect: null, prepared: false, matched: [], pairingDone: false, ids: queue.map(q => q.id), index: 0, correct: 0, answered: 0, retryIds: [], options: [], response: null, finished: false };
+    session = pending ? { ...pending, exerciseModes: pending.exerciseModes || pending.ids.map((id, index) => exerciseFor(byId.get(id), index)), levelId: pending.levelId || null } : { region, levelId, stage, startedAt: Date.now(), answerHistory: [], dismissedInterludes: [], xp: 0, firstCorrect: 0, initialCount: queue.length, exerciseModes: queue.map((q, index) => exerciseForProgress(q, progress.questions[q.id], { index })), openDraft: '', openRevealed: false, selfAssessmentCorrect: null, prepared: false, matched: [], pairingDone: false, ids: queue.map(q => q.id), index: 0, correct: 0, answered: 0, retryIds: [], options: [], response: null, finished: false };
     if (!pending && queue.length) session.options = optionsFor(queue[0]);
     save();
   }
@@ -195,6 +200,33 @@ function selfAssessOpenAnswer(correct) {
   const q = byId.get(session.ids[session.index]);
   if (currentExercise(q) === 'open-self') answer(null, session.openDraft.trim(), correct);
 }
+function lessonHud() {
+  const initialCount = session.initialCount || session.ids.length;
+  const inRetry = session.index >= initialCount;
+  const total = inRetry ? session.ids.length - initialCount : initialCount;
+  const completed = Math.min(total, (inRetry ? session.index - initialCount : session.index) + Number(Boolean(session.response)));
+  const momentum = lessonMomentum(session);
+  return '<div class="lesson-hud"><div class="lesson-top"><a href="#leren">← Leerpad</a><div class="lesson-status"><span class="lesson-run">' + icon('growth') + momentum.run + ' op rij</span><span class="lesson-xp">' + icon('sparkles') + (session.xp || 0) + ' XP</span></div></div><progress class="lesson-progress" max="' + total + '" value="' + completed + '" aria-label="' + (inRetry ? 'Herhaling' : 'Lesvoortgang') + '"></progress><p class="lesson-progress-label">' + (inRetry ? 'Fouten oefenen' : 'Je les') + ' · ' + completed + '/' + total + '</p></div>';
+}
+function renderInterlude(interlude) {
+  pendingChoiceSelection = null;
+  resetAtlas();
+  $('.atlas-panel').hidden = true;
+  intro(interlude.kind === 'retry' ? 'Nog even <em>oefenen.</em>' : 'Je bent <em>onderweg.</em>', 'Neem je tijd. Je gaat verder wanneer jij klaar bent.', 'EVEN TUSSENDOOR');
+  $('#learning').innerHTML = lessonHud() + '<article class="lesson-interlude"><span class="interlude-symbol">' + icon(interlude.icon) + '</span><h2 id="interlude-title" tabindex="-1">' + escape(interlude.title) + '</h2><p>' + escape(interlude.description) + '</p><div class="interlude-progress">' + (interlude.kind === 'retry' ? session.ids.length - session.initialCount + ' vragen om nog eens te oefenen' : session.index + ' van ' + session.initialCount + ' vragen doorlopen') + '</div><button id="continue-interlude" class="primary">' + (interlude.kind === 'retry' ? 'Oefen mijn fouten' : 'Verder met de les') + icon('arrow-right') + '</button></article>';
+}
+function dismissInterlude() {
+  if (!route.startsWith('les/') || !session?.prepared || session.response || session.finished) return;
+  const interlude = lessonInterlude(session);
+  if (!interlude) return;
+  session = { ...session, dismissedInterludes: [...(session.dismissedInterludes || []), interlude.key] };
+  save(); renderLesson(); focusLessonContent();
+}
+function feedbackMarkup(q, isCorrect, answerCheck) {
+  const momentum = lessonMomentum(session);
+  const title = isCorrect ? answerCheck?.typo ? 'Goed! Let op de spelling.' : momentum.run >= 3 ? momentum.run + ' op rij. Goed bezig!' : 'Goed gedaan!' : 'Deze oefenen we nog even.';
+  return '<div class="feedback ' + (isCorrect ? 'success' : 'retry') + ' lesson-feedback" role="status" aria-live="polite"><div class="feedback-heading"><span class="feedback-symbol" aria-hidden="true">' + (isCorrect ? icon('check') : icon('refresh')) + '</span><strong>' + title + '</strong>' + (isCorrect ? '<span class="feedback-reward">+5 XP</span>' : '') + '</div><p>' + (isCorrect ? escape(q.answer) : '<strong>Het juiste antwoord:</strong> ' + escape(q.answer)) + '</p>' + (!isCorrect ? '<p>Lees het antwoord rustig door. Een fout kost je geen XP.</p>' : '') + '</div>' + sourceMarkup(q.source) + '<div class="lesson-actions"><button class="primary next-button" id="next-question">' + (session.index + 1 >= session.ids.length ? 'Bekijk je resultaat' : 'Verder') + icon('arrow-right') + '</button></div>';
+}
 function renderLesson({ preserveCamera = false } = {}) {
   restoreAtlasLayout();
   const [, region = 'daily', stage] = route.split('/');
@@ -208,22 +240,26 @@ function renderLesson({ preserveCamera = false } = {}) {
   if (session.index >= session.ids.length) { finish(); return; }
   if (!session.prepared) { renderPreparation(); return; }
   if (needsMatching()) { renderMatching(); return; }
+  const interlude = !session.response && lessonInterlude(session);
+  if (interlude) { renderInterlude(interlude); return; }
   const q = byId.get(session.ids[session.index]);
   const title = topics.find(t => t.id === session.region)?.title || (session.region === 'review' ? 'Herhalen' : 'Gemengde les');
-  intro(title, '', 'VRAAG ' + (session.index + 1) + ' VAN ' + session.ids.length);
+  intro(title, '', session.index >= session.initialCount ? 'FOUTEN OEFENEN' : 'VRAAG ' + (session.index + 1) + ' VAN ' + session.initialCount);
   const mode = currentExercise(q);
   if (mode !== 'point' || pendingPointSelection?.questionId !== q.id || pendingPointSelection?.index !== session.index || session.response) pendingPointSelection = null;
+  if (pendingChoiceSelection?.questionId !== q.id || pendingChoiceSelection?.index !== session.index || session.response || mode === 'point' || isOpenExercise(mode)) pendingChoiceSelection = null;
   const response = session.response;
   const answerCheck = response && ['open', 'recognition-open'].includes(mode) ? checkOpenAnswer(q, response) : null;
   const isCorrect = mode === 'open-self' ? session.selfAssessmentCorrect === true : answerCheck ? answerCheck.correct : response === q.answer;
   const recognitionBlocked = q.type === 'recognition' && !viewer?.available.has(q.muscleId);
-  $('#learning').innerHTML = '<div class="lesson-top"><a href="#leren">← Leerpad</a><span>' + session.correct + ' goed · ' + (session.xp || 0) + ' XP</span></div><progress class="lesson-progress" max="' + session.ids.length + '" value="' + session.index + '" aria-label="Lesvoortgang"></progress>' +
+  $('#learning').innerHTML = lessonHud() +
     '<article class="question-card"><span class="tag">' + (mode === 'point' ? 'WIJS DE SPIER AAN' : mode === 'binary' ? 'KLOPT DIT ANTWOORD?' : isOpenExercise(mode) ? 'OPEN VRAAG' : q.type === 'recognition' ? 'HERKEN DE SPIER' : 'MEERKEUZE') + '</span><h2 tabindex="-1" id="question-title">' + escape(mode === 'point' ? 'Wijs ' + q.answer + ' aan.' : mode === 'recognition-open' ? 'Welke spier is paars gemarkeerd?' : q.prompt) + '</h2>' +
     (q.type === 'recognition' ? '<p class="question-hint">' + (mode === 'point' ? 'Tik de spier aan.' : 'Draai het model.') + '</p>' : '') +
     (recognitionBlocked ? '<p role="status">3D-model niet beschikbaar.</p>' : '') +
-    (mode === 'binary' ? '<div class="statement"><span>Voorgesteld antwoord</span><p>' + escape(session.options[0]) + '</p></div>' : '') + (isOpenExercise(mode) ? openAnswerMarkup(mode, response, recognitionBlocked) : '<div class="answers">' + (mode === 'binary' ? binaryResponses(q, session.options) : session.options).map((option, i) => '<button data-key="' + (i + 1) + '" data-answer="' + session.options.indexOf(option) + '" class="answer ' + (response ? option === q.answer ? 'correct' : option === response ? 'incorrect' : '' : mode === 'point' && pendingPointSelection?.response === option ? 'selected' : '') + '" ' + (mode === 'point' && !response ? 'aria-pressed="' + (pendingPointSelection?.response === option) + '" ' : '') + (response || recognitionBlocked ? 'disabled' : '') + '><span class="answer-key">' + (i + 1) + '</span><span>' + (mode === 'binary' ? (i === 0 ? 'Klopt' : 'Klopt niet') : mode === 'point' && !response ? 'Bekijk spier ' + (i + 1) : escape(option)) + '</span>' + (response && option === q.answer ? icon('check') : '') + '</button>').join('') + '</div>') +
+    (mode === 'binary' ? '<div class="statement"><span>Voorgesteld antwoord</span><p>' + escape(session.options[0]) + '</p></div>' : '') + (isOpenExercise(mode) ? openAnswerMarkup(mode, response, recognitionBlocked) : '<div class="answers">' + (mode === 'binary' ? binaryResponses(q, session.options) : session.options).map((option, i) => '<button data-key="' + (i + 1) + '" data-answer="' + session.options.indexOf(option) + '" class="answer ' + (response ? option === q.answer ? 'correct' : option === response ? 'incorrect' : '' : (mode === 'point' ? pendingPointSelection : pendingChoiceSelection)?.response === option ? 'selected' : '') + '" ' + (!response ? 'aria-pressed="' + ((mode === 'point' ? pendingPointSelection : pendingChoiceSelection)?.response === option) + '" ' : '') + (response || recognitionBlocked ? 'disabled' : '') + '><span class="answer-key">' + (i + 1) + '</span><span>' + (mode === 'binary' ? (i === 0 ? 'Klopt' : 'Klopt niet') : mode === 'point' && !response ? 'Bekijk spier ' + (i + 1) : escape(option)) + '</span>' + (response && option === q.answer ? icon('check') : '') + '</button>').join('') + '</div>') +
     (mode === 'point' && !response ? '<div class="point-confirmation"><p id="point-selection-status" role="status" aria-live="polite">' + (pendingPointSelection ? 'Spier geselecteerd.' : 'Kies een spier.') + '</p><button id="confirm-answer" class="primary" ' + (!pendingPointSelection || recognitionBlocked ? 'disabled' : '') + '>Bevestig antwoord ' + icon('check') + '</button></div>' : '') +
-    (response ? '<div class="feedback ' + (isCorrect ? 'success' : 'retry') + '" role="status"><strong>' + (isCorrect ? answerCheck?.typo ? 'Goed! Kleine typefout.' : 'Goed' : 'Onjuist') + '</strong><p>' + (isCorrect ? escape(q.answer) : 'Het juiste antwoord: ' + escape(q.answer)) + '</p></div>' + sourceMarkup(q.source) + '<button class="primary next-button" id="next-question">' + (session.index + 1 >= session.ids.length ? 'Resultaat' : 'Volgende vraag') + icon('arrow-right') + '</button>' : session.openRevealed ? '' : '<button class="text-button" id="skip-question">Overslaan</button>') +
+    (!response && !isOpenExercise(mode) && mode !== 'point' ? '<div class="answer-confirmation"><p id="choice-selection-status" role="status">' + (pendingChoiceSelection ? 'Antwoord gekozen. Controleer als je klaar bent.' : 'Kies je antwoord. Je kunt je keuze nog wijzigen.') + '</p><button id="confirm-choice-answer" class="primary" ' + (!pendingChoiceSelection || recognitionBlocked ? 'disabled' : '') + '>Controleer antwoord ' + icon('check') + '</button><span class="answer-shortcut">' + (mode === 'binary' ? '1–2' : '1–4') + ' om te kiezen · Enter om te controleren</span></div>' : '') +
+    (response ? feedbackMarkup(q, isCorrect, answerCheck) : session.openRevealed ? '' : '<button class="text-button" id="skip-question">Overslaan</button>') +
     '</article>' + (storageAvailable ? '' : '<p class="privacy-note" role="status">Voortgang niet opgeslagen.</p>');
   const card = curriculum.cards.find(c => c.id === q.muscleId);
   $('#muscle-select').disabled = !response;
@@ -242,6 +278,7 @@ function renderLesson({ preserveCamera = false } = {}) {
   const modelPrompt = $('#model-prompt');
   modelPrompt.hidden = q.type !== 'recognition';
   modelPrompt.textContent = mode === 'point' ? 'Wijs ' + q.answer + ' aan.' : 'Welke spier is paars gemarkeerd?';
+  $('.atlas-panel').hidden = q.type !== 'recognition';
   arrangeModelQuestion();
 }
 
@@ -262,10 +299,29 @@ function updatePointSelection(response, muscleId, anatomyName = null) {
 function chooseAnswer(index) {
   if (!session || session.response || session.finished) return;
   const q = byId.get(session.ids[session.index]);
-  if (currentExercise(q) !== 'point') { answer(index); return; }
+  if (currentExercise(q) !== 'point') {
+    if (!route.startsWith('les/') || !session.prepared || isOpenExercise(currentExercise(q)) || needsMatching() || lessonInterlude(session) || (q.type === 'recognition' && !viewer?.available.has(q.muscleId))) return;
+    const response = session.options[index];
+    if (!response || (currentExercise(q) === 'binary' && !binaryResponses(q, session.options).includes(response))) return;
+    pendingChoiceSelection = { questionId: q.id, index: session.index, response };
+    document.querySelectorAll('[data-answer]').forEach(button => {
+      const selected = session.options[Number(button.dataset.answer)] === response;
+      button.classList.toggle('selected', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    $('#choice-selection-status').textContent = 'Antwoord gekozen. Controleer als je klaar bent.';
+    $('#confirm-choice-answer').disabled = false;
+    return;
+  }
   const response = session.options[index];
   const card = curriculum.cards.find(card => card.name === response);
   updatePointSelection(response, card?.id || null);
+}
+function confirmChoiceSelection() {
+  if (!pendingChoiceSelection || !route.startsWith('les/') || !session?.prepared || session.response || session.finished) return;
+  const q = byId.get(session.ids[session.index]);
+  if (pendingChoiceSelection.questionId !== q.id || pendingChoiceSelection.index !== session.index || currentExercise(q) === 'point' || isOpenExercise(currentExercise(q)) || lessonInterlude(session)) return;
+  return answer(session.options.indexOf(pendingChoiceSelection.response));
 }
 function confirmPointSelection() {
   if (!pendingPointSelection || !route.startsWith('les/') || !session?.prepared || session.response || session.finished) return;
@@ -288,7 +344,8 @@ function answer(index, pickedMuscle = null, selfAssessment = null) {
     const mode = currentExercise(q);
     if (mode === 'open-self' && (!session.openRevealed || typeof selfAssessment !== 'boolean')) return;
     const correct = mode === 'open-self' ? selfAssessment : isOpenExercise(mode) ? isOpenAnswerCorrect(q, response) : response === q.answer;
-    session = { ...session, response, selfAssessmentCorrect: mode === 'open-self' ? selfAssessment : null, correct: session.correct + Number(correct), answered: session.answered + 1 };
+    pendingChoiceSelection = null;
+    session = { ...session, answerHistory: [...(session.answerHistory || []), { correct, skipped: false, retry: session.index >= session.initialCount }], response, selfAssessmentCorrect: mode === 'open-self' ? selfAssessment : null, correct: session.correct + Number(correct), answered: session.answered + 1 };
     if (!correct && !session.retryIds.includes(q.id)) session = { ...session, ids: [...session.ids, q.id], exerciseModes: [...(session.exerciseModes || session.ids.map((id, index) => currentExercise(byId.get(id), index))), availableExercises(q)[0]], retryIds: [...session.retryIds, q.id] };
     const xp = correct ? 5 : 0;
     game = awardXP(game, xp);
@@ -302,6 +359,9 @@ function answer(index, pickedMuscle = null, selfAssessment = null) {
   });
 }
 function next(skip = false) {
+  if (!route.startsWith('les/') || !session || session.finished || (!skip && !session.response)) return;
+  pendingChoiceSelection = null;
+  if (skip && !session.response) session = { ...session, answerHistory: [...(session.answerHistory || []), { correct: false, skipped: true, retry: session.index >= session.initialCount }] };
   pendingPointSelection = null;
   if (!session || (!skip && !session.response)) return;
   const index = session.index + 1;
@@ -330,9 +390,10 @@ function finish() {
     intro('Resultaat');
     const nextLevel = levelPath(game).find(level => !level.done);
     restoreAtlasLayout();
-    $('#learning').innerHTML = '<div class="result-card celebration"><span class="result-icon">' + icon(passed ? 'target' : 'check') + '</span><h2 id="result-title" tabindex="-1">' + (passed ? 'Level gehaald' : 'Les afgerond') + '</h2><div class="reward-xp">+' + (session.xp || 0) + ' XP</div><div class="result-metrics"><span><strong>' + (session.answered ? session.correct + '/' + session.answered : '0') + '</strong> ' + (session.answered ? 'goed met herhalingen' : 'vragen beantwoord') + '</span><span><strong>' + (session.firstCorrect || 0) + '/' + (session.initialCount || session.ids.length) + '</strong> eerste poging</span></div>' + (session.levelId && !passed ? '<p>Minimaal 80% goed op de eerste poging.</p>' : '') + '<div class="goal-result">' + (stats.today >= DAILY_GOAL ? 'Dagdoel gehaald · ' + stats.streak + (stats.streak === 1 ? ' dag streak' : ' dagen streak') : 'Nog ' + (DAILY_GOAL - stats.today) + ' XP tot je dagdoel') + '</div><button class="primary" ' + (session.levelId && !passed ? 'data-level="' + session.levelId + '"' : nextLevel ? 'data-level="' + nextLevel.id + '"' : 'data-start="daily"') + '>' + (session.levelId && !passed ? 'Oefen dit level opnieuw' : 'Volgende les') + icon('arrow-right') + '</button><a class="text-link" href="#leren">Terug naar je leerpad</a></div>';
+    $('#learning').innerHTML = '<div class="result-card celebration"><span class="result-icon">' + icon(passed ? 'target' : 'check') + '</span><h2 id="result-title" tabindex="-1">' + (passed ? 'Level gehaald' : 'Les afgerond') + '</h2><div class="reward-xp">+' + (session.xp || 0) + ' XP</div><div class="result-breakdown"><div><span>Goede antwoorden</span><strong>+' + Math.max(0, (session.xp || 0) - (session.answered > 0 ? 10 : 0)) + ' XP</strong></div><div><span>Les afgerond</span><strong>+' + (session.answered > 0 ? 10 : 0) + ' XP</strong></div><div><span>Beste reeks deze les</span><strong>' + lessonMomentum(session).bestRun + ' op rij</strong></div></div><div class="result-metrics"><span><strong>' + (session.answered ? session.correct + '/' + session.answered : '0') + '</strong> ' + (session.answered ? 'goed met herhalingen' : 'vragen beantwoord') + '</span><span><strong>' + (session.firstCorrect || 0) + '/' + (session.initialCount || session.ids.length) + '</strong> eerste poging</span></div>' + (session.levelId && !passed ? '<p>Minimaal 80% goed op de eerste poging.</p>' : '') + '<div class="goal-result">' + (stats.today >= DAILY_GOAL ? 'Dagdoel gehaald · ' + stats.streak + (stats.streak === 1 ? ' dag streak' : ' dagen streak') : 'Nog ' + (DAILY_GOAL - stats.today) + ' XP tot je dagdoel') + '</div><button class="primary" ' + (session.levelId && !passed ? 'data-level="' + session.levelId + '"' : nextLevel ? 'data-level="' + nextLevel.id + '"' : 'data-start="daily"') + '>' + (session.levelId && !passed ? 'Oefen dit level opnieuw' : 'Volgende les') + icon('arrow-right') + '</button><a class="text-link" href="#leren">Terug naar je leerpad</a></div>';
 
     resetAtlas();
+    $('.atlas-panel').hidden = true;
     focusLessonContent();
   });
 }
@@ -409,6 +470,7 @@ function filterQuestionBank() {
   $('#bank-count').textContent = count ? count + (count === 1 ? ' vraag gevonden' : ' vragen gevonden') : 'Geen vragen gevonden.';
 }
 function navigate() {
+  pendingChoiceSelection = null;
   pendingPointSelection = null;
   window.scrollTo(0, 0);
   route = location.hash.slice(1) || 'leren';
@@ -433,6 +495,8 @@ document.addEventListener('click', event => {
   if (startButton && !startButton.disabled) start(startButton.dataset.start);
   if (answerButton && !answerButton.disabled) chooseAnswer(Number(answerButton.dataset.answer));
   if (event.target.closest('#confirm-answer:not(:disabled)')) confirmPointSelection();
+  if (event.target.closest('#confirm-choice-answer:not(:disabled)')) confirmChoiceSelection();
+  if (event.target.closest('#continue-interlude')) dismissInterlude();
   if (event.target.closest('#self-assess-correct')) selfAssessOpenAnswer(true);
   if (event.target.closest('#self-assess-retry')) selfAssessOpenAnswer(false);
   if (muscleButton) { showMuscle(muscleButton.dataset.muscle); $('#muscle-card-title')?.focus(); }
@@ -451,7 +515,15 @@ document.addEventListener('input', event => {
 });
 document.addEventListener('change', event => { if (event.target.id === 'question-chapter') filterQuestionBank(); });
 document.addEventListener('keydown', event => {
-  if (!session?.prepared || (needsMatching()) || !route.startsWith('les/') || $('#credits').open || /INPUT|SELECT|TEXTAREA/.test(event.target.tagName)) return;
+  if (event.repeat && event.key === 'Enter' && route.startsWith('les/') && !/INPUT|SELECT|TEXTAREA/.test(event.target.tagName)) { event.preventDefault(); return; }
+  if (event.repeat || event.isComposing || event.altKey || event.ctrlKey || event.metaKey || !session?.prepared || (needsMatching()) || !route.startsWith('les/') || $('#credits').open || /INPUT|SELECT|TEXTAREA/.test(event.target.tagName)) return;
+  if (event.key === 'Enter' && event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') {
+    if ($('#continue-interlude')) { event.preventDefault(); dismissInterlude(); }
+    else if (session.response) { event.preventDefault(); next(); }
+    else if (pendingPointSelection) { event.preventDefault(); confirmPointSelection(); }
+    else if (pendingChoiceSelection) { event.preventDefault(); confirmChoiceSelection(); }
+    return;
+  }
   if (/^[1-4]$/.test(event.key)) {
     const button = document.querySelector('[data-key="' + event.key + '"]');
     if (button && !button.disabled) { event.preventDefault(); chooseAnswer(Number(button.dataset.answer)); }

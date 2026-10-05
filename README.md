@@ -27,7 +27,13 @@ lessons. Works in desktop and mobile browsers.
   reveal the course answer after you write yours; compare the two and explicitly
   mark whether you knew it. This self-assessment uses no AI grading.
 - Practise matching muscle names to their course-defined functions.
-- Read a short lesson introduction and see XP and progress when you finish.
+- Choose an answer, change your selection if needed, then explicitly check it. Use 1–4 to select and Enter to check from the question; Tab and Enter also work on the buttons.
+- See clear answer feedback with earned XP and a session-local run of correct answers.
+  A wrong answer reveals the solution and returns once for practice.
+- Pause briefly halfway through a lesson and before practising mistakes. Continue at
+  your own pace; dismissed moments stay dismissed on reload. Short lessons omit the halfway screen.
+- Read a short lesson introduction and finish with an XP breakdown, first-attempt
+  score, best run and daily goal. Runs and interludes earn no extra XP.
 - Earn 5 XP per correct answer and 10 XP per completed lesson with an answer.
   Reach 30 XP per local calendar day to build a streak. Replaying earns XP,
   while spaced mastery remains based on actual review intervals.
@@ -99,3 +105,12 @@ personal training or medical advice.
 The imported atlas has no animation rig. Exercise animation remains a future
 stage requiring a licensed rig and validated muscle deformation. This version
 has a functional interactive atlas and quiz, without exercise playback.
+
+## Learning interaction research
+
+The app adapts answer confirmation, feedback and lesson rhythm from official
+Duolingo design publications. Research and implementation choices are in
+[answer interaction](docs/duolingo-answer-research.md),
+[rewards and rhythm](docs/duolingo-rewards-research.md) and
+[feedback design](docs/duolingo-feedback-research.md). Native buttons, progress
+bars and the existing MIT-licensed Tabler icons keep the flow lightweight.
