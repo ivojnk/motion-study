@@ -97,14 +97,6 @@ function focusLessonContent() {
 function dueCount() {
   return curriculum.questions.filter(q => needsMistakeReview(progress.questions[q.id]) || progress.questions[q.id]?.due <= Date.now()).length;
 }
-function sourceMarkup(source) {
-  if (source.kind === 'supplement') {
-    const references = source.references.map(reference => '<p><a href="' + escape(reference.url) + '" target="_blank" rel="noreferrer">' + escape(reference.title) + ' ' + icon('arrow-square-out') + '</a></p>').join('');
-    const course = source.courseReferences?.length ? '<p><a href="' + curriculum.sourceUrl + '" target="_blank" rel="noreferrer">Bijbehorend energielek in de cheatsheet · pagina ' + source.courseReferences.map(reference => reference.page).join(', ') + ' ' + icon('arrow-square-out') + '</a></p>' : '';
-    return '<details class="source"><summary>' + icon('book-2') + ' Bron en toelichting</summary><p>' + escape(source.title) + '. De onderzoeken onderbouwen externe focus en leren met analogieën. De concrete correcties zijn oefenvoorbeelden om uit te proberen.</p>' + references + course + '</details>';
-  }
-  return '<details class="source"><summary>' + icon('book-2') + ' Bron</summary><p>' + escape(source.title) + ' · ' + escape(source.section) + (source.page ? ' · pagina ' + source.page : '') + '</p><a href="' + curriculum.sourceUrl + '" target="_blank" rel="noreferrer">Cheatsheet ' + icon('arrow-square-out') + '</a></details>';
-}
 function setLessonFocus(active) {
   document.body?.classList.toggle('lesson-focus', active);
   $('#intro').hidden = active;
@@ -614,7 +606,7 @@ function renderAtlas(card = null) {
   if (!card) {
     $('#learning').innerHTML = '<article class="explore-card"><h2>Spieren</h2><div class="atlas-muscles">' + curriculum.cards.map(c => '<button class="muscle-chip" data-muscle="' + c.id + '">' + escape(c.name) + '</button>').join('') + '</div></article>'; return;
   }
-  $('#learning').innerHTML = '<article class="explore-card"><span class="tag">' + escape(topics.find(t => t.id === card.region).title) + '</span><h2 id="muscle-card-title" tabindex="-1">' + escape(card.name) + '</h2><dl>' + Object.entries(card.fields).map(([field, value]) => '<div><dt>' + escape(field) + '</dt><dd>' + escape(value) + '</dd></div>').join('') + '</dl>' + sourceMarkup(card.source) + '<button class="primary" data-start="' + card.region + '">Oefen dit hoofdstuk ' + icon('arrow-right') + '</button><button class="text-button" id="all-muscles">Alle spierkaarten</button></article>';
+  $('#learning').innerHTML = '<article class="explore-card"><span class="tag">' + escape(topics.find(t => t.id === card.region).title) + '</span><h2 id="muscle-card-title" tabindex="-1">' + escape(card.name) + '</h2><dl>' + Object.entries(card.fields).map(([field, value]) => '<div><dt>' + escape(field) + '</dt><dd>' + escape(value) + '</dd></div>').join('') + '</dl>' + '<button class="primary" data-start="' + card.region + '">Oefen dit hoofdstuk ' + icon('arrow-right') + '</button><button class="text-button" id="all-muscles">Alle spierkaarten</button></article>';
 }
 function renderProgress() {
   restoreAtlasLayout();
@@ -635,7 +627,7 @@ function renderQuestionBank() {
   resetAtlas();
   $('.atlas-panel').hidden = true;
   intro('Vragenbank');
-  $('#learning').innerHTML = '<div class="bank-filters"><label for="question-search">Zoeken</label><input id="question-search" type="search" placeholder="Spier of onderwerp"><label for="question-chapter">Hoofdstuk</label><select id="question-chapter"><option value="">Alle hoofdstukken</option>' + topics.map(topic => '<option value="' + topic.id + '">' + escape(topic.title) + '</option>').join('') + '</select></div><p id="bank-count" role="status">' + curriculum.questions.length + ' vragen</p><div class="question-bank">' + topics.map(topic => '<details class="bank-chapter" data-chapter="' + topic.id + '"><summary>' + escape(topic.title) + ' · ' + curriculum.questions.filter(q => q.region === topic.id).length + ' vragen</summary><button class="text-button" data-start="' + topic.id + '">Oefen dit hoofdstuk</button><ol>' + curriculum.questions.filter(q => q.region === topic.id).map(q => '<li data-search="' + escape((q.prompt + ' ' + q.answer + ' ' + (q.explanation || '')).toLocaleLowerCase('nl')) + '"><details><summary>' + escape(q.type === 'model-fact' ? '3D: ' + q.prompt : isModelQuestion(q) ? '3D-herkenning: ' + q.answer : q.prompt) + '</summary>' + '<p><strong>Antwoord:</strong> ' + escape(q.answer) + '</p>' + (q.explanation ? '<p>' + escape(q.explanation) + '</p>' : '') + sourceMarkup(q.source) + '</details></li>').join('') + '</ol></details>').join('') + '</div><a class="text-link" href="#leren">Terug naar je leerpad</a>';
+  $('#learning').innerHTML = '<div class="bank-filters"><label for="question-search">Zoeken</label><input id="question-search" type="search" placeholder="Spier of onderwerp"><label for="question-chapter">Hoofdstuk</label><select id="question-chapter"><option value="">Alle hoofdstukken</option>' + topics.map(topic => '<option value="' + topic.id + '">' + escape(topic.title) + '</option>').join('') + '</select></div><p id="bank-count" role="status">' + curriculum.questions.length + ' vragen</p><div class="question-bank">' + topics.map(topic => '<details class="bank-chapter" data-chapter="' + topic.id + '"><summary>' + escape(topic.title) + ' · ' + curriculum.questions.filter(q => q.region === topic.id).length + ' vragen</summary><button class="text-button" data-start="' + topic.id + '">Oefen dit hoofdstuk</button><ol>' + curriculum.questions.filter(q => q.region === topic.id).map(q => '<li data-search="' + escape((q.prompt + ' ' + q.answer + ' ' + (q.explanation || '')).toLocaleLowerCase('nl')) + '"><details><summary>' + escape(q.type === 'model-fact' ? '3D: ' + q.prompt : isModelQuestion(q) ? '3D-herkenning: ' + q.answer : q.prompt) + '</summary>' + '<p><strong>Antwoord:</strong> ' + escape(q.answer) + '</p>' + (q.explanation ? '<p>' + escape(q.explanation) + '</p>' : '') + '</details></li>').join('') + '</ol></details>').join('') + '</div><a class="text-link" href="#leren">Terug naar je leerpad</a>';
 }
 function filterQuestionBank() {
   const query = $('#question-search').value.trim().toLocaleLowerCase('nl');

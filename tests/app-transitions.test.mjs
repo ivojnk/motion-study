@@ -89,8 +89,8 @@ test('coaching feedback shows the control point and preserves it after reload', 
   restored.go('#les/patronen/' + stage);
   assert.ok(restored.html().includes(question.explanation));
   restored.go('#vragen');
-  assert.match(restored.html(), /Bron en toelichting/);
-  assert.match(restored.html(), /https:\/\/pubmed\.ncbi\.nlm\.nih\.gov\/34822352\//);
+  assert.doesNotMatch(restored.html(), /class="source"|Bron en toelichting/);
+  assert.doesNotMatch(restored.html(), /https:\/\/pubmed\.ncbi\.nlm\.nih\.gov\/34822352\//);
   assert.match(restored.html(), /Controle: De heup beweegt naar achteren/);
 });
 
@@ -735,7 +735,7 @@ test('the full question directory is accessible without changing an unfinished l
   instance.go('#vragen');
   assert.equal([...instance.html().matchAll(/<li data-search=/g)].length, curriculum.questions.length);
   assert.match(instance.html(), /id="question-search"/);
-  assert.match(instance.html(), /pagina 28/);
+  assert.doesNotMatch(instance.html(), /class="source"|pagina 28|Milo module 6\.6/);
   assert.equal(JSON.stringify(instance.read().session), before);
   assert.equal(xp(instance), beforeXP);
   instance.go('#les/basis/0');
