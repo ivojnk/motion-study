@@ -52,9 +52,12 @@ the app on behalf of Milo, or assert rights over third-party course prose.
 | Three.js, including OrbitControls and GLTFLoader | https://github.com/mrdoob/three.js | MIT |
 | Three Mesh BVH | https://github.com/gkjohnson/three-mesh-bvh | MIT |
 | Draco decoder | https://github.com/google/draco | Apache 2.0 |
-| Tabler Icons, selected outline SVGs | https://github.com/tabler/tabler-icons | MIT |
+| Phosphor Icons, selected Duotone SVGs | https://github.com/phosphor-icons/core | MIT |
 | Vite | https://github.com/vitejs/vite | MIT |
 | DM Sans and Manrope, via Fontsource | https://github.com/fontsource/fontsource | SIL Open Font License 1.1 |
+
+The complete Phosphor notice is preserved in `public/licenses/phosphor-LICENSE.txt`.
+The selected Duotone SVGs are served locally without an icon-library dependency.
 
 Full notices are distributed in `public/licenses/`. Dependencies are pinned
 by `package-lock.json`. Fonts and models are served from the app's own

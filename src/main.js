@@ -54,15 +54,15 @@ function save(rewards = false) {
 function focusLessonContent() {
   if ($('#interlude-title')) { $('#interlude-title').focus(); return; }
   if ($('#result-title')) { window.scrollTo(0, 0); $('#result-title').focus({ preventScroll: true }); }
-  else if (window.matchMedia('(max-width:620px)').matches && document.querySelector('.question-card .atlas-panel')) {
-    $('#question-title').focus({ preventScroll: true }); $('.question-card').scrollIntoView({ block: 'start' });
-  } else $('#question-title')?.focus();
+  else if ($('#question-title')) {
+    window.scrollTo(0, 0); $('#question-title').focus({ preventScroll: true });
+  }
 }
 function dueCount() {
   return curriculum.questions.filter(q => progress.questions[q.id]?.due <= Date.now()).length;
 }
 function sourceMarkup(source) {
-  return '<details class="source"><summary>' + icon('book-2') + ' Bron</summary><p>' + escape(source.title) + ' · ' + escape(source.section) + (source.page ? ' · pagina ' + source.page : '') + '</p><a href="' + curriculum.sourceUrl + '" target="_blank" rel="noreferrer">Cheatsheet ↗</a></details>';
+  return '<details class="source"><summary>' + icon('book-2') + ' Bron</summary><p>' + escape(source.title) + ' · ' + escape(source.section) + (source.page ? ' · pagina ' + source.page : '') + '</p><a href="' + curriculum.sourceUrl + '" target="_blank" rel="noreferrer">Cheatsheet ' + icon('arrow-square-out') + '</a></details>';
 }
 function setLessonFocus(active) {
   document.body?.classList.toggle('lesson-focus', active);
@@ -70,7 +70,7 @@ function setLessonFocus(active) {
 }
 function lessonProgressMarkup() {
   const completed = session.index + Number(Boolean(session.response));
-  return '<div class="lesson-bar"><a href="#leren" class="lesson-close" aria-label="Les sluiten"><span aria-hidden="true">×</span></a><progress class="lesson-progress" max="' + session.ids.length + '" value="' + completed + '" aria-label="Lesvoortgang" aria-valuetext="' + completed + ' van ' + session.ids.length + ' vragen afgerond"></progress><span class="answer-streak" role="status" aria-label="' + (session.answerStreak || 0) + ' antwoorden goed achter elkaar">' + icon('check') + '<strong>' + (session.answerStreak || 0) + ' op rij</strong></span></div><div class="lesson-status"><span>' + completed + '/' + session.ids.length + ' vragen</span>' + (session.ids.length > session.initialCount ? '<span>+' + (session.ids.length - session.initialCount) + ' herhaling' + (session.ids.length - session.initialCount === 1 ? '' : 'en') + '</span>' : '') + '</div>';
+  return '<div class="lesson-bar"><a href="#leren" class="lesson-close" aria-label="Les sluiten">' + icon('x') + '</a><progress class="lesson-progress" max="' + session.ids.length + '" value="' + completed + '" aria-label="Lesvoortgang" aria-valuetext="' + completed + ' van ' + session.ids.length + ' vragen afgerond"></progress><span class="answer-streak" role="status" aria-label="' + (session.answerStreak || 0) + ' antwoorden goed achter elkaar">' + icon('check') + '<strong>' + (session.answerStreak || 0) + ' op rij</strong></span></div><div class="lesson-status"><span>' + completed + '/' + session.ids.length + ' vragen</span>' + (session.ids.length > session.initialCount ? '<span>+' + (session.ids.length - session.initialCount) + ' herhaling' + (session.ids.length - session.initialCount === 1 ? '' : 'en') + '</span>' : '') + '</div>';
 }
 function intro(title, description = '') {
   setLessonFocus(false);
@@ -96,6 +96,15 @@ function renderHome() {
   const description = (current ? current.label + ' van ' + current.count + ' · ' : '') + (current || pending ? (pending?.initialCount || LESSON_SIZE) + ' vragen' : 'Gemengde les');
   const action = current ? 'data-level="' + current.id + '"' : 'data-start="' + (pending?.region || 'daily') + '"';
   const due = dueCount();
+  const stats = gameStats(game);
+  const homeStats = $('#home-stats');
+  if (homeStats) {
+    homeStats.hidden = false;
+    homeStats.innerHTML = '<span class="home-metric metric-streak" title="Dagelijkse streak">' + icon('flame') + '<strong>' + stats.streak + '</strong><span class="visually-hidden"> ' + (stats.streak === 1 ? 'dag' : 'dagen') + ' streak</span></span>' +
+      '<span class="home-metric metric-points" title="Verzamelde punten">' + icon('sparkles') + '<strong>' + stats.xp + '</strong><span class="visually-hidden"> verzamelde punten</span></span>';
+  }
+  const activeTopic = topic || levels.find(level => !level.done)?.topic || topics.at(-1);
+  const activeChapter = topics.findIndex(item => item.id === activeTopic.id);
   const chapters = topics.map((topic, chapter) => {
     const chapterLevels = levels.filter(level => level.topic.id === topic.id);
     const completed = chapterLevels.filter(level => level.done).length;
@@ -114,14 +123,16 @@ function renderHome() {
         '<span class="level-copy" aria-hidden="true">' + group.label + '</span>' +
         '<span class="level-caption" aria-hidden="true">' + group.completed + '/' + group.lessons.length + ' lessen</span>' + '</li>';
     }).join('');
-    return '<details class="path-chapter' + (current?.topic.id === topic.id ? ' active-chapter' : '') + '" ' + (current?.topic.id === topic.id ? 'open' : '') + '>' +
+    return '<details class="path-chapter' + (activeTopic.id === topic.id ? ' active-chapter' : '') + '" ' + (activeTopic.id === topic.id ? 'open' : '') + '>' +
       '<summary class="chapter-heading"><span class="chapter-copy"><span class="chapter-kicker">Hoofdstuk ' + (chapter + 1) + '</span><strong>' + escape(topic.title) + '</strong><small>' + escape(topic.subtitle) + '</small></span>' +
       '<span class="chapter-count" aria-label="' + completed + ' van ' + chapterLevels.length + ' lessen voltooid">' + completed + '/' + chapterLevels.length + '</span>' +
       '<span class="chapter-toggle" aria-hidden="true">' + icon('arrow-right') + '</span></summary>' +
       '<ol aria-label="Lessen in ' + escape(topic.title) + '">' + lessons + '</ol></details>';
-  }).join('');
-  $('#learning').innerHTML = '<div class="daily-card"><span class="eyebrow">' + lessonLabel + '</span><h2>' + escape(title) + '</h2><p>' + description + '</p><button class="primary" ' + action + '>' + (pending ? 'Ga verder' : current ? 'Start les' : 'Gemengde les') + icon('arrow-right') + '</button></div><div class="study-status">' + gameMarkup() + '</div><div class="study-links"><a class="atlas-shortcut" href="#atlas">' + icon('stretch') + '<span><strong>3D-atlas</strong><small>' + curriculum.cards.length + ' spierkaarten</small></span>' + icon('arrow-right') + '</a><a class="atlas-shortcut" href="#vragen">' + icon('book-2') + '<span><strong>Vragenbank</strong><small>' + curriculum.questions.length + ' vragen</small></span>' + icon('arrow-right') + '</a></div><div class="section-heading"><h2>Hoofdstukken</h2><span>' + topics.length + ' hoofdstukken · ' + levels.length + ' lessen</span></div><div class="learning-path">' + chapters + '</div><div class="practice-actions"><button class="primary" data-start="daily">Gemengde les</button><button class="text-button" data-start="review" ' + (!due ? 'disabled' : '') + '>Herhalen (' + due + ')</button></div>';
+  });
+  const path = chapters.slice(activeChapter).join('') + (activeChapter ? '<details class="earlier-chapters"><summary>Eerdere hoofdstukken</summary>' + chapters.slice(0, activeChapter).join('') + '</details>' : '');
+  $('#learning').innerHTML = '<div class="daily-card home-chapter-header"><span class="eyebrow">' + lessonLabel + '</span><h2>' + escape(title) + '</h2><p>' + description + '</p><button class="primary" ' + action + '>' + (pending ? 'Ga verder' : current ? 'Start les' : 'Gemengde les') + icon('arrow-right') + '</button></div><div class="study-status"><div class="learning-path">' + path + '</div></div><div class="practice-actions"><button class="text-button" data-start="daily">Gemengde les</button><button class="text-button" data-start="review" ' + (!due ? 'disabled' : '') + '>Herhalen (' + due + ')</button></div>';
   resetAtlas();
+  $('.atlas-panel').hidden = true;
 }
 function groupProgressMarkup(group) {
   const position = degrees => {
@@ -144,7 +155,7 @@ function restoreAtlasLayout() {
 function arrangeModelQuestion() {
   restoreAtlasLayout();
   const answers = $('.question-card .answers');
-  if (window.matchMedia('(max-width:620px)').matches && !$('.atlas-panel').hidden && answers) {
+  if (!$('.atlas-panel').hidden && answers) {
     answers.before($('.atlas-panel'));
   }
 }
@@ -225,7 +236,11 @@ function isOpenExercise(mode) {
 }
 function openAnswerMarkup(mode, response, blocked) {
   const revealed = mode === 'open-self' && session.openRevealed;
-  return '<div class="answers"><form id="open-answer-form" class="open-answer-form"><label class="open-answer-label visually-hidden" for="open-answer">' + (mode === 'recognition-open' ? 'Welke spier is paars? Typ de naam.' : 'Schrijf je antwoord') + '</label>' + (mode === 'open-self' ? '<textarea id="open-answer" class="open-answer-input" rows="4" maxlength="2000" autocomplete="off" aria-describedby="open-answer-help" ' + (response || revealed || blocked ? 'disabled' : '') + '>' + escape(session.openDraft || response || '') + '</textarea>' : '<input id="open-answer" class="open-answer-input" type="text" maxlength="200" autocomplete="off" spellcheck="false" aria-describedby="open-answer-help" value="' + escape(session.openDraft || response || '') + '" ' + (response || revealed || blocked ? 'disabled' : '') + '>') + '<p id="open-answer-help" class="open-answer-help visually-hidden">' + (mode === 'open-self' ? 'Leg het in je eigen woorden uit. Daarna vergelijk je met het voorbeeldantwoord en beoordeel je jezelf.' : 'Hoofdletters en leestekens maken niet uit. Kleine typefouten zijn oké. Controleer met Enter of de knop hieronder.') + '</p>' + (!response && !revealed ? '<button id="check-open-answer" type="submit" class="primary" ' + (blocked || !session.openDraft?.trim() ? 'disabled' : '') + '>' + (mode === 'open-self' ? 'Vergelijk antwoord' : 'Controleer antwoord') + icon('check') + '</button>' : '') + '</form></div>' + (revealed && !response ? '<div class="feedback" role="status"><strong>Voorbeeldantwoord</strong><p>' + escape(byId.get(session.ids[session.index]).answer) + '</p></div>' + '<div class="self-assessment-controls"><button class="primary" id="self-assess-correct">Dit had ik goed ' + icon('check') + '</button><button class="text-button" id="self-assess-retry">Nog oefenen</button></div>' : '');
+  return '<div class="answers"><form id="open-answer-form" class="open-answer-form"><label class="open-answer-label visually-hidden" for="open-answer">' + (mode === 'recognition-open' ? 'Welke spier is paars? Typ de naam.' : 'Schrijf je antwoord') + '</label>' + (mode === 'open-self' ? '<textarea id="open-answer" class="open-answer-input" rows="4" maxlength="2000" autocomplete="off" aria-describedby="open-answer-help" ' + (response || revealed || blocked ? 'disabled' : '') + '>' + escape(session.openDraft || response || '') + '</textarea>' : '<input id="open-answer" class="open-answer-input" type="text" maxlength="200" autocomplete="off" spellcheck="false" aria-describedby="open-answer-help" value="' + escape(session.openDraft || response || '') + '" ' + (response || revealed || blocked ? 'disabled' : '') + '>') + '<p id="open-answer-help" class="open-answer-help visually-hidden">' + (mode === 'open-self' ? 'Leg het in je eigen woorden uit. Daarna vergelijk je met het voorbeeldantwoord en beoordeel je jezelf.' : 'Hoofdletters en leestekens maken niet uit. Kleine typefouten zijn oké. Controleer met Enter of de knop hieronder.') + '</p>' + '</form></div>';
+}
+function openAnswerActionsMarkup(mode, blocked) {
+  const revealed = mode === 'open-self' && session.openRevealed;
+  return '<div class="lesson-dock">' + (revealed ? '<div class="feedback lesson-feedback" role="status"><strong>Voorbeeldantwoord</strong><p>' + escape(byId.get(session.ids[session.index]).answer) + '</p></div><div class="self-assessment-controls"><button class="primary" id="self-assess-correct">Dit had ik goed ' + icon('check') + '</button><button class="text-button" id="self-assess-retry">Nog oefenen</button></div>' : '<button id="check-open-answer" type="submit" form="open-answer-form" class="primary" ' + (blocked || !session.openDraft?.trim() ? 'disabled' : '') + '>' + (mode === 'open-self' ? 'Vergelijk antwoord' : 'Controleer antwoord') + icon('check') + '</button>') + '</div>';
 }
 function updateOpenDraft(value) {
   if (!route.startsWith('les/') || !session?.prepared || session.response || session.finished || session.openRevealed) return;
@@ -243,7 +258,7 @@ function submitOpenAnswer() {
   if (!isOpenExercise(mode) || !session.openDraft?.trim() || (q.type === 'recognition' && !viewer?.available.has(q.muscleId))) return;
   if (mode === 'open-self') {
     session = { ...session, openRevealed: true };
-    save(); renderLesson(); $('#self-assess-correct')?.focus();
+    save(); renderLesson(); $('#self-assess-correct')?.focus({ preventScroll: true });
   } else answer(null, session.openDraft.trim());
 }
 function selfAssessOpenAnswer(correct) {
@@ -259,7 +274,7 @@ function lessonHud() {
   const total = inRetry ? session.ids.length - initialCount : initialCount;
   const completed = Math.min(total, (inRetry ? session.index - initialCount : session.index) + Number(Boolean(session.response)));
   const momentum = lessonMomentum(session);
-  return '<div class="lesson-hud"><div class="lesson-top"><a href="#leren">← Leerpad</a><div class="lesson-status"><span class="lesson-run">' + icon('growth') + momentum.run + ' op rij</span><span class="lesson-xp">' + icon('sparkles') + (session.xp || 0) + ' XP</span></div></div><progress class="lesson-progress" max="' + total + '" value="' + completed + '" aria-label="' + (inRetry ? 'Herhaling' : 'Lesvoortgang') + '"></progress><p class="lesson-progress-label">' + (inRetry ? 'Fouten oefenen' : 'Je les') + ' · ' + completed + '/' + total + '</p></div>';
+  return '<div class="lesson-hud"><div class="lesson-top"><a href="#leren">' + icon('arrow-left') + ' Leerpad</a><div class="lesson-status"><span class="lesson-run">' + icon('growth') + momentum.run + ' op rij</span><span class="lesson-xp">' + icon('sparkles') + (session.xp || 0) + ' XP</span></div></div><progress class="lesson-progress" max="' + total + '" value="' + completed + '" aria-label="' + (inRetry ? 'Herhaling' : 'Lesvoortgang') + '"></progress><p class="lesson-progress-label">' + (inRetry ? 'Fouten oefenen' : 'Je les') + ' · ' + completed + '/' + total + '</p></div>';
 }
 function renderInterlude(interlude) {
   resetAtlas();
@@ -277,7 +292,7 @@ function dismissInterlude() {
 function feedbackMarkup(q, isCorrect, answerCheck) {
   const momentum = lessonMomentum(session);
   const title = isCorrect ? answerCheck?.typo ? 'Goed! Kleine typefout.' : momentum.run >= 3 ? momentum.run + ' op rij' : 'Goed' : 'Onjuist';
-  return '<div class="feedback ' + (isCorrect ? 'success' : 'retry') + ' lesson-feedback" role="status" aria-live="polite"><div class="feedback-heading"><span class="feedback-symbol" aria-hidden="true">' + (isCorrect ? icon('check') : icon('refresh')) + '</span><strong>' + title + '</strong>' + (isCorrect ? '<span class="feedback-reward">+5 XP</span>' : '') + '</div><p>' + (isCorrect ? escape(q.answer) : '<strong>Het juiste antwoord:</strong> ' + escape(q.answer)) + '</p>' + '</div>' + (session.lessonSize === LESSON_SIZE ? '' : sourceMarkup(q.source)) + '<div class="lesson-actions"><button class="primary next-button" id="next-question">' + (session.index + 1 >= session.ids.length ? 'Bekijk je resultaat' : 'Verder') + icon('arrow-right') + '</button></div>';
+  return '<div class="lesson-dock ' + (isCorrect ? 'success' : 'retry') + '"><div class="feedback ' + (isCorrect ? 'success' : 'retry') + ' lesson-feedback" role="status" aria-live="polite"><div class="feedback-heading"><span class="feedback-symbol" aria-hidden="true">' + (isCorrect ? icon('check') : icon('refresh')) + '</span><strong>' + title + '</strong>' + (isCorrect ? '<span class="feedback-reward">+5 XP</span>' : '') + '</div><p>' + (isCorrect ? escape(q.answer) : '<strong>Het juiste antwoord:</strong> ' + escape(q.answer)) + '</p>' + '</div>' + (session.lessonSize === LESSON_SIZE ? '' : sourceMarkup(q.source)) + '<div class="lesson-actions"><button class="primary next-button" id="next-question">' + (session.index + 1 >= session.ids.length ? 'Bekijk je resultaat' : 'Verder') + icon('arrow-right') + '</button></div></div>';
 }
 function renderLesson({ preserveCamera = false } = {}) {
   restoreAtlasLayout();
@@ -304,12 +319,12 @@ function renderLesson({ preserveCamera = false } = {}) {
   const isCorrect = mode === 'open-self' ? session.selfAssessmentCorrect === true : answerCheck ? answerCheck.correct : response === q.answer;
   const recognitionBlocked = q.type === 'recognition' && !viewer?.available.has(q.muscleId);
   $('#learning').innerHTML = lessonHud() +
-    '<article class="question-card"' + (q.type === 'recognition' ? ' data-model-question' : '') + '><h2 tabindex="-1" id="question-title">' + escape(mode === 'point' ? 'Wijs ' + q.answer + ' aan.' : mode === 'recognition-open' ? 'Welke spier is paars gemarkeerd?' : q.prompt) + '</h2>' +
+    '<article class="question-card" data-exercise="' + mode + '"' + (q.type === 'recognition' ? ' data-model-question' : '') + '><h2 tabindex="-1" id="question-title">' + escape(mode === 'point' ? 'Wijs ' + q.answer + ' aan.' : mode === 'recognition-open' ? 'Welke spier is paars gemarkeerd?' : q.prompt) + '</h2>' +
     (recognitionBlocked ? '<p role="status">3D-model laden…</p>' : '') +
     (mode === 'binary' ? '<div class="statement"><p>' + escape(session.options[0]) + '</p></div>' : '') + (isOpenExercise(mode) ? openAnswerMarkup(mode, response, recognitionBlocked) : '<div class="answers">' + (mode === 'binary' ? binaryResponses(q, session.options) : session.options).map((option, i) => '<button data-key="' + (i + 1) + '" data-answer="' + session.options.indexOf(option) + '" class="answer ' + (response ? option === q.answer ? 'correct' : option === response ? 'incorrect' : '' : (mode === 'point' ? pendingPointSelection : null)?.response === option ? 'selected' : '') + '" ' + (!response && mode === 'point' ? 'aria-pressed="' + ((mode === 'point' ? pendingPointSelection : null)?.response === option) + '" ' : '') + (response || recognitionBlocked ? 'disabled' : '') + '><span class="answer-key">' + (i + 1) + '</span><span>' + (mode === 'binary' ? (i === 0 ? 'Klopt' : 'Klopt niet') : mode === 'point' && !response ? 'Bekijk spier ' + (i + 1) : escape(option)) + '</span>' + (response && option === q.answer ? icon('check') : '') + '</button>').join('') + '</div>') +
-    (mode === 'point' && !response ? '<div class="point-confirmation"><p id="point-selection-status" class="visually-hidden" role="status" aria-live="polite">' + (pendingPointSelection ? 'Keuze gemarkeerd. Je kunt je keuze nog wijzigen.' : 'Kies een spier in het model of met een antwoordknop.') + '</p><button id="confirm-answer" class="primary" ' + (!pendingPointSelection || recognitionBlocked ? 'disabled' : '') + '>Bevestig antwoord ' + icon('check') + '</button></div>' : '') +
-    (!response && !isOpenExercise(mode) && mode !== 'point' ? '<p class="answer-shortcut">' + (mode === 'binary' ? '1–2' : '1–4') + ' om direct te antwoorden</p>' : '') +
-    (response ? feedbackMarkup(q, isCorrect, answerCheck) : '') +
+    (mode === 'point' && !response ? '<div class="point-confirmation lesson-dock"><p id="point-selection-status" class="visually-hidden" role="status" aria-live="polite">' + (pendingPointSelection ? 'Keuze gemarkeerd. Je kunt je keuze nog wijzigen.' : 'Kies een spier in het model of met een antwoordknop.') + '</p><button id="confirm-answer" class="primary" ' + (!pendingPointSelection || recognitionBlocked ? 'disabled' : '') + '>Bevestig antwoord ' + icon('check') + '</button></div>' : '') +
+    (!isOpenExercise(mode) && mode !== 'point' ? '<p class="answer-shortcut' + (response ? ' is-answered" aria-hidden="true' : '') + '">' + (mode === 'binary' ? '1–2' : '1–4') + ' om direct te antwoorden</p>' : '') +
+    (response ? feedbackMarkup(q, isCorrect, answerCheck) : isOpenExercise(mode) ? openAnswerActionsMarkup(mode, recognitionBlocked) : '') +
     '</article>';
   const card = curriculum.cards.find(c => c.id === q.muscleId);
   $('#muscle-select').disabled = !response;
@@ -386,7 +401,7 @@ function answer(index, pickedMuscle = null, selfAssessment = null) {
     session = { ...session, xp: (session.xp || 0) + xp };
     progress = recordAnswer(progress, q.id, correct, Date.now(), mode);
     save(true);
-    if (route === expectedRoute) { renderLesson({ preserveCamera: true }); $('#next-question').focus(); }
+    if (route === expectedRoute) { renderLesson({ preserveCamera: true }); $('#next-question').focus({ preventScroll: true }); }
     else if (route === 'leren') renderHome();
     else if (route === 'voortgang') renderProgress();
   else if (route === 'vragen') renderQuestionBank();
@@ -508,6 +523,8 @@ function navigate() {
   pendingPointSelection = null;
   window.scrollTo(0, 0);
   route = location.hash.slice(1) || 'leren';
+  const homeStats = $('#home-stats');
+  if (homeStats) homeStats.hidden = route !== 'leren';
   for (const view of ['home', 'atlas', 'progress', 'bank']) {
     document.body?.classList.toggle(view + '-view', route === ({ home: 'leren', atlas: 'atlas', progress: 'voortgang', bank: 'vragen' })[view]);
   }

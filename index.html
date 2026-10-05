@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f5f3ed" />
   <meta name="description" content="Leer anatomie en biomechanica met een interactieve 3D-atlas en korte quizlessen." />
   <title>MotionStudy · Leer het lichaam kennen</title>
@@ -11,8 +11,9 @@
   <a class="skip" href="#main" hidden>Naar de inhoud</a>
   <header class="topbar">
     <a class="brand" href="#leren" aria-label="MotionStudy start"><span class="brand-symbol">m<span>s</span></span><span>MotionStudy<span class="brand-dot">.</span></span></a>
-    <nav aria-label="Hoofdnavigatie" hidden><a href="#leren" data-nav="leren">Leren</a><a href="#atlas" data-nav="atlas">3D-atlas</a><a href="#vragen" data-nav="vragen">Vragen</a><a href="#voortgang" data-nav="voortgang">Voortgang</a></nav>
-    <div id="account-controls" class="account-controls" hidden><span id="account-name"></span><button id="account-logout">Uitloggen</button><span id="logout-message" role="alert"></span></div>
+    <div id="home-stats" hidden></div>
+    <nav aria-label="Hoofdnavigatie" hidden><a href="#leren" data-nav="leren"><img class="icon" src="./icons/school.svg" alt="" /><span>Leren</span></a><a href="#atlas" data-nav="atlas"><img class="icon" src="./icons/stretching.svg" alt="" /><span>3D-atlas</span></a><a href="#vragen" data-nav="vragen"><img class="icon" src="./icons/book-2.svg" alt="" /><span>Vragen</span></a><a href="#voortgang" data-nav="voortgang"><img class="icon" src="./icons/chart-bar.svg" alt="" /><span>Voortgang</span></a></nav>
+    <details id="account-controls" class="account-controls" hidden><summary aria-label="Accountmenu"><img class="icon" src="./icons/user-circle.svg" alt="" /></summary><div class="account-menu"><strong id="account-name"></strong><button id="account-logout">Uitloggen</button><span id="logout-message" role="alert"></span></div></details>
   </header>
   <section id="account-screen" class="account-screen" aria-labelledby="account-title">
     <div class="account-intro"><span class="account-subject">Anatomie & biomechanica</span><h1 id="account-title">Leer het lichaam<br /><em>kennen.</em></h1><div class="account-course"><span>11 hoofdstukken</span><span>31 spierkaarten</span><span>593 vragen</span></div></div>
@@ -32,7 +33,7 @@
           <div class="viewer-status" id="viewer-status" role="status">Spieren laden…</div>
           <span class="orientation" id="orientation">VOORZIJDE</span>
         </div>
-        <div class="viewer-tools"><button data-view="front" aria-pressed="true" aria-label="Vooraanzicht">Voor</button><button data-view="back" aria-pressed="false" aria-label="Achteraanzicht">Achter</button><button data-view="side" aria-pressed="false" aria-label="Zijaanzicht">Zij</button><button id="reset-view" aria-label="Hele lichaam tonen">↺</button></div>
+        <div class="viewer-tools"><button data-view="front" aria-pressed="true" aria-label="Vooraanzicht">Voor</button><button data-view="back" aria-pressed="false" aria-label="Achteraanzicht">Achter</button><button data-view="side" aria-pressed="false" aria-label="Zijaanzicht">Zij</button><button id="reset-view" aria-label="Hele lichaam tonen"><img class="icon" src="./icons/refresh.svg" alt="" /></button></div>
         <div class="atlas-controls"><label><input id="bones" type="checkbox" checked /> Skelet tonen</label><label><input id="isolate" type="checkbox" /> Spier isoleren</label></div>
         <div class="selection-card" id="selection-card" aria-live="polite"><h3>Kies een spier</h3></div>
         <label class="muscle-picker">Kies een spier <select id="muscle-select"><option value="">Alle spieren</option></select></label>
@@ -41,7 +42,7 @@
     </div>
     <footer><button id="credits-button">Bronnen & licenties</button></footer>
   </main>
-  <dialog id="credits"><button class="close-dialog" aria-label="Sluiten">×</button><h2>Bronnen & licenties</h2><p>Lesstof: Anatomie-Biomechanica-Cheatsheet, Milo PT opleiding, module 6.6. De vragen zijn op deze lesstof gebaseerd.</p><p><a href="https://drive.google.com/file/d/1cUNMc6m7fZT2LA6F1iY5G0g2Io7OstmW/view" target="_blank" rel="noreferrer">Open de oorspronkelijke lesstof</a></p><p>BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan</p><p>Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0</p><p>Spier- en skeletmodellen overgenomen uit <a href="https://github.com/nqwrc/3d-anatomy" target="_blank" rel="noreferrer">nqwrc/3d-anatomy</a>. De geometrie is ongewijzigd. Kleur, selectie en zichtbaarheid worden in deze app aangepast.</p><p><a href="./models/License.txt">Modelvermelding</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> · <a href="./licenses/upstream-LICENSE.txt">Upstream-licenties</a> · <a href="./licenses/upstream-NOTICE.txt">Upstream-vermelding</a></p><p>Three.js & Three Mesh BVH: MIT. <a href="./licenses/draco-LICENSE.txt">Draco: Apache 2.0</a>. <a href="./licenses/tabler-LICENSE.txt">Tabler Icons: MIT</a>. <a href="./licenses/third-party.txt">Softwarelicenties</a></p><p>Lettertypes: <a href="./licenses/dm-sans-LICENSE.txt">DM Sans</a> en <a href="./licenses/manrope-LICENSE.txt">Manrope</a>, SIL Open Font License.</p></dialog>
+  <dialog id="credits"><button class="close-dialog" aria-label="Sluiten"><img class="icon" src="./icons/x.svg" alt="" /></button><h2>Bronnen & licenties</h2><p>Lesstof: Anatomie-Biomechanica-Cheatsheet, Milo PT opleiding, module 6.6. De vragen zijn op deze lesstof gebaseerd.</p><p><a href="https://drive.google.com/file/d/1cUNMc6m7fZT2LA6F1iY5G0g2Io7OstmW/view" target="_blank" rel="noreferrer">Open de oorspronkelijke lesstof</a></p><p>BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan</p><p>Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0</p><p>Spier- en skeletmodellen overgenomen uit <a href="https://github.com/nqwrc/3d-anatomy" target="_blank" rel="noreferrer">nqwrc/3d-anatomy</a>. De geometrie is ongewijzigd. Kleur, selectie en zichtbaarheid worden in deze app aangepast.</p><p><a href="./models/License.txt">Modelvermelding</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> · <a href="./licenses/upstream-LICENSE.txt">Upstream-licenties</a> · <a href="./licenses/upstream-NOTICE.txt">Upstream-vermelding</a></p><p>Three.js & Three Mesh BVH: MIT. <a href="./licenses/draco-LICENSE.txt">Draco: Apache 2.0</a>. <a href="./licenses/phosphor-LICENSE.txt">Phosphor Icons Duotone: MIT</a>. <a href="./licenses/third-party.txt">Softwarelicenties</a></p><p>Lettertypes: <a href="./licenses/dm-sans-LICENSE.txt">DM Sans</a> en <a href="./licenses/manrope-LICENSE.txt">Manrope</a>, SIL Open Font License.</p></dialog>
   <script type="module" src="/src/bootstrap.js"></script>
 </body>
 </html>
