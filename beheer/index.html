@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="nl">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="robots" content="noindex,nofollow" /><title>Beheer · MotionStudy</title></head>
+<body>
+  <header class="admin-header"><a class="brand" href="/">MotionStudy<span>.</span></a><a href="/">Terug naar de app</a></header>
+  <main class="login-layout">
+    <div><p class="eyebrow">Alleen voor beheer</p><h1>Je cijfers,<br />achter je passkey.</h1><p>Open de analytics met Touch ID of je andere passkey.</p></div>
+    <section class="panel login-panel" aria-labelledby="login-title"><img class="login-icon" src="/icons/lock.svg" alt="" /><h2 id="login-title">Beheer openen</h2><p id="status" role="status" aria-live="polite">Toegang controleren…</p>
+      <form id="owner-form" hidden><div id="setup-fields" hidden><label for="setup-key">Eenmalige setupcode</label><input id="setup-key" type="password" autocomplete="off" spellcheck="false" maxlength="256" aria-describedby="setup-help" /><p id="setup-help">Plak de code die je voor dit dashboard hebt ontvangen. Daarna maak je één passkey aan.</p></div><button id="authenticate" class="primary" type="submit">Inloggen met passkey</button></form>
+      <a id="open-dashboard" class="primary button-link" href="/analytics/" hidden>Open analytics</a><button id="retry" class="secondary" hidden>Opnieuw proberen</button>
+    </section>
+  </main>
+  <script type="module" src="/src/owner-page.js"></script>
+</body>
+</html>
