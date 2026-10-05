@@ -37,3 +37,17 @@
 .muscle-choice-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center}.muscle-choice-actions .primary{font-size:12px;padding:10px 12px;min-height:44px}.muscle-choice-actions .text-button{margin:0;padding:10px 6px;min-height:44px;font-size:12px}
 @media(max-width:360px){.muscle-choice{margin:0 10px 12px;padding:12px}.muscle-choice-option{padding:8px;font-size:12px;gap:6px}}
 .choice-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.choice-lines line{stroke:var(--choice-color);stroke-width:2}
+
+/* Give compact mobile controls enough room for a finger. */
+@media(max-width:900px){
+  nav a,.viewer-tools button,.atlas-controls label,.muscle-picker select,
+  .lesson-top a,.text-link,.source summary{min-height:44px}
+  .lesson-top a,.text-link,.source summary{display:flex;align-items:center}
+  .text-link{justify-content:center}
+}
+
+/* Keep closing the scrollable credits dialog possible on touch screens. */
+.close-dialog{position:sticky;top:0;float:right;margin:-14px -10px 0 8px;background:var(--white);border-radius:50%;z-index:1}
+
+.question-card h2,.feedback p,.statement p{overflow-wrap:anywhere}
+.answer>span:nth-child(2){min-width:0;overflow-wrap:anywhere}
