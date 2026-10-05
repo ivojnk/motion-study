@@ -12,7 +12,7 @@ test('every question has a unique id, four distinct options and an honest source
     if (q.source.kind === 'supplement') {
       assert.equal(q.source.title, 'Aanvullende coachingvoorbeelden', q.id);
       assert.ok(q.source.references.length >= 2, q.id);
-    } else assert.ok(q.source.title.includes('Milo module 6.6'), q.id);
+    } else assert.equal(q.source.title, 'Anatomie & Biomechanica', q.id);
     assert.ok(q.source.section, q.id);
     const options = optionsFor(q);
     assert.equal(options.length, 4, q.id);

@@ -2,7 +2,7 @@
 
 MotionStudy helps you practise anatomy and biomechanics with short quizzes and
 an interactive 3D body. The lessons are in Dutch and cover muscles, movements,
-exercise selection and training principles from Milo module 6.6.
+exercise selection and training principles.
 
 [Open MotionStudy](https://ivojnk.github.io/motion-study/) ·
 [Version with accounts](https://lottequiz-motionstudy.jonkersivo.workers.dev)
@@ -39,7 +39,7 @@ due. Earn XP as you study and reach the daily goal to build a streak.
 - **3D-atlas:** rotate and zoom the body, select a muscle and read its study card.
   You can also show the skeleton, isolate a muscle or open fullscreen.
 - **Vragen:** search questions, answers and explanations, or filter by
-  chapter. Course questions include page references to the study material.
+  chapter.
 
 ## Keep your progress
 

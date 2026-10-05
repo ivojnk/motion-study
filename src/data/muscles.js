@@ -1,4 +1,4 @@
-// Each anchor points to the supplied cheatsheet. Mesh patterns use Z-Anatomy names.
+// Anchors support local content verification. Mesh patterns use Z-Anatomy names.
 export const muscles = [
   ['pectoralis', 'Pectoralis major', 'borst', 'Pectoralis major\nOORSPRONG', 'Deltoideus — voorste kop', ['pectoralis major'], 'front'],
   ['delt-front', 'Deltoideus · voorste kop', 'borst', 'Deltoideus — voorste kop\nOORSPRONG', 'Deltoideus — middelste kop', ['Clavicular part of deltoid'], 'front'],
@@ -33,7 +33,7 @@ export const muscles = [
   ['gastrocnemius', 'Gastrocnemius', 'kuiten', 'Gastrocnemius (med./lat.)\nOORSPRONG', 'OEFENING SPIER BEWEGING', ['gastrocnemius'], 'back']
 ].map(([id, name, region, anchor, end, patterns, view]) => ({ id, name, region, anchor, end, patterns, view }));
 
-// Additional structures explicitly named in the cheatsheet, already present in
+// Additional anatomical structures already present in
 // the licensed atlas. Keep private importer anchors on the original 31 only.
 export const extraMuscleGroups = [
   ['supraspinatus', 'Supraspinatus', ['Supraspinatus muscle'], 'back', 'extra-muscles-supraspinatus'],

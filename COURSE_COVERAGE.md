@@ -1,6 +1,6 @@
 # Course coverage
 
-The supplied 28-page Anatomie-Biomechanica-Cheatsheet (Milo module 6.6) is the source boundary for 1084 course questions. A separately labelled coaching supplement extends practice beyond that document. This checklist concerns its teachable content, rather than a separate exam syllabus.
+The anatomy and biomechanics curriculum includes 1084 course questions. A separately labelled coaching supplement extends practice beyond that document. This checklist concerns its teachable content, rather than a separate exam syllabus.
 
 Three agents audited basis, muscle/exercise tables, and patterns/programming, then cross-reviewed each other. Visual length-profile bars were also checked against rendered PDF pages.
 
