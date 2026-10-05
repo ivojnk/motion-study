@@ -145,3 +145,30 @@ test('pointing responses survive storage even when the clicked muscle is not a s
   assert.deepEqual(readSession({getItem: () => JSON.stringify(lesson)}, lookup), lesson);
   assert.equal(readSession({getItem: () => JSON.stringify({...lesson,index:0})}, lookup), null);
 });
+
+test('source coverage maps every question and every PDF page without dangling references', () => {
+  const ids = new Set(curriculum.questions.map(q => q.id));
+  assert.equal(new Set(curriculum.coverage.map(unit => unit.id)).size, curriculum.coverage.length);
+  const covered = new Set();
+  for (const unit of curriculum.coverage) {
+    assert.ok(unit.questionIds.length, unit.id);
+    for (const id of unit.questionIds) { assert.ok(ids.has(id), unit.id + ': ' + id); covered.add(id); }
+  }
+  assert.deepEqual(covered, ids);
+  const pages = new Set();
+  for (const q of curriculum.questions) {
+    assert.ok(Number.isInteger(q.source.page) && q.source.page >= 1 && q.source.page <= 28, q.id);
+    pages.add(q.source.page);
+  }
+  assert.equal(pages.size, 28);
+});
+
+test('all 64 exercise rows and 57 visual length profiles are tested explicitly', () => {
+  assert.equal(curriculum.coverage.filter(unit => unit.id.endsWith('-target-movement')).length, 64);
+  assert.equal(curriculum.questions.filter(q => /^profile-\d+$/.test(q.id)).length, 57);
+  const answer = id => curriculum.questions.find(q => q.id === id)?.answer;
+  assert.equal(answer('profile-21'), 'Verlengde tot middenpositie');
+  assert.equal(answer('profile-27'), 'Middenpositie tot verkorte positie');
+  assert.equal(answer('profile-29'), 'Verlengde tot middenpositie');
+  assert.equal(answer('ql-maximale rek'), 'Lateroflexie andere zijde');
+});

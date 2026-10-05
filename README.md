@@ -9,7 +9,9 @@ lessons. Works in desktop and mobile browsers.
 
 - Explore real Z-Anatomy muscles and skeleton, rotate and zoom, select a muscle,
   highlight it and isolate it.
-- Study 31 muscle cards and 192 questions across eleven chapters.
+- Study 31 muscle cards and 593 questions across eleven chapters.
+- Search all questions and answers by chapter, with a PDF page reference for every question.
+  See [COURSE_COVERAGE.md](COURSE_COVERAGE.md) for the source coverage checklist.
 - Follow 33 sequential levels: discover, practise and pass a checkpoint in each chapter.
   Score at least 80% on original questions to unlock the next level. Skips count
   against that score, and retries help learning without inflating it.
@@ -41,8 +43,8 @@ to inspect the production build.
 
 The public question bank is checked in. A clean clone builds without the
 original study PDF or any private file. An optional local
-`npm run curriculum:import` rebuilds it from a private
-`sources/course.txt` file. That file is ignored.
+`npm run curriculum:import` rebuilds it from the private files
+`sources/course.txt` and `sources/course-pages.json`. These private source files are ignored.
 
 ## Sources
 
@@ -78,8 +80,9 @@ tested.
 
 ## Current limits
 
-The question bank spans the course chapters and is not an exhaustive exam
-syllabus. Questions recall the supplied course rather than providing
+The question bank covers the teachable content of the supplied 28-page cheatsheet,
+including 64 exercise rows and 57 visual length profiles. It is not a guarantee
+about questions in an external exam. Questions recall the supplied course rather than providing
 personal training or medical advice.
 
 The imported atlas has no animation rig. Exercise animation remains a future

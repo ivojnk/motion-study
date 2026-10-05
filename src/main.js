@@ -57,7 +57,7 @@ function dueCount() {
   return curriculum.questions.filter(q => progress.questions[q.id]?.due <= Date.now()).length;
 }
 function sourceMarkup(source) {
-  return '<details class="source"><summary>' + icon('book-2') + ' Bron van deze vraag</summary><p>' + escape(source.title) + ' · ' + escape(source.section) + '</p><a href="' + curriculum.sourceUrl + '" target="_blank" rel="noreferrer">Open de cheatsheet ↗</a></details>';
+  return '<details class="source"><summary>' + icon('book-2') + ' Bron van deze vraag</summary><p>' + escape(source.title) + ' · ' + escape(source.section) + (source.page ? ' · pagina ' + source.page : '') + '</p><a href="' + curriculum.sourceUrl + '" target="_blank" rel="noreferrer">Open de cheatsheet ↗</a></details>';
 }
 function intro(title, description, eyebrow = 'JOUW PERSOONLIJKE LEERPAD') {
   $('#intro').innerHTML = '<span class="eyebrow">' + eyebrow + '</span><h1>' + title + '</h1><p>' + description + '</p>';
@@ -72,7 +72,7 @@ function renderHome() {
   const levels = levelPath(game);
   const current = levels.find(level => !level.done);
   const due = dueCount();
-  $('#learning').innerHTML = gameMarkup() + '<div class="daily-card"><span class="eyebrow">' + (current ? 'JOUW VOLGENDE STAP' : 'LEERPAD AFGEROND') + '</span><h2>' + (current ? escape(current.topic.title) : 'Blijf je kennis oefenen.') + '</h2><p>' + (current ? current.label + ' · level ' + (current.stage + 1) + ' van 3' : 'Je hebt alle checkpoints gehaald. Tijd voor een gemengde les.') + '</p><button class="primary" ' + (current ? 'data-level="' + current.id + '"' : 'data-start="daily"') + '>' + (session && !session.finished && session.levelId === current?.id ? 'Ga verder' : 'Start je level') + icon('arrow-right') + '</button></div><a class="atlas-shortcut" href="#atlas">' + icon('stretch') + '<span><strong>Verken de 3D-atlas</strong><small>Bekijk alle spieren en hun functies</small></span>' + icon('arrow-right') + '</a><div class="section-heading"><h2>Jouw leerpad</h2><span>11 hoofdstukken · 33 levels</span></div><div class="learning-path">' + topics.map((topic, chapter) => '<section class="path-chapter"><div class="chapter-heading"><span>' + (chapter + 1) + '</span><div><h3>' + topic.title + '</h3><p>' + topic.subtitle + '</p></div></div><ol>' + levels.filter(level => level.topic.id === topic.id).map(level => '<li class="path-step ' + (level.done ? 'done' : level.locked ? 'locked' : 'current') + '"><button class="level-node" data-level="' + level.id + '" ' + (level.locked ? 'disabled' : '') + ' aria-label="' + escape(topic.title + ': ' + level.label + (level.done ? ', voltooid, opnieuw oefenen' : level.locked ? ', vergrendeld' : ', volgende level')) + '">' + (level.done ? icon('check') : level.stage === 2 ? icon('target') : icon(topic.icon)) + '</button><span><strong>' + level.label + '</strong><small>' + (level.done ? 'Voltooid · oefen opnieuw' : level.locked ? 'Rond de vorige level af' : 'Klaar om te starten') + '</small></span></li>').join('') + '</ol></section>').join('') + '</div><div class="practice-actions"><button class="primary" data-start="daily">Gemengde les</button><button class="text-button" data-start="review" ' + (!due ? 'disabled' : '') + '>Herhalen (' + due + ')</button></div><p class="privacy-note">Levels openen bij minstens 80% goed op de eerste poging. De atlas en gemengde lessen blijven vrij toegankelijk.</p>';
+  $('#learning').innerHTML = gameMarkup() + '<div class="daily-card"><span class="eyebrow">' + (current ? 'JOUW VOLGENDE STAP' : 'LEERPAD AFGEROND') + '</span><h2>' + (current ? escape(current.topic.title) : 'Blijf je kennis oefenen.') + '</h2><p>' + (current ? current.label + ' · level ' + (current.stage + 1) + ' van 3' : 'Je hebt alle checkpoints gehaald. Tijd voor een gemengde les.') + '</p><button class="primary" ' + (current ? 'data-level="' + current.id + '"' : 'data-start="daily"') + '>' + (session && !session.finished && session.levelId === current?.id ? 'Ga verder' : 'Start je level') + icon('arrow-right') + '</button></div><a class="atlas-shortcut" href="#atlas">' + icon('stretch') + '<span><strong>Verken de 3D-atlas</strong><small>Bekijk alle spieren en hun functies</small></span>' + icon('arrow-right') + '</a><a class="atlas-shortcut" href="#vragen">' + icon('book-2') + '<span><strong>Alle ' + curriculum.questions.length + ' vragen</strong><small>Zoek in de volledige vragenbank per hoofdstuk</small></span>' + icon('arrow-right') + '</a><div class="section-heading"><h2>Jouw leerpad</h2><span>11 hoofdstukken · 33 levels</span></div><div class="learning-path">' + topics.map((topic, chapter) => '<section class="path-chapter"><div class="chapter-heading"><span>' + (chapter + 1) + '</span><div><h3>' + topic.title + '</h3><p>' + topic.subtitle + '</p></div></div><ol>' + levels.filter(level => level.topic.id === topic.id).map(level => '<li class="path-step ' + (level.done ? 'done' : level.locked ? 'locked' : 'current') + '"><button class="level-node" data-level="' + level.id + '" ' + (level.locked ? 'disabled' : '') + ' aria-label="' + escape(topic.title + ': ' + level.label + (level.done ? ', voltooid, opnieuw oefenen' : level.locked ? ', vergrendeld' : ', volgende level')) + '">' + (level.done ? icon('check') : level.stage === 2 ? icon('target') : icon(topic.icon)) + '</button><span><strong>' + level.label + '</strong><small>' + (level.done ? 'Voltooid · oefen opnieuw' : level.locked ? 'Rond de vorige level af' : 'Klaar om te starten') + '</small></span></li>').join('') + '</ol></section>').join('') + '</div><div class="practice-actions"><button class="primary" data-start="daily">Gemengde les</button><button class="text-button" data-start="review" ' + (!due ? 'disabled' : '') + '>Herhalen (' + due + ')</button></div><p class="privacy-note">Levels openen bij minstens 80% goed op de eerste poging. De atlas en gemengde lessen blijven vrij toegankelijk.</p>';
   resetAtlas();
 }
 function restoreAtlasLayout() {
@@ -258,6 +258,7 @@ function answer(index, pickedMuscle = null) {
     if (route === expectedRoute) { renderLesson(); $('#next-question').focus(); }
     else if (route === 'leren') renderHome();
     else if (route === 'voortgang') renderProgress();
+  else if (route === 'vragen') renderQuestionBank();
   });
 }
 function next(skip = false) {
@@ -281,7 +282,8 @@ function finish() {
       progress = { ...progress, sessions: [...progress.sessions, { at: Date.now(), correct: session.correct, total: session.answered }].slice(-200) };
       save(true);
     }
-    if (route !== endingRoute) { if (route === 'leren') renderHome(); else if (route === 'voortgang') renderProgress(); return; }
+    if (route !== endingRoute) { if (route === 'leren') renderHome(); else if (route === 'voortgang') renderProgress();
+  else if (route === 'vragen') renderQuestionBank(); return; }
     const passed = session.levelId && game.completed.includes(session.levelId);
     const stats = gameStats(game);
     intro(passed ? 'Level <em>gehaald!</em>' : 'Goed <em>geoefend.</em>', passed ? 'Je volgende stap is nu open.' : 'Elke poging helpt. Bekijk wat je nu al weet.', 'LES AFGEROND');
@@ -339,14 +341,37 @@ function renderProgress() {
   }).join('') + '</div><p class="privacy-note">Beheerst betekent: minstens drie goede antwoorden met toenemende intervallen, en het laatste antwoord goed. Voortgang is gekoppeld aan deze browser.</p>';
   resetAtlas();
 }
+function renderQuestionBank() {
+  restoreAtlasLayout();
+  resetAtlas();
+  intro('Alle vragen, <em>op één plek.</em>', curriculum.questions.length + ' vragen uit de cheatsheet, verdeeld over 11 hoofdstukken. Open een vraag om het antwoord en de bron te bekijken.', 'JOUW VRAGENBANK');
+  $('#learning').innerHTML = '<div class="bank-filters"><label for="question-search">Zoek een onderwerp</label><input id="question-search" type="search" placeholder="Bijvoorbeeld diafragma of deload"><label for="question-chapter">Hoofdstuk</label><select id="question-chapter"><option value="">Alle hoofdstukken</option>' + topics.map(topic => '<option value="' + topic.id + '">' + escape(topic.title) + '</option>').join('') + '</select></div><p id="bank-count" role="status">' + curriculum.questions.length + ' vragen</p><div class="question-bank">' + topics.map(topic => '<details class="bank-chapter" data-chapter="' + topic.id + '"><summary>' + escape(topic.title) + ' · ' + curriculum.questions.filter(q => q.region === topic.id).length + ' vragen</summary><button class="text-button" data-start="' + topic.id + '">Oefen dit hoofdstuk</button><ol>' + curriculum.questions.filter(q => q.region === topic.id).map(q => '<li data-search="' + escape((q.prompt + ' ' + q.answer).toLocaleLowerCase('nl')) + '"><details><summary>' + escape(q.type === 'recognition' ? '3D-herkenning: ' + q.answer : q.prompt) + '</summary><p><strong>Antwoord:</strong> ' + escape(q.answer) + '</p>' + sourceMarkup(q.source) + '</details></li>').join('') + '</ol></details>').join('') + '</div><a class="text-link" href="#leren">Terug naar je leerpad</a>';
+}
+function filterQuestionBank() {
+  const query = $('#question-search').value.trim().toLocaleLowerCase('nl');
+  const chapter = $('#question-chapter').value;
+  let count = 0;
+  document.querySelectorAll('.bank-chapter').forEach(section => {
+    let visible = 0;
+    section.querySelectorAll('[data-search]').forEach(row => {
+      row.hidden = Boolean(chapter && section.dataset.chapter !== chapter) || !row.dataset.search.includes(query);
+      if (!row.hidden) visible++;
+    });
+    section.hidden = !visible;
+    section.open = Boolean(query || chapter) && Boolean(visible);
+    count += visible;
+  });
+  $('#bank-count').textContent = count ? count + ' vragen gevonden' : 'Geen vragen gevonden. Probeer een ander woord of hoofdstuk.';
+}
 function navigate() {
   pendingPointSelection = null;
   window.scrollTo(0, 0);
   route = location.hash.slice(1) || 'leren';
-  document.querySelectorAll('[data-nav]').forEach(a => { const active = a.dataset.nav === route || (route.startsWith('les/') && a.dataset.nav === 'leren'); a.toggleAttribute('aria-current', active); });
+  document.querySelectorAll('[data-nav]').forEach(a => { const active = a.dataset.nav === route || ((route.startsWith('les/') || route === 'vragen') && a.dataset.nav === 'leren'); a.toggleAttribute('aria-current', active); });
   if (route.startsWith('les/')) renderLesson();
   else if (route === 'atlas') { resetAtlas(); renderAtlas(); }
   else if (route === 'voortgang') renderProgress();
+  else if (route === 'vragen') renderQuestionBank();
   else renderHome();
 }
 document.addEventListener('click', event => {
@@ -372,6 +397,8 @@ document.addEventListener('click', event => {
   if (event.target.closest('#credits-button')) $('#credits').showModal();
   if (event.target.closest('.close-dialog')) $('#credits').close();
 });
+document.addEventListener('input', event => { if (event.target.id === 'question-search') filterQuestionBank(); });
+document.addEventListener('change', event => { if (event.target.id === 'question-chapter') filterQuestionBank(); });
 document.addEventListener('keydown', event => {
   if (!session?.prepared || (needsMatching()) || !route.startsWith('les/') || $('#credits').open || /INPUT|SELECT|TEXTAREA/.test(event.target.tagName)) return;
   if (/^[1-4]$/.test(event.key)) {
@@ -388,7 +415,8 @@ $('#isolate').addEventListener('change', event => viewer?.setIsolated(event.targ
 window.addEventListener('hashchange', navigate);
 window.matchMedia('(max-width:620px)').addEventListener('change', arrangeModelQuestion);
 window.addEventListener('storage', event => {
-  if ([PROGRESS_KEY, GAME_KEY].includes(event.key)) { refreshProgress(); if (route === 'leren') renderHome(); else if (route === 'voortgang') renderProgress(); }
+  if ([PROGRESS_KEY, GAME_KEY].includes(event.key)) { refreshProgress(); if (route === 'leren') renderHome(); else if (route === 'voortgang') renderProgress();
+  else if (route === 'vragen') renderQuestionBank(); }
 });
 const modelPrompt = document.createElement('p');
 modelPrompt.id = 'model-prompt'; modelPrompt.tabIndex = -1; modelPrompt.className = 'model-prompt'; modelPrompt.hidden = true;

@@ -310,3 +310,18 @@ test('an older tab saving another lesson cannot resurrect a completed lesson dra
   assert.ok(storedDrafts.daily);
   assert.equal(learning.readGame(finishing.storage).completed.join(','), 'basis:0');
 });
+
+test('the full question directory is accessible without changing an unfinished lesson or XP', () => {
+  const instance = app();
+  instance.startLesson();
+  const before = JSON.stringify(instance.read().session);
+  const beforeXP = xp(instance);
+  instance.go('#vragen');
+  assert.equal([...instance.html().matchAll(/<li data-search=/g)].length, curriculum.questions.length);
+  assert.match(instance.html(), /id="question-search"/);
+  assert.match(instance.html(), /pagina 28/);
+  assert.equal(JSON.stringify(instance.read().session), before);
+  assert.equal(xp(instance), beforeXP);
+  instance.go('#les/basis/0');
+  assert.equal(JSON.stringify(instance.read().session), before);
+});
