@@ -9,13 +9,21 @@
   <title>MotionStudy · Leer het lichaam kennen</title>
 </head>
 <body>
-  <a class="skip" href="#main">Naar de inhoud</a>
+  <a class="skip" href="#main" hidden>Naar de inhoud</a>
   <header class="topbar">
     <a class="brand" href="#leren" aria-label="MotionStudy start"><span class="brand-symbol">m<span>s</span></span><span>MotionStudy<span class="brand-dot">.</span></span></a>
-    <nav aria-label="Hoofdnavigatie"><a href="#leren" data-nav="leren">Leren</a><a href="#atlas" data-nav="atlas">3D-atlas</a><a href="#voortgang" data-nav="voortgang">Voortgang</a></nav>
-    <span class="avatar" aria-label="MotionStudy">MS</span>
+    <nav aria-label="Hoofdnavigatie" hidden><a href="#leren" data-nav="leren">Leren</a><a href="#atlas" data-nav="atlas">3D-atlas</a><a href="#voortgang" data-nav="voortgang">Voortgang</a></nav>
+    <div id="account-controls" class="account-controls" hidden><span id="account-name"></span><button id="account-logout">Uitloggen</button><span id="logout-message" role="alert"></span></div>
   </header>
-  <main id="main" tabindex="-1">
+  <section id="account-screen" class="account-screen" aria-labelledby="account-title">
+    <div class="account-intro"><span class="eyebrow">JOUW EIGEN LEERPAD</span><h1 id="account-title">Leer het lichaam<br /><em>kennen.</em></h1><p>Ontdek de 3D-atlas en oefen anatomie met korte lessen.</p></div>
+    <div class="account-card"><h2>Hoe heet je hier?</h2><p>Vul je gebruikersnaam in. Nieuw hier? Dan maken we meteen je account.</p><p id="account-loading" role="status">Even kijken of je al bent ingelogd…</p>
+      <form id="account-form" hidden><label for="account-username">Gebruikersnaam</label><input id="account-username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="2" maxlength="24" pattern="[a-zA-Z0-9][a-zA-Z0-9._\-]{1,23}" aria-describedby="account-help account-message" required /><p id="account-help">2–24 tekens. Letters, cijfers, punten, streepjes en underscores.</p><p id="account-message" role="alert" hidden></p><button id="account-submit" class="primary" type="submit">Verder</button></form>
+      <button id="account-reload" class="text-button" type="button" hidden>Probeer opnieuw</button><p class="account-note">Onthoud je naam, daarmee kom je terug. Iedereen met dezelfde gebruikersnaam kan dit account gebruiken.</p><p class="account-note">Je voortgang blijft op dit apparaat, apart per account.</p>
+    </div>
+  </section>
+  <noscript><p class="account-screen">Zet JavaScript aan om MotionStudy te gebruiken.</p></noscript>
+  <main id="main" tabindex="-1" hidden>
     <section id="intro"></section>
     <div class="workspace">
       <section class="learning-panel" id="learning" aria-label="Leeromgeving"></section>
@@ -36,6 +44,6 @@
     <footer><button id="credits-button">Bronnen & licenties</button></footer>
   </main>
   <dialog id="credits"><button class="close-dialog" aria-label="Sluiten">×</button><h2>Bronnen & licenties</h2><p>Lesstof: Anatomie-Biomechanica-Cheatsheet, Milo PT opleiding, module 6.6.</p><p><a href="https://drive.google.com/file/d/1cUNMc6m7fZT2LA6F1iY5G0g2Io7OstmW/view" target="_blank" rel="noreferrer">Open de oorspronkelijke lesstof</a></p><p>BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan</p><p>Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0</p><p>Spier- en skeletmodellen overgenomen uit <a href="https://github.com/nqwrc/3d-anatomy" target="_blank" rel="noreferrer">nqwrc/3d-anatomy</a>. De geometrie is ongewijzigd. Kleur, selectie en zichtbaarheid worden in deze app aangepast.</p><p><a href="./models/License.txt">Modelvermelding</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> · <a href="./licenses/upstream-LICENSE.txt">Upstream-licenties</a> · <a href="./licenses/upstream-NOTICE.txt">Upstream-vermelding</a></p><p>Three.js & Three Mesh BVH: MIT. <a href="./licenses/draco-LICENSE.txt">Draco: Apache 2.0</a>. <a href="./licenses/tabler-LICENSE.txt">Tabler Icons: MIT</a>. <a href="./licenses/third-party.txt">Softwarelicenties</a></p><p>Lettertypes: <a href="./licenses/dm-sans-LICENSE.txt">DM Sans</a> en <a href="./licenses/manrope-LICENSE.txt">Manrope</a>, SIL Open Font License.</p><p>Voortgang wordt in deze browser opgeslagen. Antwoorden worden niet verstuurd.</p></dialog>
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/bootstrap.js"></script>
 </body>
 </html>

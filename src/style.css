@@ -81,3 +81,28 @@ textarea.open-answer-input{min-height:132px;resize:vertical}
 
 .question-card h2,.feedback p,.statement p{overflow-wrap:anywhere}
 .answer>span:nth-child(2){min-width:0;overflow-wrap:anywhere}
+
+.account-screen{max-width:1100px;margin:0 auto;padding:80px 36px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;min-height:70vh}
+.account-intro h1{margin:16px 0 24px;font-size:clamp(36px,5vw,60px)}
+.account-intro h1 em{font-style:normal;color:var(--purple)}
+.account-intro>p{max-width:360px;font-size:16px}
+.account-card{padding:32px;border:1px solid var(--line);border-radius:24px;background:var(--white);min-width:0}
+.account-card h2{font-size:25px;margin-bottom:12px}
+.account-card>p{font-size:14px}
+#account-loading{margin-top:24px}
+#account-form{display:grid;gap:10px;margin:26px 0 20px}
+#account-form label{font-size:14px;font-weight:600}
+#account-username{width:100%;min-width:0;min-height:52px;padding:12px 14px;border:2px solid #91879e;border-radius:12px;font-size:16px;background:var(--white);color:inherit}
+#account-username:hover,#account-username:focus{border-color:var(--purple)}
+#account-help{font-size:12px}
+#account-message{font-size:13px;color:var(--red);overflow-wrap:anywhere}
+#account-submit{width:100%;margin-top:8px}
+.account-card .account-note{font-size:12px;line-height:1.7;margin-top:14px}
+.account-controls{display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:8px;max-width:220px;font-size:12px}
+#account-name{font-weight:700;overflow-wrap:anywhere;max-width:100%}
+#account-logout{min-height:44px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--white);font-size:12px}
+#account-logout:hover{background:var(--soft)}
+#logout-message{color:var(--red);font-size:12px}
+#logout-message:empty{display:none}
+@media(max-width:800px){.account-screen{gap:32px;padding:48px 24px}.account-card{padding:24px}.account-controls{max-width:170px}}
+@media(max-width:620px){.account-screen{grid-template-columns:1fr;gap:28px;padding:32px 18px;min-height:auto}.account-intro h1{font-size:36px;margin:12px 0 16px}.account-intro h1 br{display:none}.account-intro h1 em:before{content:' '}.account-intro>p{font-size:14px}.account-card{padding:24px 20px}.account-card h2{font-size:23px}.account-controls{max-width:130px;font-size:11px}.topbar:has(.account-controls:not([hidden])) .brand{font-size:18px;gap:7px}.topbar:has(.account-controls:not([hidden])) .brand-symbol{width:30px;height:30px}.topbar:has(.account-controls:not([hidden])){padding-left:14px;padding-right:14px;gap:6px}#account-logout{font-size:11px;padding:8px}}

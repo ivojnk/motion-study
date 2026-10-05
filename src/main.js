@@ -8,7 +8,7 @@ const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', 
 const iconNames = { school: 'school', stretch: 'stretching', barbell: 'barbell', target: 'target-arrow', arrows: 'arrows-move', growth: 'chart-bar' };
 const icon = name => '<img class="icon" src="' + import.meta.env.BASE_URL + 'icons/' + (iconNames[name] || name) + '.svg" alt="" />';
 let storage;
-try { storage = window.localStorage; } catch { storage = { getItem() { return null; }, setItem() { throw new Error('Storage blocked'); } }; }
+try { storage = window.motionStudyStorage || window.localStorage; } catch { storage = { getItem() { return null; }, setItem() { throw new Error('Storage blocked'); } }; }
 let progress = readProgress(storage);
 let game = readGame(storage);
 let pairSelection = null;
@@ -30,7 +30,7 @@ function refreshProgress() {
   } catch { storageAvailable = false; }
 }
 function withProgressLock(action) {
-  return typeof navigator !== 'undefined' && navigator.locks ? navigator.locks.request('motionstudy-progress', action) : action();
+  return typeof navigator !== 'undefined' && navigator.locks ? navigator.locks.request('motionstudy-progress' + (window.motionStudyAccount ? ':' + window.motionStudyAccount.id : ''), action) : action();
 }
 function save(rewards = false) {
   try {
@@ -466,7 +466,7 @@ $('#isolate').addEventListener('change', event => viewer?.setIsolated(event.targ
 window.addEventListener('hashchange', navigate);
 window.matchMedia('(max-width:620px)').addEventListener('change', arrangeModelQuestion);
 window.addEventListener('storage', event => {
-  if ([PROGRESS_KEY, GAME_KEY].includes(event.key)) { refreshProgress(); if (route === 'leren') renderHome(); else if (route === 'voortgang') renderProgress();
+  if ([PROGRESS_KEY, GAME_KEY].map(key => storage.keyFor ? storage.keyFor(key) : key).includes(event.key)) { refreshProgress(); if (route === 'leren') renderHome(); else if (route === 'voortgang') renderProgress();
   else if (route === 'vragen') renderQuestionBank(); }
 });
 const modelPrompt = document.createElement('p');
