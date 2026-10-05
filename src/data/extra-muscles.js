@@ -3,7 +3,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-flat-db-profile",
     "region": "borst",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij flat DB press?",
+    "prompt": "Welke spieren en bewegingen horen bij flat DB press?",
     "answer": "Pectoralis major: horizontale schouderadductie en elleboogextensie",
     "distractors": [
       "Quadratus lumborum en obliques: lateroflexie",
@@ -15,7 +15,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-flat-db-cue",
     "region": "borst",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij flat DB press in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij flat DB press?",
     "answer": "Meer bewegingsuitslag dan bij een barbell",
     "distractors": [
       "De dumbbells beperken de bewegingsuitslag meer dan een barbell",
@@ -27,7 +27,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-incline-db-profile",
     "region": "borst",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij incline DB press?",
+    "prompt": "Welke spieren en bewegingen horen bij incline DB press?",
     "answer": "Bovenste borst (pars clavicularis): schouderanteflexie en horizontale adductie, elleboogextensie",
     "distractors": [
       "Externe en interne obliques: geladen rotatie",
@@ -39,7 +39,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-incline-db-cue",
     "region": "borst",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij incline DB press in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij incline DB press?",
     "answer": "Meer bewegingsuitslag dan bij een barbell",
     "distractors": [
       "De dumbbells beperken de bewegingsuitslag meer dan een barbell",
@@ -51,7 +51,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-decline-db-profile",
     "region": "borst",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij decline DB press?",
+    "prompt": "Welke spieren en bewegingen horen bij decline DB press?",
     "answer": "Onderste borst (pars abdominalis): horizontale schouderadductie richting heup en elleboogextensie",
     "distractors": [
       "Externe en interne obliques: geladen rotatie",
@@ -63,7 +63,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-decline-db-cue",
     "region": "borst",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij decline DB press in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij decline DB press?",
     "answer": "Meer bewegingsuitslag dan bij een barbell",
     "distractors": [
       "De dumbbells beperken de bewegingsuitslag meer dan een barbell",
@@ -75,7 +75,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-seated-fly-profile",
     "region": "borst",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij seated cable fly?",
+    "prompt": "Welke spieren en bewegingen horen bij seated cable fly?",
     "answer": "Pectoralis major: horizontale schouderadductie met licht gebogen elleboog",
     "distractors": [
       "Obliques en rectus abdominis: diagonale flexie",
@@ -87,7 +87,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-seated-fly-cue",
     "region": "borst",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij seated cable fly in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij seated cable fly?",
     "answer": "De borst, in plaats van de triceps, is de beperkende factor",
     "distractors": [
       "De beschreven techniek vraagt juist maximaal zwaaien vanuit de heup",
@@ -99,7 +99,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-machine-press-profile",
     "region": "borst",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij machine presses?",
+    "prompt": "Welke spieren en bewegingen horen bij machine presses?",
     "answer": "Pectoralis major: horizontale schouderadductie en elleboogextensie",
     "distractors": [
       "Gluteus maximus: heupretroflexie",
@@ -111,7 +111,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-machine-press-cue",
     "region": "borst",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij machine presses in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij machine presses?",
     "answer": "De borst kan eerder limiteren dan stabiliteit of balans",
     "distractors": [
       "De ondersteuning is bedoeld om de balans moeilijker te maken",
@@ -123,7 +123,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-shoulder-press-profile",
     "region": "borst",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij seated DB shoulder press?",
+    "prompt": "Welke spieren en bewegingen horen bij seated DB shoulder press?",
     "answer": "Voorste deltoideus: schouderanteflexie of verticale abductie en elleboogextensie",
     "distractors": [
       "Gluteus medius: heupabductie",
@@ -135,7 +135,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-shoulder-press-cue",
     "region": "borst",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij seated DB shoulder press in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij seated DB shoulder press?",
     "answer": "De bank biedt stabiliteit, zodat de voorste deltoideus kan limiteren",
     "distractors": [
       "De ondersteuning is bedoeld om de balans moeilijker te maken",
@@ -147,7 +147,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-supported-raise-profile",
     "region": "borst",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij chest supported DB side raise?",
+    "prompt": "Welke spieren en bewegingen horen bij chest supported DB side raise?",
     "answer": "Middelste deltoideus: verticale schouderabductie en lichte scapulaire laterorotatie",
     "distractors": [
       "Rectus femoris en vasti: heupextensie, knie-extensie en enkelplantairflexie (triple extensie)",
@@ -159,7 +159,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-supported-raise-cue",
     "region": "borst",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij chest supported DB side raise in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij chest supported DB side raise?",
     "answer": "Zittend met borststeun beperkt momentum",
     "distractors": [
       "Borststeun dient juist om extra momentum op te bouwen",
@@ -171,7 +171,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-low-raise-profile",
     "region": "borst",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij cable side raise met lage kabel?",
+    "prompt": "Welke spieren en bewegingen horen bij cable side raise met lage kabel?",
     "answer": "Middelste deltoideus: verticale schouderabductie",
     "distractors": [
       "Gluteus maximus: heupanteflexie en retroflexie als hinge met licht gebogen, vaste knie",
@@ -183,7 +183,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-low-raise-cue",
     "region": "borst",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij cable side raise met lage kabel in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij cable side raise met lage kabel?",
     "answer": "De weerstand is halverwege de beweging het hoogst",
     "distractors": [
       "De weerstand is gedurende de hele beweging nul",
@@ -195,7 +195,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-hip-raise-profile",
     "region": "borst",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij cable side raise met kabel op heuphoogte?",
+    "prompt": "Welke spieren en bewegingen horen bij cable side raise met kabel op heuphoogte?",
     "answer": "Middelste deltoideus: verticale schouderabductie",
     "distractors": [
       "Gluteus maximus: heupanteflexie en retroflexie als hinge met licht gebogen, vaste knie",
@@ -207,7 +207,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-hip-raise-cue",
     "region": "borst",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij cable side raise met kabel op heuphoogte in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij cable side raise met kabel op heuphoogte?",
     "answer": "De weerstand is aan het begin van de beweging het hoogst",
     "distractors": [
       "De weerstand is gedurende de hele beweging nul",
@@ -219,7 +219,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-rear-incline-profile",
     "region": "borst",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij incline DB rear delt fly?",
+    "prompt": "Welke spieren en bewegingen horen bij incline DB rear delt fly?",
     "answer": "Achterste deltoideus: horizontale schouderabductie en exorotatie",
     "distractors": [
       "Gluteus maximus: geïsoleerde heupretroflexie, been naar achteren",
@@ -231,7 +231,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-rear-incline-cue",
     "region": "borst",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij incline DB rear delt fly in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij incline DB rear delt fly?",
     "answer": "Zittend met borststeun beperkt momentum",
     "distractors": [
       "Borststeun dient juist om extra momentum op te bouwen",
@@ -243,7 +243,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-rear-cable-profile",
     "region": "borst",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij single arm rear delt cable fly?",
+    "prompt": "Welke spieren en bewegingen horen bij single arm rear delt cable fly?",
     "answer": "Achterste deltoideus: horizontale schouderabductie en exorotatie",
     "distractors": [
       "Gluteus maximus: heupretroflexie van gebogen naar gestrekt",
@@ -255,7 +255,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-rear-cable-cue",
     "region": "borst",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij single arm rear delt cable fly in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij single arm rear delt cable fly?",
     "answer": "Staand een paal vasthouden voorkomt dat stabiliteit beperkt",
     "distractors": [
       "De ondersteuning is bedoeld om de balans moeilijker te maken",
@@ -267,7 +267,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-lat-pulldown-profile",
     "region": "rug",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij lat pulldown?",
+    "prompt": "Welke spieren en bewegingen horen bij lat pulldown?",
     "answer": "Latissimus: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire mediorotatie en depressie",
     "distractors": [
       "Gluteus maximus: heupretroflexie",
@@ -279,7 +279,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-lat-pulldown-cue",
     "region": "rug",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij lat pulldown in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij lat pulldown?",
     "answer": "Laagdrempelig, omdat lichaamsgewicht niet de beperkende factor is",
     "distractors": [
       "De beschreven techniek vraagt juist maximaal zwaaien vanuit de heup",
@@ -291,7 +291,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-cross-row-profile",
     "region": "rug",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij cross cable row met elleboog naar binnen?",
+    "prompt": "Welke spieren en bewegingen horen bij cross cable row met elleboog naar binnen?",
     "answer": "Latissimus: schouderretroflexie, elleboogflexie, scapulaire retractie en depressie",
     "distractors": [
       "Obliques en rectus abdominis: diagonale flexie",
@@ -303,7 +303,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-cross-row-cue",
     "region": "rug",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij cross cable row met elleboog naar binnen in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij cross cable row met elleboog naar binnen?",
     "answer": "Accent op de lats met minder nadruk op trapezius",
     "distractors": [
       "Accent op de bovenste borst via horizontale adductie",
@@ -315,7 +315,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-lat-prayer-profile",
     "region": "rug",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij lat prayer?",
+    "prompt": "Welke spieren en bewegingen horen bij lat prayer?",
     "answer": "Latissimus: schouderretroflexie met gestrekte elleboog",
     "distractors": [
       "Gluteus maximus: heupanteflexie en retroflexie als hinge met licht gebogen, vaste knie",
@@ -327,7 +327,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-lat-prayer-cue",
     "region": "rug",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij lat prayer in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij lat prayer?",
     "answer": "Isolatie van de lats zonder de biceps als limiterende factor",
     "distractors": [
       "Bicepsisolatie door maximale elleboogflexie",
@@ -339,7 +339,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-kelso-profile",
     "region": "rug",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij Kelso shrugs?",
+    "prompt": "Welke spieren en bewegingen horen bij Kelso shrugs?",
     "answer": "Bovenste trapezius: scapulaire retractie en depressie zonder schouderbeweging",
     "distractors": [
       "Quadratus lumborum en obliques: lateroflexie",
@@ -351,7 +351,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-kelso-cue",
     "region": "rug",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij Kelso shrugs in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij Kelso shrugs?",
     "answer": "Minder momentum en beide genoemde scapulaire functies trainen",
     "distractors": [
       "Borststeun dient juist om extra momentum op te bouwen",
@@ -363,7 +363,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-45-shrug-profile",
     "region": "rug",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij 45° cable shrugs?",
+    "prompt": "Welke spieren en bewegingen horen bij 45° cable shrugs?",
     "answer": "Bovenste trapezius: scapulaire elevatie afgewisseld met retractie en depressie",
     "distractors": [
       "Obliques en rectus abdominis: diagonale flexie",
@@ -375,7 +375,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-45-shrug-cue",
     "region": "rug",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij 45° cable shrugs in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij 45° cable shrugs?",
     "answer": "Spanning gedurende de hele beweging",
     "distractors": [
       "De genoemde weerstand vermindert de spierspanning tot nul",
@@ -387,7 +387,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-supported-row-profile",
     "region": "rug",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij chest supported cable row met ellebogen naar buiten?",
+    "prompt": "Welke spieren en bewegingen horen bij chest supported cable row met ellebogen naar buiten?",
     "answer": "Middelste trapezius: horizontale schouderabductie en scapulaire retractie",
     "distractors": [
       "Gluteus maximus: heupretroflexie en anteflexie van het voorste been met relatief stabiele knie",
@@ -399,7 +399,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-supported-row-cue",
     "region": "rug",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij chest supported cable row met ellebogen naar buiten in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij chest supported cable row met ellebogen naar buiten?",
     "answer": "Minder momentum en spanning gedurende de hele beweging",
     "distractors": [
       "Borststeun dient juist om extra momentum op te bouwen",
@@ -411,7 +411,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-chinup-lower-profile",
     "region": "rug",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij chin-ups, pull-ups en pulldown in de onderste-trapeziusrij?",
+    "prompt": "Welke spieren en bewegingen horen bij chin-ups, pull-ups en pulldown voor de onderste trapezius?",
     "answer": "Onderste trapezius: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire retractie en depressie",
     "distractors": [
       "Gluteus maximus: geïsoleerde heupretroflexie, been naar achteren",
@@ -423,7 +423,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-bicep-curl-profile",
     "region": "armen",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij bicep curl met DB, BB of kabel?",
+    "prompt": "Welke spieren en bewegingen horen bij bicep curl met DB, BB of kabel?",
     "answer": "Biceps brachii: elleboogflexie, bij DB of BB ook onderarmsupinatie",
     "distractors": [
       "Gluteus maximus: heupanteflexie en retroflexie als hinge met licht gebogen, vaste knie",
@@ -435,7 +435,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-bicep-curl-cue",
     "region": "armen",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij bicep curl met DB, BB of kabel in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij bicep curl met DB, BB of kabel?",
     "answer": "Met kabel meer spanning gedurende de hele beweging",
     "distractors": [
       "De genoemde weerstand vermindert de spierspanning tot nul",
@@ -447,7 +447,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-incline-curl-profile",
     "region": "armen",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij incline bicep curl?",
+    "prompt": "Welke spieren en bewegingen horen bij incline bicep curl?",
     "answer": "Biceps brachii: elleboogflexie met de bovenarm achter de romp in vaste retroflexie",
     "distractors": [
       "Gluteus maximus: heupretroflexie",
@@ -459,7 +459,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-preacher-profile",
     "region": "armen",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij single arm DB preacher curl?",
+    "prompt": "Welke spieren en bewegingen horen bij single arm DB preacher curl?",
     "answer": "Biceps brachii: elleboogflexie met de bovenarm voor de romp in vaste anteflexie",
     "distractors": [
       "Externe en interne obliques: geladen rotatie",
@@ -471,7 +471,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-preacher-cue",
     "region": "armen",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij single arm DB preacher curl in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij single arm DB preacher curl?",
     "answer": "Veel stabiliteit door de bovenarm in het kussen te fixeren",
     "distractors": [
       "De ondersteuning is bedoeld om de balans moeilijker te maken",
@@ -483,7 +483,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-spider-profile",
     "region": "armen",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij spider curl?",
+    "prompt": "Welke spieren en bewegingen horen bij spider curl?",
     "answer": "Biceps brachii: elleboogflexie met de bovenarm voor de romp in vaste anteflexie",
     "distractors": [
       "Quadratus lumborum en obliques: lateroflexie",
@@ -495,7 +495,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-spider-cue",
     "region": "armen",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij spider curl in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij spider curl?",
     "answer": "Veel stabiliteit door de bovenarm te fixeren in een kussen",
     "distractors": [
       "De ondersteuning is bedoeld om de balans moeilijker te maken",
@@ -507,7 +507,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-tricep-ext-profile",
     "region": "armen",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij tricep extension?",
+    "prompt": "Welke spieren en bewegingen horen bij tricep extension?",
     "answer": "Triceps brachii: elleboogextensie",
     "distractors": [
       "Gluteus maximus: heupretroflexie van gebogen naar gestrekt",
@@ -519,7 +519,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-tricep-ext-cue",
     "region": "armen",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij tricep extension in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij tricep extension?",
     "answer": "Met kabel meer spanning gedurende de hele beweging",
     "distractors": [
       "De genoemde weerstand vermindert de spierspanning tot nul",
@@ -531,7 +531,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-cross-ext-profile",
     "region": "armen",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij single arm cross tricep extension?",
+    "prompt": "Welke spieren en bewegingen horen bij single arm cross tricep extension?",
     "answer": "Triceps brachii: elleboogextensie met de bovenarm licht gekruist voor het lichaam",
     "distractors": [
       "Gluteus maximus: heupanteflexie en retroflexie als hinge met licht gebogen, vaste knie",
@@ -543,7 +543,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-cross-ext-cue",
     "region": "armen",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij single arm cross tricep extension in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij single arm cross tricep extension?",
     "answer": "Kruislings pakken lijnt de weerstand uit met de bovenarm en wordt gewrichtsvriendelijker genoemd",
     "distractors": [
       "Kruislings pakken vergroot juist de afwijking van de bovenarmlijn",
@@ -555,7 +555,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-katana-profile",
     "region": "armen",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij Kantana extension?",
+    "prompt": "Welke spieren en bewegingen horen bij Kantana extension?",
     "answer": "Lange tricepskop: elleboogextensie met de schouder overhead in anteflexie",
     "distractors": [
       "Erector spinae: extensie",
@@ -567,7 +567,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-katana-cue",
     "region": "armen",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij Kantana extension in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij Kantana extension?",
     "answer": "Uitlijnen met de bovenarm wordt gewrichtsvriendelijker genoemd",
     "distractors": [
       "De bovenarm moet juist dwars op de weerstandlijn staan",
@@ -579,7 +579,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-skull-profile",
     "region": "armen",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij skull crusher met DB of BB?",
+    "prompt": "Welke spieren en bewegingen horen bij skull crusher met DB of BB?",
     "answer": "Lange tricepskop: elleboogextensie met schouderanteflexie richting overhead",
     "distractors": [
       "Quadratus lumborum en obliques: lateroflexie",
@@ -591,7 +591,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-skull-cue",
     "region": "armen",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij skull crusher met DB of BB in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij skull crusher met DB of BB?",
     "answer": "Een variant om de lange kop zonder kabels te trainen",
     "distractors": [
       "Alleen mogelijk met een kabelstation",
@@ -603,7 +603,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-deadbug-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij dead bug?",
+    "prompt": "Welke spieren en bewegingen horen bij dead bug?",
     "answer": "Rectus, obliques en transversus: heupanteflexie/retroflexie, knieflexie/extensie en schouderanteflexie/retroflexie, neutrale wervelkolom",
     "distractors": [
       "Gluteus medius: heupabductie",
@@ -615,7 +615,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-deadbug-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij dead bug in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij dead bug?",
     "answer": "Voorkom een holle rug, omhooggaande ribben, een losgekanteld bekken en compensatie uit heup of schouder",
     "distractors": [
       "Laat de wervelkolom maximaal uitstrekken om het moment te ontwijken",
@@ -627,7 +627,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-deadbug-moment",
     "region": "core",
-    "prompt": "Welk moment moet de romp volgens de tabel bij dead bug overwinnen?",
+    "prompt": "Welk moment moet de romp bij dead bug overwinnen?",
     "answer": "Extensiemoment",
     "distractors": [
       "Flexiemoment",
@@ -639,7 +639,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-birddog-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij bird dog?",
+    "prompt": "Welke spieren en bewegingen horen bij bird dog?",
     "answer": "Rectus, obliques en transversus, met erector als stabilisator: been naar achteren, knie gestrekt, arm naar voren en neutrale rug",
     "distractors": [
       "Gluteus medius: heupabductie",
@@ -651,7 +651,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-birddog-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij bird dog in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij bird dog?",
     "answer": "Voorkom verlies van 360°-rompspanning tijdens het strekken",
     "distractors": [
       "De genoemde weerstand vermindert de spierspanning tot nul",
@@ -663,7 +663,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-birddog-moment",
     "region": "core",
-    "prompt": "Welk moment moet de romp volgens de tabel bij bird dog overwinnen?",
+    "prompt": "Welk moment moet de romp bij bird dog overwinnen?",
     "answer": "Extensiemoment",
     "distractors": [
       "Flexiemoment",
@@ -675,7 +675,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-plank-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij plank?",
+    "prompt": "Welke spieren en bewegingen horen bij plank?",
     "answer": "Rectus, obliques en transversus: isometrisch, lichte schouderanteflexie, heup gestrekt en neutrale rug zonder gewrichtsbeweging",
     "distractors": [
       "Gluteus maximus: geïsoleerde heupretroflexie, been naar achteren",
@@ -687,7 +687,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-plank-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij plank in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij plank?",
     "answer": "Voorkom een heup die te hoog of laag staat ten opzichte van de rechte lijn naar de hak",
     "distractors": [
       "Laat de wervelkolom maximaal uitstrekken om het moment te ontwijken",
@@ -699,7 +699,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-plank-moment",
     "region": "core",
-    "prompt": "Welk moment moet de romp volgens de tabel bij plank overwinnen?",
+    "prompt": "Welk moment moet de romp bij plank overwinnen?",
     "answer": "Extensiemoment",
     "distractors": [
       "Flexiemoment",
@@ -711,7 +711,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-back-hold-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij back extension hold met reach of kettlebell?",
+    "prompt": "Welke spieren en bewegingen horen bij back extension hold met reach of kettlebell?",
     "answer": "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
     "distractors": [
       "Erector spinae: extensie",
@@ -723,7 +723,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-back-hold-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij back extension hold met reach of kettlebell in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij back extension hold met reach of kettlebell?",
     "answer": "Voorkom hyperextensie",
     "distractors": [
       "Laat de wervelkolom maximaal uitstrekken om het moment te ontwijken",
@@ -735,7 +735,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-back-hold-moment",
     "region": "core",
-    "prompt": "Welk moment moet de romp volgens de tabel bij back extension hold met reach of kettlebell overwinnen?",
+    "prompt": "Welk moment moet de romp bij back extension hold met reach of kettlebell overwinnen?",
     "answer": "Flexiemoment",
     "distractors": [
       "Extensiemoment",
@@ -747,7 +747,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-pallof-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij Pallof press?",
+    "prompt": "Welke spieren en bewegingen horen bij Pallof press?",
     "answer": "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom",
     "distractors": [
       "Gluteus maximus: heupretroflexie",
@@ -759,7 +759,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-pallof-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij Pallof press in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij Pallof press?",
     "answer": "Voorkom hyperextensie of hyperflexie, schouders naar achteren, een bolle rug en afwijken van de streklijn",
     "distractors": [
       "Laat de wervelkolom maximaal uitstrekken om het moment te ontwijken",
@@ -771,7 +771,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-pallof-moment",
     "region": "core",
-    "prompt": "Welk moment moet de romp volgens de tabel bij Pallof press overwinnen?",
+    "prompt": "Welk moment moet de romp bij Pallof press overwinnen?",
     "answer": "Rotatiemoment",
     "distractors": [
       "Extensiemoment",
@@ -783,7 +783,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-anti-chop-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij anti-rotation chop?",
+    "prompt": "Welke spieren en bewegingen horen bij anti-rotation chop?",
     "answer": "Obliques en transversus: horizontale schouderadductie en abductie met het touw langs het lichaam, zonder romprotatie",
     "distractors": [
       "Gluteus medius: heupabductie",
@@ -795,7 +795,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-anti-chop-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij anti-rotation chop in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij anti-rotation chop?",
     "answer": "Voorkom verlies van bovenrugstabilisatie tijdens het touwtrekken",
     "distractors": [
       "Laat de wervelkolom maximaal uitstrekken om het moment te ontwijken",
@@ -807,7 +807,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-anti-chop-moment",
     "region": "core",
-    "prompt": "Welk moment moet de romp volgens de tabel bij anti-rotation chop overwinnen?",
+    "prompt": "Welk moment moet de romp bij anti-rotation chop overwinnen?",
     "answer": "Rotatiemoment",
     "distractors": [
       "Extensiemoment",
@@ -819,7 +819,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-sidehold-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij side plank of KB march & walk?",
+    "prompt": "Welke spieren en bewegingen horen bij side plank of KB march & walk?",
     "answer": "Quadratus lumborum en obliques: isometrisch met steunende schouder in abductie, bij march heupanteflexie/retroflexie, geen lateroflexie van de rug",
     "distractors": [
       "Gluteus maximus: heupretroflexie en anteflexie van het voorste been met relatief stabiele knie",
@@ -831,7 +831,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-sidehold-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij side plank of KB march & walk in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij side plank of KB march & walk?",
     "answer": "Voorkom hyperextensie of hyperflexie en een heup die te hoog of laag staat",
     "distractors": [
       "Laat de wervelkolom maximaal uitstrekken om het moment te ontwijken",
@@ -843,7 +843,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-sidehold-moment",
     "region": "core",
-    "prompt": "Welk moment moet de romp volgens de tabel bij side plank of KB march & walk overwinnen?",
+    "prompt": "Welk moment moet de romp bij side plank of KB march & walk overwinnen?",
     "answer": "Lateroflexiemoment",
     "distractors": [
       "Extensiemoment",
@@ -855,7 +855,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-crunch-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij cable crunch?",
+    "prompt": "Welke spieren en bewegingen horen bij cable crunch?",
     "answer": "Rectus abdominis: geladen rompflexie",
     "distractors": [
       "Externe en interne obliques: geladen rotatie",
@@ -867,7 +867,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-crunch-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij cable crunch in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij cable crunch?",
     "answer": "Krul de wervelkolom op en breng ribben naar bekken, geschikt voor progressive overload",
     "distractors": [
       "Buig alleen vanuit de heup en houd de wervelkolom stil",
@@ -879,7 +879,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-situp-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij weighted decline sit-up?",
+    "prompt": "Welke spieren en bewegingen horen bij weighted decline sit-up?",
     "answer": "Rectus abdominis: geladen rompflexie",
     "distractors": [
       "Erector spinae: extensie",
@@ -891,7 +891,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-situp-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij weighted decline sit-up in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij weighted decline sit-up?",
     "answer": "Beweeg vanuit de romp en niet vanuit de heup",
     "distractors": [
       "Laat de heupbuigers het werk doen met stilstaande romp",
@@ -903,7 +903,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-hanging-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij hanging leg raise?",
+    "prompt": "Welke spieren en bewegingen horen bij hanging leg raise?",
     "answer": "Rectus abdominis: flexie",
     "distractors": [
       "Gluteus maximus: heupanteflexie en retroflexie als hinge met licht gebogen, vaste knie",
@@ -915,7 +915,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-hanging-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij hanging leg raise in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij hanging leg raise?",
     "answer": "Kantel het bekken en til met de buikspieren, een langere momentarm maakt de oefening zwaarder",
     "distractors": [
       "Til de benen zonder het bekken te kantelen",
@@ -927,7 +927,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-sidebend-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij weighted side bend?",
+    "prompt": "Welke spieren en bewegingen horen bij weighted side bend?",
     "answer": "Quadratus lumborum en obliques: lateroflexie",
     "distractors": [
       "Gluteus maximus: heupretroflexie en anteflexie van het voorste been met relatief stabiele knie",
@@ -939,7 +939,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-sidebend-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij weighted side bend in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij weighted side bend?",
     "answer": "Beweeg in één vlak zonder rotatie of voorover leunen",
     "distractors": [
       "Combineer de beweging met een voorwaartse buiging",
@@ -951,7 +951,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-sidecrunch-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij side plank crunch?",
+    "prompt": "Welke spieren en bewegingen horen bij side plank crunch?",
     "answer": "Quadratus lumborum en obliques: lateroflexie",
     "distractors": [
       "Rectus femoris en vasti: heupextensie, knie-extensie en enkelplantairflexie (triple extensie)",
@@ -963,7 +963,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-sidecrunch-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij side plank crunch in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij side plank crunch?",
     "answer": "Breng de heup omhoog in één vlak",
     "distractors": [
       "Laat de heup alleen naar voren en achteren draaien",
@@ -975,7 +975,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-45-back-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij 45° back extension met gewicht?",
+    "prompt": "Welke spieren en bewegingen horen bij 45° back extension met gewicht?",
     "answer": "Erector spinae: extensie",
     "distractors": [
       "Rectus abdominis: geladen rompflexie",
@@ -987,7 +987,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-45-back-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij 45° back extension met gewicht in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij 45° back extension met gewicht?",
     "answer": "Stop bij neutraal en vermijd hyperextensie",
     "distractors": [
       "Strek door tot maximale hyperextensie",
@@ -999,7 +999,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-reversehyper-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij reverse hyper?",
+    "prompt": "Welke spieren en bewegingen horen bij reverse hyper?",
     "answer": "Erector spinae: extensie",
     "distractors": [
       "Gluteus maximus: heupanteflexie en retroflexie als hinge met licht gebogen, vaste knie",
@@ -1011,7 +1011,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-reversehyper-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij reverse hyper in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij reverse hyper?",
     "answer": "Controleer de excentrische fase zonder te zwaaien",
     "distractors": [
       "Zwaai de benen snel terug zonder controle",
@@ -1023,7 +1023,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-jefferson-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij Jefferson curl?",
+    "prompt": "Welke spieren en bewegingen horen bij Jefferson curl?",
     "answer": "Erector spinae: extensie",
     "distractors": [
       "Quadratus lumborum en obliques: lateroflexie",
@@ -1035,7 +1035,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-jefferson-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij Jefferson curl in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij Jefferson curl?",
     "answer": "Beweeg segmentaal en gecontroleerd, met licht gewicht en geleidelijke opbouw",
     "distractors": [
       "Begin direct met zwaar gewicht en maximale snelheid",
@@ -1047,7 +1047,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-woodchop-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij cable woodchop?",
+    "prompt": "Welke spieren en bewegingen horen bij cable woodchop?",
     "answer": "Externe en interne obliques: geladen rotatie",
     "distractors": [
       "Gluteus maximus: heupretroflexie en anteflexie van het voorste been met relatief stabiele knie",
@@ -1059,7 +1059,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-woodchop-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij cable woodchop in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij cable woodchop?",
     "answer": "Laat de romp meedraaien, niet alleen de armen, over de volledige bewegingsuitslag",
     "distractors": [
       "Houd de romp stil en verplaats alleen de armen",
@@ -1071,7 +1071,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-landmine-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij landmine rotation?",
+    "prompt": "Welke spieren en bewegingen horen bij landmine rotation?",
     "answer": "Externe en interne obliques: geladen rotatie",
     "distractors": [
       "Gluteus maximus: heupretroflexie en anteflexie van het voorste been met relatief stabiele knie",
@@ -1083,7 +1083,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-landmine-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij landmine rotation in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij landmine rotation?",
     "answer": "Roteer vanuit de romp en houd de armen relatief gestrekt",
     "distractors": [
       "Houd de romp stil en draai alleen vanuit de polsen",
@@ -1095,7 +1095,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-russian-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij weighted Russian twist?",
+    "prompt": "Welke spieren en bewegingen horen bij weighted Russian twist?",
     "answer": "Externe en interne obliques: geladen rotatie",
     "distractors": [
       "Gluteus maximus: geïsoleerde heupretroflexie, been naar achteren",
@@ -1107,7 +1107,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-russian-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij weighted Russian twist in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij weighted Russian twist?",
     "answer": "Roteer de romp met een stabiele wervelkolom",
     "distractors": [
       "Verplaats uitsluitend het gewicht met de armen",
@@ -1119,7 +1119,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-highlow-profile",
     "region": "core",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij cable high-to-low chop?",
+    "prompt": "Welke spieren en bewegingen horen bij cable high-to-low chop?",
     "answer": "Obliques en rectus abdominis: diagonale flexie",
     "distractors": [
       "Gluteus medius: heupabductie",
@@ -1131,7 +1131,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-highlow-cue",
     "region": "core",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij cable high-to-low chop in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij cable high-to-low chop?",
     "answer": "Combineer rotatie en flexie voor maximale verkorting van de obliques",
     "distractors": [
       "Combineer rotatie met extensie voor maximale obliqueverkorting",
@@ -1143,7 +1143,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-glute-rdl-profile",
     "region": "heup",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij Romanian deadlift met glute-focus?",
+    "prompt": "Welke spieren en bewegingen horen bij Romanian deadlift met glute-focus?",
     "answer": "Gluteus maximus: heupanteflexie en retroflexie als hinge met licht gebogen, vaste knie",
     "distractors": [
       "Erector spinae: extensie",
@@ -1155,7 +1155,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-glute-rdl-cue",
     "region": "heup",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij Romanian deadlift met glute-focus in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij Romanian deadlift met glute-focus?",
     "answer": "Makkelijk te overloaden, met veel mechanische spanning in de verlengde positie",
     "distractors": [
       "De genoemde weerstand vermindert de spierspanning tot nul",
@@ -1167,7 +1167,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-hipthrust-profile",
     "region": "heup",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij barbell hip thrust?",
+    "prompt": "Welke spieren en bewegingen horen bij barbell hip thrust?",
     "answer": "Gluteus maximus: heupretroflexie van gebogen naar gestrekt",
     "distractors": [
       "Erector spinae: extensie",
@@ -1179,7 +1179,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-hipback-profile",
     "region": "heup",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij hip / back extension met glute-focus?",
+    "prompt": "Welke spieren en bewegingen horen bij hip / back extension met glute-focus?",
     "answer": "Gluteus maximus: heupretroflexie",
     "distractors": [
       "Rectus abdominis: flexie",
@@ -1191,7 +1191,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-hipback-cue",
     "region": "heup",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij hip / back extension met glute-focus in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij hip / back extension met glute-focus?",
     "answer": "Geschikt voor hogere herhalingen en metabole stress",
     "distractors": [
       "Vooral geschikt om het aantal herhalingen zo laag mogelijk te houden",
@@ -1203,7 +1203,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-kickback-profile",
     "region": "heup",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij glute cable kickback?",
+    "prompt": "Welke spieren en bewegingen horen bij glute cable kickback?",
     "answer": "Gluteus maximus: geïsoleerde heupretroflexie, been naar achteren",
     "distractors": [
       "Quadratus lumborum en obliques: lateroflexie",
@@ -1215,7 +1215,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-bulgarian-profile",
     "region": "heup",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij hand supported Bulgarian split squat met heupaccent?",
+    "prompt": "Welke spieren en bewegingen horen bij hand supported Bulgarian split squat met heupaccent?",
     "answer": "Gluteus maximus: heupretroflexie en anteflexie van het voorste been met relatief stabiele knie",
     "distractors": [
       "Erector spinae: extensie",
@@ -1227,7 +1227,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-bulgarian-cue",
     "region": "heup",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij hand supported Bulgarian split squat met heupaccent in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij hand supported Bulgarian split squat met heupaccent?",
     "answer": "Unilaterale belasting met veel mechanische spanning in de verlengde positie",
     "distractors": [
       "De genoemde weerstand vermindert de spierspanning tot nul",
@@ -1239,7 +1239,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-sidekick-profile",
     "region": "heup",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij cable side kicks?",
+    "prompt": "Welke spieren en bewegingen horen bij cable side kicks?",
     "answer": "Gluteus medius: heupabductie",
     "distractors": [
       "Quadratus lumborum en obliques: lateroflexie",
@@ -1251,7 +1251,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-sidekick-cue",
     "region": "heup",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij cable side kicks in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij cable side kicks?",
     "answer": "Isoleert de gluteus medius bij een gestrekte heup",
     "distractors": [
       "Isoleert gluteus maximus via heupretroflexie",
@@ -1263,7 +1263,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-legpress-profile",
     "region": "quads",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij leg press?",
+    "prompt": "Welke spieren en bewegingen horen bij leg press?",
     "answer": "Rectus femoris en vasti: heupextensie, knie-extensie en enkelplantairflexie (triple extensie)",
     "distractors": [
       "Gluteus maximus: heupretroflexie van gebogen naar gestrekt",
@@ -1275,7 +1275,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-legpress-cue",
     "region": "quads",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij leg press in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij leg press?",
     "answer": "Veel machinestabiliteit om dicht bij spierfalen te trainen",
     "distractors": [
       "De ondersteuning is bedoeld om de balans moeilijker te maken",
@@ -1287,7 +1287,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-hack-profile",
     "region": "quads",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij hack squat?",
+    "prompt": "Welke spieren en bewegingen horen bij hack squat?",
     "answer": "Rectus femoris en vasti: heupextensie, knie-extensie en enkelplantairflexie",
     "distractors": [
       "Quadratus lumborum en obliques: lateroflexie",
@@ -1299,7 +1299,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-hack-cue",
     "region": "quads",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij hack squat in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij hack squat?",
     "answer": "Veel machinestabiliteit om dicht bij spierfalen te trainen",
     "distractors": [
       "De ondersteuning is bedoeld om de balans moeilijker te maken",
@@ -1311,7 +1311,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-belt-profile",
     "region": "quads",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij belt squat?",
+    "prompt": "Welke spieren en bewegingen horen bij belt squat?",
     "answer": "Rectus femoris en vasti: heupextensie, knie-extensie en enkelplantairflexie",
     "distractors": [
       "Quadratus lumborum en obliques: lateroflexie",
@@ -1323,7 +1323,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-belt-cue",
     "region": "quads",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij belt squat in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij belt squat?",
     "answer": "Veel stabiliteit zonder axiale druk op de wervelkolom",
     "distractors": [
       "De ondersteuning is bedoeld om de balans moeilijker te maken",
@@ -1335,7 +1335,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-splitquad-profile",
     "region": "quads",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij hand supported split squat-varianten?",
+    "prompt": "Welke spieren en bewegingen horen bij hand supported split squat-varianten?",
     "answer": "Rectus femoris en vasti: heupextensie van het voorste been en knie-extensie",
     "distractors": [
       "Gluteus maximus: heupretroflexie",
@@ -1347,7 +1347,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-splitquad-cue",
     "region": "quads",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij hand supported split squat-varianten in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij hand supported split squat-varianten?",
     "answer": "Meer stabiliteit dan een reguliere split squat, om dichter bij spierfalen te komen",
     "distractors": [
       "De ondersteuning is bedoeld om de balans moeilijker te maken",
@@ -1359,7 +1359,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-leanleg-profile",
     "region": "quads",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij lean away leg extension?",
+    "prompt": "Welke spieren en bewegingen horen bij lean away leg extension?",
     "answer": "Rectus femoris en vasti: knie-extensie met stilstaande heup",
     "distractors": [
       "Gluteus maximus: heupanteflexie en retroflexie als hinge met licht gebogen, vaste knie",
@@ -1371,7 +1371,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-leanleg-cue",
     "region": "quads",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij lean away leg extension in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij lean away leg extension?",
     "answer": "Een van de weinige oefeningen die de quads volledig isoleert",
     "distractors": [
       "Isoleert vooral heupflexie en laat de knie stil",
@@ -1383,7 +1383,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-ham-rdl-profile",
     "region": "hamstrings",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij RDL met hamstring-focus?",
+    "prompt": "Welke spieren en bewegingen horen bij RDL met hamstring-focus?",
     "answer": "Biceps femoris en semi-spieren: heupanteflexie en retroflexie als hinge",
     "distractors": [
       "Erector spinae: extensie",
@@ -1395,7 +1395,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-ham-rdl-cue",
     "region": "hamstrings",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij RDL met hamstring-focus in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij RDL met hamstring-focus?",
     "answer": "Makkelijk te overloaden met veel spanning in de verlengde positie",
     "distractors": [
       "De genoemde weerstand vermindert de spierspanning tot nul",
@@ -1407,7 +1407,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-ham-back-profile",
     "region": "hamstrings",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij back extension met hamstring-focus?",
+    "prompt": "Welke spieren en bewegingen horen bij back extension met hamstring-focus?",
     "answer": "Biceps femoris en semi-spieren: heupretroflexie",
     "distractors": [
       "Externe en interne obliques: geladen rotatie",
@@ -1419,7 +1419,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-ham-back-cue",
     "region": "hamstrings",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij back extension met hamstring-focus in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij back extension met hamstring-focus?",
     "answer": "Hogere herhalingen mogelijk zonder beperking door bovenrugstabiliteit of grip",
     "distractors": [
       "De ondersteuning is bedoeld om de balans moeilijker te maken",
@@ -1431,7 +1431,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-seatedcurl-profile",
     "region": "hamstrings",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij seated leg curl?",
+    "prompt": "Welke spieren en bewegingen horen bij seated leg curl?",
     "answer": "Biceps femoris en semi-spieren: knieflexie",
     "distractors": [
       "Gluteus maximus: heupanteflexie en retroflexie als hinge met licht gebogen, vaste knie",
@@ -1443,7 +1443,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-seatedcurl-cue",
     "region": "hamstrings",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij seated leg curl in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij seated leg curl?",
     "answer": "Isolatie in de verlengde positie",
     "distractors": [
       "De oefening isoleert uitsluitend in de verkorte positie",
@@ -1455,7 +1455,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-lyingcurl-profile",
     "region": "hamstrings",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij lying leg curl?",
+    "prompt": "Welke spieren en bewegingen horen bij lying leg curl?",
     "answer": "Biceps femoris en semi-spieren: knieflexie",
     "distractors": [
       "Obliques en rectus abdominis: diagonale flexie",
@@ -1467,7 +1467,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-lyingcurl-cue",
     "region": "hamstrings",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij lying leg curl in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij lying leg curl?",
     "answer": "Isolatie in de verkorte positie",
     "distractors": [
       "De oefening isoleert uitsluitend in de verlengde positie",
@@ -1479,7 +1479,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-seatedcalf-profile",
     "region": "kuiten",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij seated calf raise?",
+    "prompt": "Welke spieren en bewegingen horen bij seated calf raise?",
     "answer": "Soleus: enkelplantairflexie vanuit dorsaalflexie met gebogen knie",
     "distractors": [
       "Erector spinae: extensie",
@@ -1491,7 +1491,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-seatedcalf-cue",
     "region": "kuiten",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij seated calf raise in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij seated calf raise?",
     "answer": "De gebogen knie verkort gastrocnemius, zodat soleus geïsoleerd wordt",
     "distractors": [
       "De gebogen knie verlengt gastrocnemius maximaal",
@@ -1503,7 +1503,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-standingcalf-profile",
     "region": "kuiten",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij standing calf raise?",
+    "prompt": "Welke spieren en bewegingen horen bij standing calf raise?",
     "answer": "Gastrocnemius en soleus: enkelplantairflexie vanuit dorsaalflexie",
     "distractors": [
       "Obliques en rectus abdominis: diagonale flexie",
@@ -1515,7 +1515,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-standingcalf-cue",
     "region": "kuiten",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij standing calf raise in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij standing calf raise?",
     "answer": "Isolatie van de hele kuitspier",
     "distractors": [
       "Isoleert alleen soleus doordat de knie gebogen is",
@@ -1527,7 +1527,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-donkey-profile",
     "region": "kuiten",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij donkey calf raise?",
+    "prompt": "Welke spieren en bewegingen horen bij donkey calf raise?",
     "answer": "Gastrocnemius en soleus: enkelplantairflexie vanuit dorsaalflexie",
     "distractors": [
       "Quadratus lumborum en obliques: isometrische romp zonder lateroflexie, bij march afwisselende heupanteflexie en retroflexie",
@@ -1539,7 +1539,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-donkey-cue",
     "region": "kuiten",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij donkey calf raise in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij donkey calf raise?",
     "answer": "De romp is voorovergebogen en niet geladen, met minder axiale druk",
     "distractors": [
       "De romp wordt maximaal axiaal belast bovenop de schouders",
@@ -1551,7 +1551,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-hipcalf-profile",
     "region": "kuiten",
-    "prompt": "Welk spier- en bewegingsprofiel noemt de cheatsheet bij staande hip loaded calf raise?",
+    "prompt": "Welke spieren en bewegingen horen bij staande hip loaded calf raise?",
     "answer": "Gastrocnemius en soleus: enkelplantairflexie vanuit dorsaalflexie",
     "distractors": [
       "Rectus abdominis: geladen rompflexie",
@@ -1563,7 +1563,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-hipcalf-cue",
     "region": "kuiten",
-    "prompt": "Welke aanwijzing of welk mogelijk voordeel staat bij staande hip loaded calf raise in de cheatsheet?",
+    "prompt": "Welk voordeel of aandachtspunt hoort bij staande hip loaded calf raise?",
     "answer": "Gewicht op de heupen voorkomt een gripbeperking en axiale druk",
     "distractors": [
       "De handen dragen het gewicht, waardoor grip limiteert",
@@ -1575,7 +1575,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-chest-angle",
     "region": "borst",
-    "prompt": "Welke borstaccenten koppelt de cheatsheet aan de bovenarmhoek ten opzichte van het borstbeen?",
+    "prompt": "Hoe bepaalt de bovenarmhoek ten opzichte van het borstbeen het borstaccent?",
     "answer": "45° schuin voor: bovenste vezels, 90° haaks: middelste, 45° schuin achter: onderste",
     "distractors": [
       "45° voor: onderste, 90° haaks: bovenste, 45° achter: middelste",
@@ -1587,7 +1587,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-bank-flat-decline",
     "region": "borst",
-    "prompt": "Welke bankhoek geeft volgens de cheatsheet een gelijke borstactivatie, en welke accentueert de onderste vezels?",
+    "prompt": "Welke bankhoek geeft een gelijke borstactivatie, en welke accentueert de onderste vezels?",
     "answer": "Plat: gelijke activatie, decline: onderste vezels",
     "distractors": [
       "Plat: alleen bovenste vezels, decline: middelste",
@@ -1599,7 +1599,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-bank-steep",
     "region": "borst",
-    "prompt": "Wat verandert er volgens de cheatsheet als de incline-bankhoek boven 30° komt?",
+    "prompt": "Wat verandert er als de incline-bankhoek boven 30° komt?",
     "answer": "Meer voorste-deltoideusactivatie en iets minder borstactivatie",
     "distractors": [
       "Meer borstactivatie en minder voorste-deltoideusactivatie",
@@ -1623,7 +1623,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-supraspinatus",
     "region": "borst",
-    "prompt": "Welke functies noemt de cheatsheet voor supraspinatus?",
+    "prompt": "Wat zijn de functies van supraspinatus?",
     "answer": "Verticale abductie en stabilisatie van de schouderkop",
     "distractors": [
       "Endorotatie zonder stabilisatie",
@@ -1635,7 +1635,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-infraspinatus",
     "region": "borst",
-    "prompt": "Welke functies noemt de cheatsheet voor infraspinatus?",
+    "prompt": "Wat zijn de functies van infraspinatus?",
     "answer": "Exorotatie en stabilisatie van de schouderkop",
     "distractors": [
       "Endorotatie en stabilisatie",
@@ -1647,7 +1647,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-teres-minor",
     "region": "borst",
-    "prompt": "Welke functies noemt de cheatsheet voor teres minor?",
+    "prompt": "Wat zijn de functies van teres minor?",
     "answer": "Exorotatie, verticale adductie en stabilisatie",
     "distractors": [
       "Endorotatie, verticale abductie en stabilisatie",
@@ -1659,7 +1659,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-subscapularis",
     "region": "borst",
-    "prompt": "Welke functies noemt de cheatsheet voor subscapularis?",
+    "prompt": "Wat zijn de functies van subscapularis?",
     "answer": "Endorotatie en stabilisatie van de schouderkop",
     "distractors": [
       "Exorotatie zonder stabilisatie",
@@ -1671,7 +1671,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-teres-major",
     "region": "borst",
-    "prompt": "Welke functies noemt de cheatsheet voor teres major?",
+    "prompt": "Wat zijn de functies van teres major?",
     "answer": "Retroflexie, verticale adductie en endorotatie",
     "distractors": [
       "Anteflexie, verticale abductie en exorotatie",
@@ -1683,7 +1683,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-row-elbows-out",
     "region": "rug",
-    "prompt": "Welke spieraccenten noemt de cheatsheet bij ellebogen 45–90° van de romp tijdens een row?",
+    "prompt": "Welke spieren krijgen meer accent bij ellebogen 45–90° van de romp tijdens een row?",
     "answer": "Middelste trapezius en rhomboideus via retractie, achterste delt via horizontale abductie",
     "distractors": [
       "Alleen latissimus via endorotatie",
@@ -1695,7 +1695,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-pull-directions",
     "region": "rug",
-    "prompt": "Welke koppeling van schuine trekrichting, okselhoek en trapeziusaccent klopt volgens de cheatsheet?",
+    "prompt": "Welke koppeling van schuine trekrichting, okselhoek en trapeziusaccent klopt?",
     "answer": "Hoog naar laag: grote okselhoek, retractie/depressie en lage traps/rhomboideus. Laag naar hoog: kleine hoek, retractie/elevatie en bovenste traps",
     "distractors": [
       "Hoog naar laag: kleine hoek en bovenste traps. Laag naar hoog: grote hoek en lage traps",
@@ -1707,7 +1707,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-pull-horizontal-vertical",
     "region": "rug",
-    "prompt": "Welke koppeling hoort volgens de cheatsheet bij horizontaal en verticaal trekken?",
+    "prompt": "Welke koppeling hoort bij horizontaal en verticaal trekken?",
     "answer": "Horizontaal: retractie en lat-retroflexie. Verticaal: mediorotatie/depressie en lat-retroflexie/verticale adductie",
     "distractors": [
       "Horizontaal: alleen protractie. Verticaal: elevatie en schouderabductie",
@@ -1719,7 +1719,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-pulldown-grip",
     "region": "rug",
-    "prompt": "Hoeveel verschil maakt lat-pulldown-gripbreedte volgens de cheatsheet voor lat-activatie?",
+    "prompt": "Hoeveel verschil maakt lat-pulldown-gripbreedte voor lat-activatie?",
     "answer": "Nauwelijks verschil",
     "distractors": [
       "Een brede grip schakelt de lats uit",
@@ -1731,7 +1731,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-biceps-all-lengths",
     "region": "armen",
-    "prompt": "Welke koppeling van bovenarmpositie en bicepslengte noemt de cheatsheet?",
+    "prompt": "Hoe hangen bovenarmpositie en bicepslengte samen?",
     "answer": "Achter de romp: verlengd, naast de romp: midden, voor de romp: verkort",
     "distractors": [
       "Achter: verkort, naast: midden, voor: verlengd",
@@ -1743,7 +1743,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-triceps-all-lengths",
     "region": "armen",
-    "prompt": "Welke koppeling van bovenarmpositie en tricepslengte noemt de cheatsheet?",
+    "prompt": "Hoe hangen bovenarmpositie en tricepslengte samen?",
     "answer": "Eindigt achter lichaam: verkort, naast/zijwaarts: midden, overhead-start: lange kop verlengd",
     "distractors": [
       "Achter: verlengd, naast: verkort, overhead: midden",
@@ -1755,7 +1755,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-arm-resistance",
     "region": "armen",
-    "prompt": "Welke weerstandsrichting noemt de cheatsheet optimaal voor curls en extensies?",
+    "prompt": "Welke weerstandsrichting is optimaal voor curls en extensies?",
     "answer": "Kabel haaks op de onderarm, of de onderarm parallel aan de grond bij vrij gewicht",
     "distractors": [
       "Kabel parallel aan de onderarm, of onderarm verticaal bij vrij gewicht",
@@ -1767,7 +1767,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-core-directions",
     "region": "core",
-    "prompt": "Welke vier bewegingsrichtingen noemt het core-hoofdstuk?",
+    "prompt": "Wat zijn de vier bewegingsrichtingen voor core-training?",
     "answer": "Extensie, flexie, rotatie en lateroflexie",
     "distractors": [
       "Abductie, adductie, pronatie en supinatie",
@@ -1779,7 +1779,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-core-principles",
     "region": "core",
-    "prompt": "Hoe beschrijft de cheatsheet de opbouw van core-training?",
+    "prompt": "Hoe bouw je core-training op?",
     "answer": "Eerst statische anti-core als basis, daarna geladen dynamische hypertrofie met spanning, volume en progressive overload",
     "distractors": [
       "Alleen dynamische rotatie zonder weerstand",
@@ -1791,7 +1791,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-obliques-training",
     "region": "core",
-    "prompt": "Wanneer komen de obliques volgens de cheatsheet het sterkst tot uiting, en wat vraagt flexietraining?",
+    "prompt": "Wanneer komen de obliques het sterkst tot uiting, en wat vraagt flexietraining?",
     "answer": "Rotatie en lateroflexie onder weerstand, bij flexie moet je ze actief aansturen",
     "distractors": [
       "Alleen passieve flexie, rotatie heeft geen effect",
@@ -1803,7 +1803,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-no-spot-reduction",
     "region": "core",
-    "prompt": "Waardoor worden buikspieren volgens de cheatsheet zichtbaar?",
+    "prompt": "Waardoor worden buikspieren zichtbaar?",
     "answer": "Een voldoende laag vetpercentage, core-training geeft geen lokale vetreductie",
     "distractors": [
       "Alleen meer crunches, ongeacht vetpercentage",
@@ -1815,7 +1815,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-inner-members",
     "region": "core",
-    "prompt": "Welke vier onderdelen vormen de inner core unit volgens de cheatsheet?",
+    "prompt": "Welke vier onderdelen vormen de inner core unit?",
     "answer": "Diafragma, bekkenbodem, transversus abdominis en multifidus",
     "distractors": [
       "Rectus abdominis, obliques, glutes en latissimus",
@@ -1827,7 +1827,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-inner-role",
     "region": "core",
-    "prompt": "Welke gezamenlijke taak heeft de inner core unit volgens de cheatsheet?",
+    "prompt": "Welke gezamenlijke taak heeft de inner core unit?",
     "answer": "Ademhalingsgebonden stabilisatie en intra-abdominale druk opbouwen",
     "distractors": [
       "Alleen dynamische romprotatie veroorzaken",
@@ -1839,7 +1839,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-outer-members",
     "region": "core",
-    "prompt": "Welke spieren noemt de cheatsheet als outer core unit?",
+    "prompt": "Welke spieren vormen de outer core unit?",
     "answer": "Rectus abdominis, obliques, erector spinae, glutes en latissimus dorsi",
     "distractors": [
       "Diafragma, bekkenbodem, transversus en multifidus",
@@ -1851,7 +1851,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-breathing-brace",
     "region": "core",
-    "prompt": "Welke ademhalingskoppeling beschrijft de cheatsheet voor een stevige romp bij tillen?",
+    "prompt": "Hoe helpt ademhaling je romp stevig te houden tijdens tillen?",
     "answer": "Horizontale 360°-ademhaling verhoogt buikdruk, bij zware compounds wordt de Valsalva-manoeuvre genoemd",
     "distractors": [
       "Verticale schouderademhaling vermindert altijd de benodigde buikdruk",
@@ -1863,7 +1863,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-diaphragm-attachment",
     "region": "core",
-    "prompt": "Welke aanhechtingsgebieden noemt de cheatsheet voor het diafragma?",
+    "prompt": "Waar hecht het diafragma aan?",
     "answer": "Onderkant ribbenkast en borstbeen, onderrugwervels en kraakbeen van de onderste zes ribben",
     "distractors": [
       "Bovenkant humerus, scapula en sleutelbeen",
@@ -1875,7 +1875,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-diaphragm-inspiration",
     "region": "core",
-    "prompt": "Wat doet het diafragma volgens de cheatsheet tijdens inademen?",
+    "prompt": "Wat doet het diafragma tijdens inademen?",
     "answer": "Als belangrijkste inademingsspier contraheert en daalt het, vergroot de ribbenkast 360° en duwt organen omlaag terwijl buik en bekkenbodem ruimte geven",
     "distractors": [
       "Het ontspant en stijgt terwijl de buikspieren de ruimte sluiten",
@@ -1887,7 +1887,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-diaphragm-extra",
     "region": "core",
-    "prompt": "Welke extra effecten koppelt de cheatsheet aan daling van het diafragma en horizontale ademhaling?",
+    "prompt": "Welke extra effecten hebben een dalend diafragma en horizontale ademhaling?",
     "answer": "Stabilisatie van de onderrug en stimulatie van de nervus vagus richting het parasympathische systeem",
     "distractors": [
       "Destabilisatie van de onderrug en uitsluitend sympathische activatie",
@@ -1899,7 +1899,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-pelvic-floor-role",
     "region": "core",
-    "prompt": "Welke functies noemt de cheatsheet voor de bekkenbodem?",
+    "prompt": "Wat zijn de functies van de bekkenbodem?",
     "answer": "Organen ondersteunen, prolaps voorkomen en continentie van blaas en endeldarm regelen",
     "distractors": [
       "Alleen de ribbenkast vergroten en schouders heffen",
@@ -1911,7 +1911,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-pelvic-inspiration",
     "region": "core",
-    "prompt": "Hoe beschrijft de cheatsheet de bekkenbodem bij inademen en volle longen?",
+    "prompt": "Wat doet de bekkenbodem bij inademen en volle longen?",
     "answer": "Hij ontspant voor het dalende diafragma en vangt in die verlengde positie minder druk op",
     "distractors": [
       "Hij verkort maximaal en vangt dan onbeperkt druk op",
@@ -1923,7 +1923,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-core-programme",
     "region": "core",
-    "prompt": "Welke dosering geeft de cheatsheet voor core-hypertrofie?",
+    "prompt": "Hoeveel sets en herhalingen train je voor core-hypertrofie, en met welke RIR?",
     "answer": "12–20 sets per week per spiergroep, 6–30 herhalingen met focus op 8–15, RIR 0–4",
     "distractors": [
       "1–2 sets per maand, 1–3 herhalingen, RIR 10–15",
@@ -1935,7 +1935,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-core-schedule",
     "region": "core",
-    "prompt": "Wanneer en hoe vaak plaatst de cheatsheet geladen core-training?",
+    "prompt": "Wanneer en hoe vaak train je de core met weerstand?",
     "answer": "Na compounds of als finisher, 2–3 keer per week per richting",
     "distractors": [
       "Altijd vóór compounds, eenmaal per maand per richting",
@@ -1947,7 +1947,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-glute-roles",
     "region": "heup",
-    "prompt": "Hoe verdeelt de cheatsheet de rollen van gluteus maximus en medius bij squats en hinges?",
+    "prompt": "Welke rollen hebben gluteus maximus en medius bij squats en hinges?",
     "answer": "Maximus levert vooral retroflexie en exorotatie, medius abductie en heupstabilisatie, ook bij traplopen",
     "distractors": [
       "Medius levert alle heupretroflexie en maximus alleen knie-extensie",
@@ -1959,7 +1959,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-glute-length-setups",
     "region": "heup",
-    "prompt": "Welke aanpassingen noemt de cheatsheet voor meer rek op gluteus maximus?",
+    "prompt": "Hoe vergroot je de rek op gluteus maximus?",
     "answer": "Voeten hoger op leg press, standbeen verder van de bank bij Bulgarian split squat, verder voorover bij RDL",
     "distractors": [
       "Voeten lager op leg press, standbeen dichter bij de bank, minder voorover bij RDL",
@@ -1971,7 +1971,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-pelvic-positions",
     "region": "heup",
-    "prompt": "Wat betekenen anterior tilt, posterior tilt en stacked position volgens het heuphoofdstuk?",
+    "prompt": "Wat betekenen anterior tilt, posterior tilt en stacked position?",
     "answer": "Anterior tilt vergroot lordose en onderrugdruk, posterior tilt sluit heupen, stacked houdt ribben boven bekken",
     "distractors": [
       "Anterior tilt sluit heupen, posterior tilt vergroot lordose, stacked tilt ribben maximaal omhoog",
@@ -1983,7 +1983,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-pelvic-lift",
     "region": "heup",
-    "prompt": "Hoe moet het bekken volgens de cheatsheet tijdens een lift blijven, en wanneer mag je sluiten?",
+    "prompt": "Hoe moet het bekken tijdens een lift blijven, en wanneer mag je sluiten?",
     "answer": "Neutraal tijdens de lift, sluiten mag aan het eind",
     "distractors": [
       "Maximaal anterior gekanteld tijdens de hele lift",
@@ -1995,7 +1995,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-quad-length-setups",
     "region": "quads",
-    "prompt": "Hoe stuur je volgens de cheatsheet meer quadricepsrek via voetplaatsing en enkelmobiliteit?",
+    "prompt": "Hoe stuur je meer quadricepsrek via voetplaatsing en enkelmobiliteit?",
     "answer": "Voeten laag op leg press/hack squat, eventueel hakken verhogen met plaatjes of schoenen",
     "distractors": [
       "Voeten altijd zo hoog mogelijk en hakken omlaag dwingen",
@@ -2007,7 +2007,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-ham-pattern-length",
     "region": "hamstrings",
-    "prompt": "Hoe zoek je volgens de cheatsheet hamstringrek in beide trainingspatronen?",
+    "prompt": "Hoe zoek je hamstringrek in beide trainingspatronen?",
     "answer": "Bij heupstrekking via een kleine heuphoek en neutrale wervelkolom, bij kniebuiging via een gestrekte knie",
     "distractors": [
       "Bij heupstrekking via een bolle rug, bij kniebuiging via een maximaal gebogen knie",
@@ -2019,7 +2019,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-ham-curl-combination",
     "region": "hamstrings",
-    "prompt": "Waarom noemt de cheatsheet idealiter zowel seated als lying leg curls?",
+    "prompt": "Waarom combineer je idealiter seated en lying leg curls?",
     "answer": "Seated traint verlengd, lying verkort, en verlengd trainen lijkt iets gunstiger voor hypertrofie",
     "distractors": [
       "Beide trainen alleen verkort en seated schakelt de hamstrings uit",
@@ -2031,7 +2031,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-calf-rom",
     "region": "kuiten",
-    "prompt": "Welke bewegingsuitslag adviseert de cheatsheet voor kuittraining?",
+    "prompt": "Welke bewegingsuitslag gebruik je bij kuittraining?",
     "answer": "Volledige ROM tot dorsaalflexie, met partials in de gerekte positie als mogelijke aanvulling",
     "distractors": [
       "Alleen partials in de maximaal verkorte positie",
@@ -2043,7 +2043,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-rotator-cuff-members",
     "region": "borst",
-    "prompt": "Welke vier spieren vormen de rotator cuff in de cheatsheet, en hoort teres major daarbij?",
+    "prompt": "Welke vier spieren vormen de rotator cuff, en hoort teres major daarbij?",
     "answer": "Supraspinatus, infraspinatus, teres minor en subscapularis; teres major staat er apart naast",
     "distractors": [
       "Supraspinatus, infraspinatus, teres major en subscapularis; teres minor staat apart",
@@ -2055,7 +2055,7 @@ export const extraMuscles = [
   {
     "id": "extra-muscles-adductor-members",
     "region": "heup",
-    "prompt": "Welke vijf spieren noemt de cheatsheet samen als adductoren?",
+    "prompt": "Welke vijf spieren vormen de adductoren?",
     "answer": "Adductor longus, brevis en magnus, gracilis en pectineus",
     "distractors": [
       "Adductor longus, brevis en magnus, gracilis en tensor fasciae latae",

@@ -404,7 +404,7 @@ export const lengthProfiles = [
 const labels = ["Verlengde positie","Middenpositie","Verkorte positie","Verlengde tot middenpositie","Middenpositie tot verkorte positie","Verlengde tot verkorte positie (hele range)"];
 export const profileQuestions = lengthProfiles.map(row => ({
   id: row.id, region: row.region, type: "choice",
-  prompt: "Welk lengteprofiel geeft de balk bij " + row.name + " in de cheatsheet aan?",
+  prompt: "Welk lengteprofiel hoort bij " + row.name + "?",
   answer: row.profile, distractors: labels.filter(label => label !== row.profile),
   source: { title: "Anatomie & Biomechanica · Milo module 6.6", section: row.name + " · lengteprofiel", page: row.page }
 }));

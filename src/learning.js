@@ -1,6 +1,126 @@
 export const DAY = 86400000;
 export const PROGRESS_KEY = 'motionstudy.progress.v1';
 export const SESSION_KEY = 'motionstudy.session.v1';
+export const EXERCISE_MODES = ['choice', 'binary', 'recognition', 'point', 'open', 'recognition-open', 'open-self'];
+const POINTABLE_MUSCLES = new Set(['pectoralis', 'delt-front', 'delt-mid', 'delt-back', 'lats', 'traps-upper', 'biceps', 'triceps', 'rectus-abd', 'glute-max', 'rectus-fem', 'gastrocnemius']);
+// Only fixed, short concepts are automatically graded. Explanations use a model
+// answer and an explicit learner assessment instead of guessed semantics.
+const SHORT_ANSWERS = new Set([
+  'Sleutelbeen', 'Acromion', 'Spina scapulae', 'Radius', 'Schaambeen', 'Patellaligament',
+  'Voorkant humerus', 'Buitenkant humerus', 'Buitenste sleutelbeen', 'Bovenkant ulna',
+  'Gluteaal oppervlak darmbeen', 'Bovenkant femur', 'Onderkant bekken', 'Binnenkant tibia',
+  'Spina iliaca anterior inferior', 'Plantairflexie', 'Dorsaalflexie', 'Adductie', 'Abductie',
+  'Verticale abductie', 'Verticale adductie', 'Retractie', 'Protractie', 'Exorotatie',
+  'Endorotatie', 'Anteflexie heup', 'Extensie knie', 'Flexie knie', 'Extensie wervelkolom',
+  'Retroflexie', 'Supinatie', 'Contralaterale rotatie', 'Knie-extensie', 'Isometrisch',
+  'Excentrisch', 'Concentrisch', 'Eenzijdig', 'Tweezijdig', 'Extensiemoment', 'Flexiemoment',
+  'Rotatiemoment', 'Lateroflexiemoment', 'Verlengde positie', 'Verkorte positie', 'Middenpositie',
+  'Subscapularis', 'Latissimus dorsi', 'Transversus abdominis', 'Gluteus medius', 'Rectus femoris',
+  'Leg extension', 'Seated leg curl'
+]);
+const ANATOMY_ALIASES = {
+  'Biceps brachii': ['biceps'], 'Triceps brachii': ['triceps'],
+  'Rhomboideus': ['rhomboids', 'rhomboidei'],
+  'Deltoideus · voorste kop': ['deltoideus anterior', 'voorste deltoideus', 'deltoideus pars clavicularis'],
+  'Deltoideus · middelste kop': ['deltoideus lateralis', 'middelste deltoideus', 'deltoideus pars acromialis'],
+  'Deltoideus · achterste kop': ['deltoideus posterior', 'achterste deltoideus', 'deltoideus pars spinalis'],
+  'Trapezius · boven': ['bovenste trapezius', 'trapezius pars descendens'],
+  'Trapezius · midden': ['middelste trapezius', 'trapezius pars transversa'],
+  'Trapezius · onder': ['onderste trapezius', 'trapezius pars ascendens'],
+  'Externe obliques': ['obliquus externus abdominis'],
+  'Interne obliques': ['obliquus internus abdominis'],
+  'Gluteus medius & minimus': ['gluteus medius en minimus', 'gluteus medius en gluteus minimus']
+};
+function normalizedAnswer(value, muscle = false) {
+  let result = value.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().trim();
+  if (muscle) result = result.replace(/^(?:m\.\s*|musculus\s+)/u, '');
+  result = result.replace(/([+−-])\s*(?=\d)/gu, sign => sign.trim() === '+' ? ' plus ' : ' minus ');
+  return result.replace(/[^\p{L}\p{N}]+/gu, ' ').trim().replace(/\s+/gu, ' ');
+}
+export function supportsOpenAnswer(question) {
+  return typeof question?.answer === 'string' && question.answer.trim().length > 0 &&
+    (question.type === 'recognition' || SHORT_ANSWERS.has(question.answer) ||
+      (Array.isArray(question.acceptedAnswers) && question.acceptedAnswers.length > 0));
+}
+// Optimal-string-alignment distance also counts a neighboring letter swap as
+// one typing error. Small limits keep this from becoming semantic matching.
+function spellingDistance(left, right) {
+  const rows = Array.from({ length: left.length + 1 }, (_, row) => Array.from({ length: right.length + 1 }, (_, col) => row ? col ? 0 : row : col));
+  for (let row = 1; row <= left.length; row++) {
+    for (let col = 1; col <= right.length; col++) {
+      rows[row][col] = Math.min(rows[row - 1][col] + 1, rows[row][col - 1] + 1,
+        rows[row - 1][col - 1] + Number(left[row - 1] !== right[col - 1]));
+      if (row > 1 && col > 1 && left[row - 1] === right[col - 2] && left[row - 2] === right[col - 1]) {
+        rows[row][col] = Math.min(rows[row][col], rows[row - 2][col - 2] + 1);
+      }
+    }
+  }
+  return rows[left.length][right.length];
+}
+const PROTECTED_WORDS = new Set([
+  'niet', 'geen', 'zonder', 'wel', 'nooit', 'altijd', 'en', 'of',
+  'adductie', 'abductie', 'excentrisch', 'concentrisch', 'isometrisch',
+  'exorotatie', 'endorotatie', 'medialis', 'lateralis', 'anterior', 'posterior',
+  'major', 'minor', 'maximus', 'medius', 'minimus', 'biceps', 'triceps',
+  'voorste', 'middelste', 'achterste', 'boven', 'midden', 'onder'
+]);
+function nearAnswerDistance(response, answer) {
+  const actual = response.split(' ');
+  const expected = answer.split(' ');
+  if (actual.length !== expected.length) return Infinity;
+  const budget = answer.replace(/ /g, '').length >= 12 ? 2 : 1;
+  let total = 0;
+  for (let index = 0; index < expected.length; index++) {
+    const target = expected[index];
+    const typed = actual[index];
+    if (target === typed) continue;
+    // Numbers and negations must survive exactly. An already valid but
+    // different anatomical term is an answer distinction, not a spelling error.
+    if (/\d/u.test(target + typed) || Math.min(target.length, typed.length) < 4 ||
+      (PROTECTED_WORDS.has(typed) && typed !== target) || ['niet', 'geen', 'zonder', 'nooit'].includes(target)) return Infinity;
+    const tokenBudget = budget === 2 && target.length >= 10 ? 2 : 1;
+    if (Math.abs(target.length - typed.length) > tokenBudget) return Infinity;
+    const distance = spellingDistance(typed, target);
+    if (distance > tokenBudget) return Infinity;
+    total += distance;
+    if (total > budget) return Infinity;
+  }
+  return total;
+}
+export function checkOpenAnswer(question, response) {
+  const incorrect = { correct: false, typo: false };
+  if (!supportsOpenAnswer(question) || typeof response !== 'string' || response.length > 200) return incorrect;
+  const muscle = question.type === 'recognition';
+  const normalized = normalizedAnswer(response, muscle);
+  if (!normalized) return incorrect;
+  const aliases = Array.isArray(question.acceptedAnswers) ? question.acceptedAnswers.filter(value => typeof value === 'string' && value.trim()) : [];
+  const answers = [...new Set([question.answer, ...aliases, ...(muscle ? ANATOMY_ALIASES[question.answer] || [] : [])].map(answer => normalizedAnswer(answer, muscle)))];
+  if (answers.includes(normalized)) return { correct: true, typo: false };
+  const distance = Math.min(...answers.map(answer => nearAnswerDistance(normalized, answer)));
+  if (!Number.isFinite(distance)) return incorrect;
+  const alternatives = [...SHORT_ANSWERS, ...Object.keys(ANATOMY_ALIASES), ...Object.values(ANATOMY_ALIASES).flat(), ...(question.distractors || [])]
+    .filter(value => typeof value === 'string').map(value => normalizedAnswer(value, muscle)).filter(value => !answers.includes(value));
+  // Reject real other concepts, including misspellings that could refer to
+  // another answer just as closely. For example, 'aductie' is ambiguous.
+  if (alternatives.some(answer => answer === normalized || nearAnswerDistance(normalized, answer) <= distance)) return incorrect;
+  return { correct: true, typo: true };
+}
+export function isOpenAnswerCorrect(question, response) {
+  return checkOpenAnswer(question, response).correct;
+}
+function compatibleExercise(question, mode) {
+  if (question.type === 'recognition') {
+    return ['recognition', 'recognition-open', 'open-self'].includes(mode) || (mode === 'point' && POINTABLE_MUSCLES.has(question.muscleId));
+  }
+  return ['choice', 'binary', 'open-self'].includes(mode) || (mode === 'open' && supportsOpenAnswer(question));
+}
+function validExerciseStats(entry) {
+  if (entry.lastExercise != null && !EXERCISE_MODES.includes(entry.lastExercise)) return false;
+  return entry.exerciseStats == null || (typeof entry.exerciseStats === 'object' && !Array.isArray(entry.exerciseStats) &&
+    Object.entries(entry.exerciseStats).every(([mode, stats]) => EXERCISE_MODES.includes(mode) && stats &&
+      Number.isInteger(stats.attempts) && stats.attempts >= 0 && Number.isInteger(stats.correct) && stats.correct >= 0 && stats.correct <= stats.attempts &&
+      typeof stats.lastCorrect === 'boolean' && Number.isInteger(stats.spacedCorrect) && stats.spacedCorrect >= 0 && stats.spacedCorrect <= stats.correct));
+}
 export const topics = [
   ['basis', 'De taal van het lichaam', 'Richtingen, bewegingen & biomechanica', 'school'],
   ['borst', 'Borst & schouders', 'Van pectoralis tot rotator cuff', 'stretch'],
@@ -31,7 +151,7 @@ export function readProgress(storage) {
     const data = JSON.parse(storage.getItem(PROGRESS_KEY) || storage.getItem('lottequiz.v1') || '{}');
     const valid = Object.fromEntries(Object.entries(data.questions || {}).filter(([, entry]) =>
       entry && Number.isInteger(entry.correct) && entry.correct >= 0 && Number.isFinite(entry.due) && Number.isInteger(entry.attempts) && entry.attempts >= entry.correct &&
-      Number.isInteger(entry.interval) && entry.interval >= 0 && entry.interval <= 30 && typeof entry.lastCorrect === 'boolean'
+      Number.isInteger(entry.interval) && entry.interval >= 0 && entry.interval <= 30 && typeof entry.lastCorrect === 'boolean' && validExerciseStats(entry)
     ));
     return { questions: valid, sessions: Array.isArray(data.sessions) ? data.sessions.filter(s => Number.isFinite(s.at) && Number.isFinite(s.correct) && Number.isFinite(s.total)) : [] };
   } catch { return { questions: {}, sessions: [] }; }
@@ -51,20 +171,44 @@ export function readSession(storage, questions) {
     if (value.xp != null && (!Number.isInteger(value.xp) || value.xp < 0)) return null;
     if (value.matched != null && (!Array.isArray(value.matched) || !value.matched.every(id => typeof id === 'string'))) return null;
     if (value.pairOrder != null && (!Array.isArray(value.pairOrder) || !value.pairOrder.every(id => typeof id === 'string'))) return null;
+    if (value.exerciseModes != null && (!Array.isArray(value.exerciseModes) || value.exerciseModes.length !== value.ids.length ||
+      !value.exerciseModes.every((mode, index) => EXERCISE_MODES.includes(mode) && compatibleExercise(questions.get(value.ids[index]), mode)))) return null;
+    if (value.openDraft != null && typeof value.openDraft !== 'string') return null;
+    if (value.openRevealed != null && typeof value.openRevealed !== 'boolean') return null;
     const question = questions.get(value.ids[value.index]);
+    const mode = question && (value.exerciseModes?.[value.index] || exerciseFor(question, value.index));
+    const open = ['open', 'recognition-open', 'open-self'].includes(mode);
+    const responseLimit = mode === 'open-self' ? 2000 : 200;
+    if (value.openDraft?.length > responseLimit) return null;
     if (question && (!Array.isArray(value.options) || value.options.length !== 4 ||
       new Set(value.options).size !== 4 || !value.options.includes(question.answer) ||
       !value.options.every(option => option === question.answer || question.distractors.includes(option)) ||
-      (value.response !== null && !value.options.includes(value.response) && !(exerciseFor(question, value.index) === 'point' && typeof value.response === 'string' && value.response.length < 200)))) return null;
+      (value.response !== null && !(typeof value.response === 'string' &&
+        (value.options.includes(value.response) || (value.response.length <= responseLimit &&
+          (mode === 'point' || (open && value.response.trim().length > 0)))))))) return null;
+    if (question && ((!open && value.openDraft) || (value.openRevealed && mode !== 'open-self'))) return null;
+    if (value.selfAssessmentCorrect != null && (mode !== 'open-self' || typeof value.selfAssessmentCorrect !== 'boolean' ||
+      !value.openRevealed || typeof value.response !== 'string' || !value.response.trim())) return null;
+    if (mode === 'open-self' && value.response !== null && typeof value.selfAssessmentCorrect !== 'boolean') return null;
     return value;
   } catch { return null; }
 }
-export function recordAnswer(progress, id, correct, now = Date.now()) {
+export function recordAnswer(progress, id, correct, now = Date.now(), exercise = null) {
   const previous = progress.questions[id] || { correct: 0, attempts: 0, interval: 0 };
   // Practising early is useful, but must not manufacture spaced mastery.
   const early = correct && previous.lastCorrect && previous.due > now;
   const interval = correct ? early ? previous.interval : Math.min(30, previous.interval ? previous.interval * 2 : 1) : 0;
+  const mode = EXERCISE_MODES.includes(exercise) ? exercise : null;
+  const priorStats = previous.exerciseStats?.[mode] || { attempts: 0, correct: 0, spacedCorrect: 0 };
+  const exerciseProgress = mode ? {
+    lastExercise: mode,
+    exerciseStats: { ...previous.exerciseStats, [mode]: {
+      attempts: priorStats.attempts + 1, correct: priorStats.correct + Number(correct),
+      lastCorrect: correct, spacedCorrect: priorStats.spacedCorrect + Number(correct && !early)
+    } }
+  } : previous.exerciseStats ? { exerciseStats: previous.exerciseStats, lastExercise: previous.lastExercise } : {};
   return { ...progress, questions: { ...progress.questions, [id]: {
+    ...exerciseProgress,
     correct: previous.correct + Number(correct), attempts: previous.attempts + 1,
     interval, due: early ? previous.due : now + (correct ? interval * DAY : 10 * 60000), lastCorrect: correct
   } } };
@@ -80,7 +224,15 @@ export function lessonQueue(questions, progress, { region = 'daily', limit = 10,
 }
 export function masteryFor(questions, progress) {
   if (!questions.length) return 0;
-  return Math.round(100 * questions.filter(q => progress.questions[q.id]?.interval >= 4 && progress.questions[q.id]?.lastCorrect).length / questions.length);
+  return Math.round(100 * questions.filter(question => {
+    const entry = progress.questions[question.id];
+    if (!entry || entry.interval < 4 || !entry.lastCorrect) return false;
+    // Legacy records retain their mastery. New adaptive practice must also
+    // demonstrate recall on a later, spaced repetition, not just recognition.
+    if (!entry.exerciseStats || !Object.keys(entry.exerciseStats).length) return true;
+    const recallModes = question.type === 'recognition' ? ['recognition-open'] : ['open', 'open-self'];
+    return recallModes.some(mode => entry.exerciseStats[mode]?.spacedCorrect >= 1);
+  }).length / questions.length);
 }
 
 export const GAME_KEY = 'motionstudy.game.v1';
@@ -130,8 +282,8 @@ export function completeLevel(game, id, correct, total) {
 }
 export function exerciseFor(question, index) {
   if (question.type === 'recognition') {
-    const surface = ['pectoralis', 'delt-front', 'delt-mid', 'delt-back', 'lats', 'traps-upper', 'biceps', 'triceps', 'rectus-abd', 'glute-max', 'rectus-fem', 'gastrocnemius'];
-    return index % 2 && surface.includes(question.muscleId) ? 'point' : 'recognition';
+    if (index % 2 && POINTABLE_MUSCLES.has(question.muscleId)) return 'point';
+    return 'recognition';
   }
   if (index % 3 === 1) return 'binary';
   return 'choice';
@@ -148,10 +300,16 @@ export function binaryResponses(question, options) {
 }
 export function varyLesson(queue) {
   if (queue.length < 2) return queue;
-  const point = queue.find(q => exerciseFor(q, 1) === 'point');
-  if (!point) return queue;
-  const remaining = queue.filter(q => q.id !== point.id);
-  return [remaining[0], point, ...remaining.slice(1)];
+  const ordered = [...queue];
+  const place = (slot, predicate, excluded = []) => {
+    const from = ordered.findIndex((question, index) => !excluded.includes(index) && predicate(question));
+    if (slot < ordered.length && from !== -1) [ordered[slot], ordered[from]] = [ordered[from], ordered[slot]];
+    return from !== -1;
+  };
+  const pointing = place(1, question => exerciseFor(question, 1) === 'point');
+  const highlighted = place(0, question => question.type === 'recognition', pointing ? [1] : []);
+  place(2, supportsOpenAnswer, [...(pointing ? [1] : []), ...(highlighted ? [0] : [])]);
+  return ordered;
 }
 
 export const DRAFTS_KEY = 'motionstudy.drafts.v1';

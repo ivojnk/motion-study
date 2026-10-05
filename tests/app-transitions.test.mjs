@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import * as learning from '../src/learning.js';
+import * as progression from '../src/exercise-progression.js';
 
 const curriculum = JSON.parse(fs.readFileSync(new URL('../src/data/curriculum.json', import.meta.url)));
 // Execute the app's actual transitions; mock only browser boundaries, not grading/storage logic.
@@ -41,7 +42,7 @@ function app(data = {}, locks) {
     return null;
   };
   const storage = { getItem: key => data[key] || null, setItem: (key, value) => { data[key] = value; } };
-  const context = { ...learning, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
+  const context = { ...learning, ...progression, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
     location: { hash: '' }, navigator: locks ? { locks } : {},
     document: { querySelector, querySelectorAll: () => [] },
     window: { localStorage: storage, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
@@ -85,6 +86,16 @@ function pointLesson(locks) {
   return { instance, q };
 }
 
+test('a confirmed colour choice grades once without a second confirmation', () => {
+  const { instance, q } = pointLesson();
+  instance.showMuscle(q.muscleId, 'Target mesh', true);
+  instance.showMuscle(q.muscleId, 'Target mesh', true);
+  assert.equal(instance.read().session.response, q.answer);
+  assert.equal(instance.read().session.answered, 2);
+  assert.equal(xp(instance), 5);
+  assert.equal(instance.read().pendingPointSelection, null);
+});
+
 test('model taps highlight a changeable choice and only confirmation grades it', () => {
   const { instance, q } = pointLesson();
   assert.match(instance.html(), /id="confirm-answer"[^>]*disabled/);
@@ -114,7 +125,12 @@ test('answer button choices use the same preview and confirmation flow', () => {
   assert.equal(instance.read().session.response, null);
   assert.equal(instance.read().pendingPointSelection.response, q.answer);
   assert.equal(instance.lastHighlight()[0], q.muscleId);
-  assert.match(instance.element('#point-selection-status').textContent, /Je kunt je keuze nog wijzigen/);
+  assert.equal(instance.element('#point-selection-status').textContent, 'Spier geselecteerd.');
+  const alternative = instance.read().session.options.findIndex(option => option !== q.answer);
+  instance.chooseAnswer(alternative);
+  assert.equal(instance.read().pendingPointSelection.response, instance.read().session.options[alternative]);
+  assert.equal(instance.read().session.response, null);
+  instance.chooseAnswer(index);
   instance.renderLesson();
   assert.match(instance.html(), /class="answer selected" aria-pressed="true"/);
   assert.doesNotMatch(instance.html(), /id="confirm-answer"[^>]*disabled/);
@@ -324,4 +340,40 @@ test('the full question directory is accessible without changing an unfinished l
   assert.equal(xp(instance), beforeXP);
   instance.go('#les/basis/0');
   assert.equal(JSON.stringify(instance.read().session), before);
+});
+
+test('new review sessions select difficulty from the individual question and freeze it through rewards and reload', () => {
+  const q = curriculum.questions.find(question => question.type !== 'recognition' && learning.supportsOpenAnswer(question));
+  const dueProgress = { questions: { [q.id]: { attempts: 1, correct: 1, interval: 1, due: Date.now() - 1, lastCorrect: true } }, sessions: [] };
+  const instance = app({ [learning.PROGRESS_KEY]: JSON.stringify(dueProgress) });
+  instance.startLesson('review', null);
+  assert.deepEqual(Array.from(instance.read().session.ids), [q.id]);
+  assert.deepEqual(Array.from(instance.read().session.exerciseModes), ['open']);
+  assert.match(instance.html(), /id="open-answer-form"/);
+  instance.play();
+  assert.equal(instance.read().progress.questions[q.id].interval, 2);
+  assert.equal(instance.read().session.exerciseModes[0], 'open');
+  assert.equal(instance.read().progress.questions[q.id].exerciseStats.open.spacedCorrect, 1);
+  const restored = app(instance.data);
+  restored.go('#les/review');
+  assert.equal(restored.read().session.exerciseModes[0], 'open');
+  assert.match(restored.html(), /feedback success/);
+  assert.equal(xp(restored), 5);
+});
+
+test('new anatomy reviews use pointing only after earlier recognition progress', () => {
+  const q = curriculum.questions.find(question => question.type === 'recognition' && question.muscleId === 'pectoralis');
+  const instance = app({ [learning.PROGRESS_KEY]: JSON.stringify({ questions: {
+    [q.id]: { attempts: 1, correct: 1, interval: 1, due: Date.now() - 1, lastCorrect: true }
+  }, sessions: [] }) });
+  instance.viewerReady();
+  instance.startLesson('review', null);
+  assert.equal(instance.read().session.ids[0], q.id);
+  assert.equal(instance.read().session.exerciseModes[0], 'point');
+  assert.match(instance.html(), /id="confirm-answer"/);
+  instance.showMuscle(q.muscleId, q.answer);
+  assert.equal(instance.read().session.response, null);
+  instance.confirmPointSelection();
+  assert.equal(instance.read().session.correct, 1);
+  assert.equal(instance.read().progress.questions[q.id].lastExercise, 'point');
 });

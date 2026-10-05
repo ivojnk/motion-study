@@ -32,7 +32,7 @@ const cards = muscles.map(muscle => {
 const questions = cards.flatMap(card => Object.entries(card.fields).map(([field, answer]) => {
   const distractors = [...new Set(cards.filter(other => other.id !== card.id).map(other => other.fields[field]).filter(value => value && value !== answer))].slice(0, 8);
   if (distractors.length < 3) throw new Error('Not enough distinct options for ' + card.id);
-  return { id: card.id + '-' + field, region: card.region, muscleId: card.id, type: 'choice', prompt: 'Wat is de ' + field + ' van ' + card.name + ' volgens de cheatsheet?', answer, distractors, source: card.source };
+  return { id: card.id + '-' + field, region: card.region, muscleId: card.id, type: 'choice', prompt: 'Wat is de ' + field + ' van ' + card.name + '?', answer, distractors, source: card.source };
 }));
 for (const concept of [...concepts, ...extraBasis, ...extraMuscles, ...extraPatterns]) {
   const start = raw.indexOf(concept.anchor);

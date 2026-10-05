@@ -15,7 +15,7 @@ function selection() {
     { userData: { courseMuscleId: null, anatomyName: 'Other muscle' } },
   ];
   const views = [];
-  const context = { muscleMeshes, views, selected: null, selectedAnatomyName: null, isolated: false,
+  const context = { muscleMeshes, views, selected: null, selectedAnatomyName: null, isolated: false, choiceState: null, clearChoice() {},
     muscleMaterial: 'normal', focusMaterial: 'purple', dimMaterial: 'dim', render() {},
     view: (...args) => views.push(args), THREE: { Box3: class { isEmpty() { return true; } } } };
   vm.createContext(context);
