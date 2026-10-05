@@ -1,6 +1,8 @@
 import './style.css';
 import './study-ui.css';
 import './install-app.css';
+import './app-update.css';
+import { setupAppUpdates } from './app-update.js';
 import { accountStorage, ACCOUNT_EVENT_KEY } from './account-storage.js';
 import { setupAppInstall } from './install-app.js';
 
@@ -9,6 +11,7 @@ import { NOTICE_VERSION } from '../shared/legal.mjs';
 import { setupLegalInfo } from './legal-ui.js';
 import './legal-ui.css';
 
+setupAppUpdates({ window, document, base: import.meta.env.BASE_URL });
 setupAppInstall({ window, document, navigator });
 setupLegalInfo({ document });
 
