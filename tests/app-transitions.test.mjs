@@ -66,6 +66,27 @@ function app(data = {}, locks, options = {}) {
 }
 const xp = instance => learning.gameStats(learning.readGame(instance.storage)).xp;
 
+test('coaching feedback shows the control point and preserves it after reload', () => {
+  const originalCount = curriculum.questions.filter(q => q.region === 'patronen' && q.source.kind !== 'supplement').length;
+  const stage = Math.ceil(originalCount / learning.LESSON_SIZE);
+  const path = learning.levelPath({ completed: [] });
+  const index = path.findIndex(level => level.id === 'patronen:' + stage);
+  const instance = app({ [learning.GAME_KEY]: JSON.stringify({ days: {}, completed: path.slice(0, index).map(level => level.id) }) });
+  instance.startLesson('patronen', 'patronen:' + stage);
+  const question = curriculum.questions.find(q => q.id === instance.read().session.ids[0]);
+  assert.equal(question.source.kind, 'supplement');
+  instance.play(false);
+  assert.ok(instance.html().includes(question.explanation));
+  assert.match(instance.html(), /Aanvullend coachingvoorbeeld/);
+  const restored = app(instance.data);
+  restored.go('#les/patronen/' + stage);
+  assert.ok(restored.html().includes(question.explanation));
+  restored.go('#vragen');
+  assert.match(restored.html(), /Bron en toelichting/);
+  assert.match(restored.html(), /https:\/\/pubmed\.ncbi\.nlm\.nih\.gov\/34822352\//);
+  assert.match(restored.html(), /Controle: De heup beweegt naar achteren/);
+});
+
 test('actual lesson completion reports analytics once and restores its completion time after reload', () => {
   const instance = app();
   instance.startLesson();

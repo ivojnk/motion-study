@@ -363,12 +363,12 @@ export function levelQuestions(questions, region, stage) {
 // lessons retain their questions, including their existing review fillers.
 function chapterPools(questions, region) {
   const pool = questions.filter(q => q.region === region);
-  return [pool.filter(q => q.source?.kind !== 'course-detail'), pool.filter(q => q.source?.kind === 'course-detail')];
+  return [pool.filter(q => !['supplement', 'course-detail'].includes(q.source?.kind)), pool.filter(q => q.source?.kind === 'supplement'), pool.filter(q => q.source?.kind === 'course-detail')];
 }
 function migrateCompletedLevels(completed) {
   if (!Array.isArray(completed)) return [];
   const covered = new Set(topics.flatMap(topic => {
-    const pool = curriculum.questions.filter(q => q.region === topic.id && q.source?.kind !== 'course-detail');
+    const pool = curriculum.questions.filter(q => q.region === topic.id && !['supplement', 'course-detail'].includes(q.source?.kind));
     return [0, 1, 2].flatMap(stage => completed.includes(topic.id + ':' + stage)
       ? pool.slice(Math.floor(stage * pool.length / 3), Math.floor((stage + 1) * pool.length / 3)).map(q => q.id) : []);
   }));

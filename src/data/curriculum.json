@@ -4789,6 +4789,293 @@
       ]
     },
     {
+      "id": "question-coaching-external-focus",
+      "label": "Wat betekent externe focus bij een bewegingscue?",
+      "questionIds": [
+        "coaching-external-focus"
+      ]
+    },
+    {
+      "id": "question-coaching-implicit-analogy",
+      "label": "Hoe gebruik je een analogie als impliciete cue?",
+      "questionIds": [
+        "coaching-implicit-analogy"
+      ]
+    },
+    {
+      "id": "question-coaching-focus-versus-implicit",
+      "label": "Zijn externe focus en impliciete cues hetzelfde?",
+      "questionIds": [
+        "coaching-focus-versus-implicit"
+      ]
+    },
+    {
+      "id": "question-coaching-one-cue",
+      "label": "Hoe test je een cue bij een zichtbaar energielek?",
+      "questionIds": [
+        "coaching-one-cue"
+      ]
+    },
+    {
+      "id": "question-coaching-no-improvement",
+      "label": "Wat doe je als een energielek ondanks een cue blijft bestaan?",
+      "questionIds": [
+        "coaching-no-improvement"
+      ]
+    },
+    {
+      "id": "question-coaching-retention",
+      "label": "Hoe controleer je of een correctie ook zonder de cue behouden blijft?",
+      "questionIds": [
+        "coaching-retention"
+      ]
+    },
+    {
+      "id": "question-coaching-squat-hyperextension",
+      "label": "Welke cue richt zich op een overstrekte onderrug bij de squat?",
+      "questionIds": [
+        "coaching-squat-hyperextension"
+      ]
+    },
+    {
+      "id": "question-coaching-squat-stripper",
+      "label": "Welke cue richt zich op een stripper squat waarbij de heup eerder stijgt dan de stang?",
+      "questionIds": [
+        "coaching-squat-stripper"
+      ]
+    },
+    {
+      "id": "question-coaching-squat-valgus",
+      "label": "Welke cue richt zich op een knie die naar binnen valt bij de squat?",
+      "questionIds": [
+        "coaching-squat-valgus"
+      ]
+    },
+    {
+      "id": "question-coaching-squat-shift",
+      "label": "Welke cue richt zich op een hip shift bij de squat?",
+      "questionIds": [
+        "coaching-squat-shift"
+      ]
+    },
+    {
+      "id": "question-coaching-front-squat-collapse",
+      "label": "Welke cue richt zich op bovenrugflexie met zakkende ellebogen bij de front squat?",
+      "questionIds": [
+        "coaching-front-squat-collapse"
+      ]
+    },
+    {
+      "id": "question-coaching-squat-butt-wink",
+      "label": "Welke cue richt zich op butt wink onderin de squat?",
+      "questionIds": [
+        "coaching-squat-butt-wink"
+      ]
+    },
+    {
+      "id": "question-coaching-hinge-hyperextension",
+      "label": "Welke cue richt zich op hyperextensie bij de hinge?",
+      "questionIds": [
+        "coaching-hinge-hyperextension"
+      ]
+    },
+    {
+      "id": "question-coaching-hinge-hyperflexion",
+      "label": "Welke cue richt zich op een ronde rug door te diep zakken in de RDL?",
+      "questionIds": [
+        "coaching-hinge-hyperflexion"
+      ]
+    },
+    {
+      "id": "question-coaching-hinge-knees",
+      "label": "Welke cue richt zich op te veel kniebuiging of kniestrekking bij de hinge?",
+      "questionIds": [
+        "coaching-hinge-knees"
+      ]
+    },
+    {
+      "id": "question-coaching-hinge-shift",
+      "label": "Welke cue richt zich op een hip shift bij de hinge?",
+      "questionIds": [
+        "coaching-hinge-shift"
+      ]
+    },
+    {
+      "id": "question-coaching-hinge-bar-away",
+      "label": "Welke cue richt zich op een stang die bij de RDL van het lichaam af beweegt?",
+      "questionIds": [
+        "coaching-hinge-bar-away"
+      ]
+    },
+    {
+      "id": "question-coaching-push-hyperextension",
+      "label": "Welke cue richt zich op lumbale hyperextensie bij horizontaal duwen?",
+      "questionIds": [
+        "coaching-push-hyperextension"
+      ]
+    },
+    {
+      "id": "question-coaching-push-shoulder-dump",
+      "label": "Welke cue richt zich op schouderdump onderin een DB bench press?",
+      "questionIds": [
+        "coaching-push-shoulder-dump"
+      ]
+    },
+    {
+      "id": "question-coaching-push-flaring",
+      "label": "Welke cue richt zich op ellebogen die te ver naar buiten wijken bij horizontaal duwen?",
+      "questionIds": [
+        "coaching-push-flaring"
+      ]
+    },
+    {
+      "id": "question-coaching-bench-feet",
+      "label": "Welke cue richt zich op voeten die loskomen bij de bench press?",
+      "questionIds": [
+        "coaching-bench-feet"
+      ]
+    },
+    {
+      "id": "question-coaching-bench-butt",
+      "label": "Welke cue richt zich op billen die loskomen bij de bench press?",
+      "questionIds": [
+        "coaching-bench-butt"
+      ]
+    },
+    {
+      "id": "question-coaching-bench-head",
+      "label": "Welke cue richt zich op een hoofd dat omhoogkomt bij de bench press?",
+      "questionIds": [
+        "coaching-bench-head"
+      ]
+    },
+    {
+      "id": "question-coaching-row-hyperextension",
+      "label": "Welke cue richt zich op lumbale hyperextensie bij een row?",
+      "questionIds": [
+        "coaching-row-hyperextension"
+      ]
+    },
+    {
+      "id": "question-coaching-row-shoulder-dump",
+      "label": "Welke cue richt zich op schouderdump aan het eind van een row?",
+      "questionIds": [
+        "coaching-row-shoulder-dump"
+      ]
+    },
+    {
+      "id": "question-coaching-row-elevation",
+      "label": "Welke cue richt zich op opgetrokken schouders bij een row?",
+      "questionIds": [
+        "coaching-row-elevation"
+      ]
+    },
+    {
+      "id": "question-coaching-press-hyperextension",
+      "label": "Welke cue richt zich op lumbale hyperextensie bij de overhead press?",
+      "questionIds": [
+        "coaching-press-hyperextension"
+      ]
+    },
+    {
+      "id": "question-coaching-press-elevation",
+      "label": "Welke cue richt zich op te vroeg optrekken van de schouders bij verticaal duwen?",
+      "questionIds": [
+        "coaching-press-elevation"
+      ]
+    },
+    {
+      "id": "question-coaching-press-sidebend",
+      "label": "Welke cue richt zich op zijwaarts buigen van de romp bij verticaal duwen?",
+      "questionIds": [
+        "coaching-press-sidebend"
+      ]
+    },
+    {
+      "id": "question-coaching-press-stack",
+      "label": "Welke cue richt zich op een pols die niet boven de elleboog staat bij een DB overhead press?",
+      "questionIds": [
+        "coaching-press-stack"
+      ]
+    },
+    {
+      "id": "question-coaching-pull-shoulder-dump",
+      "label": "Welke cue richt zich op schouderdump onderin de lat pulldown?",
+      "questionIds": [
+        "coaching-pull-shoulder-dump"
+      ]
+    },
+    {
+      "id": "question-coaching-pull-hyperextension",
+      "label": "Welke cue richt zich op lumbale hyperextensie bij verticaal trekken?",
+      "questionIds": [
+        "coaching-pull-hyperextension"
+      ]
+    },
+    {
+      "id": "question-coaching-pull-forearm",
+      "label": "Welke cue richt zich op onderarmen die bij een lat pulldown horizontaal eindigen?",
+      "questionIds": [
+        "coaching-pull-forearm"
+      ]
+    },
+    {
+      "id": "question-coaching-deadbug",
+      "label": "Welke cue richt zich op een holle rug en omhooggaande ribben bij dead bug?",
+      "questionIds": [
+        "coaching-deadbug"
+      ]
+    },
+    {
+      "id": "question-coaching-birddog",
+      "label": "Welke cue richt zich op verlies van rompspanning bij bird dog?",
+      "questionIds": [
+        "coaching-birddog"
+      ]
+    },
+    {
+      "id": "question-coaching-plank",
+      "label": "Welke cue richt zich op een heup die te hoog of te laag staat in de plank?",
+      "questionIds": [
+        "coaching-plank"
+      ]
+    },
+    {
+      "id": "question-coaching-back-hold",
+      "label": "Welke cue richt zich op hyperextensie tijdens een back extension hold?",
+      "questionIds": [
+        "coaching-back-hold"
+      ]
+    },
+    {
+      "id": "question-coaching-pallof",
+      "label": "Welke cue richt zich op afwijken van de streklijn of verliezen van de rompstand bij Pallof press?",
+      "questionIds": [
+        "coaching-pallof"
+      ]
+    },
+    {
+      "id": "question-coaching-anti-chop",
+      "label": "Welke cue richt zich op verlies van bovenrugstabilisatie bij anti-rotation chop?",
+      "questionIds": [
+        "coaching-anti-chop"
+      ]
+    },
+    {
+      "id": "question-coaching-side-plank",
+      "label": "Welke cue richt zich op een te hoge of lage heup en verlies van rompstand bij side plank?",
+      "questionIds": [
+        "coaching-side-plank"
+      ]
+    },
+    {
+      "id": "question-coaching-carry",
+      "label": "Welke cue richt zich op zijwaarts leunen tijdens KB march & walk?",
+      "questionIds": [
+        "coaching-carry"
+      ]
+    },
+    {
       "id": "question-course-detail-sternocostalis",
       "label": "Hoe heten de middelste borstvezels die bij een bovenarmhoek van 90° worden benadrukt?",
       "questionIds": [
@@ -17194,6 +17481,1364 @@
         "title": "Anatomie & Biomechanica · Milo module 6.6",
         "section": "Hip loaded calf raise (staand) · lengteprofiel",
         "page": 19
+      }
+    },
+    {
+      "id": "coaching-external-focus",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Wat betekent externe focus bij een bewegingscue?",
+      "answer": "Aandacht richten op het effect van de beweging op de omgeving of het materiaal",
+      "distractors": [
+        "Aandacht richten op de spanning van één spier",
+        "Iedere gewrichtshoek bewust controleren",
+        "Alleen luisteren naar een instructie van iemand anders"
+      ],
+      "explanation": "“Duw de vloer weg” richt de aandacht op de vloer. Een cue van een trainer is niet automatisch extern: “span je quadriceps aan” heeft interne focus.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-implicit-analogy",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Hoe gebruik je een analogie als impliciete cue?",
+      "answer": "Een herkenbaar beeld gebruiken dat meerdere technische regels samenvat",
+      "distractors": [
+        "Alle gewrichtshoeken één voor één laten opnoemen",
+        "Uitleggen welke spiervezels moeten aanspannen",
+        "De sporter tijdens elke herhaling alle fouten laten analyseren"
+      ],
+      "explanation": "“Duw de lade dicht” geeft een bewegingsbeeld. Dit kan impliciet leren ondersteunen, maar één beeld bewijst niet dat de beweging al automatisch is geleerd.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-focus-versus-implicit",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Zijn externe focus en impliciete cues hetzelfde?",
+      "answer": "Nee: externe focus beschrijft het aandachtsdoel, impliciete cues beperken expliciete technische regels",
+      "distractors": [
+        "Ja: elke instructie van een trainer is extern en impliciet",
+        "Ja: beide betekenen dat je geen feedback geeft",
+        "Nee: een analogie kan nooit een externe focus hebben"
+      ],
+      "explanation": "Een cue kan beide combineren: “duw de lade dicht” is een analogie met een extern doel. Een exacte instructie over het pad van een stang kan externe focus hebben en toch expliciet zijn.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-one-cue",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Hoe test je een cue bij een zichtbaar energielek?",
+      "answer": "Kies één cue, observeer enkele herhalingen en vergelijk het lek met de uitgangssituatie",
+      "distractors": [
+        "Geef vijf nieuwe aanwijzingen tegelijk en verhoog direct het gewicht",
+        "Beoordeel alleen of de sporter de uitleg kan herhalen",
+        "Blijf dezelfde cue herhalen zonder de beweging te bekijken"
+      ],
+      "explanation": "Kies vooraf een zichtbaar controlepunt. Kijk ook of de cue een andere compensatie oproept. Een mooi beeld is pas bruikbaar wanneer de uitvoering verbetert.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-no-improvement",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Wat doe je als een energielek ondanks een cue blijft bestaan?",
+      "answer": "Pas belasting, bewegingsuitslag, steun of oefenvariant aan en beoordeel opnieuw",
+      "distractors": [
+        "Neem aan dat de sporter de cue niet goed genoeg gehoorzaamt",
+        "Vergroot de bewegingsuitslag en belasting tegelijk",
+        "Negeer het lek zodra de sporter de cue begrijpt"
+      ],
+      "explanation": "Een cue kan een beperking in kracht, mobiliteit, balans of belastbaarheid niet automatisch oplossen. Kies een uitvoerbare variant en toets dezelfde beweging opnieuw.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-retention",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Hoe controleer je of een correctie ook zonder de cue behouden blijft?",
+      "answer": "Laat later enkele herhalingen zonder herinnering of hulpmiddel uitvoeren en observeer opnieuw",
+      "distractors": [
+        "Herhaal de cue onafgebroken en neem aan dat de beweging geleerd is",
+        "Vraag alleen of de sporter de zin uit het hoofd kent",
+        "Test uitsluitend met een zwaarder gewicht en meer aanwijzingen"
+      ],
+      "explanation": "Verbetering tijdens coaching en zelfstandig behoud zijn verschillende uitkomsten. Bouw de hulp af zodra dat lukt en kijk of de correctie standhoudt.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-squat-hyperextension",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op een overstrekte onderrug bij de squat?",
+      "answer": "“Houd het denkbeeldige blikje tussen borst en bekken heel.”",
+      "distractors": [
+        "“Maak je onderrug zo hol mogelijk.”",
+        "“Til je borst omhoog zonder je bekken mee te nemen.”",
+        "“Leun bovenin achterover om de herhaling af te maken.”"
+      ],
+      "explanation": "Controle: De onderrug wordt niet holler tijdens het zakken of opstaan. Oefen zo nodig een lichtere goblet squat. Het blikje is een analogie, geen opdracht om de romp maximaal rond te maken.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-squat-hyperextension",
+            "page": 21
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-squat-stripper",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op een stripper squat waarbij de heup eerder stijgt dan de stang?",
+      "answer": "“Duw de vloer weg en laat de stang en heup samen omhoog reizen.”",
+      "distractors": [
+        "“Laat je heup eerst omhoog schieten.”",
+        "“Strek eerst je knieën en til daarna de stang op.”",
+        "“Laat de stang laag terwijl je heup omhooggaat.”"
+      ],
+      "explanation": "Controle: Heup en stang stijgen tegelijk zonder dat de romp plots verder voorover kantelt. Verlaag de belasting of gebruik een paused goblet squat als gelijktijdig opstijgen niet lukt.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "concept-44",
+            "page": 21
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-squat-valgus",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op een knie die naar binnen valt bij de squat?",
+      "answer": "“Volg met je knieën twee rails in de richting van je tenen.”",
+      "distractors": [
+        "“Laat je knieën naar elkaar toe bewegen.”",
+        "“Rol op de buitenranden van je voeten.”",
+        "“Houd je knieën bij elkaar, ongeacht je teenrichting.”"
+      ],
+      "explanation": "Controle: De knieën volgen de gekozen teenrichting zonder dat de voeten naar hun buitenrand rollen. De rails zijn een analogie. Pas voetstand en belasting aan als de knie naar binnen blijft vallen.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "concept-47",
+            "page": 21
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-squat-shift",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op een hip shift bij de squat?",
+      "answer": "“Zak tussen twee denkbeeldige liftwanden recht omlaag.”",
+      "distractors": [
+        "“Zak steeds naar je sterkste kant.”",
+        "“Verplaats al je druk naar één voet.”",
+        "“Laat je bekken zijwaarts uitwijken voor extra diepte.”"
+      ],
+      "explanation": "Controle: Het bekken schuift minder zijwaarts en de voetdruk blijft aan beide kanten aanwezig. Controleer eerst de voetpositie. Een licht elastiek kan een referentie geven, maar harder naar buiten drukken is geen algemene oplossing voor een hip shift.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-squat-hip-shift",
+            "page": 21
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-front-squat-collapse",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op bovenrugflexie met zakkende ellebogen bij de front squat?",
+      "answer": "“Houd je dienblad waterpas.”",
+      "distractors": [
+        "“Laat je dienblad naar voren kantelen.”",
+        "“Laat je ellebogen onderin naar de vloer wijzen.”",
+        "“Rol de stang tijdens het zakken van zijn steunplaats.”"
+      ],
+      "explanation": "Controle: De ellebogen zakken niet weg en de stang blijft op dezelfde steunplaats. Het dienblad is een analogie. Gebruik een lichtere belasting of een passende grip als de positie niet behouden blijft.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-squat-back-flexion",
+            "page": 21
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-squat-butt-wink",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op butt wink onderin de squat?",
+      "answer": "“Tik de box aan en kom weer omhoog.”",
+      "distractors": [
+        "“Zak verder zodra je onderrug begint te ronden.”",
+        "“Raak de vloer aan, ongeacht je bekkenpositie.”",
+        "“Gebruik dezelfde boxhoogte voor iedere sporter.”"
+      ],
+      "explanation": "Controle: De gekozen boxhoogte begrenst de diepte vóór het bekken onderkantelt en de onderrug rondt. Pas de boxhoogte en voetstand aan. De box begrenst de oefening, maar vergroot de beschikbare mobiliteit niet vanzelf.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-squat-butt-wink",
+            "page": 21
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-hinge-hyperextension",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op hyperextensie bij de hinge?",
+      "answer": "“Duw met je bil de lade dicht.”",
+      "distractors": [
+        "“Houd je borst zo hoog mogelijk terwijl je heup teruggaat.”",
+        "“Leun bovenin achterover.”",
+        "“Maak de boog in je onderrug groter tijdens het zakken.”"
+      ],
+      "explanation": "Controle: De heup beweegt naar achteren terwijl borst en hoofd mee zakken zonder extra holling van de onderrug. Dit beeld staat ook in het cursusblad. Bij het opstaan eindig je rechtop zonder achterover te leunen.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-hinge-hyperextension",
+            "page": 22
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-hinge-hyperflexion",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op een ronde rug door te diep zakken in de RDL?",
+      "answer": "“Houd de drie contactpunten met de stok vast.”",
+      "distractors": [
+        "“Laat je hoofd loskomen van de stok voor extra diepte.”",
+        "“Zak tot de vloer, ook als de rug rondt.”",
+        "“Verplaats alle druk naar je tenen en zak verder.”"
+      ],
+      "explanation": "Controle: Bil, bovenrug en achterhoofd houden tijdens een onbelaste hinge contact, zonder de natuurlijke rugcurve weg te drukken. Stop vóór een contactpunt verloren gaat en beperk de diepte van de belaste RDL tot die controleerbare uitslag. De stok is een tastbare referentie.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-hinge-hyperflexion",
+            "page": 22
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-hinge-knees",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op te veel kniebuiging of kniestrekking bij de hinge?",
+      "answer": "“Laat de stok achter je schenen met rust.”",
+      "distractors": [
+        "“Duw de stok achter je schenen weg.”",
+        "“Strek je knieën maximaal op slot vóór je beweegt.”",
+        "“Zak met je knieën ver naar voren alsof je een squat doet.”"
+      ],
+      "explanation": "Controle: Na een kleine beginbuiging blijft de kniehoek ongeveer gelijk en raken de schenen de referentiestok niet. Oefen onbelast met een vrijstaande stok als referentie. Zet de knieën niet op slot en dwing ze niet naar overstrekking.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-hinge-knee",
+            "page": 22
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-hinge-shift",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op een hip shift bij de hinge?",
+      "answer": "“Duw de lade midden tussen de twee handgrepen dicht.”",
+      "distractors": [
+        "“Duw de lade met één kant van je bekken dicht.”",
+        "“Verplaats alle druk naar één voet.”",
+        "“Schuif je heup naar de kant die het makkelijkst beweegt.”"
+      ],
+      "explanation": "Controle: De heup gaat naar achteren zonder zijwaartse verschuiving, met druk onder beide voeten. Gebruik een centraal doel achter je en pas stand, steun of belasting aan als het bekken blijft uitwijken.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-hinge-hip-shift",
+            "page": 22
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-hinge-bar-away",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op een stang die bij de RDL van het lichaam af beweegt?",
+      "answer": "“Laat de stang langs je broek naar beneden glijden.”",
+      "distractors": [
+        "“Duw de stang ver voor je tenen.”",
+        "“Laat de stang van je broek weg zweven.”",
+        "“Houd je heup vooraan terwijl de stang naar voren gaat.”"
+      ],
+      "explanation": "Controle: De stang blijft dichtbij en beweegt boven de middenvoet zonder dat de rug extra rondt. Het glijden is een analogie, geen opdracht om hard tegen de benen te schuren. Controleer ook of de heup voldoende naar achteren gaat.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-hinge-away",
+            "page": 22
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-push-hyperextension",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op lumbale hyperextensie bij horizontaal duwen?",
+      "answer": "“Houd het blikje tussen borst en bekken heel.”",
+      "distractors": [
+        "“Vergroot de holling tijdens het duwen.”",
+        "“Duw je ribben omhoog voor extra bereik.”",
+        "“Laat je bekken zakken terwijl je borst omhooggaat.”"
+      ],
+      "explanation": "Controle: De onderrug wordt niet verder hol en het bekken blijft stabiel tijdens het duwen. Gebruik bij push-ups een hogere steun. Bij bench press beperk je leg drive die de rompstand verstoort, met behoud van de gekozen uitgangspositie.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-push-low-back",
+            "page": 22
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-push-shoulder-dump",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op schouderdump onderin een DB bench press?",
+      "answer": "“Laat de dumbbells zakken tot de afgesproken stoplijn.”",
+      "distractors": [
+        "“Laat de gewichten zo diep mogelijk zakken.”",
+        "“Rol je schouderkop naar voren aan het einde.”",
+        "“Vergroot de diepte zodra je schouder naar voren rolt.”"
+      ],
+      "explanation": "Controle: De schouderkop rolt niet naar voren bij de gekozen einddiepte. Kies de stoplijn met een lichte belasting. Minder diepte is hier een oefenaanpassing, geen bewijs dat een cue de schoudercontrole volledig herstelt.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-shoulder-dump",
+            "page": 22
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-push-flaring",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op ellebogen die te ver naar buiten wijken bij horizontaal duwen?",
+      "answer": "“Volg twee schuine rails met de gewichten.”",
+      "distractors": [
+        "“Laat je ellebogen haaks op je romp uitwaaieren.”",
+        "“Schuif je polsen ver buiten je ellebogen.”",
+        "“Duw de gewichten naar buiten, weg van de gekozen rails.”"
+      ],
+      "explanation": "Controle: De ellebogen blijven bij brede grip ongeveer 45–60° van de romp en de polsen staan boven de ellebogen. De rails zijn een bewegingsbeeld. Pas hand- of grippositie aan wanneer dit pad niet comfortabel uitvoerbaar is.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-push-flaring",
+            "page": 22
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-bench-feet",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op voeten die loskomen bij de bench press?",
+      "answer": "“Houd beide voetafdrukken op de vloer.”",
+      "distractors": [
+        "“Til je voeten op zodra het gewicht stijgt.”",
+        "“Laat je voeten boven de vloer zweven.”",
+        "“Verplaats je voeten tijdens iedere duwfase.”"
+      ],
+      "explanation": "Controle: Beide voeten behouden contact tijdens de hele herhaling. Verplaats de voeten of gebruik een stabiele verhoging als de voeten de vloer niet goed bereiken.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-bench-leaks",
+            "page": 23
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-bench-butt",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op billen die loskomen bij de bench press?",
+      "answer": "“Houd je afdruk op de bank.”",
+      "distractors": [
+        "“Til je afdruk van de bank.”",
+        "“Duw met je voeten totdat je bekken loskomt.”",
+        "“Maak ruimte tussen je billen en de bank.”"
+      ],
+      "explanation": "Controle: De billen blijven op de bank terwijl de voeten druk leveren. Verminder leg drive of belasting als de druk vanuit de voeten het bekken optilt.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-bench-leaks",
+            "page": 23
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-bench-head",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op een hoofd dat omhoogkomt bij de bench press?",
+      "answer": "“Laat de hoofdsteun je hoofd blijven dragen.”",
+      "distractors": [
+        "“Til je hoofd op om het gewicht te volgen.”",
+        "“Duw je achterhoofd zo hard mogelijk in de bank.”",
+        "“Maak je hoofd los van de steun bij iedere herhaling.”"
+      ],
+      "explanation": "Controle: Het achterhoofd houdt rustig contact met de bank zonder extra druk vanuit de nek. Gebruik een lichtere belasting als het hoofd blijft optillen. De cue vraagt om contact, niet om hard in de bank te drukken.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-bench-leaks",
+            "page": 23
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-row-hyperextension",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op lumbale hyperextensie bij een row?",
+      "answer": "“Houd contact met de borststeun terwijl het handvat naar je toe komt.”",
+      "distractors": [
+        "“Trek je borst los van de steun.”",
+        "“Gooi je romp achterover om de trek af te maken.”",
+        "“Maak je onderrug holler zodra het handvat dichterbij komt.”"
+      ],
+      "explanation": "Controle: De romp blijft op de steun zonder dat de onderrug verder hol wordt. Kies een row met borststeun en verlaag de belasting als je moet achterover trekken om de herhaling af te maken.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-row-leaks",
+            "page": 23
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-row-shoulder-dump",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op schouderdump aan het eind van een row?",
+      "answer": "“Breng het handvat tot het doel en stop daar.”",
+      "distractors": [
+        "“Trek het handvat altijd zo ver mogelijk door.”",
+        "“Duw je schouderkop naar voren terwijl je elleboog naar achteren gaat.”",
+        "“Laat het doel steeds verder achter je romp liggen.”"
+      ],
+      "explanation": "Controle: Bij het gekozen doel rolt de schouderkop niet naar voren en trekken de ellebogen niet verder door. Kies het doel met een lichte belasting. Meer trekafstand is niet automatisch een betere herhaling.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-row-leaks",
+            "page": 23
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-row-elevation",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op opgetrokken schouders bij een row?",
+      "answer": "“Trek het handvat richting je achterzakken.”",
+      "distractors": [
+        "“Trek het handvat met een shrug omhoog.”",
+        "“Breng je schouders eerst naar je oren.”",
+        "“Haal de trek vooral uit het optillen van je schouders.”"
+      ],
+      "explanation": "Controle: Tijdens deze low-row-variant komen de schouders niet omhoog en blijft de romp rustig. Deze cue past bij een row met de ellebogen dichtbij. Gebruik haar niet om elke row in dezelfde lage trekrichting te dwingen.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-row-leaks",
+            "page": 23
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-press-hyperextension",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op lumbale hyperextensie bij de overhead press?",
+      "answer": "“Houd het blikje heel terwijl je het gewicht omhoog duwt.”",
+      "distractors": [
+        "“Duw je ribben omhoog voor extra hoogte.”",
+        "“Leun achterover om onder het gewicht te komen.”",
+        "“Maak je onderrug holler terwijl het gewicht stijgt.”"
+      ],
+      "explanation": "Controle: De onderrug wordt niet holler terwijl de armen omhoog bewegen. Verlaag de belasting of kies een half-kneeling landmine press als de overheadpositie zonder compensatie niet lukt.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-vertical-push-leaks",
+            "page": 24
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-press-elevation",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op te vroeg optrekken van de schouders bij verticaal duwen?",
+      "answer": "“Reik met het gewicht naar het plafond.”",
+      "distractors": [
+        "“Zet je schouderbladen tijdens de hele press vast naar beneden.”",
+        "“Begin elke press met een losse shrug.”",
+        "“Laat je schouderbladen niet omhoog draaien.”"
+      ],
+      "explanation": "Controle: De schouderbladen draaien mee omhoog zonder een vroege losse shrug die de duwbeweging vervangt. Lichte elevatie bovenin hoort bij de beweging. Zet de schouderbladen niet tijdens de hele press geforceerd vast naar beneden.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-vertical-push-leaks",
+            "page": 24
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-press-sidebend",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op zijwaarts buigen van de romp bij verticaal duwen?",
+      "answer": "“Blijf tussen twee denkbeeldige muren terwijl het gewicht omhooggaat.”",
+      "distractors": [
+        "“Leun opzij om ruimte te maken voor het gewicht.”",
+        "“Laat borst en bekken naar verschillende kanten bewegen.”",
+        "“Schuif je romp buiten de denkbeeldige muren.”"
+      ],
+      "explanation": "Controle: Borst en bekken blijven boven elkaar zonder zijwaarts uitwijken. Maak het gewicht lichter of gebruik een stabielere houding als je buiten de denkbeeldige muren blijft leunen.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-vertical-push-leaks",
+            "page": 24
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-press-stack",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op een pols die niet boven de elleboog staat bij een DB overhead press?",
+      "answer": "“Bouw een rechte toren onder de dumbbell.”",
+      "distractors": [
+        "“Laat de dumbbell ver naast de onderarm zweven.”",
+        "“Laat je pols buiten de elleboog uitwijken.”",
+        "“Kantel de toren tijdens het omhoogduwen.”"
+      ],
+      "explanation": "Controle: Van voren blijft de pols boven de elleboog en blijft de onderarm onder het gewicht. De toren is een analogie voor uitlijning. Controleer ook de zijaanblik en pas grip, belasting of variant aan als de overheadpositie niet lukt. Bij een landmine ligt het duwpad schuin.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-vertical-push-leaks",
+            "page": 24
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-pull-shoulder-dump",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op schouderdump onderin de lat pulldown?",
+      "answer": "“Breng het handvat tot je doel en laat het daar stoppen.”",
+      "distractors": [
+        "“Trek door zodra je schouderkop naar voren rolt.”",
+        "“Breng het handvat zo laag mogelijk, ongeacht de schouderstand.”",
+        "“Rol de schouders naar voren in de eindpositie.”"
+      ],
+      "explanation": "Controle: De schouderkop rolt bij de gekozen eindpositie niet naar voren. Beperk de trekdiepte en belasting wanneer verder doortrekken de schouderpositie verstoort.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-vertical-pull-leaks",
+            "page": 24
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-pull-hyperextension",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op lumbale hyperextensie bij verticaal trekken?",
+      "answer": "“Houd het blikje tussen borst en bekken heel terwijl het handvat daalt.”",
+      "distractors": [
+        "“Maak je onderrug holler terwijl het handvat daalt.”",
+        "“Gooi je romp achterover voor extra trekafstand.”",
+        "“Laat de ribben omhoogkomen terwijl het bekken blijft staan.”"
+      ],
+      "explanation": "Controle: De onderrug blijft stabiel terwijl de bovenrug gecontroleerd mag strekken. Verminder belasting of gebruik een ondersteunde variant als je de herhaling met achterover leunen moet afmaken.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-vertical-pull-leaks",
+            "page": 24
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-pull-forearm",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op onderarmen die bij een lat pulldown horizontaal eindigen?",
+      "answer": "“Laat de uiteinden van het handvat via twee verticale rails zakken.”",
+      "distractors": [
+        "“Draai je onderarmen achterwaarts naar horizontaal.”",
+        "“Trek het handvat lager, ook als de onderarmen kantelen.”",
+        "“Laat de greep ver vóór de ellebogen eindigen.”"
+      ],
+      "explanation": "Controle: De onderarmen blijven bij het gekozen eindpunt ongeveer verticaal onder de greep. Pas grip en einddiepte aan als de onderarmen naar achteren draaien. Het doel is een passende treklijn, niet het handvat zo laag mogelijk krijgen.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "patronen",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-patterns-vertical-pull-leaks",
+            "page": 24
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-deadbug",
+      "region": "core",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op een holle rug en omhooggaande ribben bij dead bug?",
+      "answer": "“Houd het handdoekje onder je onderrug rustig op zijn plek.”",
+      "distractors": [
+        "“Laat de druk op het handdoekje verdwijnen.”",
+        "“Duw je ribben omhoog zodra het been strekt.”",
+        "“Vergroot de uitslag terwijl de rug holler wordt.”"
+      ],
+      "explanation": "Controle: De druk op een dun handdoekje bij de gekozen rugpositie blijft ongeveer gelijk terwijl arm en been bewegen. Verklein de arm- of beenuitslag. De handdoek geeft feedback, zonder opdracht om de natuurlijke rugcurve maximaal plat te duwen.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "core",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-muscles-deadbug-cue",
+            "page": 13
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-birddog",
+      "region": "core",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op verlies van rompspanning bij bird dog?",
+      "answer": "“Laat het denkbeeldige dienblad op je rug niet kantelen.”",
+      "distractors": [
+        "“Kantel het dienblad naar de uitgestrekte kant.”",
+        "“Draai je bekken mee met je been.”",
+        "“Til arm en been zo hoog mogelijk, ook als je romp wegzakt.”"
+      ],
+      "explanation": "Controle: Romp en bekken draaien of zakken niet weg tijdens het uitstrekken. Begin met alleen een arm of been als gelijktijdig uitstrekken de positie verstoort.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "core",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-muscles-birddog-cue",
+            "page": 13
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-plank",
+      "region": "core",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op een heup die te hoog of te laag staat in de plank?",
+      "answer": "“Maak een brug tussen je steunpunten.”",
+      "distractors": [
+        "“Laat de brug in het midden doorzakken.”",
+        "“Maak een hoge punt van de brug.”",
+        "“Verleng de houdtijd terwijl de rompstand wegvalt.”"
+      ],
+      "explanation": "Controle: Schouders, bekken en enkels blijven in de gekozen rechte lijn zonder doorzakken of een hoge punt. Verkort de houdtijd of gebruik een hogere steun als de brugvorm niet behouden blijft.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "core",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-muscles-plank-cue",
+            "page": 13
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-back-hold",
+      "region": "core",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op hyperextensie tijdens een back extension hold?",
+      "answer": "“Verleng de schuine plank van de bank, zonder eroverheen te knikken.”",
+      "distractors": [
+        "“Knik voorbij de lijn van de bank naar achteren.”",
+        "“Til de romp altijd hoger dan de benen.”",
+        "“Maak je onderrug maximaal hol om de houding vast te houden.”"
+      ],
+      "explanation": "Controle: De romp eindigt in het verlengde van de benen en buigt niet verder achterover. Verlaag de belasting of verkort de houdtijd wanneer de positie wegvalt. De plank is een analogie voor de eindlijn.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "core",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-muscles-back-hold-cue",
+            "page": 14
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-pallof",
+      "region": "core",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op afwijken van de streklijn of verliezen van de rompstand bij Pallof press?",
+      "answer": "“Duw het handvat recht naar het doel vóór je en houd de koplampen daarop gericht.”",
+      "distractors": [
+        "“Laat het handvat naar de kabel toe afbuigen.”",
+        "“Draai je koplampen mee richting de kabel.”",
+        "“Vergroot de holling om verder te kunnen reiken.”"
+      ],
+      "explanation": "Controle: Het handvat volgt dezelfde lijn en borst en bekken blijven naar voren gericht zonder bollen of hol trekken. De koplampen zijn een analogie voor de romp. Verlaag de kabelweerstand of verkort de armhefboom als de lijn niet behouden blijft.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "core",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-muscles-pallof-cue",
+            "page": 14
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-anti-chop",
+      "region": "core",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op verlies van bovenrugstabilisatie bij anti-rotation chop?",
+      "answer": "“Beweeg het touw door de baan terwijl je koplampen vooruit blijven schijnen.”",
+      "distractors": [
+        "“Draai je romp mee met het touw.”",
+        "“Laat de bovenrug inzakken terwijl het touw beweegt.”",
+        "“Laat je koplampen met elke trek meedraaien.”"
+      ],
+      "explanation": "Controle: De armen verplaatsen het touw zonder dat de romp meedraait of de bovenrug inzakt. Gebruik een lichtere kabelweerstand en een kortere baan als de romppositie niet stabiel blijft.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "core",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-muscles-anti-chop-cue",
+            "page": 14
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-side-plank",
+      "region": "core",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op een te hoge of lage heup en verlies van rompstand bij side plank?",
+      "answer": "“Maak een rechte brug tussen elleboog en voeten.”",
+      "distractors": [
+        "“Laat het midden van de brug zakken.”",
+        "“Til je heup zo hoog mogelijk boven de lijn.”",
+        "“Rol voorover om de positie langer vol te houden.”"
+      ],
+      "explanation": "Controle: Schouder, bekken en enkels blijven op één lijn, zonder zijwaarts doorzakken of voor- of achterover kantelen. Gebruik een variant met steun op de knieën of een kortere houdtijd wanneer de lijn wegvalt.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "core",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-muscles-sidehold-cue",
+            "page": 14
+          }
+        ]
+      }
+    },
+    {
+      "id": "coaching-carry",
+      "region": "core",
+      "type": "choice",
+      "prompt": "Welke cue richt zich op zijwaarts leunen tijdens KB march & walk?",
+      "answer": "“Draag een denkbeeldig glas op een waterpas dienblad.”",
+      "distractors": [
+        "“Kantel het dienblad bij iedere stap.”",
+        "“Leun met je romp naar het gewicht toe.”",
+        "“Hang zijwaarts van het gewicht weg.”"
+      ],
+      "explanation": "Controle: Borst en bekken blijven boven elkaar tijdens stappen, zonder naar het gewicht toe of ervan weg te leunen. De cue is een analogie. Kies een lichter gewicht of oefen eerst stilstaand voordat je gaat stappen.",
+      "source": {
+        "kind": "supplement",
+        "title": "Aanvullende coachingvoorbeelden",
+        "section": "core",
+        "references": [
+          {
+            "title": "Externe focus bij krachttraining: Grgic e.a. (2021)",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/34822352/"
+          },
+          {
+            "title": "Leren met analogieën: Zacks & Friedman (2020)",
+            "url": "https://www.nature.com/articles/s41598-020-63999-1"
+          }
+        ],
+        "courseReferences": [
+          {
+            "questionId": "extra-muscles-sidehold-cue",
+            "page": 14
+          }
+        ]
       }
     },
     {
