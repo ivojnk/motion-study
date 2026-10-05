@@ -1,21 +1,2 @@
-<!--
-tags: [next, proceed, swipe, arrow, right, direction, pointer, navigation, flow, navigate]
-category: Arrows
-version: "1.0"
-unicode: "ea1f"
--->
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M5 12l14 0" />
-  <path d="M13 18l6 -6" />
-  <path d="M13 6l6 6" />
-</svg>
+<!-- Phosphor Icons: arrow-right, Duotone. Source: https://raw.githubusercontent.com/phosphor-icons/core/2b75f3ad12b420c9504ef05df8d2564a28f8500e/assets/duotone/arrow-right-duotone.svg. MIT license: /licenses/phosphor-LICENSE.txt -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M216,128l-72,72V56Z" opacity="0.2"/><path d="M221.66,122.34l-72-72A8,8,0,0,0,136,56v64H40a8,8,0,0,0,0,16h96v64a8,8,0,0,0,13.66,5.66l72-72A8,8,0,0,0,221.66,122.34ZM152,180.69V75.31L204.69,128Z"/></svg>

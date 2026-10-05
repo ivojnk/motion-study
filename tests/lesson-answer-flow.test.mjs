@@ -74,7 +74,7 @@ const xp = instance => learning.gameStats(learning.readGame({ getItem: key => in
 for (const [mode, question] of [['choice', q], ['binary', q], ['recognition', recognition]]) {
   test(mode + ' choices immediately record one answer and show feedback', () => {
     const instance = lesson(question, mode);
-    assert.doesNotMatch(instance.html(), /id="confirm-choice-answer"|aria-pressed/);
+    assert.doesNotMatch(instance.html(), /id="confirm-choice-answer"|aria-pressed|lesson-dock|>Verder</);
     const correct = instance.read().session.options.indexOf(question.answer);
     instance.chooseAnswer(correct);
     instance.chooseAnswer(correct);
@@ -85,6 +85,10 @@ for (const [mode, question] of [['choice', q], ['binary', q], ['recognition', re
     assert.equal(xp(instance), 5);
     assert.match(instance.html(), /feedback success/);
     assert.match(instance.html(), /class="answer correct" disabled/);
+    assert.match(instance.html(), /id="next-question">Verder/);
+    instance.next();
+    assert.equal(instance.read().session.index, 1);
+    assert.doesNotMatch(instance.html(), /lesson-dock|>Verder</);
   });
 }
 

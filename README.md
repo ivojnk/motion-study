@@ -2,7 +2,8 @@
 
 Learn anatomy and biomechanics with an interactive 3D body and short quiz
 lessons. Works in desktop and mobile browsers. The study-book interface uses local CSS,
-existing fonts and Tabler icons; see [UI references](docs/ui-design-research.md).
+existing fonts and Phosphor Icons in the Duotone variant. See
+[icon sources](docs/phosphor-icons.md) and [UI references](docs/ui-design-research.md).
 
 **Previous static version:** https://ivojnk.github.io/motion-study/
 
@@ -145,4 +146,4 @@ Duolingo design publications. Research and implementation choices are in
 [answer interaction](docs/duolingo-answer-research.md),
 [rewards and rhythm](docs/duolingo-rewards-research.md) and
 [feedback design](docs/duolingo-feedback-research.md). Native buttons, progress
-bars and the existing MIT-licensed Tabler icons keep the flow lightweight.
+bars and locally served MIT-licensed Phosphor Duotone icons keep the flow lightweight.
