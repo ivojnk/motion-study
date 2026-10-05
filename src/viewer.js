@@ -114,16 +114,20 @@ export async function createViewer(canvas, onSelect, onStatus) {
     return matchesId && (!patterns[id]?.length || patterns[id].some(part => mesh.userData.anatomyName.includes(part)));
   }
   function updateMaterials() {
-    const hasSelection = Boolean(selected || selectedAnatomyName);
     const coloredChoices = modelChoiceState || choiceState;
+    const hasSelection = Boolean(coloredChoices || selected || selectedAnatomyName);
     for (const mesh of muscleMeshes) {
       const active = isSelected(mesh);
       const choiceIndex = coloredChoices?.choices.findIndex(choice => choice.key === muscleKey(mesh)) ?? -1;
-      mesh.visible = Boolean(coloredChoices) || !isolated || !hasSelection || active;
+      mesh.visible = !isolated || !hasSelection || (coloredChoices ? choiceIndex >= 0 : active);
       mesh.material = coloredChoices ? choiceIndex >= 0 && (coloredChoices.preview === null || coloredChoices.preview === choiceIndex) ? choiceMaterials[choiceIndex] : dimMaterial : active ? focusMaterial : hasSelection ? dimMaterial : muscleMaterial;
       mesh.renderOrder = coloredChoices ? choiceIndex >= 0 && (coloredChoices.preview === null || coloredChoices.preview === choiceIndex) ? 10 : 0 : active ? 10 : 0;
     }
     render();
+  }
+  function setIsolated(value) {
+    isolated = Boolean(value);
+    updateMaterials();
   }
   function highlight(id, anatomyName = null, patterns = {}) {
     clearChoice();
@@ -165,7 +169,6 @@ export async function createViewer(canvas, onSelect, onStatus) {
     selected = null;
     selectedAnatomyName = null;
     selectedPatterns = {};
-    isolated = false;
     const combinedBox = new THREE.Box3();
     const choices = ids.map(id => {
       const meshes = muscleMeshes.filter(mesh => mesh.userData.courseMuscleId === id);
@@ -323,8 +326,7 @@ export async function createViewer(canvas, onSelect, onStatus) {
     render();
   }
   onStatus('ready');
-  return { available, select, highlight, view, render, showSkeleton, showModelChoices,
+  return { available, select, highlight, view, render, showSkeleton, showModelChoices, setIsolated,
     setPickingEnabled(value) { pickingEnabled = value; if (!value) clearChoice(); },
-    setIsolated(value) { clearChoice(); isolated = value; updateMaterials(); },
     dispose() { clearChoice(); clearModelChoices(); choicePanel?.dispose(); unbindTapSelection(); observer.disconnect(); controls.dispose(); draco.dispose(); if (frame !== null) cancelAnimationFrame(frame); scene.traverse(n => n.geometry?.dispose()); [muscleMaterial, boneMaterial, focusMaterial, dimMaterial, ...choiceMaterials].forEach(m => m.dispose()); renderer.dispose(); } };
 }
