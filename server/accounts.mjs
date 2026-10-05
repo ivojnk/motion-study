@@ -46,14 +46,14 @@ export function createAccounts({ databasePath, origin, now = Date.now, sessionSe
     if (path === '/api/account/session' && request.method === 'GET') return json({ user: userFor(request) });
     if (!['/api/account/enter', '/api/account/logout'].includes(path)) return json({ error: 'Deze pagina bestaat niet.' }, 404);
     if (request.method !== 'POST') return json({ error: 'Gebruik POST.' }, 405, { Allow: 'POST' });
-    if (request.headers.get('origin') !== appOrigin || request.headers.get('sec-fetch-site') === 'cross-site') return json({ error: 'Open MotionStudy opnieuw en probeer het nog eens.' }, 403);
+    if (request.headers.get('origin') !== appOrigin || request.headers.get('sec-fetch-site') === 'cross-site') return json({ error: 'Open MotionStudy opnieuw.' }, 403);
     if (!request.headers.get('content-type')?.startsWith('application/json')) return json({ error: 'Ongeldig verzoek.' }, 415);
     if (path === '/api/account/logout') {
       const token = tokenFrom(request);
       if (token) db.prepare('DELETE FROM sessions WHERE token_hash = ?').run(digest(token));
       return json({ user: null }, 200, { 'Set-Cookie': cookie('', 0) });
     }
-    if (!allowed(ip)) return json({ error: 'Even rustig aan. Probeer het over een minuut opnieuw.' }, 429, { 'Retry-After': '60' });
+    if (!allowed(ip)) return json({ error: 'Probeer over een minuut opnieuw.' }, 429, { 'Retry-After': '60' });
     let body;
     try {
       const text = await request.text();
