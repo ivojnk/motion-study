@@ -16,10 +16,10 @@
     <div id="account-controls" class="account-controls" hidden><span id="account-name"></span><button id="account-logout">Uitloggen</button><span id="logout-message" role="alert"></span></div>
   </header>
   <section id="account-screen" class="account-screen" aria-labelledby="account-title">
-    <div class="account-intro"><span class="eyebrow">JOUW EIGEN LEERPAD</span><h1 id="account-title">Leer het lichaam<br /><em>kennen.</em></h1><p>Ontdek de 3D-atlas en oefen anatomie met korte lessen.</p></div>
-    <div class="account-card"><h2>Hoe heet je hier?</h2><p>Vul je gebruikersnaam in. Nieuw hier? Dan maken we meteen je account.</p><p id="account-loading" role="status">Even kijken of je al bent ingelogd…</p>
-      <form id="account-form" hidden><label for="account-username">Gebruikersnaam</label><input id="account-username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="2" maxlength="24" pattern="[a-zA-Z0-9][a-zA-Z0-9._\-]{1,23}" aria-describedby="account-help account-message" required /><p id="account-help">2–24 tekens. Letters, cijfers, punten, streepjes en underscores.</p><p id="account-message" role="alert" hidden></p><button id="account-submit" class="primary" type="submit">Verder</button></form>
-      <button id="account-reload" class="text-button" type="button" hidden>Probeer opnieuw</button><p class="account-note">Onthoud je naam, daarmee kom je terug. Iedereen met dezelfde gebruikersnaam kan dit account gebruiken.</p><p class="account-note">Je voortgang blijft op dit apparaat, apart per account.</p>
+    <div class="account-intro"><h1 id="account-title">Leer het lichaam<br /><em>kennen.</em></h1></div>
+    <div class="account-card"><h2>Inloggen</h2><p id="account-loading" role="status">Laden…</p>
+      <form id="account-form" hidden><label for="account-username">Gebruikersnaam</label><input id="account-username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="2" maxlength="24" pattern="[a-zA-Z0-9][a-zA-Z0-9._\-]{1,23}" aria-describedby="account-help account-message" required /><p id="account-help">2–24 tekens: letters, cijfers, . _ -</p><p id="account-message" role="alert" hidden></p><button id="account-submit" class="primary" type="submit">Verder</button></form>
+      <button id="account-reload" class="text-button" type="button" hidden>Probeer opnieuw</button>
     </div>
   </section>
   <noscript><p class="account-screen">Zet JavaScript aan om MotionStudy te gebruiken.</p></noscript>

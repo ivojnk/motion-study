@@ -23,25 +23,25 @@ test('skipped and malformed attempts break a run even if marked correct', () => 
 
 test('halfway appears only at its threshold in lessons of at least six questions', () => {
   assert.equal(lessonInterlude(lesson()).key, 'halfway');
-  assert.equal(lessonInterlude(lesson()).title, 'Je hebt je ritme te pakken!');
-  assert.equal(lessonInterlude(lesson({ answerHistory: [attempt(false)] })).title, 'Je bent halverwege!');
+  assert.equal(lessonInterlude(lesson()).title, 'Halverwege');
+  assert.equal(lessonInterlude(lesson({ answerHistory: [attempt(false)] })).title, 'Halverwege');
   assert.equal(lessonInterlude(lesson({ initialCount: 5, ids: ['a', 'b', 'c', 'd', 'e'], index: 2 })), null);
   assert.equal(lessonInterlude(lesson({ index: 2 })), null);
   assert.equal(lessonInterlude(lesson({ index: 4 })), null);
   const oddLesson = lesson({ initialCount: 7, ids: ['a', 'b', 'c', 'd', 'e', 'f', 'g'] });
   assert.equal(lessonInterlude(oddLesson).key, 'halfway');
-  assert.match(lessonInterlude(oddLesson).description, /3 van de 7.*Nog 4/);
+  assert.match(lessonInterlude(oddLesson).description, /3\/7 vragen · nog 4/);
 });
 
 test('retry interlude occurs once before the appended review questions', () => {
   assert.equal(lessonInterlude(lesson({ index: 6 })), null);
   const singleRetry = lesson({ index: 6, ids: ['a', 'b', 'c', 'd', 'e', 'f', 'b'] });
   assert.deepEqual(lessonInterlude(singleRetry), {
-    key: 'retry', kind: 'retry', title: 'Nog één oefenronde',
-    description: 'Deze vraag krijgt nog één kans. Neem mee wat je net hebt geleerd.', icon: 'refresh'
+    key: 'retry', kind: 'retry', title: 'Herkansing',
+    description: '1 vraag', icon: 'refresh'
   });
   const retries = lesson({ index: 6, ids: [...singleRetry.ids, 'c'] });
-  assert.match(lessonInterlude(retries).description, /Deze 2 vragen/);
+  assert.match(lessonInterlude(retries).description, /2 vragen/);
   assert.equal(lessonInterlude({ ...retries, index: 7 }), null);
   assert.equal(lessonInterlude(lesson({ index: 2, initialCount: 2, ids: ['a', 'b', 'a'] })).key, 'retry');
 });

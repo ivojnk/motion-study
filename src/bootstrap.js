@@ -9,9 +9,9 @@ const request = async (path, body) => {
     credentials: 'same-origin', cache: 'no-store',
     ...(body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {}),
   });
-  if (!response.headers.get('content-type')?.includes('application/json')) throw new Error('Inloggen is nu niet beschikbaar. Probeer het later opnieuw.');
+  if (!response.headers.get('content-type')?.includes('application/json')) throw new Error('Inloggen lukt niet. Probeer later opnieuw.');
   const data = await response.json();
-  if (!response.ok) throw new Error(data.error || 'Dat lukte niet. Probeer het opnieuw.');
+  if (!response.ok) throw new Error(data.error || 'Dat lukt niet. Probeer opnieuw.');
   return data;
 };
 function broadcast(user) {
@@ -52,7 +52,7 @@ async function checkSession() {
   } catch {
     $('#account-loading').hidden = true;
     $('#account-form').hidden = false;
-    showError('Verbinden lukt niet. Probeer het zo nog eens.');
+    showError('Verbinding mislukt. Probeer opnieuw.');
   }
 }
 $('#account-form').addEventListener('submit', async event => {
@@ -61,14 +61,14 @@ $('#account-form').addEventListener('submit', async event => {
   entering = true;
   const button = $('#account-submit');
   button.disabled = true;
-  button.textContent = 'Even wachten…';
+  button.textContent = 'Inloggen…';
   $('#account-message').hidden = true;
   try {
     const { user } = await request('enter', { username: $('#account-username').value });
     broadcast(user);
     await openApp(user);
     $('#main').focus();
-  } catch (error) { showError(error.message === 'Failed to fetch' ? 'Verbinden lukt niet. Probeer het zo nog eens.' : error.message); }
+  } catch (error) { showError(error.message === 'Failed to fetch' ? 'Verbinding mislukt. Probeer opnieuw.' : error.message); }
   finally { entering = false; button.disabled = false; button.textContent = 'Verder'; }
 });
 $('#account-logout').addEventListener('click', async () => {

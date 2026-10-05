@@ -61,22 +61,22 @@ function dueCount() {
   return curriculum.questions.filter(q => progress.questions[q.id]?.due <= Date.now()).length;
 }
 function sourceMarkup(source) {
-  return '<details class="source"><summary>' + icon('book-2') + ' Bron</summary><p>' + escape(source.title) + ' · ' + escape(source.section) + (source.page ? ' · pagina ' + source.page : '') + '</p><a href="' + curriculum.sourceUrl + '" target="_blank" rel="noreferrer">Open de cheatsheet ↗</a></details>';
+  return '<details class="source"><summary>' + icon('book-2') + ' Bron</summary><p>' + escape(source.title) + ' · ' + escape(source.section) + (source.page ? ' · pagina ' + source.page : '') + '</p><a href="' + curriculum.sourceUrl + '" target="_blank" rel="noreferrer">Cheatsheet ↗</a></details>';
 }
 function intro(title, description = '', eyebrow = '') {
   $('#intro').innerHTML = (eyebrow ? '<span class="eyebrow">' + eyebrow + '</span>' : '') + '<h1>' + title + '</h1>' + (description ? '<p>' + description + '</p>' : '');
 }
 function gameMarkup() {
   const stats = gameStats(game);
-  return '<div class="game-bar" aria-label="Je leerbeloningen"><span>' + icon('sparkles') + '<strong>' + stats.xp + ' XP</strong></span><span>' + icon('refresh') + '<strong>' + stats.streak + (stats.streak === 1 ? ' dag streak' : ' dagen streak') + '</strong></span><span>' + game.completed.length + '/33 levels</span></div><div class="goal-card"><div><strong>Dagdoel</strong><span>' + Math.min(stats.today, DAILY_GOAL) + '/' + DAILY_GOAL + ' XP' + (stats.today >= DAILY_GOAL ? ' · gehaald!' : '') + '</span></div><progress max="' + DAILY_GOAL + '" value="' + Math.min(stats.today, DAILY_GOAL) + '" aria-label="Dagdoel in XP"></progress><p>Goed antwoord: 5 XP · les afgerond: 10 XP</p></div>';
+  return '<div class="game-bar" aria-label="Je leerbeloningen"><span>' + icon('sparkles') + '<strong>' + stats.xp + ' XP</strong></span><span>' + icon('refresh') + '<strong>' + stats.streak + (stats.streak === 1 ? ' dag streak' : ' dagen streak') + '</strong></span><span>' + game.completed.length + '/33 levels</span></div><div class="goal-card"><div><strong>Dagdoel</strong><span>' + Math.min(stats.today, DAILY_GOAL) + '/' + DAILY_GOAL + ' XP' + (stats.today >= DAILY_GOAL ? ' · gehaald!' : '') + '</span></div><progress max="' + DAILY_GOAL + '" value="' + Math.min(stats.today, DAILY_GOAL) + '" aria-label="Dagdoel in XP"></progress></div>';
 }
 function renderHome() {
   restoreAtlasLayout();
-  intro('Leren');
+  intro('Leerpad');
   const levels = levelPath(game);
   const current = levels.find(level => !level.done);
   const due = dueCount();
-  $('#learning').innerHTML = gameMarkup() + '<div class="daily-card"><span class="eyebrow">' + (current ? 'VOLGEND LEVEL' : 'LEERPAD AFGEROND') + '</span><h2>' + (current ? escape(current.topic.title) : 'Alle levels voltooid') + '</h2><p>' + (current ? current.label + ' · level ' + (current.stage + 1) + ' van 3' : '33 van 33 levels') + '</p><button class="primary" ' + (current ? 'data-level="' + current.id + '"' : 'data-start="daily"') + '>' + (session && !session.finished && session.levelId === current?.id ? 'Ga verder' : 'Start') + icon('arrow-right') + '</button></div><a class="atlas-shortcut" href="#atlas">' + icon('stretch') + '<span><strong>3D-atlas</strong><small>Spieren en functies</small></span>' + icon('arrow-right') + '</a><a class="atlas-shortcut" href="#vragen">' + icon('book-2') + '<span><strong>Alle ' + curriculum.questions.length + ' vragen</strong><small>Vragen per hoofdstuk</small></span>' + icon('arrow-right') + '</a><div class="section-heading"><h2>Hoofdstukken</h2><span>11 hoofdstukken · 33 levels</span></div><div class="learning-path">' + topics.map((topic, chapter) => '<section class="path-chapter"><div class="chapter-heading"><span>' + (chapter + 1) + '</span><div><h3>' + topic.title + '</h3><p>' + topic.subtitle + '</p></div></div><ol>' + levels.filter(level => level.topic.id === topic.id).map(level => '<li class="path-step ' + (level.done ? 'done' : level.locked ? 'locked' : 'current') + '"><button class="level-node" data-level="' + level.id + '" ' + (level.locked ? 'disabled' : '') + ' aria-label="' + escape(topic.title + ': ' + level.label + (level.done ? ', voltooid, opnieuw oefenen' : level.locked ? ', vergrendeld' : ', volgend level')) + '">' + (level.done ? icon('check') : level.stage === 2 ? icon('target') : icon(topic.icon)) + '</button><span><strong>' + level.label + '</strong><small>' + (level.done ? 'Voltooid · oefen opnieuw' : level.locked ? 'Rond het vorige level af' : 'Beschikbaar') + '</small></span></li>').join('') + '</ol></section>').join('') + '</div><div class="practice-actions"><button class="primary" data-start="daily">Gemengde les</button><button class="text-button" data-start="review" ' + (!due ? 'disabled' : '') + '>Herhalen (' + due + ')</button></div><p class="privacy-note">Volgend level bij minstens 80% goed op de eerste poging.</p>';
+  $('#learning').innerHTML = gameMarkup() + '<div class="daily-card"><span class="eyebrow">' + (current ? 'VOLGEND LEVEL' : 'LEERPAD AFGEROND') + '</span><h2>' + (current ? escape(current.topic.title) : 'Alle levels voltooid') + '</h2><p>' + (current ? current.label + ' · level ' + (current.stage + 1) + ' van 3' : '33 van 33 levels') + '</p><button class="primary" ' + (current ? 'data-level="' + current.id + '"' : 'data-start="daily"') + '>' + (session && !session.finished && session.levelId === current?.id ? 'Ga verder' : 'Start') + icon('arrow-right') + '</button></div><a class="atlas-shortcut" href="#atlas">' + icon('stretch') + '<span><strong>3D-atlas</strong></span>' + icon('arrow-right') + '</a><a class="atlas-shortcut" href="#vragen">' + icon('book-2') + '<span><strong>Alle ' + curriculum.questions.length + ' vragen</strong></span>' + icon('arrow-right') + '</a><div class="section-heading"><h2>Hoofdstukken</h2><span>11 hoofdstukken · 33 levels</span></div><div class="learning-path">' + topics.map((topic, chapter) => '<section class="path-chapter"><div class="chapter-heading"><span>' + (chapter + 1) + '</span><div><h3>' + topic.title + '</h3><p>' + topic.subtitle + '</p></div></div><ol>' + levels.filter(level => level.topic.id === topic.id).map(level => '<li class="path-step ' + (level.done ? 'done' : level.locked ? 'locked' : 'current') + '"><button class="level-node" data-level="' + level.id + '" ' + (level.locked ? 'disabled' : '') + ' aria-label="' + escape(topic.title + ': ' + level.label + (level.done ? ', voltooid, opnieuw oefenen' : level.locked ? ', vergrendeld' : ', volgend level')) + '">' + (level.done ? icon('check') : level.stage === 2 ? icon('target') : icon(topic.icon)) + '</button><span><strong>' + level.label + '</strong><small>' + (level.done ? 'Voltooid' : level.locked ? 'Rond het vorige level af' : 'Beschikbaar') + '</small></span></li>').join('') + '</ol></section>').join('') + '</div><div class="practice-actions"><button class="primary" data-start="daily">Gemengde les</button><button class="text-button" data-start="review" ' + (!due ? 'disabled' : '') + '>Herhalen (' + due + ')</button></div><p class="privacy-note">Volgend level bij minstens 80% goed op de eerste poging.</p>';
   resetAtlas();
 }
 function restoreAtlasLayout() {
@@ -102,7 +102,7 @@ function resetAtlas() {
   viewer?.setIsolated(false);
   viewer?.select(null);
   $('#orientation').textContent = 'VOORZIJDE';
-  $('#selection-card').innerHTML = '<h3>Tik een spier aan</h3>';
+  $('#selection-card').innerHTML = '<h3>Kies een spier</h3>';
 }
 function start(region, levelId = null) {
   pendingChoiceSelection = null;
@@ -212,8 +212,8 @@ function renderInterlude(interlude) {
   pendingChoiceSelection = null;
   resetAtlas();
   $('.atlas-panel').hidden = true;
-  intro(interlude.kind === 'retry' ? 'Nog even <em>oefenen.</em>' : 'Je bent <em>onderweg.</em>', 'Neem je tijd. Je gaat verder wanneer jij klaar bent.', 'EVEN TUSSENDOOR');
-  $('#learning').innerHTML = lessonHud() + '<article class="lesson-interlude"><span class="interlude-symbol">' + icon(interlude.icon) + '</span><h2 id="interlude-title" tabindex="-1">' + escape(interlude.title) + '</h2><p>' + escape(interlude.description) + '</p><div class="interlude-progress">' + (interlude.kind === 'retry' ? session.ids.length - session.initialCount + ' vragen om nog eens te oefenen' : session.index + ' van ' + session.initialCount + ' vragen doorlopen') + '</div><button id="continue-interlude" class="primary">' + (interlude.kind === 'retry' ? 'Oefen mijn fouten' : 'Verder met de les') + icon('arrow-right') + '</button></article>';
+  $('#intro').innerHTML = '';
+  $('#learning').innerHTML = lessonHud() + '<article class="lesson-interlude"><span class="interlude-symbol">' + icon(interlude.icon) + '</span><h2 id="interlude-title" tabindex="-1">' + escape(interlude.title) + '</h2><p>' + escape(interlude.description) + '</p><button id="continue-interlude" class="primary">' + (interlude.kind === 'retry' ? 'Herhalen' : 'Verder') + icon('arrow-right') + '</button></article>';
 }
 function dismissInterlude() {
   if (!route.startsWith('les/') || !session?.prepared || session.response || session.finished) return;
@@ -224,8 +224,8 @@ function dismissInterlude() {
 }
 function feedbackMarkup(q, isCorrect, answerCheck) {
   const momentum = lessonMomentum(session);
-  const title = isCorrect ? answerCheck?.typo ? 'Goed! Let op de spelling.' : momentum.run >= 3 ? momentum.run + ' op rij. Goed bezig!' : 'Goed gedaan!' : 'Deze oefenen we nog even.';
-  return '<div class="feedback ' + (isCorrect ? 'success' : 'retry') + ' lesson-feedback" role="status" aria-live="polite"><div class="feedback-heading"><span class="feedback-symbol" aria-hidden="true">' + (isCorrect ? icon('check') : icon('refresh')) + '</span><strong>' + title + '</strong>' + (isCorrect ? '<span class="feedback-reward">+5 XP</span>' : '') + '</div><p>' + (isCorrect ? escape(q.answer) : '<strong>Het juiste antwoord:</strong> ' + escape(q.answer)) + '</p>' + (!isCorrect ? '<p>Lees het antwoord rustig door. Een fout kost je geen XP.</p>' : '') + '</div>' + sourceMarkup(q.source) + '<div class="lesson-actions"><button class="primary next-button" id="next-question">' + (session.index + 1 >= session.ids.length ? 'Bekijk je resultaat' : 'Verder') + icon('arrow-right') + '</button></div>';
+  const title = isCorrect ? answerCheck?.typo ? 'Goed! Let op de spelling.' : momentum.run >= 3 ? momentum.run + ' op rij' : 'Goed' : 'Onjuist';
+  return '<div class="feedback ' + (isCorrect ? 'success' : 'retry') + ' lesson-feedback" role="status" aria-live="polite"><div class="feedback-heading"><span class="feedback-symbol" aria-hidden="true">' + (isCorrect ? icon('check') : icon('refresh')) + '</span><strong>' + title + '</strong>' + (isCorrect ? '<span class="feedback-reward">+5 XP</span>' : '') + '</div><p>' + (isCorrect ? escape(q.answer) : '<strong>Het juiste antwoord:</strong> ' + escape(q.answer)) + '</p>' + '</div>' + sourceMarkup(q.source) + '<div class="lesson-actions"><button class="primary next-button" id="next-question">' + (session.index + 1 >= session.ids.length ? 'Bekijk je resultaat' : 'Verder') + icon('arrow-right') + '</button></div>';
 }
 function renderLesson({ preserveCamera = false } = {}) {
   restoreAtlasLayout();
@@ -234,7 +234,7 @@ function renderLesson({ preserveCamera = false } = {}) {
   if (!session || session.region !== region || session.levelId !== levelId) { start(region, levelId); return; }
   if (!session.ids.length) {
     intro('Herhalen');
-    $('#learning').innerHTML = '<div class="empty-card"><h2>Geen herhalingen klaar</h2><button class="primary" data-start="daily">Start een gemengde les</button><a class="text-link" href="#leren">Terug naar je leerpad</a></div>';
+    $('#learning').innerHTML = '<div class="empty-card"><h2>Geen herhalingen</h2><button class="primary" data-start="daily">Gemengde les</button><a class="text-link" href="#leren">Terug naar je leerpad</a></div>';
     resetAtlas(); return;
   }
   if (session.index >= session.ids.length) { finish(); return; }
@@ -258,7 +258,7 @@ function renderLesson({ preserveCamera = false } = {}) {
     (recognitionBlocked ? '<p role="status">3D-model niet beschikbaar.</p>' : '') +
     (mode === 'binary' ? '<div class="statement"><span>Voorgesteld antwoord</span><p>' + escape(session.options[0]) + '</p></div>' : '') + (isOpenExercise(mode) ? openAnswerMarkup(mode, response, recognitionBlocked) : '<div class="answers">' + (mode === 'binary' ? binaryResponses(q, session.options) : session.options).map((option, i) => '<button data-key="' + (i + 1) + '" data-answer="' + session.options.indexOf(option) + '" class="answer ' + (response ? option === q.answer ? 'correct' : option === response ? 'incorrect' : '' : (mode === 'point' ? pendingPointSelection : pendingChoiceSelection)?.response === option ? 'selected' : '') + '" ' + (!response ? 'aria-pressed="' + ((mode === 'point' ? pendingPointSelection : pendingChoiceSelection)?.response === option) + '" ' : '') + (response || recognitionBlocked ? 'disabled' : '') + '><span class="answer-key">' + (i + 1) + '</span><span>' + (mode === 'binary' ? (i === 0 ? 'Klopt' : 'Klopt niet') : mode === 'point' && !response ? 'Bekijk spier ' + (i + 1) : escape(option)) + '</span>' + (response && option === q.answer ? icon('check') : '') + '</button>').join('') + '</div>') +
     (mode === 'point' && !response ? '<div class="point-confirmation"><p id="point-selection-status" role="status" aria-live="polite">' + (pendingPointSelection ? 'Spier geselecteerd.' : 'Kies een spier.') + '</p><button id="confirm-answer" class="primary" ' + (!pendingPointSelection || recognitionBlocked ? 'disabled' : '') + '>Bevestig antwoord ' + icon('check') + '</button></div>' : '') +
-    (!response && !isOpenExercise(mode) && mode !== 'point' ? '<div class="answer-confirmation"><p id="choice-selection-status" role="status">' + (pendingChoiceSelection ? 'Antwoord gekozen. Controleer als je klaar bent.' : 'Kies je antwoord. Je kunt je keuze nog wijzigen.') + '</p><button id="confirm-choice-answer" class="primary" ' + (!pendingChoiceSelection || recognitionBlocked ? 'disabled' : '') + '>Controleer antwoord ' + icon('check') + '</button><span class="answer-shortcut">' + (mode === 'binary' ? '1–2' : '1–4') + ' om te kiezen · Enter om te controleren</span></div>' : '') +
+    (!response && !isOpenExercise(mode) && mode !== 'point' ? '<div class="answer-confirmation"><p id="choice-selection-status" role="status">' + (pendingChoiceSelection ? 'Antwoord gekozen.' : 'Kies een antwoord.') + '</p><button id="confirm-choice-answer" class="primary" ' + (!pendingChoiceSelection || recognitionBlocked ? 'disabled' : '') + '>Controleer antwoord ' + icon('check') + '</button><span class="answer-shortcut">' + (mode === 'binary' ? '1–2' : '1–4') + ' om te kiezen · Enter om te controleren</span></div>' : '') +
     (response ? feedbackMarkup(q, isCorrect, answerCheck) : session.openRevealed ? '' : '<button class="text-button" id="skip-question">Overslaan</button>') +
     '</article>' + (storageAvailable ? '' : '<p class="privacy-note" role="status">Voortgang niet opgeslagen.</p>');
   const card = curriculum.cards.find(c => c.id === q.muscleId);
@@ -309,7 +309,7 @@ function chooseAnswer(index) {
       button.classList.toggle('selected', selected);
       button.setAttribute('aria-pressed', String(selected));
     });
-    $('#choice-selection-status').textContent = 'Antwoord gekozen. Controleer als je klaar bent.';
+    $('#choice-selection-status').textContent = 'Antwoord gekozen.';
     $('#confirm-choice-answer').disabled = false;
     return;
   }
@@ -387,7 +387,7 @@ function finish() {
   else if (route === 'vragen') renderQuestionBank(); return; }
     const passed = session.levelId && game.completed.includes(session.levelId);
     const stats = gameStats(game);
-    intro('Resultaat');
+    $('#intro').innerHTML = '';
     const nextLevel = levelPath(game).find(level => !level.done);
     restoreAtlasLayout();
     $('#learning').innerHTML = '<div class="result-card celebration"><span class="result-icon">' + icon(passed ? 'target' : 'check') + '</span><h2 id="result-title" tabindex="-1">' + (passed ? 'Level gehaald' : 'Les afgerond') + '</h2><div class="reward-xp">+' + (session.xp || 0) + ' XP</div><div class="result-breakdown"><div><span>Goede antwoorden</span><strong>+' + Math.max(0, (session.xp || 0) - (session.answered > 0 ? 10 : 0)) + ' XP</strong></div><div><span>Les afgerond</span><strong>+' + (session.answered > 0 ? 10 : 0) + ' XP</strong></div><div><span>Beste reeks deze les</span><strong>' + lessonMomentum(session).bestRun + ' op rij</strong></div></div><div class="result-metrics"><span><strong>' + (session.answered ? session.correct + '/' + session.answered : '0') + '</strong> ' + (session.answered ? 'goed met herhalingen' : 'vragen beantwoord') + '</span><span><strong>' + (session.firstCorrect || 0) + '/' + (session.initialCount || session.ids.length) + '</strong> eerste poging</span></div>' + (session.levelId && !passed ? '<p>Minimaal 80% goed op de eerste poging.</p>' : '') + '<div class="goal-result">' + (stats.today >= DAILY_GOAL ? 'Dagdoel gehaald · ' + stats.streak + (stats.streak === 1 ? ' dag streak' : ' dagen streak') : 'Nog ' + (DAILY_GOAL - stats.today) + ' XP tot je dagdoel') + '</div><button class="primary" ' + (session.levelId && !passed ? 'data-level="' + session.levelId + '"' : nextLevel ? 'data-level="' + nextLevel.id + '"' : 'data-start="daily"') + '>' + (session.levelId && !passed ? 'Oefen dit level opnieuw' : 'Volgende les') + icon('arrow-right') + '</button><a class="text-link" href="#leren">Terug naar je leerpad</a></div>';
@@ -440,7 +440,7 @@ function renderProgress() {
   const seen = Object.keys(progress.questions).length;
   const due = dueCount();
   const mastery = masteryFor(curriculum.questions, progress);
-  $('#learning').innerHTML = gameMarkup() + '<div class="stats"><div><strong>' + seen + '</strong><span>vragen geoefend</span></div><div><strong>' + progress.sessions.length + '</strong><span>lessen afgerond</span></div><div><strong>' + mastery + '%</strong><span>herhaald beheerst</span></div></div><div class="review-card"><h2>' + (due ? due + ' vragen om te herhalen' : 'Geen herhalingen klaar') + '</h2><button class="primary" data-start="review" ' + (!due ? 'disabled' : '') + '>Start herhaling ' + icon('refresh') + '</button></div><div class="section-heading"><h2>Per hoofdstuk</h2></div><div class="progress-topics">' + topics.map(t => {
+  $('#learning').innerHTML = gameMarkup() + '<div class="stats"><div><strong>' + seen + '</strong><span>vragen geoefend</span></div><div><strong>' + progress.sessions.length + '</strong><span>lessen afgerond</span></div><div><strong>' + mastery + '%</strong><span>beheerst</span></div></div><div class="review-card"><h2>' + (due ? due + ' vragen te herhalen' : 'Geen herhalingen') + '</h2><button class="primary" data-start="review" ' + (!due ? 'disabled' : '') + '>Start herhaling ' + icon('refresh') + '</button></div><div class="section-heading"><h2>Per hoofdstuk</h2></div><div class="progress-topics">' + topics.map(t => {
     const qs = curriculum.questions.filter(q => q.region === t.id);
     const seen = qs.filter(q => progress.questions[q.id]).length;
     return '<div><strong>' + t.title + '</strong><span>' + seen + ' / ' + qs.length + ' geoefend · ' + masteryFor(qs, progress) + '% beheerst</span><progress max="' + qs.length + '" value="' + seen + '" aria-label="' + t.title + ' geoefend"></progress></div>';
@@ -450,8 +450,8 @@ function renderProgress() {
 function renderQuestionBank() {
   restoreAtlasLayout();
   resetAtlas();
-  intro('Vragenbank', curriculum.questions.length + ' vragen · 11 hoofdstukken');
-  $('#learning').innerHTML = '<div class="bank-filters"><label for="question-search">Zoeken</label><input id="question-search" type="search" placeholder="Bijvoorbeeld diafragma of deload"><label for="question-chapter">Hoofdstuk</label><select id="question-chapter"><option value="">Alle hoofdstukken</option>' + topics.map(topic => '<option value="' + topic.id + '">' + escape(topic.title) + '</option>').join('') + '</select></div><p id="bank-count" role="status">' + curriculum.questions.length + ' vragen</p><div class="question-bank">' + topics.map(topic => '<details class="bank-chapter" data-chapter="' + topic.id + '"><summary>' + escape(topic.title) + ' · ' + curriculum.questions.filter(q => q.region === topic.id).length + ' vragen</summary><button class="text-button" data-start="' + topic.id + '">Oefen dit hoofdstuk</button><ol>' + curriculum.questions.filter(q => q.region === topic.id).map(q => '<li data-search="' + escape((q.prompt + ' ' + q.answer).toLocaleLowerCase('nl')) + '"><details><summary>' + escape(q.type === 'recognition' ? '3D-herkenning: ' + q.answer : q.prompt) + '</summary><p><strong>Antwoord:</strong> ' + escape(q.answer) + '</p>' + sourceMarkup(q.source) + '</details></li>').join('') + '</ol></details>').join('') + '</div><a class="text-link" href="#leren">Terug naar je leerpad</a>';
+  intro('Vragenbank');
+  $('#learning').innerHTML = '<div class="bank-filters"><label for="question-search">Zoeken</label><input id="question-search" type="search" placeholder="Spier of onderwerp"><label for="question-chapter">Hoofdstuk</label><select id="question-chapter"><option value="">Alle hoofdstukken</option>' + topics.map(topic => '<option value="' + topic.id + '">' + escape(topic.title) + '</option>').join('') + '</select></div><p id="bank-count" role="status">' + curriculum.questions.length + ' vragen</p><div class="question-bank">' + topics.map(topic => '<details class="bank-chapter" data-chapter="' + topic.id + '"><summary>' + escape(topic.title) + ' · ' + curriculum.questions.filter(q => q.region === topic.id).length + ' vragen</summary><button class="text-button" data-start="' + topic.id + '">Oefen dit hoofdstuk</button><ol>' + curriculum.questions.filter(q => q.region === topic.id).map(q => '<li data-search="' + escape((q.prompt + ' ' + q.answer).toLocaleLowerCase('nl')) + '"><details><summary>' + escape(q.type === 'recognition' ? '3D-herkenning: ' + q.answer : q.prompt) + '</summary><p><strong>Antwoord:</strong> ' + escape(q.answer) + '</p>' + sourceMarkup(q.source) + '</details></li>').join('') + '</ol></details>').join('') + '</div><a class="text-link" href="#leren">Terug naar je leerpad</a>';
 }
 function filterQuestionBank() {
   const query = $('#question-search').value.trim().toLocaleLowerCase('nl');
