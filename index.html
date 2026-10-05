@@ -101,6 +101,22 @@
     <p>De server bewaart je gebruikersnaam, accountnummer en aanmaakdatum. Wie je gebruikersnaam kent, kan inloggen. Gebruik een bijnaam zonder gevoelige gegevens.</p>
     <h3>In deze browser</h3>
     <p>Antwoorden, scores, XP, herhaalplanning en onafgemaakte lessen blijven in deze browser, per account. Ze synchroniseren niet. Sitegegevens wissen verwijdert ze. Op dit apparaat kan iemand met je gebruikersnaam dezelfde voortgang openen.</p>
+    <section id="progress-transfer" class="progress-transfer" aria-labelledby="progress-transfer-title" hidden>
+      <h3 id="progress-transfer-title">Je voortgang</h3>
+      <div class="progress-transfer-actions">
+        <button id="progress-export" class="primary" type="button">Exporteer voortgang</button>
+        <button id="progress-import" class="progress-import-button" type="button">Importeer voortgang</button>
+      </div>
+      <input id="progress-import-file" type="file" accept=".json,application/json" aria-label="Voortgangsbestand" hidden />
+      <div id="progress-import-confirmation" hidden>
+        <p>Importeren vervangt je huidige voortgang.</p>
+        <div class="progress-transfer-actions">
+          <button id="progress-import-confirm" class="primary" type="button">Vervang voortgang</button>
+          <button id="progress-import-cancel" class="progress-import-button" type="button">Annuleren</button>
+        </div>
+      </div>
+      <p id="progress-transfer-status" role="status" aria-live="polite"></p>
+    </section>
     <h3>Cookies en beveiliging</h3>
     <p>Een noodzakelijke inlogcookie werkt maximaal 30 dagen. Uitloggen beëindigt de sessie. De server bewaart de sessiecode gehasht, de vervaldatum, deze informatieversie en je statistiekkeuze. Je IP-adres wordt kort gebruikt om inlogpogingen te beperken. De app plaatst geen advertentie- of trackingcookies.</p>
     <h3>Optionele gebruiksstatistieken</h3>
