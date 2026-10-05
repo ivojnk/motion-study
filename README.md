@@ -112,8 +112,18 @@ Third-party components retain their own terms.
 
 ## Deployment and checks
 
-GitHub Actions runs tests and builds the app. Automatic GitHub Pages deployment
-is disabled because a static host cannot run the account server.
+Every push to `main` in `ivojnk/motion-study` automatically deploys to the existing
+`lottequiz-motionstudy` Worker through Cloudflare Workers Builds. Cloudflare
+installs the locked dependencies, runs `npm test && npm run build`, then
+`npx wrangler deploy`. Failed tests or builds stop deployment. Preview builds
+are disabled, so other branches do not publish to production.
+
+Cloudflare uses the repository root and `NODE_VERSION=22`. The checked-in
+`.node-version` also selects Node 22 for local version managers and GitHub Actions.
+GitHub Actions independently runs tests and builds on pushes and pull requests.
+GitHub Pages deployment remains disabled because a static host cannot run the
+account server. Build history and logs are available under the Worker's
+**Deployments** tab, and the repository connection under **Settings → Builds**.
 
 Cloudflare URL: https://lottequiz-motionstudy.jonkersivo.workers.dev
 
