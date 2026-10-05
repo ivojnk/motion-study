@@ -1,0 +1,70 @@
+/* Local, bounded celebration using the existing palette and Phosphor icons. */
+.lesson-focus .result-card.completion-card {
+  border: 0;
+  background: transparent;
+  padding: 12px 8px;
+  animation: none;
+}
+.completion-hero { position: relative; display: grid; justify-items: center; gap: 12px; margin-bottom: 20px; }
+.completion-medal {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  background: var(--soft);
+  box-shadow: 0 5px 0 var(--line);
+}
+.completion-medal .icon { width: 42px; height: 42px; }
+.completion-medal::after { content: ''; position: absolute; inset: -12px; border: 1px solid var(--accent); border-radius: 50%; opacity: 0; }
+.completion-card h2 { font-size: clamp(28px, 5vw, 34px); color: var(--accent); }
+.completion-burst { position: absolute; inset: 0; pointer-events: none; }
+.completion-burst i { position: absolute; left: 50%; top: 44px; width: 6px; height: 10px; border-radius: 2px; background: var(--accent); opacity: 0; }
+.completion-burst i:nth-child(even) { background: var(--muted); height: 6px; }
+.completion-burst i:nth-child(1) { --burst-x: -88px; --burst-y: -22px; --burst-turn: -32deg; }
+.completion-burst i:nth-child(2) { --burst-x: -64px; --burst-y: -65px; --burst-turn: 24deg; }
+.completion-burst i:nth-child(3) { --burst-x: -22px; --burst-y: -79px; --burst-turn: -12deg; }
+.completion-burst i:nth-child(4) { --burst-x: 28px; --burst-y: -76px; --burst-turn: 38deg; }
+.completion-burst i:nth-child(5) { --burst-x: 72px; --burst-y: -54px; --burst-turn: 14deg; }
+.completion-burst i:nth-child(6) { --burst-x: 90px; --burst-y: -6px; --burst-turn: -26deg; }
+.completion-burst i:nth-child(7) { --burst-x: 66px; --burst-y: 49px; --burst-turn: 35deg; }
+.completion-burst i:nth-child(8) { --burst-x: 26px; --burst-y: 76px; --burst-turn: -15deg; }
+.completion-burst i:nth-child(9) { --burst-x: -43px; --burst-y: 67px; --burst-turn: 28deg; }
+.completion-burst i:nth-child(10) { --burst-x: -81px; --burst-y: 31px; --burst-turn: -38deg; }
+.completion-card .reward-xp { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0 0 16px; color: var(--accent); font-size: 48px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.completion-card .reward-xp > .icon { width: 28px; height: 28px; }
+.completion-card .xp-unit { font-size: 18px; }
+.completion-card .result-breakdown { border: 1px solid var(--line); background: var(--white); border-radius: 12px; }
+.completion-card .result-metrics { gap: 8px; }
+.completion-card .result-metrics > span { display: grid; justify-items: center; align-content: start; gap: 5px; padding: 12px 4px; border-radius: 12px; border: 1px solid var(--line); background: var(--white); color: var(--muted); }
+.completion-card .result-metrics .icon { width: 20px; height: 20px; }
+.completion-card .result-metrics strong { color: var(--accent); margin: 0; }
+.completion-card .result-metrics small { font-size: inherit; line-height: 1.35; }
+.completion-card .goal-result { border: 0; background: var(--soft); border-radius: 10px; color: var(--accent); }
+.completion-details > p { margin-bottom: 12px; font-size: 13px; }
+.is-entering .completion-medal { animation: completion-stamp 700ms cubic-bezier(.2,.8,.3,1) both; }
+.is-entering .completion-medal::after { animation: completion-ring 900ms 160ms ease-out both; }
+.is-entering .completion-burst i { animation: completion-burst 1000ms 240ms ease-out both; }
+.is-entering .completion-hero h2 { animation: completion-reveal 400ms 260ms both; }
+.is-entering .reward-xp { animation: completion-reveal 450ms 850ms both; }
+.is-entering .result-metrics > span:nth-child(1) { animation: completion-reveal 400ms 1050ms both; }
+.is-entering .result-metrics > span:nth-child(2) { animation: completion-reveal 400ms 1170ms both; }
+.is-entering .result-metrics > span:nth-child(3) { animation: completion-reveal 400ms 1290ms both; }
+.is-entering :is(.result-breakdown, .goal-result, .completion-details > p) { animation: completion-reveal 400ms 1150ms both; }
+@keyframes completion-stamp { 0% { opacity: 0; transform: scale(.75); } 55% { opacity: 1; transform: scale(1.1); } 100% { transform: scale(1); } }
+@keyframes completion-ring { 0% { opacity: .45; transform: scale(.8); } 100% { opacity: 0; transform: scale(1.4); } }
+@keyframes completion-burst { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.5); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--burst-x), var(--burst-y)) rotate(var(--burst-turn)); } }
+@keyframes completion-reveal { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-height: 700px) {
+  .completion-hero { gap: 8px; margin-bottom: 12px; }
+  .completion-medal { width: 64px; height: 64px; }
+  .completion-medal .icon { width: 32px; height: 32px; }
+  .completion-burst i { top: 32px; }
+  .completion-card .reward-xp { font-size: 40px; margin-bottom: 12px; }
+  .completion-card .result-metrics > span { gap: 3px; padding: 8px 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .completion-card *, .completion-card *::after { animation: none !important; }
+}

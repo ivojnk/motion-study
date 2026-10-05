@@ -26,6 +26,28 @@ export function installInstructions(navigator) {
   ];
 }
 
+// Let the student see their result before offering installation on the path.
+export function setupInstallNudge({ window, document, openPanel, isInstalled }) {
+  const key = 'motionstudy.install-nudge.v1';
+  let seen = false;
+  let pending = false;
+  try { seen = window.localStorage.getItem(key) === 'seen'; } catch { /* Keep state in this page. */ }
+  document.addEventListener('motionstudy:lesson-completed', () => {
+    if (!seen && !isInstalled()) pending = true;
+  });
+  window.addEventListener('hashchange', () => {
+    if (!pending || seen) return;
+    window.requestAnimationFrame(() => {
+      if (!pending || seen || isInstalled() || document.hidden || document.querySelector('dialog[open]')) return;
+      if (window.location.hash && window.location.hash !== '#leren') return;
+      openPanel();
+      pending = false;
+      seen = true;
+      try { window.localStorage.setItem(key, 'seen'); } catch { /* Do not block learning. */ }
+    });
+  });
+}
+
 export function setupAppInstall({ window, document, navigator }) {
   const triggers = [...document.querySelectorAll('[data-install-app]')];
   const dialog = document.querySelector('#install-app');
@@ -33,9 +55,6 @@ export function setupAppInstall({ window, document, navigator }) {
   const instructions = document.querySelector('#install-instructions');
   const status = document.querySelector('#install-status');
   const standalone = window.matchMedia('(display-mode: standalone)');
-  const nudgeKey = 'motionstudy.install-nudge.v1';
-  let nudgeSeen = false;
-  try { nudgeSeen = window.localStorage.getItem(nudgeKey) === 'seen'; } catch { /* Keep the dismissal for this page when storage is blocked. */ }
   let installed = Boolean(navigator.standalone || standalone.matches);
   let pendingPrompt = null;
   let prompting = false;
@@ -81,12 +100,7 @@ export function setupAppInstall({ window, document, navigator }) {
     instructions.append(step);
   });
   triggers.forEach(button => button.addEventListener('click', openPanel));
-  document.addEventListener('motionstudy:lesson-completed', () => {
-    if (nudgeSeen || installed || document.hidden || document.querySelector('dialog[open]')) return;
-    openPanel();
-    nudgeSeen = true;
-    try { window.localStorage.setItem(nudgeKey, 'seen'); } catch { /* Do not block learning when storage is unavailable. */ }
-  });
+  setupInstallNudge({ window, document, openPanel, isInstalled: () => installed });
   document.querySelectorAll('[data-install-close]').forEach(button => button.addEventListener('click', () => dialog.close()));
   howTo.addEventListener('click', () => { guide = true; update(); back.focus(); });
   back.addEventListener('click', () => { guide = false; update(); howTo.focus(); });
