@@ -14,11 +14,11 @@ existing fonts and Phosphor Icons in the Duotone variant. See
 - Tap near a muscle to preview nearby choices with matching colours and symbols.
   Ambiguous taps zoom into the area. Choice buttons hide muscle names; confirm
   with “Deze bedoel ik” or restore the previous view with “Opnieuw kiezen”.
-- Study 31 muscle cards and 634 questions across eleven chapters.
+- Study 31 muscle cards and 653 questions across eleven chapters.
 - Practise 41 additional coaching questions about external focus, analogy cues and energy leaks. Each correction includes a cue, an observable check and an exercise adjustment. Original applications are labelled as supplemental, with research references for the learning principles.
 - Search all questions, answers and coaching explanations by chapter. The 593 course questions have PDF page references; coaching examples link to related course facts and learning research.
   See [COURSE_COVERAGE.md](COURSE_COVERAGE.md) for the source coverage checklist.
-- Follow 95 sequential lessons across eleven chapters. Each lesson starts with seven
+- Follow 101 sequential lessons across eleven chapters. Each lesson starts with seven
   course questions plus up to two earlier mistakes; the final lesson in a chapter adds earlier questions as review. Wrong
   answers return until corrected, then the next lesson unlocks. The result keeps
   the first-attempt score separate from corrections. Existing completed chapters

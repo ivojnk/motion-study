@@ -4636,7 +4636,7 @@
     },
     {
       "id": "question-concept-20",
-      "label": "Welke rotator-cuffspier zorgt volgens de tabel voor endorotatie?",
+      "label": "Welke rotator-cuffspier zorgt voor endorotatie?",
       "questionIds": [
         "concept-20"
       ]
@@ -4657,7 +4657,7 @@
     },
     {
       "id": "question-concept-23",
-      "label": "Welke onderarmbeweging staat bij de bicepsfunctie?",
+      "label": "Welke onderarmbeweging hoort bij de bicepsfunctie?",
       "questionIds": [
         "concept-23"
       ]
@@ -4720,7 +4720,7 @@
     },
     {
       "id": "question-concept-32",
-      "label": "Wat gebeurt er bij een kleinere heuphoek volgens het heuphoofdstuk?",
+      "label": "Wat doet een kleinere heuphoek met de rek op gluteus maximus?",
       "questionIds": [
         "concept-32"
       ]
@@ -4734,7 +4734,7 @@
     },
     {
       "id": "question-concept-34",
-      "label": "Welke kniehoek geeft volgens het quadhoofdstuk meer rek?",
+      "label": "Welke kniehoek geeft de quadriceps meer rek?",
       "questionIds": [
         "concept-34"
       ]
@@ -4755,14 +4755,14 @@
     },
     {
       "id": "question-concept-37",
-      "label": "Welke leg curl traint volgens de cheatsheet de verlengde positie?",
+      "label": "Welke leg curl traint de verlengde positie?",
       "questionIds": [
         "concept-37"
       ]
     },
     {
       "id": "question-concept-38",
-      "label": "Welke knierotatie staat bij biceps femoris?",
+      "label": "Welke knierotatie voert de biceps femoris uit?",
       "questionIds": [
         "concept-38"
       ]
@@ -5073,6 +5073,139 @@
       "label": "Welke cue richt zich op zijwaarts leunen tijdens KB march & walk?",
       "questionIds": [
         "coaching-carry"
+      ]
+    },
+    {
+      "id": "question-course-detail-sternocostalis",
+      "label": "Hoe heten de middelste borstvezels die bij een bovenarmhoek van 90° worden benadrukt?",
+      "questionIds": [
+        "course-detail-sternocostalis"
+      ]
+    },
+    {
+      "id": "question-course-detail-trapezius-descendens",
+      "label": "Welke Latijnse naam hoort bij het bovenste deel van de trapezius?",
+      "questionIds": [
+        "course-detail-trapezius-descendens"
+      ]
+    },
+    {
+      "id": "question-course-detail-trapezius-transversa",
+      "label": "Welke Latijnse naam hoort bij het middelste deel van de trapezius?",
+      "questionIds": [
+        "course-detail-trapezius-transversa"
+      ]
+    },
+    {
+      "id": "question-course-detail-trapezius-ascendens",
+      "label": "Welke Latijnse naam hoort bij het onderste deel van de trapezius?",
+      "questionIds": [
+        "course-detail-trapezius-ascendens"
+      ]
+    },
+    {
+      "id": "question-course-detail-rhomboideus-members",
+      "label": "Welke twee spieren worden samen bedoeld met rhomboideus in het cheatsheet?",
+      "questionIds": [
+        "course-detail-rhomboideus-members"
+      ]
+    },
+    {
+      "id": "question-course-detail-role-pectoralis",
+      "label": "Welk rollabel staat in het cheatsheet bij Pectoralis major?",
+      "questionIds": [
+        "course-detail-role-pectoralis"
+      ]
+    },
+    {
+      "id": "question-course-detail-role-delt-front",
+      "label": "Welk rollabel staat in het cheatsheet bij de voorste kop van de deltoideus?",
+      "questionIds": [
+        "course-detail-role-delt-front"
+      ]
+    },
+    {
+      "id": "question-course-detail-role-delt-mid",
+      "label": "Welk rollabel staat in het cheatsheet bij de middelste kop van de deltoideus?",
+      "questionIds": [
+        "course-detail-role-delt-mid"
+      ]
+    },
+    {
+      "id": "question-course-detail-role-delt-back",
+      "label": "Welk rollabel staat in het cheatsheet bij de achterste kop van de deltoideus?",
+      "questionIds": [
+        "course-detail-role-delt-back"
+      ]
+    },
+    {
+      "id": "question-course-detail-role-rotator-block",
+      "label": "Welk rollabel staat in het cheatsheet bij het blok “Rotator cuff (4) + teres major”?",
+      "questionIds": [
+        "course-detail-role-rotator-block"
+      ]
+    },
+    {
+      "id": "question-course-detail-role-serratus",
+      "label": "Welk rollabel staat in het cheatsheet bij Serratus anterior?",
+      "questionIds": [
+        "course-detail-role-serratus"
+      ]
+    },
+    {
+      "id": "question-course-detail-role-pec-minor",
+      "label": "Welk rollabel staat in het cheatsheet bij Pectoralis minor?",
+      "questionIds": [
+        "course-detail-role-pec-minor"
+      ]
+    },
+    {
+      "id": "question-course-detail-role-lats",
+      "label": "Welk rollabel staat in het cheatsheet bij Latissimus dorsi?",
+      "questionIds": [
+        "course-detail-role-lats"
+      ]
+    },
+    {
+      "id": "question-course-detail-role-traps-upper",
+      "label": "Welk rollabel staat in het cheatsheet bij het bovenste deel van de trapezius?",
+      "questionIds": [
+        "course-detail-role-traps-upper"
+      ]
+    },
+    {
+      "id": "question-course-detail-role-traps-mid",
+      "label": "Welk rollabel staat in het cheatsheet bij het middelste deel van de trapezius?",
+      "questionIds": [
+        "course-detail-role-traps-mid"
+      ]
+    },
+    {
+      "id": "question-course-detail-role-traps-lower",
+      "label": "Welk rollabel staat in het cheatsheet bij het onderste deel van de trapezius?",
+      "questionIds": [
+        "course-detail-role-traps-lower"
+      ]
+    },
+    {
+      "id": "question-course-detail-role-rhomboids",
+      "label": "Welk rollabel staat in het cheatsheet bij Rhomboideus minor/major?",
+      "questionIds": [
+        "course-detail-role-rhomboids"
+      ]
+    },
+    {
+      "id": "question-course-detail-outer-core-role",
+      "label": "Welke gezamenlijke rol heeft de outer core unit volgens het cheatsheet?",
+      "questionIds": [
+        "course-detail-outer-core-role"
+      ]
+    },
+    {
+      "id": "question-course-detail-squat-hip-phase",
+      "label": "Tijdens welke fase van de squat kan beperkte heupmobiliteit je volgens het cheatsheet voorover laten leunen?",
+      "questionIds": [
+        "course-detail-squat-hip-phase"
       ]
     }
   ],
@@ -18706,6 +18839,410 @@
             "page": 14
           }
         ]
+      }
+    },
+    {
+      "id": "course-detail-sternocostalis",
+      "region": "borst",
+      "type": "choice",
+      "prompt": "Hoe heten de middelste borstvezels die bij een bovenarmhoek van 90° worden benadrukt?",
+      "answer": "Sternocostalis",
+      "distractors": [
+        "Pars clavicularis",
+        "Pars abdominalis",
+        "Pars acromialis"
+      ],
+      "acceptedAnswers": [
+        "Pars sternocostalis"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "borst",
+        "page": 6
+      }
+    },
+    {
+      "id": "course-detail-trapezius-descendens",
+      "region": "rug",
+      "type": "choice",
+      "prompt": "Welke Latijnse naam hoort bij het bovenste deel van de trapezius?",
+      "answer": "Descendens",
+      "distractors": [
+        "Transversa",
+        "Ascendens",
+        "Clavicularis"
+      ],
+      "acceptedAnswers": [
+        "Pars descendens",
+        "Trapezius pars descendens"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "rug",
+        "page": 8
+      }
+    },
+    {
+      "id": "course-detail-trapezius-transversa",
+      "region": "rug",
+      "type": "choice",
+      "prompt": "Welke Latijnse naam hoort bij het middelste deel van de trapezius?",
+      "answer": "Transversa",
+      "distractors": [
+        "Descendens",
+        "Ascendens",
+        "Clavicularis"
+      ],
+      "acceptedAnswers": [
+        "Pars transversa",
+        "Trapezius pars transversa"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "rug",
+        "page": 9
+      }
+    },
+    {
+      "id": "course-detail-trapezius-ascendens",
+      "region": "rug",
+      "type": "choice",
+      "prompt": "Welke Latijnse naam hoort bij het onderste deel van de trapezius?",
+      "answer": "Ascendens",
+      "distractors": [
+        "Descendens",
+        "Transversa",
+        "Clavicularis"
+      ],
+      "acceptedAnswers": [
+        "Pars ascendens",
+        "Trapezius pars ascendens"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "rug",
+        "page": 9
+      }
+    },
+    {
+      "id": "course-detail-rhomboideus-members",
+      "region": "rug",
+      "type": "choice",
+      "prompt": "Welke twee spieren worden samen bedoeld met rhomboideus in het cheatsheet?",
+      "answer": "Rhomboideus minor en major",
+      "distractors": [
+        "Teres minor en major",
+        "Pectoralis minor en major",
+        "Gluteus medius en minimus"
+      ],
+      "acceptedAnswers": [
+        "Rhomboideus minor en rhomboideus major",
+        "Rhomboideus minor/major",
+        "Rhomboideus major en minor"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "rug",
+        "page": 9
+      }
+    },
+    {
+      "id": "course-detail-role-pectoralis",
+      "region": "borst",
+      "type": "choice",
+      "prompt": "Welk rollabel staat in het cheatsheet bij Pectoralis major?",
+      "answer": "Duwspier",
+      "distractors": [
+        "Trekspier",
+        "Stabilisator",
+        "Elleboogflexor"
+      ],
+      "acceptedAnswers": [
+        "Duwende spier"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "borst",
+        "page": 6
+      }
+    },
+    {
+      "id": "course-detail-role-delt-front",
+      "region": "borst",
+      "type": "choice",
+      "prompt": "Welk rollabel staat in het cheatsheet bij de voorste kop van de deltoideus?",
+      "answer": "Duwspier",
+      "distractors": [
+        "Trekspier",
+        "Stabilisator",
+        "Elleboogflexor"
+      ],
+      "acceptedAnswers": [
+        "Duwende spier"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "borst",
+        "page": 6
+      }
+    },
+    {
+      "id": "course-detail-role-delt-mid",
+      "region": "borst",
+      "type": "choice",
+      "prompt": "Welk rollabel staat in het cheatsheet bij de middelste kop van de deltoideus?",
+      "answer": "Duwspier",
+      "distractors": [
+        "Trekspier",
+        "Stabilisator",
+        "Elleboogflexor"
+      ],
+      "acceptedAnswers": [
+        "Duwende spier"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "borst",
+        "page": 6
+      }
+    },
+    {
+      "id": "course-detail-role-delt-back",
+      "region": "borst",
+      "type": "choice",
+      "prompt": "Welk rollabel staat in het cheatsheet bij de achterste kop van de deltoideus?",
+      "answer": "Duwspier",
+      "distractors": [
+        "Trekspier",
+        "Stabilisator",
+        "Elleboogflexor"
+      ],
+      "acceptedAnswers": [
+        "Duwende spier"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "borst",
+        "page": 6
+      }
+    },
+    {
+      "id": "course-detail-role-rotator-block",
+      "region": "borst",
+      "type": "choice",
+      "prompt": "Welk rollabel staat in het cheatsheet bij het blok “Rotator cuff (4) + teres major”?",
+      "answer": "Stabilisator",
+      "distractors": [
+        "Duwspier",
+        "Trekspier",
+        "Elleboogflexor"
+      ],
+      "acceptedAnswers": [
+        "Stabiliserende spier"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "borst",
+        "page": 7
+      }
+    },
+    {
+      "id": "course-detail-role-serratus",
+      "region": "borst",
+      "type": "choice",
+      "prompt": "Welk rollabel staat in het cheatsheet bij Serratus anterior?",
+      "answer": "Stabilisator",
+      "distractors": [
+        "Duwspier",
+        "Trekspier",
+        "Elleboogflexor"
+      ],
+      "acceptedAnswers": [
+        "Stabiliserende spier"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "borst",
+        "page": 7
+      }
+    },
+    {
+      "id": "course-detail-role-pec-minor",
+      "region": "borst",
+      "type": "choice",
+      "prompt": "Welk rollabel staat in het cheatsheet bij Pectoralis minor?",
+      "answer": "Duwspier",
+      "distractors": [
+        "Trekspier",
+        "Stabilisator",
+        "Elleboogflexor"
+      ],
+      "acceptedAnswers": [
+        "Duwende spier"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "borst",
+        "page": 7
+      }
+    },
+    {
+      "id": "course-detail-role-lats",
+      "region": "rug",
+      "type": "choice",
+      "prompt": "Welk rollabel staat in het cheatsheet bij Latissimus dorsi?",
+      "answer": "Trekspier",
+      "distractors": [
+        "Duwspier",
+        "Stabilisator",
+        "Elleboogflexor"
+      ],
+      "acceptedAnswers": [
+        "Trekkende spier"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "rug",
+        "page": 8
+      }
+    },
+    {
+      "id": "course-detail-role-traps-upper",
+      "region": "rug",
+      "type": "choice",
+      "prompt": "Welk rollabel staat in het cheatsheet bij het bovenste deel van de trapezius?",
+      "answer": "Trekspier",
+      "distractors": [
+        "Duwspier",
+        "Stabilisator",
+        "Elleboogflexor"
+      ],
+      "acceptedAnswers": [
+        "Trekkende spier"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "rug",
+        "page": 8
+      }
+    },
+    {
+      "id": "course-detail-role-traps-mid",
+      "region": "rug",
+      "type": "choice",
+      "prompt": "Welk rollabel staat in het cheatsheet bij het middelste deel van de trapezius?",
+      "answer": "Trekspier",
+      "distractors": [
+        "Duwspier",
+        "Stabilisator",
+        "Elleboogflexor"
+      ],
+      "acceptedAnswers": [
+        "Trekkende spier"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "rug",
+        "page": 9
+      }
+    },
+    {
+      "id": "course-detail-role-traps-lower",
+      "region": "rug",
+      "type": "choice",
+      "prompt": "Welk rollabel staat in het cheatsheet bij het onderste deel van de trapezius?",
+      "answer": "Trekspier",
+      "distractors": [
+        "Duwspier",
+        "Stabilisator",
+        "Elleboogflexor"
+      ],
+      "acceptedAnswers": [
+        "Trekkende spier"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "rug",
+        "page": 9
+      }
+    },
+    {
+      "id": "course-detail-role-rhomboids",
+      "region": "rug",
+      "type": "choice",
+      "prompt": "Welk rollabel staat in het cheatsheet bij Rhomboideus minor/major?",
+      "answer": "Trekspier",
+      "distractors": [
+        "Duwspier",
+        "Stabilisator",
+        "Elleboogflexor"
+      ],
+      "acceptedAnswers": [
+        "Trekkende spier"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "rug",
+        "page": 9
+      }
+    },
+    {
+      "id": "course-detail-outer-core-role",
+      "region": "core",
+      "type": "choice",
+      "prompt": "Welke gezamenlijke rol heeft de outer core unit volgens het cheatsheet?",
+      "answer": "Beweging en kracht leveren",
+      "distractors": [
+        "Ademhalingsgebonden stabilisatie en buikdruk opbouwen",
+        "Uitsluitend de schouderkop in de kom stabiliseren",
+        "Alleen de elleboog buigen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Inner en outer core",
+        "page": 11
+      }
+    },
+    {
+      "id": "course-detail-squat-hip-phase",
+      "region": "patronen",
+      "type": "choice",
+      "prompt": "Tijdens welke fase van de squat kan beperkte heupmobiliteit je volgens het cheatsheet voorover laten leunen?",
+      "answer": "Excentrisch",
+      "distractors": [
+        "Concentrisch",
+        "Isometrisch",
+        "Alleen na afloop van de squat"
+      ],
+      "acceptedAnswers": [
+        "Excentrische fase",
+        "Tijdens het zakken",
+        "Zakken",
+        "Neergaande fase"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Squat en heupmobiliteit",
+        "page": 20
       }
     }
   ]

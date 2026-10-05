@@ -108,7 +108,7 @@ test('XP calendar streak survives reload, crosses month boundary and expires aft
 });
 test('short lessons cover the whole course and unlock only after every question is corrected', () => {
   const empty = { days: {}, completed: [] };
-  assert.equal(levelPath(empty).length, 95);
+  assert.equal(levelPath(empty).length, 101);
   assert.equal(levelPath(empty).filter(level => !level.locked).length, 1);
   assert.deepEqual(completeLevel(empty, 'basis:0', 0, 0), empty);
   assert.deepEqual(completeLevel(empty, 'basis:0', NaN, 7), empty);
@@ -123,7 +123,7 @@ test('short lessons cover the whole course and unlock only after every question 
   for (const topic of topics) {
     const lessons = levelPath(empty).filter(level => level.topic.id === topic.id);
     const chapter = curriculum.questions.filter(q => q.region === topic.id);
-    assert.equal(lessons.length, [false, true].reduce((count, supplement) => count + Math.ceil(chapter.filter(q => (q.source.kind === 'supplement') === supplement).length / LESSON_SIZE), 0));
+    assert.equal(lessons.length, [undefined, 'supplement', 'course-detail'].reduce((count, kind) => count + Math.ceil(chapter.filter(q => q.source.kind === kind).length / LESSON_SIZE), 0));
     assert.ok(lessons.length > 3);
     const partitions = lessons.flatMap(level => {
       const questions = levelQuestions(curriculum.questions, topic.id, level.stage);

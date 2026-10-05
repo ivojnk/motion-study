@@ -351,22 +351,24 @@ export function levelQuestions(questions, region, stage) {
   let remaining = stage;
   for (const pool of chapterPools(questions, region)) {
     const count = Math.ceil(pool.length / LESSON_SIZE);
-    if (remaining < count) return fillLesson(pool.slice(remaining * LESSON_SIZE, (remaining + 1) * LESSON_SIZE), pool);
+    if (remaining < count) {
+      const reviewPool = pool[0]?.source?.kind === 'course-detail' ? [...pool, ...questions.filter(q => q.region === region && q.source?.kind !== 'course-detail')] : pool;
+      return fillLesson(pool.slice(remaining * LESSON_SIZE, (remaining + 1) * LESSON_SIZE), reviewPool);
+    }
     remaining -= count;
   }
   return [];
 }
-// Add coaching after the original chapter's final lesson, keeping its review
-// fillers and completed lesson IDs unchanged.
+// Start additions after the original chapter's final lesson. Previously completed
+// lessons retain their questions, including their existing review fillers.
 function chapterPools(questions, region) {
   const pool = questions.filter(q => q.region === region);
-  return [pool.filter(q => q.source?.kind !== 'supplement'), pool.filter(q => q.source?.kind === 'supplement')];
+  return [pool.filter(q => !['supplement', 'course-detail'].includes(q.source?.kind)), pool.filter(q => q.source?.kind === 'supplement'), pool.filter(q => q.source?.kind === 'course-detail')];
 }
-
 function migrateCompletedLevels(completed) {
   if (!Array.isArray(completed)) return [];
   const covered = new Set(topics.flatMap(topic => {
-    const pool = curriculum.questions.filter(q => q.region === topic.id && q.source?.kind !== 'supplement');
+    const pool = curriculum.questions.filter(q => q.region === topic.id && !['supplement', 'course-detail'].includes(q.source?.kind));
     return [0, 1, 2].flatMap(stage => completed.includes(topic.id + ':' + stage)
       ? pool.slice(Math.floor(stage * pool.length / 3), Math.floor((stage + 1) * pool.length / 3)).map(q => q.id) : []);
   }));
