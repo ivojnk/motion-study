@@ -7,18 +7,18 @@ Three agents audited basis, muscle/exercise tables, and patterns/programming, th
 | Chapter | Questions |
 | --- | ---: |
 | Basis | 104 |
-| Borst en schouders | 69 |
-| Rug | 48 |
+| Borst en schouders | 77 |
+| Rug | 57 |
 | Armen | 41 |
-| Core | 105 |
+| Core | 106 |
 | Heup | 38 |
 | Quadriceps | 29 |
 | Hamstrings | 27 |
 | Kuiten | 26 |
-| Bewegingspatronen | 68 |
+| Bewegingspatronen | 69 |
 | Groei en programmering | 38 |
 
-- 593 questions, each with a PDF page reference. Every source page is represented.
+- 612 questions, each with a PDF page reference. Every source page is represented.
 - 31 muscle cards: all listed fields plus 3D recognition.
 - All 64 exercise-table rows: target muscles and movement, plus listed benefits, cues, energy leaks and moment information.
 - All 57 visual length profiles. Anti-core rows have no profile bars.
@@ -27,4 +27,6 @@ Three agents audited basis, muscle/exercise tables, and patterns/programming, th
 - All listed programming, recovery and hypertrophy concepts.
 - Explicit membership questions for the adductors and rotator cuff, and the diaphragm/pelvic-floor content.
 
-The public curriculum contains 660 coverage records linking source facts to questions. Tests reject missing question references, uncovered questions, invalid page numbers and incomplete exercise/profile inventories. The private original PDF and extracted pages stay outside the repository. A searchable question directory at `#vragen` makes every question available without unlocking levels.
+The public curriculum contains 679 coverage records linking source facts to questions. Tests reject missing question references, uncovered questions, invalid page numbers and incomplete exercise/profile inventories. The private original PDF and extracted pages stay outside the repository. A searchable question directory at `#vragen` makes every question available without unlocking levels.
+
+The repeat audit added 19 explicit questions for Latin muscle names, push/pull/stabilizer card labels, the outer-core role and the eccentric phase of the squat hip-mobility issue. Six extra lessons preserve every existing lesson partition and its review fillers. Earlier progress never marks these additions complete.

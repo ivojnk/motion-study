@@ -105,7 +105,7 @@ test('XP calendar streak survives reload, crosses month boundary and expires aft
 });
 test('short lessons cover the whole course and unlock only after every question is corrected', () => {
   const empty = { days: {}, completed: [] };
-  assert.equal(levelPath(empty).length, 88);
+  assert.equal(levelPath(empty).length, 94);
   assert.equal(levelPath(empty).filter(level => !level.locked).length, 1);
   assert.deepEqual(completeLevel(empty, 'basis:0', 0, 0), empty);
   assert.deepEqual(completeLevel(empty, 'basis:0', NaN, 7), empty);
@@ -119,7 +119,8 @@ test('short lessons cover the whole course and unlock only after every question 
   assert.equal(completeLevel(first, 'basis:0', 5, 5).completed.length, 1);
   for (const topic of topics) {
     const lessons = levelPath(empty).filter(level => level.topic.id === topic.id);
-    assert.equal(lessons.length, Math.ceil(curriculum.questions.filter(q => q.region === topic.id).length / LESSON_SIZE));
+    const chapter = curriculum.questions.filter(q => q.region === topic.id);
+    assert.equal(lessons.length, [undefined, 'course-detail'].reduce((count, kind) => count + Math.ceil(chapter.filter(q => q.source.kind === kind).length / LESSON_SIZE), 0));
     assert.ok(lessons.length > 3);
     const partitions = lessons.flatMap(level => {
       const questions = levelQuestions(curriculum.questions, topic.id, level.stage);
@@ -223,5 +224,6 @@ test('answer streak counters and later lesson stages validate on reload', () => 
   for (const counters of [{ answerStreak: -1 }, { answerStreak: 4 }, { bestAnswerStreak: 2 }, { bestAnswerStreak: 3.5 }]) {
     assert.equal(readSession(storage({ ...session, ...counters }), lookup), null);
   }
-  assert.equal(readSession(storage({ ...session, levelId: 'core:15', stage: 15 }), lookup), null);
+  const invalidStage = levelPath({ completed: [] }).filter(level => level.topic.id === 'core').length;
+  assert.equal(readSession(storage({ ...session, levelId: 'core:' + invalidStage, stage: invalidStage }), lookup), null);
 });

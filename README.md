@@ -14,10 +14,10 @@ existing fonts and Phosphor Icons in the Duotone variant. See
 - Tap near a muscle to preview nearby choices with matching colours and symbols.
   Ambiguous taps zoom into the area. Choice buttons hide muscle names; confirm
   with “Deze bedoel ik” or restore the previous view with “Opnieuw kiezen”.
-- Study 31 muscle cards and 593 questions across eleven chapters.
+- Study 31 muscle cards and 612 questions across eleven chapters.
 - Search all questions and answers by chapter, with a PDF page reference for every question.
   See [COURSE_COVERAGE.md](COURSE_COVERAGE.md) for the source coverage checklist.
-- Follow 88 sequential lessons across eleven chapters. Each lesson starts with seven
+- Follow 94 sequential lessons across eleven chapters. Each lesson starts with seven
   course questions plus up to two earlier mistakes; the final lesson in a chapter adds earlier questions as review. Wrong
   answers return until corrected, then the next lesson unlocks. The result keeps
   the first-attempt score separate from corrections. Existing completed chapters
