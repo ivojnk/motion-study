@@ -92,7 +92,7 @@ progress::-moz-progress-bar { background: var(--accent); border-radius: 2px; }
 .path-step:nth-child(8n + 6), .path-step:nth-child(8n + 8) { --step-offset: calc(var(--path-sway) * .7); }
 .path-step:nth-child(8n + 7) { --step-offset: var(--path-sway); }
 .level-node { position: relative; width: 78px; height: 70px; min-height: 70px; padding: 0; border: 0; border-radius: 50%; background: var(--path-color); display: grid; place-items: center; box-shadow: 0 7px 0 var(--path-shadow); transition: transform .12s ease, box-shadow .12s ease; }
-.level-symbol { width: 36px; height: 36px; display: grid; place-items: center; }
+.level-symbol { width: 36px; height: 36px; display: grid; place-items: center; transition: transform .16s ease-out; }
 .level-node .icon { width: 34px; height: 34px; filter: brightness(0) invert(1); }
 .level-ring { position: absolute; width: 106px; height: 106px; top: calc(50% + 3px); left: 50%; transform: translate(-50%, -50%); pointer-events: none; overflow: visible; }
 .ring-segment { fill: none; stroke: #dfe5dd; stroke-width: 6; stroke-linecap: round; }
@@ -113,6 +113,41 @@ progress::-moz-progress-bar { background: var(--accent); border-radius: 2px; }
 .level-node:active:not(:disabled) { transform: translateY(5px); box-shadow: 0 2px 0 var(--path-shadow); }
 .path-step.done .level-node:active { box-shadow: 0 2px 0 #ae8833; }
 .level-node:focus-visible { outline: 3px solid var(--path-ink); outline-offset: 14px; }
+
+/* Only the newly earned lesson celebrates, once on returning to the path. */
+.just-earned .level-node { animation: path-earned-pop .62s .12s cubic-bezier(.22, 1, .36, 1); }
+.ring-segment.earned { stroke-dasharray: 1 1; animation: path-ring-fill .65s .18s ease-out backwards; }
+.level-sparkles { position: absolute; inset: 0; pointer-events: none; }
+.level-sparkles::before, .level-sparkles::after { content: ''; position: absolute; width: 13px; height: 13px; background: #a17c2a; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); opacity: 0; animation: path-sparkle .7s .22s ease-out; }
+.level-sparkles::before { top: -16px; left: -14px; }
+.level-sparkles::after { right: -17px; bottom: -10px; width: 10px; height: 10px; animation-delay: .32s; }
+.just-earned.done .level-node::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: linear-gradient(110deg, transparent 30%, #fff8 48%, transparent 66%); background-size: 250% 100%; opacity: 0; animation: path-gold-shimmer .8s .3s ease-out; }
+.active-chapter[open] .current .level-callout { animation: path-next-nudge 4.2s .9s ease-in-out infinite; }
+.active-chapter[open] .current .level-node:is(:hover, :focus-visible, :active) .level-callout { animation-play-state: paused; }
+.just-earned .level-node:is(:hover, :focus-visible, :active) { animation: none; }
+.level-node:active:not(:disabled) .level-symbol { transform: scale(.9); }
+@keyframes path-earned-pop {
+  0%, 100% { transform: translateY(0) scale(1); }
+  30% { transform: translateY(-5px) scale(1.055); }
+  58% { transform: translateY(1px) scale(.98); }
+  78% { transform: translateY(-1px) scale(1.015); }
+}
+@keyframes path-ring-fill { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes path-sparkle {
+  0% { opacity: 0; transform: translateY(4px) scale(.3) rotate(-12deg); }
+  35% { opacity: 1; transform: translateY(-2px) scale(1) rotate(0); }
+  100% { opacity: 0; transform: translateY(-8px) scale(.5) rotate(12deg); }
+}
+@keyframes path-gold-shimmer {
+  0% { opacity: 0; background-position: 100% 0; }
+  25%, 65% { opacity: .75; }
+  100% { opacity: 0; background-position: 0 0; }
+}
+@keyframes path-next-nudge {
+  0%, 24%, 100% { transform: translateX(-50%) translateY(0); }
+  9% { transform: translateX(-50%) translateY(-4px); }
+  17% { transform: translateX(-50%) translateY(1px); }
+}
 .practice-actions { padding-top: 12px; gap: 20px; }
 .text-button, .privacy-note, .text-link { font-size: 12px; }
 .text-button:disabled { opacity: .6; }
@@ -381,6 +416,7 @@ nav a > .icon { width: 20px; height: 20px; }
 .home-view .active-chapter > .chapter-heading { display: none; }
 .home-view .path-chapter ol { padding-top: 80px; padding-bottom: 40px; }
 .home-view .path-chapter :is(button, summary) { scroll-margin-block: 250px 100px; }
+.home-view .path-chapter .level-node { scroll-margin-block-start: 320px; }
 .home-view .chapter-heading { border-radius: 14px; background: var(--soft); }
 /* Keep the same bottom navigation on every main page. */
 main:not([hidden]) { padding-bottom: calc(112px + env(safe-area-inset-bottom)); }

@@ -25,6 +25,8 @@ let session = null;
 let viewer = null;
 let viewerFullscreen = null;
 let route = '';
+// A visual reward for the next path visit only; never stored with progress.
+let pathRewardLevelId = null;
 let atlasSearchQuery = '';
 let storageAvailable = true;
 const byId = new Map(curriculum.questions.map(q => [q.id, q]));
@@ -146,6 +148,8 @@ function renderHome() {
   const activeTopic = topic || levels.find(level => !level.done)?.topic || topics.at(-1);
   const activeLevel = current || levels.find(level => !level.done);
   const activeChapter = topics.findIndex(item => item.id === activeTopic.id);
+  const earnedLevelId = pathRewardLevelId;
+  pathRewardLevelId = null;
   const chapters = topics.map((topic, chapter) => {
     const chapterLevels = levels.filter(level => level.topic.id === topic.id);
     const completed = chapterLevels.filter(level => level.done).length;
@@ -155,17 +159,19 @@ function renderHome() {
       const level = active ? activeLevel : group.next;
       const resume = drafts[draftKey({ region: topic.id, levelId: level.id })];
       const label = resume ? 'Verder' : 'Start';
-      return '<li class="path-step ' + state + ' group-' + group.type + '">' +
+      const justEarned = group.lessons.some(lesson => lesson.id === earnedLevelId && lesson.done);
+      return '<li class="path-step ' + state + ' group-' + group.type + (justEarned ? ' just-earned' : '') + '">' +
         '<button class="level-node" data-level="' + level.id + '" ' + (group.locked ? 'disabled' : '') +
         (active ? ' aria-current="step"' : '') +
         ' aria-label="' + escape(topic.title + ': ' + group.label + ', groep ' + (group.index + 1) + ', ' + group.completed + ' van ' + group.lessons.length + ' lessen voltooid' + (group.done ? ', opnieuw oefenen' : group.locked ? ', vergrendeld' : ', volgende: ' + level.label)) + '">' +
-        groupProgressMarkup(group) +
+        groupProgressMarkup(group, earnedLevelId) +
+        (justEarned ? '<span class="level-sparkles" aria-hidden="true"></span>' : '') +
         (active ? '<span class="level-callout" aria-hidden="true">' + label + '</span>' : '') +
         '<span class="level-symbol" aria-hidden="true">' + icon(group.icon) + '</span></button>' +
         '<span class="level-copy" aria-hidden="true">' + group.label + '</span>' +
         '<span class="level-caption" aria-hidden="true">' + group.completed + '/' + group.lessons.length + ' lessen</span>' + '</li>';
     }).join('');
-    return '<details class="path-chapter' + (activeTopic.id === topic.id ? ' active-chapter' : '') + '" ' + (chapter <= activeChapter ? 'open' : '') + '>' +
+    return '<details class="path-chapter' + (activeTopic.id === topic.id ? ' active-chapter' : '') + '" ' + (chapter <= activeChapter || chapterLevels.some(level => level.id === earnedLevelId) ? 'open' : '') + '>' +
       '<summary class="chapter-heading"><span class="chapter-copy"><span class="chapter-kicker">Hoofdstuk ' + (chapter + 1) + '</span><strong>' + escape(topic.title) + '</strong><small>' + escape(topic.subtitle) + '</small></span>' +
       '<span class="chapter-count" aria-label="' + completed + ' van ' + chapterLevels.length + ' lessen voltooid">' + completed + '/' + chapterLevels.length + '</span>' +
       '<span class="chapter-toggle" aria-hidden="true">' + icon('arrow-right') + '</span></summary>' +
@@ -176,7 +182,7 @@ function renderHome() {
   resetAtlas();
   $('.atlas-panel').hidden = true;
 }
-function groupProgressMarkup(group) {
+function groupProgressMarkup(group, earnedLevelId = null) {
   const position = degrees => {
     const angle = degrees * Math.PI / 180;
     return (50 + 45 * Math.cos(angle)).toFixed(3) + ' ' + (50 + 45 * Math.sin(angle)).toFixed(3);
@@ -184,7 +190,7 @@ function groupProgressMarkup(group) {
   return '<svg class="level-ring" viewBox="0 0 100 100" aria-hidden="true">' + group.lessons.map((lesson, index) => {
     const start = -90 + index * 360 / group.lessons.length + 5;
     const end = -90 + (index + 1) * 360 / group.lessons.length - 5;
-    return '<path class="ring-segment' + (lesson.done ? ' filled' : '') + '" d="M ' + position(start) + ' A 45 45 0 0 1 ' + position(end) + '" />';
+    return '<path class="ring-segment' + (lesson.done ? ' filled' : '') + (lesson.done && lesson.id === earnedLevelId ? ' earned' : '') + '" pathLength="1" d="M ' + position(start) + ' A 45 45 0 0 1 ' + position(end) + '" />';
   }).join('') + '</svg>';
 }
 function restoreAtlasLayout() {
@@ -545,11 +551,13 @@ function finish() {
     const justFinished = !session.finished;
     if (!session.finished) {
       refreshProgress();
+      const alreadyCompleted = game.completed.includes(session.levelId);
       const bonus = session.answered > 0 ? 10 : 0;
       game = completeLevel(awardXP(game, bonus), session.levelId, session.correct, session.initialCount || session.ids.length);
       session = { ...session, finished: true, finishedAt: Date.now(), xp: (session.xp || 0) + bonus };
       progress = { ...progress, sessions: [...progress.sessions, { at: Date.now(), correct: session.correct, total: session.answered }].slice(-200) };
-      save(true);
+      const saved = save(true);
+      if (saved && !alreadyCompleted && game.completed.includes(session.levelId)) pathRewardLevelId = session.levelId;
       window.motionStudyAnalytics?.lessonFinished(session);
     }
     if (route !== endingRoute) { if (route === 'leren') renderHome(); else if (route === 'voortgang') renderProgress();
@@ -694,6 +702,8 @@ function navigate() {
     renderHome();
     window.requestAnimationFrame(() => {
       if (route !== 'leren') return;
+      const earnedButton = $('.just-earned .level-node');
+      if (earnedButton) { earnedButton.scrollIntoView({ block: 'start', behavior: 'instant' }); return; }
       const activeChapter = $('.active-chapter');
       if (activeChapter?.previousElementSibling) $('.active-chapter .level-node')?.scrollIntoView({ block: 'start', behavior: 'instant' });
     });

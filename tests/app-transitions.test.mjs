@@ -1028,6 +1028,67 @@ test('answer streak continues after feedback reload and survives switching betwe
 });
 
 
+test('new lesson progress celebrates exactly one segment on the next path visit, without persisting animation state', () => {
+  const instance = app(); instance.startLesson();
+  while (!instance.read().session.finished) { instance.play(); instance.next(); }
+  instance.finish(); // Rendering the result twice must not duplicate the reward.
+  const saved = JSON.stringify(instance.data);
+  instance.go('#leren');
+  assert.equal((instance.html().match(/ just-earned/g) || []).length, 1);
+  assert.equal((instance.html().match(/ring-segment filled earned/g) || []).length, 1);
+  assert.match(instance.html(), /path-step current group-learn just-earned/);
+  assert.match(instance.html(), /class="level-sparkles" aria-hidden="true"/);
+  assert.match(instance.html(), /data-level="basis:1"/);
+  assert.equal(JSON.stringify(instance.data), saved);
+  instance.go('#voortgang'); instance.go('#leren');
+  assert.doesNotMatch(instance.html(), /just-earned|level-sparkles|filled earned/);
+  const restored = app(instance.data); restored.go('#leren');
+  assert.doesNotMatch(restored.html(), /just-earned|level-sparkles|filled earned/);
+  instance.startLesson();
+  while (!instance.read().session.finished) { instance.play(); instance.next(); }
+  instance.go('#leren');
+  assert.doesNotMatch(instance.html(), /just-earned|level-sparkles|filled earned/);
+});
+
+test('finishing a group celebrates its gold button and leaves the following group unlocked', () => {
+  const firstGroup = groups.lessonGroups(learning.levelPath({ completed: [] }).filter(level => level.topic.id === 'basis'))[0];
+  const completed = firstGroup.lessons.slice(0, -1).map(level => level.id);
+  const instance = app({ [learning.GAME_KEY]: JSON.stringify({ days: {}, completed }) });
+  instance.startLesson('basis', firstGroup.lessons.at(-1).id);
+  while (!instance.read().session.finished) { instance.play(); instance.next(); }
+  instance.go('#leren');
+  assert.match(instance.html(), /path-step done group-learn just-earned/);
+  assert.equal((instance.html().match(/ring-segment filled earned/g) || []).length, 1);
+  assert.match(instance.html(), /path-step current group-practice/);
+});
+
+test('a newly completed later chapter opens for its reward while earlier lessons stay available', () => {
+  const instance = app(); instance.startLesson('borst', 'borst:0');
+  while (!instance.read().session.finished) { instance.play(); instance.next(); }
+  instance.go('#leren');
+  assert.match(instance.html(), /<details class="path-chapter" open><summary[^]*?Hoofdstuk 2/);
+  assert.match(instance.html(), /path-step available group-learn just-earned/);
+  assert.match(instance.html(), /data-level="basis:0"[^>]*aria-current="step"/);
+  assert.equal(instance.read().game.completed.join(','), 'borst:0');
+});
+
+test('unfinished and failed lessons do not trigger a path reward', () => {
+  const instance = app(); instance.startLesson();
+  instance.play(); instance.go('#leren');
+  assert.doesNotMatch(instance.html(), /just-earned|level-sparkles|filled earned/);
+  const question = curriculum.questions.find(q => q.region === 'basis' && q.type === 'choice');
+  const failed = app({ [learning.SESSION_KEY]: JSON.stringify({
+    region: 'basis', levelId: 'basis:0', stage: 0, ids: [question.id], exerciseModes: ['choice'], index: 1,
+    correct: 0, firstCorrect: 0, answered: 1, initialCount: 1, options: [], response: question.distractors[0], prepared: true,
+    retryIds: [], finished: false, startedAt: Date.now(),
+  }) });
+  failed.go('#les/basis/0');
+  assert.equal(failed.read().session.finished, true);
+  failed.go('#leren');
+  assert.equal(failed.read().game.completed.length, 0);
+  assert.doesNotMatch(failed.html(), /just-earned|level-sparkles|filled earned/);
+});
+
 test('installation invitation starts after the lesson result and does not fire for reloads or incomplete lessons', () => {
   let instance = app();
   instance.startLesson();
