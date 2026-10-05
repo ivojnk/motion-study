@@ -16,7 +16,6 @@ let game = readGame(storage);
 let pairSelection = null;
 let pairMessage = "";
 let pendingPointSelection = null;
-let pendingChoiceSelection = null;
 let session = null;
 let viewer = null;
 let route = '';
@@ -146,7 +145,6 @@ function resetAtlas() {
   $('#selection-card').innerHTML = '<h3>Kies een spier</h3>';
 }
 function start(region, levelId = null) {
-  pendingChoiceSelection = null;
   pendingPointSelection = null;
   refreshProgress();
   if (levelId && !levelPath(game).some(level => level.id === levelId && !level.locked)) return;
@@ -242,7 +240,6 @@ function lessonHud() {
   return '<div class="lesson-hud"><div class="lesson-top"><a href="#leren">← Leerpad</a><div class="lesson-status"><span class="lesson-run">' + icon('growth') + momentum.run + ' op rij</span><span class="lesson-xp">' + icon('sparkles') + (session.xp || 0) + ' XP</span></div></div><progress class="lesson-progress" max="' + total + '" value="' + completed + '" aria-label="' + (inRetry ? 'Herhaling' : 'Lesvoortgang') + '"></progress><p class="lesson-progress-label">' + (inRetry ? 'Fouten oefenen' : 'Je les') + ' · ' + completed + '/' + total + '</p></div>';
 }
 function renderInterlude(interlude) {
-  pendingChoiceSelection = null;
   resetAtlas();
   $('.atlas-panel').hidden = true;
   $('#intro').innerHTML = '';
@@ -280,7 +277,6 @@ function renderLesson({ preserveCamera = false } = {}) {
   $('#intro').innerHTML = '';
   const mode = currentExercise(q);
   if (mode !== 'point' || pendingPointSelection?.questionId !== q.id || pendingPointSelection?.index !== session.index || session.response) pendingPointSelection = null;
-  if (pendingChoiceSelection?.questionId !== q.id || pendingChoiceSelection?.index !== session.index || session.response || mode === 'point' || isOpenExercise(mode)) pendingChoiceSelection = null;
   const response = session.response;
   const answerCheck = response && ['open', 'recognition-open'].includes(mode) ? checkOpenAnswer(q, response) : null;
   const isCorrect = mode === 'open-self' ? session.selfAssessmentCorrect === true : answerCheck ? answerCheck.correct : response === q.answer;
@@ -288,9 +284,9 @@ function renderLesson({ preserveCamera = false } = {}) {
   $('#learning').innerHTML = lessonHud() +
     '<article class="question-card"' + (q.type === 'recognition' ? ' data-model-question' : '') + '><h2 tabindex="-1" id="question-title">' + escape(mode === 'point' ? 'Wijs ' + q.answer + ' aan.' : mode === 'recognition-open' ? 'Welke spier is paars gemarkeerd?' : q.prompt) + '</h2>' +
     (recognitionBlocked ? '<p role="status">3D-model laden…</p>' : '') +
-    (mode === 'binary' ? '<div class="statement"><p>' + escape(session.options[0]) + '</p></div>' : '') + (isOpenExercise(mode) ? openAnswerMarkup(mode, response, recognitionBlocked) : '<div class="answers">' + (mode === 'binary' ? binaryResponses(q, session.options) : session.options).map((option, i) => '<button data-key="' + (i + 1) + '" data-answer="' + session.options.indexOf(option) + '" class="answer ' + (response ? option === q.answer ? 'correct' : option === response ? 'incorrect' : '' : (mode === 'point' ? pendingPointSelection : pendingChoiceSelection)?.response === option ? 'selected' : '') + '" ' + (!response ? 'aria-pressed="' + ((mode === 'point' ? pendingPointSelection : pendingChoiceSelection)?.response === option) + '" ' : '') + (response || recognitionBlocked ? 'disabled' : '') + '><span class="answer-key">' + (i + 1) + '</span><span>' + (mode === 'binary' ? (i === 0 ? 'Klopt' : 'Klopt niet') : mode === 'point' && !response ? 'Bekijk spier ' + (i + 1) : escape(option)) + '</span>' + (response && option === q.answer ? icon('check') : '') + '</button>').join('') + '</div>') +
+    (mode === 'binary' ? '<div class="statement"><p>' + escape(session.options[0]) + '</p></div>' : '') + (isOpenExercise(mode) ? openAnswerMarkup(mode, response, recognitionBlocked) : '<div class="answers">' + (mode === 'binary' ? binaryResponses(q, session.options) : session.options).map((option, i) => '<button data-key="' + (i + 1) + '" data-answer="' + session.options.indexOf(option) + '" class="answer ' + (response ? option === q.answer ? 'correct' : option === response ? 'incorrect' : '' : (mode === 'point' ? pendingPointSelection : null)?.response === option ? 'selected' : '') + '" ' + (!response && mode === 'point' ? 'aria-pressed="' + ((mode === 'point' ? pendingPointSelection : null)?.response === option) + '" ' : '') + (response || recognitionBlocked ? 'disabled' : '') + '><span class="answer-key">' + (i + 1) + '</span><span>' + (mode === 'binary' ? (i === 0 ? 'Klopt' : 'Klopt niet') : mode === 'point' && !response ? 'Bekijk spier ' + (i + 1) : escape(option)) + '</span>' + (response && option === q.answer ? icon('check') : '') + '</button>').join('') + '</div>') +
     (mode === 'point' && !response ? '<div class="point-confirmation"><p id="point-selection-status" class="visually-hidden" role="status" aria-live="polite">' + (pendingPointSelection ? 'Keuze gemarkeerd. Je kunt je keuze nog wijzigen.' : 'Kies een spier in het model of met een antwoordknop.') + '</p><button id="confirm-answer" class="primary" ' + (!pendingPointSelection || recognitionBlocked ? 'disabled' : '') + '>Bevestig antwoord ' + icon('check') + '</button></div>' : '') +
-    (!response && !isOpenExercise(mode) && mode !== 'point' ? '<div class="answer-confirmation"><p id="choice-selection-status" role="status">' + (pendingChoiceSelection ? 'Antwoord gekozen.' : 'Kies een antwoord.') + '</p><button id="confirm-choice-answer" class="primary" ' + (!pendingChoiceSelection || recognitionBlocked ? 'disabled' : '') + '>Controleer antwoord ' + icon('check') + '</button><span class="answer-shortcut">' + (mode === 'binary' ? '1–2' : '1–4') + ' om te kiezen · Enter om te controleren</span></div>' : '') +
+    (!response && !isOpenExercise(mode) && mode !== 'point' ? '<p class="answer-shortcut">' + (mode === 'binary' ? '1–2' : '1–4') + ' om direct te antwoorden</p>' : '') +
     (response ? feedbackMarkup(q, isCorrect, answerCheck) : '') +
     '</article>';
   const card = curriculum.cards.find(c => c.id === q.muscleId);
@@ -335,25 +331,11 @@ function chooseAnswer(index) {
     if (!route.startsWith('les/') || !session.prepared || isOpenExercise(currentExercise(q)) || needsMatching() || activeInterlude() || (q.type === 'recognition' && !viewer?.available.has(q.muscleId))) return;
     const response = session.options[index];
     if (!response || (currentExercise(q) === 'binary' && !binaryResponses(q, session.options).includes(response))) return;
-    pendingChoiceSelection = { questionId: q.id, index: session.index, response };
-    document.querySelectorAll('[data-answer]').forEach(button => {
-      const selected = session.options[Number(button.dataset.answer)] === response;
-      button.classList.toggle('selected', selected);
-      button.setAttribute('aria-pressed', String(selected));
-    });
-    $('#choice-selection-status').textContent = 'Antwoord gekozen.';
-    $('#confirm-choice-answer').disabled = false;
-    return;
+    return answer(index);
   }
   const response = session.options[index];
   const card = curriculum.cards.find(card => card.name === response);
   updatePointSelection(response, card?.id || null);
-}
-function confirmChoiceSelection() {
-  if (!pendingChoiceSelection || !route.startsWith('les/') || !session?.prepared || session.response || session.finished) return;
-  const q = byId.get(session.ids[session.index]);
-  if (pendingChoiceSelection.questionId !== q.id || pendingChoiceSelection.index !== session.index || currentExercise(q) === 'point' || isOpenExercise(currentExercise(q)) || activeInterlude()) return;
-  return answer(session.options.indexOf(pendingChoiceSelection.response));
 }
 function confirmPointSelection() {
   if (!pendingPointSelection || !route.startsWith('les/') || !session?.prepared || session.response || session.finished) return;
@@ -376,7 +358,6 @@ function answer(index, pickedMuscle = null, selfAssessment = null) {
     const mode = currentExercise(q);
     if (mode === 'open-self' && (!session.openRevealed || typeof selfAssessment !== 'boolean')) return;
     const correct = mode === 'open-self' ? selfAssessment : isOpenExercise(mode) ? isOpenAnswerCorrect(q, response) : response === q.answer;
-    pendingChoiceSelection = null;
     session = { ...recordLessonAnswer(session, correct, availableExercises(q)[0]), response, selfAssessmentCorrect: mode === 'open-self' ? selfAssessment : null };
     const xp = correct ? 5 : 0;
     game = awardXP(game, xp);
@@ -392,7 +373,6 @@ function answer(index, pickedMuscle = null, selfAssessment = null) {
 function next() {
   if (!session || !session.response) return;
   pendingPointSelection = null;
-  pendingChoiceSelection = null;
   const index = session.index + 1;
   const exerciseModes = session.exerciseModes || session.ids.map((id, slot) => currentExercise(byId.get(id), slot));
   session = { ...session, index, response: null, openDraft: '', openRevealed: false, selfAssessmentCorrect: null, exerciseModes, options: index < session.ids.length ? optionsFor(byId.get(session.ids[index])) : [] };
@@ -503,7 +483,6 @@ function filterQuestionBank() {
   $('#bank-count').textContent = count ? count + (count === 1 ? ' vraag gevonden' : ' vragen gevonden') : 'Geen vragen gevonden.';
 }
 function navigate() {
-  pendingChoiceSelection = null;
   pendingPointSelection = null;
   window.scrollTo(0, 0);
   route = location.hash.slice(1) || 'leren';
@@ -530,7 +509,6 @@ document.addEventListener('click', event => {
   if (startButton && !startButton.disabled) start(startButton.dataset.start);
   if (answerButton && !answerButton.disabled) chooseAnswer(Number(answerButton.dataset.answer));
   if (event.target.closest('#confirm-answer:not(:disabled)')) confirmPointSelection();
-  if (event.target.closest('#confirm-choice-answer:not(:disabled)')) confirmChoiceSelection();
   if (event.target.closest('#continue-interlude')) dismissInterlude();
   if (event.target.closest('#self-assess-correct')) selfAssessOpenAnswer(true);
   if (event.target.closest('#self-assess-retry')) selfAssessOpenAnswer(false);
@@ -555,7 +533,6 @@ document.addEventListener('keydown', event => {
     if ($('#continue-interlude')) { event.preventDefault(); dismissInterlude(); }
     else if (session.response) { event.preventDefault(); next(); }
     else if (pendingPointSelection) { event.preventDefault(); confirmPointSelection(); }
-    else if (pendingChoiceSelection) { event.preventDefault(); confirmChoiceSelection(); }
     return;
   }
   if (/^[1-4]$/.test(event.key)) {
