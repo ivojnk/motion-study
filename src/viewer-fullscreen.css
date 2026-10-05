@@ -62,7 +62,7 @@ dialog.viewer-fullscreen-dialog {
   border: 0;
   border-radius: 0;
 }
-.viewer-fullscreen-dialog .viewer-expanded .orientation { top: 22px; left: 20px; }
+.viewer-fullscreen-dialog .viewer-expanded .orientation { top: 66px; left: 16px; }
 .viewer-fullscreen-dialog .viewer-expanded .viewer-controls {
   flex-shrink: 0;
   max-height: 45dvh;
@@ -74,4 +74,3 @@ dialog.viewer-fullscreen-dialog {
 }
 .viewer-fullscreen-dialog .viewer-expanded .viewer-tools { margin: 0 auto; }
 .viewer-fullscreen-dialog .viewer-expanded .atlas-controls { justify-content: center; padding: 4px 0 0; gap: 16px; }
-.viewer-fullscreen-dialog .viewer-expanded .muscle-choice { margin: 8px 0; }

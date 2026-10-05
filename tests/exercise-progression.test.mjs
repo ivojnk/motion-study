@@ -15,23 +15,23 @@ test('every question has assisted and recall forms; deep muscles are never point
     assert.ok(modes.length >= 2, q.id);
     assert.ok(modes.some(mode => ['open', 'open-self', 'recognition-open'].includes(mode)), q.id);
     assert.equal(new Set(modes).size, modes.length, q.id);
-    if (q.type === 'recognition') assert.equal(modes[0], 'recognition', q.id);
+    if (['recognition', 'exercise-recognition'].includes(q.type)) assert.equal(modes[0], 'recognition', q.id);
     else assert.deepEqual(modes.slice(0, 2), ['choice', 'binary'], q.id);
   }
-  assert.deepEqual(availableExercises(muscle), ['recognition', 'point', 'recognition-open']);
-  assert.deepEqual(availableExercises({ type: 'recognition', muscleId: 'pec-minor' }), ['recognition', 'recognition-open']);
+  assert.deepEqual(availableExercises(muscle), ['recognition', 'model-choice', 'point', 'recognition-open']);
+  assert.deepEqual(availableExercises({ type: 'recognition', muscleId: 'pec-minor' }), ['recognition', 'model-choice', 'recognition-open']);
 });
 
 test('fresh and failed facts use assistance independent of lesson position', () => {
   assert.equal(exerciseForProgress(fact, undefined), 'choice');
   assert.equal(exerciseForProgress(fact, undefined, { index: 1 }), 'binary');
-  assert.equal(exerciseForProgress(muscle, undefined, { index: 1 }), 'recognition');
+  assert.equal(exerciseForProgress(muscle, undefined, { index: 0 }), 'model-choice');
   assert.equal(exerciseForProgress(fact, { interval: 8, lastCorrect: false, due: 0 }), 'choice');
 });
 
 test('spaced anatomy practice progresses from recognition to pointing to open recall', () => {
   let progress = recordAnswer(empty(), muscle.id, true, 1000, 'recognition');
-  assert.equal(exerciseForProgress(muscle, progress.questions[muscle.id], { now: 1001 }), 'recognition');
+  assert.equal(exerciseForProgress(muscle, progress.questions[muscle.id], { now: 1001 }), 'model-choice');
   assert.equal(exerciseForProgress(muscle, progress.questions[muscle.id], { now: 1000 + DAY }), 'point');
   progress = recordAnswer(progress, muscle.id, true, 1000 + DAY, 'point');
   assert.equal(exerciseForProgress(muscle, progress.questions[muscle.id], { now: 1000 + DAY + 1 }), 'point');
@@ -39,14 +39,14 @@ test('spaced anatomy practice progresses from recognition to pointing to open re
   progress = recordAnswer(progress, muscle.id, true, 1000 + 3 * DAY, 'recognition-open');
   assert.equal(exerciseForProgress(muscle, progress.questions[muscle.id], { now: 1000 + 3 * DAY + 1 }), 'recognition-open');
   const modes = [0, 1, 2, 3].map(index => exerciseForProgress(muscle, progress.questions[muscle.id], { index, now: 1000 + 7 * DAY }));
-  assert.deepEqual(modes, ['recognition-open', 'point', 'recognition-open', 'recognition']);
+  assert.deepEqual(modes, ['recognition-open', 'point', 'recognition-open', 'model-choice']);
 });
 
 test('early replay cannot unlock harder forms or manufacture modality mastery', () => {
   let progress = recordAnswer(empty(), muscle.id, true, 1000, 'recognition');
   for (let index = 0; index < 20; index++) progress = recordAnswer(progress, muscle.id, true, 1001 + index, 'recognition');
   assert.equal(progress.questions[muscle.id].interval, 1);
-  assert.equal(exerciseForProgress(muscle, progress.questions[muscle.id], { now: 5000 }), 'recognition');
+  assert.equal(exerciseForProgress(muscle, progress.questions[muscle.id], { now: 5000 }), 'model-choice');
   assert.equal(exerciseForProgress(muscle, progress.questions[muscle.id], { now: 1000 + DAY }), 'point');
   const assistedOnly = { interval: 8, due: 0, lastCorrect: true, exerciseStats: { recognition: { spacedCorrect: 4 } } };
   assert.equal(exerciseForProgress(muscle, assistedOnly, { now: 5000 }), 'point');

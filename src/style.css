@@ -38,17 +38,24 @@
 .bank-filters{display:grid;gap:14px;margin-bottom:16px}.bank-filters label{display:grid;gap:8px;font-size:13px;font-weight:600}.bank-filters input,.bank-filters select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--white);font-size:14px;min-height:48px;color:inherit}.question-bank{display:grid;gap:12px;margin-top:18px}.bank-chapter{padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--white)}.bank-chapter>summary{font-weight:700;color:var(--purple)}.question-bank summary{cursor:pointer;min-height:44px;line-height:1.5;padding:10px 0;font-size:13px;overflow-wrap:anywhere}.question-bank ol{padding-left:22px}.question-bank li{padding:8px 0;border-top:1px solid var(--line)}.question-bank p{font-size:13px;margin:8px 0}.bank-chapter .text-button{margin:8px 0}.question-bank .source{margin-top:12px;padding-top:10px}
 
 /* Muscle choices use native buttons; symbols supplement the colours. */
-.muscle-choice{padding:16px;margin:0 16px 16px;border:1px solid var(--line);border-radius:14px;background:var(--white)}
-.muscle-choice h3{font-size:17px}.muscle-choice p{font-size:12px;margin:6px 0 12px}
+.muscle-choice{position:fixed;inset:auto max(24px,calc((100vw - 1248px)/2 + 36px)) max(24px,env(safe-area-inset-bottom)) auto;z-index:100;width:min(336px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto;padding:16px;margin:0;border:1px solid var(--line);border-radius:18px;background:var(--white);color:inherit;box-shadow:0 12px 48px #252e2926,0 2px 8px #252e2910;overscroll-behavior:contain;touch-action:manipulation}
+.muscle-choice-heading{display:flex;align-items:center;justify-content:space-between;gap:4px;margin:-6px -6px 8px 0}
+.muscle-choice h3{font-size:20px;line-height:1.2;letter-spacing:-.4px}
+.muscle-choice-close{display:grid;place-items:center;flex-shrink:0;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:transparent;color:var(--muted);font-size:26px;line-height:1}
+.muscle-choice-close:hover{background:var(--soft);color:var(--purple)}
 .muscle-choice-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.muscle-choice-option{display:flex;align-items:center;gap:10px;min-height:52px;padding:8px 12px;border:2px solid var(--line);border-radius:10px;background:var(--white);font-size:13px;text-align:left}
-.muscle-choice-option[aria-pressed=true]{border-color:var(--purple);background:var(--soft)}
+.muscle-choice-option{display:flex;align-items:center;gap:8px;min-height:46px;padding:7px 10px;border:1px solid var(--line);border-radius:10px;background:var(--white);font-size:13px;font-weight:500;text-align:left}
+.muscle-choice-option:hover{border-color:var(--purple);background:var(--soft)}
+.muscle-choice-option[aria-pressed=true]{border-color:var(--purple);background:var(--soft);box-shadow:inset 0 0 0 1px var(--purple)}
+.muscle-choice-option .choice-swatch{width:24px;height:24px;border:0;font-size:13px}
 .choice-color-0{--choice-color:#0072b2}.choice-color-1{--choice-color:#d55e00}.choice-color-2{--choice-color:#009e73}.choice-color-3{--choice-color:#a447a0}
 .choice-swatch,.choice-mark{display:grid;place-items:center;background:var(--choice-color);color:white;width:30px;height:30px;border:2px solid white;border-radius:50%;font-size:17px;line-height:1;flex-shrink:0}
 .choice-mark{position:absolute;transform:translate(-50%,-50%);pointer-events:none;box-shadow:0 0 0 1px #302d3955}
 .choice-mark.is-preview{box-shadow:0 0 0 3px var(--purple),0 0 0 6px white}
-.muscle-choice-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center}.muscle-choice-actions .primary{font-size:12px;padding:10px 12px;min-height:44px}.muscle-choice-actions .text-button{margin:0;padding:10px 6px;min-height:44px;font-size:12px}
-@media(max-width:360px){.muscle-choice{margin:0 10px 12px;padding:12px}.muscle-choice-option{padding:8px;font-size:12px;gap:6px}}
+.muscle-choice-actions{display:flex;gap:8px;margin-top:12px;align-items:center}.muscle-choice-actions .primary{flex:1;font-size:13px;padding:10px 12px;min-height:44px;border-radius:10px}.muscle-choice-actions .text-button{margin:0;padding:10px 12px;min-height:44px;border-radius:10px;font-size:13px;text-decoration:none}.muscle-choice-actions .text-button:hover{background:var(--soft);color:var(--purple)}
+.muscle-choice :is(button):focus-visible{outline-offset:2px}
+@media(max-width:620px){.muscle-choice{inset:auto 12px max(12px,env(safe-area-inset-bottom)) auto;width:calc(100vw - 24px);max-width:360px;padding:14px}}
+@media(max-height:440px) and (min-width:621px){.muscle-choice{bottom:12px;max-height:calc(100dvh - 24px)}}
 .choice-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.choice-lines line{stroke:var(--choice-color);stroke-width:2}
 
 /* Recall exercises share the same card and keyboard focus as choice questions. */
@@ -202,3 +209,8 @@ textarea.open-answer-input{min-height:132px;resize:vertical}
 .lesson-hud .lesson-top{margin-bottom:0;gap:12px;align-items:center}
 .lesson-progress-label{font-size:12px;line-height:1.5;color:var(--muted)}
 .answer-shortcut{font-size:11px;line-height:1.5;text-align:center;color:var(--muted)}
+
+/* The number and shape keep quiz choices readable without colour perception. */
+.model-choice-mark{width:42px;height:32px;border:3px solid var(--choice-color);background:var(--white);color:#302d39;font-size:13px;font-weight:700;z-index:2}
+.model-choice-answer>span:nth-child(2){display:flex;align-items:center;gap:10px}
+.model-choice-answer .choice-swatch{width:26px;height:26px;font-size:14px}

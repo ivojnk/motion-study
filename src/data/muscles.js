@@ -33,7 +33,21 @@ export const muscles = [
   ['gastrocnemius', 'Gastrocnemius', 'kuiten', 'Gastrocnemius (med./lat.)\nOORSPRONG', 'OEFENING SPIER BEWEGING', ['gastrocnemius'], 'back']
 ].map(([id, name, region, anchor, end, patterns, view]) => ({ id, name, region, anchor, end, patterns, view }));
 
+// Additional structures explicitly named in the cheatsheet, already present in
+// the licensed atlas. Keep private importer anchors on the original 31 only.
+export const extraMuscleGroups = [
+  ['supraspinatus', 'Supraspinatus', ['Supraspinatus muscle'], 'back', 'extra-muscles-supraspinatus'],
+  ['infraspinatus', 'Infraspinatus', ['Infraspinatus muscle'], 'back', 'extra-muscles-infraspinatus'],
+  ['teres-minor', 'Teres minor', ['Teres minor muscle'], 'back', 'extra-muscles-teres-minor'],
+  ['subscapularis', 'Subscapularis', ['Subscapularis muscle'], 'front', 'extra-muscles-subscapularis'],
+  ['teres-major', 'Teres major', ['Teres major muscle'], 'back', 'extra-muscles-teres-major'],
+  ['diaphragm', 'Diafragma', ['Diaphragm'], 'front', 'extra-muscles-diaphragm-inspiration'],
+  ['pelvic-floor', 'Bekkenbodem', ['Coccygeus muscle', 'Iliococcygeus muscle', 'Pubococcygeus muscle'], 'front', 'extra-muscles-pelvic-floor-role'],
+  ['multifidus', 'Multifidus', ['Multifidus colli', 'Multifidus lumborum', 'Multifidus thoracis'], 'back', 'extra-muscles-inner-role']
+].map(([id, name, patterns, view, sourceQuestionId]) => ({ id, name, patterns, view, sourceQuestionId }));
+const atlasMuscles = [...muscles, ...extraMuscleGroups];
+
 export function muscleForMesh(name) {
   if (/\bfascia\b|bursa|tendon|retinaculum/i.test(name)) return null;
-  return muscles.find(muscle => muscle.patterns.some(pattern => name.toLowerCase().includes(pattern.toLowerCase()))) || null;
+  return atlasMuscles.find(muscle => muscle.patterns.some(pattern => name.toLowerCase().includes(pattern.toLowerCase()))) || null;
 }

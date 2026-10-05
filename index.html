@@ -38,6 +38,7 @@
   <a class="skip" href="#main" hidden>Naar de inhoud</a>
   <header class="topbar">
     <a class="brand" href="#leren" aria-label="MotionStudy start"><img class="brand-logo" src="%BASE_URL%brand/motionstudy-horizontal-color.svg" width="1139" height="256" alt="" /><img class="brand-symbol" src="%BASE_URL%brand/motionstudy-symbol-color.svg" width="256" height="256" alt="" /></a>
+    <div id="login-install"><button class="text-button install-link" data-install-app type="button" aria-haspopup="dialog" aria-controls="install-app" hidden><img class="icon" src="./icons/arrow-square-out.svg" alt="" />Op je beginscherm</button></div>
     <div id="home-stats" hidden></div>
     <nav aria-label="Hoofdnavigatie" hidden><a href="#leren" data-nav="leren"><img class="icon" src="./icons/school.svg" alt="" /><span>Leren</span></a><a href="#atlas" data-nav="atlas"><img class="icon" src="./icons/stretching.svg" alt="" /><span>3D-atlas</span></a><a href="#vragen" data-nav="vragen"><img class="icon" src="./icons/book-2.svg" alt="" /><span>Vragen</span></a><a href="#voortgang" data-nav="voortgang"><img class="icon" src="./icons/chart-bar.svg" alt="" /><span>Voortgang</span></a></nav>
     <details id="account-controls" class="account-controls" hidden>
@@ -54,8 +55,7 @@
     </details>
   </header>
   <section id="account-screen" class="account-screen" aria-labelledby="account-title">
-    <div class="account-intro"><span class="account-subject">Anatomie & biomechanica</span><h1 id="account-title">Leer het lichaam<br /><em>kennen.</em></h1><div class="account-course"><span>11 hoofdstukken</span><span>31 spierkaarten</span><span>593 vragen</span></div></div>
-    <div class="account-card"><h2>Inloggen</h2><p id="account-loading" role="status">Laden…</p>
+    <div class="account-card"><span class="account-subject">Anatomie & biomechanica</span><h1 id="account-title">Inloggen</h1><p id="account-loading" role="status">Laden…</p>
       <form id="account-form" hidden>
         <label for="account-username">Gebruikersnaam</label>
         <input id="account-username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="2" maxlength="24" pattern="[a-zA-Z0-9][a-zA-Z0-9._\-]{1,23}" aria-describedby="account-message" required />
@@ -65,7 +65,6 @@
         <p id="account-message" role="alert" hidden></p>
         <button id="account-submit" class="primary" type="submit">Verder</button>
       </form><button id="account-reload" class="text-button" hidden>Opnieuw laden</button>
-      <button class="text-button install-link" data-install-app type="button" aria-haspopup="dialog" aria-controls="install-app" hidden><img class="icon" src="./icons/arrow-square-out.svg" alt="" />Op je beginscherm</button>
     </div>
   </section>
   <noscript><p class="account-screen">Zet JavaScript aan om MotionStudy te gebruiken.</p></noscript>
@@ -80,15 +79,17 @@
           <canvas id="body" tabindex="0" aria-label="3D-anatomiemodel. Draai met de pijltjestoetsen, zoom met plus en min. Gebruik de antwoordknoppen in een les of de spierlijst in de atlas."></canvas>
           <div class="viewer-status" id="viewer-status" role="status">Spieren laden…</div>
           <span class="orientation" id="orientation">VOORZIJDE</span>
+          <div class="viewer-model-toggles" role="group" aria-label="Modelweergave">
+            <label class="viewer-model-toggle" title="Skelet tonen"><input id="bones" type="checkbox" role="switch" aria-label="Skelet tonen" checked /><img class="icon" src="./icons/bone.svg" alt="" /><span class="viewer-toggle-state" aria-hidden="true"></span><span class="viewer-toggle-hint" aria-hidden="true">Skelet tonen</span></label>
+            <label class="viewer-model-toggle" title="Spier isoleren"><input id="isolate" type="checkbox" role="switch" aria-label="Spier isoleren" /><img class="icon" src="./icons/target-arrow.svg" alt="" /><span class="viewer-toggle-state" aria-hidden="true"></span><span class="viewer-toggle-hint" aria-hidden="true">Spier isoleren</span></label>
+          </div>
           <button id="viewer-fullscreen" class="viewer-fullscreen-toggle" type="button" aria-label="3D-weergave op volledig scherm" title="Volledig scherm" aria-expanded="false" aria-controls="viewer-fullscreen-dialog"><img class="icon fullscreen-open-icon" src="./icons/corners-out.svg" alt="" /><img class="icon fullscreen-close-icon" src="./icons/corners-in.svg" alt="" /></button>
         </div>
         <div class="viewer-controls" role="group" aria-label="3D-bediening">
           <div class="viewer-tools"><button data-view="front" aria-pressed="true" aria-label="Vooraanzicht">Voor</button><button data-view="back" aria-pressed="false" aria-label="Achteraanzicht">Achter</button><button data-view="side" aria-pressed="false" aria-label="Zijaanzicht">Zij</button><button id="reset-view" aria-label="Hele lichaam tonen"><img class="icon" src="./icons/refresh.svg" alt="" /></button></div>
-          <div class="atlas-controls"><label><input id="bones" type="checkbox" checked /> Skelet tonen</label><label><input id="isolate" type="checkbox" /> Spier isoleren</label></div>
         </div>
         <div class="selection-card" id="selection-card" aria-live="polite"><h3>Kies een spier</h3></div>
         <label class="muscle-picker">Kies een spier <select id="muscle-select"><option value="">Alle spieren</option></select></label>
-        <p class="viewer-help">Sleep om te draaien · knijp of scroll om te zoomen</p>
       </section>
     </div>
   </main>

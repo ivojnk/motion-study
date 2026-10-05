@@ -36,6 +36,8 @@ export function setupViewerFullscreen({ document, window, onClose = () => {} }) 
   function restore(restoreFocus) {
     animation?.cancel();
     animation = null;
+    const choice = panel.querySelector('.muscle-choice[popover]:not([hidden])');
+    choice?.hidePopover();
     placeholder?.replaceWith(panel);
     placeholder = null;
     panel.classList.remove('viewer-expanded');
@@ -49,6 +51,9 @@ export function setupViewerFullscreen({ document, window, onClose = () => {} }) 
     }
     scrollPositions = [];
     onClose();
+    // Moving a popover removes it from the top layer. Restore an active choice
+    // only after the atlas has reached its final container.
+    choice?.showPopover();
     if (restoreFocus && button.isConnected && !panel.hidden) button.focus({ preventScroll: true });
   }
 
@@ -69,6 +74,8 @@ export function setupViewerFullscreen({ document, window, onClose = () => {} }) 
 
   function open() {
     const rect = panel.getBoundingClientRect();
+    const choice = panel.querySelector('.muscle-choice[popover]:not([hidden])');
+    choice?.hidePopover();
     scrollPositions = [];
     for (let element = panel.parentElement; element; element = element.parentElement) {
       scrollPositions.push({ element, top: element.scrollTop, left: element.scrollLeft });
@@ -83,6 +90,7 @@ export function setupViewerFullscreen({ document, window, onClose = () => {} }) 
     document.body.classList.add('viewer-fullscreen-active');
     updateButton(true);
     dialog.showModal();
+    choice?.showPopover();
     button.focus({ preventScroll: true });
     animate([
       { clipPath: clippedBounds(rect), opacity: .9 },

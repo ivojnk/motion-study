@@ -6,6 +6,8 @@ import * as learning from '../src/learning.js';
 import * as progression from '../src/exercise-progression.js';
 import * as motivation from '../src/lesson-motivation.js';
 import * as groups from '../src/lesson-groups.js';
+import * as lessonModels from '../src/lesson-models.js';
+import { choicePalette } from '../src/muscle-choice.js';
 
 const curriculum = JSON.parse(fs.readFileSync(new URL('../src/data/curriculum.json', import.meta.url)));
 // Execute the app's actual transitions; mock only browser boundaries, not grading/storage logic.
@@ -16,10 +18,13 @@ const source = fs.readFileSync(new URL('../src/main.js', import.meta.url), 'utf8
   globalThis.api = { start, answer, next, finish, choosePair, renderLesson, navigate, chooseAnswer, confirmPointSelection, showMuscle,
     read: () => ({ session, game, progress, route, pendingPointSelection }),
     prepare: () => { session = { ...session, prepared: true }; save(); renderLesson(); },
-    viewerReady: () => { globalThis.viewerCalls = []; viewer = { available: new Set(curriculum.cards.map(c => c.id)),
+    viewerReady: (availableIds = curriculum.cards.map(c => c.id)) => { globalThis.viewerCalls = []; viewer = { available: new Set(availableIds),
       select(...args) { globalThis.viewerCalls.push(['select', ...args]); },
-      highlight(...args) { globalThis.lastHighlight = args; globalThis.viewerCalls.push(['highlight', ...args]); }, setIsolated() {} }; },
+      showModelChoices(...args) { globalThis.viewerCalls.push(['model-choice', ...args]); return true; },
+      highlight(...args) { globalThis.lastHighlight = args; globalThis.viewerCalls.push(['highlight', ...args]); },
+      setPickingEnabled(value) { globalThis.pickingEnabled = value; }, setIsolated() {} }; },
     lastHighlight: () => globalThis.lastHighlight,
+    pickingEnabled: () => globalThis.pickingEnabled,
     viewerCalls: () => globalThis.viewerCalls
   };`;
 
@@ -51,20 +56,20 @@ function app(data = {}, locks, options = {}) {
   };
   const storage = { getItem: key => data[key] || null, setItem: (key, value) => { if (options.blocked) throw new Error('QuotaExceededError'); data[key] = value; } };
   let reloads = 0;
-  const context = { ...learning, ...progression, ...motivation, ...groups, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean, Event,
+  const context = { ...learning, ...progression, ...motivation, ...groups, ...lessonModels, choicePalette, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean, Event,
     location: { hash: '', reload() { reloads++; } }, navigator: locks ? { locks } : {},
     document: { body: { classList: { toggle(name, active) { if (active) bodyClasses.add(name); else bodyClasses.delete(name); } } }, querySelector, querySelectorAll: () => [], dispatchEvent(event) { events.push({ type: event.type, html: node('#learning').innerHTML }); } },
     window: { localStorage: storage, motionStudyAnalytics: { lessonFinished: session => analyticsEvents.push(session) }, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
   vm.createContext(context);
   vm.runInContext(source, context);
   const api = context.api;
+  if (!options.modelUnavailable) api.viewerReady();
   return { ...api, data, storage, events, analyticsEvents, prepareUpdate: () => context.window.motionStudyPrepareUpdate(), reloads: () => reloads, focused: () => bodyClasses.has('lesson-focus'), html: () => node('#learning').innerHTML, element: node,
     startLesson(region = 'basis', levelId = 'basis:0') { api.start(region, levelId); api.navigate(); api.prepare(); },
     go(hash) { context.location.hash = hash; api.navigate(); },
     play(correct = true) { const session = api.read().session; const q = curriculum.questions.find(q => q.id === session.ids[session.index]); return api.answer(session.options.indexOf(correct ? q.answer : q.distractors[0])); }
   };
 }
-const xp = instance => learning.gameStats(learning.readGame(instance.storage)).xp;
 
 test('coaching feedback shows the control point and preserves it after reload', () => {
   const originalCount = curriculum.questions.filter(q => q.region === 'patronen' && q.source.kind !== 'supplement').length;
@@ -85,6 +90,219 @@ test('coaching feedback shows the control point and preserves it after reload', 
   assert.match(restored.html(), /Bron en toelichting/);
   assert.match(restored.html(), /https:\/\/pubmed\.ncbi\.nlm\.nih\.gov\/34822352\//);
   assert.match(restored.html(), /Controle: De heup beweegt naar achteren/);
+});
+
+test('home practice stays in chapter lessons without standalone 3D shortcuts', () => {
+  const instance = app(); instance.go('#leren');
+  assert.doesNotMatch(instance.html(), /data-start="(?:combinaties|verdieping)"/);
+  assert.match(instance.html(), /data-level="combinaties:0"/);
+  assert.match(instance.html(), /data-level="verdieping:0"/);
+  const covered = new Set(learning.levelPath({ completed: [] }).flatMap(level =>
+    learning.levelQuestions(curriculum.questions, level.topic.id, level.stage).map(question => question.id)));
+  assert.deepEqual(curriculum.questions.filter(question => !covered.has(question.id)), []);
+});
+
+test('combination practice waits for the atlas, renders the whole group and preserves feedback on reload', () => {
+  const instance = app({}, undefined, { modelUnavailable: true });
+  instance.go('#leren');
+  assert.doesNotMatch(instance.html(), /data-start="(?:combinaties|verdieping)"/);
+  instance.start('combinaties'); instance.go('#les/combinaties');
+  const state = instance.read();
+  assert.equal(state.session.ids.length, 7);
+  assert.ok(state.session.ids.every(id => curriculum.questions.find(q => q.id === id).type === 'exercise-recognition'));
+  const q = curriculum.questions.find(q => q.id === state.session.ids[0]);
+  assert.match(instance.html(), /3D-model laden/);
+  instance.chooseAnswer(state.session.options.indexOf(q.answer));
+  assert.equal(instance.read().session.answered, 0);
+  instance.viewerReady(); instance.renderLesson();
+  assert.equal(instance.element('.atlas-panel').hidden, false);
+  assert.equal(instance.viewerCalls().at(-1)[0], 'select');
+  assert.deepEqual(Array.from(instance.viewerCalls().at(-1)[1]), q.muscleIds);
+  assert.ok(!/data-answer="[^"]*"[^>]*disabled/.test(instance.html()));
+  assert.equal(instance.element('#muscle-select').disabled, true);
+  assert.ok(!instance.element('#selection-card').innerHTML.includes(curriculum.cards.find(c => c.id === q.muscleIds[0]).name));
+  instance.showMuscle('pectoralis', 'Pectoralis', true);
+  assert.equal(instance.read().session.answered, 0);
+  instance.element('#orientation').textContent = 'ZIJAANZICHT';
+  instance.chooseAnswer(instance.read().session.options.indexOf(q.answer));
+  assert.equal(instance.read().session.response, q.answer);
+  assert.equal(instance.element('#orientation').textContent, 'ZIJAANZICHT');
+  assert.deepEqual(Array.from(instance.lastHighlight()[0]), q.muscleIds);
+  assert.ok(instance.element('#selection-card').innerHTML.includes(curriculum.cards.find(c => c.id === q.muscleIds[0]).name));
+  const feedbackText = instance.html().replace(/<[^>]*>/g, '').replace(/&amp;|&lt;|&gt;|&quot;|&#39;/g, entity => ({ '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'" })[entity]);
+  if (q.id === 'combination-row') {
+    assert.ok(feedbackText.includes('Rhomboideus (retractie)'));
+    assert.ok(feedbackText.includes('Deltoideus · achterste kop (horizontale abductie)'));
+  } else assert.ok(feedbackText.includes(q.explanation.split(': ').at(-1)), q.id);
+  const restored = app(instance.data);
+  restored.viewerReady(); restored.go('#les/combinaties');
+  assert.equal(restored.read().session.response, q.answer);
+  assert.equal(restored.element('.atlas-panel').hidden, false);
+  assert.deepEqual(Array.from(restored.viewerCalls().at(-1)[1]), q.muscleIds);
+  restored.next();
+  assert.equal(restored.read().session.index, 1);
+  assert.equal(restored.element('.atlas-panel').hidden, false);
+});
+
+test('combination recall hides the movement hint and labels the answer as an exercise', () => {
+  const q = curriculum.questions.find(q => q.type === 'exercise-recognition');
+  const session = { ids: [q.id], index: 0, correct: 0, answered: 0, retryIds: [], region: 'combinaties', options: learning.optionsFor(q), response: null, exerciseModes: ['recognition-open'], openDraft: 'Row met ellebogen', finished: false, prepared: true };
+  const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) });
+  instance.viewerReady(); instance.go('#les/combinaties');
+  assert.ok(!instance.html().includes(q.hint));
+  assert.equal(instance.element('#model-prompt').hidden, true);
+  assert.match(instance.html(), /Welke oefening past hierbij\? Typ de naam/);
+  assert.match(instance.html(), /Row met ellebogen/);
+  assert.equal(instance.element('.atlas-panel').hidden, false);
+});
+const xp = instance => learning.gameStats(learning.readGame(instance.storage)).xp;
+
+test('every 3D question renders without descriptive hints or muscle names in the model legend', () => {
+  const questions = curriculum.questions.filter(learning.usesModel);
+  assert.ok(questions.some(q => q.type === 'model-fact'));
+  assert.ok(questions.some(q => q.modelContext));
+  assert.ok(questions.some(q => q.type === 'exercise-recognition'));
+  for (const q of questions) {
+    const mode = learning.exerciseFor(q, 0);
+    const session = { ids: [q.id], exerciseModes: [mode], index: 0, initialCount: 1,
+      correct: 0, answered: 0, retryIds: [], region: 'daily', options: learning.optionsFor(q),
+      response: null, finished: false, prepared: true };
+    const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) });
+    instance.go('#les/daily');
+    assert.doesNotMatch(instance.html(), /class="open-answer-help"/, q.id);
+    assert.equal(instance.element('#model-prompt').hidden, true, q.id);
+    assert.equal(instance.element('#selection-card').innerHTML, '', q.id);
+  }
+});
+
+test('3D muscle names and explanations appear in feedback and remain available after reload', () => {
+  const questions = [
+    curriculum.questions.find(q => q.type === 'model-fact'),
+    curriculum.questions.find(q => q.modelContext),
+    curriculum.questions.find(q => q.type === 'exercise-recognition')
+  ];
+  for (const q of questions) {
+    assert.ok(q);
+    const session = { ids: [q.id], exerciseModes: [learning.exerciseFor(q, 0)], index: 0, initialCount: 1,
+      correct: 0, answered: 0, retryIds: [], region: 'daily', options: learning.optionsFor(q),
+      response: null, finished: false, prepared: true };
+    const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) });
+    instance.go('#les/daily');
+    assert.doesNotMatch(instance.html(), /Gemarkeerde spieren:/);
+    instance.chooseAnswer(instance.read().session.options.indexOf(q.answer));
+    const names = (q.muscleIds || q.modelContext.muscleIds).map(id => curriculum.cards.find(card => card.id === id).name);
+    assert.match(instance.html(), /Gemarkeerde spieren:/, q.id);
+    for (const name of names) assert.ok(instance.html().includes(name), q.id);
+    if (q.id === 'combination-row') {
+      assert.ok(instance.html().includes('Trapezius · midden (retractie)'));
+      assert.ok(instance.html().includes('Rhomboideus (retractie)'));
+      assert.ok(instance.html().includes('Deltoideus · achterste kop (horizontale abductie)'));
+    } else if (q.explanation) assert.ok(instance.html().includes(q.explanation.split(': ').at(-1)), q.id);
+    const restored = app(instance.data);
+    restored.go('#les/daily');
+    assert.match(restored.html(), /Gemarkeerde spieren:/, q.id);
+    assert.equal(restored.read().session.response, q.answer);
+  }
+});
+
+test('single-muscle exercise feedback names the muscle once and keeps its movement explanation after reload', () => {
+  const q = curriculum.questions.find(q => q.id === 'combination-seated-fly');
+  const session = { ids: [q.id], exerciseModes: ['recognition'], index: 0, initialCount: 1,
+    correct: 0, answered: 0, retryIds: [], region: 'daily', options: learning.optionsFor(q),
+    response: null, finished: false, prepared: true };
+  const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) });
+  instance.go('#les/daily');
+  instance.chooseAnswer(instance.read().session.options.indexOf(q.answer));
+  for (const view of [instance, app(instance.data)]) {
+    view.go('#les/daily');
+    const feedback = view.html().split('class="lesson-dock success"')[1];
+    assert.equal((feedback.match(/Pectoralis major/g) || []).length, 1);
+    assert.ok(feedback.includes('horizontale schouderadductie met licht gebogen elleboog'));
+    assert.ok(feedback.includes('Seated cable fly'));
+  }
+});
+
+test('direction definitions hide the atlas in every exercise form and after reload', () => {
+  const definitions = curriculum.questions.filter(q => q.region === 'basis' && q.prompt.startsWith('Wat betekent'));
+  assert.ok(definitions.some(q => q.id === 'concept-0'));
+  for (const q of definitions) {
+    for (const mode of progression.availableExercises(q)) {
+      const session = { ids: [q.id], exerciseModes: [mode], index: 0, initialCount: 1,
+        correct: 0, answered: 0, retryIds: [], region: 'daily', options: learning.optionsFor(q),
+        response: null, finished: false, prepared: true, openDraft: '' };
+      const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) }, undefined, { modelUnavailable: true });
+      instance.go('#les/daily');
+      assert.equal(instance.element('.atlas-panel').hidden, true, q.id + ': ' + mode);
+      assert.equal(instance.element('#model-prompt').hidden, true);
+      assert.doesNotMatch(instance.html(), /data-model-question|3D-model laden|Paars markeert/);
+      assert.ok(instance.html().includes(q.prompt));
+      if (['choice', 'binary'].includes(mode)) {
+        instance.chooseAnswer(session.options.indexOf(q.answer));
+        assert.equal(instance.read().session.correct, 1, q.id + ': answers without waiting for model');
+      }
+      const restored = app(instance.data);
+      restored.go('#les/daily');
+      assert.equal(restored.element('.atlas-panel').hidden, true, q.id + ': restored ' + mode);
+      assert.doesNotMatch(restored.html(), /data-model-question|Paars markeert/);
+    }
+  }
+});
+
+for (const mode of ['choice', 'binary']) {
+  test('3D context keeps ' + mode + ' grading, loading protection and saved feedback', () => {
+    const q = curriculum.questions.find(q => q.id === 'pectoralis-functie');
+    const plain = curriculum.questions.find(q => q.type === 'choice' && !learning.usesModel(q));
+    const session = { ids: [q.id, plain.id], exerciseModes: [mode, 'choice'], index: 0, initialCount: 2,
+      correct: 0, answered: 0, retryIds: [], region: 'daily', options: learning.optionsFor(q),
+      response: null, finished: false, prepared: true };
+    const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) }, undefined, { modelUnavailable: true });
+    instance.go('#les/daily');
+    assert.match(instance.html(), /3D-model laden/);
+    instance.chooseAnswer(session.options.indexOf(q.answer));
+    instance.answer(session.options.indexOf(q.answer));
+    assert.equal(instance.read().session.answered, 0);
+    assert.equal(xp(instance), 0);
+    instance.viewerReady(); instance.renderLesson();
+    assert.equal(instance.element('.atlas-panel').hidden, false);
+    assert.equal(instance.pickingEnabled(), false);
+    assert.equal(instance.element('#isolate').disabled, true);
+    assert.deepEqual(Array.from(instance.viewerCalls().at(-1)[1]), q.modelContext.muscleIds);
+    assert.match(instance.html(), /data-model-question/);
+    assert.ok(instance.html().includes(q.prompt));
+    instance.showMuscle('pectoralis', 'Pectoralis', true);
+    assert.equal(instance.read().session.answered, 0);
+    assert.ok(!instance.element('#selection-card').innerHTML.includes('Pectoralis'));
+    instance.element('#orientation').textContent = 'ZIJAANZICHT';
+    instance.chooseAnswer(session.options.indexOf(q.answer));
+    assert.equal(instance.read().session.correct, 1);
+    assert.equal(instance.read().session.exerciseModes[0], mode);
+    assert.equal(instance.element('#orientation').textContent, 'ZIJAANZICHT');
+    assert.deepEqual(Array.from(instance.lastHighlight()[0]), q.modelContext.muscleIds);
+    assert.equal(xp(instance), 5);
+    const restored = app(instance.data); restored.go('#les/daily');
+    assert.equal(restored.read().session.response, q.answer);
+    assert.equal(restored.element('.atlas-panel').hidden, false);
+    assert.equal(xp(restored), 5);
+    restored.next();
+    assert.equal(restored.element('.atlas-panel').hidden, true);
+    assert.equal(restored.pickingEnabled(), true);
+  });
+}
+
+test('all eight first muscle lessons include early recognition and preserve their original seven facts', () => {
+  const path = learning.levelPath({ completed: [] });
+  for (const region of ['borst', 'rug', 'armen', 'core', 'heup', 'quads', 'hamstrings', 'kuiten']) {
+    const index = path.findIndex(level => level.topic.id === region);
+    const level = path[index];
+    const instance = app({ [learning.GAME_KEY]: JSON.stringify({ days: {}, completed: path.slice(0, index).map(level => level.id) }) });
+    instance.startLesson(region, level.id);
+    const state = instance.read();
+    const originals = learning.levelQuestions(curriculum.questions, region, 0);
+    assert.equal(state.session.initialCount, 8, region);
+    assert.ok(originals.every(q => state.session.ids.includes(q.id)), region);
+    assert.ok(state.session.ids.some(id => curriculum.questions.find(q => q.id === id).type === 'recognition'), region);
+    assert.equal(instance.element('.atlas-panel').hidden, false, region);
+  }
 });
 
 test('actual lesson completion reports analytics once and restores its completion time after reload', () => {
@@ -525,9 +743,9 @@ test('new anatomy reviews use pointing only after earlier recognition progress',
 });
 
 
-test('text questions hide the atlas even with a muscle reference; visual questions and atlas restore it', () => {
+test('questions without model context hide the atlas; visual questions and atlas restore it', () => {
   const visual = curriculum.questions.find(q => q.type === 'recognition' && q.muscleId === 'pectoralis');
-  const text = curriculum.questions.find(q => q.type !== 'recognition' && q.muscleId);
+  const text = curriculum.questions.find(q => q.type === 'choice' && !learning.usesModel(q));
   assert.ok(text);
   const session = { ids: [visual.id, text.id, visual.id], exerciseModes: ['recognition', 'choice', 'point'],
     index: 0, initialCount: 3, correct: 0, answered: 0, retryIds: [], region: visual.region,
@@ -580,13 +798,17 @@ test('lessons start directly with only the question and progress, and restore na
 });
 
 
-test('every new lesson starts with seven questions without an extra matching round', () => {
+test('new lessons retain seven source questions and include early 3D practice without a matching round', () => {
   const instance = app(); instance.viewerReady();
   for (const [region, id] of [['basis', 'basis:0'], ['daily', null], ['armen', null]]) {
     instance.startLesson(region, id);
-    assert.equal(instance.read().session.initialCount, 7);
-    assert.equal(instance.read().session.ids.length, 7);
-    assert.match(instance.html(), /aria-valuetext="0 van 7 vragen goed beantwoord"/);
+    const level = learning.levelPath({ completed: [] }).find(level => level.id === id);
+    const originals = level ? learning.levelQuestions(curriculum.questions, level.topic.id, level.stage) : [];
+    const expected = level ? lessonModels.withLessonModels(originals, curriculum.questions) : new Array(learning.LESSON_SIZE);
+    assert.equal(instance.read().session.initialCount, expected.length);
+    assert.equal(instance.read().session.ids.length, expected.length);
+    assert.ok(originals.every(q => instance.read().session.ids.includes(q.id)));
+    assert.ok(instance.html().includes('aria-valuetext="0 van ' + expected.length + ' vragen goed beantwoord"'));
     assert.doesNotMatch(instance.html(), /matching-grid/);
   }
 });
@@ -671,6 +893,36 @@ test('installation invitation starts after the lesson result and does not fire f
   assert.equal(instance.events.length, 0);
 });
 
+test('an error survives correction and reload, interleaves in the next lesson and advances only once there', () => {
+  let instance = app();
+  instance.startLesson();
+  const failedId = instance.read().session.ids[0];
+  instance.play(false); instance.next();
+  while (!instance.read().session.finished) { instance.play(true); instance.next(); }
+  assert.equal(instance.read().progress.questions[failedId].mistakeReview.successes, 0);
+  assert.equal(learning.needsMistakeReview(instance.read().progress.questions[failedId]), true);
+  const firstLessonId = instance.read().session.reviewLessonId;
+  instance = app(instance.data);
+  instance.startLesson('basis', 'basis:1');
+  const originals = learning.levelQuestions(curriculum.questions, 'basis', 1).map(q => q.id);
+  const ids = Array.from(instance.read().session.ids);
+  assert.equal(ids.length, 8);
+  assert.ok(originals.every(id => ids.includes(id)));
+  assert.equal(ids.filter(id => id === failedId).length, 1);
+  while (instance.read().session.ids[instance.read().session.index] !== failedId) { instance.play(true); instance.next(); }
+  assert.doesNotMatch(instance.html(), /Eerder fout/);
+  instance.play(true);
+  assert.equal(instance.read().progress.questions[failedId].mistakeReview.successes, 1);
+  assert.notEqual(instance.read().session.reviewLessonId, firstLessonId);
+  const laterLessonId = instance.read().session.reviewLessonId;
+  instance = app(instance.data); instance.go('#les/basis/1');
+  assert.equal(instance.read().session.reviewLessonId, laterLessonId);
+  instance.play(true);
+  assert.equal(instance.read().progress.questions[failedId].mistakeReview.successes, 1);
+  assert.equal(instance.read().session.initialCount, 8);
+});
+
+
 test('a stale tab cannot overwrite newer feedback or lesson position', () => {
   const data = {}; const active = app(data); active.startLesson();
   const stale = app(data); stale.go('#les/basis/0');
@@ -718,35 +970,6 @@ test('storage failures warn visibly and a later successful save keeps in-memory 
   assert.equal(reopened.read().session.index, 1);
   assert.equal(xp(reopened), 5);
   assert.equal(Object.values(reopened.read().progress.questions).reduce((sum, q) => sum + q.attempts, 0), 1);
-});
-
-test('an error survives correction and reload, interleaves in the next lesson and advances only once there', () => {
-  let instance = app();
-  instance.startLesson();
-  const failedId = instance.read().session.ids[0];
-  instance.play(false); instance.next();
-  while (!instance.read().session.finished) { instance.play(true); instance.next(); }
-  assert.equal(instance.read().progress.questions[failedId].mistakeReview.successes, 0);
-  assert.equal(learning.needsMistakeReview(instance.read().progress.questions[failedId]), true);
-  const firstLessonId = instance.read().session.reviewLessonId;
-  instance = app(instance.data);
-  instance.startLesson('basis', 'basis:1');
-  const originals = learning.levelQuestions(curriculum.questions, 'basis', 1).map(q => q.id);
-  const ids = Array.from(instance.read().session.ids);
-  assert.equal(ids.length, 8);
-  assert.ok(originals.every(id => ids.includes(id)));
-  assert.equal(ids.filter(id => id === failedId).length, 1);
-  while (instance.read().session.ids[instance.read().session.index] !== failedId) { instance.play(true); instance.next(); }
-  assert.match(instance.html(), /Eerder fout/);
-  instance.play(true);
-  assert.equal(instance.read().progress.questions[failedId].mistakeReview.successes, 1);
-  assert.notEqual(instance.read().session.reviewLessonId, firstLessonId);
-  const laterLessonId = instance.read().session.reviewLessonId;
-  instance = app(instance.data); instance.go('#les/basis/1');
-  assert.equal(instance.read().session.reviewLessonId, laterLessonId);
-  instance.play(true);
-  assert.equal(instance.read().progress.questions[failedId].mistakeReview.successes, 1);
-  assert.equal(instance.read().session.initialCount, 8);
 });
 
 test('actual later lessons ask for recall, retire recovered errors and stop appending them', () => {
@@ -821,4 +1044,110 @@ test('update preparation at the result preserves completion and never grants rew
   assert.equal(await instance.prepareUpdate(), true); assert.equal(JSON.stringify(instance.data), before);
   const restored = app(instance.data); restored.go('#les/basis/0'); restored.finish();
   assert.equal(JSON.stringify(instance.data), before);
+});
+
+for (const mode of ['choice', 'binary']) {
+  test('3D knowledge ' + mode + ' gates loading, grades facts and restores precise fiber selection', () => {
+    const q = curriculum.questions.find(q => q.id === 'model-fact-extra-muscles-incline-db-profile');
+    const session = { ids: [q.id], index: 0, correct: 0, answered: 0, retryIds: [], region: 'verdieping', options: learning.optionsFor(q), response: null, exerciseModes: [mode], finished: false, prepared: true, pairingDone: true };
+    const instance = app({[learning.SESSION_KEY]: JSON.stringify(session)}, undefined, {modelUnavailable: true});
+    instance.go('#les/verdieping');
+    assert.match(instance.html(), /3D-model laden/);
+    instance.answer(session.options.indexOf(q.answer));
+    assert.equal(instance.read().session.answered, 0);
+    instance.viewerReady(); instance.renderLesson();
+    assert.equal(instance.pickingEnabled(), false);
+    const call = instance.viewerCalls().at(-1);
+    assert.deepEqual(Array.from(call[1]), q.muscleIds);
+    assert.equal(JSON.stringify(call[5]), JSON.stringify(q.highlightPatterns));
+    assert.ok(instance.html().includes(q.prompt));
+    instance.chooseAnswer(session.options.indexOf(q.answer));
+    assert.equal(instance.read().session.correct, 1);
+    assert.equal(xp(instance), 5);
+    const restored = app(instance.data); restored.go('#les/verdieping');
+    assert.equal(restored.read().session.response, q.answer);
+    assert.equal(restored.read().session.exerciseModes[0], mode);
+    assert.equal(JSON.stringify(restored.viewerCalls().at(-1)[5]), JSON.stringify(q.highlightPatterns));
+    assert.equal(xp(restored), 5);
+  });
+}
+
+test('single muscle exercise feedback names only the marked fiber subset', () => {
+  const q = curriculum.questions.find(q => q.id === 'combination-sidekick');
+  const session = { ids: [q.id], index: 0, correct: 0, answered: 0, retryIds: [], region: 'combinaties', options: learning.optionsFor(q), response: null, exerciseModes: ['recognition'], finished: false, prepared: true };
+  const instance = app({[learning.SESSION_KEY]: JSON.stringify(session)});
+  instance.go('#les/combinaties'); instance.play();
+  assert.match(instance.html(), /Gemarkeerde spieren:<\/strong> Gluteus medius<\/p>/);
+  assert.ok(!instance.html().includes('Gluteus medius &amp; minimus'));
+});
+
+test('four highlighted candidates map anonymous buttons to muscles and preserve camera and order on feedback/reload', () => {
+  const q = curriculum.questions.find(q => q.type === 'recognition' && q.muscleId === 'biceps');
+  const options = learning.optionsFor(q, Math.random, 'model-choice');
+  const ids = learning.modelChoiceCards(options).map(card => card.id);
+  const session = { ids: [q.id], exerciseModes: ['model-choice'], index: 0, initialCount: 1,
+    correct: 0, answered: 0, retryIds: [], region: 'daily', options,
+    response: null, finished: false, prepared: true };
+  const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) });
+  instance.go('#les/daily');
+  assert.ok(instance.html().includes('Welke gemarkeerde spier is ' + q.answer + '?'));
+  assert.equal(instance.element('#model-prompt').hidden, true);
+  assert.equal(instance.element('#model-prompt').textContent, '');
+  assert.equal(instance.element('#selection-card').innerHTML, '');
+  assert.doesNotMatch(instance.html(), /answer-shortcut|om direct te antwoorden/);
+  assert.equal((instance.html().match(/class="answer model-choice-answer/g) || []).length, 4);
+  for (const name of options.filter(name => name !== q.answer)) assert.ok(!instance.html().includes(name));
+  for (let index = 0; index < 4; index++) assert.ok(instance.html().includes('Spier ' + (index + 1) + ' · ' + choicePalette[index].name));
+  assert.deepEqual(Array.from(instance.viewerCalls().at(-1)[1]), ids);
+  assert.equal(instance.pickingEnabled(), false);
+  assert.equal(instance.element('#isolate').disabled, true);
+  instance.element('#orientation').textContent = 'ZIJAANZICHT';
+  instance.chooseAnswer(options.indexOf(q.answer));
+  assert.equal(instance.read().session.correct, 1);
+  assert.equal(instance.viewerCalls().at(-1)[3], true);
+  assert.equal(instance.element('#orientation').textContent, 'ZIJAANZICHT');
+  assert.ok(instance.element('#selection-card').innerHTML.includes(q.answer));
+  const restored = app(instance.data);
+  restored.go('#les/daily');
+  assert.deepEqual(Array.from(restored.read().session.options), options);
+  assert.deepEqual(Array.from(restored.viewerCalls().at(-1)[1]), ids);
+  assert.equal(restored.read().session.response, q.answer);
+});
+
+test('four-choice answers wait until every candidate is loaded, then incorrect choices retry with regular recognition', () => {
+  const q = curriculum.questions.find(q => q.type === 'recognition');
+  const options = learning.optionsFor(q, Math.random, 'model-choice');
+  const ids = learning.modelChoiceCards(options).map(card => card.id);
+  const session = { ids: [q.id], exerciseModes: ['model-choice'], index: 0, initialCount: 1,
+    correct: 0, answered: 0, retryIds: [], region: 'daily', options,
+    response: null, finished: false, prepared: true };
+  const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) }, undefined, { modelUnavailable: true });
+  instance.go('#les/daily');
+  instance.chooseAnswer(options.indexOf(q.answer));
+  assert.equal(instance.read().session.answered, 0);
+  instance.viewerReady(ids.filter(id => id === q.muscleId)); instance.renderLesson();
+  instance.chooseAnswer(options.indexOf(q.answer));
+  assert.equal(instance.read().session.answered, 0);
+  assert.match(instance.html(), /Niet alle spieren zijn beschikbaar/);
+  instance.viewerReady(); instance.renderLesson();
+  instance.chooseAnswer(options.findIndex(option => option !== q.answer));
+  assert.equal(instance.read().session.correct, 0);
+  instance.next();
+  assert.equal(instance.read().session.exerciseModes[instance.read().session.index], 'recognition');
+  assert.equal(instance.viewerCalls().at(-1)[0], 'select');
+  assert.equal(instance.pickingEnabled(), true);
+});
+
+test('each early muscle chapter introduces its added recognition with four highlighted candidates', () => {
+  const path = learning.levelPath({ completed: [] });
+  for (const region of ['borst', 'rug', 'armen', 'core', 'heup', 'quads', 'hamstrings', 'kuiten']) {
+    const index = path.findIndex(level => level.id === region + ':0');
+    const instance = app({ [learning.GAME_KEY]: JSON.stringify({ days: {}, completed: path.slice(0, index).map(level => level.id) }) });
+    instance.startLesson(region, region + ':0');
+    const session = instance.read().session;
+    const recognitionIndex = session.ids.findIndex(id => curriculum.questions.find(q => q.id === id).type === 'recognition');
+    assert.ok(recognitionIndex >= 0, region);
+    assert.equal(session.exerciseModes[recognitionIndex], 'model-choice', region);
+    assert.equal(learning.modelChoiceCards(learning.optionsFor(curriculum.questions.find(q => q.id === session.ids[recognitionIndex]), Math.random, 'model-choice')).length, 4);
+  }
 });

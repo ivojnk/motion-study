@@ -31,6 +31,7 @@ export async function createViewer(canvas, onSelect, onStatus) {
   const dimMaterial = new THREE.MeshStandardMaterial({ color: 0xd1b9bc, roughness: 0.9 });
   const choiceMaterials = choicePalette.map(({ color }) => new THREE.MeshBasicMaterial({ color, depthTest: false }));
   let choiceState = null;
+  let modelChoiceState = null;
   let choicePanel = null;
   const group = new THREE.Group();
   scene.add(group);
@@ -59,7 +60,9 @@ export async function createViewer(canvas, onSelect, onStatus) {
   let skeletonPromise = null;
   let selected = null;
   let selectedAnatomyName = null;
+  let selectedPatterns = {};
   let isolated = false;
+  let pickingEnabled = true;
   const muscleMeshes = [];
   const available = new Set();
   const gltf = await loader.loadAsync(import.meta.env.BASE_URL + 'models/muscular.glb');
@@ -103,33 +106,98 @@ export async function createViewer(canvas, onSelect, onStatus) {
   }
   view('front');
   function isSelected(mesh) {
-    return selected ? mesh.userData.courseMuscleId === selected : Boolean(selectedAnatomyName && mesh.userData.anatomyName === selectedAnatomyName);
+    return selected ? matchesSelection(mesh, selected, selectedPatterns) : Boolean(selectedAnatomyName && mesh.userData.anatomyName === selectedAnatomyName);
+  }
+  function matchesSelection(mesh, ids, patterns) {
+    const id = mesh.userData.courseMuscleId;
+    const matchesId = Array.isArray(ids) ? ids.includes(id) : id === ids;
+    return matchesId && (!patterns[id]?.length || patterns[id].some(part => mesh.userData.anatomyName.includes(part)));
   }
   function updateMaterials() {
     const hasSelection = Boolean(selected || selectedAnatomyName);
+    const coloredChoices = modelChoiceState || choiceState;
     for (const mesh of muscleMeshes) {
       const active = isSelected(mesh);
-      const choiceIndex = choiceState?.choices.findIndex(choice => choice.key === muscleKey(mesh)) ?? -1;
-      mesh.visible = Boolean(choiceState) || !isolated || !hasSelection || active;
-      mesh.material = choiceState ? choiceIndex >= 0 && (choiceState.preview === null || choiceState.preview === choiceIndex) ? choiceMaterials[choiceIndex] : dimMaterial : active ? focusMaterial : hasSelection ? dimMaterial : muscleMaterial;
-      mesh.renderOrder = choiceState ? choiceIndex >= 0 && (choiceState.preview === null || choiceState.preview === choiceIndex) ? 10 : 0 : active ? 10 : 0;
+      const choiceIndex = coloredChoices?.choices.findIndex(choice => choice.key === muscleKey(mesh)) ?? -1;
+      mesh.visible = Boolean(coloredChoices) || !isolated || !hasSelection || active;
+      mesh.material = coloredChoices ? choiceIndex >= 0 && (coloredChoices.preview === null || coloredChoices.preview === choiceIndex) ? choiceMaterials[choiceIndex] : dimMaterial : active ? focusMaterial : hasSelection ? dimMaterial : muscleMaterial;
+      mesh.renderOrder = coloredChoices ? choiceIndex >= 0 && (coloredChoices.preview === null || coloredChoices.preview === choiceIndex) ? 10 : 0 : active ? 10 : 0;
     }
     render();
   }
-  function highlight(id, anatomyName = null) {
+  function highlight(id, anatomyName = null, patterns = {}) {
     clearChoice();
-    selected = id || null;
+    clearModelChoices();
+    selected = Array.isArray(id) ? id.length ? [...id] : null : id || null;
     selectedAnatomyName = id ? null : anatomyName || null;
+    selectedPatterns = structuredClone(patterns || {});
     updateMaterials();
   }
-  function select(id, direction = 'front', focus = false, highlight = true) {
+  function select(id, direction = 'front', focus = false, highlight = true, patterns = {}) {
     clearChoice();
-    selected = highlight ? id : null;
+    clearModelChoices();
+    selected = highlight ? Array.isArray(id) ? id.length ? [...id] : null : id : null;
     selectedAnatomyName = null;
+    selectedPatterns = structuredClone(patterns || {});
     updateMaterials();
     const selectedBox = new THREE.Box3();
-    if (focus && id) muscleMeshes.filter(mesh => mesh.userData.courseMuscleId === id).forEach(mesh => selectedBox.expandByObject(mesh));
+    if (focus && id) muscleMeshes.filter(mesh => matchesSelection(mesh, id, selectedPatterns)).forEach(mesh => selectedBox.expandByObject(mesh));
     view(direction, !selectedBox.isEmpty() ? selectedBox : null);
+  }
+  function clearModelChoices() {
+    if (!modelChoiceState) return;
+    modelChoiceState.marks.forEach(mark => mark.remove());
+    modelChoiceState.lines.remove();
+    modelChoiceState = null;
+  }
+  function showModelChoices(ids, direction = 'front', preserveCamera = false) {
+    if (!Array.isArray(ids) || ids.length !== 4 || new Set(ids).size !== 4 || !ids.every(id => available.has(id))) {
+      clearModelChoices();
+      updateMaterials();
+      return false;
+    }
+    clearChoice();
+    if (preserveCamera && modelChoiceState?.choices.every((choice, index) => choice.key === ids[index])) {
+      updateMaterials();
+      return true;
+    }
+    clearModelChoices();
+    selected = null;
+    selectedAnatomyName = null;
+    selectedPatterns = {};
+    isolated = false;
+    const combinedBox = new THREE.Box3();
+    const choices = ids.map(id => {
+      const meshes = muscleMeshes.filter(mesh => mesh.userData.courseMuscleId === id);
+      meshes.forEach(mesh => combinedBox.expandByObject(mesh));
+      // Anchor to a real mesh on one side, rather than the gap between both sides.
+      const representative = meshes.reduce((largest, mesh) => {
+        const size = new THREE.Box3().setFromObject(mesh).getSize(new THREE.Vector3()).lengthSq();
+        return !largest || size > largest.size ? { mesh, size } : largest;
+      }, null).mesh;
+      const point = new THREE.Box3().setFromObject(representative).getCenter(new THREE.Vector3());
+      return { key: id, hit: { object: representative, point } };
+    });
+    const lines = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    lines.classList.add('choice-lines');
+    lines.setAttribute('aria-hidden', 'true');
+    choices.forEach((choice, index) => {
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('class', 'choice-color-' + index);
+      lines.append(line);
+    });
+    const marks = choices.map((choice, index) => {
+      const mark = document.createElement('span');
+      mark.className = 'choice-mark model-choice-mark choice-color-' + index;
+      mark.textContent = (index + 1) + ' ' + choicePalette[index].symbol;
+      mark.setAttribute('aria-hidden', 'true');
+      return mark;
+    });
+    canvas.parentElement.append(lines, ...marks);
+    modelChoiceState = { choices, marks, lines, preview: null };
+    if (!preserveCamera) view(direction, combinedBox);
+    updateMaterials();
+    return true;
   }
   const raycaster = new THREE.Raycaster();
   raycaster.firstHitOnly = true;
@@ -143,25 +211,28 @@ export async function createViewer(canvas, onSelect, onStatus) {
     updateMaterials();
   }
   function updateChoiceMarks() {
-    if (!choiceState) return;
+    const state = modelChoiceState || choiceState;
+    if (!state) return;
     const rect = canvas.getBoundingClientRect();
-    choiceState.lines.setAttribute('viewBox', '0 0 ' + rect.width + ' ' + rect.height);
+    state.lines.setAttribute('viewBox', '0 0 ' + rect.width + ' ' + rect.height);
     const positions = [];
-    choiceState.choices.forEach((choice, index) => {
+    const margin = modelChoiceState ? 24 : 18;
+    const spacing = modelChoiceState ? 46 : 38;
+    state.choices.forEach((choice, index) => {
       const point = choice.hit.point.clone().project(camera);
-      const mark = choiceState.marks[index];
+      const mark = state.marks[index];
       mark.hidden = Math.abs(point.x) > 1 || Math.abs(point.y) > 1 || Math.abs(point.z) > 1;
       const x = (point.x + 1) * rect.width / 2;
       const y = (1 - point.y) * rect.height / 2;
-      const position = { x: Math.max(18, Math.min(rect.width - 18, x)), y: Math.max(18, Math.min(rect.height - 18, y)) };
+      const position = { x: Math.max(margin, Math.min(rect.width - margin, x)), y: Math.max(margin, Math.min(rect.height - margin, y)) };
       for (const previous of positions) {
-        if (Math.hypot(position.x - previous.x, position.y - previous.y) < 38) position.y = previous.y + 38 <= rect.height - 18 ? previous.y + 38 : previous.y - 38;
+        if (Math.hypot(position.x - previous.x, position.y - previous.y) < spacing) position.y = previous.y + spacing <= rect.height - margin ? previous.y + spacing : previous.y - spacing;
       }
       positions.push(position);
       mark.style.left = position.x + 'px';
       mark.style.top = position.y + 'px';
-      mark.classList.toggle('is-preview', choiceState.preview === index);
-      const line = choiceState.lines.children[index];
+      mark.classList.toggle('is-preview', state.preview === index);
+      const line = state.lines.children[index];
       line.setAttribute('x1', x); line.setAttribute('y1', y);
       line.setAttribute('x2', position.x); line.setAttribute('y2', position.y);
       line.style.display = mark.hidden ? 'none' : '';
@@ -175,12 +246,13 @@ export async function createViewer(canvas, onSelect, onStatus) {
     },
     confirm(choice) {
       clearChoice();
-      canvas.focus({ preventScroll: true });
       onSelect(choice.hit.object.userData.courseMuscleId, choice.hit.object.userData.anatomyName, true);
+      canvas.focus({ preventScroll: true });
     },
     cancel() { clearChoice(); canvas.focus({ preventScroll: true }); }
   });
   const unbindTapSelection = bindTapSelection(canvas, event => {
+    if (!pickingEnabled) return;
     clearChoice();
     const rect = canvas.getBoundingClientRect();
     const visibleMeshes = muscleMeshes.filter(mesh => mesh.visible);
@@ -251,6 +323,8 @@ export async function createViewer(canvas, onSelect, onStatus) {
     render();
   }
   onStatus('ready');
-  return { available, select, highlight, view, render, showSkeleton, setIsolated(value) { clearChoice(); isolated = value; updateMaterials(); },
-    dispose() { clearChoice(); choicePanel?.dispose(); unbindTapSelection(); observer.disconnect(); controls.dispose(); draco.dispose(); if (frame !== null) cancelAnimationFrame(frame); scene.traverse(n => n.geometry?.dispose()); [muscleMaterial, boneMaterial, focusMaterial, dimMaterial, ...choiceMaterials].forEach(m => m.dispose()); renderer.dispose(); } };
+  return { available, select, highlight, view, render, showSkeleton, showModelChoices,
+    setPickingEnabled(value) { pickingEnabled = value; if (!value) clearChoice(); },
+    setIsolated(value) { clearChoice(); isolated = value; updateMaterials(); },
+    dispose() { clearChoice(); clearModelChoices(); choicePanel?.dispose(); unbindTapSelection(); observer.disconnect(); controls.dispose(); draco.dispose(); if (frame !== null) cancelAnimationFrame(frame); scene.traverse(n => n.geometry?.dispose()); [muscleMaterial, boneMaterial, focusMaterial, dimMaterial, ...choiceMaterials].forEach(m => m.dispose()); renderer.dispose(); } };
 }
