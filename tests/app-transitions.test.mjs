@@ -652,7 +652,7 @@ test('queued answer does not redirect a user who navigated to the atlas', async 
   await locks.drain(); await pending;
   assert.equal(instance.read().route, 'atlas');
   assert.equal(instance.read().session.levelId, 'basis:0');
-  assert.match(instance.html(), /<h2>Spieren<\/h2>/);
+  assert.match(instance.html(), /<h2\b[^>]*>Spieren<\/h2>/);
 });
 
 test('corrupt finished-active session is rejected without restoring unusable quiz', () => {
@@ -671,7 +671,7 @@ test('async finish runs once and leaves atlas navigation intact', async () => {
   const duplicate = instance.finish(); instance.go('#atlas');
   await locks.drain(); await duplicate;
   assert.equal(xp(instance), count * 5 + 10); assert.equal(instance.read().session.finished, true);
-  assert.equal(instance.read().route, 'atlas'); assert.match(instance.html(), /<h2>Spieren<\/h2>/);
+  assert.equal(instance.read().route, 'atlas'); assert.match(instance.html(), /<h2\b[^>]*>Spieren<\/h2>/);
   assert.equal(learning.readProgress(instance.storage).sessions.length, 1);
 });
 
