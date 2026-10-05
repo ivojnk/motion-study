@@ -139,6 +139,10 @@ select { font-size: 13px; border-radius: 5px; background: var(--white); color: v
 .atlas-view .workspace { grid-template-columns: minmax(0, .9fr) minmax(0, 1.2fr); }
 .atlas-view .viewer-wrap { height: 560px; }
 .explore-card { border: 0; background: transparent; border-radius: 0; padding: 0; }
+.explore-card.muscle-detail { padding-bottom: 88px; }
+.atlas-back-button { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 16; display: flex; align-items: center; justify-content: center; gap: 10px; width: max-content; max-width: calc(100% - 32px); min-height: 48px; padding: 12px 20px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); color: var(--ink); box-shadow: 0 6px 24px #252e2926; font-size: 14px; font-weight: 600; touch-action: manipulation; }
+.atlas-back-button:hover { background: var(--soft); border-color: var(--accent); }
+@media (max-width: 620px) { .atlas-back-button { bottom: calc(96px + env(safe-area-inset-bottom)); } }
 .explore-card h2 { font-size: 32px; margin: 0 0 22px; }
 .atlas-muscles { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: 0; border-top: 1px solid var(--line); }
 .muscle-chip { font-size: 14px; padding: 12px 4px; background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; text-align: left; min-height: 48px; }

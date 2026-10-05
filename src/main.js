@@ -612,9 +612,9 @@ function renderAtlas(card = null) {
   restoreAtlasLayout();
   intro('3D-atlas');
   if (!card) {
-    $('#learning').innerHTML = '<article class="explore-card"><h2>Spieren</h2><div class="atlas-muscles">' + curriculum.cards.map(c => '<button class="muscle-chip" data-muscle="' + c.id + '">' + escape(c.name) + '</button>').join('') + '</div></article>'; return;
+    $('#learning').innerHTML = '<article class="explore-card"><h2 id="muscle-list-title" tabindex="-1">Spieren</h2><div class="atlas-muscles">' + curriculum.cards.map(c => '<button class="muscle-chip" data-muscle="' + c.id + '">' + escape(c.name) + '</button>').join('') + '</div></article>'; return;
   }
-  $('#learning').innerHTML = '<article class="explore-card"><span class="tag">' + escape(topics.find(t => t.id === card.region).title) + '</span><h2 id="muscle-card-title" tabindex="-1">' + escape(card.name) + '</h2><dl>' + Object.entries(card.fields).map(([field, value]) => '<div><dt>' + escape(field) + '</dt><dd>' + escape(value) + '</dd></div>').join('') + '</dl>' + sourceMarkup(card.source) + '<button class="primary" data-start="' + card.region + '">Oefen dit hoofdstuk ' + icon('arrow-right') + '</button><button class="text-button" id="all-muscles">Alle spierkaarten</button></article>';
+  $('#learning').innerHTML = '<article class="explore-card muscle-detail"><span class="tag">' + escape(topics.find(t => t.id === card.region).title) + '</span><h2 id="muscle-card-title" tabindex="-1">' + escape(card.name) + '</h2><dl>' + Object.entries(card.fields).map(([field, value]) => '<div><dt>' + escape(field) + '</dt><dd>' + escape(value) + '</dd></div>').join('') + '</dl>' + sourceMarkup(card.source) + '<button class="primary" data-start="' + card.region + '">Oefen dit hoofdstuk ' + icon('arrow-right') + '</button><button type="button" class="atlas-back-button" id="all-muscles">' + icon('arrow-left') + 'Terug naar alle spierkaarten</button></article>';
 }
 function renderProgress() {
   restoreAtlasLayout();
@@ -689,7 +689,7 @@ document.addEventListener('click', event => {
   if (muscleButton) { showMuscle(muscleButton.dataset.muscle); $('#muscle-card-title')?.focus(); }
   if (viewButton) { viewer?.view(viewButton.dataset.view); setOrientation(viewButton.dataset.view); }
   if (event.target.closest('#next-question')) next();
-  if (event.target.closest('#all-muscles')) { resetAtlas(); renderAtlas(); }
+  if (event.target.closest('#all-muscles')) { resetAtlas(); renderAtlas(); $('#muscle-list-title').focus(); }
   if (event.target.closest('#reset-view')) { viewer?.view('front'); setOrientation('front'); }
   if (event.target.closest('#credits-button')) {
     $('#account-controls').open = false;
