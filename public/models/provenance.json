@@ -1,0 +1,21 @@
+{
+  "upstreamCommit": "8ca3b7421bcfbe88b85859eb1983d5cf79f21749",
+  "assets": [
+    {
+      "file": "muscular.glb",
+      "sha256": "f69ed1287f802a2d603d23293e01512bb57ae77ee7cca1d5527ba00496e51de2",
+      "bytes": 4503232,
+      "source": "https://github.com/nqwrc/3d-anatomy/blob/8ca3b7421bcfbe88b85859eb1983d5cf79f21749/public/models/muscular.glb",
+      "license": "CC-BY-SA-4.0",
+      "modifications": "None to stored geometry. Runtime color, highlighting and visibility differ."
+    },
+    {
+      "file": "skeletal.glb",
+      "sha256": "c2b70b31ddec4062cbc5ba969fc24ecfed61d00397a0bca795e2701d997200f8",
+      "bytes": 1863828,
+      "source": "https://github.com/nqwrc/3d-anatomy/blob/8ca3b7421bcfbe88b85859eb1983d5cf79f21749/public/models/skeletal.glb",
+      "license": "CC-BY-SA-4.0",
+      "modifications": "None to stored geometry. Runtime color, highlighting and visibility differ."
+    }
+  ]
+}

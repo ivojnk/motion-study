@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#faf9f6" />
+  <meta name="description" content="Leer anatomie en biomechanica met een interactieve 3D-atlas en korte quizlessen." />
+  <title>MotionStudy · Leer het lichaam kennen</title>
+</head>
+<body>
+  <a class="skip" href="#main">Naar de inhoud</a>
+  <header class="topbar">
+    <a class="brand" href="#leren" aria-label="MotionStudy start"><span class="brand-symbol">m<span>s</span></span><span>MotionStudy<span class="brand-dot">.</span></span></a>
+    <nav aria-label="Hoofdnavigatie"><a href="#leren" data-nav="leren">Leren</a><a href="#atlas" data-nav="atlas">3D-atlas</a><a href="#voortgang" data-nav="voortgang">Voortgang</a></nav>
+    <span class="avatar" aria-label="Jouw lokale leeromgeving">MS</span>
+  </header>
+  <main id="main">
+    <section id="intro"></section>
+    <div class="workspace">
+      <section class="learning-panel" id="learning" aria-label="Leeromgeving"></section>
+      <section class="atlas-panel" aria-labelledby="atlas-heading">
+        <div class="atlas-top"><div><span class="eyebrow">ONTDEK IN 3D</span><h2 id="atlas-heading">Het lichaam, van dichtbij.</h2></div><span class="tag">Interactief</span></div>
+        <div class="viewer-wrap">
+          <canvas id="body" tabindex="0" aria-label="3D-anatomiemodel. Draai met de pijltjestoetsen, zoom met plus en min. Kies een spier via de lijst onder het model."></canvas>
+          <div class="viewer-status" id="viewer-status" role="status">Spieren laden…</div>
+          <span class="orientation" id="orientation">VOORZIJDE</span>
+          <div class="viewer-tools"><button data-view="front" aria-label="Vooraanzicht">Voor</button><button data-view="back" aria-label="Achteraanzicht">Achter</button><button data-view="side" aria-label="Zijaanzicht">Zij</button><button id="reset-view" aria-label="Hele lichaam tonen">↺</button></div>
+        </div>
+        <div class="atlas-controls"><label><input id="bones" type="checkbox" checked /> Skelet tonen</label><label><input id="isolate" type="checkbox" /> Spier isoleren</label></div>
+        <div class="selection-card" id="selection-card" aria-live="polite"><span class="eyebrow">BEGIN MET ONTDEKKEN</span><h3>Tik een spier aan</h3><p>Draai het lichaam en ontdek hoe alles samenwerkt.</p></div>
+        <label class="muscle-picker">Kies een spier <select id="muscle-select"><option value="">Alle spieren</option></select></label>
+        <p class="viewer-help">Sleep om te draaien · knijp of scroll om te zoomen</p>
+      </section>
+    </div>
+    <footer><span>Anatomie leren. Eén les tegelijk.</span><button id="credits-button">Bronnen & licenties</button></footer>
+  </main>
+  <dialog id="credits"><button class="close-dialog" aria-label="Sluiten">×</button><span class="eyebrow">SAMEN GEBOUWD</span><h2>Bronnen & licenties</h2><p>Lesstof: Anatomie-Biomechanica-Cheatsheet, Milo PT opleiding, module 6.6. De vragen zijn op deze lesstof gebaseerd.</p><p><a href="https://drive.google.com/file/d/1cUNMc6m7fZT2LA6F1iY5G0g2Io7OstmW/view" target="_blank" rel="noreferrer">Open de oorspronkelijke lesstof</a></p><p>BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan</p><p>Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0</p><p>Spier- en skeletmodellen overgenomen uit <a href="https://github.com/nqwrc/3d-anatomy" target="_blank" rel="noreferrer">nqwrc/3d-anatomy</a>. De geometrie is ongewijzigd. Kleur, selectie en zichtbaarheid worden in deze app aangepast.</p><p><a href="./models/License.txt">Modelvermelding</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> · <a href="./licenses/upstream-LICENSE.txt">Upstream-licenties</a> · <a href="./licenses/upstream-NOTICE.txt">Upstream-vermelding</a></p><p>Three.js & Three Mesh BVH: MIT. <a href="./licenses/draco-LICENSE.txt">Draco: Apache 2.0</a>. <a href="./licenses/tabler-LICENSE.txt">Tabler Icons: MIT</a>. <a href="./licenses/third-party.txt">Softwarelicenties</a></p><p>Lettertypes: <a href="./licenses/dm-sans-LICENSE.txt">DM Sans</a> en <a href="./licenses/manrope-LICENSE.txt">Manrope</a>, SIL Open Font License.</p><p>Je leerresultaten blijven in deze browser. Er worden geen antwoorden verstuurd. Als browseropslag is geblokkeerd, blijft je voortgang alleen tijdens deze sessie bewaard.</p></dialog>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

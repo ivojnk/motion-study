@@ -1,0 +1,5127 @@
+{
+  "title": "Anatomie & Biomechanica",
+  "sourceUrl": "https://drive.google.com/file/d/1cUNMc6m7fZT2LA6F1iY5G0g2Io7OstmW/view",
+  "fetchedAt": "2026-10-05",
+  "cards": [
+    {
+      "id": "pectoralis",
+      "name": "Pectoralis major",
+      "region": "borst",
+      "patterns": [
+        "pectoralis major"
+      ],
+      "view": "front",
+      "fields": {
+        "oorsprong": "Sleutelbeen, borstbeen, rectusschede",
+        "aanhechting": "Voorkant humerus",
+        "functie": "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "maximale rek": "Horiz./vert. abductie boven 90° in exorotatie"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Pectoralis major"
+      }
+    },
+    {
+      "id": "delt-front",
+      "name": "Deltoideus · voorste kop",
+      "region": "borst",
+      "patterns": [
+        "Clavicular part of deltoid"
+      ],
+      "view": "front",
+      "fields": {
+        "oorsprong": "Sleutelbeen",
+        "aanhechting": "Buitenkant humerus",
+        "functie": "Anteflexie, horizontale adductie, endorotatie",
+        "maximale rek": "Horizontale abductie, retroflexie, exorotatie"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · voorste kop"
+      }
+    },
+    {
+      "id": "delt-mid",
+      "name": "Deltoideus · middelste kop",
+      "region": "borst",
+      "patterns": [
+        "Acromial part of deltoid"
+      ],
+      "view": "front",
+      "fields": {
+        "oorsprong": "Acromion",
+        "aanhechting": "Buitenkant humerus",
+        "functie": "Verticale abductie",
+        "maximale rek": "Verticale adductie"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · middelste kop"
+      }
+    },
+    {
+      "id": "delt-back",
+      "name": "Deltoideus · achterste kop",
+      "region": "borst",
+      "patterns": [
+        "Scapular spinal part of deltoid"
+      ],
+      "view": "back",
+      "fields": {
+        "oorsprong": "Spina scapulae",
+        "aanhechting": "Buitenkant humerus",
+        "functie": "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "maximale rek": "Horizontale adductie in 90° anteflexie, endorotatie"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · achterste kop"
+      }
+    },
+    {
+      "id": "serratus",
+      "name": "Serratus anterior",
+      "region": "borst",
+      "patterns": [
+        "Serratus anterior muscle"
+      ],
+      "view": "side",
+      "fields": {
+        "functie": "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Serratus anterior"
+      }
+    },
+    {
+      "id": "pec-minor",
+      "name": "Pectoralis minor",
+      "region": "borst",
+      "patterns": [
+        "Pectoralis minor muscle"
+      ],
+      "view": "front",
+      "fields": {
+        "functie": "Depressie, mediorotatie en protractie van de scapula"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Pectoralis minor"
+      }
+    },
+    {
+      "id": "lats",
+      "name": "Latissimus dorsi",
+      "region": "rug",
+      "patterns": [
+        "Latissimus dorsi muscle"
+      ],
+      "view": "back",
+      "fields": {
+        "oorsprong": "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "aanhechting": "Voorkant humerus",
+        "functie": "Retroflexie, verticale adductie, endorotatie",
+        "maximale rek": "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Latissimus dorsi"
+      }
+    },
+    {
+      "id": "traps-upper",
+      "name": "Trapezius · boven",
+      "region": "rug",
+      "patterns": [
+        "Descending part of trapezius"
+      ],
+      "view": "back",
+      "fields": {
+        "oorsprong": "Achterhoofdsbeen, cervicale wervels",
+        "aanhechting": "Buitenste sleutelbeen",
+        "functie": "Laterorotatie, elevatie, retractie (zwak) scapula",
+        "maximale rek": "Depressie, deels protractie"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · boven"
+      }
+    },
+    {
+      "id": "traps-mid",
+      "name": "Trapezius · midden",
+      "region": "rug",
+      "patterns": [
+        "Transverse part of trapezius"
+      ],
+      "view": "back",
+      "fields": {
+        "oorsprong": "Thoracale wervels 1–4",
+        "aanhechting": "Acromion + bovenkant scapula",
+        "functie": "Retractie",
+        "maximale rek": "Protractie"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · midden"
+      }
+    },
+    {
+      "id": "traps-lower",
+      "name": "Trapezius · onder",
+      "region": "rug",
+      "patterns": [
+        "Ascending part of trapezius"
+      ],
+      "view": "back",
+      "fields": {
+        "oorsprong": "Thoracale wervels 5–12",
+        "aanhechting": "Spina scapulae",
+        "functie": "Retractie + depressie",
+        "maximale rek": "Elevatie, laterorotatie, protractie"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · onder"
+      }
+    },
+    {
+      "id": "rhomboids",
+      "name": "Rhomboideus",
+      "region": "rug",
+      "patterns": [
+        "Rhomboid major muscle",
+        "Rhomboid minor muscle"
+      ],
+      "view": "back",
+      "fields": {
+        "functie": "Retractie scapula + ondersteunt mediorotatie"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Rhomboideus"
+      }
+    },
+    {
+      "id": "biceps",
+      "name": "Biceps brachii",
+      "region": "armen",
+      "patterns": [
+        "biceps brachii"
+      ],
+      "view": "front",
+      "fields": {
+        "oorsprong": "Lange kop: boven schouderkom · korte kop: processus coracoideus",
+        "aanhechting": "Radius",
+        "functie": "Flexie elleboog, supinatie onderarm (in flexie), anteflexie bovenarm (zwak)",
+        "maximale rek": "Extensie elleboog, retroflexie bovenarm, pronatie onderarm"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Biceps brachii"
+      }
+    },
+    {
+      "id": "brachialis",
+      "name": "Brachialis",
+      "region": "armen",
+      "patterns": [
+        "Brachialis muscle"
+      ],
+      "view": "front",
+      "fields": {
+        "functie": "Flexie elleboog (vooral in pronatie) — extreem sterke elleboogflexor"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Brachialis"
+      }
+    },
+    {
+      "id": "triceps",
+      "name": "Triceps brachii",
+      "region": "armen",
+      "patterns": [
+        "triceps brachii"
+      ],
+      "view": "back",
+      "fields": {
+        "oorsprong": "Lange kop: onder schouderkom · laterale kop: bovenkant humerus",
+        "aanhechting": "Bovenkant ulna",
+        "functie": "Extensie elleboog (alle koppen); retroflexie + verticale adductie bovenarm (lange kop, zwak)",
+        "maximale rek": "Flexie elleboog, anteflexie arm"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Triceps brachii"
+      }
+    },
+    {
+      "id": "rectus-abd",
+      "name": "Rectus abdominis",
+      "region": "core",
+      "patterns": [
+        "Rectus abdominis muscle"
+      ],
+      "view": "front",
+      "fields": {
+        "oorsprong": "Schaambeen",
+        "aanhechting": "Kraakbeen rib 5–7 / processus xiphoideus",
+        "functie": "Flexie romp, samendrukken organen, ademsteun",
+        "maximale rek": "Extensie wervelkolom"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Rectus abdominis"
+      }
+    },
+    {
+      "id": "oblique-ext",
+      "name": "Externe obliques",
+      "region": "core",
+      "patterns": [
+        "External abdominal oblique"
+      ],
+      "view": "front",
+      "fields": {
+        "oorsprong": "Buitenkant rib 5–12",
+        "aanhechting": "Crista iliaca / schaambeen / rectusschede",
+        "functie": "Bilateraal: flexie; unilateraal: lateroflexie + contralaterale rotatie",
+        "maximale rek": "Extensie + lateroflexie andere zijde + rotatie eigen zijde"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Externe obliques"
+      }
+    },
+    {
+      "id": "oblique-int",
+      "name": "Interne obliques",
+      "region": "core",
+      "patterns": [
+        "Internal abdominal oblique"
+      ],
+      "view": "front",
+      "fields": {
+        "oorsprong": "Crista iliaca / lig. inguinale / thoracolumbale fascie",
+        "aanhechting": "Onderrand rib 10–12 / rectusschede",
+        "functie": "Bilateraal: flexie; unilateraal: lateroflexie + ipsilaterale rotatie",
+        "maximale rek": "Extensie + lateroflexie/rotatie andere zijde"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Interne obliques"
+      }
+    },
+    {
+      "id": "transversus",
+      "name": "Transversus abdominis",
+      "region": "core",
+      "patterns": [
+        "Transversus abdominis muscle"
+      ],
+      "view": "front",
+      "fields": {
+        "functie": "Bilateraal: samendrukken organen + ademsteun; unilateraal: ipsilaterale rotatie"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Transversus abdominis"
+      }
+    },
+    {
+      "id": "ql",
+      "name": "Quadratus lumborum",
+      "region": "core",
+      "patterns": [
+        "Quadratus lumborum muscle"
+      ],
+      "view": "back",
+      "fields": {
+        "oorsprong": "Crista iliaca + lig. iliolumbale",
+        "aanhechting": "Rib 12 / dwarsuitsteeksels L1–4",
+        "functie": "Bilateraal: stabiliseert ribben bij inademing+extensie; unilateraal: lateroflexie",
+        "maximale rek": "Lateroflexie andere zijde EXTENSIE"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Quadratus lumborum"
+      }
+    },
+    {
+      "id": "erector",
+      "name": "Erector spinae",
+      "region": "core",
+      "patterns": [
+        "Iliocostalis",
+        "Longissimus",
+        "Spinalis"
+      ],
+      "view": "back",
+      "fields": {
+        "oorsprong": "Sacrum, crista iliaca, onderste lenden/borstwervels",
+        "aanhechting": "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen",
+        "functie": "Bilateraal: extensie; unilateraal: lateroflexie + rotatie",
+        "maximale rek": "Volledige flexie wervelkolom (segmentaal)"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Erector spinae"
+      }
+    },
+    {
+      "id": "iliopsoas",
+      "name": "Iliopsoas",
+      "region": "core",
+      "patterns": [
+        "Psoas major muscle",
+        "Iliacus muscle"
+      ],
+      "view": "front",
+      "fields": {
+        "functie": "Heup: anteflexie + exorotatie been. Romp: extensie + lateroflexie wervelkolom bij de heup"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Iliopsoas"
+      }
+    },
+    {
+      "id": "glute-max",
+      "name": "Gluteus maximus",
+      "region": "heup",
+      "patterns": [
+        "Gluteus maximus muscle"
+      ],
+      "view": "back",
+      "fields": {
+        "oorsprong": "Gluteaal opp. darmbeen, fascia thoracolumbalis, heiligbeen, lig. sacrotuberale",
+        "aanhechting": "Boven: IT-band · Onder: bovenkant femur",
+        "functie": "Retroflexie (sterkst nabij volledige strekking) + exorotatie; boven: abductie; onder: adductie",
+        "maximale rek": "Anteflexie heup"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gluteus maximus"
+      }
+    },
+    {
+      "id": "glute-med",
+      "name": "Gluteus medius & minimus",
+      "region": "heup",
+      "patterns": [
+        "Gluteus medius muscle",
+        "Gluteus minimus muscle"
+      ],
+      "view": "back",
+      "fields": {
+        "oorsprong": "Gluteaal oppervlak darmbeen",
+        "aanhechting": "Bovenkant femur",
+        "functie": "Abductie; voorste vezels flexie+endorotatie; achterste vezels retroflexie+exorotatie + stabilisatie bekken",
+        "maximale rek": "Adductie"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gluteus medius & minimus"
+      }
+    },
+    {
+      "id": "tfl",
+      "name": "Tensor fasciae latae",
+      "region": "heup",
+      "patterns": [
+        "Tensor fasciae latae"
+      ],
+      "view": "front",
+      "fields": {
+        "functie": "Endorotatie heup, zwak in abductie heup, exorotatie knie"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Tensor fasciae latae"
+      }
+    },
+    {
+      "id": "adductors",
+      "name": "Adductoren",
+      "region": "heup",
+      "patterns": [
+        "Adductor longus muscle",
+        "Adductor brevis muscle",
+        "Adductor magnus muscle",
+        "Gracilis muscle",
+        "Pectineus muscle"
+      ],
+      "view": "front",
+      "fields": {
+        "functie": "Adductie heup + stabilisatie bekken. Longus: ook anteflexie (+retroflexie >70–80°). Brevis: anteflexie+exorotatie. Magnus: anteflexie+retroflexie (in anteflexie)"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Adductoren"
+      }
+    },
+    {
+      "id": "rectus-fem",
+      "name": "Rectus femoris",
+      "region": "quads",
+      "patterns": [
+        "Rectus femoris muscle"
+      ],
+      "view": "front",
+      "fields": {
+        "oorsprong": "Spina iliaca anterior inferior",
+        "aanhechting": "Patellaligament",
+        "functie": "Anteflexie heup + extensie knie",
+        "maximale rek": "Extensie heup + flexie knie (niet beide tegelijk — passieve insufficiëntie)"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Rectus femoris"
+      }
+    },
+    {
+      "id": "vasti",
+      "name": "Vastus medialis / lateralis / intermedius",
+      "region": "quads",
+      "patterns": [
+        "Vastus medialis muscle",
+        "Vastus lateralis muscle",
+        "Vastus intermedius muscle"
+      ],
+      "view": "front",
+      "fields": {
+        "oorsprong": "Binnen-/buiten-/voorkant bovenbeen",
+        "aanhechting": "Patellaligament",
+        "functie": "Extensie knie",
+        "maximale rek": "Flexie knie"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Vastus medialis / lateralis / intermedius"
+      }
+    },
+    {
+      "id": "biceps-fem",
+      "name": "Biceps femoris",
+      "region": "hamstrings",
+      "patterns": [
+        "biceps femoris"
+      ],
+      "view": "back",
+      "fields": {
+        "oorsprong": "Lange kop: onderkant bekken · Korte kop: midden femur",
+        "aanhechting": "Kop van het kuitbeen (fibula)",
+        "functie": "Retroflexie heup + flexie & exorotatie knie",
+        "maximale rek": "Anteflexie heup ÓF knie-extensie (niet beide — passieve insuff.)"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Biceps femoris"
+      }
+    },
+    {
+      "id": "semis",
+      "name": "Semimembranosus / semitendinosus",
+      "region": "hamstrings",
+      "patterns": [
+        "Semimembranosus muscle",
+        "Semitendinosus muscle"
+      ],
+      "view": "back",
+      "fields": {
+        "oorsprong": "Onderkant bekken",
+        "aanhechting": "Binnenkant tibia",
+        "functie": "Retroflexie heup + flexie & endorotatie knie",
+        "maximale rek": "Anteflexie heup ÓF knie-extensie (niet beide — passieve insuff.)"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Semimembranosus / semitendinosus"
+      }
+    },
+    {
+      "id": "soleus",
+      "name": "Soleus",
+      "region": "kuiten",
+      "patterns": [
+        "Soleus muscle"
+      ],
+      "view": "back",
+      "fields": {
+        "oorsprong": "Bovenkant onderbeen (tibia + fibula)",
+        "aanhechting": "Via achillespees op hielbot",
+        "functie": "Plantairflexie",
+        "maximale rek": "Dorsaalflexie"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Soleus"
+      }
+    },
+    {
+      "id": "gastrocnemius",
+      "name": "Gastrocnemius",
+      "region": "kuiten",
+      "patterns": [
+        "gastrocnemius"
+      ],
+      "view": "back",
+      "fields": {
+        "oorsprong": "Onderkant femur (mediale/laterale kop)",
+        "aanhechting": "Via achillespees op hielbot",
+        "functie": "Plantairflexie, supinatie voet, endo/exorotatie onderbeen, flexie knie",
+        "maximale rek": "Dorsaalflexie"
+      },
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gastrocnemius"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "pectoralis-oorsprong",
+      "region": "borst",
+      "muscleId": "pectoralis",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Pectoralis major volgens de cheatsheet?",
+      "answer": "Sleutelbeen, borstbeen, rectusschede",
+      "distractors": [
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12",
+        "Lange kop: boven schouderkom · korte kop: processus coracoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Pectoralis major"
+      }
+    },
+    {
+      "id": "pectoralis-aanhechting",
+      "region": "borst",
+      "muscleId": "pectoralis",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Pectoralis major volgens de cheatsheet?",
+      "answer": "Voorkant humerus",
+      "distractors": [
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus",
+        "Crista iliaca / schaambeen / rectusschede"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Pectoralis major"
+      }
+    },
+    {
+      "id": "pectoralis-functie",
+      "region": "borst",
+      "muscleId": "pectoralis",
+      "type": "choice",
+      "prompt": "Wat is de functie van Pectoralis major volgens de cheatsheet?",
+      "answer": "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+      "distractors": [
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula",
+        "Retractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Pectoralis major"
+      }
+    },
+    {
+      "id": "pectoralis-maximale rek",
+      "region": "borst",
+      "muscleId": "pectoralis",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Pectoralis major volgens de cheatsheet?",
+      "answer": "Horiz./vert. abductie boven 90° in exorotatie",
+      "distractors": [
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie",
+        "Extensie elleboog, retroflexie bovenarm, pronatie onderarm"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Pectoralis major"
+      }
+    },
+    {
+      "id": "delt-front-oorsprong",
+      "region": "borst",
+      "muscleId": "delt-front",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Deltoideus · voorste kop volgens de cheatsheet?",
+      "answer": "Sleutelbeen",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12",
+        "Lange kop: boven schouderkom · korte kop: processus coracoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · voorste kop"
+      }
+    },
+    {
+      "id": "delt-front-aanhechting",
+      "region": "borst",
+      "muscleId": "delt-front",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Deltoideus · voorste kop volgens de cheatsheet?",
+      "answer": "Buitenkant humerus",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus",
+        "Crista iliaca / schaambeen / rectusschede"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · voorste kop"
+      }
+    },
+    {
+      "id": "delt-front-functie",
+      "region": "borst",
+      "muscleId": "delt-front",
+      "type": "choice",
+      "prompt": "Wat is de functie van Deltoideus · voorste kop volgens de cheatsheet?",
+      "answer": "Anteflexie, horizontale adductie, endorotatie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula",
+        "Retractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · voorste kop"
+      }
+    },
+    {
+      "id": "delt-front-maximale rek",
+      "region": "borst",
+      "muscleId": "delt-front",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Deltoideus · voorste kop volgens de cheatsheet?",
+      "answer": "Horizontale abductie, retroflexie, exorotatie",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie",
+        "Extensie elleboog, retroflexie bovenarm, pronatie onderarm"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · voorste kop"
+      }
+    },
+    {
+      "id": "delt-mid-oorsprong",
+      "region": "borst",
+      "muscleId": "delt-mid",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Deltoideus · middelste kop volgens de cheatsheet?",
+      "answer": "Acromion",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12",
+        "Lange kop: boven schouderkom · korte kop: processus coracoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · middelste kop"
+      }
+    },
+    {
+      "id": "delt-mid-aanhechting",
+      "region": "borst",
+      "muscleId": "delt-mid",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Deltoideus · middelste kop volgens de cheatsheet?",
+      "answer": "Buitenkant humerus",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus",
+        "Crista iliaca / schaambeen / rectusschede"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · middelste kop"
+      }
+    },
+    {
+      "id": "delt-mid-functie",
+      "region": "borst",
+      "muscleId": "delt-mid",
+      "type": "choice",
+      "prompt": "Wat is de functie van Deltoideus · middelste kop volgens de cheatsheet?",
+      "answer": "Verticale abductie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula",
+        "Retractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · middelste kop"
+      }
+    },
+    {
+      "id": "delt-mid-maximale rek",
+      "region": "borst",
+      "muscleId": "delt-mid",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Deltoideus · middelste kop volgens de cheatsheet?",
+      "answer": "Verticale adductie",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie",
+        "Extensie elleboog, retroflexie bovenarm, pronatie onderarm"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · middelste kop"
+      }
+    },
+    {
+      "id": "delt-back-oorsprong",
+      "region": "borst",
+      "muscleId": "delt-back",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Deltoideus · achterste kop volgens de cheatsheet?",
+      "answer": "Spina scapulae",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12",
+        "Lange kop: boven schouderkom · korte kop: processus coracoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · achterste kop"
+      }
+    },
+    {
+      "id": "delt-back-aanhechting",
+      "region": "borst",
+      "muscleId": "delt-back",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Deltoideus · achterste kop volgens de cheatsheet?",
+      "answer": "Buitenkant humerus",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus",
+        "Crista iliaca / schaambeen / rectusschede"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · achterste kop"
+      }
+    },
+    {
+      "id": "delt-back-functie",
+      "region": "borst",
+      "muscleId": "delt-back",
+      "type": "choice",
+      "prompt": "Wat is de functie van Deltoideus · achterste kop volgens de cheatsheet?",
+      "answer": "Retroflexie (zwak), horizontale abductie, exorotatie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula",
+        "Retractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · achterste kop"
+      }
+    },
+    {
+      "id": "delt-back-maximale rek",
+      "region": "borst",
+      "muscleId": "delt-back",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Deltoideus · achterste kop volgens de cheatsheet?",
+      "answer": "Horizontale adductie in 90° anteflexie, endorotatie",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie",
+        "Extensie elleboog, retroflexie bovenarm, pronatie onderarm"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · achterste kop"
+      }
+    },
+    {
+      "id": "serratus-functie",
+      "region": "borst",
+      "muscleId": "serratus",
+      "type": "choice",
+      "prompt": "Wat is de functie van Serratus anterior volgens de cheatsheet?",
+      "answer": "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula",
+        "Retractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Serratus anterior"
+      }
+    },
+    {
+      "id": "pec-minor-functie",
+      "region": "borst",
+      "muscleId": "pec-minor",
+      "type": "choice",
+      "prompt": "Wat is de functie van Pectoralis minor volgens de cheatsheet?",
+      "answer": "Depressie, mediorotatie en protractie van de scapula",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula",
+        "Retractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Pectoralis minor"
+      }
+    },
+    {
+      "id": "lats-oorsprong",
+      "region": "rug",
+      "muscleId": "lats",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Latissimus dorsi volgens de cheatsheet?",
+      "answer": "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12",
+        "Lange kop: boven schouderkom · korte kop: processus coracoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Latissimus dorsi"
+      }
+    },
+    {
+      "id": "lats-aanhechting",
+      "region": "rug",
+      "muscleId": "lats",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Latissimus dorsi volgens de cheatsheet?",
+      "answer": "Voorkant humerus",
+      "distractors": [
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus",
+        "Crista iliaca / schaambeen / rectusschede"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Latissimus dorsi"
+      }
+    },
+    {
+      "id": "lats-functie",
+      "region": "rug",
+      "muscleId": "lats",
+      "type": "choice",
+      "prompt": "Wat is de functie van Latissimus dorsi volgens de cheatsheet?",
+      "answer": "Retroflexie, verticale adductie, endorotatie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Laterorotatie, elevatie, retractie (zwak) scapula",
+        "Retractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Latissimus dorsi"
+      }
+    },
+    {
+      "id": "lats-maximale rek",
+      "region": "rug",
+      "muscleId": "lats",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Latissimus dorsi volgens de cheatsheet?",
+      "answer": "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie",
+        "Extensie elleboog, retroflexie bovenarm, pronatie onderarm"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Latissimus dorsi"
+      }
+    },
+    {
+      "id": "traps-upper-oorsprong",
+      "region": "rug",
+      "muscleId": "traps-upper",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Trapezius · boven volgens de cheatsheet?",
+      "answer": "Achterhoofdsbeen, cervicale wervels",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12",
+        "Lange kop: boven schouderkom · korte kop: processus coracoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · boven"
+      }
+    },
+    {
+      "id": "traps-upper-aanhechting",
+      "region": "rug",
+      "muscleId": "traps-upper",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Trapezius · boven volgens de cheatsheet?",
+      "answer": "Buitenste sleutelbeen",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus",
+        "Crista iliaca / schaambeen / rectusschede"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · boven"
+      }
+    },
+    {
+      "id": "traps-upper-functie",
+      "region": "rug",
+      "muscleId": "traps-upper",
+      "type": "choice",
+      "prompt": "Wat is de functie van Trapezius · boven volgens de cheatsheet?",
+      "answer": "Laterorotatie, elevatie, retractie (zwak) scapula",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Retractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · boven"
+      }
+    },
+    {
+      "id": "traps-upper-maximale rek",
+      "region": "rug",
+      "muscleId": "traps-upper",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Trapezius · boven volgens de cheatsheet?",
+      "answer": "Depressie, deels protractie",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie",
+        "Extensie elleboog, retroflexie bovenarm, pronatie onderarm"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · boven"
+      }
+    },
+    {
+      "id": "traps-mid-oorsprong",
+      "region": "rug",
+      "muscleId": "traps-mid",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Trapezius · midden volgens de cheatsheet?",
+      "answer": "Thoracale wervels 1–4",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 5–12",
+        "Lange kop: boven schouderkom · korte kop: processus coracoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · midden"
+      }
+    },
+    {
+      "id": "traps-mid-aanhechting",
+      "region": "rug",
+      "muscleId": "traps-mid",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Trapezius · midden volgens de cheatsheet?",
+      "answer": "Acromion + bovenkant scapula",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus",
+        "Crista iliaca / schaambeen / rectusschede"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · midden"
+      }
+    },
+    {
+      "id": "traps-mid-functie",
+      "region": "rug",
+      "muscleId": "traps-mid",
+      "type": "choice",
+      "prompt": "Wat is de functie van Trapezius · midden volgens de cheatsheet?",
+      "answer": "Retractie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · midden"
+      }
+    },
+    {
+      "id": "traps-mid-maximale rek",
+      "region": "rug",
+      "muscleId": "traps-mid",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Trapezius · midden volgens de cheatsheet?",
+      "answer": "Protractie",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Elevatie, laterorotatie, protractie",
+        "Extensie elleboog, retroflexie bovenarm, pronatie onderarm"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · midden"
+      }
+    },
+    {
+      "id": "traps-lower-oorsprong",
+      "region": "rug",
+      "muscleId": "traps-lower",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Trapezius · onder volgens de cheatsheet?",
+      "answer": "Thoracale wervels 5–12",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Lange kop: boven schouderkom · korte kop: processus coracoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · onder"
+      }
+    },
+    {
+      "id": "traps-lower-aanhechting",
+      "region": "rug",
+      "muscleId": "traps-lower",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Trapezius · onder volgens de cheatsheet?",
+      "answer": "Spina scapulae",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus",
+        "Crista iliaca / schaambeen / rectusschede"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · onder"
+      }
+    },
+    {
+      "id": "traps-lower-functie",
+      "region": "rug",
+      "muscleId": "traps-lower",
+      "type": "choice",
+      "prompt": "Wat is de functie van Trapezius · onder volgens de cheatsheet?",
+      "answer": "Retractie + depressie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · onder"
+      }
+    },
+    {
+      "id": "traps-lower-maximale rek",
+      "region": "rug",
+      "muscleId": "traps-lower",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Trapezius · onder volgens de cheatsheet?",
+      "answer": "Elevatie, laterorotatie, protractie",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Extensie elleboog, retroflexie bovenarm, pronatie onderarm"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · onder"
+      }
+    },
+    {
+      "id": "rhomboids-functie",
+      "region": "rug",
+      "muscleId": "rhomboids",
+      "type": "choice",
+      "prompt": "Wat is de functie van Rhomboideus volgens de cheatsheet?",
+      "answer": "Retractie scapula + ondersteunt mediorotatie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Rhomboideus"
+      }
+    },
+    {
+      "id": "biceps-oorsprong",
+      "region": "armen",
+      "muscleId": "biceps",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Biceps brachii volgens de cheatsheet?",
+      "answer": "Lange kop: boven schouderkom · korte kop: processus coracoideus",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Biceps brachii"
+      }
+    },
+    {
+      "id": "biceps-aanhechting",
+      "region": "armen",
+      "muscleId": "biceps",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Biceps brachii volgens de cheatsheet?",
+      "answer": "Radius",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus",
+        "Crista iliaca / schaambeen / rectusschede"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Biceps brachii"
+      }
+    },
+    {
+      "id": "biceps-functie",
+      "region": "armen",
+      "muscleId": "biceps",
+      "type": "choice",
+      "prompt": "Wat is de functie van Biceps brachii volgens de cheatsheet?",
+      "answer": "Flexie elleboog, supinatie onderarm (in flexie), anteflexie bovenarm (zwak)",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Biceps brachii"
+      }
+    },
+    {
+      "id": "biceps-maximale rek",
+      "region": "armen",
+      "muscleId": "biceps",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Biceps brachii volgens de cheatsheet?",
+      "answer": "Extensie elleboog, retroflexie bovenarm, pronatie onderarm",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Biceps brachii"
+      }
+    },
+    {
+      "id": "brachialis-functie",
+      "region": "armen",
+      "muscleId": "brachialis",
+      "type": "choice",
+      "prompt": "Wat is de functie van Brachialis volgens de cheatsheet?",
+      "answer": "Flexie elleboog (vooral in pronatie) — extreem sterke elleboogflexor",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Brachialis"
+      }
+    },
+    {
+      "id": "triceps-oorsprong",
+      "region": "armen",
+      "muscleId": "triceps",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Triceps brachii volgens de cheatsheet?",
+      "answer": "Lange kop: onder schouderkom · laterale kop: bovenkant humerus",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Triceps brachii"
+      }
+    },
+    {
+      "id": "triceps-aanhechting",
+      "region": "armen",
+      "muscleId": "triceps",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Triceps brachii volgens de cheatsheet?",
+      "answer": "Bovenkant ulna",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Kraakbeen rib 5–7 / processus xiphoideus",
+        "Crista iliaca / schaambeen / rectusschede"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Triceps brachii"
+      }
+    },
+    {
+      "id": "triceps-functie",
+      "region": "armen",
+      "muscleId": "triceps",
+      "type": "choice",
+      "prompt": "Wat is de functie van Triceps brachii volgens de cheatsheet?",
+      "answer": "Extensie elleboog (alle koppen); retroflexie + verticale adductie bovenarm (lange kop, zwak)",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Triceps brachii"
+      }
+    },
+    {
+      "id": "triceps-maximale rek",
+      "region": "armen",
+      "muscleId": "triceps",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Triceps brachii volgens de cheatsheet?",
+      "answer": "Flexie elleboog, anteflexie arm",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Triceps brachii"
+      }
+    },
+    {
+      "id": "rectus-abd-oorsprong",
+      "region": "core",
+      "muscleId": "rectus-abd",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Rectus abdominis volgens de cheatsheet?",
+      "answer": "Schaambeen",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Rectus abdominis"
+      }
+    },
+    {
+      "id": "rectus-abd-aanhechting",
+      "region": "core",
+      "muscleId": "rectus-abd",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Rectus abdominis volgens de cheatsheet?",
+      "answer": "Kraakbeen rib 5–7 / processus xiphoideus",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Crista iliaca / schaambeen / rectusschede"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Rectus abdominis"
+      }
+    },
+    {
+      "id": "rectus-abd-functie",
+      "region": "core",
+      "muscleId": "rectus-abd",
+      "type": "choice",
+      "prompt": "Wat is de functie van Rectus abdominis volgens de cheatsheet?",
+      "answer": "Flexie romp, samendrukken organen, ademsteun",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Rectus abdominis"
+      }
+    },
+    {
+      "id": "rectus-abd-maximale rek",
+      "region": "core",
+      "muscleId": "rectus-abd",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Rectus abdominis volgens de cheatsheet?",
+      "answer": "Extensie wervelkolom",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Rectus abdominis"
+      }
+    },
+    {
+      "id": "oblique-ext-oorsprong",
+      "region": "core",
+      "muscleId": "oblique-ext",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Externe obliques volgens de cheatsheet?",
+      "answer": "Buitenkant rib 5–12",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Externe obliques"
+      }
+    },
+    {
+      "id": "oblique-ext-aanhechting",
+      "region": "core",
+      "muscleId": "oblique-ext",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Externe obliques volgens de cheatsheet?",
+      "answer": "Crista iliaca / schaambeen / rectusschede",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Externe obliques"
+      }
+    },
+    {
+      "id": "oblique-ext-functie",
+      "region": "core",
+      "muscleId": "oblique-ext",
+      "type": "choice",
+      "prompt": "Wat is de functie van Externe obliques volgens de cheatsheet?",
+      "answer": "Bilateraal: flexie; unilateraal: lateroflexie + contralaterale rotatie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Externe obliques"
+      }
+    },
+    {
+      "id": "oblique-ext-maximale rek",
+      "region": "core",
+      "muscleId": "oblique-ext",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Externe obliques volgens de cheatsheet?",
+      "answer": "Extensie + lateroflexie andere zijde + rotatie eigen zijde",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Externe obliques"
+      }
+    },
+    {
+      "id": "oblique-int-oorsprong",
+      "region": "core",
+      "muscleId": "oblique-int",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Interne obliques volgens de cheatsheet?",
+      "answer": "Crista iliaca / lig. inguinale / thoracolumbale fascie",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Interne obliques"
+      }
+    },
+    {
+      "id": "oblique-int-aanhechting",
+      "region": "core",
+      "muscleId": "oblique-int",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Interne obliques volgens de cheatsheet?",
+      "answer": "Onderrand rib 10–12 / rectusschede",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Interne obliques"
+      }
+    },
+    {
+      "id": "oblique-int-functie",
+      "region": "core",
+      "muscleId": "oblique-int",
+      "type": "choice",
+      "prompt": "Wat is de functie van Interne obliques volgens de cheatsheet?",
+      "answer": "Bilateraal: flexie; unilateraal: lateroflexie + ipsilaterale rotatie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Interne obliques"
+      }
+    },
+    {
+      "id": "oblique-int-maximale rek",
+      "region": "core",
+      "muscleId": "oblique-int",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Interne obliques volgens de cheatsheet?",
+      "answer": "Extensie + lateroflexie/rotatie andere zijde",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Interne obliques"
+      }
+    },
+    {
+      "id": "transversus-functie",
+      "region": "core",
+      "muscleId": "transversus",
+      "type": "choice",
+      "prompt": "Wat is de functie van Transversus abdominis volgens de cheatsheet?",
+      "answer": "Bilateraal: samendrukken organen + ademsteun; unilateraal: ipsilaterale rotatie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Transversus abdominis"
+      }
+    },
+    {
+      "id": "ql-oorsprong",
+      "region": "core",
+      "muscleId": "ql",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Quadratus lumborum volgens de cheatsheet?",
+      "answer": "Crista iliaca + lig. iliolumbale",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Quadratus lumborum"
+      }
+    },
+    {
+      "id": "ql-aanhechting",
+      "region": "core",
+      "muscleId": "ql",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Quadratus lumborum volgens de cheatsheet?",
+      "answer": "Rib 12 / dwarsuitsteeksels L1–4",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Quadratus lumborum"
+      }
+    },
+    {
+      "id": "ql-functie",
+      "region": "core",
+      "muscleId": "ql",
+      "type": "choice",
+      "prompt": "Wat is de functie van Quadratus lumborum volgens de cheatsheet?",
+      "answer": "Bilateraal: stabiliseert ribben bij inademing+extensie; unilateraal: lateroflexie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Quadratus lumborum"
+      }
+    },
+    {
+      "id": "ql-maximale rek",
+      "region": "core",
+      "muscleId": "ql",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Quadratus lumborum volgens de cheatsheet?",
+      "answer": "Lateroflexie andere zijde EXTENSIE",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Quadratus lumborum"
+      }
+    },
+    {
+      "id": "erector-oorsprong",
+      "region": "core",
+      "muscleId": "erector",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Erector spinae volgens de cheatsheet?",
+      "answer": "Sacrum, crista iliaca, onderste lenden/borstwervels",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Erector spinae"
+      }
+    },
+    {
+      "id": "erector-aanhechting",
+      "region": "core",
+      "muscleId": "erector",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Erector spinae volgens de cheatsheet?",
+      "answer": "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Erector spinae"
+      }
+    },
+    {
+      "id": "erector-functie",
+      "region": "core",
+      "muscleId": "erector",
+      "type": "choice",
+      "prompt": "Wat is de functie van Erector spinae volgens de cheatsheet?",
+      "answer": "Bilateraal: extensie; unilateraal: lateroflexie + rotatie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Erector spinae"
+      }
+    },
+    {
+      "id": "erector-maximale rek",
+      "region": "core",
+      "muscleId": "erector",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Erector spinae volgens de cheatsheet?",
+      "answer": "Volledige flexie wervelkolom (segmentaal)",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Erector spinae"
+      }
+    },
+    {
+      "id": "iliopsoas-functie",
+      "region": "core",
+      "muscleId": "iliopsoas",
+      "type": "choice",
+      "prompt": "Wat is de functie van Iliopsoas volgens de cheatsheet?",
+      "answer": "Heup: anteflexie + exorotatie been. Romp: extensie + lateroflexie wervelkolom bij de heup",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Iliopsoas"
+      }
+    },
+    {
+      "id": "glute-max-oorsprong",
+      "region": "heup",
+      "muscleId": "glute-max",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Gluteus maximus volgens de cheatsheet?",
+      "answer": "Gluteaal opp. darmbeen, fascia thoracolumbalis, heiligbeen, lig. sacrotuberale",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gluteus maximus"
+      }
+    },
+    {
+      "id": "glute-max-aanhechting",
+      "region": "heup",
+      "muscleId": "glute-max",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Gluteus maximus volgens de cheatsheet?",
+      "answer": "Boven: IT-band · Onder: bovenkant femur",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gluteus maximus"
+      }
+    },
+    {
+      "id": "glute-max-functie",
+      "region": "heup",
+      "muscleId": "glute-max",
+      "type": "choice",
+      "prompt": "Wat is de functie van Gluteus maximus volgens de cheatsheet?",
+      "answer": "Retroflexie (sterkst nabij volledige strekking) + exorotatie; boven: abductie; onder: adductie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gluteus maximus"
+      }
+    },
+    {
+      "id": "glute-max-maximale rek",
+      "region": "heup",
+      "muscleId": "glute-max",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Gluteus maximus volgens de cheatsheet?",
+      "answer": "Anteflexie heup",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gluteus maximus"
+      }
+    },
+    {
+      "id": "glute-med-oorsprong",
+      "region": "heup",
+      "muscleId": "glute-med",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Gluteus medius & minimus volgens de cheatsheet?",
+      "answer": "Gluteaal oppervlak darmbeen",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gluteus medius & minimus"
+      }
+    },
+    {
+      "id": "glute-med-aanhechting",
+      "region": "heup",
+      "muscleId": "glute-med",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Gluteus medius & minimus volgens de cheatsheet?",
+      "answer": "Bovenkant femur",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gluteus medius & minimus"
+      }
+    },
+    {
+      "id": "glute-med-functie",
+      "region": "heup",
+      "muscleId": "glute-med",
+      "type": "choice",
+      "prompt": "Wat is de functie van Gluteus medius & minimus volgens de cheatsheet?",
+      "answer": "Abductie; voorste vezels flexie+endorotatie; achterste vezels retroflexie+exorotatie + stabilisatie bekken",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gluteus medius & minimus"
+      }
+    },
+    {
+      "id": "glute-med-maximale rek",
+      "region": "heup",
+      "muscleId": "glute-med",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Gluteus medius & minimus volgens de cheatsheet?",
+      "answer": "Adductie",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gluteus medius & minimus"
+      }
+    },
+    {
+      "id": "tfl-functie",
+      "region": "heup",
+      "muscleId": "tfl",
+      "type": "choice",
+      "prompt": "Wat is de functie van Tensor fasciae latae volgens de cheatsheet?",
+      "answer": "Endorotatie heup, zwak in abductie heup, exorotatie knie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Tensor fasciae latae"
+      }
+    },
+    {
+      "id": "adductors-functie",
+      "region": "heup",
+      "muscleId": "adductors",
+      "type": "choice",
+      "prompt": "Wat is de functie van Adductoren volgens de cheatsheet?",
+      "answer": "Adductie heup + stabilisatie bekken. Longus: ook anteflexie (+retroflexie >70–80°). Brevis: anteflexie+exorotatie. Magnus: anteflexie+retroflexie (in anteflexie)",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Adductoren"
+      }
+    },
+    {
+      "id": "rectus-fem-oorsprong",
+      "region": "quads",
+      "muscleId": "rectus-fem",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Rectus femoris volgens de cheatsheet?",
+      "answer": "Spina iliaca anterior inferior",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Rectus femoris"
+      }
+    },
+    {
+      "id": "rectus-fem-aanhechting",
+      "region": "quads",
+      "muscleId": "rectus-fem",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Rectus femoris volgens de cheatsheet?",
+      "answer": "Patellaligament",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Rectus femoris"
+      }
+    },
+    {
+      "id": "rectus-fem-functie",
+      "region": "quads",
+      "muscleId": "rectus-fem",
+      "type": "choice",
+      "prompt": "Wat is de functie van Rectus femoris volgens de cheatsheet?",
+      "answer": "Anteflexie heup + extensie knie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Rectus femoris"
+      }
+    },
+    {
+      "id": "rectus-fem-maximale rek",
+      "region": "quads",
+      "muscleId": "rectus-fem",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Rectus femoris volgens de cheatsheet?",
+      "answer": "Extensie heup + flexie knie (niet beide tegelijk — passieve insufficiëntie)",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Rectus femoris"
+      }
+    },
+    {
+      "id": "vasti-oorsprong",
+      "region": "quads",
+      "muscleId": "vasti",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Vastus medialis / lateralis / intermedius volgens de cheatsheet?",
+      "answer": "Binnen-/buiten-/voorkant bovenbeen",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Vastus medialis / lateralis / intermedius"
+      }
+    },
+    {
+      "id": "vasti-aanhechting",
+      "region": "quads",
+      "muscleId": "vasti",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Vastus medialis / lateralis / intermedius volgens de cheatsheet?",
+      "answer": "Patellaligament",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Vastus medialis / lateralis / intermedius"
+      }
+    },
+    {
+      "id": "vasti-functie",
+      "region": "quads",
+      "muscleId": "vasti",
+      "type": "choice",
+      "prompt": "Wat is de functie van Vastus medialis / lateralis / intermedius volgens de cheatsheet?",
+      "answer": "Extensie knie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Vastus medialis / lateralis / intermedius"
+      }
+    },
+    {
+      "id": "vasti-maximale rek",
+      "region": "quads",
+      "muscleId": "vasti",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Vastus medialis / lateralis / intermedius volgens de cheatsheet?",
+      "answer": "Flexie knie",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Vastus medialis / lateralis / intermedius"
+      }
+    },
+    {
+      "id": "biceps-fem-oorsprong",
+      "region": "hamstrings",
+      "muscleId": "biceps-fem",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Biceps femoris volgens de cheatsheet?",
+      "answer": "Lange kop: onderkant bekken · Korte kop: midden femur",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Biceps femoris"
+      }
+    },
+    {
+      "id": "biceps-fem-aanhechting",
+      "region": "hamstrings",
+      "muscleId": "biceps-fem",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Biceps femoris volgens de cheatsheet?",
+      "answer": "Kop van het kuitbeen (fibula)",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Biceps femoris"
+      }
+    },
+    {
+      "id": "biceps-fem-functie",
+      "region": "hamstrings",
+      "muscleId": "biceps-fem",
+      "type": "choice",
+      "prompt": "Wat is de functie van Biceps femoris volgens de cheatsheet?",
+      "answer": "Retroflexie heup + flexie & exorotatie knie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Biceps femoris"
+      }
+    },
+    {
+      "id": "biceps-fem-maximale rek",
+      "region": "hamstrings",
+      "muscleId": "biceps-fem",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Biceps femoris volgens de cheatsheet?",
+      "answer": "Anteflexie heup ÓF knie-extensie (niet beide — passieve insuff.)",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Biceps femoris"
+      }
+    },
+    {
+      "id": "semis-oorsprong",
+      "region": "hamstrings",
+      "muscleId": "semis",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Semimembranosus / semitendinosus volgens de cheatsheet?",
+      "answer": "Onderkant bekken",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Semimembranosus / semitendinosus"
+      }
+    },
+    {
+      "id": "semis-aanhechting",
+      "region": "hamstrings",
+      "muscleId": "semis",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Semimembranosus / semitendinosus volgens de cheatsheet?",
+      "answer": "Binnenkant tibia",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Semimembranosus / semitendinosus"
+      }
+    },
+    {
+      "id": "semis-functie",
+      "region": "hamstrings",
+      "muscleId": "semis",
+      "type": "choice",
+      "prompt": "Wat is de functie van Semimembranosus / semitendinosus volgens de cheatsheet?",
+      "answer": "Retroflexie heup + flexie & endorotatie knie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Semimembranosus / semitendinosus"
+      }
+    },
+    {
+      "id": "semis-maximale rek",
+      "region": "hamstrings",
+      "muscleId": "semis",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Semimembranosus / semitendinosus volgens de cheatsheet?",
+      "answer": "Anteflexie heup ÓF knie-extensie (niet beide — passieve insuff.)",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Semimembranosus / semitendinosus"
+      }
+    },
+    {
+      "id": "soleus-oorsprong",
+      "region": "kuiten",
+      "muscleId": "soleus",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Soleus volgens de cheatsheet?",
+      "answer": "Bovenkant onderbeen (tibia + fibula)",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Soleus"
+      }
+    },
+    {
+      "id": "soleus-aanhechting",
+      "region": "kuiten",
+      "muscleId": "soleus",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Soleus volgens de cheatsheet?",
+      "answer": "Via achillespees op hielbot",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Soleus"
+      }
+    },
+    {
+      "id": "soleus-functie",
+      "region": "kuiten",
+      "muscleId": "soleus",
+      "type": "choice",
+      "prompt": "Wat is de functie van Soleus volgens de cheatsheet?",
+      "answer": "Plantairflexie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Soleus"
+      }
+    },
+    {
+      "id": "soleus-maximale rek",
+      "region": "kuiten",
+      "muscleId": "soleus",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Soleus volgens de cheatsheet?",
+      "answer": "Dorsaalflexie",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Soleus"
+      }
+    },
+    {
+      "id": "gastrocnemius-oorsprong",
+      "region": "kuiten",
+      "muscleId": "gastrocnemius",
+      "type": "choice",
+      "prompt": "Wat is de oorsprong van Gastrocnemius volgens de cheatsheet?",
+      "answer": "Onderkant femur (mediale/laterale kop)",
+      "distractors": [
+        "Sleutelbeen, borstbeen, rectusschede",
+        "Sleutelbeen",
+        "Acromion",
+        "Spina scapulae",
+        "Thoracale wervels 7–12, thoracolumbale fascia, crista iliaca, rib 9–12, onderste scapulahoek",
+        "Achterhoofdsbeen, cervicale wervels",
+        "Thoracale wervels 1–4",
+        "Thoracale wervels 5–12"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gastrocnemius"
+      }
+    },
+    {
+      "id": "gastrocnemius-aanhechting",
+      "region": "kuiten",
+      "muscleId": "gastrocnemius",
+      "type": "choice",
+      "prompt": "Wat is de aanhechting van Gastrocnemius volgens de cheatsheet?",
+      "answer": "Via achillespees op hielbot",
+      "distractors": [
+        "Voorkant humerus",
+        "Buitenkant humerus",
+        "Buitenste sleutelbeen",
+        "Acromion + bovenkant scapula",
+        "Spina scapulae",
+        "Radius",
+        "Bovenkant ulna",
+        "Kraakbeen rib 5–7 / processus xiphoideus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gastrocnemius"
+      }
+    },
+    {
+      "id": "gastrocnemius-functie",
+      "region": "kuiten",
+      "muscleId": "gastrocnemius",
+      "type": "choice",
+      "prompt": "Wat is de functie van Gastrocnemius volgens de cheatsheet?",
+      "answer": "Plantairflexie, supinatie voet, endo/exorotatie onderbeen, flexie knie",
+      "distractors": [
+        "Anteflexie tot 90°, horizontale/verticale adductie, endorotatie",
+        "Anteflexie, horizontale adductie, endorotatie",
+        "Verticale abductie",
+        "Retroflexie (zwak), horizontale abductie, exorotatie",
+        "Drukt scapula tegen thorax, laterorotatie + protractie scapula (bovenste vezels: mediorotatie)",
+        "Depressie, mediorotatie en protractie van de scapula",
+        "Retroflexie, verticale adductie, endorotatie",
+        "Laterorotatie, elevatie, retractie (zwak) scapula"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gastrocnemius"
+      }
+    },
+    {
+      "id": "gastrocnemius-maximale rek",
+      "region": "kuiten",
+      "muscleId": "gastrocnemius",
+      "type": "choice",
+      "prompt": "Wat is de maximale rek van Gastrocnemius volgens de cheatsheet?",
+      "answer": "Dorsaalflexie",
+      "distractors": [
+        "Horiz./vert. abductie boven 90° in exorotatie",
+        "Horizontale abductie, retroflexie, exorotatie",
+        "Verticale adductie",
+        "Horizontale adductie in 90° anteflexie, endorotatie",
+        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)",
+        "Depressie, deels protractie",
+        "Protractie",
+        "Elevatie, laterorotatie, protractie"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gastrocnemius"
+      }
+    },
+    {
+      "id": "concept-0",
+      "region": "basis",
+      "prompt": "Wat betekent anterieur?",
+      "answer": "Aan de voorzijde van het lichaam",
+      "distractors": [
+        "Aan de achterzijde",
+        "Dichter bij de kern",
+        "Richting de schedel"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-1",
+      "region": "basis",
+      "prompt": "Wat betekent proximaal?",
+      "answer": "Dichter bij de kern van het lichaam",
+      "distractors": [
+        "Verder van de kern",
+        "Naar de middenlijn",
+        "Aan de achterzijde"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-2",
+      "region": "basis",
+      "prompt": "Wat betekent mediaal?",
+      "answer": "Naar de middenlijn toe",
+      "distractors": [
+        "Van de middenlijn af",
+        "Richting het staartbeen",
+        "Verder van de kern"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-3",
+      "region": "basis",
+      "prompt": "Wat betekent bilateraal?",
+      "answer": "Tweezijdig",
+      "distractors": [
+        "Eenzijdig",
+        "Naar buiten gedraaid",
+        "Naar beneden gericht"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-4",
+      "region": "basis",
+      "prompt": "Welke beweging voert een arm van de middenlijn af?",
+      "answer": "Abductie",
+      "distractors": [
+        "Adductie",
+        "Endorotatie",
+        "Depressie"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-5",
+      "region": "basis",
+      "prompt": "Wat is retractie van de scapulae?",
+      "answer": "De schouderbladen naar elkaar toe bewegen",
+      "distractors": [
+        "De schouderbladen van elkaar af bewegen",
+        "De schouderbladen heffen",
+        "De romp zijwaarts buigen"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-6",
+      "region": "basis",
+      "prompt": "Hoe heet naar buiten draaien?",
+      "answer": "Exorotatie",
+      "distractors": [
+        "Endorotatie",
+        "Elevatie",
+        "Lateroflexie"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-7",
+      "region": "basis",
+      "prompt": "Wat is de agonist?",
+      "answer": "De primaire spier die de beweging veroorzaakt",
+      "distractors": [
+        "De tegenhanger van de beweging",
+        "Een spier zonder spanning",
+        "Een pees die kracht overdraagt"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-8",
+      "region": "basis",
+      "prompt": "Wat doet een synergist?",
+      "answer": "Helpt de agonist met kracht of stabiliteit",
+      "distractors": [
+        "Verlengt altijd de agonist",
+        "Voorkomt iedere gewrichtsbeweging",
+        "Vervangt de antagonist volledig"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-9",
+      "region": "basis",
+      "prompt": "Wat gebeurt er bij een concentrische contractie?",
+      "answer": "De spier verkort tegen de weerstand in",
+      "distractors": [
+        "De spier verlengt met de weerstand mee",
+        "De spier blijft even lang",
+        "De spier verliest alle spanning"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-10",
+      "region": "basis",
+      "prompt": "Wat gebeurt er bij een excentrische contractie?",
+      "answer": "De spier verlengt met de weerstand mee",
+      "distractors": [
+        "De spier verkort tegen de weerstand in",
+        "De spier blijft even lang",
+        "Er is geen spieractiviteit"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-11",
+      "region": "basis",
+      "prompt": "Welke contractievorm hoort bij een plank?",
+      "answer": "Isometrisch",
+      "distractors": [
+        "Concentrisch",
+        "Excentrisch",
+        "Ballistisch"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-12",
+      "region": "basis",
+      "prompt": "In welk vlak valt zijwaarts heffen van een arm?",
+      "answer": "Het frontale vlak",
+      "distractors": [
+        "Het sagittale vlak",
+        "Het transversale vlak",
+        "Geen bewegingsvlak"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-13",
+      "region": "basis",
+      "prompt": "Welke as hoort bij het transversale vlak?",
+      "answer": "De longitudinale as",
+      "distractors": [
+        "De sagittale as",
+        "De transversale as",
+        "De diagonale as"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-14",
+      "region": "basis",
+      "prompt": "Welke oefening is een voorbeeld van een open keten?",
+      "answer": "Leg extension",
+      "distractors": [
+        "Squat",
+        "Lunge",
+        "Push-up"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-15",
+      "region": "basis",
+      "prompt": "Hoe bereken je het moment?",
+      "answer": "Kracht × afstand",
+      "distractors": [
+        "Kracht ÷ afstand",
+        "Massa × snelheid",
+        "Afstand ÷ tijd"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-16",
+      "region": "basis",
+      "prompt": "Wat gebeurt er bij dezelfde kracht en een langere momentarm?",
+      "answer": "Het moment wordt groter",
+      "distractors": [
+        "Het moment wordt kleiner",
+        "Het moment blijft gelijk",
+        "De kracht verdwijnt"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-17",
+      "region": "basis",
+      "prompt": "Waar piekt een bell-shaped weerstandscurve?",
+      "answer": "In het midden van de beweging",
+      "distractors": [
+        "Aan het begin",
+        "Aan het eind",
+        "Overal even hoog"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-18",
+      "region": "basis",
+      "prompt": "Wat is actieve insufficiëntie?",
+      "answer": "Moeite om over meerdere gewrichten tegelijk te verkorten",
+      "distractors": [
+        "Moeite om één gewricht te strekken",
+        "Moeite om over meerdere gewrichten tegelijk te verlengen",
+        "Volledig verlies van spanning"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "basis"
+      }
+    },
+    {
+      "id": "concept-19",
+      "region": "borst",
+      "prompt": "Welke borstvezels krijgen meer accent bij 30° incline?",
+      "answer": "De bovenste borstvezels",
+      "distractors": [
+        "Alleen de onderste borstvezels",
+        "Alleen de triceps",
+        "Alleen de achterste deltoideus"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "borst"
+      }
+    },
+    {
+      "id": "concept-20",
+      "region": "borst",
+      "prompt": "Welke rotator-cuffspier zorgt volgens de tabel voor endorotatie?",
+      "answer": "Subscapularis",
+      "distractors": [
+        "Infraspinatus",
+        "Teres minor",
+        "Supraspinatus"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "borst"
+      }
+    },
+    {
+      "id": "concept-21",
+      "region": "rug",
+      "prompt": "Waarop ligt het accent bij een row met ellebogen dicht bij de romp?",
+      "answer": "Latissimus dorsi",
+      "distractors": [
+        "Rectus femoris",
+        "Voorste deltoideus",
+        "Gastrocnemius"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "rug"
+      }
+    },
+    {
+      "id": "concept-22",
+      "region": "rug",
+      "prompt": "Welke beweging van de schouder hoort bij een lat prayer?",
+      "answer": "Retroflexie",
+      "distractors": [
+        "Anteflexie",
+        "Verticale abductie",
+        "Elevatie"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "rug"
+      }
+    },
+    {
+      "id": "concept-23",
+      "region": "armen",
+      "prompt": "Welke onderarmbeweging staat bij de bicepsfunctie?",
+      "answer": "Supinatie",
+      "distractors": [
+        "Pronatie",
+        "Dorsaalflexie",
+        "Plantairflexie"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "armen"
+      }
+    },
+    {
+      "id": "concept-24",
+      "region": "armen",
+      "prompt": "Welke bicepspositie benadrukt een bovenarm achter de romp?",
+      "answer": "De verlengde positie",
+      "distractors": [
+        "De verkorte positie",
+        "Alleen de middenpositie",
+        "Een isometrische positie"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "armen"
+      }
+    },
+    {
+      "id": "concept-25",
+      "region": "armen",
+      "prompt": "Welke tricepskop wordt in een overhead-startpositie verlengd?",
+      "answer": "De lange kop",
+      "distractors": [
+        "Alleen de laterale kop",
+        "Alleen de mediale kop",
+        "Geen van de koppen"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "armen"
+      }
+    },
+    {
+      "id": "concept-26",
+      "region": "core",
+      "prompt": "Welke spier behoort tot de inner core unit?",
+      "answer": "Transversus abdominis",
+      "distractors": [
+        "Pectoralis major",
+        "Latissimus dorsi",
+        "Gluteus maximus"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "core"
+      }
+    },
+    {
+      "id": "concept-27",
+      "region": "core",
+      "prompt": "Welke romprotatie hoort bij de externe obliques?",
+      "answer": "Contralaterale rotatie",
+      "distractors": [
+        "Ipsilaterale rotatie",
+        "Alleen exorotatie van de schouder",
+        "Alleen endorotatie van de heup"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "core"
+      }
+    },
+    {
+      "id": "concept-28",
+      "region": "core",
+      "prompt": "Welk moment moet de romp overwinnen bij een Pallof press?",
+      "answer": "Een rotatiemoment",
+      "distractors": [
+        "Een flexiemoment",
+        "Een elevatiemoment",
+        "Een plantairflexiemoment"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "core"
+      }
+    },
+    {
+      "id": "concept-29",
+      "region": "core",
+      "prompt": "Welk moment moet de romp overwinnen bij een side plank?",
+      "answer": "Een lateroflexiemoment",
+      "distractors": [
+        "Een rotatiemoment",
+        "Een schouderflexiemoment",
+        "Een kniestrekmoment"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "core"
+      }
+    },
+    {
+      "id": "concept-30",
+      "region": "heup",
+      "prompt": "Welke spier krijgt het accent bij cable side kicks?",
+      "answer": "Gluteus medius",
+      "distractors": [
+        "Biceps brachii",
+        "Rectus abdominis",
+        "Soleus"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "heup"
+      }
+    },
+    {
+      "id": "concept-31",
+      "region": "heup",
+      "prompt": "Welke heupbeweging hoort bij een barbell hip thrust?",
+      "answer": "Retroflexie",
+      "distractors": [
+        "Abductie",
+        "Endorotatie",
+        "Adductie"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "heup"
+      }
+    },
+    {
+      "id": "concept-32",
+      "region": "heup",
+      "prompt": "Wat gebeurt er bij een kleinere heuphoek volgens het heuphoofdstuk?",
+      "answer": "Meer rek op gluteus maximus",
+      "distractors": [
+        "Minder rek op gluteus maximus",
+        "Alleen meer knie-extensie",
+        "Alleen meer schouderelevatie"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "heup"
+      }
+    },
+    {
+      "id": "concept-33",
+      "region": "quads",
+      "prompt": "Welke quadricepsspier werkt ook over de heup?",
+      "answer": "Rectus femoris",
+      "distractors": [
+        "Vastus medialis",
+        "Vastus lateralis",
+        "Vastus intermedius"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "quads"
+      }
+    },
+    {
+      "id": "concept-34",
+      "region": "quads",
+      "prompt": "Welke kniehoek geeft volgens het quadhoofdstuk meer rek?",
+      "answer": "Een kleinere kniehoek",
+      "distractors": [
+        "Een grotere kniehoek",
+        "Iedere kniehoek geeft dezelfde rek",
+        "Alleen een volledig gestrekte knie"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "quads"
+      }
+    },
+    {
+      "id": "concept-35",
+      "region": "quads",
+      "prompt": "Welke beweging isoleert de quads bij een leg extension?",
+      "answer": "Knie-extensie",
+      "distractors": [
+        "Heup-extensie",
+        "Knie-flexie",
+        "Enkel-plantairflexie"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "quads"
+      }
+    },
+    {
+      "id": "concept-36",
+      "region": "hamstrings",
+      "prompt": "Welke twee patronen trainen de hamstrings?",
+      "answer": "Heupstrekking en kniebuiging",
+      "distractors": [
+        "Heupbuiging en kniestrekking",
+        "Heupabductie en kniebuiging",
+        "Schouderstrekking en enkelbuiging"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "hamstrings"
+      }
+    },
+    {
+      "id": "concept-37",
+      "region": "hamstrings",
+      "prompt": "Welke leg curl traint volgens de cheatsheet de verlengde positie?",
+      "answer": "Seated leg curl",
+      "distractors": [
+        "Lying leg curl",
+        "Beide alleen de verkorte positie",
+        "Geen van beide"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "hamstrings"
+      }
+    },
+    {
+      "id": "concept-38",
+      "region": "hamstrings",
+      "prompt": "Welke knierotatie staat bij biceps femoris?",
+      "answer": "Exorotatie",
+      "distractors": [
+        "Endorotatie",
+        "Geen rotatie",
+        "Alleen supinatie van de onderarm"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "hamstrings"
+      }
+    },
+    {
+      "id": "concept-39",
+      "region": "kuiten",
+      "prompt": "Waarom geeft een seated calf raise meer accent aan de soleus?",
+      "answer": "De gastrocnemius is al verkort over de gebogen knie",
+      "distractors": [
+        "De soleus werkt niet bij een gestrekte knie",
+        "De gastrocnemius is maximaal verlengd",
+        "De achillespees wordt uitgeschakeld"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "kuiten"
+      }
+    },
+    {
+      "id": "concept-40",
+      "region": "kuiten",
+      "prompt": "Welke beweging brengt de kuitspieren op rek?",
+      "answer": "Dorsaalflexie",
+      "distractors": [
+        "Plantairflexie",
+        "Heup-abductie",
+        "Schouder-retractie"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "kuiten"
+      }
+    },
+    {
+      "id": "concept-41",
+      "region": "kuiten",
+      "prompt": "Waarom pauzeren in de meest gerekte kuitpositie?",
+      "answer": "Om veren via de achillespees te minimaliseren",
+      "distractors": [
+        "Om de knie volledig te buigen",
+        "Om de gastrocnemius uit te schakelen",
+        "Om alle spierspanning los te laten"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "kuiten"
+      }
+    },
+    {
+      "id": "concept-42",
+      "region": "patronen",
+      "prompt": "Met welke contractiefase begint een squat?",
+      "answer": "Excentrisch",
+      "distractors": [
+        "Concentrisch",
+        "Zonder spiercontractie",
+        "Altijd isometrisch"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "patronen"
+      }
+    },
+    {
+      "id": "concept-43",
+      "region": "patronen",
+      "prompt": "Wat kenmerkt een hinge ten opzichte van een squat?",
+      "answer": "Grote heupbeweging en kleinere kniebeweging",
+      "distractors": [
+        "Grote kniebeweging en vrijwel geen heupbeweging",
+        "Alleen beweging in de onderrug",
+        "Geen beweging in de heup"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "patronen"
+      }
+    },
+    {
+      "id": "concept-44",
+      "region": "patronen",
+      "prompt": "Wat is een stripper squat?",
+      "answer": "De knieën strekken eerst, de heup pas daarna",
+      "distractors": [
+        "De heup en knie strekken gelijktijdig",
+        "De ellebogen blijven hoog",
+        "De stang blijft boven de middenvoet"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "patronen"
+      }
+    },
+    {
+      "id": "concept-45",
+      "region": "patronen",
+      "prompt": "Welke drie punten verdelen de voetdruk?",
+      "answer": "Grote teen, kleine teen en hiel",
+      "distractors": [
+        "Alleen hiel en enkel",
+        "Alleen de tenen",
+        "Binnenenkel, buitenenkel en knie"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "patronen"
+      }
+    },
+    {
+      "id": "concept-46",
+      "region": "patronen",
+      "prompt": "Waarom houd je bij een RDL de stang dichtbij?",
+      "answer": "Voor een kortere momentarm op de onderrug",
+      "distractors": [
+        "Voor een langere momentarm op de onderrug",
+        "Om de knie maximaal te buigen",
+        "Om rompspanning te vermijden"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "patronen"
+      }
+    },
+    {
+      "id": "concept-47",
+      "region": "patronen",
+      "prompt": "Wat is een veelvoorkomend energielek bij een squat?",
+      "answer": "De knie valt naar binnen",
+      "distractors": [
+        "Gelijkmatige voetdruk",
+        "Een verticale bar path",
+        "Een stabiele romp"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "patronen"
+      }
+    },
+    {
+      "id": "concept-48",
+      "region": "patronen",
+      "prompt": "Wat doet de scapula bij een push-up volgens de cheatsheet?",
+      "answer": "Ze beweegt ook in protractie",
+      "distractors": [
+        "Ze blijft volledig gefixeerd",
+        "Ze beweegt alleen in depressie",
+        "Ze heeft geen rol"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "patronen"
+      }
+    },
+    {
+      "id": "concept-49",
+      "region": "patronen",
+      "prompt": "Welke positie hoort bij het einde van een row?",
+      "answer": "Retractie en depressie van het schouderblad",
+      "distractors": [
+        "Protractie en elevatie",
+        "Alleen endorotatie",
+        "Flexie van de onderrug"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "patronen"
+      }
+    },
+    {
+      "id": "concept-50",
+      "region": "patronen",
+      "prompt": "Welk energielek kan optreden bij verticaal duwen?",
+      "answer": "Lateroflexie van de romp",
+      "distractors": [
+        "Een neutrale onderrug",
+        "De pols boven de elleboog",
+        "Externe schouderrotatie"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "patronen"
+      }
+    },
+    {
+      "id": "concept-51",
+      "region": "patronen",
+      "prompt": "Wanneer maakt meer stabiliteit een oefening nuttiger?",
+      "answer": "Als balans de set stopt vóór spierfalen van de doelspier",
+      "distractors": [
+        "Als je iedere spieractiviteit wilt vermijden",
+        "Als stabiliteit altijd het enige doel is",
+        "Als je alle weerstand wilt wegnemen"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "patronen"
+      }
+    },
+    {
+      "id": "concept-52",
+      "region": "groei",
+      "prompt": "Wat betekent hypertrofie?",
+      "answer": "Toename van de grootte van de spier",
+      "distractors": [
+        "Alleen toename van het aantal botten",
+        "Verkorting van een pees",
+        "Verlies van contractiele eiwitten"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "groei"
+      }
+    },
+    {
+      "id": "concept-53",
+      "region": "groei",
+      "prompt": "Welke eiwitten worden genoemd bij myofibrillaire hypertrofie?",
+      "answer": "Actine en myosine",
+      "distractors": [
+        "Insuline en glucagon",
+        "Keratin en melanine",
+        "Albumine en hemoglobine"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "groei"
+      }
+    },
+    {
+      "id": "concept-54",
+      "region": "groei",
+      "prompt": "Welk weekvolume noemt de cheatsheet als optimaal?",
+      "answer": "Ongeveer 12–20 sets per spier",
+      "distractors": [
+        "Ongeveer 1–2 sets per spier",
+        "Ongeveer 40–60 sets per spier",
+        "Altijd precies 5 sets per spier"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "groei"
+      }
+    },
+    {
+      "id": "concept-55",
+      "region": "groei",
+      "prompt": "Wat is MEV?",
+      "answer": "De laagste hoeveelheid volume die genoeg prikkel geeft",
+      "distractors": [
+        "Het hoogste herstelbare volume",
+        "Een maximale herhaling",
+        "Een type excentrische contractie"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "groei"
+      }
+    },
+    {
+      "id": "concept-56",
+      "region": "groei",
+      "prompt": "Wat is een microcyclus volgens de cheatsheet?",
+      "answer": "Eén trainingsweek",
+      "distractors": [
+        "Eén losse set",
+        "Eén kalenderjaar",
+        "Vier tot twaalf maanden"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "groei"
+      }
+    },
+    {
+      "id": "concept-57",
+      "region": "groei",
+      "prompt": "Hoe lang is een mesocyclus volgens de cheatsheet?",
+      "answer": "4–12 microcycli",
+      "distractors": [
+        "1–2 herhalingen",
+        "Altijd één dag",
+        "25–35 trainingsjaren"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "groei"
+      }
+    },
+    {
+      "id": "concept-58",
+      "region": "groei",
+      "prompt": "Welke afstand tot spierfalen noemt de cheatsheet?",
+      "answer": "RIR 0–4",
+      "distractors": [
+        "RIR 10–15",
+        "Altijd RIR 0",
+        "Altijd RIR 8"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "groei"
+      }
+    },
+    {
+      "id": "concept-59",
+      "region": "groei",
+      "prompt": "Waarom hoeft niet iedere set tot volledig falen?",
+      "answer": "Het kost herstel en kan ten koste gaan van het totaalvolume",
+      "distractors": [
+        "Sets vóór falen tellen nooit mee",
+        "Het maakt spieren altijd kleiner",
+        "Het verhindert iedere adaptatie"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "groei"
+      }
+    },
+    {
+      "id": "concept-60",
+      "region": "groei",
+      "prompt": "Wat is een genoemde methode van progressie?",
+      "answer": "Beter presteren binnen dezelfde rep-range",
+      "distractors": [
+        "Iedere week alle oefeningen vervangen",
+        "Altijd minder gewicht gebruiken",
+        "Iedere set verder van falen stoppen"
+      ],
+      "type": "choice",
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "groei"
+      }
+    },
+    {
+      "id": "pectoralis-recognition",
+      "region": "borst",
+      "muscleId": "pectoralis",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Pectoralis major",
+      "distractors": [
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Pectoralis major"
+      }
+    },
+    {
+      "id": "delt-front-recognition",
+      "region": "borst",
+      "muscleId": "delt-front",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Deltoideus · voorste kop",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · voorste kop"
+      }
+    },
+    {
+      "id": "delt-mid-recognition",
+      "region": "borst",
+      "muscleId": "delt-mid",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Deltoideus · middelste kop",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · middelste kop"
+      }
+    },
+    {
+      "id": "delt-back-recognition",
+      "region": "borst",
+      "muscleId": "delt-back",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Deltoideus · achterste kop",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Deltoideus · achterste kop"
+      }
+    },
+    {
+      "id": "serratus-recognition",
+      "region": "borst",
+      "muscleId": "serratus",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Serratus anterior",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Serratus anterior"
+      }
+    },
+    {
+      "id": "pec-minor-recognition",
+      "region": "borst",
+      "muscleId": "pec-minor",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Pectoralis minor",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Pectoralis minor"
+      }
+    },
+    {
+      "id": "lats-recognition",
+      "region": "rug",
+      "muscleId": "lats",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Latissimus dorsi",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Latissimus dorsi"
+      }
+    },
+    {
+      "id": "traps-upper-recognition",
+      "region": "rug",
+      "muscleId": "traps-upper",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Trapezius · boven",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · boven"
+      }
+    },
+    {
+      "id": "traps-mid-recognition",
+      "region": "rug",
+      "muscleId": "traps-mid",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Trapezius · midden",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · midden"
+      }
+    },
+    {
+      "id": "traps-lower-recognition",
+      "region": "rug",
+      "muscleId": "traps-lower",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Trapezius · onder",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Trapezius · onder"
+      }
+    },
+    {
+      "id": "rhomboids-recognition",
+      "region": "rug",
+      "muscleId": "rhomboids",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Rhomboideus",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Rhomboideus"
+      }
+    },
+    {
+      "id": "biceps-recognition",
+      "region": "armen",
+      "muscleId": "biceps",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Biceps brachii",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Biceps brachii"
+      }
+    },
+    {
+      "id": "brachialis-recognition",
+      "region": "armen",
+      "muscleId": "brachialis",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Brachialis",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Brachialis"
+      }
+    },
+    {
+      "id": "triceps-recognition",
+      "region": "armen",
+      "muscleId": "triceps",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Triceps brachii",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Triceps brachii"
+      }
+    },
+    {
+      "id": "rectus-abd-recognition",
+      "region": "core",
+      "muscleId": "rectus-abd",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Rectus abdominis",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Rectus abdominis"
+      }
+    },
+    {
+      "id": "oblique-ext-recognition",
+      "region": "core",
+      "muscleId": "oblique-ext",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Externe obliques",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Externe obliques"
+      }
+    },
+    {
+      "id": "oblique-int-recognition",
+      "region": "core",
+      "muscleId": "oblique-int",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Interne obliques",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Interne obliques"
+      }
+    },
+    {
+      "id": "transversus-recognition",
+      "region": "core",
+      "muscleId": "transversus",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Transversus abdominis",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Transversus abdominis"
+      }
+    },
+    {
+      "id": "ql-recognition",
+      "region": "core",
+      "muscleId": "ql",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Quadratus lumborum",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Quadratus lumborum"
+      }
+    },
+    {
+      "id": "erector-recognition",
+      "region": "core",
+      "muscleId": "erector",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Erector spinae",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Erector spinae"
+      }
+    },
+    {
+      "id": "iliopsoas-recognition",
+      "region": "core",
+      "muscleId": "iliopsoas",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Iliopsoas",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Iliopsoas"
+      }
+    },
+    {
+      "id": "glute-max-recognition",
+      "region": "heup",
+      "muscleId": "glute-max",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Gluteus maximus",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gluteus maximus"
+      }
+    },
+    {
+      "id": "glute-med-recognition",
+      "region": "heup",
+      "muscleId": "glute-med",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Gluteus medius & minimus",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gluteus medius & minimus"
+      }
+    },
+    {
+      "id": "tfl-recognition",
+      "region": "heup",
+      "muscleId": "tfl",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Tensor fasciae latae",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Tensor fasciae latae"
+      }
+    },
+    {
+      "id": "adductors-recognition",
+      "region": "heup",
+      "muscleId": "adductors",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Adductoren",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Adductoren"
+      }
+    },
+    {
+      "id": "rectus-fem-recognition",
+      "region": "quads",
+      "muscleId": "rectus-fem",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Rectus femoris",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Rectus femoris"
+      }
+    },
+    {
+      "id": "vasti-recognition",
+      "region": "quads",
+      "muscleId": "vasti",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Vastus medialis / lateralis / intermedius",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Vastus medialis / lateralis / intermedius"
+      }
+    },
+    {
+      "id": "biceps-fem-recognition",
+      "region": "hamstrings",
+      "muscleId": "biceps-fem",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Biceps femoris",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Semimembranosus / semitendinosus",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Biceps femoris"
+      }
+    },
+    {
+      "id": "semis-recognition",
+      "region": "hamstrings",
+      "muscleId": "semis",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Semimembranosus / semitendinosus",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Semimembranosus / semitendinosus"
+      }
+    },
+    {
+      "id": "soleus-recognition",
+      "region": "kuiten",
+      "muscleId": "soleus",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Soleus",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Gastrocnemius"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Soleus"
+      }
+    },
+    {
+      "id": "gastrocnemius-recognition",
+      "region": "kuiten",
+      "muscleId": "gastrocnemius",
+      "type": "recognition",
+      "prompt": "Welke spier is paars gemarkeerd?",
+      "answer": "Gastrocnemius",
+      "distractors": [
+        "Pectoralis major",
+        "Deltoideus · voorste kop",
+        "Deltoideus · middelste kop",
+        "Deltoideus · achterste kop",
+        "Serratus anterior",
+        "Pectoralis minor",
+        "Latissimus dorsi",
+        "Trapezius · boven",
+        "Trapezius · midden",
+        "Trapezius · onder",
+        "Rhomboideus",
+        "Biceps brachii",
+        "Brachialis",
+        "Triceps brachii",
+        "Rectus abdominis",
+        "Externe obliques",
+        "Interne obliques",
+        "Transversus abdominis",
+        "Quadratus lumborum",
+        "Erector spinae",
+        "Iliopsoas",
+        "Gluteus maximus",
+        "Gluteus medius & minimus",
+        "Tensor fasciae latae",
+        "Adductoren",
+        "Rectus femoris",
+        "Vastus medialis / lateralis / intermedius",
+        "Biceps femoris",
+        "Semimembranosus / semitendinosus",
+        "Soleus"
+      ],
+      "source": {
+        "title": "Anatomie & Biomechanica · Milo module 6.6",
+        "section": "Gastrocnemius"
+      }
+    }
+  ],
+  "license": "CC-BY-SA-4.0"
+}

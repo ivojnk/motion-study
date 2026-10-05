@@ -1,0 +1,73 @@
+# MotionStudy
+
+Learn anatomy and biomechanics with an interactive 3D body and short quiz
+lessons. Works in desktop and mobile browsers.
+
+**Webapp:** https://ivojnk.github.io/motion-study/
+
+## What you can do
+
+- Explore real Z-Anatomy muscles and skeleton, rotate and zoom, select a muscle,
+  highlight it and isolate it.
+- Study 31 muscle cards and 192 questions across eleven chapters.
+- Practise ten-question lessons with feedback and one retry per wrong question.
+- Review questions with increasing intervals and resume an unfinished lesson.
+- Use the keyboard: arrows and +/− control the model, 1–4 answer quiz questions.
+
+Progress stays in your browser. There is no account, analytics, cloud storage
+or live AI request. Clearing site data clears your progress.
+
+## Run locally
+
+Requires Node 22.12 or newer.
+
+```sh
+npm ci
+npm test
+npm run dev
+```
+
+Open http://127.0.0.1:5173. Use `npm run build` and `npm run preview`
+to inspect the production build.
+
+The public question bank is checked in. A clean clone builds without the
+original study PDF or any private file. An optional local
+`npm run curriculum:import` rebuilds it from a private
+`sources/course.txt` file. That file is ignored.
+
+## Sources
+
+The model exports come from
+[nqwrc/3d-anatomy](https://github.com/nqwrc/3d-anatomy), based on
+[Z-Anatomy](https://www.z-anatomy.com/) and
+[BodyParts3D](https://lifesciencedb.jp/bp3d/).
+The learning topics follow the supplied Anatomie-Biomechanica-Cheatsheet,
+Milo module 6.6. Question references link to that document. The full PDF and
+extracted source passages are not redistributed.
+
+See [ATTRIBUTION.md](ATTRIBUTION.md) for exact credits, immutable model
+provenance, modifications and the license breakdown. Original software:
+MIT. Anatomy assets and original question-bank contributions: CC BY-SA.
+Third-party components retain their own terms.
+
+## Deployment and checks
+
+GitHub Actions runs the tests and builds the app. Pushes to `main` deploy
+to GitHub Pages. The workflow sets `BASE_PATH=/motion-study/`; asset and
+license URLs support that project subpath. To host at another subpath, set
+`BASE_PATH` when building. Use the same `BASE_PATH` for local preview.
+
+Tests cover question integrity, chapter coverage, real anatomical mesh
+mappings, asset provenance, review scheduling and invalid stored progress.
+Browser checks cover desktop and 320/390px mobile layouts, quiz feedback,
+reload, keyboard controls and 3D selection.
+
+## Current limits
+
+The question bank spans the course chapters and is not an exhaustive exam
+syllabus. Questions recall the supplied course rather than providing
+personal training or medical advice.
+
+The imported atlas has no animation rig. Exercise animation remains a future
+stage requiring a licensed rig and validated muscle deformation. This version
+has a functional interactive atlas and quiz, without exercise playback.
