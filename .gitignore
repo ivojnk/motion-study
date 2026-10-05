@@ -7,3 +7,9 @@ task_plan.md
 findings.md
 progress.md
 .env*
+
+.task-backup/
+.data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
