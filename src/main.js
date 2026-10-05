@@ -49,7 +49,7 @@ function save(rewards = false) {
 function focusLessonContent() {
   if ($('#result-title')) { window.scrollTo(0, 0); $('#result-title').focus({ preventScroll: true }); }
   else if (window.matchMedia('(max-width:620px)').matches && document.querySelector('.question-hint')) {
-    $('#model-prompt').focus({ preventScroll: true }); $('.atlas-panel').scrollIntoView({ block: 'start' });
+    $('#question-title').focus({ preventScroll: true }); $('.question-card').scrollIntoView({ block: 'start' });
   } else $('#question-title')?.focus();
 }
 function dueCount() {
@@ -66,14 +66,27 @@ function gameMarkup() {
   return '<div class="game-bar" aria-label="Je leerbeloningen"><span>' + icon('sparkles') + '<strong>' + stats.xp + ' XP</strong></span><span>' + icon('refresh') + '<strong>' + stats.streak + (stats.streak === 1 ? ' dag streak' : ' dagen streak') + '</strong></span><span>' + game.completed.length + '/33 levels</span></div><div class="goal-card"><div><strong>Dagdoel</strong><span>' + Math.min(stats.today, DAILY_GOAL) + '/' + DAILY_GOAL + ' XP' + (stats.today >= DAILY_GOAL ? ' · gehaald!' : '') + '</span></div><progress max="' + DAILY_GOAL + '" value="' + Math.min(stats.today, DAILY_GOAL) + '" aria-label="Dagdoel in XP"></progress><p>Goed antwoord: 5 XP. Les afgerond: 10 XP. Haal elke dag je doel voor je streak.</p></div>';
 }
 function renderHome() {
+  restoreAtlasLayout();
   intro('Een level dichter bij <em>begrip.</em>', 'Volg je leerpad. Ontdek, oefen en laat zien wat je weet.');
   const levels = levelPath(game);
   const current = levels.find(level => !level.done);
   const due = dueCount();
-  $('#learning').innerHTML = gameMarkup() + '<div class="daily-card"><span class="eyebrow">' + (current ? 'JOUW VOLGENDE STAP' : 'LEERPAD AFGEROND') + '</span><h2>' + (current ? escape(current.topic.title) : 'Blijf je kennis oefenen.') + '</h2><p>' + (current ? current.label + ' · level ' + (current.stage + 1) + ' van 3' : 'Je hebt alle checkpoints gehaald. Tijd voor een gemengde les.') + '</p><button class="primary" ' + (current ? 'data-level="' + current.id + '"' : 'data-start="daily"') + '>' + (session && !session.finished && session.levelId === current?.id ? 'Ga verder' : 'Start je level') + icon('arrow-right') + '</button></div><div class="section-heading"><h2>Jouw leerpad</h2><span>11 hoofdstukken · 33 levels</span></div><div class="learning-path">' + topics.map((topic, chapter) => '<section class="path-chapter"><div class="chapter-heading"><span>' + (chapter + 1) + '</span><div><h3>' + topic.title + '</h3><p>' + topic.subtitle + '</p></div></div><ol>' + levels.filter(level => level.topic.id === topic.id).map(level => '<li class="path-step ' + (level.done ? 'done' : level.locked ? 'locked' : 'current') + '"><button class="level-node" data-level="' + level.id + '" ' + (level.locked ? 'disabled' : '') + ' aria-label="' + escape(topic.title + ': ' + level.label + (level.done ? ', voltooid, opnieuw oefenen' : level.locked ? ', vergrendeld' : ', volgende level')) + '">' + (level.done ? icon('check') : level.stage === 2 ? icon('target') : icon(topic.icon)) + '</button><span><strong>' + level.label + '</strong><small>' + (level.done ? 'Voltooid · oefen opnieuw' : level.locked ? 'Rond de vorige level af' : 'Klaar om te starten') + '</small></span></li>').join('') + '</ol></section>').join('') + '</div><div class="practice-actions"><button class="primary" data-start="daily">Gemengde les</button><button class="text-button" data-start="review" ' + (!due ? 'disabled' : '') + '>Herhalen (' + due + ')</button></div><p class="privacy-note">Levels openen bij minstens 80% goed op de eerste poging. De atlas en gemengde lessen blijven vrij toegankelijk.</p>';
+  $('#learning').innerHTML = gameMarkup() + '<div class="daily-card"><span class="eyebrow">' + (current ? 'JOUW VOLGENDE STAP' : 'LEERPAD AFGEROND') + '</span><h2>' + (current ? escape(current.topic.title) : 'Blijf je kennis oefenen.') + '</h2><p>' + (current ? current.label + ' · level ' + (current.stage + 1) + ' van 3' : 'Je hebt alle checkpoints gehaald. Tijd voor een gemengde les.') + '</p><button class="primary" ' + (current ? 'data-level="' + current.id + '"' : 'data-start="daily"') + '>' + (session && !session.finished && session.levelId === current?.id ? 'Ga verder' : 'Start je level') + icon('arrow-right') + '</button></div><a class="atlas-shortcut" href="#atlas">' + icon('stretch') + '<span><strong>Verken de 3D-atlas</strong><small>Bekijk alle spieren en hun functies</small></span>' + icon('arrow-right') + '</a><div class="section-heading"><h2>Jouw leerpad</h2><span>11 hoofdstukken · 33 levels</span></div><div class="learning-path">' + topics.map((topic, chapter) => '<section class="path-chapter"><div class="chapter-heading"><span>' + (chapter + 1) + '</span><div><h3>' + topic.title + '</h3><p>' + topic.subtitle + '</p></div></div><ol>' + levels.filter(level => level.topic.id === topic.id).map(level => '<li class="path-step ' + (level.done ? 'done' : level.locked ? 'locked' : 'current') + '"><button class="level-node" data-level="' + level.id + '" ' + (level.locked ? 'disabled' : '') + ' aria-label="' + escape(topic.title + ': ' + level.label + (level.done ? ', voltooid, opnieuw oefenen' : level.locked ? ', vergrendeld' : ', volgende level')) + '">' + (level.done ? icon('check') : level.stage === 2 ? icon('target') : icon(topic.icon)) + '</button><span><strong>' + level.label + '</strong><small>' + (level.done ? 'Voltooid · oefen opnieuw' : level.locked ? 'Rond de vorige level af' : 'Klaar om te starten') + '</small></span></li>').join('') + '</ol></section>').join('') + '</div><div class="practice-actions"><button class="primary" data-start="daily">Gemengde les</button><button class="text-button" data-start="review" ' + (!due ? 'disabled' : '') + '>Herhalen (' + due + ')</button></div><p class="privacy-note">Levels openen bij minstens 80% goed op de eerste poging. De atlas en gemengde lessen blijven vrij toegankelijk.</p>';
   resetAtlas();
 }
+function restoreAtlasLayout() {
+  const workspace = $('.workspace');
+  if (workspace) workspace.append($('.atlas-panel'));
+}
+function arrangeModelQuestion() {
+  restoreAtlasLayout();
+  const answers = $('.question-card .answers');
+  if (window.matchMedia('(max-width:620px)').matches && $('.question-hint') && answers) {
+    answers.before($('.atlas-panel'));
+  }
+}
 function resetAtlas() {
+  restoreAtlasLayout();
   $('#model-prompt')?.setAttribute('hidden', '');
   $('#muscle-select').disabled = false;
   $('#muscle-select').value = '';
@@ -141,6 +154,7 @@ function choosePair(id, side) {
   document.querySelector('[data-side="' + sideToFocus + '"]:not(:disabled)')?.focus();
 }
 function renderLesson() {
+  restoreAtlasLayout();
   const [, region = 'daily', stage] = route.split('/');
   const levelId = stage !== undefined ? region + ':' + stage : null;
   if (!session || session.region !== region || session.levelId !== levelId) { start(region, levelId); return; }
@@ -176,6 +190,7 @@ function renderLesson() {
   const modelPrompt = $('#model-prompt');
   modelPrompt.hidden = q.type !== 'recognition';
   modelPrompt.textContent = mode === 'point' ? 'Wijs ' + q.answer + ' aan.' : 'Welke spier is paars gemarkeerd?';
+  arrangeModelQuestion();
 }
 
 function answer(index, pickedMuscle = null) {
@@ -227,6 +242,7 @@ function finish() {
     const stats = gameStats(game);
     intro(passed ? 'Level <em>gehaald!</em>' : 'Goed <em>geoefend.</em>', passed ? 'Je volgende stap is nu open.' : 'Elke poging helpt. Bekijk wat je nu al weet.', 'LES AFGEROND');
     const nextLevel = levelPath(game).find(level => !level.done);
+    restoreAtlasLayout();
     $('#learning').innerHTML = '<div class="result-card celebration"><span class="result-icon">' + icon(passed ? 'target' : 'check') + '</span><h2 id="result-title" tabindex="-1">' + (passed ? 'Een stap verder!' : 'Les afgerond!') + '</h2><div class="reward-xp">+' + (session.xp || 0) + ' XP</div><div class="result-metrics"><span><strong>' + session.correct + '/' + session.answered + '</strong> goed met herhalingen</span><span><strong>' + (session.firstCorrect || 0) + '/' + (session.initialCount || session.ids.length) + '</strong> eerste poging</span></div><p>' + (session.levelId && !passed ? 'Voor dit level heb je minstens 80% goed op de eerste poging nodig. Probeer het opnieuw wanneer je er klaar voor bent.' : 'Je kennis groeit. Je herhalingen komen terug zodra het tijd is.') + '</p><div class="goal-result">' + (stats.today >= DAILY_GOAL ? 'Dagdoel gehaald · ' + stats.streak + (stats.streak === 1 ? ' dag streak' : ' dagen streak') : 'Nog ' + (DAILY_GOAL - stats.today) + ' XP tot je dagdoel') + '</div><button class="primary" ' + (session.levelId && !passed ? 'data-level="' + session.levelId + '"' : nextLevel ? 'data-level="' + nextLevel.id + '"' : 'data-start="daily"') + '>' + (session.levelId && !passed ? 'Oefen dit level opnieuw' : 'Volgende les') + icon('arrow-right') + '</button><a class="text-link" href="#leren">Terug naar je leerpad</a></div>';
 
     resetAtlas();
@@ -257,6 +273,7 @@ function showMuscle(id, originalName) {
   if (route === 'atlas') renderAtlas(card);
 }
 function renderAtlas(card = null) {
+  restoreAtlasLayout();
   intro('Ontdek de spieren <em>in 3D.</em>', 'Ontdek een spier in 3D en verbind wat je ziet met wat je moet weten.', 'JOUW ANATOMIE-ATLAS');
   if (!card) {
     $('#learning').innerHTML = '<article class="explore-card"><span class="tag">31 SPIERKAARTEN</span><h2>Van plaatje naar begrip.</h2><p>Kies een spier in het model of in de lijst. Je ziet de functie, oorsprong, aanhechting en maximale rek uit je lesmateriaal.</p><div class="atlas-muscles">' + curriculum.cards.map(c => '<button class="muscle-chip" data-muscle="' + c.id + '">' + escape(c.name) + '</button>').join('') + '</div></article>'; return;
@@ -264,6 +281,7 @@ function renderAtlas(card = null) {
   $('#learning').innerHTML = '<article class="explore-card"><span class="tag">' + escape(topics.find(t => t.id === card.region).title) + '</span><h2 id="muscle-card-title" tabindex="-1">' + escape(card.name) + '</h2><dl>' + Object.entries(card.fields).map(([field, value]) => '<div><dt>' + escape(field) + '</dt><dd>' + escape(value) + '</dd></div>').join('') + '</dl>' + sourceMarkup(card.source) + '<button class="primary" data-start="' + card.region + '">Oefen dit hoofdstuk ' + icon('arrow-right') + '</button><button class="text-button" id="all-muscles">Alle spierkaarten</button></article>';
 }
 function renderProgress() {
+  restoreAtlasLayout();
   intro('Kijk eens hoe ver je <em>komt.</em>', 'Bekijk wat je hebt geoefend en welke vragen aan herhaling toe zijn. Vragen die je vaker goed beantwoordt, komen minder snel terug.', 'JOUW VOORTGANG');
   const seen = Object.keys(progress.questions).length;
   const due = dueCount();
@@ -320,6 +338,7 @@ $('#bones').addEventListener('change', async event => {
 });
 $('#isolate').addEventListener('change', event => viewer?.setIsolated(event.target.checked));
 window.addEventListener('hashchange', navigate);
+window.matchMedia('(max-width:620px)').addEventListener('change', arrangeModelQuestion);
 window.addEventListener('storage', event => {
   if ([PROGRESS_KEY, GAME_KEY].includes(event.key)) { refreshProgress(); if (route === 'leren') renderHome(); else if (route === 'voortgang') renderProgress(); }
 });
