@@ -62,7 +62,7 @@ function app(data = {}, locks, options = {}) {
   const context = { ...learning, ...progression, ...motivation, ...groups, ...lessonModels, choicePalette, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean, Event,
     location: { hash: '', reload() { reloads++; } }, navigator: locks ? { locks } : {},
     document: { body: { classList: { toggle(name, active) { if (active) bodyClasses.add(name); else bodyClasses.delete(name); } } }, querySelector, querySelectorAll: () => [], dispatchEvent(event) { events.push({ type: event.type, html: node('#learning').innerHTML }); } },
-    window: { localStorage: storage, motionStudyAnalytics: { lessonFinished: session => analyticsEvents.push(session) }, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
+    window: { localStorage: storage, motionStudyAnalytics: { lessonFinished: session => analyticsEvents.push(session) }, scrollTo() {}, requestAnimationFrame(callback) { callback(); }, matchMedia: () => ({ matches: false }) } };
   vm.createContext(context);
   vm.runInContext(source, context);
   const api = context.api;
@@ -591,6 +591,30 @@ test('switching to mixed practice and browser history preserve independent lesso
 });
 
 const homeCard = instance => instance.html().split('<div class="study-status">')[0];
+test('home keeps earlier chapter lessons open above the current chapter and preserves saved progress', () => {
+  const levels = learning.levelPath({ completed: [] });
+  const currentIndex = levels.findIndex(level => level.topic.id === 'rug');
+  const data = { [learning.GAME_KEY]: JSON.stringify({ days: {}, completed: levels.slice(0, currentIndex).map(level => level.id) }) };
+  const instance = app(data);
+  instance.startLesson('rug', levels[currentIndex].id); instance.play(); instance.next();
+  const saved = JSON.stringify(data);
+  instance.go('#leren');
+  const chapters = [...instance.html().matchAll(/<details class="path-chapter([^"]*)"\s*(open)?>([\s\S]*?)<\/details>/g)];
+  assert.equal(chapters.length, learning.topics.length);
+  assert.doesNotMatch(instance.html(), /earlier-chapters|Eerdere hoofdstukken/);
+  chapters.forEach((chapter, index) => {
+    assert.ok(chapter[3].includes('Hoofdstuk ' + (index + 1) + '</span>'));
+    assert.ok(chapter[3].includes('data-level="' + learning.topics[index].id + ':'));
+    assert.equal(Boolean(chapter[2]), index <= 2);
+    assert.equal(chapter[1].includes('active-chapter'), index === 2);
+  });
+  assert.equal(JSON.stringify(data), saved);
+  const restored = app(data); restored.go('#leren');
+  assert.equal(restored.html(), instance.html());
+  continueHomeLesson(restored);
+  assert.equal(JSON.stringify(restored.read().session), JSON.stringify(instance.read().session));
+});
+
 function continueHomeLesson(instance) {
   const card = homeCard(instance);
   const levelId = card.match(/data-level="([^"]+)"/)?.[1];
