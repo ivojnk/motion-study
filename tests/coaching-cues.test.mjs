@@ -39,7 +39,7 @@ test('added lessons preserve every original lesson including its review fillers'
   }
   const extra = newPath.filter(level => !oldPath.some(old => old.id === level.id));
   assert.equal(extra.length, 7);
-  assert.equal(extra.filter(level => !level.locked).length, 1);
+  assert.equal(extra.filter(level => !level.locked).length, new Set(extra.map(level => level.topic.id)).size);
   assert.ok(extra.every(level => !level.done));
   assert.deepEqual(new Set(extra.flatMap(level => levelQuestions(coachingCurriculum, level.topic.id, level.stage).map(q => q.id))), new Set(additions.map(q => q.id)));
 });

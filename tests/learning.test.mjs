@@ -106,10 +106,10 @@ test('XP calendar streak survives reload, crosses month boundary and expires aft
   assert.equal(dayKey(time), '2026-10-01');
   assert.deepEqual(readGame({getItem: () => '{"days":{"bad":100,"2026-10-01":-2},"completed":["fake"]}'}), empty);
 });
-test('short lessons cover the whole course and unlock only after every question is corrected', () => {
+test('every chapter starts independently and its lessons unlock only after every question is corrected', () => {
   const empty = { days: {}, completed: [] };
   assert.equal(levelPath(empty).length, topics.reduce((count, topic) => count + [undefined, 'supplement', 'course-detail'].reduce((sum, kind) => sum + Math.ceil(curriculum.questions.filter(q => q.region === topic.id && q.source.kind === kind).length / LESSON_SIZE), 0), 0));
-  assert.equal(levelPath(empty).filter(level => !level.locked).length, 1);
+  assert.equal(levelPath(empty).filter(level => !level.locked).length, topics.length);
   assert.deepEqual(completeLevel(empty, 'basis:0', 0, 0), empty);
   assert.deepEqual(completeLevel(empty, 'basis:0', NaN, 7), empty);
   assert.deepEqual(completeLevel(empty, 'basis:0', 7, Infinity), empty);
@@ -122,6 +122,15 @@ test('short lessons cover the whole course and unlock only after every question 
   assert.equal(completeLevel(first, 'basis:0', 5, 5).completed.length, 1);
   for (const topic of topics) {
     const lessons = levelPath(empty).filter(level => level.topic.id === topic.id);
+    assert.equal(lessons[0].locked, false);
+    assert.ok(lessons.slice(1).every(level => level.locked));
+    const completed = completeLevel(empty, lessons[0].id, 7, 7);
+    assert.deepEqual(completed.completed, [lessons[0].id]);
+    assert.deepEqual(empty, { days: {}, completed: [] });
+    const updated = levelPath(completed).filter(level => level.topic.id === topic.id);
+    assert.equal(updated[0].done, true);
+    if (updated[1]) assert.equal(updated[1].locked, false);
+    assert.ok(levelPath(completed).filter(level => level.topic.id !== topic.id && level.stage === 0).every(level => !level.done && !level.locked));
     const chapter = curriculum.questions.filter(q => q.region === topic.id);
     assert.equal(lessons.length, [undefined, 'supplement', 'course-detail'].reduce((count, kind) => count + Math.ceil(chapter.filter(q => q.source.kind === kind).length / LESSON_SIZE), 0));
     const partitions = lessons.flatMap(level => {

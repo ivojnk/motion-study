@@ -36,7 +36,7 @@ test('new detail lessons preserve all existing lessons and require their own com
   const extra = newPath.filter(level => !oldIds.has(level.id));
   assert.equal(extra.length, 6);
   assert.ok(extra.every(level => !level.done));
-  assert.equal(extra.filter(level => !level.locked).length, 1);
+  assert.equal(extra.filter(level => !level.locked).length, new Set(extra.map(level => level.topic.id)).size);
   const reached = new Set(extra.flatMap(level => {
     const queue = levelQuestions(curriculum.questions, level.topic.id, level.stage);
     assert.equal(queue.length, 7);

@@ -9,8 +9,8 @@ exercise selection and training principles from Milo module 6.6.
 
 ## Get started
 
-Open the app on your phone, tablet or computer and start the first available
-lesson on your learning path. The static version opens straight into the app,
+Open the app on your phone, tablet or computer and choose any chapter on your
+learning path. The static version opens straight into the app,
 with no account or usage statistics.
 
 In the account version, choose a username and acknowledge the privacy and usage
@@ -20,8 +20,8 @@ your username can sign in with it.
 
 ## Study and review
 
-Work through 13 chapters in short lessons. Complete each lesson and correct
-its mistakes to unlock the next one.
+Choose any of the 13 chapters, in any order. Within each chapter, complete each
+short lesson and correct its mistakes to unlock the next one.
 
 You'll answer multiple-choice questions, recognise highlighted muscles and
 exercises, and practise recalling answers without hints. Short typed answers
