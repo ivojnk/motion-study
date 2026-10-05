@@ -366,12 +366,12 @@ export function gameStats(game, now = Date.now()) {
   return { today: game.days[today] || 0, xp: Object.values(game.days).reduce((sum, xp) => sum + xp, 0), streak };
 }
 export function levelPath(game, questions = curriculum.questions) {
-  const levels = topics.flatMap(topic => {
+  return topics.flatMap(topic => {
     const count = chapterPools(questions, topic.id).reduce((total, pool) => total + Math.ceil(pool.length / LESSON_SIZE), 0);
-    return Array.from({ length: count }, (_, stage) => ({ id: topic.id + ':' + stage, topic, stage, count, label: 'Les ' + (stage + 1) }));
+    const levels = Array.from({ length: count }, (_, stage) => ({ id: topic.id + ':' + stage, topic, stage, count, label: 'Les ' + (stage + 1) }));
+    const first = levels.findIndex(level => !game.completed.includes(level.id));
+    return levels.map((level, index) => ({ ...level, done: game.completed.includes(level.id), locked: first !== -1 && index > first }));
   });
-  const first = levels.findIndex(level => !game.completed.includes(level.id));
-  return levels.map((level, index) => ({ ...level, done: game.completed.includes(level.id), locked: first !== -1 && index > first }));
 }
 // Fill a topic's final lesson with earlier material, so it still has seven
 // questions. Very small review pools repeat due questions rather than new facts.

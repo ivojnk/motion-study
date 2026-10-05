@@ -591,6 +591,43 @@ test('switching to mixed practice and browser history preserve independent lesso
 });
 
 const homeCard = instance => instance.html().split('<div class="study-status">')[0];
+test('every chapter is startable from the home path before any earlier chapter is complete', () => {
+  const instance = app(); instance.go('#leren');
+  for (const topic of learning.topics) {
+    const button = instance.html().match(new RegExp('<button class="level-node" data-level="' + topic.id + ':0"[^>]*>'));
+    assert.ok(button, topic.id);
+    assert.doesNotMatch(button[0], /disabled|vergrendeld/);
+    instance.startLesson(topic.id, topic.id + ':0');
+    assert.equal(instance.read().session.levelId, topic.id + ':0');
+    assert.equal(instance.read().session.region, topic.id);
+    assert.equal(instance.read().session.finished, false);
+    assert.equal(instance.read().game.completed.length, 0);
+    instance.go('#leren');
+  }
+});
+
+test('out-of-order chapters complete and resume while earlier chapter drafts and XP are retained', () => {
+  const instance = app(); instance.startLesson(); instance.play(); instance.next();
+  const earlier = JSON.stringify(instance.read().session);
+  const last = learning.topics.at(-1).id;
+  instance.startLesson(last, last + ':0'); instance.play(); instance.next();
+  const later = JSON.stringify(instance.read().session);
+  const earned = xp(instance);
+  instance.go('#leren');
+  assert.match(homeCard(instance), new RegExp('data-level="' + last + ':0"'));
+  const restored = app(instance.data); restored.go('#leren'); continueHomeLesson(restored);
+  assert.equal(JSON.stringify(restored.read().session), later);
+  assert.equal(xp(restored), earned);
+  while (!restored.read().session.finished) { restored.play(); restored.next(); }
+  assert.equal(restored.read().game.completed.join(','), last + ':0');
+  restored.go('#les/basis/0');
+  assert.equal(JSON.stringify(restored.read().session), earlier);
+  assert.ok(xp(restored) > earned);
+  const path = learning.levelPath(restored.read().game);
+  assert.equal(path.find(level => level.id === 'basis:0').locked, false);
+  assert.equal(path.find(level => level.id === last + ':1').locked, false);
+});
+
 test('home keeps earlier chapter lessons open above the current chapter and preserves saved progress', () => {
   const levels = learning.levelPath({ completed: [] });
   const currentIndex = levels.findIndex(level => level.topic.id === 'rug');
