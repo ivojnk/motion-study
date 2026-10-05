@@ -9,6 +9,9 @@ lessons. Works in desktop and mobile browsers.
 
 - Explore real Z-Anatomy muscles and skeleton, rotate and zoom, select a muscle,
   highlight it and isolate it.
+- Tap near a muscle to preview nearby choices with matching colours and symbols.
+  Ambiguous taps zoom into the area. Choice buttons hide muscle names; confirm
+  with “Deze bedoel ik” or restore the previous view with “Opnieuw kiezen”.
 - Study 31 muscle cards and 593 questions across eleven chapters.
 - Search all questions and answers by chapter, with a PDF page reference for every question.
   See [COURSE_COVERAGE.md](COURSE_COVERAGE.md) for the source coverage checklist.
