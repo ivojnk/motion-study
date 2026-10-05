@@ -17,14 +17,14 @@ const source = main.split("document.addEventListener('click'")[0].replace(/^impo
 function app(data) {
  const nodes = new Map(); const listeners = new Map();
  const node = selector => { if (!nodes.has(selector)) nodes.set(selector, { innerHTML: '', focus() {}, setAttribute() {}, scrollIntoView() {} }); return nodes.get(selector); };
- const fixed = new Set(['#learning', '#intro', '#model-prompt', '#muscle-select', '#isolate', '#orientation', '#selection-card', '.atlas-panel', '#credits']);
+ const fixed = new Set(['#learning', '#intro', '#model-prompt', '#isolate', '#orientation', '#selection-card', '.atlas-panel', '#credits']);
  const querySelector = selector => fixed.has(selector) || selector.startsWith('#') && node('#learning').innerHTML.includes(`id="${selector.slice(1)}"`) ? node(selector) : null;
  const storage = { getItem: key => data[key] || null, setItem: (key, value) => { data[key] = value; } };
  const context = { ...learning, ...progression, ...motivation, ...groups, ...lessonModels, choicePalette, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
  location: { hash: '' }, navigator: {}, document: { querySelector, querySelectorAll: () => [], addEventListener(type, listener) { listeners.set(type, listener); } },
  window: { localStorage: storage, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
  vm.createContext(context); vm.runInContext(source, context);
- vm.runInContext(main.slice(main.indexOf("document.addEventListener('submit'"), main.indexOf("$('#muscle-select').addEventListener")), context);
+ vm.runInContext(main.slice(main.indexOf("document.addEventListener('submit'"), main.indexOf("$('#bones').addEventListener")), context);
  return { ...context.api, data, node, html: () => node('#learning').innerHTML, fire: (type, event) => listeners.get(type)(event), go(hash) { context.location.hash = hash; context.api.navigate(); } };
 }
 function lesson(q, mode, extra = {}) {
@@ -69,7 +69,7 @@ test('highlighted-muscle recall exposes no choice/name and suppresses model name
  const instance = lesson(recognition, 'recognition-open');
  assert.doesNotMatch(instance.html(), /data-answer=/); assert.doesNotMatch(instance.html(), new RegExp(recognition.answer));
  assert.doesNotMatch(instance.node('#selection-card').innerHTML, new RegExp(recognition.answer));
- assert.equal(instance.node('#muscle-select').disabled, true); assert.equal(instance.selected()[2], true); assert.equal(instance.selected()[3], true);
+ assert.equal(instance.selected()[2], true); assert.equal(instance.selected()[3], true);
  instance.showMuscle(recognition.muscleId, recognition.answer); assert.doesNotMatch(instance.node('#selection-card').innerHTML, new RegExp(recognition.answer));
  instance.updateOpenDraft(recognition.answer); instance.submitOpenAnswer(); assert.equal(instance.read().session.correct, 1); assert.equal(xp(instance), 5);
 });

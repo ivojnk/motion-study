@@ -130,6 +130,7 @@ progress::-moz-progress-bar { background: var(--accent); border-radius: 2px; }
 .atlas-controls { font-size: 12px; padding: 12px 24px; gap: 24px; border-top-color: var(--line); }
 .atlas-controls label { min-height: 44px; }
 .selection-card { margin: 0 24px 16px; padding: 16px 0 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; }
+.selection-card:empty { display: none; }
 .selection-card .eyebrow { font-size: 11px; }
 .selection-card h3 { font-size: 24px; margin: 8px 0; }
 .selection-card p { font-size: 13px; }

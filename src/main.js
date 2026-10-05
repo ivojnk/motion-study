@@ -212,14 +212,12 @@ function resetAtlas() {
   restoreAtlasLayout();
   $('.atlas-panel').hidden = false;
   $('#model-prompt')?.setAttribute('hidden', '');
-  $('#muscle-select').disabled = false;
-  $('#muscle-select').value = '';
   $('#isolate').disabled = false;
   viewer?.setIsolated($('#isolate').checked);
   viewer?.setPickingEnabled?.(true);
   viewer?.select(null);
   setOrientation('front');
-  $('#selection-card').innerHTML = '<h3>Kies een spier</h3>';
+  $('#selection-card').innerHTML = '';
 }
 function start(region, levelId = null) {
   pendingPointSelection = null;
@@ -428,12 +426,10 @@ function renderLesson({ preserveCamera = false } = {}) {
     (response ? feedbackMarkup(q, isCorrect, answerCheck) : isOpenExercise(mode) ? openAnswerActionsMarkup(mode, recognitionBlocked) : '') +
     '</article>';
   const card = curriculum.cards.find(c => c.id === q.muscleId);
-  $('#muscle-select').disabled = !response;
   $('#isolate').disabled = false;
   if (mode === 'model-choice') {
     if (modelChoices) viewer?.showModelChoices?.(modelChoices.map(card => card.id), card?.view || 'front', preserveCamera);
     if (!preserveCamera) setOrientation(card?.view || 'front');
-    $('#muscle-select').disabled = true;
     $('#selection-card').innerHTML = response ? '<h3>' + escape(modelChoiceLabel(session.options.indexOf(q.answer))) + '</h3><p>' + escape(q.answer) + '</p>' : '';
   } else if (combination) {
     if (preserveCamera) viewer?.highlight(q.muscleIds, null, q.highlightPatterns);
@@ -441,7 +437,6 @@ function renderLesson({ preserveCamera = false } = {}) {
       viewer?.select(q.muscleIds, q.view, true, true, q.highlightPatterns);
       setOrientation(q.view);
     }
-    $('#muscle-select').disabled = true;
     $('#selection-card').innerHTML = response ? '<h3>Gemarkeerde spieren</h3><p>' + escape(highlightedMuscleNames(q)) + '</p>' : '';
   } else if (modelContext) {
     if (preserveCamera) viewer?.highlight(modelContext.muscleIds);
@@ -449,7 +444,6 @@ function renderLesson({ preserveCamera = false } = {}) {
       viewer?.select(modelContext.muscleIds, modelContext.view, false);
       setOrientation(modelContext.view);
     }
-    $('#muscle-select').disabled = true;
     $('#selection-card').innerHTML = response ? '<h3>Gemarkeerde spieren</h3><p>' + escape(modelContext.muscleIds.map(id => curriculum.cards.find(card => card.id === id)?.name).join(', ')) + '</p>' : '';
   } else if (card) {
     if (mode === 'point' && pendingPointSelection && !response) viewer?.highlight(pendingPointSelection.muscleId, pendingPointSelection.anatomyName);
@@ -457,7 +451,7 @@ function renderLesson({ preserveCamera = false } = {}) {
     else viewer?.select(card.id, card.view, q.type === 'recognition' && mode !== 'point', mode !== 'point' || Boolean(response));
     if (!preserveCamera) setOrientation(card.view || 'front');
     $('#selection-card').innerHTML = response ? cardMarkup(card) : '';
-  } else { resetAtlas(); $('#muscle-select').disabled = !response; }
+  } else { resetAtlas(); }
   const modelPrompt = $('#model-prompt');
   modelPrompt.hidden = true;
   modelPrompt.textContent = '';
@@ -596,7 +590,6 @@ function showMuscle(id, originalName, confirmed = false) {
     viewer?.select(card.id, card.view);
     setOrientation(card.view || 'front');
   }
-  $('#muscle-select').value = card.id;
   $('#selection-card').innerHTML = cardMarkup(card);
   if (route === 'atlas') renderAtlas(card);
 }
@@ -710,7 +703,6 @@ document.addEventListener('keydown', event => {
     if (button && !button.disabled) { event.preventDefault(); chooseAnswer(Number(button.dataset.answer)); }
   }
 });
-$('#muscle-select').addEventListener('change', event => event.target.value ? showMuscle(event.target.value) : resetAtlas());
 $('#bones').addEventListener('change', async event => {
   try { await viewer?.showSkeleton(event.target.checked); }
   catch { event.target.checked = false; $('#viewer-status').hidden = false; $('#viewer-status').textContent = 'Skelet laden mislukt. Zet Skelet tonen opnieuw aan.'; }
@@ -729,16 +721,11 @@ $('.atlas-top').after(modelPrompt);
 viewerFullscreen = setupViewerFullscreen({ document, window, onClose: arrangeModelQuestion });
 if (session?.levelId && location.hash === '#les/' + session.region) history.replaceState(null, '', location.hash + '/' + session.stage);
 navigate();
-for (const card of curriculum.cards) {
-  const option = document.createElement('option');
-  option.value = card.id; option.textContent = card.name; $('#muscle-select').append(option);
-}
 async function initViewer() {
   try {
     const { createViewer } = await import('./viewer.js');
     viewer = await createViewer($('#body'), showMuscle, () => { $('#viewer-status').hidden = true; });
     viewer.setIsolated($('#isolate').checked);
-    for (const option of $('#muscle-select').options) if (option.value && !viewer.available.has(option.value)) option.disabled = true;
     if (route.startsWith('les/')) renderLesson();
     await viewer.showSkeleton($('#bones').checked);
   } catch {
