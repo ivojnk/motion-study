@@ -10,10 +10,11 @@ const source = fs.readFileSync(new URL('../src/main.js', import.meta.url), 'utf8
   .split("document.addEventListener('click'")[0]
   .replace(/^import .*;\n/gm, '')
   .replaceAll('import.meta.env.BASE_URL', "'/'") + `
-  globalThis.api = { start, answer, next, finish, choosePair, renderLesson, navigate,
-    read: () => ({ session, game, progress, route }),
+  globalThis.api = { start, answer, next, finish, choosePair, renderLesson, navigate, chooseAnswer, confirmPointSelection, showMuscle,
+    read: () => ({ session, game, progress, route, pendingPointSelection }),
     prepare: () => { session = { ...session, prepared: true }; save(); renderLesson(); },
-    viewerReady: () => { viewer = { available: new Set(curriculum.cards.map(c => c.id)), select() {}, setIsolated() {} }; }
+    viewerReady: () => { viewer = { available: new Set(curriculum.cards.map(c => c.id)), select() {}, highlight(...args) { globalThis.lastHighlight = args; }, setIsolated() {} }; },
+    lastHighlight: () => globalThis.lastHighlight
   };`;
 
 function controlledLocks() {
@@ -47,13 +48,125 @@ function app(data = {}, locks) {
   vm.createContext(context);
   vm.runInContext(source, context);
   const api = context.api;
-  return { ...api, data, storage, html: () => node('#learning').innerHTML,
+  return { ...api, data, storage, html: () => node('#learning').innerHTML, element: node,
     startLesson(region = 'basis', levelId = 'basis:0') { api.start(region, levelId); api.navigate(); api.prepare(); },
     go(hash) { context.location.hash = hash; api.navigate(); },
     play(correct = true) { const session = api.read().session; const q = curriculum.questions.find(q => q.id === session.ids[session.index]); return api.answer(session.options.indexOf(correct ? q.answer : q.distractors[0])); }
   };
 }
 const xp = instance => learning.gameStats(learning.readGame(instance.storage)).xp;
+
+test('point questions clear isolation, keep answer buttons available and restore controls after grading or navigation', () => {
+  const q = curriculum.questions.find(q => q.type === 'recognition' && q.muscleId === 'pectoralis');
+  const session = { ids: [q.id, q.id], index: 1, correct: 0, answered: 1, retryIds: [], region: q.region,
+    options: learning.optionsFor(q), response: null, finished: false, prepared: true, pairingDone: true };
+  const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) });
+  instance.viewerReady();
+  instance.element('#isolate').checked = true;
+  instance.go('#les/' + q.region);
+  assert.equal(instance.element('#isolate').disabled, true);
+  assert.equal(instance.element('#isolate').checked, false);
+  const answers = [...instance.html().matchAll(/<button[^>]*data-answer="[^"]*"[^>]*>/g)].map(match => match[0]);
+  assert.equal(answers.length, 4);
+  assert.ok(answers.every(button => !button.includes('disabled')));
+  instance.play();
+  assert.equal(instance.element('#isolate').disabled, false);
+  instance.go('#atlas');
+  assert.equal(instance.element('#isolate').disabled, false);
+  assert.equal(instance.element('#isolate').checked, false);
+});
+
+function pointLesson(locks) {
+  const q = curriculum.questions.find(q => q.type === 'recognition' && q.muscleId === 'pectoralis');
+  const session = { ids: [q.id, q.id, q.id], index: 1, correct: 0, answered: 1, retryIds: [], region: q.region,
+    options: learning.optionsFor(q), response: null, finished: false, prepared: true, pairingDone: true };
+  const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) }, locks);
+  instance.viewerReady(); instance.go('#les/' + q.region);
+  return { instance, q };
+}
+
+test('model taps highlight a changeable choice and only confirmation grades it', () => {
+  const { instance, q } = pointLesson();
+  assert.match(instance.html(), /id="confirm-answer"[^>]*disabled/);
+  instance.confirmPointSelection();
+  assert.equal(instance.read().session.response, null);
+  const wrong = curriculum.cards.find(card => card.id !== q.muscleId);
+  instance.showMuscle(wrong.id, 'Original mesh name');
+  assert.equal(instance.read().pendingPointSelection.response, wrong.name);
+  assert.equal(instance.read().session.response, null);
+  assert.equal(instance.read().session.answered, 1);
+  assert.equal(xp(instance), 0);
+  assert.equal(instance.element('#confirm-answer').disabled, false);
+  assert.equal(instance.lastHighlight()[0], wrong.id);
+  instance.showMuscle(q.muscleId, 'Target mesh');
+  instance.confirmPointSelection(); instance.confirmPointSelection();
+  assert.equal(instance.read().session.response, q.answer);
+  assert.equal(instance.read().session.answered, 2);
+  assert.equal(instance.read().session.correct, 1);
+  assert.equal(xp(instance), 5);
+  assert.equal(instance.read().pendingPointSelection, null);
+});
+
+test('answer button choices use the same preview and confirmation flow', () => {
+  const { instance, q } = pointLesson();
+  const index = instance.read().session.options.indexOf(q.answer);
+  instance.chooseAnswer(index);
+  assert.equal(instance.read().session.response, null);
+  assert.equal(instance.read().pendingPointSelection.response, q.answer);
+  assert.equal(instance.lastHighlight()[0], q.muscleId);
+  assert.match(instance.element('#point-selection-status').textContent, /Je kunt je keuze nog wijzigen/);
+  instance.renderLesson();
+  assert.match(instance.html(), /class="answer selected" aria-pressed="true"/);
+  assert.doesNotMatch(instance.html(), /id="confirm-answer"[^>]*disabled/);
+  instance.confirmPointSelection();
+  assert.equal(instance.read().session.response, q.answer);
+});
+
+test('unmapped mesh taps preview the exact structure and are graded only after confirmation', () => {
+  const { instance } = pointLesson();
+  instance.showMuscle(null, 'Small anatomical muscle');
+  assert.equal(instance.read().session.response, null);
+  assert.equal(instance.lastHighlight()[0], null);
+  assert.equal(instance.lastHighlight()[1], 'Small anatomical muscle');
+  instance.confirmPointSelection();
+  assert.equal(instance.read().session.response, 'Small anatomical muscle');
+  assert.equal(instance.read().session.correct, 0);
+  assert.equal(instance.read().session.retryIds.length, 1);
+  assert.equal(xp(instance), 0);
+});
+
+test('skip, navigation and reload discard unconfirmed point choices without rewards', () => {
+  const { instance, q } = pointLesson();
+  instance.showMuscle(q.muscleId);
+  const reloaded = app(instance.data); reloaded.viewerReady(); reloaded.go('#les/' + q.region);
+  assert.equal(reloaded.read().pendingPointSelection, null);
+  assert.equal(reloaded.read().session.response, null);
+  instance.go('#atlas');
+  assert.equal(instance.read().pendingPointSelection, null);
+  instance.confirmPointSelection();
+  assert.equal(xp(instance), 0);
+  instance.go('#les/' + q.region); instance.showMuscle(q.muscleId); instance.next(true);
+  assert.equal(instance.read().pendingPointSelection, null);
+  instance.confirmPointSelection();
+  assert.equal(instance.read().session.response, null);
+  assert.equal(instance.read().session.index, 2);
+  assert.equal(xp(instance), 0);
+});
+
+test('queued point confirmations award once and cannot grade a replacement question', async () => {
+  const locks = controlledLocks();
+  const { instance, q } = pointLesson(locks);
+  instance.showMuscle(q.muscleId);
+  instance.confirmPointSelection(); instance.confirmPointSelection();
+  await locks.drain();
+  assert.equal(xp(instance), 5);
+  assert.equal(instance.read().session.answered, 2);
+  const next = pointLesson(locks).instance;
+  next.showMuscle(q.muscleId); next.confirmPointSelection(); next.next(true);
+  await locks.drain();
+  assert.equal(xp(next), 0);
+  assert.equal(next.read().session.response, null);
+});
 
 test('answer double clicks, feedback reload and result revisits never duplicate rewards', () => {
   let instance = app(); instance.startLesson(); instance.play(); instance.play();
@@ -62,17 +175,19 @@ test('answer double clicks, feedback reload and result revisits never duplicate 
   assert.ok(instance.read().session.response); assert.equal(xp(instance), 5);
   instance.next();
   while (!instance.read().session.finished) { instance.play(); instance.next(); }
-  assert.equal(xp(instance), 40); assert.equal(instance.read().game.completed.join(','), 'basis:0');
-  instance.finish(); assert.equal(xp(instance), 40);
-  instance = app(instance.data); instance.go('#les/basis/0'); assert.equal(xp(instance), 40);
+  const completedXP = instance.read().session.initialCount * 5 + 10;
+  assert.equal(xp(instance), completedXP); assert.equal(instance.read().game.completed.join(','), 'basis:0');
+  instance.finish(); assert.equal(xp(instance), completedXP);
+  instance = app(instance.data); instance.go('#les/basis/0'); assert.equal(xp(instance), completedXP);
 });
 
 test('retry success does not pass a failed first attempt and all skips earn nothing', () => {
   const instance = app(); instance.startLesson();
   const count = instance.read().session.initialCount;
-  for (let index = 0; index < count; index++) { instance.play(index >= 2); instance.next(); }
+  const wrongCount = Math.floor(count * 0.2) + 1;
+  for (let index = 0; index < count; index++) { instance.play(index >= wrongCount); instance.next(); }
   while (!instance.read().session.finished) { instance.play(); instance.next(); }
-  assert.equal(instance.read().session.firstCorrect, count - 2);
+  assert.equal(instance.read().session.firstCorrect, count - wrongCount);
   assert.equal(instance.read().game.completed.length, 0);
   const skipped = app(); skipped.startLesson();
   while (!skipped.read().session.finished) skipped.next(true);

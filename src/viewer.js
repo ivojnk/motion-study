@@ -4,6 +4,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { acceleratedRaycast, computeBoundsTree } from 'three-mesh-bvh';
 import { muscleForMesh } from './data/muscles.js';
+import { bindTapSelection } from './tap-selection.js';
 
 export async function createViewer(canvas, onSelect, onStatus) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
@@ -53,6 +54,7 @@ export async function createViewer(canvas, onSelect, onStatus) {
   let skeleton = null;
   let skeletonPromise = null;
   let selected = null;
+  let selectedAnatomyName = null;
   let isolated = false;
   const muscleMeshes = [];
   const available = new Set();
@@ -95,17 +97,27 @@ export async function createViewer(canvas, onSelect, onStatus) {
     render();
   }
   view('front');
+  function isSelected(mesh) {
+    return selected ? mesh.userData.courseMuscleId === selected : Boolean(selectedAnatomyName && mesh.userData.anatomyName === selectedAnatomyName);
+  }
   function updateMaterials() {
+    const hasSelection = Boolean(selected || selectedAnatomyName);
     for (const mesh of muscleMeshes) {
-      const active = selected && mesh.userData.courseMuscleId === selected;
-      mesh.visible = !isolated || !selected || active;
-      mesh.material = active ? focusMaterial : selected ? dimMaterial : muscleMaterial;
+      const active = isSelected(mesh);
+      mesh.visible = !isolated || !hasSelection || active;
+      mesh.material = active ? focusMaterial : hasSelection ? dimMaterial : muscleMaterial;
       mesh.renderOrder = active ? 10 : 0;
     }
     render();
   }
+  function highlight(id, anatomyName = null) {
+    selected = id || null;
+    selectedAnatomyName = id ? null : anatomyName || null;
+    updateMaterials();
+  }
   function select(id, direction = 'front', focus = false, highlight = true) {
     selected = highlight ? id : null;
+    selectedAnatomyName = null;
     updateMaterials();
     const selectedBox = new THREE.Box3();
     if (focus && id) muscleMeshes.filter(mesh => mesh.userData.courseMuscleId === id).forEach(mesh => selectedBox.expandByObject(mesh));
@@ -113,14 +125,12 @@ export async function createViewer(canvas, onSelect, onStatus) {
   }
   const raycaster = new THREE.Raycaster();
   raycaster.firstHitOnly = true;
-  let pointerStart = null;
-  canvas.addEventListener('pointerdown', event => { pointerStart = [event.clientX, event.clientY]; });
-  canvas.addEventListener('pointerup', event => {
-    if (!pointerStart || Math.hypot(event.clientX - pointerStart[0], event.clientY - pointerStart[1]) > 6) return;
+  const unbindTapSelection = bindTapSelection(canvas, event => {
     const rect = canvas.getBoundingClientRect();
     raycaster.setFromCamera(new THREE.Vector2(2 * (event.clientX - rect.left) / rect.width - 1, 1 - 2 * (event.clientY - rect.top) / rect.height), camera);
     const hits = raycaster.intersectObjects(muscleMeshes.filter(mesh => mesh.visible), false);
-    const hit = hits[0]?.object;
+    // Picking follows the highlighted overlay visible through outer layers.
+    const hit = hits.find(({ object }) => isSelected(object))?.object || hits[0]?.object;
     if (hit) onSelect(hit.userData.courseMuscleId, hit.userData.anatomyName);
   });
   canvas.addEventListener('keydown', event => {
@@ -152,6 +162,6 @@ export async function createViewer(canvas, onSelect, onStatus) {
     render();
   }
   onStatus('ready');
-  return { available, select, view, render, showSkeleton, setIsolated(value) { isolated = value; updateMaterials(); },
-    dispose() { observer.disconnect(); controls.dispose(); draco.dispose(); if (frame !== null) cancelAnimationFrame(frame); scene.traverse(n => n.geometry?.dispose()); [muscleMaterial, boneMaterial, focusMaterial, dimMaterial].forEach(m => m.dispose()); renderer.dispose(); } };
+  return { available, select, highlight, view, render, showSkeleton, setIsolated(value) { isolated = value; updateMaterials(); },
+    dispose() { unbindTapSelection(); observer.disconnect(); controls.dispose(); draco.dispose(); if (frame !== null) cancelAnimationFrame(frame); scene.traverse(n => n.geometry?.dispose()); [muscleMaterial, boneMaterial, focusMaterial, dimMaterial].forEach(m => m.dispose()); renderer.dispose(); } };
 }

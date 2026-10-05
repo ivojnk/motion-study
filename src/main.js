@@ -12,6 +12,7 @@ let progress = readProgress(storage);
 let game = readGame(storage);
 let pairSelection = null;
 let pairMessage = "";
+let pendingPointSelection = null;
 let session = null;
 let viewer = null;
 let route = '';
@@ -86,17 +87,20 @@ function arrangeModelQuestion() {
   }
 }
 function resetAtlas() {
+  pendingPointSelection = null;
   restoreAtlasLayout();
   $('#model-prompt')?.setAttribute('hidden', '');
   $('#muscle-select').disabled = false;
   $('#muscle-select').value = '';
   $('#isolate').checked = false;
+  $('#isolate').disabled = false;
   viewer?.setIsolated(false);
   viewer?.select(null);
   $('#orientation').textContent = 'VOORZIJDE';
   $('#selection-card').innerHTML = '<span class="eyebrow">BEGIN MET ONTDEKKEN</span><h3>Tik een spier aan</h3><p>Draai het lichaam en ontdek hoe alles samenwerkt.</p>';
 }
 function start(region, levelId = null) {
+  pendingPointSelection = null;
   refreshProgress();
   if (levelId && !levelPath(game).some(level => level.id === levelId && !level.locked)) return;
   if (!session || session.region !== region || session.finished || session.levelId !== levelId) {
@@ -170,20 +174,28 @@ function renderLesson() {
   const title = topics.find(t => t.id === session.region)?.title || (session.region === 'review' ? 'Even opfrissen' : 'Je dagelijkse tien');
   intro(title + '.', 'Oefen de vragen en bekijk daarna de uitleg uit je lesstof.', 'VRAAG ' + (session.index + 1) + ' VAN ' + session.ids.length);
   const mode = exerciseFor(q, session.index);
+  if (mode !== 'point' || pendingPointSelection?.questionId !== q.id || pendingPointSelection?.index !== session.index || session.response) pendingPointSelection = null;
   const response = session.response;
   const isCorrect = response === q.answer;
   const recognitionBlocked = q.type === 'recognition' && !viewer?.available.has(q.muscleId);
   $('#learning').innerHTML = '<div class="lesson-top"><a href="#leren">← Leerpad</a><span>' + session.correct + ' goed · ' + (session.xp || 0) + ' XP</span></div><progress class="lesson-progress" max="' + session.ids.length + '" value="' + session.index + '" aria-label="Lesvoortgang"></progress>' +
     '<article class="question-card"><span class="tag">' + (mode === 'point' ? 'WIJS DE SPIER AAN' : mode === 'binary' ? 'KLOPT DIT ANTWOORD?' : q.type === 'recognition' ? 'HERKEN DE SPIER' : q.muscleId ? 'SPIERKENNIS' : 'BEGRIJP DE BEWEGING') + '</span><h2 tabindex="-1" id="question-title">' + escape(mode === 'point' ? 'Wijs ' + q.answer + ' aan.' : q.prompt) + '</h2>' +
-    (q.type === 'recognition' ? '<p class="question-hint">' + (mode === 'point' ? 'Tik de gevraagde spier aan in het lichaam. Je kunt ook een antwoordknop gebruiken.' : 'Bekijk de paarse spier in het 3D-model. Je mag het lichaam draaien en de spier isoleren.') + '</p>' : '') +
+    (q.type === 'recognition' ? '<p class="question-hint">' + (mode === 'point' ? 'Tik een spier aan om die paars te markeren. Controleer je keuze en bevestig je antwoord. Je kunt ook een antwoordknop gebruiken.' : 'Bekijk de paarse spier in het 3D-model. Je mag het lichaam draaien en de spier isoleren.') + '</p>' : '') +
     (recognitionBlocked ? '<p role="status">Het 3D-model is nog niet beschikbaar. Wacht even of sla deze vraag over.</p>' : '') +
-    (mode === 'binary' ? '<div class="statement"><span>Voorgesteld antwoord</span><p>' + escape(session.options[0]) + '</p></div>' : '') + '<div class="answers">' + (mode === 'binary' ? binaryResponses(q, session.options) : session.options).map((option, i) => '<button data-key="' + (i + 1) + '" data-answer="' + session.options.indexOf(option) + '" class="answer ' + (response ? option === q.answer ? 'correct' : option === response ? 'incorrect' : '' : '') + '" ' + (response || recognitionBlocked ? 'disabled' : '') + '><span class="answer-key">' + (i + 1) + '</span><span>' + (mode === 'binary' ? (i === 0 ? 'Klopt' : 'Klopt niet') : escape(option)) + '</span>' + (response && option === q.answer ? icon('check') : '') + '</button>').join('') + '</div>' +
+    (mode === 'binary' ? '<div class="statement"><span>Voorgesteld antwoord</span><p>' + escape(session.options[0]) + '</p></div>' : '') + '<div class="answers">' + (mode === 'binary' ? binaryResponses(q, session.options) : session.options).map((option, i) => '<button data-key="' + (i + 1) + '" data-answer="' + session.options.indexOf(option) + '" class="answer ' + (response ? option === q.answer ? 'correct' : option === response ? 'incorrect' : '' : mode === 'point' && pendingPointSelection?.response === option ? 'selected' : '') + '" ' + (mode === 'point' && !response ? 'aria-pressed="' + (pendingPointSelection?.response === option) + '" ' : '') + (response || recognitionBlocked ? 'disabled' : '') + '><span class="answer-key">' + (i + 1) + '</span><span>' + (mode === 'binary' ? (i === 0 ? 'Klopt' : 'Klopt niet') : escape(option)) + '</span>' + (response && option === q.answer ? icon('check') : '') + '</button>').join('') + '</div>' +
+    (mode === 'point' && !response ? '<div class="point-confirmation"><p id="point-selection-status" role="status" aria-live="polite">' + (pendingPointSelection ? 'Geselecteerd: ' + escape(pendingPointSelection.response) + '. Je kunt je keuze nog wijzigen.' : 'Kies eerst een spier in het model of met een antwoordknop.') + '</p><button id="confirm-answer" class="primary" ' + (!pendingPointSelection || recognitionBlocked ? 'disabled' : '') + '>Bevestig antwoord ' + icon('check') + '</button></div>' : '') +
     (response ? '<div class="feedback ' + (isCorrect ? 'success' : 'retry') + '" role="status"><strong>' + (isCorrect ? 'Ja, die heb je!' : 'Bijna. Deze nemen we nog een keer mee.') + '</strong><p>' + (isCorrect ? escape(q.answer) : 'Het juiste antwoord: ' + escape(q.answer)) + '</p></div>' + sourceMarkup(q.source) + '<button class="primary next-button" id="next-question">' + (session.index + 1 >= session.ids.length ? 'Bekijk je resultaat' : 'Volgende vraag') + icon('arrow-right') + '</button>' : '<button class="text-button" id="skip-question">Deze vraag overslaan</button>') +
     '</article><p class="privacy-note">' + (storageAvailable ? 'Je voortgang wordt alleen in deze browser bewaard.' : 'Opslaan lukt niet. Je voortgang blijft alleen in deze sessie beschikbaar.') + '</p>';
   const card = curriculum.cards.find(c => c.id === q.muscleId);
   $('#muscle-select').disabled = !response;
+  $('#isolate').disabled = mode === 'point' && !response;
+  if ($('#isolate').disabled) {
+    $('#isolate').checked = false;
+    viewer?.setIsolated(false);
+  }
   if (card) {
-    viewer?.select(card.id, card.view, q.type === 'recognition', mode !== 'point' || Boolean(response));
+    if (mode === 'point' && pendingPointSelection && !response) viewer?.highlight(pendingPointSelection.muscleId, pendingPointSelection.anatomyName);
+    else viewer?.select(card.id, card.view, q.type === 'recognition', mode !== 'point' || Boolean(response));
     $('#orientation').textContent = card.view === 'back' ? 'ACHTERZIJDE' : card.view === 'side' ? 'ZIJAANZICHT' : 'VOORZIJDE';
     $('#selection-card').innerHTML = !response ? q.type === 'recognition' ? '<span class="eyebrow">KIJK GOED</span><h3>' + (mode === 'point' ? 'Waar ligt ' + escape(card.name) + '?' : 'Welke spier is dit?') + '</h3><p>' + (mode === 'point' ? 'Tik een spier aan of gebruik de antwoordknoppen.' : 'Paars licht de doelspier uit, ook wanneer ze onder een andere spier ligt.') + '</p>' : '<span class="eyebrow">SPIER IN BEELD</span><h3>' + escape(card.name) + '</h3><p>De uitleg zie je na je antwoord.</p>' : cardMarkup(card);
   } else { resetAtlas(); $('#muscle-select').disabled = !response; }
@@ -191,6 +203,37 @@ function renderLesson() {
   modelPrompt.hidden = q.type !== 'recognition';
   modelPrompt.textContent = mode === 'point' ? 'Wijs ' + q.answer + ' aan.' : 'Welke spier is paars gemarkeerd?';
   arrangeModelQuestion();
+}
+
+function updatePointSelection(response, muscleId, anatomyName = null) {
+  if (!route.startsWith('les/') || !session?.prepared || session.response || session.finished || needsMatching()) return;
+  const q = byId.get(session.ids[session.index]);
+  if (exerciseFor(q, session.index) !== 'point' || !viewer?.available.has(q.muscleId) || !response) return;
+  pendingPointSelection = { questionId: q.id, index: session.index, response, muscleId, anatomyName };
+  viewer.highlight(muscleId, anatomyName);
+  document.querySelectorAll('[data-answer]').forEach(button => {
+    const selected = session.options[Number(button.dataset.answer)] === response;
+    button.classList.toggle('selected', selected);
+    button.setAttribute('aria-pressed', String(selected));
+  });
+  $('#point-selection-status').textContent = 'Geselecteerd: ' + response + '. Je kunt je keuze nog wijzigen.';
+  $('#confirm-answer').disabled = false;
+}
+
+function chooseAnswer(index) {
+  if (!session || session.response || session.finished) return;
+  const q = byId.get(session.ids[session.index]);
+  if (exerciseFor(q, session.index) !== 'point') { answer(index); return; }
+  const response = session.options[index];
+  const card = curriculum.cards.find(card => card.name === response);
+  updatePointSelection(response, card?.id || null);
+}
+
+function confirmPointSelection() {
+  if (!pendingPointSelection || !route.startsWith('les/') || !session?.prepared || session.response || session.finished) return;
+  const q = byId.get(session.ids[session.index]);
+  if (pendingPointSelection.questionId !== q.id || pendingPointSelection.index !== session.index || exerciseFor(q, session.index) !== 'point') return;
+  answer(session.options.indexOf(pendingPointSelection.response), pendingPointSelection.response);
 }
 
 function answer(index, pickedMuscle = null) {
@@ -218,6 +261,7 @@ function answer(index, pickedMuscle = null) {
   });
 }
 function next(skip = false) {
+  pendingPointSelection = null;
   if (!session || (!skip && !session.response)) return;
   const index = session.index + 1;
   session = { ...session, index, response: null, options: index < session.ids.length ? optionsFor(byId.get(session.ids[index])) : [] };
@@ -252,13 +296,15 @@ function finish() {
 function cardMarkup(card) {
   return '<span class="eyebrow">' + escape(topics.find(t => t.id === card.region)?.title || 'SPIER') + '</span><h3>' + escape(card.name) + '</h3><p>' + escape(card.fields.functie || '') + '</p>';
 }
-function showMuscle(id, originalName) {
+function showMuscle(id, originalName, confirmed = false) {
   if (route.startsWith('les/') && session && !session.finished && !session.response) {
     const q = byId.get(session.ids[session.index]);
     if (session.prepared && exerciseFor(q, session.index) === 'point') {
       const card = curriculum.cards.find(c => c.id === id);
-      const index = session.options.indexOf(card?.name);
-      if (card) answer(index, card.name);
+      if (card || originalName) {
+        updatePointSelection(card?.name || originalName, id, originalName);
+        if (confirmed) confirmPointSelection();
+      }
     }
     return;
   }
@@ -294,6 +340,7 @@ function renderProgress() {
   resetAtlas();
 }
 function navigate() {
+  pendingPointSelection = null;
   window.scrollTo(0, 0);
   route = location.hash.slice(1) || 'leren';
   document.querySelectorAll('[data-nav]').forEach(a => { const active = a.dataset.nav === route || (route.startsWith('les/') && a.dataset.nav === 'leren'); a.toggleAttribute('aria-current', active); });
@@ -314,7 +361,8 @@ document.addEventListener('click', event => {
   const muscleButton = event.target.closest('[data-muscle]');
   const viewButton = event.target.closest('[data-view]');
   if (startButton && !startButton.disabled) start(startButton.dataset.start);
-  if (answerButton && !answerButton.disabled) answer(Number(answerButton.dataset.answer));
+  if (answerButton && !answerButton.disabled) chooseAnswer(Number(answerButton.dataset.answer));
+  if (event.target.closest('#confirm-answer:not(:disabled)')) confirmPointSelection();
   if (muscleButton) { showMuscle(muscleButton.dataset.muscle); $('#muscle-card-title')?.focus(); }
   if (viewButton) { viewer?.view(viewButton.dataset.view); $('#orientation').textContent = { front: 'VOORZIJDE', back: 'ACHTERZIJDE', side: 'ZIJAANZICHT' }[viewButton.dataset.view]; }
   if (event.target.closest('#next-question')) next();
@@ -328,7 +376,7 @@ document.addEventListener('keydown', event => {
   if (!session?.prepared || (needsMatching()) || !route.startsWith('les/') || $('#credits').open || /INPUT|SELECT|TEXTAREA/.test(event.target.tagName)) return;
   if (/^[1-4]$/.test(event.key)) {
     const button = document.querySelector('[data-key="' + event.key + '"]');
-    if (button && !button.disabled) answer(Number(button.dataset.answer));
+    if (button && !button.disabled) { event.preventDefault(); chooseAnswer(Number(button.dataset.answer)); }
   }
 });
 $('#muscle-select').addEventListener('change', event => event.target.value ? showMuscle(event.target.value) : resetAtlas());
