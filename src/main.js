@@ -1,6 +1,10 @@
 import './style.css';
 import './study-ui.css';
 import './lesson-completion.css';
+import './chapter-completion.css';
+import './streak-completion.css';
+import { streakMarkup, animateStreakCompletion } from './streak-completion.js';
+import { animateChapterCompletion } from './chapter-completion.js';
 import { animateLessonCompletion } from './lesson-completion.js';
 import curriculum from './data/curriculum.json';
 import { LESSON_SIZE, fillLesson, interleaveMistakes, needsMistakeReview, recordLessonAnswer, topics, readProgress, readSession, recordAnswer, lessonQueue, optionsFor, masteryFor, PROGRESS_KEY, SESSION_KEY, GAME_KEY, DAILY_GOAL, readGame, awardXP, gameStats, levelPath, levelQuestions, completeLevel, exerciseFor, matchingPairs, shuffled, binaryResponses, varyLesson, DRAFTS_KEY, draftKey, readDrafts, isOpenAnswerCorrect, checkOpenAnswer, isModelQuestion, usesModel, modelAvailable, modelMuscleIds, modelChoiceCards } from './learning.js';
@@ -31,6 +35,8 @@ let route = '';
 // A visual reward for the next path visit only; never stored with progress.
 let pathRewardLevelId = null;
 let stopCompletionAnimation = null;
+let renderedResultSession = null;
+let pendingStreakSession = null;
 let atlasSearchQuery = '';
 let storageAvailable = true;
 const byId = new Map(curriculum.questions.map(q => [q.id, q]));
@@ -95,6 +101,7 @@ function save(rewards = false) {
 // Use the same account-scoped lock and persistence path as lesson answers.
 window.motionStudyPrepareUpdate = () => withProgressLock(() => save());
 function focusLessonContent() {
+  if ($('#streak-title')) { window.scrollTo(0, 0); $('#streak-title').focus({ preventScroll: true }); return; }
   if ($('#interlude-title')) { $('#interlude-title').focus(); return; }
   if ($('#result-title')) { window.scrollTo(0, 0); $('#result-title').focus({ preventScroll: true }); }
   else if ($('#question-title')) {
@@ -107,6 +114,7 @@ function dueCount() {
 function setLessonFocus(active) {
   stopCompletionAnimation?.();
   stopCompletionAnimation = null;
+  if (!active) { renderedResultSession = null; pendingStreakSession = null; }
   document.body?.classList.toggle('lesson-focus', active);
   $('#intro').hidden = active;
 }
@@ -140,10 +148,11 @@ function renderHome() {
   const current = pending ? levels.find(level => level.id === pending.levelId) : levels.find(level => !level.done);
   const topic = current?.topic || topics.find(topic => topic.id === pending?.region);
   const title = topic?.title || (pending?.region === 'review' ? 'Herhalen' : pending ? 'Gemengde les' : 'Alle hoofdstukken afgerond');
-  const lessonLabel = topic ? 'Hoofdstuk ' + (topics.findIndex(item => item.id === topic.id) + 1) + ' · ' + (pending ? 'lopende les' : 'volgende les') : pending ? 'Lopende les' : 'Leerpad afgerond';
+  const lessonLabel = topic ? (pending ? 'Lopende les' : 'Volgende les') + ' · Hoofdstuk ' + (topics.findIndex(item => item.id === topic.id) + 1) : pending ? 'Lopende les' : 'Leerpad afgerond';
   const questionCount = pending?.initialCount || (current ? interleaveMistakes(withLessonModels(levelQuestions(curriculum.questions, current.topic.id, current.stage), curriculum.questions), curriculum.questions, progress).length : LESSON_SIZE);
   const description = (current ? current.label + ' van ' + current.count + ' · ' : '') + (current || pending ? questionCount + ' vragen' : 'Gemengde les');
   const action = current ? 'data-level="' + current.id + '"' : 'data-start="' + (pending?.region || 'daily') + '"';
+  const lessonCard = '<div class="daily-card home-chapter-header"><span class="eyebrow">' + lessonLabel + '</span><h2>' + escape(title) + '</h2><p>' + description + '</p><button class="primary" ' + action + '>' + (pending ? 'Ga verder' : current ? 'Start les' : 'Gemengde les') + icon('arrow-right') + '</button></div>';
   const stats = gameStats(game);
   const homeStats = $('#home-stats');
   if (homeStats) {
@@ -159,6 +168,8 @@ function renderHome() {
   const chapters = topics.map((topic, chapter) => {
     const chapterLevels = levels.filter(level => level.topic.id === topic.id);
     const completed = chapterLevels.filter(level => level.done).length;
+    const open = (topic.id === pending?.region && !pending.levelId) || chapterLevels.some(level => level.id === pending?.levelId) ||
+      (completed < chapterLevels.length && (chapter <= activeChapter || chapterLevels.some(level => level.id === earnedLevelId)));
     const lessons = lessonGroups(chapterLevels).map(group => {
       const active = group.lessons.some(level => level.id === activeLevel?.id);
       const state = group.done ? 'done' : group.locked ? 'locked' : active ? 'current' : 'available';
@@ -177,14 +188,15 @@ function renderHome() {
         '<span class="level-copy" aria-hidden="true">' + group.label + '</span>' +
         '<span class="level-caption" aria-hidden="true">' + group.completed + '/' + group.lessons.length + ' lessen</span>' + '</li>';
     }).join('');
-    return '<details class="path-chapter' + (activeTopic.id === topic.id ? ' active-chapter' : '') + '" ' + (chapter <= activeChapter || chapterLevels.some(level => level.id === earnedLevelId) ? 'open' : '') + '>' +
+    return '<details class="path-chapter' + (activeTopic.id === topic.id ? ' active-chapter' : '') + '" ' + (open ? 'open' : '') + '>' +
       '<summary class="chapter-heading"><span class="chapter-copy"><span class="chapter-kicker">Hoofdstuk ' + (chapter + 1) + '</span><strong>' + escape(topic.title) + '</strong><small>' + escape(topic.subtitle) + '</small></span>' +
       '<span class="chapter-count" aria-label="' + completed + ' van ' + chapterLevels.length + ' lessen voltooid">' + completed + '/' + chapterLevels.length + '</span>' +
       '<span class="chapter-toggle" aria-hidden="true">' + icon('arrow-right') + '</span></summary>' +
-      '<ol aria-label="Lessen in ' + escape(topic.title) + '">' + lessons + '</ol></details>';
+      '<div class="chapter-lessons">' + (topic.id === activeTopic.id && (current || pending && topic.id === pending.region) ? lessonCard : '') +
+      '<ol aria-label="Lessen in ' + escape(topic.title) + '">' + lessons + '</ol></div></details>';
   });
   const path = chapters.join('');
-  $('#learning').innerHTML = '<div class="daily-card home-chapter-header"><span class="eyebrow">' + lessonLabel + '</span><h2>' + escape(title) + '</h2><p>' + description + '</p><button class="primary" ' + action + '>' + (pending ? 'Ga verder' : current ? 'Start les' : 'Gemengde les') + icon('arrow-right') + '</button></div><div class="study-status"><div class="learning-path">' + path + '</div></div>';
+  $('#learning').innerHTML = (!current && !topic ? lessonCard : '') + '<div class="study-status"><div class="learning-path">' + path + '</div></div>';
   resetAtlas();
   $('.atlas-panel').hidden = true;
 }
@@ -235,6 +247,7 @@ function resetAtlas() {
   $('#selection-card').innerHTML = '';
 }
 function start(region, levelId = null) {
+  pendingStreakSession = null;
   pendingPointSelection = null;
   refreshProgress();
   if (levelId && !levelPath(game).some(level => level.id === levelId && !level.locked)) return;
@@ -549,12 +562,15 @@ function next() {
 }
 function finish() {
   if (!session || session.index < session.ids.length) return;
+  // Background model loading must not replace or replay an already visible result.
+  if (session.finished && renderedResultSession === session && ($('#result-title') || $('#streak-title'))) return;
   const ending = session;
   const endingRoute = route;
   return withProgressLock(() => {
     if (!canSaveLesson()) return;
     if (session !== ending) return;
     const justFinished = !session.finished;
+    let finishedChapter = null;
     if (!session.finished) {
       refreshProgress();
       const alreadyCompleted = game.completed.includes(session.levelId);
@@ -563,7 +579,16 @@ function finish() {
       session = { ...session, finished: true, finishedAt: Date.now(), xp: (session.xp || 0) + bonus };
       progress = { ...progress, sessions: [...progress.sessions, { at: Date.now(), correct: session.correct, total: session.answered }].slice(-200) };
       const saved = save(true);
-      if (saved && !alreadyCompleted && game.completed.includes(session.levelId)) pathRewardLevelId = session.levelId;
+      const streakStats = gameStats(game);
+      pendingStreakSession = saved && session.answered > 0 && streakStats.today >= DAILY_GOAL && streakStats.streak > 0 ? session : null;
+      if (saved && !alreadyCompleted && game.completed.includes(session.levelId)) {
+        pathRewardLevelId = session.levelId;
+        const chapterLessons = levelPath(game).filter(level => level.topic.id === session.region);
+        if (chapterLessons.length && chapterLessons.every(level => level.done)) {
+          const topic = chapterLessons[0].topic;
+          finishedChapter = { title: topic.title, number: topics.findIndex(item => item.id === topic.id) + 1, lessons: chapterLessons.length };
+        }
+      }
       window.motionStudyAnalytics?.lessonFinished(session);
     }
     if (route !== endingRoute) { if (route === 'leren') renderHome(); else if (route === 'voortgang') renderProgress();
@@ -574,15 +599,41 @@ function finish() {
     $('#intro').innerHTML = '';
     const nextLevel = levelPath(game).find(level => !level.done);
     restoreAtlasLayout();
-    $('#learning').innerHTML = '<div class="result-card completion-card"><div class="completion-hero"><div class="completion-burst" aria-hidden="true">' + '<i></i>'.repeat(10) + '</div><span class="completion-medal" aria-hidden="true">' + icon('check') + '</span><h2 id="result-title" tabindex="-1">' + (passed ? 'Les gehaald' : 'Les afgerond') + '</h2></div><div class="reward-xp">' + icon('sparkles') + '<span aria-hidden="true">+<span class="xp-count">' + (session.xp || 0) + '</span> <span class="xp-unit">XP</span></span><span class="visually-hidden">' + (session.xp || 0) + ' XP verdiend</span></div><div class="completion-details"><div class="result-metrics"><span>' + icon('check') + '<strong>' + session.correct + '/' + session.answered + '</strong><small>goed met herhalingen</small></span><span>' + icon('target') + '<strong>' + (session.firstCorrect || 0) + '/' + (session.initialCount || session.ids.length) + '</strong><small>eerste poging</small></span><span>' + icon('growth') + '<strong>' + (session.bestAnswerStreak || 0) + '</strong><small>beste reeks</small></span></div><div class="result-breakdown"><div><span>Goede antwoorden</span><strong>+' + Math.max(0, (session.xp || 0) - (session.answered > 0 ? 10 : 0)) + ' XP</strong></div><div><span>Les afgerond</span><strong>+' + (session.answered > 0 ? 10 : 0) + ' XP</strong></div></div>' + (session.levelId && !passed ? '<p>Verbeter alle fouten om deze les te halen.</p>' : '') + '<div class="goal-result">' + (stats.today >= DAILY_GOAL ? 'Dagdoel gehaald · ' + stats.streak + (stats.streak === 1 ? ' dag streak' : ' dagen streak') : 'Nog ' + (DAILY_GOAL - stats.today) + ' XP tot je dagdoel') + '</div></div><button class="primary" ' + (session.levelId && !passed ? 'data-level="' + session.levelId + '"' : nextLevel ? 'data-level="' + nextLevel.id + '"' : 'data-start="daily"') + '>' + (session.levelId && !passed ? 'Oefen deze les opnieuw' : 'Volgende les') + icon('arrow-right') + '</button><a class="text-link" href="#leren">Terug naar je leerpad</a></div>';
+    const resultCount = (value, suffix = '') => '<span aria-hidden="true"><span class="metric-count" data-count-to="' + value + '">' + value + '</span>' + suffix + '</span><span class="visually-hidden">' + value + suffix + '</span>';
+    const rewardCount = value => '<span aria-hidden="true">+<span class="breakdown-count" data-count-to="' + value + '">' + value + '</span> XP</span><span class="visually-hidden">+' + value + ' XP</span>';
+    const completionHero = finishedChapter
+      ? '<div class="completion-hero"><span class="chapter-kicker">Hoofdstuk ' + finishedChapter.number + '</span><div class="chapter-emblem" aria-hidden="true"><span class="chapter-rays"></span><span class="completion-medal">' + icon('trophy') + '</span></div><h2 id="result-title" tabindex="-1">Hoofdstuk gehaald!</h2><p class="chapter-name">' + escape(finishedChapter.title) + '</p><p class="chapter-summary">' + finishedChapter.lessons + ' lessen afgerond</p></div>'
+      : '<div class="completion-hero"><div class="completion-burst" aria-hidden="true">' + '<i></i>'.repeat(10) + '</div><span class="completion-medal" aria-hidden="true">' + icon('check') + '</span><h2 id="result-title" tabindex="-1">' + (passed ? 'Les gehaald' : 'Les afgerond') + '</h2></div>';
+    $('#learning').innerHTML = '<div class="result-card completion-card' + (finishedChapter ? ' chapter-complete' : '') + '">' + completionHero + '<div class="reward-xp">' + icon('sparkles') + '<span aria-hidden="true">+<span class="xp-count">' + (session.xp || 0) + '</span> <span class="xp-unit">XP</span></span><span class="visually-hidden">' + (session.xp || 0) + ' XP verdiend</span></div><div class="completion-details"><div class="result-metrics"><span>' + icon('check') + '<strong>' + resultCount(session.correct, '/' + session.answered) + '</strong><small>goed met herhalingen</small></span><span>' + icon('target') + '<strong>' + resultCount(session.firstCorrect || 0, '/' + (session.initialCount || session.ids.length)) + '</strong><small>eerste poging</small></span><span>' + icon('growth') + '<strong>' + resultCount(session.bestAnswerStreak || 0) + '</strong><small>beste reeks</small></span></div><div class="result-breakdown"><div><span>Goede antwoorden</span><strong>' + rewardCount(Math.max(0, (session.xp || 0) - (session.answered > 0 ? 10 : 0))) + '</strong></div><div><span>Les afgerond</span><strong>' + rewardCount(session.answered > 0 ? 10 : 0) + '</strong></div></div>' + (session.levelId && !passed ? '<p>Verbeter alle fouten om deze les te halen.</p>' : '') + '<div class="goal-result">' + (stats.today >= DAILY_GOAL ? 'Dagdoel gehaald' : 'Nog ' + (DAILY_GOAL - stats.today) + ' XP tot je dagdoel') + '</div></div><button class="primary" ' + (pendingStreakSession === session ? 'id="show-streak"' : session.levelId && !passed ? 'data-level="' + session.levelId + '"' : nextLevel ? 'data-level="' + nextLevel.id + '"' : 'data-start="daily"') + '>' + (pendingStreakSession === session ? 'Verder' : session.levelId && !passed ? 'Oefen deze les opnieuw' : 'Volgende les') + icon('arrow-right') + '</button><a class="ghost-button" href="#leren">Terug naar je leerpad</a></div>';
 
     resetAtlas();
     $('.atlas-panel').hidden = true;
     focusLessonContent();
+    renderedResultSession = session;
     const completionCard = $('.completion-card');
-    if (completionCard) stopCompletionAnimation = animateLessonCompletion(completionCard, { xp: session.xp || 0, animate: justFinished && session.answered > 0 });
+    if (completionCard) {
+      const stopLesson = animateLessonCompletion(completionCard, { xp: session.xp || 0, animate: justFinished && session.answered > 0 });
+      const stopChapter = finishedChapter ? animateChapterCompletion(completionCard) : null;
+      stopCompletionAnimation = () => { stopLesson(); stopChapter?.(); };
+    }
     if (justFinished && session.answered > 0) document.dispatchEvent?.(new Event('motionstudy:lesson-completed'));
   });
+}
+function showStreak() {
+  if (!session?.finished || pendingStreakSession !== session || !route.startsWith('les/')) return;
+  pendingStreakSession = null;
+  refreshProgress();
+  const stats = gameStats(game);
+  if (stats.today < DAILY_GOAL || stats.streak < 1) { renderedResultSession = null; finish(); return; }
+  setLessonFocus(true);
+  const passed = session.levelId && game.completed.includes(session.levelId);
+  const nextLevel = levelPath(game).find(level => !level.done);
+  const action = session.levelId && !passed ? 'data-level="' + session.levelId + '"' : nextLevel ? 'data-level="' + nextLevel.id + '"' : 'data-start="daily"';
+  $('#learning').innerHTML = '<div class="result-card completion-card streak-card">' + streakMarkup(game, stats.streak) + '<div class="streak-actions"><button class="primary" ' + action + '>' + (session.levelId && !passed ? 'Oefen deze les opnieuw' : 'Volgende les') + icon('arrow-right') + '</button><a class="ghost-button" href="#leren">Terug naar je leerpad</a></div></div>';
+  focusLessonContent();
+  renderedResultSession = session;
+  const card = $('.streak-card');
+  if (card) stopCompletionAnimation = animateStreakCompletion(card);
 }
 function cardMarkup(card) {
   return '<span class="eyebrow">' + escape(topics.find(t => t.id === card.region)?.title || 'SPIER') + '</span><h3>' + escape(card.name) + '</h3><p>' + escape(card.fields.functie || '') + '</p>';
@@ -710,10 +761,10 @@ function navigate() {
     renderHome();
     window.requestAnimationFrame(() => {
       if (route !== 'leren') return;
-      const earnedButton = $('.just-earned .level-node');
+      const earnedButton = $('.path-chapter[open] .just-earned .level-node');
       if (earnedButton) { earnedButton.scrollIntoView({ block: 'start', behavior: 'instant' }); return; }
       const activeChapter = $('.active-chapter');
-      if (activeChapter?.previousElementSibling) $('.active-chapter .level-node')?.scrollIntoView({ block: 'start', behavior: 'instant' });
+      if (activeChapter?.open && activeChapter.previousElementSibling) $('.active-chapter .chapter-heading')?.scrollIntoView({ block: 'start', behavior: 'instant' });
     });
   }
 }
@@ -736,6 +787,7 @@ document.addEventListener('click', event => {
   if (muscleButton) { showMuscle(muscleButton.dataset.muscle); $('#muscle-card-title')?.focus(); }
   if (viewButton) { viewer?.view(viewButton.dataset.view); setOrientation(viewButton.dataset.view); }
   if (event.target.closest('#next-question')) next();
+  if (event.target.closest('#show-streak')) showStreak();
   if (event.target.closest('#all-muscles')) { resetAtlas(); renderAtlas(); $('#muscle-list-title').focus(); }
   if (event.target.closest('#reset-view')) { viewer?.view('front'); setOrientation('front'); }
   if (event.target.closest('#credits-button')) {

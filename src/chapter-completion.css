@@ -1,0 +1,44 @@
+.chapter-complete {
+  --chapter-gold: #ddb451;
+  --chapter-coral: #b86c52;
+  --chapter-gold-light: #f7e9b9;
+  --chapter-gold-ink: #6d5019;
+}
+.chapter-confetti { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 30; pointer-events: none; }
+.chapter-complete .completion-hero { gap: 8px; margin-bottom: 14px; isolation: isolate; }
+.chapter-complete .chapter-kicker { position: relative; color: var(--chapter-gold-ink); font-size: 10px; letter-spacing: 1.6px; text-transform: uppercase; font-weight: 700; }
+.chapter-emblem { position: relative; display: grid; place-items: center; width: 140px; height: 112px; }
+.chapter-rays { position: absolute; inset: -16px -20px; z-index: -1; border-radius: 50%; background: repeating-conic-gradient(from 8deg, transparent 0deg 24deg, var(--chapter-gold-light) 24deg 30deg); mask-image: radial-gradient(ellipse, transparent 25%, #000 38%, transparent 72%); opacity: .75; }
+.chapter-complete .completion-medal { width: 96px; height: 96px; border: 2px solid var(--chapter-gold); background: var(--chapter-gold-light); box-shadow: 0 5px 0 var(--chapter-gold), 0 0 0 6px var(--white), 0 0 0 7px var(--chapter-gold); }
+.chapter-complete .completion-medal .icon { width: 52px; height: 52px; }
+.chapter-complete .completion-medal::after { border-color: var(--chapter-gold); }
+.chapter-complete h2 { font-size: clamp(26px, 5vw, 32px); }
+/* The heading receives reading focus; interactive controls retain their focus rings. */
+.chapter-complete #result-title:focus { outline: none; }
+.chapter-complete .chapter-name { max-width: 360px; margin: 0; color: var(--ink); font-size: 15px; line-height: 1.3; font-weight: 600; text-wrap: balance; }
+.chapter-complete .chapter-summary { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.3; }
+.chapter-celebrating .completion-medal { animation: chapter-trophy 1100ms cubic-bezier(.16,.8,.3,1) both; }
+.chapter-celebrating .completion-medal::after { animation: chapter-ring 1300ms 200ms ease-out both; }
+.chapter-celebrating .chapter-rays { animation: chapter-rays 2800ms ease-out both; }
+.chapter-celebrating :is(.chapter-kicker, .chapter-name, .chapter-summary) { animation: completion-reveal 500ms 250ms both; }
+@keyframes chapter-trophy { 0% { opacity: 0; transform: translateY(28px) scale(.5) rotate(-16deg); } 45% { opacity: 1; transform: translateY(-6px) scale(1.12) rotate(6deg); } 70% { transform: translateY(2px) scale(.98) rotate(-3deg); } 100% { transform: translateY(0) scale(1) rotate(0); } }
+@keyframes chapter-ring { 0% { opacity: .8; transform: scale(.7); } 100% { opacity: 0; transform: scale(1.8); } }
+@keyframes chapter-rays { 0% { opacity: 0; transform: scale(.6) rotate(-18deg); } 35% { opacity: .9; } 100% { opacity: .75; transform: scale(1) rotate(18deg); } }
+@media (max-height: 700px) {
+  .lesson-focus .result-card.completion-card.chapter-complete { padding-block: 4px; }
+  .chapter-complete .completion-hero { gap: 4px; margin-bottom: 10px; }
+  .chapter-emblem { width: 108px; height: 72px; }
+  .chapter-complete .completion-medal { width: 64px; height: 64px; }
+  .chapter-complete .completion-medal .icon { width: 36px; height: 36px; }
+  .chapter-complete .chapter-name { font-size: 13px; }
+  .chapter-complete .result-breakdown > div { padding-block: 6px; }
+  .chapter-complete .result-metrics { margin-bottom: 8px; }
+  .chapter-complete .result-metrics > span { padding: 6px 4px; gap: 2px; }
+  .chapter-complete .result-metrics .icon { width: 16px; height: 16px; }
+  .chapter-complete .result-metrics strong { font-size: 20px; line-height: 1.1; }
+  .chapter-complete .primary { margin-top: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chapter-complete *, .chapter-complete *::after { animation: none !important; }
+  .chapter-confetti { display: none; }
+}

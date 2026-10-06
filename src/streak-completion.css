@@ -1,0 +1,68 @@
+/* A finite ignition sequence: charge, burst, number reveal, then calendar. */
+body.lesson-focus:has(.streak-card) { background: #fff9ef; }
+.lesson-focus #learning:has(>.streak-card) { max-width: none; overflow: clip; }
+.lesson-focus .result-card.completion-card.streak-card { display: flex; flex-direction: column; min-height: calc(100svh - 32px); max-width: 480px; gap: 12px; padding: 16px 8px; text-align: center; }
+.streak-hero { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px 0 0; }
+.streak-firework { position: relative; width: clamp(170px, 26svh, 240px); height: clamp(195px, 30svh, 280px); isolation: isolate; }
+.streak-flame { position: relative; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 14px 24px #f782283b); transform-origin: 50% 92%; }
+.streak-halo { position: absolute; inset: -20%; border-radius: 50%; background: radial-gradient(ellipse, #ffcc7766 0%, #ffcd7829 45%, transparent 70%); z-index: -1; }
+.streak-shockwave { position: absolute; inset: 10%; border: 3px solid #ffb456; border-radius: 50%; opacity: 0; pointer-events: none; z-index: -1; }
+.streak-card h2 { font-family: 'Manrope Variable', sans-serif; margin: 0; line-height: 1; color: #9a390d; }
+.streak-number { display: block; overflow: hidden; font-size: clamp(80px, 14svh, 128px); font-weight: 850; letter-spacing: -.06em; line-height: 1.12; }
+.streak-number>span { display: block; }
+.streak-label { display: block; margin-top: 2px; font-size: 24px; font-weight: 750; letter-spacing: -.6px; }
+.streak-card .streak-message { color: #735c45; margin: 16px 0 0; font-size: 17px; }
+.streak-calendar { position: relative; padding: 18px 18px 14px; border: 1px solid #e9d9c4; border-radius: 22px; background: #fffdf7; }
+.streak-calendar>p { margin: 0 0 16px; font-size: 13px; color: #735c45; font-weight: 650; }
+.streak-calendar ol { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; padding: 0; margin: 0; list-style: none; }
+.streak-day { display: flex; flex-direction: column; align-items: center; gap: 10px; color: #735c45; font-size: 12px; font-weight: 650; }
+.streak-day-mark { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #f2eadf; color: #735c45; font-size: 22px; }
+.streak-day.is-done .streak-day-mark { background: #a44010; color: #fff9e9; }
+.streak-day.is-today { color: #9a390d; font-weight: 800; }
+.streak-day.is-today .streak-day-mark { outline: 2px solid #bc5d21; outline-offset: 3px; }
+.streak-day-mark svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.streak-today { display: block; margin: 16px 0 0; font-size: 14px; font-weight: 700; color: #9a390d; }
+.streak-card .streak-actions { display: grid; gap: 10px; margin-top: 10px; }
+.streak-card .streak-actions .primary { width: 100%; min-height: 52px; margin: 0; }
+.streak-card .streak-actions .ghost-button { margin: 0; }
+.streak-embers { position: absolute; inset: 0; pointer-events: none; }
+.streak-embers i { position: absolute; left: 50%; top: 52%; width: 9px; height: 16px; border-radius: 80% 20% 70% 30%; background: #fba233; opacity: 0; --ember-x: -105px; --ember-y: -140px; --ember-turn: -40deg; }
+.streak-embers i:nth-child(2) { --ember-x: -70px; --ember-y: -190px; --ember-turn: 20deg; }
+.streak-embers i:nth-child(3) { --ember-x: -20px; --ember-y: -220px; --ember-turn: 80deg; }
+.streak-embers i:nth-child(4) { --ember-x: 55px; --ember-y: -200px; --ember-turn: -20deg; }
+.streak-embers i:nth-child(5) { --ember-x: 110px; --ember-y: -145px; --ember-turn: 60deg; }
+.streak-embers i:nth-child(6) { --ember-x: 140px; --ember-y: -70px; --ember-turn: 130deg; }
+.streak-embers i:nth-child(7) { --ember-x: 145px; --ember-y: 20px; --ember-turn: 80deg; }
+.streak-embers i:nth-child(8) { --ember-x: 105px; --ember-y: 80px; --ember-turn: -40deg; }
+.streak-embers i:nth-child(9) { --ember-x: -105px; --ember-y: 80px; --ember-turn: 60deg; }
+.streak-embers i:nth-child(10) { --ember-x: -145px; --ember-y: 15px; --ember-turn: -90deg; }
+.streak-embers i:nth-child(11) { --ember-x: -140px; --ember-y: -65px; --ember-turn: 40deg; }
+.streak-embers i:nth-child(12) { --ember-x: 20px; --ember-y: -165px; --ember-turn: 90deg; }
+.streak-card.is-igniting .streak-flame { animation: streak-ignite 1300ms cubic-bezier(.2,.8,.2,1) both; }
+.streak-card.is-igniting .streak-flame-middle { transform-origin: 50% 85%; animation: streak-inner 1100ms 450ms both; }
+.streak-card.is-igniting .streak-halo { animation: streak-glow 1800ms both; }
+.streak-card.is-igniting .streak-shockwave { animation: streak-wave 1000ms 480ms both; }
+.streak-card.is-igniting .streak-embers i { animation: streak-ember 1200ms 550ms cubic-bezier(.15,.7,.3,1) both; }
+.streak-card.is-igniting .streak-embers i:nth-child(even) { animation-delay: 650ms; background: #f57540; }
+.streak-card.is-igniting .streak-number>span { animation: streak-roll 750ms 650ms cubic-bezier(.15,1.25,.3,1) both; }
+.streak-card.is-igniting .streak-label { animation: streak-rise 500ms 1100ms both; }
+.streak-card.is-igniting .streak-message { animation: streak-rise 550ms 1300ms both; }
+.streak-card.is-igniting .streak-calendar { animation: streak-rise 650ms 1500ms both; }
+.streak-card.is-igniting .streak-day.is-done .streak-day-mark { animation: streak-day-pop 600ms 2000ms both; }
+.streak-card.is-igniting .streak-day.is-today .streak-day-mark { animation-delay: 2300ms; }
+.streak-card.is-igniting .streak-day.is-today svg path { stroke-dasharray: 20; animation: streak-check 350ms 2500ms both; }
+.streak-card.is-igniting .streak-today { animation: streak-rise 500ms 2550ms both; }
+.streak-card.is-igniting .streak-actions { animation: streak-rise 500ms 1850ms both; }
+@keyframes streak-ignite { 0% { transform: scale(.6); filter: grayscale(1); opacity: .25; } 30% { transform: scale(.52,.66) rotate(-5deg); filter: grayscale(1); opacity: .5; } 48% { transform: scale(1.2,.88) rotate(4deg); filter: grayscale(0) drop-shadow(0 0 32px #ffb34b90); opacity: 1; } 68% { transform: scale(.92,1.08) rotate(-3deg); } 84% { transform: scale(1.04,.98) rotate(1deg); } 100% { transform: scale(1); } }
+@keyframes streak-inner { 0% { transform: scaleY(.3); opacity: 0; } 50% { transform: scaleY(1.2); opacity: 1; } 100% { transform: scaleY(1); } }
+@keyframes streak-glow { 0%,25% { opacity: 0; transform: scale(.4); } 45% { opacity: 1; transform: scale(1.8); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes streak-wave { 0% { transform: scale(.2); opacity: 0; } 12% { opacity: .6; } 100% { transform: scale(7); opacity: 0; } }
+@keyframes streak-ember { 0% { opacity: 0; transform: translate(0,30px) scale(.3); } 15% { opacity: 1; } 65% { opacity: .9; } 100% { opacity: 0; transform: translate(var(--ember-x),var(--ember-y)) rotate(var(--ember-turn)) scale(.3); } }
+@keyframes streak-roll { 0% { transform: translateY(110%); opacity: 0; } 65% { transform: translateY(-8%); opacity: 1; } 100% { transform: translateY(0); opacity: 1; } }
+@keyframes streak-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes streak-day-pop { 0% { transform: scale(.65); background: #f2eadf; } 60% { transform: scale(1.18); } 100% { transform: scale(1); } }
+@keyframes streak-check { from { stroke-dashoffset: 20; } to { stroke-dashoffset: 0; } }
+@media (min-height: 781px) and (max-height: 820px) { .streak-firework { width: 182px; height: 210px; } }
+@media (max-height: 780px) { .lesson-focus .result-card.completion-card.streak-card { gap: 8px; padding-block: 4px; } .streak-hero { padding-top: 0; } .streak-firework { width: 150px; height: 174px; } .streak-number { font-size: 80px; } .streak-label { font-size: 22px; } .streak-card .streak-message { margin-top: 10px; font-size: 15px; } .streak-calendar { padding: 14px 12px 10px; } .streak-calendar>p { margin-bottom: 10px; } .streak-today { margin-top: 12px; } }
+@media (max-width: 359px) { .streak-calendar { padding-inline: 8px; } .streak-calendar ol { gap: 3px; } .streak-day-mark { width: 28px; height: 28px; } }
+@media (prefers-reduced-motion: reduce) { .streak-card.is-igniting *, .streak-card.is-igniting svg path { animation: none !important; } }
