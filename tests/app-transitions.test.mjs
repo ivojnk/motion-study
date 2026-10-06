@@ -7,6 +7,7 @@ import * as progression from '../src/exercise-progression.js';
 import * as motivation from '../src/lesson-motivation.js';
 import * as groups from '../src/lesson-groups.js';
 import * as lessonModels from '../src/lesson-models.js';
+import { streakMarkup } from '../src/streak-completion.js';
 import { choicePalette } from '../src/muscle-choice.js';
 
 const curriculum = JSON.parse(fs.readFileSync(new URL('../src/data/curriculum.json', import.meta.url)));
@@ -15,7 +16,7 @@ const source = fs.readFileSync(new URL('../src/main.js', import.meta.url), 'utf8
   .split("document.addEventListener('click'")[0]
   .replace(/^import .*;\n/gm, '')
   .replaceAll('import.meta.env.BASE_URL', "'/'") + `
-  globalThis.api = { start, answer, next, finish, choosePair, renderLesson, navigate, chooseAnswer, confirmPointSelection, showMuscle, muscleMatchesSearch,
+  globalThis.api = { start, answer, next, finish, showStreak, choosePair, renderLesson, navigate, chooseAnswer, confirmPointSelection, showMuscle, muscleMatchesSearch,
     searchAtlas: query => { $('#muscle-search').value = query; filterAtlasMuscles(); },
     read: () => ({ session, game, progress, route, pendingPointSelection }),
     prepare: () => { session = { ...session, prepared: true }; save(); renderLesson(); },
@@ -59,7 +60,7 @@ function app(data = {}, locks, options = {}) {
   };
   const storage = { getItem: key => data[key] || null, setItem: (key, value) => { if (options.blocked) throw new Error('QuotaExceededError'); data[key] = value; } };
   let reloads = 0;
-  const context = { ...learning, ...progression, ...motivation, ...groups, ...lessonModels, choicePalette, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean, Event,
+  const context = { ...learning, ...progression, ...motivation, ...groups, ...lessonModels, choicePalette, streakMarkup, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean, Event,
     location: { hash: '', reload() { reloads++; } }, navigator: locks ? { locks } : {},
     document: { body: { classList: { toggle(name, active) { if (active) bodyClasses.add(name); else bodyClasses.delete(name); } } }, querySelector, querySelectorAll: () => [], dispatchEvent(event) { events.push({ type: event.type, html: node('#learning').innerHTML }); } },
     window: { localStorage: storage, motionStudyAnalytics: { lessonFinished: session => analyticsEvents.push(session) }, scrollTo() {}, requestAnimationFrame(callback) { callback(); }, matchMedia: () => ({ matches: false }) } };
@@ -590,7 +591,7 @@ test('switching to mixed practice and browser history preserve independent lesso
   assert.equal(instance.read().session.response, mixed.response);
 });
 
-const homeCard = instance => instance.html().split('<div class="study-status">')[0];
+const homeCard = instance => instance.html().match(/<div class="daily-card home-chapter-header">[\s\S]*?<\/button><\/div>/)?.[0] || '';
 test('every chapter is startable from the home path before any earlier chapter is complete', () => {
   const instance = app(); instance.go('#leren');
   for (const topic of learning.topics) {
@@ -628,7 +629,7 @@ test('out-of-order chapters complete and resume while earlier chapter drafts and
   assert.equal(path.find(level => level.id === last + ':1').locked, false);
 });
 
-test('home keeps earlier chapter lessons open above the current chapter and preserves saved progress', () => {
+test('home closes completed chapters, keeps every header and opens the current chapter without changing progress', () => {
   const levels = learning.levelPath({ completed: [] });
   const currentIndex = levels.findIndex(level => level.topic.id === 'rug');
   const data = { [learning.GAME_KEY]: JSON.stringify({ days: {}, completed: levels.slice(0, currentIndex).map(level => level.id) }) };
@@ -642,7 +643,7 @@ test('home keeps earlier chapter lessons open above the current chapter and pres
   chapters.forEach((chapter, index) => {
     assert.ok(chapter[3].includes('Hoofdstuk ' + (index + 1) + '</span>'));
     assert.ok(chapter[3].includes('data-level="' + learning.topics[index].id + ':'));
-    assert.equal(Boolean(chapter[2]), index <= 2);
+    assert.equal(Boolean(chapter[2]), index === 2);
     assert.equal(chapter[1].includes('active-chapter'), index === 2);
   });
   assert.equal(JSON.stringify(data), saved);
@@ -686,7 +687,7 @@ test('the home card resumes an unfinished replay before recommending the next le
   for (const reload of [false, true]) {
     if (reload) instance = app(data);
     instance.go('#leren');
-    assert.match(homeCard(instance), /Hoofdstuk 1 · lopende les/);
+    assert.match(homeCard(instance), /Lopende les · Hoofdstuk 1/);
     assert.match(homeCard(instance), /Les 2 van 15/);
     assert.match(homeCard(instance), /data-level="basis:1">Ga verder/);
     assert.equal((instance.html().match(/class="level-callout"/g) || []).length, 1);
@@ -710,12 +711,14 @@ test('the home card restores a saved course draft when the active session is fin
 });
 
 test('the home card resumes mixed and free chapter practice without replacing their questions', () => {
-  for (const region of ['daily', 'basis']) {
-    let instance = app(); instance.startLesson(region, null); instance.play(); instance.next();
+  for (const { region, completed = false } of [{ region: 'daily' }, { region: 'basis' }, { region: 'basis', completed: true }]) {
+    const data = completed ? { [learning.GAME_KEY]: JSON.stringify({ days: {}, completed: learning.levelPath({ completed: [] }).filter(level => level.topic.id === region).map(level => level.id) }) } : {};
+    let instance = app(data); instance.startLesson(region, null); instance.play(); instance.next();
     const pending = JSON.stringify(instance.read().session);
     instance = app(instance.data); instance.go('#leren');
     assert.match(homeCard(instance), new RegExp('data-start="' + region + '">Ga verder'));
     assert.match(homeCard(instance), /[Ll]opende les/);
+    if (region === 'basis') assert.match(instance.html(), /<details class="path-chapter active-chapter" open>/);
     continueHomeLesson(instance);
     assert.equal(JSON.stringify(instance.read().session), pending);
   }
@@ -732,7 +735,7 @@ test('the home card only recommends the next lesson once the current lesson is f
   assert.equal(JSON.stringify(instance.read().session), pending);
   while (!instance.read().session.finished) { instance.play(); instance.next(); }
   instance.go('#leren');
-  assert.match(homeCard(instance), /volgende les/);
+  assert.match(homeCard(instance), /Volgende les/);
   assert.match(homeCard(instance), /data-level="basis:1">Start les/);
 });
 
@@ -1050,6 +1053,100 @@ test('new lesson progress celebrates exactly one segment on the next path visit,
   assert.doesNotMatch(instance.html(), /just-earned|level-sparkles|filled earned/);
 });
 
+function finalChapterResult({ region = 'basis', earlierChapters = false, missingEarlier = false, replay = false, correct = true, blocked = false } = {}) {
+  const path = learning.levelPath({ completed: [] });
+  const levels = path.filter(level => level.topic.id === region);
+  const last = levels.at(-1);
+  const question = learning.levelQuestions(curriculum.questions, region, last.stage)[0];
+  const completed = [
+    ...(earlierChapters ? path.slice(0, path.findIndex(level => level.topic.id === region)) : []),
+    ...(replay ? levels : levels.slice(missingEarlier ? 1 : 0, -1)),
+  ].map(level => level.id);
+  const instance = app({
+    [learning.GAME_KEY]: JSON.stringify({ days: {}, completed }),
+    [learning.SESSION_KEY]: JSON.stringify({
+      region, levelId: last.id, stage: last.stage, ids: [question.id], exerciseModes: [learning.exerciseFor(question, 0)], index: 1,
+      correct: Number(correct), firstCorrect: Number(correct), answered: 1, initialCount: 1, options: [],
+      response: question.answer, prepared: true, retryIds: [], finished: false, xp: correct ? 5 : 0,
+    }),
+  }, undefined, { blocked });
+  instance.go('#les/' + region + '/' + last.stage);
+  return { instance, levels, last };
+}
+
+test('each chapter finale closes completed chapters and opens the next chapter with every header retained after reload', () => {
+  learning.topics.forEach((topic, index) => {
+    const { instance } = finalChapterResult({ region: topic.id, earlierChapters: true });
+    const saved = JSON.stringify(instance.data);
+    for (const current of [instance, app(instance.data)]) {
+      current.go('#leren');
+      const chapters = [...current.html().matchAll(/<details class="path-chapter([^"]*)"\s*(open)?>([\s\S]*?)<\/details>/g)];
+      assert.equal(chapters.length, learning.topics.length);
+      chapters.forEach((chapter, chapterIndex) => {
+        assert.equal(Boolean(chapter[2]), chapterIndex === index + 1, topic.id);
+        assert.match(chapter[3], /<summary class="chapter-heading">/);
+        assert.ok(chapter[3].includes('Hoofdstuk ' + (chapterIndex + 1) + '</span>'));
+        assert.ok(chapter[3].includes('data-level="' + learning.topics[chapterIndex].id + ':'));
+      });
+      if (index + 1 < learning.topics.length) {
+        assert.match(homeCard(current), new RegExp('data-level="' + learning.topics[index + 1].id + ':0"'));
+        assert.ok(chapters[index + 1][1].includes('active-chapter'));
+        assert.ok(chapters[index + 1][3].includes('<div class="chapter-lessons">' + homeCard(current)));
+        assert.equal((current.html().match(/class="daily-card home-chapter-header"/g) || []).length, 1);
+        assert.ok(current.html().startsWith('<div class="study-status">'));
+      } else {
+        assert.match(homeCard(current), /Alle hoofdstukken afgerond/);
+      }
+      assert.equal(JSON.stringify(instance.data), saved);
+    }
+  });
+});
+
+test('an unfinished replay can reopen a completed chapter without losing its next-chapter progress', () => {
+  const { instance } = finalChapterResult();
+  instance.startLesson('basis', 'basis:0'); instance.play(); instance.next();
+  const saved = JSON.stringify(instance.data);
+  instance.go('#leren');
+  assert.match(instance.html(), /<details class="path-chapter active-chapter" open>/);
+  assert.match(homeCard(instance), /data-level="basis:0">Ga verder/);
+  assert.equal(JSON.stringify(instance.data), saved);
+});
+
+test('only the saved final chapter completion gets the trophy finale, including later chapters', () => {
+  for (const region of ['basis', 'borst']) {
+    const { instance, levels } = finalChapterResult({ region });
+    assert.match(instance.html(), /completion-card chapter-complete/);
+    assert.match(instance.html(), /Hoofdstuk gehaald!/);
+    assert.ok(instance.html().replaceAll('&amp;', '&').includes(levels[0].topic.title));
+    assert.ok(instance.html().includes(levels.length + ' lessen afgerond'));
+    assert.equal(instance.read().session.xp, 15);
+    assert.deepEqual(Array.from(instance.read().game.completed), levels.map(level => level.id));
+  }
+});
+
+test('chapter replay, incomplete chapters, failed lessons and failed saves do not celebrate', () => {
+  for (const options of [{ replay: true }, { missingEarlier: true }, { correct: false }, { blocked: true }]) {
+    const { instance } = finalChapterResult(options);
+    assert.doesNotMatch(instance.html(), /chapter-complete|Hoofdstuk gehaald!/);
+    assert.match(instance.html(), /completion-card/);
+  }
+});
+
+test('chapter finale does not replay on duplicate finish, reload or navigation and keeps earned XP', () => {
+  const { instance, last } = finalChapterResult();
+  const saved = JSON.stringify(instance.data);
+  const result = instance.html();
+  instance.finish(); instance.renderLesson();
+  assert.equal(instance.html(), result);
+  assert.equal(JSON.stringify(instance.data), saved);
+  const restored = app(instance.data); restored.go('#les/basis/' + last.stage);
+  assert.doesNotMatch(restored.html(), /chapter-complete/);
+  assert.equal(JSON.stringify(instance.data), saved);
+  instance.go('#leren'); instance.go('#les/basis/' + last.stage);
+  assert.doesNotMatch(instance.html(), /chapter-complete/);
+  assert.equal(JSON.stringify(instance.data), saved);
+});
+
 test('finishing a group celebrates its gold button and leaves the following group unlocked', () => {
   const firstGroup = groups.lessonGroups(learning.levelPath({ completed: [] }).filter(level => level.topic.id === 'basis'))[0];
   const completed = firstGroup.lessons.slice(0, -1).map(level => level.id);
@@ -1361,5 +1458,59 @@ test('each early muscle chapter introduces its added recognition with four highl
     assert.ok(recognitionIndex >= 0, region);
     assert.equal(session.exerciseModes[recognitionIndex], 'model-choice', region);
     assert.equal(learning.modelChoiceCards(learning.optionsFor(curriculum.questions.find(q => q.id === session.ids[recognitionIndex]), Math.random, 'model-choice')).length, 4);
+  }
+});
+
+function streakResult({ days = {}, xp = 25, answered = 7, blocked = false, correct = 7 } = {}) {
+  const questions = learning.levelQuestions(curriculum.questions, 'basis', 0);
+  const instance = app({
+    [learning.GAME_KEY]: JSON.stringify({ days: { ...days, [learning.dayKey()]: xp }, completed: [] }),
+    [learning.SESSION_KEY]: JSON.stringify({ region: 'basis', levelId: 'basis:0', stage: 0,
+      ids: questions.map(q => q.id), exerciseModes: questions.map(() => 'choice'), index: questions.length,
+      correct, firstCorrect: correct, answered, initialCount: questions.length, options: [],
+      response: null, prepared: true, retryIds: [], finished: false, xp }),
+  }, undefined, { blocked });
+  instance.go('#les/basis/0');
+  return instance;
+}
+
+test('fresh daily-goal completion has a separate streak screen and preserves rewards and lesson actions', () => {
+  const instance = streakResult();
+  assert.match(instance.html(), /id="show-streak">Verder/);
+  assert.doesNotMatch(instance.html(), /dag streak/);
+  const saved = JSON.stringify(instance.data);
+  const xp = learning.gameStats(instance.read().game).xp;
+  instance.showStreak();
+  assert.match(instance.html(), /id="streak-title"[^>]*aria-label="1 dag streak"/);
+  assert.match(instance.html(), /data-level="basis:1"/);
+  assert.match(instance.html(), /class="ghost-button" href="#leren"/);
+  assert.equal(instance.focused(), true);
+  const streak = instance.html();
+  instance.finish(); instance.renderLesson(); instance.showStreak();
+  assert.equal(instance.html(), streak);
+  assert.equal(JSON.stringify(instance.data), saved);
+  assert.equal(learning.gameStats(instance.read().game).xp, xp);
+  const restored = app(instance.data); restored.go('#les/basis/0');
+  assert.match(restored.html(), /id="result-title"/);
+  assert.doesNotMatch(restored.html(), /show-streak|streak-title/);
+  instance.go('#leren'); instance.go('#les/basis/0');
+  assert.doesNotMatch(instance.html(), /show-streak|streak-title/);
+});
+
+test('streak uses saved consecutive days and keeps the retry action for an unfinished lesson', () => {
+  const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
+  const instance = streakResult({ days: { [learning.dayKey(yesterday.getTime())]: 30 }, correct: 1 });
+  instance.showStreak();
+  assert.match(instance.html(), /aria-label="2 dagen streak"/);
+  assert.equal((instance.html().match(/class="streak-day is-done/g) || []).length, 2);
+  assert.match(instance.html(), /data-level="basis:0">Oefen deze les opnieuw/);
+});
+
+test('unfinished goal, blocked saves, and empty lessons do not offer a streak celebration', () => {
+  for (const options of [{ xp: 5 }, { blocked: true }, { answered: 0 }]) {
+    const instance = streakResult(options);
+    assert.doesNotMatch(instance.html(), /show-streak/);
+    const result = instance.html(); instance.showStreak();
+    assert.equal(instance.html(), result);
   }
 });

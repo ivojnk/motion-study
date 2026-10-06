@@ -20,3 +20,5 @@ progress.md
 .playwright-cli/
 .playwright-mcp/
 output/
+
+dist-static/

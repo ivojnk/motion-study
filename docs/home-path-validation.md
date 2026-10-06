@@ -4,10 +4,10 @@ Start/Verder callout validation on 2026-10-05:
 - One callout follows the recommended or resumed lesson across all chapters, including saved replays. Other unlocked chapters remain startable.
 - Fixed 66px row gaps replace active-step margins. All four first-chapter steps kept the same document positions when the callout moved to the second group and changed from Start to Verder.
 - Local browser checks passed at 320, 390 and 1280px without horizontal overflow. Keyboard focus retained its 3px outline, and Enter opened the active lesson.
-- All 247 tests and the production build passed on the latest main. The existing large-chunk build warning remains.
+- All 74 focused transition/group tests and both production/static builds passed. The existing large-chunk build warning remains.
 - Screenshot: `output/playwright/single-resume-callout-390.png`. No deployment was performed.
 
-The supplied Duolingo screenshot informed the compact top metrics, chapter banner and bottom navigation. MotionStudy keeps its existing cream/forest palette and grouped lesson path. Chapters appear in course order, with earlier and current chapter lessons open. Opening the homepage positions the current chapter below the sticky banner, so earlier lessons are accessible by scrolling up. Atlas, question bank and progress stay in navigation.
+The supplied Duolingo screenshot informed the compact top metrics, chapter banner and bottom navigation. MotionStudy keeps its existing cream/forest palette and grouped lesson path. Chapters appear in course order, with completed chapters collapsed and the current chapter open. Opening the homepage positions the current chapter header below the sticky banner. Earlier chapters remain available through their headers. Atlas, question bank and progress stay in navigation.
 
 The existing lesson IDs, progress rings, saved-session selection and grading remain intact. No UI dependency or Duolingo artwork was added. Local icons follow the project's icon library and license notices.
 
@@ -30,4 +30,4 @@ Earlier lesson scrolling checked on 2026-10-05: the bottom “Eerdere hoofdstukk
 
 Independent chapter choice checked on 2026-10-05: every chapter can start without completing earlier chapters. Lessons unlock sequentially within the chosen chapter. Existing questions, lesson IDs, completed lessons, XP and unfinished drafts remain intact. All 247 tests and both production builds pass. Local browser checks at 320, 390 and 1280 pixels confirm all 13 chapter entries enabled without horizontal overflow; chapter 13 starts with Enter and emulated touch, has a visible focus outline, and resumes after reload. No deployment was performed.
 
-Merge verification: the isolated release branch based on current main passes all 246 tests and the production build. The extra static-edition test and build script exist only in the separate local static work; they are outside this merge.
+Chapter handoff checked on 2026-10-06: completed chapters now collapse, and the next chapter opens with its header visible. All 13 headers remain available. Regression checks cover every chapter, reloads, the completed course and unfinished replays. Browser checks at 320, 390 and 1280px passed without overflow; Enter reopens completed chapters with visible focus. Saved progress stayed unchanged. All 277 tests and both builds passed. Screenshot: artifacts/chapter-handoff/mobile-390.jpg. No deployment was performed.

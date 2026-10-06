@@ -49,6 +49,7 @@ third-party course prose.
 | Three Mesh BVH | https://github.com/gkjohnson/three-mesh-bvh | MIT |
 | Draco decoder | https://github.com/google/draco | Apache 2.0 |
 | Phosphor Icons, selected Duotone SVGs | https://github.com/phosphor-icons/core | MIT |
+| canvas-confetti 1.9.4 | https://github.com/catdad/canvas-confetti | ISC |
 | Vite | https://github.com/vitejs/vite | MIT |
 | DM Sans and Manrope, via Fontsource | https://github.com/fontsource/fontsource | SIL Open Font License 1.1 |
 
