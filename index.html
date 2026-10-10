@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="app-edition" content="static" />
-  <meta name="app-version" content="a2fc32dcd26cb4a88d01fa95d76a567b2b2e017a47a422925f64ca6de59890be" />
+  <meta name="app-version" content="d3ab601cab4ecb1fa895632c83722b05e08d3db8ab8bb3306e4bc29b538a77f5" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f5f3ed" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,10 +34,10 @@
   <meta name="twitter:image" content="https://ivojnk.github.io/motion-study/brand/social-share.png?v=leerblad-1" />
   <meta name="twitter:image:alt" content="MotionStudy Leerblad-logo met de tekst: Leer het lichaam kennen. Anatomie en biomechanica. Korte quizlessen en interactieve 3D-atlas." />
   <title>MotionStudy · Leer het lichaam kennen</title>
-  <script type="module" crossorigin src="/motion-study/assets/app-s-Kvio4L.js"></script>
-  <link rel="modulepreload" crossorigin href="/motion-study/assets/preload-helper-CmipD5-9.js">
-  <link rel="stylesheet" crossorigin href="/motion-study/assets/preload-helper-Bd7REKSR.css">
-  <link rel="stylesheet" crossorigin href="/motion-study/assets/app-B9Iugeso.css">
+  <script type="module" crossorigin src="/motion-study/assets/app-BSBLyLMH.js"></script>
+  <link rel="modulepreload" crossorigin href="/motion-study/assets/preload-helper-gLKkDur5.js">
+  <link rel="stylesheet" crossorigin href="/motion-study/assets/preload-helper-DQS3RBl9.css">
+  <link rel="stylesheet" crossorigin href="/motion-study/assets/app-BEk5pzeM.css">
 </head>
 <body>
   <a class="skip" href="#main" hidden>Naar de inhoud</a>
@@ -53,6 +53,7 @@
         <button class="account-menu-action" data-install-app type="button" aria-haspopup="dialog" aria-controls="install-app" hidden><img class="icon" src="./icons/arrow-square-out.svg" alt="" />Op je beginscherm</button>
         <button class="account-menu-action" data-legal-dialog="privacy" type="button" aria-haspopup="dialog" aria-controls="privacy"><img class="icon" src="./icons/lock.svg" alt="" />Privacy & opslag</button>
         <button class="account-menu-action" data-legal-dialog="usage" type="button" aria-haspopup="dialog" aria-controls="usage"><img class="icon" src="./icons/book-2.svg" alt="" />Gebruik & contact</button>
+        <button class="account-menu-action" data-progress-recovery type="button" aria-haspopup="dialog" aria-controls="progress-recovery"><img class="icon" src="./icons/refresh.svg" alt="" />Voortgang herstellen</button>
         <button id="credits-button" class="account-menu-action" type="button" aria-haspopup="dialog" aria-controls="credits"><img class="icon" src="./icons/book-2.svg" alt="" />Licenties</button>
         
         
@@ -62,6 +63,7 @@
   <p id="static-loading" class="account-screen" role="status">Laden…</p>
   <noscript><p class="account-screen">Zet JavaScript aan om MotionStudy te gebruiken.</p></noscript>
   <main id="main" tabindex="-1" hidden>
+    
     <p id="storage-warning" class="storage-warning" role="alert" hidden>Je browser kan je voortgang niet opslaan. Laat dit tabblad open: bij sluiten of vernieuwen kunnen je laatste antwoorden verloren gaan. Controleer of siteopslag is toegestaan en of er voldoende ruimte is.</p>
     <section id="intro"></section>
     <div class="workspace">
@@ -114,7 +116,7 @@
   <dialog id="usage" class="legal-dialog" aria-labelledby="usage-title">
     <button class="close-dialog" data-legal-close type="button" aria-label="Sluiten" autofocus><img class="icon" src="./icons/x.svg" alt="" /></button>
     <h2 id="usage-title">Gebruik & contact</h2>
-    <p class="legal-date">Bijgewerkt op 5 oktober 2026</p>
+    <p class="legal-date">Bijgewerkt op 10 oktober 2026</p>
     <p>MotionStudy is een privéleerhulp voor anatomie en biomechanica. De inhoud is geen officiële toets, medisch advies of persoonlijk trainingsadvies.</p>
     <p>Je voortgang hoort bij deze browser. Gebruik steeds hetzelfde apparaat en dezelfde browser om verder te leren.</p>
     <h3>Lesstof en licenties</h3>
@@ -146,6 +148,17 @@
       <button class="install-continue" data-install-close type="button">Verder leren</button>
     </div>
   </dialog>
+  <dialog id="progress-recovery" class="legal-dialog" aria-labelledby="progress-recovery-title" aria-describedby="progress-recovery-description">
+    <h2 id="progress-recovery-title">Waar wil je verdergaan?</h2>
+    <p id="progress-recovery-description">Kies de voortgang die je wilt gebruiken.</p>
+    <fieldset class="recovery-list" aria-label="Gevonden voortgang" id="progress-recovery-list"></fieldset>
+    <p id="progress-recovery-status" role="status" aria-live="polite"></p>
+    <div class="progress-transfer-actions">
+      <button id="progress-recovery-use" class="primary" type="button" disabled>Verder met deze voortgang</button>
+      <button id="progress-recovery-close" class="progress-import-button" type="button" autofocus>Sluiten</button>
+    </div>
+  </dialog>
+  
   <dialog id="app-update" class="update-dialog" aria-labelledby="app-update-title" aria-describedby="app-update-description">
     <h2 id="app-update-title">Nieuwe versie beschikbaar</h2>
     <p id="app-update-description">Er staat een update klaar voor MotionStudy. Werk bij om de nieuwste versie te gebruiken.</p>
