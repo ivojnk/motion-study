@@ -84,14 +84,14 @@ test('mistakes corrected today remain available in explicit review without addin
   assert.deepEqual(lessonQueue(qs, progress, { region: 'review', now: 1001 }), [fact]);
 });
 
-test('legacy errors migrate without losing counters, while prior mastered errors remain mastered', () => {
+test('legacy errors migrate without losing counters, without marking unverified older records as mastered', () => {
   const legacy = { correct: 2, attempts: 3, interval: 1, due: DAY, lastCorrect: true };
   const mastered = { ...legacy, interval: 4 };
   const progress = readProgress({ getItem: () => JSON.stringify({ questions: { legacy, mastered }, sessions: [] }) });
   assert.equal(progress.questions.legacy.correct, 2);
   assert.equal(needsMistakeReview(progress.questions.legacy), true);
   assert.equal(needsMistakeReview(progress.questions.mastered), false);
-  assert.equal(masteryFor([{ id: 'mastered' }], progress), 100);
+  assert.equal(masteryFor([{ id: 'mastered' }], progress), 0);
   for (const review of [{ successes: -1 }, { successes: 100, recalled: true, lastLesson: null, lastPracticedAt: 0 },
     { successes: 3, recalled: true, lastLesson: null, lastPracticedAt: '0' }]) {
     const restored = readProgress({ getItem: () => JSON.stringify({ questions: { fact: { ...legacy, mistakeReview: review } } }) });

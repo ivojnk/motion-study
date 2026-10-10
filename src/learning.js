@@ -240,6 +240,7 @@ export function readSession(storage, questions) {
       !Number.isInteger(value.correct) || value.correct < 0 || value.correct > value.answered ||
       !Array.isArray(value.retryIds) || !value.retryIds.every(id => value.ids.includes(id)) ||
       typeof value.finished !== 'boolean' || (value.finished && value.index !== value.ids.length) || !['daily', 'review', ...topics.map(t => t.id)].includes(value.region)) return null;
+    if (value.dailyGoalReached != null && (typeof value.dailyGoalReached !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value.dailyGoalReached))) return null;
     if (value.levelId != null && (!levelPath({ completed: [] }).some(level => value.levelId === level.id && value.region === level.topic.id && value.stage === level.stage) ||
       !Number.isInteger(value.initialCount) || value.initialCount < 1 || value.initialCount > value.ids.length ||
       !Number.isInteger(value.firstCorrect) || value.firstCorrect < 0 || value.firstCorrect > value.initialCount)) return null;
@@ -325,9 +326,10 @@ export function masteryFor(questions, progress) {
   return Math.round(100 * questions.filter(question => {
     const entry = progress.questions[question.id];
     if (!entry || needsMistakeReview(entry) || entry.interval < 4 || !entry.lastCorrect) return false;
-    // Legacy records retain their mastery. New adaptive practice must also
-    // demonstrate recall on a later, spaced repetition, not just recognition.
-    if (!entry.exerciseStats || !Object.keys(entry.exerciseStats).length) return true;
+    // Mastery needs both a correct multiple-choice answer and spaced recall.
+    // Older records without modality evidence need a fresh check.
+    const choiceModes = ['recognition', 'exercise-recognition'].includes(question.type) ? ['recognition', 'model-choice'] : ['choice'];
+    if (!choiceModes.some(mode => entry.exerciseStats?.[mode]?.correct >= 1)) return false;
     const recallModes = ['recognition', 'exercise-recognition'].includes(question.type) ? ['recognition-open'] : ['open', 'open-self'];
     return recallModes.some(mode => entry.exerciseStats[mode]?.spacedCorrect >= 1);
   }).length / questions.length);

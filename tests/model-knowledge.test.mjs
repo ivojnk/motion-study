@@ -72,7 +72,7 @@ test('model facts retain factual grading, progress-based recall and reload witho
   for (const question of questions) {
     const modes = ['choice', 'binary', supportsOpenAnswer(question) ? 'open' : 'open-self'];
     assert.equal(exerciseForProgress(question, undefined), 'choice', question.id);
-    assert.equal(exerciseForProgress(question, {interval: 1, lastCorrect: true, due: DAY}, {now: DAY}), modes[2], question.id);
+    assert.equal(exerciseForProgress(question, {interval: 1, lastCorrect: true, due: DAY, exerciseStats: {choice: {correct: 1}}}, {now: DAY}), modes[2], question.id);
     if (supportsOpenAnswer(question)) assert.equal(checkOpenAnswer(question, question.answer).correct, true, question.id);
     const session = { ids: [question.id], index: 0, correct: 0, answered: 0, retryIds: [], region: 'verdieping', options: optionsFor(question), response: null, exerciseModes: [modes[2]], finished: false, prepared: true, openDraft: 'Mijn antwoord' };
     const read = value => readSession({getItem: key => key === SESSION_KEY ? JSON.stringify(value) : null}, lookup);

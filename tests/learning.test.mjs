@@ -40,15 +40,15 @@ test('all muscle recognition groups match real exported meshes, excluding fascia
 });
 test('wrong answers are due after ten minutes, right answers expand intervals and mastery requires repetition', () => {
   const empty = { questions: {}, sessions: [] };
-  const first = recordAnswer(empty, 'a', true, 1000);
+  const first = recordAnswer(empty, 'a', true, 1000, 'choice');
   assert.deepEqual(empty.questions, {});
   assert.equal(first.questions.a.due, 1000 + DAY);
   const early = recordAnswer(first, 'a', true, 2000);
   assert.equal(early.questions.a.interval, 1);
   assert.equal(early.questions.a.due, first.questions.a.due);
   assert.equal(masteryFor([{id:'a'}], early), 0);
-  const second = recordAnswer(first, 'a', true, 1000 + DAY);
-  const third = recordAnswer(second, 'a', true, 1000 + 3 * DAY);
+  const second = recordAnswer(first, 'a', true, 1000 + DAY, 'open');
+  const third = recordAnswer(second, 'a', true, 1000 + 3 * DAY, 'open');
   assert.equal(third.questions.a.interval, 4);
   assert.equal(masteryFor([{id:'a'}], third), 100);
   const wrong = recordAnswer(third, 'a', false, 1000 + 7 * DAY);
@@ -241,4 +241,14 @@ test('answer streak counters and later lesson stages validate on reload', () => 
   }
   const invalidStage = levelPath({ completed: [] }).filter(level => level.topic.id === 'core').length;
   assert.equal(readSession(storage({ ...session, levelId: 'core:' + invalidStage, stage: invalidStage }), lookup), null);
+});
+
+test('mastery requires multiple choice as well as spaced recall for the same fact', () => {
+  const q = { id: 'fact', type: 'choice' };
+  let progress = { questions: {}, sessions: [] };
+  for (const [time, mode] of [[1000, 'binary'], [1000 + DAY, 'open'], [1000 + 3 * DAY, 'open']]) progress = recordAnswer(progress, q.id, true, time, mode);
+  assert.equal(masteryFor([q], progress), 0);
+  progress = recordAnswer(progress, q.id, true, 1000 + 7 * DAY, 'choice');
+  assert.equal(masteryFor([q], progress), 100);
+  assert.equal(masteryFor([q], { questions: { fact: { interval: 8, lastCorrect: true } } }), 0);
 });

@@ -16,7 +16,7 @@ const source = main.split("document.addEventListener('click'")[0].replace(/^impo
  read: () => ({ session, game, progress }), viewerReady: () => { viewer = { available: new Set(curriculum.cards.map(c => c.id)), select(...args) { globalThis.selected = args; }, highlight() {}, setIsolated() {} }; }, selected: () => globalThis.selected };`;
 function app(data) {
  const nodes = new Map(); const listeners = new Map();
- const node = selector => { if (!nodes.has(selector)) nodes.set(selector, { innerHTML: '', focus() {}, setAttribute() {}, scrollIntoView() {} }); return nodes.get(selector); };
+ const node = selector => { if (!nodes.has(selector)) nodes.set(selector, { innerHTML: '', focus() { globalThis.focusOptions = arguments[0]; }, setSelectionRange(start, end, direction) { this.caret = [start, end, direction]; }, setAttribute() {}, scrollIntoView() {} }); return nodes.get(selector); };
  const fixed = new Set(['#learning', '#intro', '#model-prompt', '#isolate', '#orientation', '#selection-card', '.atlas-panel', '#credits']);
  const querySelector = selector => fixed.has(selector) || selector.startsWith('#') && node('#learning').innerHTML.includes(`id="${selector.slice(1)}"`) ? node(selector) : null;
  const storage = { getItem: key => data[key] || null, setItem: (key, value) => { data[key] = value; } };
@@ -25,7 +25,7 @@ function app(data) {
  window: { localStorage: storage, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
  vm.createContext(context); vm.runInContext(source, context);
  vm.runInContext(main.slice(main.indexOf("document.addEventListener('submit'"), main.indexOf("$('#bones').addEventListener")), context);
- return { ...context.api, data, node, html: () => node('#learning').innerHTML, fire: (type, event) => listeners.get(type)(event), go(hash) { context.location.hash = hash; context.api.navigate(); } };
+ return { ...context.api, data, node, setActiveInput: input => { context.document.activeElement = input; }, html: () => node('#learning').innerHTML, fire: (type, event) => listeners.get(type)(event), go(hash) { context.location.hash = hash; context.api.navigate(); } };
 }
 function lesson(q, mode, extra = {}) {
  const session = { ids: [q.id], exerciseModes: [mode], index: 0, initialCount: 1, correct: 0, answered: 0, retryIds: [], region: q.region, options: learning.optionsFor(q), response: null, finished: false, prepared: true, pairingDone: true, ...extra };
@@ -120,4 +120,17 @@ test('short text recall accepts a small spelling slip without adding a retry', (
  instance.updateOpenDraft('Voorkant humeruss'); instance.submitOpenAnswer();
  assert.equal(instance.read().session.correct, 1); assert.equal(instance.read().session.retryIds.length, 0); assert.equal(xp(instance), 5);
  assert.match(instance.html(), /Goed! Kleine typefout\./); assert.match(instance.html(), /<p>Voorkant humerus<\/p>/);
+});
+
+test('typing preserves the input markup and a background redraw restores focus and caret', () => {
+  const instance = lesson(short, 'open');
+  const html = instance.html();
+  instance.setActiveInput({ id: 'open-answer', selectionStart: 4, selectionEnd: 7, selectionDirection: 'backward' });
+  instance.updateOpenDraft('Mijn antwoord');
+  assert.equal(instance.html(), html);
+  assert.equal(instance.read().session.response, null);
+  instance.renderLesson();
+  assert.deepEqual(instance.node('#open-answer').caret, [4, 7, 'backward']);
+  assert.equal(instance.read().session.openDraft, 'Mijn antwoord');
+  assert.equal(xp(instance), 0);
 });

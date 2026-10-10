@@ -24,7 +24,7 @@ test('every question has assisted and recall forms; deep muscles are never point
 
 test('fresh and failed facts use assistance independent of lesson position', () => {
   assert.equal(exerciseForProgress(fact, undefined), 'choice');
-  assert.equal(exerciseForProgress(fact, undefined, { index: 1 }), 'binary');
+  assert.equal(exerciseForProgress(fact, undefined, { index: 1 }), 'choice');
   assert.equal(exerciseForProgress(muscle, undefined, { index: 0 }), 'model-choice');
   assert.equal(exerciseForProgress(fact, { interval: 8, lastCorrect: false, due: 0 }), 'choice');
 });
@@ -71,4 +71,13 @@ test('legacy spaced progress still unlocks recall and selections stay in availab
     }
   }
   assert.equal(exerciseForProgress(muscle, { interval: 2, due: 0, lastCorrect: true }, { now: DAY }), 'recognition-open');
+});
+
+test('binary-only and legacy facts need a correct multiple-choice check before recall', () => {
+  let progress = empty();
+  for (const now of [1000, 1000 + DAY, 1000 + 3 * DAY]) progress = recordAnswer(progress, fact.id, true, now, 'binary');
+  assert.equal(exerciseForProgress(fact, progress.questions[fact.id], { index: 1, now: 1000 + 7 * DAY }), 'choice');
+  assert.equal(exerciseForProgress(fact, { interval: 8, lastCorrect: true, due: 0 }), 'choice');
+  progress = recordAnswer(progress, fact.id, true, 1000 + 7 * DAY, 'choice');
+  assert.equal(exerciseForProgress(fact, progress.questions[fact.id], { now: 1000 + 8 * DAY }), availableExercises(fact)[2]);
 });
