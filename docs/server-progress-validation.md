@@ -14,4 +14,6 @@ Validation:
 
 Offline writes remain pending. Revision conflicts require a choice. Interrupted local replacement rolls back from a saved snapshot. Updating waits for server acknowledgement. Logout attempts to flush and retains pending local data if unavailable. Storage notice version changed, requiring renewed login acknowledgement without changing account IDs.
 
-No physical iPhone test or recovery of already deleted iPhone data was possible. Production verification is recorded after deployment below.
+No physical iPhone test or recovery of already deleted iPhone data was possible. 
+
+Production verification completed after PR #23 merged as `327578c`. Cloudflare version `e6680e8b-9c1c-4a48-ad74-e570b258ed46` serves the current build. A test account saved an answer, XP and an unfinished lesson, then restored the identical snapshot in a second login. Live checks rejected a stale write with HTTP 409 and an account mismatch with HTTP 401. Both PR and main CI passed. Existing account, asset and origin checks also passed. These checks used test accounts, not Lotte's iPhone.
