@@ -675,3 +675,36 @@ main:not([hidden]) { padding-bottom: calc(112px + env(safe-area-inset-bottom)); 
 .result-card .text-link { display: flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 4px; }
 
 .storage-warning { padding: 16px; border: 1px solid var(--red); border-radius: 12px; background: var(--paper); color: var(--ink); line-height: 1.5; overflow-wrap: anywhere; }
+
+/* Open answers stay in normal flow while the phone keyboard is visible. */
+.lesson-focus #learning:has(.open-answer-form):not(:has(.lesson-dock.success, .lesson-dock.retry)) {
+  height: auto;
+  min-height: 100svh;
+  overflow: visible;
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+}
+.lesson-focus .question-card:has(.open-answer-form) .answers {
+  flex: none;
+  max-height: none;
+  overflow: visible;
+}
+.lesson-focus .question-card:has(.open-answer-form) .lesson-dock:not(.success, .retry) {
+  position: static;
+  margin-top: 12px;
+  padding-inline: 0;
+}
+.extra-explanation { margin-top: 8px; }
+.extra-explanation summary { min-height: 44px; padding-block: 12px; cursor: pointer; font-weight: 600; }
+.extra-explanation summary:focus-visible { outline: 3px solid var(--purple); outline-offset: 2px; border-radius: 4px; }
+.extra-explanation-content { padding-bottom: 8px; }
+.lesson-focus .lesson-dock:has(.extra-explanation[open]) .lesson-feedback {
+  max-height: 55svh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+@media (max-width: 620px) {
+  .lesson-focus .question-card:has(.open-answer-form) .atlas-panel { flex: none; }
+  .lesson-focus .workspace .question-card:has(.open-answer-form) .viewer-wrap { height: 180px; flex: none; }
+  .lesson-focus .question-card:has(.open-answer-form) .answers { padding-top: 12px; }
+  .lesson-focus .question-card:has(.open-answer-form) .open-answer-input { font-size: 16px; }
+}

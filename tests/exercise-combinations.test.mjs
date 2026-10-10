@@ -46,7 +46,7 @@ test('combination recall grades exercise names and aliases without anatomy-name 
     for (const wrong of q.distractors) assert.equal(checkOpenAnswer(q, wrong).correct, false);
     assert.equal(checkOpenAnswer(q, 'musculus ' + q.answer).correct, false);
     assert.equal(masteryFor([q], { questions: { [q.id]: { interval: 4, lastCorrect: true, exerciseStats: { recognition: { spacedCorrect: 3 } } } } }), 0);
-    assert.equal(masteryFor([q], { questions: { [q.id]: { interval: 4, lastCorrect: true, exerciseStats: { 'recognition-open': { spacedCorrect: 1 } } } } }), 100);
+    assert.equal(masteryFor([q], { questions: { [q.id]: { interval: 4, lastCorrect: true, exerciseStats: { recognition: { correct: 1 }, 'recognition-open': { spacedCorrect: 1 } } } } }), 100);
   }
 });
 

@@ -32,6 +32,8 @@ const source = fs.readFileSync(new URL('../src/main.js', import.meta.url), 'utf8
     viewerCalls: () => globalThis.viewerCalls
   };`;
 
+const confirmedChoice = q => JSON.stringify(learning.recordAnswer({ questions: {}, sessions: [] }, q.id, true, Date.now(), 'choice'));
+
 function controlledLocks() {
   const queue = [];
   return {
@@ -265,7 +267,7 @@ test('direction definitions hide the atlas in every exercise form and after relo
       const session = { ids: [q.id], exerciseModes: [mode], index: 0, initialCount: 1,
         correct: 0, answered: 0, retryIds: [], region: 'daily', options: learning.optionsFor(q),
         response: null, finished: false, prepared: true, openDraft: '' };
-      const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) }, undefined, { modelUnavailable: true });
+      const instance = app({ [learning.PROGRESS_KEY]: confirmedChoice(q), [learning.SESSION_KEY]: JSON.stringify(session) }, undefined, { modelUnavailable: true });
       instance.go('#les/daily');
       assert.equal(instance.element('.atlas-panel').hidden, true, q.id + ': ' + mode);
       assert.equal(instance.element('#model-prompt').hidden, true);
@@ -290,7 +292,7 @@ for (const mode of ['choice', 'binary']) {
     const session = { ids: [q.id, plain.id], exerciseModes: [mode, 'choice'], index: 0, initialCount: 2,
       correct: 0, answered: 0, retryIds: [], region: 'daily', options: learning.optionsFor(q),
       response: null, finished: false, prepared: true };
-    const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) }, undefined, { modelUnavailable: true });
+    const instance = app({ [learning.PROGRESS_KEY]: confirmedChoice(q), [learning.SESSION_KEY]: JSON.stringify(session) }, undefined, { modelUnavailable: true });
     instance.go('#les/daily');
     assert.match(instance.html(), /3D-model laden/);
     instance.chooseAnswer(session.options.indexOf(q.answer));
@@ -862,7 +864,7 @@ test('the full question directory is accessible without changing an unfinished l
 
 test('new review sessions select difficulty from the individual question and freeze it through rewards and reload', () => {
   const q = curriculum.questions.find(question => question.type !== 'recognition' && learning.supportsOpenAnswer(question));
-  const dueProgress = { questions: { [q.id]: { attempts: 1, correct: 1, interval: 1, due: Date.now() - 1, lastCorrect: true } }, sessions: [] };
+  const dueProgress = { questions: { [q.id]: { attempts: 1, correct: 1, interval: 1, due: Date.now() - 1, lastCorrect: true, exerciseStats: { choice: { attempts: 1, correct: 1, lastCorrect: true, spacedCorrect: 1 } } } }, sessions: [] };
   const instance = app({ [learning.PROGRESS_KEY]: JSON.stringify(dueProgress) });
   instance.startLesson('review', null);
   assert.deepEqual(Array.from(instance.read().session.ids), Array(7).fill(q.id));
@@ -1359,7 +1361,7 @@ for (const mode of ['choice', 'binary']) {
   test('3D knowledge ' + mode + ' gates loading, grades facts and restores precise fiber selection', () => {
     const q = curriculum.questions.find(q => q.id === 'model-fact-extra-muscles-incline-db-profile');
     const session = { ids: [q.id], index: 0, correct: 0, answered: 0, retryIds: [], region: 'verdieping', options: learning.optionsFor(q), response: null, exerciseModes: [mode], finished: false, prepared: true, pairingDone: true };
-    const instance = app({[learning.SESSION_KEY]: JSON.stringify(session)}, undefined, {modelUnavailable: true});
+    const instance = app({[learning.PROGRESS_KEY]: confirmedChoice(q), [learning.SESSION_KEY]: JSON.stringify(session)}, undefined, {modelUnavailable: true});
     instance.go('#les/verdieping');
     assert.match(instance.html(), /3D-model laden/);
     instance.answer(session.options.indexOf(q.answer));
@@ -1513,4 +1515,51 @@ test('unfinished goal, blocked saves, and empty lessons do not offer a streak ce
     const result = instance.html(); instance.showStreak();
     assert.equal(instance.html(), result);
   }
+});
+
+test('later lessons above the daily goal do not repeat the streak celebration', () => {
+  for (const xp of [30, 45, 100]) {
+    const instance = streakResult({ xp });
+    assert.doesNotMatch(instance.html(), /show-streak/);
+  }
+});
+
+test('a goal reached during answers is celebrated after finishing, including a resumed draft', () => {
+  const q = curriculum.questions.find(q => q.type === 'choice' && !learning.usesModel(q));
+  const session = { ids: [q.id], exerciseModes: ['choice'], index: 0, initialCount: 1, correct: 0, answered: 0,
+    retryIds: [], region: 'daily', options: learning.optionsFor(q), response: null, finished: false, prepared: true, pairingDone: true };
+  const instance = app({ [learning.GAME_KEY]: JSON.stringify({ days: { [learning.dayKey()]: 25 }, completed: [] }),
+    [learning.SESSION_KEY]: JSON.stringify(session) });
+  instance.go('#les/daily'); instance.play();
+  assert.equal(instance.read().session.dailyGoalReached, learning.dayKey());
+  const resumed = app(instance.data); resumed.go('#les/daily'); resumed.next();
+  assert.match(resumed.html(), /show-streak/);
+  const reloaded = app(resumed.data); reloaded.go('#les/daily');
+  assert.doesNotMatch(reloaded.html(), /show-streak/);
+});
+
+test('unanswered binary drafts without choice evidence become multiple choice and keep rewards', () => {
+  const q = curriculum.questions.find(q => q.type === 'choice' && !learning.usesModel(q));
+  const session = { ids: [q.id], exerciseModes: ['binary'], index: 0, initialCount: 1, correct: 0, answered: 0,
+    retryIds: [], region: 'daily', options: learning.optionsFor(q), response: null, finished: false, prepared: true, pairingDone: true };
+  const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) });
+  instance.go('#les/daily');
+  assert.equal(instance.read().session.exerciseModes[0], 'choice');
+  assert.equal(instance.read().session.options.length, 4);
+  assert.equal(xp(instance), 0);
+  instance.play(); assert.equal(instance.read().progress.questions[q.id].exerciseStats.choice.correct, 1);
+});
+
+test('extra explanation is a collapsed disclosure after grading with existing lesson context', () => {
+  const q = curriculum.questions.find(q => q.id === 'pectoralis-aanhechting');
+  const session = { ids: [q.id], exerciseModes: ['choice'], index: 0, initialCount: 1, correct: 0, answered: 0,
+    retryIds: [], region: 'daily', options: learning.optionsFor(q), response: null, finished: false, prepared: true, pairingDone: true };
+  const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) });
+  instance.go('#les/daily'); assert.doesNotMatch(instance.html(), /Meer uitleg/);
+  instance.play(); assert.match(instance.html(), /<details class="extra-explanation"><summary>Meer uitleg/);
+  assert.match(instance.html(), /Sleutelbeen, borstbeen, rectusschede/);
+  assert.match(instance.html(), /Anteflexie tot 90/);
+  const restored = app(instance.data); restored.go('#les/daily');
+  assert.match(restored.html(), /<details class="extra-explanation">/);
+  assert.equal(xp(restored), 5);
 });

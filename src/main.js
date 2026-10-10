@@ -7,7 +7,7 @@ import { streakMarkup, animateStreakCompletion } from './streak-completion.js';
 import { animateChapterCompletion } from './chapter-completion.js';
 import { animateLessonCompletion } from './lesson-completion.js';
 import curriculum from './data/curriculum.json';
-import { LESSON_SIZE, fillLesson, interleaveMistakes, needsMistakeReview, recordLessonAnswer, topics, readProgress, readSession, recordAnswer, lessonQueue, optionsFor, masteryFor, PROGRESS_KEY, SESSION_KEY, GAME_KEY, DAILY_GOAL, readGame, awardXP, gameStats, levelPath, levelQuestions, completeLevel, exerciseFor, matchingPairs, shuffled, binaryResponses, varyLesson, DRAFTS_KEY, draftKey, readDrafts, isOpenAnswerCorrect, checkOpenAnswer, isModelQuestion, usesModel, modelAvailable, modelMuscleIds, modelChoiceCards } from './learning.js';
+import { LESSON_SIZE, fillLesson, interleaveMistakes, needsMistakeReview, recordLessonAnswer, topics, readProgress, readSession, recordAnswer, lessonQueue, optionsFor, masteryFor, PROGRESS_KEY, SESSION_KEY, GAME_KEY, DAILY_GOAL, dayKey, readGame, awardXP, gameStats, levelPath, levelQuestions, completeLevel, exerciseFor, matchingPairs, shuffled, binaryResponses, varyLesson, DRAFTS_KEY, draftKey, readDrafts, isOpenAnswerCorrect, checkOpenAnswer, isModelQuestion, usesModel, modelAvailable, modelMuscleIds, modelChoiceCards } from './learning.js';
 import { lessonMomentum, lessonInterlude } from './lesson-motivation.js';
 import { exerciseForProgress, availableExercises } from './exercise-progression.js';
 import { lessonGroups } from './lesson-groups.js';
@@ -411,14 +411,27 @@ function compactMuscleFeedback(question, muscles) {
   if (muscles && ids.length && ids.every(id => namesFor(id).some(name => question.answer.toLocaleLowerCase('nl').includes(name))) && withoutNames(question.answer) === '') labels = null;
   return { modelMuscles: labels, answer, explanation };
 }
+function extraExplanationMarkup(q) {
+  const muscleIds = q.muscleIds || q.modelContext?.muscleIds || (q.muscleId ? [q.muscleId] : []);
+  const cards = curriculum.cards.filter(card => muscleIds.includes(card.id));
+  const fields = cards.flatMap(card => Object.entries(card.fields || {}).filter(([, value]) => value !== q.answer)
+    .map(([label, value]) => '<p><strong>' + escape((cards.length > 1 ? card.name + ' · ' : '') + label) + '</strong><br>' + escape(value) + '</p>')).slice(0, 4);
+  const related = fields.length ? [] : curriculum.questions.filter(other => other.id !== q.id && other.type !== 'recognition' &&
+    other.region === q.region && other.source?.section === q.source?.section && other.answer !== q.answer).slice(0, 3)
+    .map(other => '<p><strong>' + escape(other.prompt) + '</strong><br>' + escape(other.explanation || other.answer) + '</p>');
+  const content = (q.modelContext?.hint ? '<p>' + escape(q.modelContext.hint) + '</p>' : '') + fields.join('') + related.join('');
+  return content ? '<details class="extra-explanation"><summary>Meer uitleg</summary><div class="extra-explanation-content">' + content + '</div></details>' : '';
+}
 function feedbackMarkup(q, isCorrect, answerCheck) {
   const momentum = lessonMomentum(session);
   const title = isCorrect ? answerCheck?.typo ? 'Goed! Kleine typefout.' : momentum.run >= 3 ? momentum.run + ' op rij' : 'Goed' : 'Onjuist';
   const muscles = ['exercise-recognition', 'model-fact'].includes(q.type) ? highlightedMuscleNames(q) : q.modelContext ? q.modelContext.muscleIds.map(id => curriculum.cards.find(card => card.id === id)?.name).join(', ') : null;
   const { modelMuscles, answer: displayAnswer, explanation } = compactMuscleFeedback(q, muscles);
-  return '<div class="lesson-dock ' + (isCorrect ? 'success' : 'retry') + '"><div class="feedback ' + (isCorrect ? 'success' : 'retry') + ' lesson-feedback" role="status" aria-live="polite"><div class="feedback-heading"><span class="feedback-symbol" aria-hidden="true">' + (isCorrect ? icon('check') : icon('refresh')) + '</span><strong>' + title + '</strong>' + (isCorrect ? '<span class="feedback-reward">+5 XP</span>' : '') + '</div><p>' + (isCorrect ? escape(displayAnswer) : '<strong>Het juiste antwoord:</strong> ' + escape(displayAnswer)) + '</p>' + (modelMuscles ? '<p><strong>Gemarkeerde spieren:</strong> ' + escape(modelMuscles) + '</p>' : '') + (explanation ? '<p>' + escape(explanation) + '</p>' : '') + (q.source.kind === 'supplement' ? '<p>Aanvullend coachingvoorbeeld</p>' : '') + '</div><div class="lesson-actions"><button class="primary next-button" id="next-question">' + (session.index + 1 >= session.ids.length ? 'Bekijk je resultaat' : 'Verder') + icon('arrow-right') + '</button></div></div>';
+  return '<div class="lesson-dock ' + (isCorrect ? 'success' : 'retry') + '"><div class="feedback ' + (isCorrect ? 'success' : 'retry') + ' lesson-feedback" role="status" aria-live="polite"><div class="feedback-heading"><span class="feedback-symbol" aria-hidden="true">' + (isCorrect ? icon('check') : icon('refresh')) + '</span><strong>' + title + '</strong>' + (isCorrect ? '<span class="feedback-reward">+5 XP</span>' : '') + '</div><p>' + (isCorrect ? escape(displayAnswer) : '<strong>Het juiste antwoord:</strong> ' + escape(displayAnswer)) + '</p>' + (modelMuscles ? '<p><strong>Gemarkeerde spieren:</strong> ' + escape(modelMuscles) + '</p>' : '') + (explanation ? '<p>' + escape(explanation) + '</p>' : '') + (q.source.kind === 'supplement' ? '<p>Aanvullend coachingvoorbeeld</p>' : '') + extraExplanationMarkup(q) + '</div><div class="lesson-actions"><button class="primary next-button" id="next-question">' + (session.index + 1 >= session.ids.length ? 'Bekijk je resultaat' : 'Verder') + icon('arrow-right') + '</button></div></div>';
 }
 function renderLesson({ preserveCamera = false } = {}) {
+  const activeInput = document.activeElement?.id === 'open-answer' ? document.activeElement : null;
+  const caret = activeInput ? { start: activeInput.selectionStart, end: activeInput.selectionEnd, direction: activeInput.selectionDirection, scrollY: window.scrollY, scrollTop: $('#learning').scrollTop } : null;
   restoreAtlasLayout();
   const [, region = 'daily', stage] = route.split('/');
   const levelId = stage !== undefined ? region + ':' + stage : null;
@@ -436,6 +449,11 @@ function renderLesson({ preserveCamera = false } = {}) {
   const q = byId.get(session.ids[session.index]);
   setLessonFocus(true);
   $('#intro').innerHTML = '';
+  if (!session.response && currentExercise(q) === 'binary' && !(progress.questions[q.id]?.exerciseStats?.choice?.correct > 0)) {
+    const exerciseModes = session.exerciseModes.map((mode, index) => index === session.index ? 'choice' : mode);
+    session = { ...session, exerciseModes, options: optionsFor(q, Math.random, 'choice') };
+    save();
+  }
   const mode = currentExercise(q);
   if (mode !== 'point' || pendingPointSelection?.questionId !== q.id || pendingPointSelection?.index !== session.index || session.response) pendingPointSelection = null;
   const response = session.response;
@@ -485,6 +503,13 @@ function renderLesson({ preserveCamera = false } = {}) {
   modelPrompt.textContent = '';
   $('.atlas-panel').hidden = !usesModel(q);
   arrangeModelQuestion();
+  if (caret && !session.response) {
+    const input = $('#open-answer');
+    input?.focus({ preventScroll: true });
+    input?.setSelectionRange(caret.start, caret.end, caret.direction);
+    $('#learning').scrollTop = caret.scrollTop;
+    window.scrollTo(0, caret.scrollY);
+  }
 }
 
 function updatePointSelection(response, muscleId, anatomyName = null) {
@@ -541,7 +566,9 @@ function answer(index, pickedMuscle = null, selfAssessment = null) {
     session = { ...session, reviewLessonId };
     session = { ...recordLessonAnswer(session, correct, availableExercises(q)[0]), response, selfAssessmentCorrect: mode === 'open-self' ? selfAssessment : null };
     const xp = correct ? 5 : 0;
+    const beforeGoal = gameStats(game).today < DAILY_GOAL;
     game = awardXP(game, xp);
+    if (beforeGoal && gameStats(game).today >= DAILY_GOAL) session = { ...session, dailyGoalReached: dayKey() };
     session = { ...session, xp: (session.xp || 0) + xp };
     progress = recordAnswer(progress, q.id, correct, Date.now(), mode, { lessonId: reviewLessonId, retry });
     save(true);
@@ -575,12 +602,13 @@ function finish() {
       refreshProgress();
       const alreadyCompleted = game.completed.includes(session.levelId);
       const bonus = session.answered > 0 ? 10 : 0;
+      const beforeGoal = gameStats(game).today < DAILY_GOAL;
       game = completeLevel(awardXP(game, bonus), session.levelId, session.correct, session.initialCount || session.ids.length);
       session = { ...session, finished: true, finishedAt: Date.now(), xp: (session.xp || 0) + bonus };
       progress = { ...progress, sessions: [...progress.sessions, { at: Date.now(), correct: session.correct, total: session.answered }].slice(-200) };
       const saved = save(true);
       const streakStats = gameStats(game);
-      pendingStreakSession = saved && session.answered > 0 && streakStats.today >= DAILY_GOAL && streakStats.streak > 0 ? session : null;
+      pendingStreakSession = saved && session.answered > 0 && (beforeGoal || session.dailyGoalReached === dayKey()) && streakStats.today >= DAILY_GOAL && streakStats.streak > 0 ? session : null;
       if (saved && !alreadyCompleted && game.completed.includes(session.levelId)) {
         pathRewardLevelId = session.levelId;
         const chapterLessons = levelPath(game).filter(level => level.topic.id === session.region);

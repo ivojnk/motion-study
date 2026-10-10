@@ -25,7 +25,12 @@ export function exerciseForProgress(question, questionProgress, { index = 0, now
   const modes = availableExercises(question);
   const turn = Number.isInteger(index) ? Math.abs(index) : 0;
   const recognition = ['recognition', 'exercise-recognition'].includes(question.type);
-  const easy = recognition ? (question.type === 'recognition' ? 'model-choice' : 'recognition') : turn % 3 === 1 ? 'binary' : 'choice';
+  const choiceCorrect = recognition
+    ? ['recognition', 'model-choice'].some(mode => questionProgress?.exerciseStats?.[mode]?.correct > 0)
+    : questionProgress?.exerciseStats?.choice?.correct > 0;
+  const easy = recognition ? (question.type === 'recognition' ? 'model-choice' : 'recognition') : choiceCorrect && turn % 3 === 1 ? 'binary' : 'choice';
+  // A two-option answer cannot replace demonstrating the fact in multiple choice.
+  if (!recognition && !choiceCorrect) return 'choice';
   if (needsMistakeReview(questionProgress)) {
     if (!questionProgress?.lastCorrect) return easy;
     if (questionProgress.mistakeReview?.successes >= 1) {
