@@ -16,6 +16,8 @@ export function staticEditionPlugin({ origin = 'https://ivojnk.github.io' } = {}
         replace(/src="\/src\/bootstrap\.js"/, 'src="/src/static-bootstrap.js"');
         replace(/<meta name="app-version"/, '<meta name="app-edition" content="static" />\n  <meta name="app-version"');
         html = html.replaceAll('https://lottequiz-motionstudy.jonkersivo.workers.dev', publicOrigin);
+        replace(/<dialog id="progress-conflict"[\s\S]*?<\/dialog>/, '');
+        replace(/<p id="progress-sync-status"[\s\S]*?<\/p>/, '');
         replace(/<div id="login-install">[\s\S]*?<\/div>/, '');
         replace(/<section id="account-screen"[\s\S]*?<\/section>/,
           '<p id="static-loading" class="account-screen" role="status">Laden…</p>');

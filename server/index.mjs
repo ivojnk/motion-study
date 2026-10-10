@@ -2,6 +2,7 @@ import { createServer } from 'node:http';
 import { readFile, stat, realpath } from 'node:fs/promises';
 import { resolve, sep, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { progressRequestLimit } from '../shared/progress.mjs';
 import { createAccounts } from './accounts.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -25,7 +26,7 @@ export async function startServer({ port = 5173, host = '127.0.0.1', origin = `h
         let size = 0;
         for await (const chunk of req) {
           size += chunk.length;
-          if (size > 4096) { res.writeHead(413, { 'Cache-Control': 'no-store' }); res.end(); return; }
+          if (size > progressRequestLimit(requestURL.pathname)) { res.writeHead(413, { 'Cache-Control': 'no-store' }); res.end(); return; }
           chunks.push(chunk);
         }
         const request = new Request(requestURL, { method: req.method, headers: req.headers, ...(!['GET', 'HEAD'].includes(req.method) ? { body: Buffer.concat(chunks) } : {}) });

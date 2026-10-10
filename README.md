@@ -29,7 +29,7 @@ are checked automatically. For longer explanations, compare your answer with
 the course answer and mark whether you knew it.
 
 Read the feedback before continuing. Mistakes return for more practice.
-Unfinished lessons can be resumed later in the same browser.
+Unfinished lessons can be resumed later. The account version also restores them on other devices.
 
 Use **Voortgang** to see your progress and start a review when questions are
 due. Earn XP as you study and reach the daily goal to build a streak.
@@ -43,10 +43,15 @@ due. Earn XP as you study and reach the daily goal to build a streak.
 
 ## Keep your progress
 
-Your answers, XP, review schedule and unfinished lessons stay in the browser
-you used. In the account version, each account has separate progress. Neither
-version syncs progress between devices or browsers. Clearing site data removes
-that progress, even if you sign in again.
+The account version saves answers, XP, review planning and unfinished lessons
+on the server and keeps a local copy. Sign in with the same username on another
+device to continue. Existing local progress uploads automatically. If two devices
+have different pending changes, choose which version to keep. The app downloads
+a recovery copy before replacing local progress. Changes without a connection
+remain local until synchronization succeeds. Clearing site data removes those
+unsent changes. Anyone who knows your username can view and change your progress.
+
+The static version stores progress only in the browser and does not synchronize.
 
 Open **Privacy & opslag** in the app menu for storage information. In the account
 version, you can also change your statistics choice there.
