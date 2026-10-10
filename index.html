@@ -69,6 +69,7 @@
   </section>
   <noscript><p class="account-screen">Zet JavaScript aan om MotionStudy te gebruiken.</p></noscript>
   <main id="main" tabindex="-1" hidden>
+    <p id="progress-sync-status" class="storage-warning" role="status" aria-live="polite" hidden></p>
     <p id="storage-warning" class="storage-warning" role="alert" hidden>Je browser kan je voortgang niet opslaan. Laat dit tabblad open: bij sluiten of vernieuwen kunnen je laatste antwoorden verloren gaan. Controleer of siteopslag is toegestaan en of er voldoende ruimte is.</p>
     <section id="intro"></section>
     <div class="workspace">
@@ -96,11 +97,12 @@
   <dialog id="privacy" class="legal-dialog" aria-labelledby="privacy-title">
     <button class="close-dialog" data-legal-close type="button" aria-label="Sluiten" autofocus><img class="icon" src="./icons/x.svg" alt="" /></button>
     <h2 id="privacy-title">Privacy & opslag</h2>
-    <p class="legal-date">Bijgewerkt op 5 oktober 2026</p>
+    <p class="legal-date">Bijgewerkt op 10 oktober 2026</p>
     <h3>Je account</h3>
     <p>De server bewaart je gebruikersnaam, accountnummer en aanmaakdatum. Wie je gebruikersnaam kent, kan inloggen. Gebruik een bijnaam zonder gevoelige gegevens.</p>
-    <h3>In deze browser</h3>
-    <p>Antwoorden, scores, XP, herhaalplanning en onafgemaakte lessen blijven in deze browser, per account. Ze synchroniseren niet. Sitegegevens wissen verwijdert ze. Op dit apparaat kan iemand met je gebruikersnaam dezelfde voortgang openen.</p>
+    <h3>Je voortgang</h3>
+    <p>Antwoorden, scores, XP, herhaalplanning en onafgemaakte lessen worden bij je account op de server bewaard. Deze browser bewaart ook een lokale kopie. Met dezelfde gebruikersnaam kun je op een ander apparaat verder. Wie je gebruikersnaam kent, kan je voortgang bekijken en wijzigen.</p>
+    <p>Wijzigingen zonder verbinding blijven lokaal totdat ze zijn verstuurd. Sitegegevens wissen verwijdert nog niet verstuurde wijzigingen.</p>
     <section id="progress-transfer" class="progress-transfer" aria-labelledby="progress-transfer-title" hidden>
       <h3 id="progress-transfer-title">Je voortgang</h3>
       <div class="progress-transfer-actions">
@@ -120,7 +122,7 @@
     <h3>Cookies en beveiliging</h3>
     <p>Een noodzakelijke inlogcookie werkt maximaal 30 dagen. Uitloggen beëindigt de sessie. De server bewaart de sessiecode gehasht, de vervaldatum, deze informatieversie en je statistiekkeuze. Je IP-adres wordt kort gebruikt om inlogpogingen te beperken. De app plaatst geen advertentie- of trackingcookies.</p>
     <h3>Optionele gebruiksstatistieken</h3>
-    <p>Met jouw toestemming bewaren we de laatste activiteit en het aantal afgeronde lessen bij je account. De beheerder ziet totalen. Antwoorden en scores worden niet verstuurd. Je keuze geldt voor deze sessie. Het aantal aangemaakte accounts tellen we uit de accountadministratie.</p>
+    <p>Met jouw toestemming bewaren we de laatste activiteit en het aantal afgeronde lessen bij je account. De beheerder ziet totalen. Deze statistieken staan los van de opslag van je leergegevens. Je keuze geldt voor deze sessie. Het aantal aangemaakte accounts tellen we uit de accountadministratie.</p>
     <p>Dagtotalen ouder dan 90 dagen en controlecodes ouder dan 35 dagen worden bij de volgende statistiekverwerking opgeruimd. Niet-verstuurde lesmeldingen blijven maximaal 30 dagen in je browser. Uitzetten wist die meldingen en stopt nieuwe statistieken voor deze sessie. Eerdere servergegevens blijven staan.</p>
     <div id="privacy-preferences" class="privacy-preferences" hidden>
       <label class="account-check"><input id="privacy-analytics" type="checkbox" aria-describedby="privacy-choice-help" /><span>Gebruiksstatistieken delen</span></label>
@@ -129,15 +131,15 @@
     </div>
     <h3>Hosting en bewaartijd</h3>
     <p>Cloudflare verzorgt hosting en beveiliging en verwerkt technisch verkeer, waaronder je IP-adres. Verwerking buiten de EU is mogelijk. Zie de <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noreferrer">privacyinformatie van Cloudflare</a>.</p>
-    <p>Accountgegevens en activiteit per account blijven staan totdat de beheerder ze verwijdert. Accounts hebben nog geen automatische verwijdertermijn. Verlopen sessies worden bij een volgende login opgeruimd. Browsergegevens blijven staan totdat jij of je browser ze wist.</p>
+    <p>Accountgegevens, leergegevens en activiteit per account blijven staan totdat de beheerder ze verwijdert. Accounts hebben nog geen automatische verwijdertermijn. Verlopen sessies worden bij een volgende login opgeruimd. Browsergegevens blijven staan totdat jij of je browser ze wist.</p>
     <h3>Vragen of gegevens verwijderen</h3>
-    <p>Neem contact op met de persoon van wie je de app kreeg voor inzage, een kopie, correctie of verwijdering van accountgegevens. De beheerder moet je verzoek kunnen controleren. Lokale leergegevens wis je via de sitegegevens in je browser.</p>
+    <p>Neem contact op met de persoon van wie je de app kreeg voor inzage, een kopie, correctie of verwijdering van accountgegevens. De beheerder moet je verzoek kunnen controleren. Sitegegevens wissen verwijdert alleen de lokale kopie. Vraag de beheerder om ook je servervoortgang te verwijderen.</p>
     <p>Als de AVG van toepassing is, kun je ook verzoeken om beperking of overdracht, bezwaar maken en een klacht indienen bij de <a href="https://autoriteitpersoonsgegevens.nl/" target="_blank" rel="noreferrer">Autoriteit Persoonsgegevens</a> of je lokale toezichthouder.</p>
   </dialog>
   <dialog id="usage" class="legal-dialog" aria-labelledby="usage-title">
     <button class="close-dialog" data-legal-close type="button" aria-label="Sluiten" autofocus><img class="icon" src="./icons/x.svg" alt="" /></button>
     <h2 id="usage-title">Gebruik & contact</h2>
-    <p class="legal-date">Bijgewerkt op 5 oktober 2026</p>
+    <p class="legal-date">Bijgewerkt op 10 oktober 2026</p>
     <p>MotionStudy is een privéleerhulp voor anatomie en biomechanica. De inhoud is geen officiële toets, medisch advies of persoonlijk trainingsadvies.</p>
     <p>Gebruik je eigen account. Deel de link alleen binnen je studiekring. De app controleert geen uitnodigingen of identiteit.</p>
     <h3>Lesstof en licenties</h3>
@@ -167,6 +169,17 @@
       <button id="install-how-to" class="install-button" type="button"><span>Toevoegen aan beginscherm</span></button>
       <button id="install-back" class="install-button" type="button" hidden><span>Terug</span></button>
       <button class="install-continue" data-install-close type="button">Verder leren</button>
+    </div>
+  </dialog>
+  <dialog id="progress-conflict" class="legal-dialog" aria-labelledby="progress-conflict-title" aria-describedby="progress-conflict-description">
+    <h2 id="progress-conflict-title">Welke voortgang wil je gebruiken?</h2>
+    <p id="progress-conflict-description">Dit apparaat en de server hebben verschillende voortgang. Je keuze vervangt de andere versie.</p>
+    <p>Bij de serverversie downloaden we eerst een herstelkopie van dit apparaat.</p>
+    <p id="progress-conflict-error" role="alert" hidden></p>
+    <div class="progress-transfer-actions">
+      <button class="primary" type="button" data-progress-choice="server" autofocus>Gebruik serverversie</button>
+      <button class="progress-import-button" type="button" data-progress-choice="local">Gebruik dit apparaat</button>
+      <button class="progress-import-button" type="button" data-progress-choice="cancel">Later</button>
     </div>
   </dialog>
   <dialog id="app-update" class="update-dialog" aria-labelledby="app-update-title" aria-describedby="app-update-description">

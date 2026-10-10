@@ -1,5 +1,6 @@
 import { DurableObject } from 'cloudflare:workers';
 import { createAccountService } from './account-service.mjs';
+import { progressRequestLimit } from '../shared/progress.mjs';
 import { hasOwnerSession, ownerRoute } from './owner-routes.mjs';
 export { OwnerAuth } from './owner-auth.mjs';
 
@@ -24,21 +25,23 @@ export class Accounts extends DurableObject {
     let buffered = request;
     if (request.body) {
       const reader = request.body.getReader();
-      let body = new Uint8Array(0);
+      const chunks = [];
+      let size = 0;
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        if (body.byteLength + value.byteLength > 4096) {
+        if (size + value.byteLength > progressRequestLimit(new URL(request.url).pathname)) {
           await reader.cancel();
           return new Response(JSON.stringify({ error: 'Dit verzoek is te groot.' }), {
             status: 413, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },
           });
         }
-        const combined = new Uint8Array(body.byteLength + value.byteLength);
-        combined.set(body);
-        combined.set(value, body.byteLength);
-        body = combined;
+        chunks.push(value);
+        size += value.byteLength;
       }
+      const body = new Uint8Array(size);
+      let offset = 0;
+      for (const chunk of chunks) { body.set(chunk, offset); offset += chunk.byteLength; }
       buffered = new Request(request, { body });
     }
     return this.accounts.handle(buffered, request.headers.get('CF-Connecting-IP') || 'unknown');
