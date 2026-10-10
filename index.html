@@ -48,6 +48,7 @@
         <button class="account-menu-action" data-install-app type="button" aria-haspopup="dialog" aria-controls="install-app" hidden><img class="icon" src="./icons/arrow-square-out.svg" alt="" />Op je beginscherm</button>
         <button class="account-menu-action" data-legal-dialog="privacy" type="button" aria-haspopup="dialog" aria-controls="privacy"><img class="icon" src="./icons/lock.svg" alt="" />Privacy & opslag</button>
         <button class="account-menu-action" data-legal-dialog="usage" type="button" aria-haspopup="dialog" aria-controls="usage"><img class="icon" src="./icons/book-2.svg" alt="" />Gebruik & contact</button>
+        <button class="account-menu-action" data-progress-recovery type="button" aria-haspopup="dialog" aria-controls="progress-recovery"><img class="icon" src="./icons/refresh.svg" alt="" />Voortgang herstellen</button>
         <button id="credits-button" class="account-menu-action" type="button" aria-haspopup="dialog" aria-controls="credits"><img class="icon" src="./icons/book-2.svg" alt="" />Licenties</button>
         <button id="account-logout" class="account-menu-action" type="button"><img class="icon" src="./icons/arrow-square-out.svg" alt="" />Uitloggen</button>
         <span id="logout-message" role="alert"></span>
@@ -64,7 +65,11 @@
         <label class="account-check"><input id="account-analytics" type="checkbox" checked /><span>Ik wil gebruiksstatistieken delen <small>(optioneel)</small></span></label>
         <p id="account-message" role="alert" hidden></p>
         <button id="account-submit" class="primary" type="submit">Verder</button>
-      </form><button id="account-reload" class="text-button" hidden>Opnieuw laden</button>
+      </form>
+      <p id="account-recovery-note" role="status" hidden></p>
+      <button id="account-recovery-cancel" class="text-button" type="button" hidden>Keuze wissen</button>
+      <button class="text-button recovery-login-button" data-progress-recovery hidden type="button" aria-haspopup="dialog" aria-controls="progress-recovery">Voortgang herstellen</button>
+      <button id="account-reload" class="text-button" hidden>Opnieuw laden</button>
     </div>
   </section>
   <noscript><p class="account-screen">Zet JavaScript aan om MotionStudy te gebruiken.</p></noscript>
@@ -169,6 +174,16 @@
       <button id="install-how-to" class="install-button" type="button"><span>Toevoegen aan beginscherm</span></button>
       <button id="install-back" class="install-button" type="button" hidden><span>Terug</span></button>
       <button class="install-continue" data-install-close type="button">Verder leren</button>
+    </div>
+  </dialog>
+  <dialog id="progress-recovery" class="legal-dialog" aria-labelledby="progress-recovery-title" aria-describedby="progress-recovery-description">
+    <h2 id="progress-recovery-title">Waar wil je verdergaan?</h2>
+    <p id="progress-recovery-description">Kies de voortgang die je wilt gebruiken.</p>
+    <fieldset class="recovery-list" aria-label="Gevonden voortgang" id="progress-recovery-list"></fieldset>
+    <p id="progress-recovery-status" role="status" aria-live="polite"></p>
+    <div class="progress-transfer-actions">
+      <button id="progress-recovery-use" class="primary" type="button" disabled>Verder met deze voortgang</button>
+      <button id="progress-recovery-close" class="progress-import-button" type="button" autofocus>Sluiten</button>
     </div>
   </dialog>
   <dialog id="progress-conflict" class="legal-dialog" aria-labelledby="progress-conflict-title" aria-describedby="progress-conflict-description">

@@ -2,6 +2,8 @@ import { PROGRESS_KEYS, validateProgressSnapshot } from '../shared/progress.mjs'
 
 export const SYNC_KEY = 'motionstudy.sync.v1';
 export const RECOVERY_KEY = 'motionstudy.sync.recovery.v1';
+export const SERVER_RECOVERY_KEY = 'motionstudy.sync.server-recovery.v1';
+const ROLLBACK_KEY = 'motionstudy.sync.rollback.v1';
 const snapshotOf = storage => validateProgressSnapshot(Object.fromEntries(PROGRESS_KEYS.map(key => [key, storage.getItem(key) ?? null])));
 const meaningful = snapshot => {
   const values = PROGRESS_KEYS.map(key => JSON.parse(snapshot[key] || 'null'));
@@ -12,7 +14,7 @@ const meaningful = snapshot => {
 
 // Main's synchronous storage interface stays intact. A complete save is uploaded
 // after the current JS turn, under the same account lock as lesson writes.
-export function createProgressSync({ storage, accountId, fetchImpl = fetch, withLock = action => action(), onStatus = () => {}, onConflict = async () => 'cancel', onReload = () => {} }) {
+export function createProgressSync({ storage, accountId, initialSnapshot = null, fetchImpl = fetch, withLock = action => action(), onStatus = () => {}, onConflict = async () => 'cancel', onReload = () => {} }) {
   let inFlight = null;
   let stopped = false;
   let initialized = false;
@@ -36,17 +38,19 @@ export function createProgressSync({ storage, accountId, fetchImpl = fetch, with
     }
     return { ...data, conflict: response.status === 409 };
   };
-  function adopt(remote) {
+  function adopt(remote, dirty = false) {
     // Retain the entire old local snapshot before any partial storage write.
     const local = snapshotOf(storage);
-    storage.setItem(RECOVERY_KEY, JSON.stringify(local));
+    const snapshot = remote.snapshot || Object.fromEntries(PROGRESS_KEYS.map(key => [key, null]));
+    if (JSON.stringify(local) === JSON.stringify(snapshot)) { setMeta({ revision: remote.revision, dirty }); return; }
+    storage.setItem(ROLLBACK_KEY, JSON.stringify(local));
+    if (meaningful(local)) storage.setItem(RECOVERY_KEY, JSON.stringify(local));
     const previousMeta = storage.getItem(SYNC_KEY);
     // An interrupted adoption must be rolled back from this recovery snapshot.
     setMeta({ revision: meta()?.revision || 0, dirty: true, recoveryRequired: true });
-    const snapshot = remote.snapshot || Object.fromEntries(PROGRESS_KEYS.map(key => [key, null]));
     try {
       writeSnapshot(snapshot);
-      setMeta({ revision: remote.revision, dirty: false });
+      setMeta({ revision: remote.revision, dirty });
     } catch (error) {
       writeSnapshot(local);
       if (previousMeta === null) storage.removeItem(SYNC_KEY);
@@ -63,7 +67,7 @@ export function createProgressSync({ storage, accountId, fetchImpl = fetch, with
   function recoverAdoption() {
     const current = meta();
     if (!current?.recoveryRequired) return;
-    const recovery = validateProgressSnapshot(JSON.parse(storage.getItem(RECOVERY_KEY)));
+    const recovery = validateProgressSnapshot(JSON.parse(storage.getItem(ROLLBACK_KEY) || storage.getItem(RECOVERY_KEY)));
     writeSnapshot(recovery);
     setMeta({ revision: current.revision, dirty: true });
   }
@@ -106,10 +110,17 @@ export function createProgressSync({ storage, accountId, fetchImpl = fetch, with
       try { remote = await request(); }
       catch (error) {
         // Never invent an empty starting point when the server cannot be read.
-        if (!current && !meaningful(local)) throw error;
+        if (initialSnapshot || (!current && !meaningful(local))) throw error;
         if (!current) setMeta({ revision: 0, dirty: true });
         initialized = true;
         onStatus('offline');
+        return;
+      }
+      if (initialSnapshot) {
+        if (remote.snapshot) storage.setItem(SERVER_RECOVERY_KEY, JSON.stringify(remote.snapshot));
+        adopt({ revision: remote.revision, snapshot: validateProgressSnapshot(initialSnapshot) }, true);
+        initialized = true;
+        try { await upload(); } catch { onStatus('offline'); }
         return;
       }
       // A browser without Web Locks may have saved while GET was in flight.
@@ -163,5 +174,17 @@ export function createProgressSync({ storage, accountId, fetchImpl = fetch, with
     })).catch(() => { onStatus('offline'); return false; }).finally(() => { inFlight = null; });
     return inFlight;
   }
-  return { storage: syncedStorage, initialize, flush, refresh, stop() { stopped = true; } };
+  async function replace(snapshot) {
+    if (inFlight) await inFlight;
+    inFlight = Promise.resolve(withLock(async () => {
+      const remote = await request();
+      if (remote.snapshot) storage.setItem(SERVER_RECOVERY_KEY, JSON.stringify(remote.snapshot));
+      adopt({ revision: remote.revision, snapshot: validateProgressSnapshot(snapshot) }, true);
+      conflictPaused = false;
+      try { await upload(); } catch { onStatus('offline'); }
+      onReload();
+    })).finally(() => { inFlight = null; });
+    return inFlight;
+  }
+  return { storage: syncedStorage, initialize, flush, refresh, replace, stop() { stopped = true; } };
 }
