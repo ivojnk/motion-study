@@ -6,6 +6,7 @@ import './app-update.css';
 import { setupAppUpdates } from './app-update.js';
 import { accountStorage, ACCOUNT_EVENT_KEY } from './account-storage.js';
 import { createProgressSync } from './progress-sync.js';
+import { setupRecoveryLoader } from './recovery-loader.js';
 import { setupAppInstall } from './install-app.js';
 
 import { createUsageClient } from './usage-client.js';
@@ -102,13 +103,23 @@ async function openApp(user, preferences = {}) {
       const keys = { progress: 'motionstudy.progress.v1', game: 'motionstudy.game.v2', drafts: 'motionstudy.drafts.v2', session: 'motionstudy.session.v2' };
       for (const [name, key] of Object.entries(keys)) if (!local.getItem(key)) local.setItem(key, JSON.stringify(backup.data[name]));
     }
+    let initialSnapshot = null;
+    const selectionKey = 'motionstudy.recovery.selection.v1';
+    let staged = null;
+    try { staged = sessionStorage.getItem(selectionKey); } catch { /* No pre-login recovery selection. */ }
+    if (staged) {
+      const { readStagedRecovery, recoverySnapshot } = await import('./progress-recovery.js');
+      initialSnapshot = recoverySnapshot(readStagedRecovery(sessionStorage));
+    }
     const withLock = action => navigator.locks ? navigator.locks.request('motionstudy-progress:' + user.id, action) : action();
-    progressSync = createProgressSync({ storage: local, accountId: user.id, withLock, onStatus: syncStatus,
+    progressSync = createProgressSync({ storage: local, accountId: user.id, initialSnapshot, withLock, onStatus: syncStatus,
       onConflict: resolveProgressConflict, onReload: () => location.reload() });
     // Export during a startup conflict needs the local account scope too.
     window.motionStudyStorage = local;
     await progressSync.initialize();
     window.motionStudyStorage = progressSync.storage;
+    if (initialSnapshot) sessionStorage.removeItem(selectionKey);
+    try { local.setItem('username', user.username); } catch { /* Labels are optional. */ }
   } catch (error) {
     appOpening = false;
     progressSync?.stop();
@@ -142,11 +153,13 @@ async function checkSession() {
     else if (!user) {
       $('#account-loading').hidden = true;
       $('#account-form').hidden = false;
+      $('.recovery-login-button').hidden = false;
       $('#account-username').focus();
     }
   } catch {
     $('#account-loading').hidden = true;
     $('#account-form').hidden = false;
+    $('.recovery-login-button').hidden = false;
     showError('Voortgang laden mislukt. Controleer je verbinding en probeer opnieuw.');
   }
 }
@@ -155,6 +168,7 @@ $('#account-form').addEventListener('submit', async event => {
   if (entering) return;
   if (!$('#account-form').reportValidity()) return;
   entering = true;
+  for (const recovery of document.querySelectorAll('[data-progress-recovery]')) recovery.disabled = true;
   const button = $('#account-submit');
   button.disabled = true;
   button.textContent = 'Inloggen…';
@@ -165,7 +179,7 @@ $('#account-form').addEventListener('submit', async event => {
     await openApp(user, preferences);
     $('#main').focus();
   } catch (error) { showError(error.message === 'Failed to fetch' ? 'Verbinding mislukt. Probeer opnieuw.' : error.message); }
-  finally { entering = false; button.disabled = false; button.textContent = 'Verder'; }
+  finally { entering = false; button.disabled = false; button.textContent = 'Verder'; for (const recovery of document.querySelectorAll('[data-progress-recovery]')) recovery.disabled = false; }
 });
 $('#account-logout').addEventListener('click', async () => {
   const button = $('#account-logout');
@@ -240,3 +254,30 @@ window.addEventListener('focus', refreshServerProgress);
 document.addEventListener('visibilitychange', refreshServerProgress);
 window.addEventListener('pagehide', () => { void progressSync?.flush(); });
 setInterval(refreshServerProgress, 30_000);
+
+setupRecoveryLoader({ window, document, getAccount: () => currentUser,
+  getServer: async () => {
+    const response = await fetch('/api/account/progress', { credentials: 'same-origin', cache: 'no-store', signal: AbortSignal.timeout(10_000), headers: { 'X-MotionStudy-Account': currentUser.id } });
+    if (!response.ok) throw new Error('Voortgang laden mislukt.');
+    return response.json();
+  },
+  restore: async data => {
+    const { recoverySnapshot } = await import('./progress-recovery.js');
+    await progressSync.replace(recoverySnapshot(data));
+  },
+});
+
+$('#account-recovery-cancel').addEventListener('click', () => {
+  try {
+    sessionStorage.removeItem('motionstudy.recovery.selection.v1');
+    $('#account-recovery-note').hidden = true;
+    $('#account-recovery-cancel').hidden = true;
+  } catch { showError('Keuze wissen lukt niet. Probeer opnieuw.'); }
+});
+try {
+  if (sessionStorage.getItem('motionstudy.recovery.selection.v1')) {
+    $('#account-recovery-note').hidden = false;
+    $('#account-recovery-note').textContent = 'Voortgang gekozen. Log in om hiermee verder te gaan.';
+    $('#account-recovery-cancel').hidden = false;
+  }
+} catch { /* No staged selection. */ }

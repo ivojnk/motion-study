@@ -53,6 +53,11 @@ unsent changes. Anyone who knows your username can view and change your progress
 
 The static version stores progress only in the browser and does not synchronize.
 
+Choose **Voortgang herstellen** on the login screen or in the app menu to look
+for saved progress across local profiles, older editions and recovery copies.
+Choose a version to continue with. Before login, that choice waits until you sign
+in. The scan can read only this app's storage in the browser where you open it.
+
 Open **Privacy & opslag** in the app menu for storage information. In the account
 version, you can also change your statistics choice there.
 

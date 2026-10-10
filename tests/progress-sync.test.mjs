@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createAccounts } from '../server/accounts.mjs';
 import { createAccountService } from '../server/account-service.mjs';
-import { createProgressSync, SYNC_KEY, RECOVERY_KEY } from '../src/progress-sync.js';
+import { createProgressSync, SYNC_KEY, RECOVERY_KEY, SERVER_RECOVERY_KEY } from '../src/progress-sync.js';
 import { PROGRESS_KEYS, MAX_PROGRESS_BYTES } from '../shared/progress.mjs';
 import { NOTICE_VERSION } from '../shared/legal.mjs';
 
@@ -164,4 +164,42 @@ test('interrupted adoption restores its saved recovery snapshot before uploading
   await f.client(cookie, storage).initialize();
   assert.equal(storage.getItem(PROGRESS_KEYS[0]), progress(2));
   assert.deepEqual((await (await f.service.handle(f.request(undefined, cookie))).json()).snapshot, snapshot(2));
+});
+
+test('an explicitly chosen pre-login recovery replaces server progress and preserves the previous local copy', async t => {
+  const f = fixture(t); const cookie = await f.login();
+  await f.client(cookie, local(snapshot(1))).initialize();
+  const storage = local(snapshot(2));
+  const sync = f.client(cookie, storage, { initialSnapshot: snapshot(4) });
+  await sync.initialize();
+  assert.deepEqual((await (await f.service.handle(f.request(undefined, cookie))).json()).snapshot, snapshot(4));
+  assert.deepEqual(JSON.parse(storage.getItem(RECOVERY_KEY)), snapshot(2));
+  assert.deepEqual(JSON.parse(storage.getItem(SERVER_RECOVERY_KEY)), snapshot(1));
+});
+
+test('logged-in recovery persists a selected snapshot against the current server version and reloads once', async t => {
+  const f = fixture(t); const cookie = await f.login(); const storage = local(snapshot(1)); let reloads = 0;
+  const sync = f.client(cookie, storage, { onReload: () => reloads++ }); await sync.initialize();
+  await f.service.handle(f.request({ revision: 1, snapshot: snapshot(2) }, cookie));
+  await sync.replace(snapshot(4));
+  assert.deepEqual((await (await f.service.handle(f.request(undefined, cookie))).json()).snapshot, snapshot(4));
+  assert.equal(reloads, 1); assert.deepEqual(JSON.parse(storage.getItem(RECOVERY_KEY)), snapshot(1));
+  assert.deepEqual(JSON.parse(storage.getItem(SERVER_RECOVERY_KEY)), snapshot(2));
+});
+
+test('offline pre-login replacement does not touch existing local progress or forget the pending selection', async t => {
+  const f = fixture(t); const storage = local(snapshot(1));
+  const sync = f.client('', storage, { initialSnapshot: snapshot(4), fetchImpl: async () => { throw new Error('offline'); } });
+  await assert.rejects(sync.initialize(), /offline/);
+  assert.equal(storage.getItem(PROGRESS_KEYS[0]), progress(1));
+});
+
+
+test('normal startup preserves recovery copies when the current cache already matches the server', async t => {
+  const f = fixture(t); const cookie = await f.login(); const storage = local(snapshot(1));
+  const first = f.client(cookie, storage); await first.initialize();
+  await first.replace(snapshot(4)); first.stop();
+  const originalCopy = storage.getItem(RECOVERY_KEY);
+  await f.client(cookie, storage).initialize();
+  assert.equal(storage.getItem(RECOVERY_KEY), originalCopy);
 });
