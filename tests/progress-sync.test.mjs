@@ -25,7 +25,7 @@ function fixture(t) {
     method, headers: { ...(body ? { origin, 'content-type': 'application/json' } : {}), ...(cookie ? { cookie } : {}), ...headers }, ...(body ? { body: JSON.stringify(body) } : {}),
   });
   async function login(username = 'lotte') {
-    const response = await service.handle(new Request(origin + '/api/account/enter', { method: 'POST', headers: { origin, 'content-type': 'application/json' }, body: JSON.stringify({ username, acknowledged: true, noticeVersion: NOTICE_VERSION }) }));
+    const response = await service.handle(new Request(origin + '/api/account/enter', { method: 'POST', headers: { origin, 'content-type': 'application/json' }, body: JSON.stringify({ username, acknowledged: true, noticeVersion: NOTICE_VERSION, create: true }) }));
     return response.headers.get('set-cookie').split(';')[0];
   }
   const client = (cookie, storage, options = {}) => createProgressSync({ storage, fetchImpl: (_, init) => service.handle(request(init.body && JSON.parse(init.body), cookie)), ...options });
@@ -63,7 +63,7 @@ test('progress survives database restart and a fresh device restores all four ke
   const dir = mkdtempSync(join(tmpdir(), 'motionstudy-sync-')); const databasePath = join(dir, 'accounts.sqlite');
   t.after(() => rmSync(dir, { recursive: true, force: true }));
   let service = createAccounts({ databasePath, origin });
-  const entered = await service.handle(new Request(origin + '/api/account/enter', { method: 'POST', headers: { origin, 'content-type': 'application/json' }, body: JSON.stringify({ username: 'lotte', acknowledged: true, noticeVersion: NOTICE_VERSION }) }));
+  const entered = await service.handle(new Request(origin + '/api/account/enter', { method: 'POST', headers: { origin, 'content-type': 'application/json' }, body: JSON.stringify({ username: 'lotte', acknowledged: true, noticeVersion: NOTICE_VERSION, create: true }) }));
   const cookie = entered.headers.get('set-cookie').split(';')[0];
   const fetchImpl = (_, init) => service.handle(new Request(origin + '/api/account/progress', { ...init, headers: { ...init.headers, cookie, ...(init.method ? { origin } : {}) } }));
   const first = createProgressSync({ storage: local(snapshot(3)), fetchImpl });

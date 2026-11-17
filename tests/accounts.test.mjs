@@ -12,7 +12,7 @@ function request(path, body, cookie, headers = {}) {
   return new Request(origin + '/api/account/' + path, {
     method: body === undefined ? 'GET' : 'POST',
     headers: { ...(body !== undefined ? { origin, 'content-type': 'application/json' } : {}), ...(cookie ? { cookie } : {}), ...headers },
-    ...(body !== undefined ? { body: JSON.stringify(path === 'enter' ? { acknowledged: true, noticeVersion: NOTICE_VERSION, ...body } : body) } : {}),
+    ...(body !== undefined ? { body: JSON.stringify(path === 'enter' ? { acknowledged: true, noticeVersion: NOTICE_VERSION, create: true, ...body } : body) } : {}),
   });
 }
 function fixture(t, options = {}) {
@@ -104,4 +104,49 @@ test('progress, lesson drafts and legacy keys stay separate for each account', (
     assert.equal(storage.getItem(lotte.keyFor(key)), 'lotte-data');
   }
   assert.equal(storage.getItem('motionstudy.game.v1'), 'legacy');
+});
+
+test('an unknown username is only created after explicit confirmation', async t => {
+  const { service } = fixture(t);
+  const raw = body => new Request(origin + '/api/account/enter', { method: 'POST', headers: { origin, 'content-type': 'application/json' }, body: JSON.stringify({ acknowledged: true, noticeVersion: NOTICE_VERSION, ...body }) });
+  const unknown = await service.handle(raw({ username: 'Lotte1' }));
+  assert.equal(unknown.status, 404);
+  assert.deepEqual({ ...(await unknown.json()), error: undefined }, { error: undefined, unknownUsername: true, username: 'lotte1' });
+  assert.equal(unknown.headers.get('set-cookie'), null);
+  assert.equal((await service.handle(raw({ username: 'lotte1', create: 'yes' }))).status, 400);
+  const created = await service.handle(raw({ username: 'lotte1', create: true }));
+  assert.equal((await created.json()).created, true);
+  const again = await service.handle(raw({ username: 'LOTTE1' }));
+  assert.equal(again.status, 200);
+  assert.equal((await again.json()).created, false);
+});
+
+test('the device remembers the last username after the session ends, and sessions slide forward', async t => {
+  let time = Date.UTC(2026, 10, 17);
+  const { service } = fixture(t, { now: () => time });
+  const entered = await service.handle(request('enter', { username: 'lotte' }));
+  const cookies = entered.headers.getSetCookie();
+  assert.equal(cookies.length, 2);
+  assert.match(cookies[0], /^motionstudy\.session=[a-f0-9]{64}; .*Max-Age=31536000/);
+  assert.match(cookies[1], new RegExp('^motionstudy\\.name=lotte:' + NOTICE_VERSION + '; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000'));
+  const session = cookies[0].split(';')[0];
+  const name = cookies[1].split(';')[0];
+
+  // Same day: no renewal traffic.
+  assert.deepEqual((await service.handle(request('session', undefined, session))).headers.getSetCookie(), []);
+  // 300 days later the session is still valid and gets a fresh year.
+  time += 300 * 86_400_000;
+  const renewed = await service.handle(request('session', undefined, session));
+  assert.equal((await renewed.json()).user.username, 'lotte');
+  assert.equal(renewed.headers.getSetCookie().length, 2);
+  time += 300 * 86_400_000;
+  assert.equal((await (await service.handle(request('session', undefined, session))).json()).user.username, 'lotte');
+
+  // Logged out: the name stays remembered, with whether the current notice was accepted.
+  await service.handle(request('logout', {}, session));
+  const after = await (await service.handle(request('session', undefined, name))).json();
+  assert.equal(after.user, null);
+  assert.deepEqual(after.remembered, { username: 'lotte', acknowledged: true });
+  assert.deepEqual((await (await service.handle(request('session', undefined, 'motionstudy.name=lotte:old'))).json()).remembered, { username: 'lotte', acknowledged: false });
+  assert.equal((await (await service.handle(request('session', undefined, 'motionstudy.name=bad%20name:x'))).json()).remembered, null);
 });

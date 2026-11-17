@@ -30,10 +30,14 @@ for (const path of ['/analytics/', '/analytics/index.html', '/%61nalytics/', '/%
 }
 assert.equal((await request('/api/analytics')).status, 401);
 assert.equal((await request('/api/analytics', { headers: { cookie: '__Host-motionstudy_owner=' + 'a'.repeat(64) } })).status, 401);
-const entered = await post('enter', { username, acknowledged: true, noticeVersion: NOTICE_VERSION });
+const unknown = await post('enter', { username, acknowledged: true, noticeVersion: NOTICE_VERSION });
+assert.equal(unknown.status, 404);
+assert.equal((await unknown.json()).unknownUsername, true);
+const entered = await post('enter', { username, acknowledged: true, noticeVersion: NOTICE_VERSION, create: true });
 assert.equal(entered.status, 200);
 assert.equal(entered.headers.get('cache-control'), 'no-store');
 assert.match(entered.headers.get('set-cookie'), /HttpOnly; SameSite=Lax/);
+assert.deepEqual(entered.headers.getSetCookie().map(value => value.split('=')[0]), base.startsWith('https:') ? ['__Host-motionstudy.session', '__Host-motionstudy.name'] : ['motionstudy.session', 'motionstudy.name']);
 if (base.startsWith('https:')) assert.match(entered.headers.get('set-cookie'), /^__Host-.*; Secure$/);
 const first = await entered.json();
 assert.equal(first.created, true);

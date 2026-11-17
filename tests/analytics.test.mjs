@@ -16,7 +16,7 @@ function fixture(t) {
   const post = (path, body, cookie, headers = {}) => service.handle(new Request(origin + '/api/' + path, {
     method: 'POST', headers: { origin, 'Content-Type': 'application/json', ...(cookie ? { cookie } : {}), ...headers }, body: JSON.stringify(body),
   }));
-  const enter = async username => { const response = await post('account/enter', { username, acknowledged: true, noticeVersion: NOTICE_VERSION, analytics: true }); return { user: (await response.json()).user, cookie: response.headers.get('set-cookie').split(';')[0] }; };
+  const enter = async username => { const response = await post('account/enter', { username, acknowledged: true, noticeVersion: NOTICE_VERSION, create: true, analytics: true }); return { user: (await response.json()).user, cookie: response.headers.get('set-cookie').split(';')[0] }; };
   return { db, service, post, enter, now: () => time, setTime: value => { time = value; } };
 }
 

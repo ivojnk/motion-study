@@ -1,3 +1,5 @@
+.account-new-name { display: grid; gap: 10px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; }
+.account-new-name p { margin: 0; font-size: 14px; line-height: 1.55; overflow-wrap: anywhere; }
 #account-form .account-check, .legal-dialog .account-check { display: flex; align-items: flex-start; gap: 10px; min-height: 44px; padding: 10px 0; font-size: 13px; font-weight: 400; line-height: 1.55; cursor: pointer; }
 .account-check input { flex: 0 0 20px; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--accent); }
 .account-check small { color: var(--muted); font-size: inherit; }

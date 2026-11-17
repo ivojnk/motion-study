@@ -18,7 +18,7 @@ test('HTTP server handles entry/logout, protects atlas assets and never serves d
   const app = await startServer({ port: 0, origin, databasePath: join(dir, 'accounts.sqlite'), distPath });
   const base = 'http://127.0.0.1:' + app.server.address().port;
   t.after(async () => { await app.close(); await rm(dir, { recursive: true, force: true }); });
-  const enter = username => fetch(base + '/api/account/enter', { method: 'POST', headers: { origin, 'Content-Type': 'application/json' }, body: JSON.stringify({ username, acknowledged: true, noticeVersion: NOTICE_VERSION }) });
+  const enter = username => fetch(base + '/api/account/enter', { method: 'POST', headers: { origin, 'Content-Type': 'application/json' }, body: JSON.stringify({ username, acknowledged: true, noticeVersion: NOTICE_VERSION, create: true }) });
   assert.match(await (await fetch(base)).text(), /Username form/);
   const manifest = await fetch(base + '/manifest.webmanifest');
   assert.equal(manifest.status, 200);

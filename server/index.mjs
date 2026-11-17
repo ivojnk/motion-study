@@ -31,7 +31,10 @@ export async function startServer({ port = 5173, host = '127.0.0.1', origin = `h
         }
         const request = new Request(requestURL, { method: req.method, headers: req.headers, ...(!['GET', 'HEAD'].includes(req.method) ? { body: Buffer.concat(chunks) } : {}) });
         const response = await accounts.handle(request, req.socket.remoteAddress);
-        res.writeHead(response.status, Object.fromEntries(response.headers));
+        const headers = Object.fromEntries(response.headers);
+        // Keep every Set-Cookie header; a plain object would only keep the last one.
+        if (response.headers.getSetCookie().length) headers['set-cookie'] = response.headers.getSetCookie();
+        res.writeHead(response.status, headers);
         res.end(await response.text());
         return;
       }
