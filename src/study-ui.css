@@ -528,6 +528,13 @@ main:not([hidden]) { padding-bottom: calc(112px + env(safe-area-inset-bottom)); 
 .lesson-focus .question-card .atlas-controls { padding: 8px 12px; font-size: 12px; }
 .lesson-focus .question-card .viewer-tools { margin: 8px auto; }
 .lesson-focus .question-card :is(button, input, textarea, summary) { scroll-margin-block: 24px calc(var(--lesson-dock-space) + 24px); }
+/* Typed answers on touch screens: the open keyboard leaves too little room for the box plus the
+   dock's 264px bottom margin, so the browser kept re-scrolling on every keystroke. Keep the box
+   right under the question and give it a small margin; the dock sits behind the keyboard anyway. */
+@media (pointer: coarse) {
+  .lesson-focus .question-card:is([data-exercise="open"], [data-exercise="open-self"], [data-exercise="recognition-open"]):not([data-model-question]) .answers { margin-top: 0; padding-top: 8px; }
+  .lesson-focus .question-card .open-answer-input { scroll-margin-block: 24px; }
+}
 @media (max-width: 620px) {
   .lesson-focus #learning { padding-top: 16px; }
   .lesson-focus .lesson-status { margin-bottom: 22px; }
