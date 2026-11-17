@@ -1,4 +1,4 @@
-// Authored from the supplied cheatsheet. Anchors are retained only for private source verification.
+// Anchors are retained only for local content verification.
 export const extraMuscles = [
   {
     "id": "extra-muscles-flat-db-profile",

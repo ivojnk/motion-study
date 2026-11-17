@@ -2,27 +2,74 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
+  <meta name="app-version" content="development" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f5f3ed" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="MotionStudy" />
+  <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="%BASE_URL%app-icons/favicon.svg?v=leerblad-1" />
+  <link rel="icon" type="image/vnd.microsoft.icon" sizes="16x16 32x32 48x48" href="%BASE_URL%app-icons/favicon.ico?v=leerblad-1" />
+  <link rel="icon" type="image/png" sizes="16x16" href="%BASE_URL%app-icons/favicon-16.png?v=leerblad-1" />
+  <link rel="icon" type="image/png" sizes="32x32" href="%BASE_URL%app-icons/favicon-32.png?v=leerblad-1" />
+  <link rel="apple-touch-icon" sizes="180x180" href="%BASE_URL%app-icons/apple-touch-icon.png?v=leerblad-1" />
   <meta name="description" content="Leer anatomie en biomechanica met een interactieve 3D-atlas en korte quizlessen." />
+  <link rel="canonical" href="https://lottequiz-motionstudy.jonkersivo.workers.dev%BASE_URL%" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="nl_NL" />
+  <meta property="og:site_name" content="MotionStudy" />
+  <meta property="og:title" content="MotionStudy · Leer het lichaam kennen" />
+  <meta property="og:description" content="Leer anatomie en biomechanica met een interactieve 3D-atlas en korte quizlessen." />
+  <meta property="og:url" content="https://lottequiz-motionstudy.jonkersivo.workers.dev%BASE_URL%" />
+  <meta property="og:image" content="https://lottequiz-motionstudy.jonkersivo.workers.dev%BASE_URL%brand/social-share.png?v=leerblad-1" />
+  <meta property="og:image:secure_url" content="https://lottequiz-motionstudy.jonkersivo.workers.dev%BASE_URL%brand/social-share.png?v=leerblad-1" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="MotionStudy Leerblad-logo met de tekst: Leer het lichaam kennen. Anatomie en biomechanica. Korte quizlessen en interactieve 3D-atlas." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MotionStudy · Leer het lichaam kennen" />
+  <meta name="twitter:description" content="Leer anatomie en biomechanica met een interactieve 3D-atlas en korte quizlessen." />
+  <meta name="twitter:image" content="https://lottequiz-motionstudy.jonkersivo.workers.dev%BASE_URL%brand/social-share.png?v=leerblad-1" />
+  <meta name="twitter:image:alt" content="MotionStudy Leerblad-logo met de tekst: Leer het lichaam kennen. Anatomie en biomechanica. Korte quizlessen en interactieve 3D-atlas." />
   <title>MotionStudy · Leer het lichaam kennen</title>
 </head>
 <body>
   <a class="skip" href="#main" hidden>Naar de inhoud</a>
   <header class="topbar">
-    <a class="brand" href="#leren" aria-label="MotionStudy start"><span class="brand-symbol">m<span>s</span></span><span>MotionStudy<span class="brand-dot">.</span></span></a>
+    <a class="brand" href="#leren" aria-label="MotionStudy start"><img class="brand-logo" src="%BASE_URL%brand/motionstudy-horizontal-color.svg" width="1139" height="256" alt="" /><img class="brand-symbol" src="%BASE_URL%brand/motionstudy-symbol-color.svg" width="256" height="256" alt="" /></a>
+    <div id="login-install"><button class="text-button install-link" data-install-app type="button" aria-haspopup="dialog" aria-controls="install-app" hidden><img class="icon" src="./icons/arrow-square-out.svg" alt="" />Op je beginscherm</button></div>
     <div id="home-stats" hidden></div>
     <nav aria-label="Hoofdnavigatie" hidden><a href="#leren" data-nav="leren"><img class="icon" src="./icons/school.svg" alt="" /><span>Leren</span></a><a href="#atlas" data-nav="atlas"><img class="icon" src="./icons/stretching.svg" alt="" /><span>3D-atlas</span></a><a href="#vragen" data-nav="vragen"><img class="icon" src="./icons/book-2.svg" alt="" /><span>Vragen</span></a><a href="#voortgang" data-nav="voortgang"><img class="icon" src="./icons/chart-bar.svg" alt="" /><span>Voortgang</span></a></nav>
-    <details id="account-controls" class="account-controls" hidden><summary aria-label="Accountmenu"><img class="icon" src="./icons/user-circle.svg" alt="" /></summary><div class="account-menu"><strong id="account-name"></strong><button id="account-logout">Uitloggen</button><span id="logout-message" role="alert"></span></div></details>
+    <details id="account-controls" class="account-controls" hidden>
+      <summary aria-label="Accountmenu"><img class="icon" src="./icons/user-circle.svg" alt="" /></summary>
+      <div class="account-menu">
+        <div class="account-menu-heading"><span>Account</span><strong id="account-name"></strong></div>
+        <button class="account-menu-action" data-install-app type="button" aria-haspopup="dialog" aria-controls="install-app" hidden><img class="icon" src="./icons/arrow-square-out.svg" alt="" />Op je beginscherm</button>
+        <button class="account-menu-action" data-legal-dialog="privacy" type="button" aria-haspopup="dialog" aria-controls="privacy"><img class="icon" src="./icons/lock.svg" alt="" />Privacy & opslag</button>
+        <button class="account-menu-action" data-legal-dialog="usage" type="button" aria-haspopup="dialog" aria-controls="usage"><img class="icon" src="./icons/book-2.svg" alt="" />Gebruik & contact</button>
+        <button id="credits-button" class="account-menu-action" type="button" aria-haspopup="dialog" aria-controls="credits"><img class="icon" src="./icons/book-2.svg" alt="" />Licenties</button>
+        <button id="account-logout" class="account-menu-action" type="button"><img class="icon" src="./icons/arrow-square-out.svg" alt="" />Uitloggen</button>
+        <span id="logout-message" role="alert"></span>
+      </div>
+    </details>
   </header>
   <section id="account-screen" class="account-screen" aria-labelledby="account-title">
-    <div class="account-intro"><span class="account-subject">Anatomie & biomechanica</span><h1 id="account-title">Leer het lichaam<br /><em>kennen.</em></h1><div class="account-course"><span>11 hoofdstukken</span><span>31 spierkaarten</span><span>593 vragen</span></div></div>
-    <div class="account-card"><h2>Inloggen</h2><p id="account-loading" role="status">Laden…</p>
-      <form id="account-form" hidden><label for="account-username">Gebruikersnaam</label><input id="account-username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="2" maxlength="24" pattern="[a-zA-Z0-9][a-zA-Z0-9._\-]{1,23}" aria-describedby="account-help account-message" required /><p id="account-help">2–24 tekens: letters, cijfers, . _ -</p><p id="account-message" role="alert" hidden></p><button id="account-submit" class="primary" type="submit">Verder</button></form><button id="account-reload" class="text-button" hidden>Opnieuw laden</button>
+    <div class="account-card"><span class="account-subject">Anatomie & biomechanica</span><h1 id="account-title">Inloggen</h1><p id="account-loading" role="status">Laden…</p>
+      <form id="account-form" hidden>
+        <label for="account-username">Gebruikersnaam</label>
+        <input id="account-username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="2" maxlength="24" pattern="[a-zA-Z0-9][a-zA-Z0-9._\-]{1,23}" aria-describedby="account-message" required />
+        <div class="login-legal-links"><button data-legal-dialog="privacy" type="button" aria-haspopup="dialog" aria-controls="privacy">Privacy & opslag</button><button data-legal-dialog="usage" type="button" aria-haspopup="dialog" aria-controls="usage">Gebruik & contact</button><button data-legal-dialog="credits" type="button" aria-haspopup="dialog" aria-controls="credits">Licenties</button></div>
+        <label class="account-check"><input id="account-acknowledgement" type="checkbox" required /><span>Ik heb de informatie over privacy en gebruik gelezen.</span></label>
+        <label class="account-check"><input id="account-analytics" type="checkbox" checked /><span>Ik wil gebruiksstatistieken delen <small>(optioneel)</small></span></label>
+        <p id="account-message" role="alert" hidden></p>
+        <button id="account-submit" class="primary" type="submit">Verder</button>
+      </form><button id="account-reload" class="text-button" hidden>Opnieuw laden</button>
     </div>
   </section>
   <noscript><p class="account-screen">Zet JavaScript aan om MotionStudy te gebruiken.</p></noscript>
   <main id="main" tabindex="-1" hidden>
+    <p id="storage-warning" class="storage-warning" role="alert" hidden>Je browser kan je voortgang niet opslaan. Laat dit tabblad open: bij sluiten of vernieuwen kunnen je laatste antwoorden verloren gaan. Controleer of siteopslag is toegestaan en of er voldoende ruimte is.</p>
     <section id="intro"></section>
     <div class="workspace">
       <section class="learning-panel" id="learning" aria-label="Leeromgeving"></section>
@@ -32,17 +79,103 @@
           <canvas id="body" tabindex="0" aria-label="3D-anatomiemodel. Draai met de pijltjestoetsen, zoom met plus en min. Gebruik de antwoordknoppen in een les of de spierlijst in de atlas."></canvas>
           <div class="viewer-status" id="viewer-status" role="status">Spieren laden…</div>
           <span class="orientation" id="orientation">VOORZIJDE</span>
+          <div class="viewer-model-toggles" role="group" aria-label="Modelweergave">
+            <label class="viewer-model-toggle" title="Skelet tonen"><input id="bones" type="checkbox" role="switch" aria-label="Skelet tonen" checked /><img class="icon" src="./icons/bone.svg" alt="" /><span class="viewer-toggle-state" aria-hidden="true"></span><span class="viewer-toggle-hint" aria-hidden="true">Skelet tonen</span></label>
+            <label class="viewer-model-toggle" title="Spier isoleren"><input id="isolate" type="checkbox" role="switch" aria-label="Spier isoleren" /><img class="icon" src="./icons/scan.svg" alt="" /><span class="viewer-toggle-state" aria-hidden="true"></span><span class="viewer-toggle-hint" aria-hidden="true">Spier isoleren</span></label>
+          </div>
+          <button id="viewer-fullscreen" class="viewer-fullscreen-toggle" type="button" aria-label="3D-weergave op volledig scherm" title="Volledig scherm" aria-expanded="false" aria-controls="viewer-fullscreen-dialog"><img class="icon fullscreen-open-icon" src="./icons/corners-out.svg" alt="" /><img class="icon fullscreen-close-icon" src="./icons/corners-in.svg" alt="" /></button>
         </div>
-        <div class="viewer-tools"><button data-view="front" aria-pressed="true" aria-label="Vooraanzicht">Voor</button><button data-view="back" aria-pressed="false" aria-label="Achteraanzicht">Achter</button><button data-view="side" aria-pressed="false" aria-label="Zijaanzicht">Zij</button><button id="reset-view" aria-label="Hele lichaam tonen"><img class="icon" src="./icons/refresh.svg" alt="" /></button></div>
-        <div class="atlas-controls"><label><input id="bones" type="checkbox" checked /> Skelet tonen</label><label><input id="isolate" type="checkbox" /> Spier isoleren</label></div>
-        <div class="selection-card" id="selection-card" aria-live="polite"><h3>Kies een spier</h3></div>
-        <label class="muscle-picker">Kies een spier <select id="muscle-select"><option value="">Alle spieren</option></select></label>
-        <p class="viewer-help">Sleep om te draaien · knijp of scroll om te zoomen</p>
+        <div class="viewer-controls" role="group" aria-label="3D-bediening">
+          <div class="viewer-tools"><button data-view="front" aria-pressed="true" aria-label="Vooraanzicht">Voor</button><button data-view="back" aria-pressed="false" aria-label="Achteraanzicht">Achter</button><button data-view="side" aria-pressed="false" aria-label="Zijaanzicht">Zij</button><button id="reset-view" aria-label="Hele lichaam tonen"><img class="icon" src="./icons/refresh.svg" alt="" /></button></div>
+        </div>
+        <div class="selection-card" id="selection-card" aria-live="polite"></div>
       </section>
     </div>
-    <footer><button id="credits-button">Bronnen & licenties</button></footer>
   </main>
-  <dialog id="credits"><button class="close-dialog" aria-label="Sluiten"><img class="icon" src="./icons/x.svg" alt="" /></button><h2>Bronnen & licenties</h2><p>Lesstof: Anatomie-Biomechanica-Cheatsheet, Milo PT opleiding, module 6.6. De vragen zijn op deze lesstof gebaseerd.</p><p><a href="https://drive.google.com/file/d/1cUNMc6m7fZT2LA6F1iY5G0g2Io7OstmW/view" target="_blank" rel="noreferrer">Open de oorspronkelijke lesstof</a></p><p>BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan</p><p>Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0</p><p>Spier- en skeletmodellen overgenomen uit <a href="https://github.com/nqwrc/3d-anatomy" target="_blank" rel="noreferrer">nqwrc/3d-anatomy</a>. De geometrie is ongewijzigd. Kleur, selectie en zichtbaarheid worden in deze app aangepast.</p><p><a href="./models/License.txt">Modelvermelding</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> · <a href="./licenses/upstream-LICENSE.txt">Upstream-licenties</a> · <a href="./licenses/upstream-NOTICE.txt">Upstream-vermelding</a></p><p>Three.js & Three Mesh BVH: MIT. <a href="./licenses/draco-LICENSE.txt">Draco: Apache 2.0</a>. <a href="./licenses/phosphor-LICENSE.txt">Phosphor Icons Duotone: MIT</a>. <a href="./licenses/third-party.txt">Softwarelicenties</a></p><p>Lettertypes: <a href="./licenses/dm-sans-LICENSE.txt">DM Sans</a> en <a href="./licenses/manrope-LICENSE.txt">Manrope</a>, SIL Open Font License.</p></dialog>
+  <dialog id="viewer-fullscreen-dialog" class="viewer-fullscreen-dialog" aria-label="3D-weergave op volledig scherm"></dialog>
+  <dialog id="privacy" class="legal-dialog" aria-labelledby="privacy-title">
+    <button class="close-dialog" data-legal-close type="button" aria-label="Sluiten" autofocus><img class="icon" src="./icons/x.svg" alt="" /></button>
+    <h2 id="privacy-title">Privacy & opslag</h2>
+    <p class="legal-date">Bijgewerkt op 5 oktober 2026</p>
+    <h3>Je account</h3>
+    <p>De server bewaart je gebruikersnaam, accountnummer en aanmaakdatum. Wie je gebruikersnaam kent, kan inloggen. Gebruik een bijnaam zonder gevoelige gegevens.</p>
+    <h3>In deze browser</h3>
+    <p>Antwoorden, scores, XP, herhaalplanning en onafgemaakte lessen blijven in deze browser, per account. Ze synchroniseren niet. Sitegegevens wissen verwijdert ze. Op dit apparaat kan iemand met je gebruikersnaam dezelfde voortgang openen.</p>
+    <section id="progress-transfer" class="progress-transfer" aria-labelledby="progress-transfer-title" hidden>
+      <h3 id="progress-transfer-title">Je voortgang</h3>
+      <div class="progress-transfer-actions">
+        <button id="progress-export" class="primary" type="button">Exporteer voortgang</button>
+        <button id="progress-import" class="progress-import-button" type="button">Importeer voortgang</button>
+      </div>
+      <input id="progress-import-file" type="file" accept=".json,application/json" aria-label="Voortgangsbestand" hidden />
+      <div id="progress-import-confirmation" hidden>
+        <p>Importeren vervangt je huidige voortgang.</p>
+        <div class="progress-transfer-actions">
+          <button id="progress-import-confirm" class="primary" type="button">Vervang voortgang</button>
+          <button id="progress-import-cancel" class="progress-import-button" type="button">Annuleren</button>
+        </div>
+      </div>
+      <p id="progress-transfer-status" role="status" aria-live="polite"></p>
+    </section>
+    <h3>Cookies en beveiliging</h3>
+    <p>Een noodzakelijke inlogcookie werkt maximaal 30 dagen. Uitloggen beëindigt de sessie. De server bewaart de sessiecode gehasht, de vervaldatum, deze informatieversie en je statistiekkeuze. Je IP-adres wordt kort gebruikt om inlogpogingen te beperken. De app plaatst geen advertentie- of trackingcookies.</p>
+    <h3>Optionele gebruiksstatistieken</h3>
+    <p>Met jouw toestemming bewaren we de laatste activiteit en het aantal afgeronde lessen bij je account. De beheerder ziet totalen. Antwoorden en scores worden niet verstuurd. Je keuze geldt voor deze sessie. Het aantal aangemaakte accounts tellen we uit de accountadministratie.</p>
+    <p>Dagtotalen ouder dan 90 dagen en controlecodes ouder dan 35 dagen worden bij de volgende statistiekverwerking opgeruimd. Niet-verstuurde lesmeldingen blijven maximaal 30 dagen in je browser. Uitzetten wist die meldingen en stopt nieuwe statistieken voor deze sessie. Eerdere servergegevens blijven staan.</p>
+    <div id="privacy-preferences" class="privacy-preferences" hidden>
+      <label class="account-check"><input id="privacy-analytics" type="checkbox" aria-describedby="privacy-choice-help" /><span>Gebruiksstatistieken delen</span></label>
+      <p id="privacy-choice-help">Optioneel. Je kunt de app ook gebruiken als dit uit staat.</p>
+      <p id="privacy-choice-status" role="status"></p>
+    </div>
+    <h3>Hosting en bewaartijd</h3>
+    <p>Cloudflare verzorgt hosting en beveiliging en verwerkt technisch verkeer, waaronder je IP-adres. Verwerking buiten de EU is mogelijk. Zie de <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noreferrer">privacyinformatie van Cloudflare</a>.</p>
+    <p>Accountgegevens en activiteit per account blijven staan totdat de beheerder ze verwijdert. Accounts hebben nog geen automatische verwijdertermijn. Verlopen sessies worden bij een volgende login opgeruimd. Browsergegevens blijven staan totdat jij of je browser ze wist.</p>
+    <h3>Vragen of gegevens verwijderen</h3>
+    <p>Neem contact op met de persoon van wie je de app kreeg voor inzage, een kopie, correctie of verwijdering van accountgegevens. De beheerder moet je verzoek kunnen controleren. Lokale leergegevens wis je via de sitegegevens in je browser.</p>
+    <p>Als de AVG van toepassing is, kun je ook verzoeken om beperking of overdracht, bezwaar maken en een klacht indienen bij de <a href="https://autoriteitpersoonsgegevens.nl/" target="_blank" rel="noreferrer">Autoriteit Persoonsgegevens</a> of je lokale toezichthouder.</p>
+  </dialog>
+  <dialog id="usage" class="legal-dialog" aria-labelledby="usage-title">
+    <button class="close-dialog" data-legal-close type="button" aria-label="Sluiten" autofocus><img class="icon" src="./icons/x.svg" alt="" /></button>
+    <h2 id="usage-title">Gebruik & contact</h2>
+    <p class="legal-date">Bijgewerkt op 5 oktober 2026</p>
+    <p>MotionStudy is een privéleerhulp voor anatomie en biomechanica. De inhoud is geen officiële toets, medisch advies of persoonlijk trainingsadvies.</p>
+    <p>Gebruik je eigen account. Deel de link alleen binnen je studiekring. De app controleert geen uitnodigingen of identiteit.</p>
+    <h3>Lesstof en licenties</h3>
+    <p>Voor lesstof, modellen en software gelden de rechten van de oorspronkelijke makers. Zie <button class="legal-inline-link" data-legal-switch="credits" type="button">Licenties</button>.</p>
+    <h3>Contact</h3>
+    <p>Vragen, fouten of accountverzoeken? Neem contact op met de persoon van wie je de app kreeg.</p>
+  </dialog>
+  <dialog id="credits" aria-labelledby="credits-title"><button class="close-dialog" data-legal-close type="button" aria-label="Sluiten"><img class="icon" src="./icons/x.svg" alt="" /></button><h2 id="credits-title">Licenties</h2><p>BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan</p><p>Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0</p><p>Spier- en skeletmodellen overgenomen uit <a href="https://github.com/nqwrc/3d-anatomy" target="_blank" rel="noreferrer">nqwrc/3d-anatomy</a>. De geometrie is ongewijzigd. Kleur, selectie en zichtbaarheid worden in deze app aangepast.</p><p><a href="./models/License.txt">Modelvermelding</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a> · <a href="./licenses/upstream-LICENSE.txt">Upstream-licenties</a> · <a href="./licenses/upstream-NOTICE.txt">Upstream-vermelding</a></p><p>Three.js & Three Mesh BVH: MIT. <a href="./licenses/draco-LICENSE.txt">Draco: Apache 2.0</a>. <a href="./licenses/phosphor-LICENSE.txt">Phosphor Icons Duotone: MIT</a>. <a href="./licenses/pwa-install-LICENSE.txt">PWA Install: MIT</a>. <a href="./licenses/third-party.txt">Softwarelicenties</a></p><p>Lettertypes: <a href="./licenses/dm-sans-LICENSE.txt">DM Sans</a> en <a href="./licenses/manrope-LICENSE.txt">Manrope</a>, SIL Open Font License.</p></dialog>
+  <dialog id="install-app" class="install-dialog install-arriving" aria-labelledby="install-title" aria-describedby="install-description">
+    <div class="install-header">
+      <img class="install-app-icon" src="%BASE_URL%app-icons/icon-192.png?v=leerblad-1" width="60" height="60" alt="" />
+      <div><h2 id="install-title">MotionStudy</h2><p>Op je beginscherm</p></div>
+      <button class="install-close" data-install-close type="button" aria-label="Sluiten" autofocus></button>
+    </div>
+    <div class="install-body">
+      <div id="install-preview">
+        <p id="install-description" class="install-benefit">Een kort leermoment, altijd binnen handbereik.</p>
+        <div class="install-preview"><img src="%BASE_URL%app-icons/icon-192.png?v=leerblad-1" width="36" height="36" alt="" /><div><span>MotionStudy</span><p>Open de app en leer verder.</p></div></div>
+        <p class="install-preview-note">Je eigen app-icoon op je telefoon, tablet of computer.</p>
+      </div>
+      <ol id="install-instructions" class="install-steps" hidden></ol>
+      <p id="install-status" class="dialog-note" role="status" hidden></p>
+      <p class="install-guide-note">Je hebt een internetverbinding nodig.</p>
+    </div>
+    <div class="install-actions">
+      <button id="install-confirm" class="install-button install-button-primary" type="button" hidden>App installeren</button>
+      <button id="install-how-to" class="install-button" type="button"><span>Toevoegen aan beginscherm</span></button>
+      <button id="install-back" class="install-button" type="button" hidden><span>Terug</span></button>
+      <button class="install-continue" data-install-close type="button">Verder leren</button>
+    </div>
+  </dialog>
+  <dialog id="app-update" class="update-dialog" aria-labelledby="app-update-title" aria-describedby="app-update-description">
+    <h2 id="app-update-title">Nieuwe versie beschikbaar</h2>
+    <p id="app-update-description">Er staat een update klaar voor MotionStudy. Werk bij om de nieuwste versie te gebruiken.</p>
+    <p>Je voortgang wordt eerst opgeslagen.</p>
+    <p id="app-update-status" role="status" hidden></p>
+    <div class="update-actions"><button id="app-update-confirm" class="primary" type="button">Bijwerken</button><button id="app-update-later" type="button" autofocus>Later</button></div>
+  </dialog>
   <script type="module" src="/src/bootstrap.js"></script>
 </body>
 </html>

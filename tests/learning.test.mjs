@@ -6,10 +6,13 @@ import { muscles, muscleForMesh } from '../src/data/muscles.js';
 const curriculum = JSON.parse(readFileSync(new URL('../src/data/curriculum.json', import.meta.url)));
 const provenance = JSON.parse(readFileSync(new URL('../public/models/provenance.json', import.meta.url)));
 const serialized = JSON.stringify(curriculum);
-test('every question has a unique id, four distinct options and a course reference', () => {
+test('every question has a unique id, four distinct options and an honest source reference', () => {
   assert.equal(new Set(curriculum.questions.map(q => q.id)).size, curriculum.questions.length);
   for (const q of curriculum.questions) {
-    assert.ok(q.source.title.includes('Milo module 6.6'), q.id);
+    if (q.source.kind === 'supplement') {
+      assert.equal(q.source.title, 'Aanvullende coachingvoorbeelden', q.id);
+      assert.ok(q.source.references.length >= 2, q.id);
+    } else assert.equal(q.source.title, 'Anatomie & Biomechanica', q.id);
     assert.ok(q.source.section, q.id);
     const options = optionsFor(q);
     assert.equal(options.length, 4, q.id);
@@ -37,15 +40,15 @@ test('all muscle recognition groups match real exported meshes, excluding fascia
 });
 test('wrong answers are due after ten minutes, right answers expand intervals and mastery requires repetition', () => {
   const empty = { questions: {}, sessions: [] };
-  const first = recordAnswer(empty, 'a', true, 1000);
+  const first = recordAnswer(empty, 'a', true, 1000, 'choice');
   assert.deepEqual(empty.questions, {});
   assert.equal(first.questions.a.due, 1000 + DAY);
   const early = recordAnswer(first, 'a', true, 2000);
   assert.equal(early.questions.a.interval, 1);
   assert.equal(early.questions.a.due, first.questions.a.due);
   assert.equal(masteryFor([{id:'a'}], early), 0);
-  const second = recordAnswer(first, 'a', true, 1000 + DAY);
-  const third = recordAnswer(second, 'a', true, 1000 + 3 * DAY);
+  const second = recordAnswer(first, 'a', true, 1000 + DAY, 'open');
+  const third = recordAnswer(second, 'a', true, 1000 + 3 * DAY, 'open');
   assert.equal(third.questions.a.interval, 4);
   assert.equal(masteryFor([{id:'a'}], third), 100);
   const wrong = recordAnswer(third, 'a', false, 1000 + 7 * DAY);
@@ -103,10 +106,10 @@ test('XP calendar streak survives reload, crosses month boundary and expires aft
   assert.equal(dayKey(time), '2026-10-01');
   assert.deepEqual(readGame({getItem: () => '{"days":{"bad":100,"2026-10-01":-2},"completed":["fake"]}'}), empty);
 });
-test('short lessons cover the whole course and unlock only after every question is corrected', () => {
+test('every chapter starts independently and its lessons unlock only after every question is corrected', () => {
   const empty = { days: {}, completed: [] };
-  assert.equal(levelPath(empty).length, 88);
-  assert.equal(levelPath(empty).filter(level => !level.locked).length, 1);
+  assert.equal(levelPath(empty).length, topics.reduce((count, topic) => count + [undefined, 'supplement', 'course-detail'].reduce((sum, kind) => sum + Math.ceil(curriculum.questions.filter(q => q.region === topic.id && q.source.kind === kind).length / LESSON_SIZE), 0), 0));
+  assert.equal(levelPath(empty).filter(level => !level.locked).length, topics.length);
   assert.deepEqual(completeLevel(empty, 'basis:0', 0, 0), empty);
   assert.deepEqual(completeLevel(empty, 'basis:0', NaN, 7), empty);
   assert.deepEqual(completeLevel(empty, 'basis:0', 7, Infinity), empty);
@@ -119,8 +122,17 @@ test('short lessons cover the whole course and unlock only after every question 
   assert.equal(completeLevel(first, 'basis:0', 5, 5).completed.length, 1);
   for (const topic of topics) {
     const lessons = levelPath(empty).filter(level => level.topic.id === topic.id);
-    assert.equal(lessons.length, Math.ceil(curriculum.questions.filter(q => q.region === topic.id).length / LESSON_SIZE));
-    assert.ok(lessons.length > 3);
+    assert.equal(lessons[0].locked, false);
+    assert.ok(lessons.slice(1).every(level => level.locked));
+    const completed = completeLevel(empty, lessons[0].id, 7, 7);
+    assert.deepEqual(completed.completed, [lessons[0].id]);
+    assert.deepEqual(empty, { days: {}, completed: [] });
+    const updated = levelPath(completed).filter(level => level.topic.id === topic.id);
+    assert.equal(updated[0].done, true);
+    if (updated[1]) assert.equal(updated[1].locked, false);
+    assert.ok(levelPath(completed).filter(level => level.topic.id !== topic.id && level.stage === 0).every(level => !level.done && !level.locked));
+    const chapter = curriculum.questions.filter(q => q.region === topic.id);
+    assert.equal(lessons.length, [undefined, 'supplement', 'course-detail'].reduce((count, kind) => count + Math.ceil(chapter.filter(q => q.source.kind === kind).length / LESSON_SIZE), 0));
     const partitions = lessons.flatMap(level => {
       const questions = levelQuestions(curriculum.questions, topic.id, level.stage);
       assert.equal(questions.length, 7);
@@ -171,6 +183,10 @@ test('source coverage maps every question and every PDF page without dangling re
   assert.deepEqual(covered, ids);
   const pages = new Set();
   for (const q of curriculum.questions) {
+    if (q.source.kind === 'supplement') {
+      assert.equal(q.source.page, undefined, q.id);
+      continue;
+    }
     assert.ok(Number.isInteger(q.source.page) && q.source.page >= 1 && q.source.page <= 28, q.id);
     pages.add(q.source.page);
   }
@@ -197,7 +213,7 @@ test('old completed thirds migrate only fully covered short lessons and preserve
   assert.deepEqual(migrated.days, days);
   assert.deepEqual(migrated.completed, ['basis:0', 'basis:1', 'basis:2', 'basis:3']);
   assert.equal(levelPath(migrated).find(level => !level.done).id, 'basis:4');
-  stored['motionstudy.game.v1'] = JSON.stringify({ days, completed: topics.flatMap(t => [0, 1, 2].map(stage => t.id + ':' + stage)) });
+  stored['motionstudy.game.v1'] = JSON.stringify({ days, completed: topics.filter(t => t.id !== 'combinaties').flatMap(t => [0, 1, 2].map(stage => t.id + ':' + stage)) });
   assert.equal(readGame(storage).completed.length, 88);
   stored['motionstudy.game.v2'] = JSON.stringify({ days, completed: ['basis:0', 'basis:10', 'fake', 'basis:99'] });
   assert.deepEqual(readGame(storage).completed, ['basis:0', 'basis:10']);
@@ -223,5 +239,16 @@ test('answer streak counters and later lesson stages validate on reload', () => 
   for (const counters of [{ answerStreak: -1 }, { answerStreak: 4 }, { bestAnswerStreak: 2 }, { bestAnswerStreak: 3.5 }]) {
     assert.equal(readSession(storage({ ...session, ...counters }), lookup), null);
   }
-  assert.equal(readSession(storage({ ...session, levelId: 'core:15', stage: 15 }), lookup), null);
+  const invalidStage = levelPath({ completed: [] }).filter(level => level.topic.id === 'core').length;
+  assert.equal(readSession(storage({ ...session, levelId: 'core:' + invalidStage, stage: invalidStage }), lookup), null);
+});
+
+test('mastery requires multiple choice as well as spaced recall for the same fact', () => {
+  const q = { id: 'fact', type: 'choice' };
+  let progress = { questions: {}, sessions: [] };
+  for (const [time, mode] of [[1000, 'binary'], [1000 + DAY, 'open'], [1000 + 3 * DAY, 'open']]) progress = recordAnswer(progress, q.id, true, time, mode);
+  assert.equal(masteryFor([q], progress), 0);
+  progress = recordAnswer(progress, q.id, true, 1000 + 7 * DAY, 'choice');
+  assert.equal(masteryFor([q], progress), 100);
+  assert.equal(masteryFor([q], { questions: { fact: { interval: 8, lastCorrect: true } } }), 0);
 });

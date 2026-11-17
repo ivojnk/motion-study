@@ -3,15 +3,15 @@ import assert from 'node:assert/strict';
 import { lessonGroups } from '../src/lesson-groups.js';
 import { levelPath, topics } from '../src/learning.js';
 
-test('every chapter groups all existing lessons in order, with two to five lessons per node', () => {
+test('every chapter groups its lessons in order, including a single-lesson chapter', () => {
   const path = levelPath({ completed: [] });
   for (const topic of topics) {
     const levels = path.filter(level => level.topic.id === topic.id);
     const groups = lessonGroups(levels);
     assert.deepEqual(groups.flatMap(group => group.lessons.map(level => level.id)), levels.map(level => level.id));
-    assert.ok(groups.every(group => group.lessons.length >= 2 && group.lessons.length <= 5));
+    assert.ok(groups.every(group => group.lessons.length >= Math.min(2, levels.length) && group.lessons.length <= 5));
     assert.equal(groups[0].type, 'learn');
-    assert.equal(groups.at(-1).type, 'finish');
+    assert.equal(groups.at(-1).type, groups.length === 1 ? 'learn' : 'finish');
   }
 });
 

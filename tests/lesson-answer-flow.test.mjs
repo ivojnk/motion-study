@@ -6,6 +6,8 @@ import * as learning from '../src/learning.js';
 import * as progression from '../src/exercise-progression.js';
 import * as motivation from '../src/lesson-motivation.js';
 import * as groups from '../src/lesson-groups.js';
+import * as lessonModels from '../src/lesson-models.js';
+import { choicePalette } from '../src/muscle-choice.js';
 
 const curriculum = JSON.parse(fs.readFileSync(new URL('../src/data/curriculum.json', import.meta.url)));
 const main = fs.readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
@@ -27,7 +29,7 @@ function app(data = {}, locks) {
     if (!nodes.has(selector)) nodes.set(selector, { innerHTML: '', dataset: {}, classList: { toggle() {} }, setAttribute() {}, focus() {}, scrollIntoView() {}, closest() { return null; }, click() {} });
     return nodes.get(selector);
   };
-  const fixed = new Set(['#learning', '#intro', '#model-prompt', '#muscle-select', '#isolate', '#orientation', '#selection-card', '.atlas-panel', '#credits']);
+  const fixed = new Set(['#learning', '#intro', '#model-prompt', '#isolate', '#orientation', '#selection-card', '.atlas-panel', '#credits']);
   const querySelector = selector => {
     if (fixed.has(selector)) return node(selector);
     const html = node('#learning').innerHTML;
@@ -50,13 +52,13 @@ function app(data = {}, locks) {
     return null;
   };
   const storage = { getItem: key => data[key] || null, setItem: (key, value) => { data[key] = value; } };
-  const context = { ...learning, ...progression, ...motivation, ...groups, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
+  const context = { ...learning, ...progression, ...motivation, ...groups, ...lessonModels, choicePalette, curriculum, Map, Set, Date, Math, Number, String, JSON, Error, Boolean,
     location: { hash: '' }, navigator: locks ? { locks } : {},
     document: { querySelector, querySelectorAll: () => [], addEventListener(type, listener) { listeners.set(type, listener); } },
     window: { localStorage: storage, scrollTo() {}, matchMedia: () => ({ matches: false }) } };
-  vm.createContext(context); vm.runInContext(source, context);
+  vm.createContext(context); vm.runInContext(source, context); context.api.viewerReady();
   vm.runInContext(main.slice(main.indexOf("document.addEventListener('click'"), main.indexOf("document.addEventListener('submit'")), context);
-  vm.runInContext(main.slice(main.indexOf("document.addEventListener('submit'"), main.indexOf("$('#muscle-select').addEventListener")), context);
+  vm.runInContext(main.slice(main.indexOf("document.addEventListener('submit'"), main.indexOf("$('#bones').addEventListener")), context);
   return { ...context.api, data, html: () => node('#learning').innerHTML,
     fire(type, event) { listeners.get(type)(event); }, go(hash) { context.location.hash = hash; context.api.navigate(); } };
 }
@@ -172,22 +174,24 @@ test('halfway waits for feedback continuation, survives reload and dismisses wit
   assert.deepEqual(Array.from(instance.read().session.dismissedInterludes), ['halfway']);
 });
 
-test('mistakes keep the original progress total stable and start a separate retry round after original questions', () => {
+test('mistakes hold progress steady and corrected retries complete the original total', () => {
   let instance = sequentialLesson();
   for (let index = 0; index < 6; index++) {
     instance.dismissInterlude(); confirmCurrent(instance, index !== 0);
-    assert.match(instance.html(), /class="lesson-progress" max="6"/);
+    assert.match(instance.html(), new RegExp('class="lesson-progress" max="6" value="' + index + '"'));
     assert.equal(instance.read().session.index, index);
     assert.equal(instance.read().session.ids.length, 7);
     instance.next();
   }
   assert.equal(instance.read().session.index, 6); assert.equal(instance.read().session.answered, 6);
-  assert.match(instance.html(), /Herkansing/); assert.match(instance.html(), /class="lesson-progress" max="1"[^>]*aria-label="Herhaling"/);
+  assert.match(instance.html(), /Herkansing/); assert.match(instance.html(), /class="lesson-progress" max="6" value="5"[^>]*aria-label="Lesvoortgang"/);
   assert.equal(xp(instance), 25);
   instance = app(instance.data); instance.go('#les/daily'); assert.match(instance.html(), /Herkansing/);
   instance.dismissInterlude(); assert.equal(xp(instance), 25);
   instance = app(instance.data); instance.go('#les/daily'); assert.doesNotMatch(instance.html(), /id="continue-interlude"/);
-  confirmCurrent(instance); instance.next();
+  confirmCurrent(instance);
+  assert.match(instance.html(), /class="lesson-progress" max="6" value="6"/);
+  instance.next();
   assert.equal(instance.read().session.finished, true); assert.equal(instance.read().session.firstCorrect, 5); assert.equal(xp(instance), 40);
 });
 

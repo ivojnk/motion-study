@@ -24,9 +24,14 @@ export function createChoicePanel(host, { preview, confirm, cancel }) {
   const panel = document.createElement('section');
   panel.className = 'muscle-choice';
   panel.hidden = true;
-  panel.setAttribute('aria-label', 'Kies de bedoelde spier');
-  panel.innerHTML = '<h3>Kies een spier</h3><div class="muscle-choice-options" role="group" aria-label="Spieren op kleur en symbool"></div><div class="muscle-choice-actions"><button type="button" class="primary" data-choice-confirm disabled>Bevestigen</button><button type="button" class="text-button" data-choice-cancel>Opnieuw</button></div>';
-  host.querySelector('.viewer-tools').after(panel);
+  panel.setAttribute('role', 'dialog');
+  panel.setAttribute('aria-label', 'Welke spier bedoel je?');
+  // Native popovers float above clipping and fullscreen containers without
+  // making the model inert. Older browsers retain the fixed-position panel.
+  const supportsPopover = typeof panel.showPopover === 'function';
+  if (supportsPopover) panel.setAttribute('popover', 'manual');
+  panel.innerHTML = '<div class="muscle-choice-heading"><h3>Welke spier bedoel je?</h3><button type="button" class="muscle-choice-close" data-choice-cancel aria-label="Spierkeuze sluiten"><span aria-hidden="true">×</span></button></div><div class="muscle-choice-options" role="group" aria-label="Spieren op kleur en symbool"></div><div class="muscle-choice-actions"><button type="button" class="text-button" data-choice-cancel>Opnieuw</button><button type="button" class="primary" data-choice-confirm disabled>Bevestigen</button></div>';
+  host.append(panel);
   const options = panel.querySelector('.muscle-choice-options');
   const confirmButton = panel.querySelector('[data-choice-confirm]');
   let chosen = null;
@@ -43,10 +48,15 @@ export function createChoicePanel(host, { preview, confirm, cancel }) {
     } else if (event.target.closest('[data-choice-cancel]')) cancel();
   };
   const keydown = event => {
-    if (event.key === 'Escape') { event.preventDefault(); cancel(); }
+    if (panel.hidden || event.key !== 'Escape') return;
+    event.preventDefault();
+    event.stopPropagation();
+    cancel();
   };
   panel.addEventListener('click', click);
-  panel.addEventListener('keydown', keydown);
+  // Escape also cancels after returning focus to the model; do not close its
+  // fullscreen dialog at the same time.
+  document.addEventListener('keydown', keydown, true);
   return {
     open(nextChoices) {
       choices = nextChoices;
@@ -64,10 +74,13 @@ export function createChoicePanel(host, { preview, confirm, cancel }) {
         return button;
       }));
       panel.hidden = false;
+      if (supportsPopover) panel.showPopover();
       options.firstElementChild?.focus({ preventScroll: true });
-      panel.scrollIntoView({ block: 'nearest', behavior: 'instant' });
     },
-    close() { panel.hidden = true; choices = []; chosen = null; },
-    dispose() { panel.removeEventListener('click', click); panel.removeEventListener('keydown', keydown); panel.remove(); }
+    close() {
+      if (supportsPopover && !panel.hidden) panel.hidePopover();
+      panel.hidden = true; choices = []; chosen = null;
+    },
+    dispose() { panel.removeEventListener('click', click); document.removeEventListener('keydown', keydown, true); panel.remove(); }
   };
 }

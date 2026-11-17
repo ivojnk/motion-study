@@ -35,15 +35,11 @@ exporter application code or Wikipedia definitions were copied.
 
 ## Learning content
 
-The curriculum follows the supplied **Anatomie-Biomechanica-Cheatsheet**,
-Milo PT opleiding, module 6.6. Every question names a source chapter and links
-to the supplied study document.
-
 The public repository includes factual muscle profiles and authored quiz
 questions. It does not redistribute the PDF, extracted document or long
 source passages. Original contributions to the question bank are
-CC BY-SA 4.0. This does not relicense the original course document, endorse
-the app on behalf of Milo, or assert rights over third-party course prose.
+CC BY-SA 4.0. This does not relicense third-party course documents or assert rights over
+third-party course prose.
 
 ## Software, fonts and icons
 
@@ -53,6 +49,7 @@ the app on behalf of Milo, or assert rights over third-party course prose.
 | Three Mesh BVH | https://github.com/gkjohnson/three-mesh-bvh | MIT |
 | Draco decoder | https://github.com/google/draco | Apache 2.0 |
 | Phosphor Icons, selected Duotone SVGs | https://github.com/phosphor-icons/core | MIT |
+| canvas-confetti 1.9.4 | https://github.com/catdad/canvas-confetti | ISC |
 | Vite | https://github.com/vitejs/vite | MIT |
 | DM Sans and Manrope, via Fontsource | https://github.com/fontsource/fontsource | SIL Open Font License 1.1 |
 
@@ -62,3 +59,27 @@ The selected Duotone SVGs are served locally without an icon-library dependency.
 Full notices are distributed in `public/licenses/`. Dependencies are pinned
 by `package-lock.json`. Fonts and models are served from the app's own
 origin. No component-gallery implementation was copied.
+
+## Installation panel
+
+The installation panel uses selected Apple-template SVGs and adapted sheet CSS
+from PWA Install 0.7.0 by Gleb Khmyznikov, under the MIT license. Source commit:
+`ef1bd3ec440d711e3eaafb796914566817f976a6`. The MotionStudy app icon, learning
+copy, native dialog behavior, cream/green brand colors and responsive behavior
+are local adaptations. The complete runtime library is not included.
+The five system icons are separate from the app's Phosphor Duotone icon set.
+Full notice: `public/licenses/pwa-install-LICENSE.txt`. The notice is also included
+in `public/licenses/third-party.txt` and exposed in the app's credits.
+The MotionStudy Leerblad logo, favicon, social-share artwork and app icons use original geometric artwork and an outlined Manrope wordmark. Manrope's OFL notice is preserved in `public/brand/Manrope-OFL.txt` and the existing font notices.
+
+Source: https://github.com/khmyznikov/pwa-install/tree/ef1bd3ec440d711e3eaafb796914566817f976a6
+
+## Passkey authentication
+
+SimpleWebAuthn browser 14.0.0 and server 14.0.3, by Matthew Miller, MIT.
+Source: https://github.com/MasterKale/SimpleWebAuthn
+License: `public/licenses/simplewebauthn-LICENSE.txt`. Browser code is limited to the owner login page.
+
+## Supplemental coaching questions
+
+Original coaching examples are released with the question bank under CC BY-SA 4.0. They apply learning principles described by [Grgic, Mikulic & Mikulic (2021)](https://pubmed.ncbi.nlm.nih.gov/34822352/) and [Zacks & Friedman (2020)](https://www.nature.com/articles/s41598-020-63999-1). Research references support external-focus and analogy definitions, rather than proving each correction. No article text or third-party assets are reproduced.

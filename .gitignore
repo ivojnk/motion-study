@@ -1,5 +1,6 @@
 node_modules/
 dist/
+dist-static/
 .DS_Store
 sources/
 artifacts/
@@ -10,6 +11,13 @@ progress.md
 
 .task-backup/
 .data/
+.wrangler/
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
+
+# Local secrets and browser-test artifacts
+.dev.vars*
+.playwright-cli/
+.playwright-mcp/
+output/

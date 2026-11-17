@@ -4,8 +4,33 @@ export const DAY = 86400000;
 export const PROGRESS_KEY = 'motionstudy.progress.v1';
 export const SESSION_KEY = 'motionstudy.session.v2';
 export const LESSON_SIZE = 7;
-export const EXERCISE_MODES = ['choice', 'binary', 'recognition', 'point', 'open', 'recognition-open', 'open-self'];
+export const MISTAKE_REVIEW_SUCCESSES = 3;
+export const MISTAKE_REVIEW_LIMIT = 2;
+export const EXERCISE_MODES = ['choice', 'binary', 'recognition', 'model-choice', 'point', 'open', 'recognition-open', 'open-self'];
 const POINTABLE_MUSCLES = new Set(['pectoralis', 'delt-front', 'delt-mid', 'delt-back', 'lats', 'traps-upper', 'biceps', 'triceps', 'rectus-abd', 'glute-max', 'rectus-fem', 'gastrocnemius']);
+export function isModelQuestion(question) {
+  return ['recognition', 'exercise-recognition', 'model-fact'].includes(question?.type);
+}
+// Atlas context does not change a factual question into muscle-name recall.
+export function usesModel(question) {
+  return isModelQuestion(question) || Boolean(question?.modelContext?.muscleIds?.length);
+}
+export function modelMuscleIds(question) {
+  return ['exercise-recognition', 'model-fact'].includes(question?.type) ? question.muscleIds : question?.type === 'recognition' ? [question.muscleId] : question?.modelContext?.muscleIds || [];
+}
+export function modelAvailable(question, available, options = null, mode = null) {
+  if (mode === 'model-choice') {
+    const candidates = modelChoiceCards(options);
+    return Boolean(question?.type === 'recognition' && candidates && options.includes(question.answer) &&
+      available && candidates.every(card => available.has(card.id)));
+  }
+  return !usesModel(question) || Boolean(available && modelMuscleIds(question)?.length && modelMuscleIds(question).every(id => available.has(id)));
+}
+export function modelChoiceCards(options) {
+  if (!Array.isArray(options) || options.length !== 4 || new Set(options).size !== 4) return null;
+  const cards = options.map(option => curriculum.cards.find(card => card.name === option));
+  return cards.every(Boolean) && new Set(cards.map(card => card.id)).size === 4 ? cards : null;
+}
 // Only fixed, short concepts are automatically graded. Explanations use a model
 // answer and an explicit learner assessment instead of guessed semantics.
 const SHORT_ANSWERS = new Set([
@@ -42,7 +67,7 @@ function normalizedAnswer(value, muscle = false) {
 }
 export function supportsOpenAnswer(question) {
   return typeof question?.answer === 'string' && question.answer.trim().length > 0 &&
-    (question.type === 'recognition' || SHORT_ANSWERS.has(question.answer) ||
+    (['recognition', 'exercise-recognition'].includes(question.type) || SHORT_ANSWERS.has(question.answer) ||
       (Array.isArray(question.acceptedAnswers) && question.acceptedAnswers.length > 0));
 }
 // Optimal-string-alignment distance also counts a neighboring letter swap as
@@ -112,8 +137,9 @@ export function isOpenAnswerCorrect(question, response) {
   return checkOpenAnswer(question, response).correct;
 }
 function compatibleExercise(question, mode) {
+  if (question.type === 'exercise-recognition') return ['recognition', 'recognition-open'].includes(mode);
   if (question.type === 'recognition') {
-    return ['recognition', 'recognition-open', 'open-self'].includes(mode) || (mode === 'point' && POINTABLE_MUSCLES.has(question.muscleId));
+    return ['recognition', 'model-choice', 'recognition-open', 'open-self'].includes(mode) || (mode === 'point' && POINTABLE_MUSCLES.has(question.muscleId));
   }
   return ['choice', 'binary', 'open-self'].includes(mode) || (mode === 'open' && supportsOpenAnswer(question));
 }
@@ -135,7 +161,9 @@ export const topics = [
   ['hamstrings', 'Hamstrings', 'Heupstrekking & kniebuiging', 'barbell'],
   ['kuiten', 'Kuiten', 'Gastrocnemius, soleus & de enkel', 'stretch'],
   ['patronen', 'Van anatomie naar beweging', 'Squat, hinge, duwen & trekken', 'arrows'],
-  ['groei', 'Waarom spieren groeien', 'Hypertrofie, volume & progressie', 'growth']
+  ['groei', 'Waarom spieren groeien', 'Hypertrofie, volume & progressie', 'growth'],
+  ['combinaties', 'Oefeningen in 3D', 'Herken oefeningen aan spiercombinaties', 'barbell'],
+  ['verdieping', 'Spieren & toepassing in 3D', 'Spierkennis, oefeningskeuze, lengteprofielen & techniek', 'school']
 ].map(([id, title, subtitle, icon]) => ({ id, title, subtitle, icon }));
 
 export function shuffled(items, random = Math.random) {
@@ -146,8 +174,48 @@ export function shuffled(items, random = Math.random) {
   }
   return result;
 }
-export function optionsFor(question, random = Math.random) {
+export function optionsFor(question, random = Math.random, mode = null) {
+  if (mode === 'model-choice' && question.type === 'recognition') {
+    const target = curriculum.cards.find(card => card.id === question.muscleId);
+    const candidates = curriculum.cards.filter(card => card.id !== target?.id && question.distractors.includes(card.name));
+    // Keep the four choices visible from the same side where possible.
+    const nearby = shuffled(candidates.filter(card => card.region === target?.region && card.view === target?.view), random);
+    const sameView = shuffled(candidates.filter(card => card.region !== target?.region && card.view === target?.view), random);
+    const otherView = shuffled(candidates.filter(card => card.view !== target?.view), random);
+    return shuffled([question.answer, ...[...nearby, ...sameView, ...otherView].slice(0, 3).map(card => card.name)], random);
+  }
   return shuffled([question.answer, ...shuffled([...new Set(question.distractors)].filter(x => x !== question.answer), random).slice(0, 3)], random);
+}
+function validMistakeReview(review) {
+  return review && Number.isInteger(review.successes) && review.successes >= 0 && review.successes <= MISTAKE_REVIEW_SUCCESSES &&
+    typeof review.recalled === 'boolean' && (review.lastLesson === null || (typeof review.lastLesson === 'string' && review.lastLesson.length > 0 && review.lastLesson.length <= 100)) &&
+    Number.isFinite(review.lastPracticedAt) && review.lastPracticedAt >= 0;
+}
+function mistakeReviewFor(entry) {
+  if (!entry) return null;
+  if (validMistakeReview(entry.mistakeReview)) return entry.mistakeReview;
+  // Earlier versions kept error totals, but no cross-lesson recovery history.
+  const recalled = Object.entries(entry.exerciseStats || {}).some(([mode, stats]) =>
+    ['open', 'open-self', 'recognition-open'].includes(mode) && stats.spacedCorrect > 0);
+  return entry.attempts > entry.correct && !(entry.lastCorrect && entry.interval >= 4 && (!entry.exerciseStats || recalled))
+    ? { successes: 0, recalled: false, lastLesson: null, lastPracticedAt: 0 } : null;
+}
+export function needsMistakeReview(entry) {
+  const review = mistakeReviewFor(entry);
+  return Boolean(review && (review.successes < MISTAKE_REVIEW_SUCCESSES || !review.recalled));
+}
+export function mistakeQuestions(questions, progress, { excludeIds = [], limit = MISTAKE_REVIEW_LIMIT, availableMuscles = null } = {}) {
+  const excluded = new Set(excludeIds);
+  return questions.filter(q => !excluded.has(q.id) && needsMistakeReview(progress.questions[q.id]) &&
+    (availableMuscles === null || modelAvailable(q, availableMuscles)))
+    .sort((left, right) => mistakeReviewFor(progress.questions[left.id]).lastPracticedAt - mistakeReviewFor(progress.questions[right.id]).lastPracticedAt || left.id.localeCompare(right.id))
+    .slice(0, limit);
+}
+export function interleaveMistakes(queue, questions, progress, options = {}) {
+  if (!queue.length) return [];
+  const reviews = mistakeQuestions(questions, progress, { ...options, excludeIds: queue.map(q => q.id) });
+  // Retain every new question and distribute at most two extra reviews.
+  return queue.flatMap((q, index) => [q, ...reviews.filter((_, slot) => index === Math.floor((slot + 1) * queue.length / (reviews.length + 1)))]);
 }
 export function readProgress(storage) {
   try {
@@ -155,8 +223,12 @@ export function readProgress(storage) {
     const valid = Object.fromEntries(Object.entries(data.questions || {}).filter(([, entry]) =>
       entry && Number.isInteger(entry.correct) && entry.correct >= 0 && Number.isFinite(entry.due) && Number.isInteger(entry.attempts) && entry.attempts >= entry.correct &&
       Number.isInteger(entry.interval) && entry.interval >= 0 && entry.interval <= 30 && typeof entry.lastCorrect === 'boolean' && validExerciseStats(entry)
-    ));
-    return { questions: valid, sessions: Array.isArray(data.sessions) ? data.sessions.filter(s => Number.isFinite(s.at) && Number.isFinite(s.correct) && Number.isFinite(s.total)) : [] };
+    ).map(([id, entry]) => {
+      const { mistakeReview: ignored, ...rest } = entry;
+      const review = mistakeReviewFor(entry);
+      return [id, review ? { ...rest, mistakeReview: review } : rest];
+    }));
+    return { questions: valid, sessions: Array.isArray(data.sessions) ? data.sessions.filter(s => s && Number.isFinite(s.at) && Number.isFinite(s.correct) && Number.isFinite(s.total)) : [] };
   } catch { return { questions: {}, sessions: [] }; }
 }
 export function readSession(storage, questions) {
@@ -168,12 +240,14 @@ export function readSession(storage, questions) {
       !Number.isInteger(value.correct) || value.correct < 0 || value.correct > value.answered ||
       !Array.isArray(value.retryIds) || !value.retryIds.every(id => value.ids.includes(id)) ||
       typeof value.finished !== 'boolean' || (value.finished && value.index !== value.ids.length) || !['daily', 'review', ...topics.map(t => t.id)].includes(value.region)) return null;
+    if (value.dailyGoalReached != null && (typeof value.dailyGoalReached !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value.dailyGoalReached))) return null;
     if (value.levelId != null && (!levelPath({ completed: [] }).some(level => value.levelId === level.id && value.region === level.topic.id && value.stage === level.stage) ||
       !Number.isInteger(value.initialCount) || value.initialCount < 1 || value.initialCount > value.ids.length ||
       !Number.isInteger(value.firstCorrect) || value.firstCorrect < 0 || value.firstCorrect > value.initialCount)) return null;
     if (['answerStreak', 'bestAnswerStreak'].some(key => value[key] != null && (!Number.isInteger(value[key]) || value[key] < 0 || value[key] > value.correct)) ||
       (value.answerStreak || 0) > (value.bestAnswerStreak || 0)) return null;
     if (value.xp != null && (!Number.isInteger(value.xp) || value.xp < 0)) return null;
+    if (value.reviewLessonId != null && (typeof value.reviewLessonId !== 'string' || !value.reviewLessonId.length || value.reviewLessonId.length > 100)) return null;
     if (value.answerHistory != null && (!Array.isArray(value.answerHistory) || value.answerHistory.length > value.ids.length ||
       !value.answerHistory.every(attempt => attempt && typeof attempt.correct === 'boolean' && typeof attempt.skipped === 'boolean' &&
         typeof attempt.retry === 'boolean' && !(attempt.correct && attempt.skipped)))) return null;
@@ -197,6 +271,7 @@ export function readSession(storage, questions) {
       (value.response !== null && !(typeof value.response === 'string' &&
         (value.options.includes(value.response) || (value.response.length <= responseLimit &&
           (mode === 'point' || (open && value.response.trim().length > 0)))))))) return null;
+    if (mode === 'model-choice' && !modelChoiceCards(value.options)) return null;
     if (question && ((!open && value.openDraft) || (value.openRevealed && mode !== 'open-self'))) return null;
     if (value.selfAssessmentCorrect != null && (mode !== 'open-self' || typeof value.selfAssessmentCorrect !== 'boolean' ||
       !value.openRevealed || typeof value.response !== 'string' || !value.response.trim())) return null;
@@ -204,12 +279,21 @@ export function readSession(storage, questions) {
     return value;
   } catch { return null; }
 }
-export function recordAnswer(progress, id, correct, now = Date.now(), exercise = null) {
+export function recordAnswer(progress, id, correct, now = Date.now(), exercise = null, { lessonId = null, retry = false } = {}) {
   const previous = progress.questions[id] || { correct: 0, attempts: 0, interval: 0 };
   // Practising early is useful, but must not manufacture spaced mastery.
   const early = correct && previous.lastCorrect && previous.due > now;
   const interval = correct ? early ? previous.interval : Math.min(30, previous.interval ? previous.interval * 2 : 1) : 0;
   const mode = EXERCISE_MODES.includes(exercise) ? exercise : null;
+  const priorReview = mistakeReviewFor(previous);
+  const laterSuccess = correct && priorReview && lessonId && !retry && lessonId !== priorReview.lastLesson;
+  const mistakeReview = !correct ? { successes: 0, recalled: false, lastLesson: lessonId, lastPracticedAt: now }
+    : priorReview ? {
+      ...priorReview, lastPracticedAt: now,
+      successes: Math.min(MISTAKE_REVIEW_SUCCESSES, priorReview.successes + Number(Boolean(laterSuccess))),
+      recalled: priorReview.recalled || Boolean(laterSuccess && ['open', 'open-self', 'recognition-open'].includes(mode)),
+      lastLesson: laterSuccess ? lessonId : priorReview.lastLesson
+    } : null;
   const priorStats = previous.exerciseStats?.[mode] || { attempts: 0, correct: 0, spacedCorrect: 0 };
   const exerciseProgress = mode ? {
     lastExercise: mode,
@@ -220,28 +304,33 @@ export function recordAnswer(progress, id, correct, now = Date.now(), exercise =
   } : previous.exerciseStats ? { exerciseStats: previous.exerciseStats, lastExercise: previous.lastExercise } : {};
   return { ...progress, questions: { ...progress.questions, [id]: {
     ...exerciseProgress,
+    ...(mistakeReview ? { mistakeReview } : {}),
     correct: previous.correct + Number(correct), attempts: previous.attempts + 1,
     interval, due: early ? previous.due : now + (correct ? interval * DAY : 10 * 60000), lastCorrect: correct
   } } };
 }
 export function lessonQueue(questions, progress, { region = 'daily', limit = LESSON_SIZE, now = Date.now(), availableMuscles = null } = {}) {
   const pool = questions.filter(q => (region === 'daily' || region === 'review' || q.region === region) &&
-    (q.type !== 'recognition' || availableMuscles?.has(q.muscleId)));
+    modelAvailable(q, availableMuscles));
   const due = shuffled(pool.filter(q => progress.questions[q.id] && progress.questions[q.id].due <= now));
   const fresh = shuffled(pool.filter(q => !progress.questions[q.id]));
   const future = shuffled(pool.filter(q => progress.questions[q.id]?.due > now));
-  if (region === 'review') return due.slice(0, limit);
+  if (region === 'review') {
+    const mistakes = mistakeQuestions(pool, progress, { limit, availableMuscles });
+    return [...mistakes, ...due.filter(q => !mistakes.some(mistake => mistake.id === q.id))].slice(0, limit);
+  }
   return [...due, ...fresh, ...future].slice(0, limit);
 }
 export function masteryFor(questions, progress) {
   if (!questions.length) return 0;
   return Math.round(100 * questions.filter(question => {
     const entry = progress.questions[question.id];
-    if (!entry || entry.interval < 4 || !entry.lastCorrect) return false;
-    // Legacy records retain their mastery. New adaptive practice must also
-    // demonstrate recall on a later, spaced repetition, not just recognition.
-    if (!entry.exerciseStats || !Object.keys(entry.exerciseStats).length) return true;
-    const recallModes = question.type === 'recognition' ? ['recognition-open'] : ['open', 'open-self'];
+    if (!entry || needsMistakeReview(entry) || entry.interval < 4 || !entry.lastCorrect) return false;
+    // Mastery needs both a correct multiple-choice answer and spaced recall.
+    // Older records without modality evidence need a fresh check.
+    const choiceModes = ['recognition', 'exercise-recognition'].includes(question.type) ? ['recognition', 'model-choice'] : ['choice'];
+    if (!choiceModes.some(mode => entry.exerciseStats?.[mode]?.correct >= 1)) return false;
+    const recallModes = ['recognition', 'exercise-recognition'].includes(question.type) ? ['recognition-open'] : ['open', 'open-self'];
     return recallModes.some(mode => entry.exerciseStats[mode]?.spacedCorrect >= 1);
   }).length / questions.length);
 }
@@ -279,12 +368,12 @@ export function gameStats(game, now = Date.now()) {
   return { today: game.days[today] || 0, xp: Object.values(game.days).reduce((sum, xp) => sum + xp, 0), streak };
 }
 export function levelPath(game, questions = curriculum.questions) {
-  const levels = topics.flatMap(topic => {
-    const count = Math.ceil(questions.filter(q => q.region === topic.id).length / LESSON_SIZE);
-    return Array.from({ length: count }, (_, stage) => ({ id: topic.id + ':' + stage, topic, stage, count, label: 'Les ' + (stage + 1) }));
+  return topics.flatMap(topic => {
+    const count = chapterPools(questions, topic.id).reduce((total, pool) => total + Math.ceil(pool.length / LESSON_SIZE), 0);
+    const levels = Array.from({ length: count }, (_, stage) => ({ id: topic.id + ':' + stage, topic, stage, count, label: 'Les ' + (stage + 1) }));
+    const first = levels.findIndex(level => !game.completed.includes(level.id));
+    return levels.map((level, index) => ({ ...level, done: game.completed.includes(level.id), locked: first !== -1 && index > first }));
   });
-  const first = levels.findIndex(level => !game.completed.includes(level.id));
-  return levels.map((level, index) => ({ ...level, done: game.completed.includes(level.id), locked: first !== -1 && index > first }));
 }
 // Fill a topic's final lesson with earlier material, so it still has seven
 // questions. Very small review pools repeat due questions rather than new facts.
@@ -297,19 +386,33 @@ export function fillLesson(questions, pool = questions) {
 }
 export function levelQuestions(questions, region, stage) {
   if (!Number.isInteger(stage) || stage < 0) return [];
+  let remaining = stage;
+  for (const pool of chapterPools(questions, region)) {
+    const count = Math.ceil(pool.length / LESSON_SIZE);
+    if (remaining < count) {
+      const reviewPool = pool[0]?.source?.kind === 'course-detail' ? [...pool, ...questions.filter(q => q.region === region && q.source?.kind !== 'course-detail')] : pool;
+      return fillLesson(pool.slice(remaining * LESSON_SIZE, (remaining + 1) * LESSON_SIZE), reviewPool);
+    }
+    remaining -= count;
+  }
+  return [];
+}
+// Start additions after the original chapter's final lesson. Previously completed
+// lessons retain their questions, including their existing review fillers.
+function chapterPools(questions, region) {
   const pool = questions.filter(q => q.region === region);
-  return fillLesson(pool.slice(stage * LESSON_SIZE, (stage + 1) * LESSON_SIZE), pool);
+  return [pool.filter(q => !['supplement', 'course-detail'].includes(q.source?.kind)), pool.filter(q => q.source?.kind === 'supplement'), pool.filter(q => q.source?.kind === 'course-detail')];
 }
 function migrateCompletedLevels(completed) {
   if (!Array.isArray(completed)) return [];
-  const covered = new Set(topics.flatMap(topic => {
-    const pool = curriculum.questions.filter(q => q.region === topic.id);
+  const covered = new Set(topics.filter(topic => !['combinaties', 'verdieping'].includes(topic.id)).flatMap(topic => {
+    const pool = curriculum.questions.filter(q => q.region === topic.id && !['supplement', 'course-detail'].includes(q.source?.kind));
     return [0, 1, 2].flatMap(stage => completed.includes(topic.id + ':' + stage)
       ? pool.slice(Math.floor(stage * pool.length / 3), Math.floor((stage + 1) * pool.length / 3)).map(q => q.id) : []);
   }));
   return levelPath({ completed: [] }).filter(level => {
-    const originals = curriculum.questions.filter(q => q.region === level.topic.id).slice(level.stage * LESSON_SIZE, (level.stage + 1) * LESSON_SIZE);
-    return originals.every(q => covered.has(q.id));
+    const originals = levelQuestions(curriculum.questions, level.topic.id, level.stage);
+    return originals.length > 0 && originals.every(q => covered.has(q.id));
   }).map(level => level.id);
 }
 export function completeLevel(game, id, correct, total) {
@@ -332,6 +435,7 @@ export function recordLessonAnswer(session, correct, retryMode) {
   };
 }
 export function exerciseFor(question, index) {
+  if (question.type === 'exercise-recognition') return 'recognition';
   if (question.type === 'recognition') {
     if (index % 2 && POINTABLE_MUSCLES.has(question.muscleId)) return 'point';
     return 'recognition';
@@ -358,7 +462,7 @@ export function varyLesson(queue) {
     return from !== -1;
   };
   const pointing = place(1, question => exerciseFor(question, 1) === 'point');
-  const highlighted = place(0, question => question.type === 'recognition', pointing ? [1] : []);
+  const highlighted = place(0, isModelQuestion, pointing ? [1] : []) || place(0, usesModel, pointing ? [1] : []);
   place(2, supportsOpenAnswer, [...(pointing ? [1] : []), ...(highlighted ? [0] : [])]);
   return ordered;
 }

@@ -1,4 +1,4 @@
-// Source-specific study questions. Ranges and recommendations describe the cheatsheet.
+// Study questions about movement patterns, ranges and training recommendations.
 export const extraPatterns = [
   ['shared-core', 'patronen', 'Welke rol heeft de rug bij squat en hinge?', 'Positiebehoud en rompstijfheid: de rug verbindt onder- en bovenlichaam isometrisch; de heup levert kracht', ['De rug buigt actief om de kracht te leveren', 'De rug blijft ontspannen terwijl de heup beweegt', 'De rug roteert bij iedere herhaling'], 'kracht komt uit de heup, de rug verbindt onder- en bovenlichaam'],
   ['hip-disassociation', 'patronen', 'Wat betekent hip disassociation?', 'De heupen kunnen los van de onderrug bewegen', ['Heupen en onderrug bewegen altijd samen', 'De heupen blijven volledig vast', 'De beweging komt alleen uit de enkels'], 'Hip disassociation — heupen los van de onderrug kunnen bewegen'],

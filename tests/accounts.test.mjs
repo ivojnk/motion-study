@@ -5,13 +5,14 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createAccounts } from '../server/accounts.mjs';
 import { accountStorage } from '../src/account-storage.js';
+import { NOTICE_VERSION } from '../shared/legal.mjs';
 
 const origin = 'http://127.0.0.1:5173';
 function request(path, body, cookie, headers = {}) {
   return new Request(origin + '/api/account/' + path, {
     method: body === undefined ? 'GET' : 'POST',
     headers: { ...(body !== undefined ? { origin, 'content-type': 'application/json' } : {}), ...(cookie ? { cookie } : {}), ...headers },
-    ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
+    ...(body !== undefined ? { body: JSON.stringify(path === 'enter' ? { acknowledged: true, noticeVersion: NOTICE_VERSION, ...body } : body) } : {}),
   });
 }
 function fixture(t, options = {}) {

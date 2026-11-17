@@ -175,7 +175,7 @@ test('near matches preserve qualifiers, short words, numbers and negations', () 
 });
 
 
-test('adaptive mastery requires spaced recall while legacy mastery remains intact', () => {
+test('adaptive mastery requires choice evidence and spaced recall, including older records', () => {
   const easyOnly = recordAnswer(recordAnswer(recordAnswer({ questions: {}, sessions: [] }, short.id, true, 1000, 'choice'), short.id, true, 1000 + DAY, 'binary'), short.id, true, 1000 + 3 * DAY, 'choice');
   assert.equal(easyOnly.questions[short.id].interval, 4);
   assert.equal(masteryFor([short], easyOnly), 0);
@@ -186,11 +186,12 @@ test('adaptive mastery requires spaced recall while legacy mastery remains intac
   const selfRecall = recordAnswer(easyOnly, short.id, true, 1000 + 7 * DAY, 'open-self');
   assert.equal(masteryFor([short], selfRecall), 100);
   const legacy = { questions: { [short.id]: { interval: 4, lastCorrect: true } } };
-  assert.equal(masteryFor([short], legacy), 100);
+  assert.equal(masteryFor([short], legacy), 0);
   legacy.questions[short.id].exerciseStats = {};
-  assert.equal(masteryFor([short], legacy), 100);
+  assert.equal(masteryFor([short], legacy), 0);
   const visualProgress = { questions: { [visual.id]: { interval: 4, lastCorrect: true, exerciseStats: { point: { spacedCorrect: 2 } } } } };
   assert.equal(masteryFor([visual], visualProgress), 0);
+  visualProgress.questions[visual.id].exerciseStats.recognition = { correct: 1 };
   visualProgress.questions[visual.id].exerciseStats['recognition-open'] = { spacedCorrect: 1 };
   assert.equal(masteryFor([visual], visualProgress), 100);
 });

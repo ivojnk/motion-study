@@ -1,4 +1,4 @@
-import { supportsOpenAnswer } from './learning.js';
+import { supportsOpenAnswer, needsMistakeReview } from './learning.js';
 
 // Deep muscles are deliberately excluded: pointing must be possible without
 // highlighting the correct answer through an overlying structure.
@@ -8,10 +8,11 @@ const pointableMuscles = new Set([
 ]);
 
 export function availableExercises(question) {
+  if (question.type === 'exercise-recognition') return ['recognition', 'recognition-open'];
   if (question.type === 'recognition') {
     return pointableMuscles.has(question.muscleId)
-      ? ['recognition', 'point', 'recognition-open']
-      : ['recognition', 'recognition-open'];
+      ? ['recognition', 'model-choice', 'point', 'recognition-open']
+      : ['recognition', 'model-choice', 'recognition-open'];
   }
   return ['choice', 'binary', supportsOpenAnswer(question) ? 'open' : 'open-self'];
 }
@@ -23,8 +24,19 @@ function spacedSuccess(stats, mode) {
 export function exerciseForProgress(question, questionProgress, { index = 0, now = Date.now() } = {}) {
   const modes = availableExercises(question);
   const turn = Number.isInteger(index) ? Math.abs(index) : 0;
-  const recognition = question.type === 'recognition';
-  const easy = recognition ? 'recognition' : turn % 3 === 1 ? 'binary' : 'choice';
+  const recognition = ['recognition', 'exercise-recognition'].includes(question.type);
+  const choiceCorrect = recognition
+    ? ['recognition', 'model-choice'].some(mode => questionProgress?.exerciseStats?.[mode]?.correct > 0)
+    : questionProgress?.exerciseStats?.choice?.correct > 0;
+  const easy = recognition ? (question.type === 'recognition' ? 'model-choice' : 'recognition') : choiceCorrect && turn % 3 === 1 ? 'binary' : 'choice';
+  // A two-option answer cannot replace demonstrating the fact in multiple choice.
+  if (!recognition && !choiceCorrect) return 'choice';
+  if (needsMistakeReview(questionProgress)) {
+    if (!questionProgress?.lastCorrect) return easy;
+    if (questionProgress.mistakeReview?.successes >= 1) {
+      return recognition && modes.includes('point') && questionProgress.mistakeReview.successes === 1 ? 'point' : modes.at(-1);
+    }
+  }
   if (!questionProgress?.lastCorrect || !(questionProgress.interval >= 1)) return easy;
 
   // An interval describes completed spaced practice. The NEXT harder form is
