@@ -1550,6 +1550,17 @@ test('unanswered binary drafts without choice evidence become multiple choice an
   instance.play(); assert.equal(instance.read().progress.questions[q.id].exerciseStats.choice.correct, 1);
 });
 
+test('extra explanation for a concept shows neighbouring course definitions', () => {
+  const q = curriculum.questions.find(q => q.id === 'extra-basis-verkorte-positie');
+  assert.equal(q.answer, 'De spier is maximaal verkort en heeft al zijn functies uitgevoerd');
+  const session = { ids: [q.id], exerciseModes: ['choice'], index: 0, initialCount: 1, correct: 0, answered: 0,
+    retryIds: [], region: 'daily', options: learning.optionsFor(q), response: null, finished: false, prepared: true, pairingDone: true };
+  const instance = app({ [learning.SESSION_KEY]: JSON.stringify(session) });
+  instance.go('#les/daily'); instance.play();
+  assert.match(instance.html(), /Wat is de middenpositie van een spier\?/);
+  assert.doesNotMatch(instance.html(), /Wat betekent anterieur\?/);
+});
+
 test('extra explanation is a collapsed disclosure after grading with existing lesson context', () => {
   const q = curriculum.questions.find(q => q.id === 'pectoralis-aanhechting');
   const session = { ids: [q.id], exerciseModes: ['choice'], index: 0, initialCount: 1, correct: 0, answered: 0,

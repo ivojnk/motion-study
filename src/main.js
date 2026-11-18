@@ -417,8 +417,11 @@ function extraExplanationMarkup(q) {
   const cards = curriculum.cards.filter(card => muscleIds.includes(card.id));
   const fields = cards.flatMap(card => Object.entries(card.fields || {}).filter(([, value]) => value !== q.answer)
     .map(([label, value]) => '<p><strong>' + escape((cards.length > 1 ? card.name + ' · ' : '') + label) + '</strong><br>' + escape(value) + '</p>')).slice(0, 4);
+  // Neighbouring questions on the same course page follow the sheet's order, so they cover the same topic.
+  const position = other => curriculum.questions.findIndex(item => item.id === other.id), here = position(q);
   const related = fields.length ? [] : curriculum.questions.filter(other => other.id !== q.id && other.type !== 'recognition' &&
-    other.region === q.region && other.source?.section === q.source?.section && other.answer !== q.answer).slice(0, 3)
+    other.region === q.region && other.source?.section === q.source?.section && other.source?.page === q.source?.page &&
+    other.answer !== q.answer).sort((a, b) => Math.abs(position(a) - here) - Math.abs(position(b) - here)).slice(0, 3)
     .map(other => '<p><strong>' + escape(other.prompt) + '</strong><br>' + escape(other.explanation || other.answer) + '</p>');
   const content = (q.modelContext?.hint ? '<p>' + escape(q.modelContext.hint) + '</p>' : '') + fields.join('') + related.join('');
   return content ? '<details class="extra-explanation"><summary>Meer uitleg</summary><div class="extra-explanation-content">' + content + '</div></details>' : '';

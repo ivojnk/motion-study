@@ -14574,7 +14574,7 @@
       "prompt": "Wat betekent de verlengde spierpositie?",
       "answer": "De spier is maximaal op rek",
       "distractors": [
-        "De spier vervult alle functies in de verkorte positie",
+        "De spier is maximaal verkort",
         "De spier is noch maximaal verlengd noch verkort",
         "Er is geen spierspanning mogelijk"
       ],
@@ -14623,7 +14623,7 @@
       "id": "extra-basis-verkorte-positie",
       "region": "basis",
       "prompt": "Wat is de verkorte spierpositie?",
-      "answer": "De spier vervult alle functies",
+      "answer": "De spier is maximaal verkort en heeft al zijn functies uitgevoerd",
       "distractors": [
         "De spier staat maximaal op rek",
         "De spier is niet maximaal verlengd of verkort",
