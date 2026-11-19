@@ -158,7 +158,8 @@ function renderHome() {
   if (homeStats) {
     homeStats.hidden = false;
     homeStats.innerHTML = '<span class="home-metric metric-streak" title="Dagelijkse streak">' + icon('flame') + '<strong>' + stats.streak + '</strong><span class="visually-hidden"> ' + (stats.streak === 1 ? 'dag' : 'dagen') + ' streak</span></span>' +
-      '<span class="home-metric metric-points" title="Verzamelde punten">' + icon('sparkles') + '<strong>' + stats.xp + '</strong><span class="visually-hidden"> verzamelde punten</span></span>';
+      '<span class="home-metric metric-points" title="Verzamelde punten">' + icon('sparkles') + '<strong>' + stats.xp + '</strong><span class="visually-hidden"> verzamelde punten</span></span>' +
+      '<span class="home-metric metric-lessons" title="Afgeronde lessen van het totaal">' + icon('book-2') + '<strong>' + levels.filter(level => level.done).length + '/' + levels.length + '</strong><span class="visually-hidden"> lessen afgerond</span></span>';
   }
   const activeTopic = topic || levels.find(level => !level.done)?.topic || topics.at(-1);
   const activeLevel = current || levels.find(level => !level.done);
