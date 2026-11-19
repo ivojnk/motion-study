@@ -8659,6 +8659,153 @@
       ]
     },
     {
+      "id": "question-lesson-7-intake-doel",
+      "label": "Waarom plan je bij leefstijlcoaching zo snel mogelijk een intake?",
+      "questionIds": [
+        "lesson-7-intake-doel"
+      ]
+    },
+    {
+      "id": "question-lesson-7-intake-sfeer",
+      "label": "Welke houding past bij een succesvolle intake?",
+      "questionIds": [
+        "lesson-7-intake-sfeer"
+      ]
+    },
+    {
+      "id": "question-lesson-7-intake-autonomie",
+      "label": "Wat benadruk je bij het bespreken van de agenda van een intake?",
+      "questionIds": [
+        "lesson-7-intake-autonomie"
+      ]
+    },
+    {
+      "id": "question-lesson-7-actieplan",
+      "label": "Wat leg je op de eerste pagina van een leefstijlactieplan vast?",
+      "questionIds": [
+        "lesson-7-actieplan"
+      ]
+    },
+    {
+      "id": "question-lesson-7-actieplan-meten",
+      "label": "Wat hoort op de verdiepende pagina van een actieplan?",
+      "questionIds": [
+        "lesson-7-actieplan-meten"
+      ]
+    },
+    {
+      "id": "question-lesson-7-actiestap",
+      "label": "Welke actiestap kies je volgens de les als eerste?",
+      "questionIds": [
+        "lesson-7-actiestap"
+      ]
+    },
+    {
+      "id": "question-lesson-7-consistentie",
+      "label": "Wat is een logische vervolgstap wanneer een actiestap minder dan 80% consistent lukt?",
+      "questionIds": [
+        "lesson-7-consistentie"
+      ]
+    },
+    {
+      "id": "question-lesson-7-langzaam-eten",
+      "label": "Welk doel heeft langzamer eten volgens de les?",
+      "questionIds": [
+        "lesson-7-langzaam-eten"
+      ]
+    },
+    {
+      "id": "question-lesson-7-schermvrij-eten",
+      "label": "Waarom adviseert de les om zonder schermen te eten?",
+      "questionIds": [
+        "lesson-7-schermvrij-eten"
+      ]
+    },
+    {
+      "id": "question-lesson-7-eiwit-elke-maaltijd",
+      "label": "Welke praktische eiwitactie noemt de les?",
+      "questionIds": [
+        "lesson-7-eiwit-elke-maaltijd"
+      ]
+    },
+    {
+      "id": "question-lesson-7-plantaardig-eiwit",
+      "label": "Welke aanpak past bij een veganistisch eetpatroon volgens de les?",
+      "questionIds": [
+        "lesson-7-plantaardig-eiwit"
+      ]
+    },
+    {
+      "id": "question-lesson-7-groente-twee-maaltijden",
+      "label": "Welke groente-actie helpt volgens de les een dagelijkse basis op te bouwen?",
+      "questionIds": [
+        "lesson-7-groente-twee-maaltijden"
+      ]
+    },
+    {
+      "id": "question-lesson-7-na-maaltijd-bewegen",
+      "label": "Wat is een praktische beweegactie na een maaltijd?",
+      "questionIds": [
+        "lesson-7-na-maaltijd-bewegen"
+      ]
+    },
+    {
+      "id": "question-lesson-7-neat-duurzaam",
+      "label": "Waarom kan alledaagse beweging op lange termijn belangrijk zijn?",
+      "questionIds": [
+        "lesson-7-neat-duurzaam"
+      ]
+    },
+    {
+      "id": "question-lesson-7-lage-intensiteit",
+      "label": "Wat kenmerkt een laag-intensieve activiteit in de les?",
+      "questionIds": [
+        "lesson-7-lage-intensiteit"
+      ]
+    },
+    {
+      "id": "question-lesson-7-gezonde-vetten",
+      "label": "Welke verandering past bij voldoende vetten?",
+      "questionIds": [
+        "lesson-7-gezonde-vetten"
+      ]
+    },
+    {
+      "id": "question-lesson-7-cafeine-slaap",
+      "label": "Welke slaaptip noemt de les voor cafeïne?",
+      "questionIds": [
+        "lesson-7-cafeine-slaap"
+      ]
+    },
+    {
+      "id": "question-lesson-7-ochtendlicht",
+      "label": "Waarom kan een ochtendwandeling helpen bij slaap?",
+      "questionIds": [
+        "lesson-7-ochtendlicht"
+      ]
+    },
+    {
+      "id": "question-lesson-7-probleemgerichte-coping",
+      "label": "Wat is probleemgerichte coping?",
+      "questionIds": [
+        "lesson-7-probleemgerichte-coping"
+      ]
+    },
+    {
+      "id": "question-lesson-7-emotiegerichte-coping",
+      "label": "Waar richt emotiegerichte coping zich op?",
+      "questionIds": [
+        "lesson-7-emotiegerichte-coping"
+      ]
+    },
+    {
+      "id": "question-lesson-7-time-management",
+      "label": "Welke stressinterventie geeft de cliënt volgens de les meer grip op afspraken?",
+      "questionIds": [
+        "lesson-7-time-management"
+      ]
+    },
+    {
       "id": "question-lesson-8-force",
       "label": "Wat betekent force in de les over kracht?",
       "questionIds": [
@@ -8775,6 +8922,188 @@
       "label": "Wat volgt in het stappenplan na de beginsituatie?",
       "questionIds": [
         "lesson-8-belasting-uitschrijven"
+      ]
+    },
+    {
+      "id": "question-lesson-8-antropometrie",
+      "label": "Wat betekent antropometrie in de context van kracht?",
+      "questionIds": [
+        "lesson-8-antropometrie"
+      ]
+    },
+    {
+      "id": "question-lesson-8-motorische-vaardigheden",
+      "label": "Waarom zijn motorische vaardigheden relevant voor maximale kracht?",
+      "questionIds": [
+        "lesson-8-motorische-vaardigheden"
+      ]
+    },
+    {
+      "id": "question-lesson-8-force-velocity",
+      "label": "Wat beschrijft de force-velocitycurve?",
+      "questionIds": [
+        "lesson-8-force-velocity"
+      ]
+    },
+    {
+      "id": "question-lesson-8-hoge-intentie",
+      "label": "Wat bewaakt een coach bij zware krachtsets vooral?",
+      "questionIds": [
+        "lesson-8-hoge-intentie"
+      ]
+    },
+    {
+      "id": "question-lesson-8-snelheid-signaal",
+      "label": "Wat kan een duidelijke snelheidsdaling binnen een set signaleren?",
+      "questionIds": [
+        "lesson-8-snelheid-signaal"
+      ]
+    },
+    {
+      "id": "question-lesson-8-deelbewegingen",
+      "label": "Waarom kijk je bij een bewegingsanalyse naar deelbewegingen?",
+      "questionIds": [
+        "lesson-8-deelbewegingen"
+      ]
+    },
+    {
+      "id": "question-lesson-8-energielek",
+      "label": "Wat is een energielek in een krachtbeweging?",
+      "questionIds": [
+        "lesson-8-energielek"
+      ]
+    },
+    {
+      "id": "question-lesson-8-hoofdoefening",
+      "label": "Waarop richt oefeningsselectie voor kracht zich in de eerste plaats?",
+      "questionIds": [
+        "lesson-8-hoofdoefening"
+      ]
+    },
+    {
+      "id": "question-lesson-8-core-kracht",
+      "label": "Welke rol kan de core hebben bij kracht leveren?",
+      "questionIds": [
+        "lesson-8-core-kracht"
+      ]
+    },
+    {
+      "id": "question-lesson-8-unilateraal",
+      "label": "Waarom kan unilateraal trainen nuttig zijn voor kracht?",
+      "questionIds": [
+        "lesson-8-unilateraal"
+      ]
+    },
+    {
+      "id": "question-lesson-8-vermoeidheid-kwaliteit",
+      "label": "Wat doe je als vermoeidheid de kwaliteit van een krachtbeweging aantast?",
+      "questionIds": [
+        "lesson-8-vermoeidheid-kwaliteit"
+      ]
+    },
+    {
+      "id": "question-lesson-8-kracht-intensiteit",
+      "label": "Welke intensiteit noemt de les als effectief voor maximale krachtadaptatie?",
+      "questionIds": [
+        "lesson-8-kracht-intensiteit"
+      ]
+    },
+    {
+      "id": "question-lesson-8-kracht-frequentie",
+      "label": "Welk frequentiebereik is volgens de les vaak werkbaar per hoofdoefening?",
+      "questionIds": [
+        "lesson-8-kracht-frequentie"
+      ]
+    },
+    {
+      "id": "question-lesson-8-krachtvolume",
+      "label": "Welke richtlijn noemt de les voor wekelijks krachtvolume bij intermediaire krachtsporters?",
+      "questionIds": [
+        "lesson-8-krachtvolume"
+      ]
+    },
+    {
+      "id": "question-lesson-8-volume-flexibel",
+      "label": "Welke variabele pas je volgens de les logischerwijs aan als intensiteit op een dag niet haalbaar is?",
+      "questionIds": [
+        "lesson-8-volume-flexibel"
+      ]
+    },
+    {
+      "id": "question-lesson-8-herstel-pijlers",
+      "label": "Welke hoort bij de vier pijlers van herstel uit de les?",
+      "questionIds": [
+        "lesson-8-herstel-pijlers"
+      ]
+    },
+    {
+      "id": "question-lesson-8-beginner-kracht",
+      "label": "Waar ligt bij een beginnende krachtsporter de nadruk?",
+      "questionIds": [
+        "lesson-8-beginner-kracht"
+      ]
+    },
+    {
+      "id": "question-lesson-8-intermediair-kracht",
+      "label": "Welke verandering past bij een intermediaire krachtsporter?",
+      "questionIds": [
+        "lesson-8-intermediair-kracht"
+      ]
+    },
+    {
+      "id": "question-lesson-8-warming-up-volgorde",
+      "label": "Welke volgorde hoort bij de warming-up voor een hoofdoefening?",
+      "questionIds": [
+        "lesson-8-warming-up-volgorde"
+      ]
+    },
+    {
+      "id": "question-lesson-8-mobiliteit",
+      "label": "Wat betekent mobiliteit volgens de les?",
+      "questionIds": [
+        "lesson-8-mobiliteit"
+      ]
+    },
+    {
+      "id": "question-lesson-8-activatie",
+      "label": "Wat is een doel van spieractivatie in de warming-up?",
+      "questionIds": [
+        "lesson-8-activatie"
+      ]
+    },
+    {
+      "id": "question-lesson-8-motor-engram",
+      "label": "Wat is een motor engram?",
+      "questionIds": [
+        "lesson-8-motor-engram"
+      ]
+    },
+    {
+      "id": "question-lesson-8-kracht-beginsituatie",
+      "label": "Wat maak je bij de beginsituatie voor krachtprogrammering concreet?",
+      "questionIds": [
+        "lesson-8-kracht-beginsituatie"
+      ]
+    },
+    {
+      "id": "question-lesson-8-weekprogramma",
+      "label": "Wat programmeer je eerst wanneer je de trainingsweek invult?",
+      "questionIds": [
+        "lesson-8-weekprogramma"
+      ]
+    },
+    {
+      "id": "question-lesson-8-laatste-check",
+      "label": "Wat controleer je in een laatste krachtprogrammeringscheck?",
+      "questionIds": [
+        "lesson-8-laatste-check"
+      ]
+    },
+    {
+      "id": "question-lesson-8-kracht-leefstijl",
+      "label": "Welke leefstijlfactoren ondersteunen volgens de les een krachttraject?",
+      "questionIds": [
+        "lesson-8-kracht-leefstijl"
       ]
     },
     {
@@ -8922,6 +9251,160 @@
       "label": "Wat helpt de vraag “Leeft ’t?” een coach te beoordelen?",
       "questionIds": [
         "lesson-9-loopt-lukt-leeft"
+      ]
+    },
+    {
+      "id": "question-lesson-9-kinetische-keten",
+      "label": "Wat is een kinetische keten?",
+      "questionIds": [
+        "lesson-9-kinetische-keten"
+      ]
+    },
+    {
+      "id": "question-lesson-9-hefboom-fulcrum",
+      "label": "Wat is het fulcrum van een hefboom?",
+      "questionIds": [
+        "lesson-9-hefboom-fulcrum"
+      ]
+    },
+    {
+      "id": "question-lesson-9-momentarm-impact",
+      "label": "Wat gebeurt er met de impact van een moment als de momentarm groter wordt?",
+      "questionIds": [
+        "lesson-9-momentarm-impact"
+      ]
+    },
+    {
+      "id": "question-lesson-9-line-of-pull",
+      "label": "Wat beschrijft de line of pull?",
+      "questionIds": [
+        "lesson-9-line-of-pull"
+      ]
+    },
+    {
+      "id": "question-lesson-9-lokale-vermoeidheid",
+      "label": "Wat is lokale vermoeidheid?",
+      "questionIds": [
+        "lesson-9-lokale-vermoeidheid"
+      ]
+    },
+    {
+      "id": "question-lesson-9-globale-vermoeidheid",
+      "label": "Wat is globale vermoeidheid?",
+      "questionIds": [
+        "lesson-9-globale-vermoeidheid"
+      ]
+    },
+    {
+      "id": "question-lesson-9-anaeroob-alactisch",
+      "label": "Welk energiesysteem levert zeer snel energie maar raakt snel uitgeput?",
+      "questionIds": [
+        "lesson-9-anaeroob-alactisch"
+      ]
+    },
+    {
+      "id": "question-lesson-9-anaeroob-lactisch",
+      "label": "Welk energiesysteem hoort volgens de les bij korte, zware inspanning met lokale vermoeidheid?",
+      "questionIds": [
+        "lesson-9-anaeroob-lactisch"
+      ]
+    },
+    {
+      "id": "question-lesson-9-aeroob",
+      "label": "Wat kenmerkt het aerobe energiesysteem?",
+      "questionIds": [
+        "lesson-9-aeroob"
+      ]
+    },
+    {
+      "id": "question-lesson-9-fitness-fatigue",
+      "label": "Wat beschrijft het fitness-fatigue model over prestatie?",
+      "questionIds": [
+        "lesson-9-fitness-fatigue"
+      ]
+    },
+    {
+      "id": "question-lesson-9-adaptatie",
+      "label": "Wat is een positieve adaptatie in training?",
+      "questionIds": [
+        "lesson-9-adaptatie"
+      ]
+    },
+    {
+      "id": "question-lesson-9-spiergroei-volume",
+      "label": "Welke weekomvang noemt de les als richtlijn bij spiergroei?",
+      "questionIds": [
+        "lesson-9-spiergroei-volume"
+      ]
+    },
+    {
+      "id": "question-lesson-9-spiergroei-frequentie",
+      "label": "Welke frequentie noemt de les vaak voor het trainen van een spier bij spiergroei?",
+      "questionIds": [
+        "lesson-9-spiergroei-frequentie"
+      ]
+    },
+    {
+      "id": "question-lesson-9-spiergroei-intentie",
+      "label": "Waar richt de intentie van een effectieve set voor spiergroei zich op?",
+      "questionIds": [
+        "lesson-9-spiergroei-intentie"
+      ]
+    },
+    {
+      "id": "question-lesson-9-kracht-frequentie-2",
+      "label": "Waarom is frequentie belangrijk voor submaximale kracht?",
+      "questionIds": [
+        "lesson-9-kracht-frequentie-2"
+      ]
+    },
+    {
+      "id": "question-lesson-9-kracht-transfer",
+      "label": "Wat zijn ondersteunende oefeningen met hoge transferwaarde?",
+      "questionIds": [
+        "lesson-9-kracht-transfer"
+      ]
+    },
+    {
+      "id": "question-lesson-9-kracht-rust",
+      "label": "Waarom is rust tussen zware krachtsets belangrijk?",
+      "questionIds": [
+        "lesson-9-kracht-rust"
+      ]
+    },
+    {
+      "id": "question-lesson-9-kracht-herstelvoorwaarden",
+      "label": "Welke herstelvoorwaarden zijn volgens de les belangrijk bij krachtprogrammering?",
+      "questionIds": [
+        "lesson-9-kracht-herstelvoorwaarden"
+      ]
+    },
+    {
+      "id": "question-lesson-9-submaximaal-80",
+      "label": "Wat benadrukt de les bij prestatieverbetering boven 80% van de 1RM?",
+      "questionIds": [
+        "lesson-9-submaximaal-80"
+      ]
+    },
+    {
+      "id": "question-lesson-9-coachen-minder-zeggen",
+      "label": "Welke coachingsstijl wordt in de les voor beter bewegen benadrukt?",
+      "questionIds": [
+        "lesson-9-coachen-minder-zeggen"
+      ]
+    },
+    {
+      "id": "question-lesson-9-coachingslus",
+      "label": "Welke elementen horen bij de coachingslus?",
+      "questionIds": [
+        "lesson-9-coachingslus"
+      ]
+    },
+    {
+      "id": "question-lesson-9-extern-impliciet",
+      "label": "Waarom gebruikt een coach externe en impliciete cues?",
+      "questionIds": [
+        "lesson-9-extern-impliciet"
       ]
     }
   ],
@@ -38604,6 +39087,363 @@
       }
     },
     {
+      "id": "lesson-7-intake-doel",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Waarom plan je bij leefstijlcoaching zo snel mogelijk een intake?",
+      "answer": "Om behoeften, uitdagingen, mogelijkheden en doelen samen in kaart te brengen",
+      "distractors": [
+        "Om meteen een vast voedingsschema op te leggen",
+        "Om training zonder gesprek te starten",
+        "Om alleen lichaamsgewicht te meten"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Leefstijlcoaching: informatie verzamelen"
+      }
+    },
+    {
+      "id": "lesson-7-intake-sfeer",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welke houding past bij een succesvolle intake?",
+      "answer": "Open, veilig, nieuwsgierig en empathisch",
+      "distractors": [
+        "Oordelend en gehaast",
+        "Alleen gesloten vragen stellen",
+        "De agenda van de cliënt negeren"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Leefstijlcoaching: informatie verzamelen"
+      }
+    },
+    {
+      "id": "lesson-7-intake-autonomie",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat benadruk je bij het bespreken van de agenda van een intake?",
+      "answer": "Dat de cliënt eigen keuzes kan maken en de coach richting en steun biedt",
+      "distractors": [
+        "Dat de coach alle keuzes overneemt",
+        "Dat doelen niet besproken hoeven worden",
+        "Dat obstakels buiten het traject vallen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Leefstijlcoaching: informatie verzamelen"
+      }
+    },
+    {
+      "id": "lesson-7-actieplan",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat leg je op de eerste pagina van een leefstijlactieplan vast?",
+      "answer": "Doel, vaardigheden en acties",
+      "distractors": [
+        "Alleen een lijst met verboden producten",
+        "Alleen lichaamsgewicht en BMI",
+        "Alleen de planning van de coach"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Persoonlijk actieplan"
+      }
+    },
+    {
+      "id": "lesson-7-actieplan-meten",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat hoort op de verdiepende pagina van een actieplan?",
+      "answer": "Hoe voortgang wordt gemeten en wanneer er wordt geëvalueerd",
+      "distractors": [
+        "Alleen de prijs van het traject",
+        "Alleen de vorige resultaten",
+        "Een willekeurige nieuwe doelstelling"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Persoonlijk actieplan"
+      }
+    },
+    {
+      "id": "lesson-7-actiestap",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welke actiestap kies je volgens de les als eerste?",
+      "answer": "De actie die de cliënt het meest geschikt vindt en concreet begrijpt",
+      "distractors": [
+        "De meest ingewikkelde actie",
+        "Alle acties tegelijk",
+        "De actie die de coach zonder overleg kiest"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Eerstvolgende actiestap"
+      }
+    },
+    {
+      "id": "lesson-7-consistentie",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat is een logische vervolgstap wanneer een actiestap minder dan 80% consistent lukt?",
+      "answer": "De actie kleiner of makkelijker maken",
+      "distractors": [
+        "De cliënt straffen",
+        "Het hele traject stoppen",
+        "De actie direct moeilijker maken"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Volgende actie bepalen"
+      }
+    },
+    {
+      "id": "lesson-7-langzaam-eten",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welk doel heeft langzamer eten volgens de les?",
+      "answer": "Het verzadigingsgevoel beter laten aansluiten",
+      "distractors": [
+        "De thermische werking van vet verdubbelen",
+        "Elke maaltijd exact gelijk maken",
+        "Het slaapritme verkorten"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Calorie-inname"
+      }
+    },
+    {
+      "id": "lesson-7-schermvrij-eten",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Waarom adviseert de les om zonder schermen te eten?",
+      "answer": "Om met meer aandacht te eten en mindless eten te verminderen",
+      "distractors": [
+        "Om meer calorieën te verbranden",
+        "Om de spijsvertering uit te schakelen",
+        "Om maaltijden sneller op te eten"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Calorie-inname"
+      }
+    },
+    {
+      "id": "lesson-7-eiwit-elke-maaltijd",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welke praktische eiwitactie noemt de les?",
+      "answer": "Bij elke maaltijd een hoogwaardige eiwitbron nemen",
+      "distractors": [
+        "Eiwit alleen direct na training eten",
+        "Eiwit volledig vermijden bij ontbijt",
+        "Alleen één grote eiwitmaaltijd per week eten"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Voldoende eiwitten"
+      }
+    },
+    {
+      "id": "lesson-7-plantaardig-eiwit",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welke aanpak past bij een veganistisch eetpatroon volgens de les?",
+      "answer": "Verschillende plantaardige eiwitbronnen combineren",
+      "distractors": [
+        "Alle eiwitbronnen vervangen door suiker",
+        "Eiwit alleen uit één product halen",
+        "Geen aandacht aan aminozuren besteden"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Voldoende eiwitten"
+      }
+    },
+    {
+      "id": "lesson-7-groente-twee-maaltijden",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welke groente-actie helpt volgens de les een dagelijkse basis op te bouwen?",
+      "answer": "Bij minstens twee maaltijden groente of fruit opnemen",
+      "distractors": [
+        "Groente alleen na een training eten",
+        "Groente vervangen door een supplement",
+        "Groente uitsluitend in het weekend eten"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Voldoende groente- en fruit"
+      }
+    },
+    {
+      "id": "lesson-7-na-maaltijd-bewegen",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat is een praktische beweegactie na een maaltijd?",
+      "answer": "Tien minuten bewegen",
+      "distractors": [
+        "Meteen een zware maximale set doen",
+        "De rest van de dag stilzitten",
+        "Een maaltijd overslaan"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Beweeg genoeg"
+      }
+    },
+    {
+      "id": "lesson-7-neat-duurzaam",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Waarom kan alledaagse beweging op lange termijn belangrijk zijn?",
+      "answer": "Ze kan duurzaam energieverbruik en naleving ondersteunen",
+      "distractors": [
+        "Ze vervangt altijd alle training",
+        "Ze telt niet mee voor energieverbruik",
+        "Ze werkt alleen bij topsporters"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Beweeg genoeg"
+      }
+    },
+    {
+      "id": "lesson-7-lage-intensiteit",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat kenmerkt een laag-intensieve activiteit in de les?",
+      "answer": "Een inspanning die herstel of het aerobe systeem kan ondersteunen",
+      "distractors": [
+        "Altijd maximale hartslag",
+        "Alleen krachttraining met zware sets",
+        "Volledige rust zonder beweging"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Beweeg genoeg"
+      }
+    },
+    {
+      "id": "lesson-7-gezonde-vetten",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welke verandering past bij voldoende vetten?",
+      "answer": "Een bewerkte vetbron vervangen door een minder bewerkte variant",
+      "distractors": [
+        "Alle vetten volledig schrappen",
+        "Alleen transvetten kiezen",
+        "Vetten alleen rond middernacht eten"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Eet genoeg vetten"
+      }
+    },
+    {
+      "id": "lesson-7-cafeine-slaap",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welke slaaptip noemt de les voor cafeïne?",
+      "answer": "Neem de laatste dosis ruim voor bedtijd",
+      "distractors": [
+        "Neem cafeïne vlak voor bedtijd",
+        "Drink cafeïne alleen in bed",
+        "Verdubbel de dosis bij vermoeidheid"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Slaap goed en genoeg"
+      }
+    },
+    {
+      "id": "lesson-7-ochtendlicht",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Waarom kan een ochtendwandeling helpen bij slaap?",
+      "answer": "Daglicht helpt het circadiaanse ritme te reguleren",
+      "distractors": [
+        "Het vervangt alle slaap",
+        "Het verlaagt altijd de trainingsfrequentie",
+        "Het maakt planning overbodig"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Slaap goed en genoeg"
+      }
+    },
+    {
+      "id": "lesson-7-probleemgerichte-coping",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat is probleemgerichte coping?",
+      "answer": "De stressvolle situatie of beschikbare middelen aanpakken",
+      "distractors": [
+        "De stressreactie uitsluitend wegdrukken",
+        "Geen enkele actie ondernemen",
+        "Alleen anderen verantwoordelijk maken"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Omgaan met stress"
+      }
+    },
+    {
+      "id": "lesson-7-emotiegerichte-coping",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Waar richt emotiegerichte coping zich op?",
+      "answer": "De stressreactie en arousal hanteren",
+      "distractors": [
+        "Alleen trainingsvolume verhogen",
+        "Alleen de omgeving controleren",
+        "Een doel onmeetbaar maken"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Omgaan met stress"
+      }
+    },
+    {
+      "id": "lesson-7-time-management",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welke stressinterventie geeft de cliënt volgens de les meer grip op afspraken?",
+      "answer": "Praktische time-managementvaardigheden",
+      "distractors": [
+        "Meer onduidelijke doelen",
+        "Minder slaap plannen",
+        "Alle maaltijden overslaan"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Omgaan met stress"
+      }
+    },
+    {
       "id": "lesson-8-force",
       "region": "kracht",
       "type": "choice",
@@ -38885,6 +39725,448 @@
         "De laatste check",
         "De week invullen",
         "De warming-up overslaan"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Stappenplan programmeren"
+      }
+    },
+    {
+      "id": "lesson-8-antropometrie",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat betekent antropometrie in de context van kracht?",
+      "answer": "Lichaamsverhoudingen en hefbomen die prestaties kunnen beïnvloeden",
+      "distractors": [
+        "Alleen de gekozen muziek",
+        "Alleen spierpijn na training",
+        "De kleur van trainingsmateriaal"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Antropometrie"
+      }
+    },
+    {
+      "id": "lesson-8-motorische-vaardigheden",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Waarom zijn motorische vaardigheden relevant voor maximale kracht?",
+      "answer": "Omdat techniek en aansturing bepalen hoe kracht in een beweging wordt gebruikt",
+      "distractors": [
+        "Omdat ze spiermassa overbodig maken",
+        "Omdat ze herstel uitschakelen",
+        "Omdat ze alleen bij cardio horen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Motorische vaardigheden"
+      }
+    },
+    {
+      "id": "lesson-8-force-velocity",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat beschrijft de force-velocitycurve?",
+      "answer": "De relatie tussen geleverde kracht en bewegingssnelheid",
+      "distractors": [
+        "De relatie tussen slaap en voeding",
+        "De verhouding tussen lengte en gewicht",
+        "Het aantal stappen per dag"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Force velocity curve"
+      }
+    },
+    {
+      "id": "lesson-8-hoge-intentie",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat bewaakt een coach bij zware krachtsets vooral?",
+      "answer": "Technische kwaliteit en de beoogde intentie",
+      "distractors": [
+        "Alleen de snelheid van praten",
+        "Alleen de trainingskleding",
+        "Dat elke set tot volledig falen gaat"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Krachtig coachen"
+      }
+    },
+    {
+      "id": "lesson-8-snelheid-signaal",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat kan een duidelijke snelheidsdaling binnen een set signaleren?",
+      "answer": "Toenemende vermoeidheid of verlies van kwaliteit",
+      "distractors": [
+        "Automatisch betere techniek",
+        "Dat rust nooit nodig is",
+        "Dat weerstand lager is geworden"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Snelheid als maat voor kwaliteit"
+      }
+    },
+    {
+      "id": "lesson-8-deelbewegingen",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Waarom kijk je bij een bewegingsanalyse naar deelbewegingen?",
+      "answer": "Ze geven aanwijzingen over waar kwaliteit of energieverlies verandert",
+      "distractors": [
+        "Ze maken de volledige beweging onbelangrijk",
+        "Ze vervangen observatie van techniek",
+        "Ze bepalen alleen de kledingkeuze"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "De bewegingsanalyse"
+      }
+    },
+    {
+      "id": "lesson-8-energielek",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat is een energielek in een krachtbeweging?",
+      "answer": "Een verlies van effectieve kracht door een minder optimale positie of uitvoering",
+      "distractors": [
+        "Een geplande rustpauze",
+        "Een hogere trainingsfrequentie",
+        "Een warming-up zonder belasting"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Sticking point en energielek"
+      }
+    },
+    {
+      "id": "lesson-8-hoofdoefening",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Waarop richt oefeningsselectie voor kracht zich in de eerste plaats?",
+      "answer": "Op de hoofdoefening en het gewenste bewegingspatroon",
+      "distractors": [
+        "Op zoveel mogelijk willekeurige isolatie-oefeningen",
+        "Op de nieuwste apparatuur",
+        "Op minimale rust tussen alle sets"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Oefeningsselectie voor kracht"
+      }
+    },
+    {
+      "id": "lesson-8-core-kracht",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Welke rol kan de core hebben bij kracht leveren?",
+      "answer": "Een stabiele basis bieden om kracht via de extremiteiten te leveren",
+      "distractors": [
+        "Alleen de hartslag verhogen",
+        "Alleen de onderrug bewegen",
+        "De ademhaling volledig blokkeren"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Core"
+      }
+    },
+    {
+      "id": "lesson-8-unilateraal",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Waarom kan unilateraal trainen nuttig zijn voor kracht?",
+      "answer": "Om verschillen, stabiliteit en specifieke posities gericht te trainen",
+      "distractors": [
+        "Omdat beide zijden dan nooit werken",
+        "Omdat techniek niet meer relevant is",
+        "Omdat het altijd zwaarder is dan bilateraal trainen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Unilateraal trainen voor kracht"
+      }
+    },
+    {
+      "id": "lesson-8-vermoeidheid-kwaliteit",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat doe je als vermoeidheid de kwaliteit van een krachtbeweging aantast?",
+      "answer": "De belasting of oefenkeuze aanpassen om kwaliteit te bewaken",
+      "distractors": [
+        "De techniek negeren en doorgaan",
+        "Altijd meer herhalingen toevoegen",
+        "Alle rust schrappen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Vermoeidheid"
+      }
+    },
+    {
+      "id": "lesson-8-kracht-intensiteit",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Welke intensiteit noemt de les als effectief voor maximale krachtadaptatie?",
+      "answer": "Zware belasting rond 80% van de 1RM of hoger",
+      "distractors": [
+        "Alleen heel lichte belasting",
+        "Altijd precies 20% van de 1RM",
+        "Geen externe weerstand"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Intensiteit"
+      }
+    },
+    {
+      "id": "lesson-8-kracht-frequentie",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Welk frequentiebereik is volgens de les vaak werkbaar per hoofdoefening?",
+      "answer": "Twee tot vier keer per week",
+      "distractors": [
+        "Eén keer per maand",
+        "Elke dag zonder herstel",
+        "Alleen één keer per jaar"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Frequentie"
+      }
+    },
+    {
+      "id": "lesson-8-krachtvolume",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Welke richtlijn noemt de les voor wekelijks krachtvolume bij intermediaire krachtsporters?",
+      "answer": "Vier tot tien directe sets per bewegingspatroon",
+      "distractors": [
+        "Veertig tot zestig sets per dag",
+        "Nul sets per week",
+        "Alleen één set per maand"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Volume"
+      }
+    },
+    {
+      "id": "lesson-8-volume-flexibel",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Welke variabele pas je volgens de les logischerwijs aan als intensiteit op een dag niet haalbaar is?",
+      "answer": "Het volume",
+      "distractors": [
+        "De definitie van het doel",
+        "De 1RM van de cliënt",
+        "Alle slaapgewoonten"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Herstel"
+      }
+    },
+    {
+      "id": "lesson-8-herstel-pijlers",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Welke hoort bij de vier pijlers van herstel uit de les?",
+      "answer": "Stressmanagement",
+      "distractors": [
+        "Meer ongerichte vermoeidheid",
+        "Geen voeding na training",
+        "Alleen meetbare competitie"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Herstel"
+      }
+    },
+    {
+      "id": "lesson-8-beginner-kracht",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Waar ligt bij een beginnende krachtsporter de nadruk?",
+      "answer": "Correcte bewegingspatronen aanleren met herhaling",
+      "distractors": [
+        "Meteen maximale volumeprikkels",
+        "Alleen zeer hoge intensiteit",
+        "Elke week alle oefeningen wisselen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Invloed van leeftijd op de programmering"
+      }
+    },
+    {
+      "id": "lesson-8-intermediair-kracht",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Welke verandering past bij een intermediaire krachtsporter?",
+      "answer": "Meer specifieke oefening met hogere intensiteit en minder herhalingen",
+      "distractors": [
+        "Geen techniek meer oefenen",
+        "Alleen lage intensiteit en hoge herhalingen",
+        "Minder aandacht voor herstel"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Invloed van leeftijd op de programmering"
+      }
+    },
+    {
+      "id": "lesson-8-warming-up-volgorde",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Welke volgorde hoort bij de warming-up voor een hoofdoefening?",
+      "answer": "Algemeen, specifiek, opbouwsets en daarna werksets",
+      "distractors": [
+        "Werksets, rust, algemene warming-up",
+        "Alleen passief rekken en direct testen",
+        "Eerst falen en daarna opwarmen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Warming up"
+      }
+    },
+    {
+      "id": "lesson-8-mobiliteit",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat betekent mobiliteit volgens de les?",
+      "answer": "Een actieve bewegingsuitslag die je sterk en stabiel kunt beheersen",
+      "distractors": [
+        "Alleen passief zo ver mogelijk rekken",
+        "Een gewricht volledig stilhouden",
+        "Een hogere hartslag in rust"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Specifieke warming up"
+      }
+    },
+    {
+      "id": "lesson-8-activatie",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat is een doel van spieractivatie in de warming-up?",
+      "answer": "De neuromusculaire verbinding en doorbloeding voorbereiden",
+      "distractors": [
+        "Vermoeidheid maximaal verhogen",
+        "Alleen calorieën tellen",
+        "De hoofdoefening vervangen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Specifieke warming up"
+      }
+    },
+    {
+      "id": "lesson-8-motor-engram",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat is een motor engram?",
+      "answer": "Een opgeslagen motorisch patroon voor het uitvoeren van een vaardigheid",
+      "distractors": [
+        "Een voedingsrichtlijn",
+        "Een type spiervezel",
+        "Een meeteenheid voor volume"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Opwarmen van de hoofdoefening"
+      }
+    },
+    {
+      "id": "lesson-8-kracht-beginsituatie",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat maak je bij de beginsituatie voor krachtprogrammering concreet?",
+      "answer": "Het specifieke doel, de beweging en de belastbaarheid van de cliënt",
+      "distractors": [
+        "Alleen een lijst met favoriete oefeningen",
+        "Alleen een eindgewicht zonder techniek",
+        "Alleen de rusthartslag"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Stappenplan programmeren"
+      }
+    },
+    {
+      "id": "lesson-8-weekprogramma",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat programmeer je eerst wanneer je de trainingsweek invult?",
+      "answer": "Kwalitatieve sets voor de hoofdoefening, verspreid over de week",
+      "distractors": [
+        "Willekeurige accessoires zonder hoofddoel",
+        "Alleen cooling-downs",
+        "Zo veel mogelijk supersets"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Stappenplan programmeren"
+      }
+    },
+    {
+      "id": "lesson-8-laatste-check",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat controleer je in een laatste krachtprogrammeringscheck?",
+      "answer": "Of coaching aansluit op het energielek of sticking point en de cliënt op de taak focust",
+      "distractors": [
+        "Alleen of de muziek aan staat",
+        "Of elke oefening dezelfde herhalingen heeft",
+        "Of de warming-up volledig ontbreekt"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Stappenplan programmeren"
+      }
+    },
+    {
+      "id": "lesson-8-kracht-leefstijl",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Welke leefstijlfactoren ondersteunen volgens de les een krachttraject?",
+      "answer": "Voeding, slaap en stressmanagement",
+      "distractors": [
+        "Alleen meer schermtijd",
+        "Alleen minder rust tussen sets",
+        "Alleen willekeurige supplementen"
       ],
       "source": {
         "kind": "course-detail",
@@ -39247,6 +40529,380 @@
         "kind": "course-detail",
         "title": "Les 9: Holistische benadering",
         "section": "Coachen naar beter bewegen"
+      }
+    },
+    {
+      "id": "lesson-9-kinetische-keten",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat is een kinetische keten?",
+      "answer": "Een aaneenschakeling van gewrichten en spieren die energie overdraagt",
+      "distractors": [
+        "Een losstaande spier zonder gewricht",
+        "Alleen een voedingsstrategie",
+        "Een rustperiode tussen sets"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Denken in bewegen"
+      }
+    },
+    {
+      "id": "lesson-9-hefboom-fulcrum",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat is het fulcrum van een hefboom?",
+      "answer": "De rotatieas waar de beweging omheen plaatsvindt",
+      "distractors": [
+        "De last die je wilt overwinnen",
+        "De spier die het hardst brandt",
+        "De rust tussen sets"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Denken in bewegen"
+      }
+    },
+    {
+      "id": "lesson-9-momentarm-impact",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat gebeurt er met de impact van een moment als de momentarm groter wordt?",
+      "answer": "De impact van het moment wordt groter",
+      "distractors": [
+        "De impact verdwijnt altijd",
+        "De beweging wordt automatisch stabieler",
+        "De zwaartekracht stopt"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Denken in bewegen"
+      }
+    },
+    {
+      "id": "lesson-9-line-of-pull",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat beschrijft de line of pull?",
+      "answer": "De richting waarlangs een kracht trekt",
+      "distractors": [
+        "Het aantal sets per week",
+        "De lengte van een warming-up",
+        "De slaapdruk van een cliënt"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Denken in bewegen"
+      }
+    },
+    {
+      "id": "lesson-9-lokale-vermoeidheid",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat is lokale vermoeidheid?",
+      "answer": "Vermoeidheid die vooral binnen de werkende spiergroep ontstaat",
+      "distractors": [
+        "Vermoeidheid die alleen door slaaptekort ontstaat",
+        "Een volledig rustmoment",
+        "Een hogere motivatie"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Programmeren"
+      }
+    },
+    {
+      "id": "lesson-9-globale-vermoeidheid",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat is globale vermoeidheid?",
+      "answer": "Vermoeidheid die je door het hele lichaam ervaart",
+      "distractors": [
+        "Alleen verzuring in één kleine spier",
+        "Een vaste trainingsmethode",
+        "Een techniek om doelen te stellen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Programmeren"
+      }
+    },
+    {
+      "id": "lesson-9-anaeroob-alactisch",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Welk energiesysteem levert zeer snel energie maar raakt snel uitgeput?",
+      "answer": "Anaeroob alactisch",
+      "distractors": [
+        "Aeroob",
+        "Alleen het spijsverteringssysteem",
+        "Het circadiaanse ritme"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Meer over energie"
+      }
+    },
+    {
+      "id": "lesson-9-anaeroob-lactisch",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Welk energiesysteem hoort volgens de les bij korte, zware inspanning met lokale vermoeidheid?",
+      "answer": "Anaeroob lactisch",
+      "distractors": [
+        "Aeroob",
+        "Alleen homeostatische slaapdruk",
+        "Het immuunsysteem"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Meer over energie"
+      }
+    },
+    {
+      "id": "lesson-9-aeroob",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat kenmerkt het aerobe energiesysteem?",
+      "answer": "Het kan langdurig energie leveren met zuurstof",
+      "distractors": [
+        "Het levert geen energie",
+        "Het werkt alleen bij maximale sprints",
+        "Het is uitsluitend een coachingsmodel"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Meer over energie"
+      }
+    },
+    {
+      "id": "lesson-9-fitness-fatigue",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat beschrijft het fitness-fatigue model over prestatie?",
+      "answer": "Prestatie wordt beïnvloed door fitness én door vermoeidheid die prestaties kan maskeren",
+      "distractors": [
+        "Vermoeidheid heeft nooit effect op prestatie",
+        "Fitness is alleen spieromvang",
+        "Prestatie hangt alleen van motivatie af"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Structuur aanbrengen om progressie te maximaliseren"
+      }
+    },
+    {
+      "id": "lesson-9-adaptatie",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat is een positieve adaptatie in training?",
+      "answer": "Een gerichte aanpassing aan een herhaalde trainingsprikkel",
+      "distractors": [
+        "Een fout die je moet vermijden",
+        "Alleen vermoeidheid zonder herstel",
+        "Een willekeurige oefeningswissel"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Structuur aanbrengen om progressie te maximaliseren"
+      }
+    },
+    {
+      "id": "lesson-9-spiergroei-volume",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Welke weekomvang noemt de les als richtlijn bij spiergroei?",
+      "answer": "Ongeveer twaalf tot achttien sets per spiergroep",
+      "distractors": [
+        "Eén set per maand",
+        "Nul sets per week",
+        "Alleen honderd sets op één dag"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Spiergroei maximaliseren"
+      }
+    },
+    {
+      "id": "lesson-9-spiergroei-frequentie",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Welke frequentie noemt de les vaak voor het trainen van een spier bij spiergroei?",
+      "answer": "Twee tot drie keer per week",
+      "distractors": [
+        "Eén keer per jaar",
+        "Elke dag zonder herstel",
+        "Nooit dezelfde spier herhalen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Spiergroei maximaliseren"
+      }
+    },
+    {
+      "id": "lesson-9-spiergroei-intentie",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Waar richt de intentie van een effectieve set voor spiergroei zich op?",
+      "answer": "Dicht bij spierfalen werken met voldoende rust en herstel",
+      "distractors": [
+        "Elke set zo kort mogelijk maken",
+        "Alleen trainen zonder weerstand",
+        "Geen herstel tussen sessies"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Spiergroei maximaliseren"
+      }
+    },
+    {
+      "id": "lesson-9-kracht-frequentie-2",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Waarom is frequentie belangrijk voor submaximale kracht?",
+      "answer": "Omdat de specifieke vaardigheid vaker kwalitatief wordt geoefend",
+      "distractors": [
+        "Omdat technische oefening dan niet meer nodig is",
+        "Omdat herstel nooit meer nodig is",
+        "Omdat volume altijd onbeperkt kan stijgen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Programmeren: kracht"
+      }
+    },
+    {
+      "id": "lesson-9-kracht-transfer",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat zijn ondersteunende oefeningen met hoge transferwaarde?",
+      "answer": "Oefeningen die sterk bijdragen aan de techniek of positie van de hoofdoefening",
+      "distractors": [
+        "Oefeningen die geen verband hebben met het doel",
+        "Alleen oefeningen zonder belasting",
+        "Oefeningen die altijd exact hetzelfde zijn als de hoofdoefening"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Programmeren: kracht"
+      }
+    },
+    {
+      "id": "lesson-9-kracht-rust",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Waarom is rust tussen zware krachtsets belangrijk?",
+      "answer": "Om hoog vermogen te kunnen leveren met zo min mogelijk vermoeidheid",
+      "distractors": [
+        "Om meer lokale vermoeidheid op te bouwen",
+        "Om de techniek te negeren",
+        "Om de training willekeurig langer te maken"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Programmeren: kracht"
+      }
+    },
+    {
+      "id": "lesson-9-kracht-herstelvoorwaarden",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Welke herstelvoorwaarden zijn volgens de les belangrijk bij krachtprogrammering?",
+      "answer": "Voldoende energie, eiwitten, slaap en beheersbare stress",
+      "distractors": [
+        "Alleen meer cafeïne",
+        "Alleen extra accessoires",
+        "Alleen minder slaap"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Programmeren: kracht"
+      }
+    },
+    {
+      "id": "lesson-9-submaximaal-80",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat benadrukt de les bij prestatieverbetering boven 80% van de 1RM?",
+      "answer": "Hoge oefenfrequentie met minimale vermoeidheid",
+      "distractors": [
+        "Zo veel mogelijk uitputting per set",
+        "Alleen isolatie-oefeningen",
+        "Geen aandacht voor techniek"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Submaximaal kracht"
+      }
+    },
+    {
+      "id": "lesson-9-coachen-minder-zeggen",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Welke coachingsstijl wordt in de les voor beter bewegen benadrukt?",
+      "answer": "Minder, heldere aanwijzingen geven en gericht observeren",
+      "distractors": [
+        "Zo veel mogelijk aanwijzingen tegelijk geven",
+        "Nooit feedback geven",
+        "Alleen technische termen gebruiken"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Coachen naar beter bewegen"
+      }
+    },
+    {
+      "id": "lesson-9-coachingslus",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Welke elementen horen bij de coachingslus?",
+      "answer": "Uitleggen, demonstreren, laten uitvoeren, observeren en feedback geven",
+      "distractors": [
+        "Alleen een oefening noemen",
+        "Alleen een eindresultaat meten",
+        "Alleen corrigeren zonder uitleg"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Coaching is een vak apart"
+      }
+    },
+    {
+      "id": "lesson-9-extern-impliciet",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Waarom gebruikt een coach externe en impliciete cues?",
+      "answer": "Om beweging begrijpelijk aan te leren zonder te veel technische details tegelijk",
+      "distractors": [
+        "Om elke vorm van leren te vermijden",
+        "Om alle aandacht naar anatomische termen te sturen",
+        "Om feedback te vervangen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Coaching is een vak apart"
       }
     }
   ]

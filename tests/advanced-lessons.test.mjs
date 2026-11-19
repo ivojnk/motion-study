@@ -6,6 +6,7 @@ import { levelPath, levelQuestions, topics } from '../src/learning.js';
 
 const curriculum = JSON.parse(readFileSync(new URL('../src/data/curriculum.json', import.meta.url)));
 const advancedTopics = ['voeding', 'kracht', 'coaching'];
+const expectedLessonCounts = { voeding: 6, kracht: 7, coaching: 7 };
 const generated = curriculum.questions.filter(question => advancedTopics.includes(question.region));
 
 test('lessons 7–9 are source-linked, complete chapters with stable lesson queues', () => {
@@ -16,12 +17,12 @@ test('lessons 7–9 are source-linked, complete chapters with stable lesson queu
 
   for (const topic of advancedTopics) {
     const questions = generated.filter(question => question.region === topic);
-    assert.ok(questions.length >= 14, topic + ' needs at least two lessons of source material');
+    assert.ok(questions.length >= 42, topic + ' needs a comparable amount of source material');
     assert.ok(questions.every(question => question.source.kind === 'course-detail'));
     assert.ok(questions.every(question => question.source.title.startsWith('Les ')));
 
     const levels = levelPath({ completed: [] }).filter(level => level.topic.id === topic);
-    assert.ok(levels.length >= 2, topic + ' needs at least two lessons');
+    assert.equal(levels.length, expectedLessonCounts[topic], topic + ' lesson count');
     for (const level of levels) {
       const queue = levelQuestions(curriculum.questions, topic, level.stage);
       assert.equal(queue.length, 7);
