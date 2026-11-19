@@ -9,6 +9,7 @@ import { exerciseCombinationQuestions } from '../src/data/exercise-combinations.
 import { additionalMuscleCards, modelKnowledgeQuestions } from '../src/data/model-knowledge.js';
 import { coachingQuestions } from '../src/data/coaching-cues.js';
 import { courseDetailQuestions } from '../src/data/course-details.js';
+import { advancedLessonQuestions } from '../src/data/advanced-lessons.js';
 import { withModelContexts } from '../src/data/model-contexts.js';
 // Optional local import; the public build uses the checked-in question bank.
 const raw = (await readFile('sources/course.txt', 'utf8')).replace(/\r/g, '');
@@ -34,7 +35,7 @@ const cards = muscles.map(muscle => {
   });
   return { ...muscle, fields, source: { section: muscle.name, page: pageFor(muscle.anchor), excerpt, start, end } };
 });
-const questions = cards.flatMap(card => Object.entries(card.fields).map(([field, answer]) => {
+let questions = cards.flatMap(card => Object.entries(card.fields).map(([field, answer]) => {
   const distractors = [...new Set(cards.filter(other => other.id !== card.id).map(other => other.fields[field]).filter(value => value && value !== answer))].slice(0, 8);
   if (distractors.length < 3) throw new Error('Not enough distinct options for ' + card.id);
   return { id: card.id + '-' + field, region: card.region, muscleId: card.id, type: 'choice', prompt: 'Wat is de ' + field + ' van ' + card.name + '?', answer, distractors, source: card.source };
@@ -51,7 +52,7 @@ cards.push(...additionalMuscleCards(questions));
 questions.push(...exerciseCombinationQuestions(questions));
 questions.push(...modelKnowledgeQuestions(questions, cards));
 questions.push(...coachingQuestions(questions));
-questions.push(...courseDetailQuestions);
+questions = [...questions, ...courseDetailQuestions, ...advancedLessonQuestions];
 const coverage = [
   ...basisCoverage, ...muscleCoverage, ...patternCoverage,
   ...cards.filter(card => muscles.some(muscle => muscle.id === card.id)).map(card => ({ id: 'card-' + card.id, label: card.name + ': spierkennis en herkenning', questionIds: [...Object.keys(card.fields).map(field => card.id + '-' + field), card.id + '-recognition'] })),
@@ -68,7 +69,7 @@ for (const unit of coverage) {
 }
 await mkdir('src/data', { recursive: true });
 for (const item of [...cards, ...questions]) {
-  if (item.source.kind !== 'supplement') item.source = { ...(item.source.kind === 'course-detail' ? { kind: 'course-detail' } : {}), title: 'Anatomie & Biomechanica', section: item.source.section, page: item.source.page };
+  if (item.source.kind !== 'supplement') item.source = { ...(item.source.kind === 'course-detail' ? { kind: 'course-detail' } : {}), title: item.source.title || 'Anatomie & Biomechanica', section: item.source.section, page: item.source.page };
   delete item.anchor; delete item.end;
 }
 await writeFile('src/data/curriculum.json', JSON.stringify({ license: 'CC-BY-SA-4.0', title: 'Anatomie & Biomechanica', fetchedAt: '2026-10-05', sourcePages: 28, coverage, cards, questions: withModelContexts(questions) }, null, 2));

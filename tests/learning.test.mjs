@@ -12,6 +12,8 @@ test('every question has a unique id, four distinct options and an honest source
     if (q.source.kind === 'supplement') {
       assert.equal(q.source.title, 'Aanvullende coachingvoorbeelden', q.id);
       assert.ok(q.source.references.length >= 2, q.id);
+    } else if (q.source.title?.startsWith('Les ')) {
+      assert.match(q.source.title, /^Les [789]: /, q.id);
     } else assert.equal(q.source.title, 'Anatomie & Biomechanica', q.id);
     assert.ok(q.source.section, q.id);
     const options = optionsFor(q);
@@ -184,6 +186,10 @@ test('source coverage maps every question and every PDF page without dangling re
   const pages = new Set();
   for (const q of curriculum.questions) {
     if (q.source.kind === 'supplement') {
+      assert.equal(q.source.page, undefined, q.id);
+      continue;
+    }
+    if (q.source.title?.startsWith('Les ')) {
       assert.equal(q.source.page, undefined, q.id);
       continue;
     }

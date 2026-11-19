@@ -8510,6 +8510,419 @@
       "questionIds": [
         "course-detail-squat-hip-phase"
       ]
+    },
+    {
+      "id": "question-lesson-7-obesogene-omgeving",
+      "label": "Wat bevordert een obesogene omgeving?",
+      "questionIds": [
+        "lesson-7-obesogene-omgeving"
+      ]
+    },
+    {
+      "id": "question-lesson-7-sct-wisselwerking",
+      "label": "Wat beschrijft de Sociale Cognitieve Theorie?",
+      "questionIds": [
+        "lesson-7-sct-wisselwerking"
+      ]
+    },
+    {
+      "id": "question-lesson-7-zelfeffectiviteit",
+      "label": "Wat betekent zelfeffectiviteit in de Sociale Cognitieve Theorie?",
+      "questionIds": [
+        "lesson-7-zelfeffectiviteit"
+      ]
+    },
+    {
+      "id": "question-lesson-7-dieetmindset",
+      "label": "Welk patroon kan een strikte dieetmindset versterken?",
+      "questionIds": [
+        "lesson-7-dieetmindset"
+      ]
+    },
+    {
+      "id": "question-lesson-7-zelfdeterminatie",
+      "label": "Welke drie basisbehoeften horen bij de zelfdeterminatietheorie?",
+      "questionIds": [
+        "lesson-7-zelfdeterminatie"
+      ]
+    },
+    {
+      "id": "question-lesson-7-stress-coping",
+      "label": "Welke drie aangrijpingspunten noemt de les bij stress?",
+      "questionIds": [
+        "lesson-7-stress-coping"
+      ]
+    },
+    {
+      "id": "question-lesson-7-metabolisme",
+      "label": "Wat is metabolisme?",
+      "questionIds": [
+        "lesson-7-metabolisme"
+      ]
+    },
+    {
+      "id": "question-lesson-7-energiebalans",
+      "label": "Wat gebeurt er bij energie-inname die structureel hoger is dan energieverbruik?",
+      "questionIds": [
+        "lesson-7-energiebalans"
+      ]
+    },
+    {
+      "id": "question-lesson-7-tdee-neat",
+      "label": "Waar staat NEAT binnen het totale dagelijkse energieverbruik voor?",
+      "questionIds": [
+        "lesson-7-tdee-neat"
+      ]
+    },
+    {
+      "id": "question-lesson-7-tef",
+      "label": "Welk macronutriënt heeft volgens de les het hoogste thermische effect van voeding?",
+      "questionIds": [
+        "lesson-7-tef"
+      ]
+    },
+    {
+      "id": "question-lesson-7-ghreline",
+      "label": "Welk hormoon verhoogt eetlust wanneer de maag leeg is?",
+      "questionIds": [
+        "lesson-7-ghreline"
+      ]
+    },
+    {
+      "id": "question-lesson-7-hedonisch-eten",
+      "label": "Wat is hedonistische regulering van eetgedrag?",
+      "questionIds": [
+        "lesson-7-hedonisch-eten"
+      ]
+    },
+    {
+      "id": "question-lesson-7-calorische-dichtheid",
+      "label": "Wat betekent calorische dichtheid?",
+      "questionIds": [
+        "lesson-7-calorische-dichtheid"
+      ]
+    },
+    {
+      "id": "question-lesson-7-slaapdruk",
+      "label": "Waardoor bouwt homeostatische slaapdruk op tijdens het waken?",
+      "questionIds": [
+        "lesson-7-slaapdruk"
+      ]
+    },
+    {
+      "id": "question-lesson-7-macronutrienten",
+      "label": "Welke drie voedingsstoffen zijn macronutriënten?",
+      "questionIds": [
+        "lesson-7-macronutrienten"
+      ]
+    },
+    {
+      "id": "question-lesson-7-eiwitfunctie",
+      "label": "Welke combinatie ondersteunt volgens de les het behoud en de opbouw van spiermassa het meest?",
+      "questionIds": [
+        "lesson-7-eiwitfunctie"
+      ]
+    },
+    {
+      "id": "question-lesson-7-vetoplosbare-vitamines",
+      "label": "Welke vitamines zijn vetoplosbaar?",
+      "questionIds": [
+        "lesson-7-vetoplosbare-vitamines"
+      ]
+    },
+    {
+      "id": "question-lesson-7-complexe-koolhydraten",
+      "label": "Welke bron past het best bij complexe koolhydraten?",
+      "questionIds": [
+        "lesson-7-complexe-koolhydraten"
+      ]
+    },
+    {
+      "id": "question-lesson-7-volwaardige-voeding",
+      "label": "Wat is volgens de les de belangrijkste bron van micronutriënten?",
+      "questionIds": [
+        "lesson-7-volwaardige-voeding"
+      ]
+    },
+    {
+      "id": "question-lesson-7-evidence-based-practice",
+      "label": "Wat combineert evidence-based practice in leefstijlcoaching?",
+      "questionIds": [
+        "lesson-7-evidence-based-practice"
+      ]
+    },
+    {
+      "id": "question-lesson-7-hefbomeffect",
+      "label": "Wat betekent het hefboomeffect in leefstijlcoaching?",
+      "questionIds": [
+        "lesson-7-hefbomeffect"
+      ]
+    },
+    {
+      "id": "question-lesson-8-force",
+      "label": "Wat betekent force in de les over kracht?",
+      "questionIds": [
+        "lesson-8-force"
+      ]
+    },
+    {
+      "id": "question-lesson-8-power-formule",
+      "label": "Welke formule hoort bij power?",
+      "questionIds": [
+        "lesson-8-power-formule"
+      ]
+    },
+    {
+      "id": "question-lesson-8-type-i",
+      "label": "Welke spiervezels zijn traag en sterk vermoeidheidsresistent?",
+      "questionIds": [
+        "lesson-8-type-i"
+      ]
+    },
+    {
+      "id": "question-lesson-8-type-iix",
+      "label": "Welke spiervezels trekken het snelst samen maar vermoeien ook snel?",
+      "questionIds": [
+        "lesson-8-type-iix"
+      ]
+    },
+    {
+      "id": "question-lesson-8-size-principle",
+      "label": "Welke motor units worden volgens het size principle eerst gerekruteerd?",
+      "questionIds": [
+        "lesson-8-size-principle"
+      ]
+    },
+    {
+      "id": "question-lesson-8-spiermassa",
+      "label": "Welke uitspraak over spiermassa en maximale kracht past bij de les?",
+      "questionIds": [
+        "lesson-8-spiermassa"
+      ]
+    },
+    {
+      "id": "question-lesson-8-kracht-coachingslus",
+      "label": "Welke volgorde hoort bij de coachingslus?",
+      "questionIds": [
+        "lesson-8-kracht-coachingslus"
+      ]
+    },
+    {
+      "id": "question-lesson-8-trainen-met-intentie",
+      "label": "Wat is het doel van trainen met intentie?",
+      "questionIds": [
+        "lesson-8-trainen-met-intentie"
+      ]
+    },
+    {
+      "id": "question-lesson-8-sticking-point",
+      "label": "Wat is een sticking point?",
+      "questionIds": [
+        "lesson-8-sticking-point"
+      ]
+    },
+    {
+      "id": "question-lesson-8-transferwaarde",
+      "label": "Wat kenmerkt een oefening met een hoge transferwaarde voor kracht?",
+      "questionIds": [
+        "lesson-8-transferwaarde"
+      ]
+    },
+    {
+      "id": "question-lesson-8-intensiteit",
+      "label": "Hoe wordt trainingsintensiteit voor kracht vaak uitgedrukt?",
+      "questionIds": [
+        "lesson-8-intensiteit"
+      ]
+    },
+    {
+      "id": "question-lesson-8-volume",
+      "label": "Wat vormt trainingsvolume in de basis?",
+      "questionIds": [
+        "lesson-8-volume"
+      ]
+    },
+    {
+      "id": "question-lesson-8-algemene-warming-up",
+      "label": "Wat is het hoofddoel van een algemene warming-up?",
+      "questionIds": [
+        "lesson-8-algemene-warming-up"
+      ]
+    },
+    {
+      "id": "question-lesson-8-specifieke-warming-up",
+      "label": "Wat voeg je met een specifieke warming-up toe?",
+      "questionIds": [
+        "lesson-8-specifieke-warming-up"
+      ]
+    },
+    {
+      "id": "question-lesson-8-opbouwsets",
+      "label": "Hoe verandert de opbouw naar werksets voor maximale kracht meestal?",
+      "questionIds": [
+        "lesson-8-opbouwsets"
+      ]
+    },
+    {
+      "id": "question-lesson-8-beginsituatie",
+      "label": "Wat is de eerste stap van het programmeerstappenplan?",
+      "questionIds": [
+        "lesson-8-beginsituatie"
+      ]
+    },
+    {
+      "id": "question-lesson-8-belasting-uitschrijven",
+      "label": "Wat volgt in het stappenplan na de beginsituatie?",
+      "questionIds": [
+        "lesson-8-belasting-uitschrijven"
+      ]
+    },
+    {
+      "id": "question-lesson-9-effectieve-doelen",
+      "label": "Welke eigenschap hoort volgens goal-setting theory bij effectieve doelen?",
+      "questionIds": [
+        "lesson-9-effectieve-doelen"
+      ]
+    },
+    {
+      "id": "question-lesson-9-procesdoel",
+      "label": "Wat is een procesdoel?",
+      "questionIds": [
+        "lesson-9-procesdoel"
+      ]
+    },
+    {
+      "id": "question-lesson-9-zelfregulatie",
+      "label": "Welke stap hoort bij de zelfregulerende cyclus na uitvoeren?",
+      "questionIds": [
+        "lesson-9-zelfregulatie"
+      ]
+    },
+    {
+      "id": "question-lesson-9-sd-theorie",
+      "label": "Welke behoefte hoort bij de zelfdeterminatietheorie?",
+      "questionIds": [
+        "lesson-9-sd-theorie"
+      ]
+    },
+    {
+      "id": "question-lesson-9-woop",
+      "label": "Waar staat de O in WOOP voor?",
+      "questionIds": [
+        "lesson-9-woop"
+      ]
+    },
+    {
+      "id": "question-lesson-9-woop-plan",
+      "label": "Wat is het doel van de Plan-stap in WOOP?",
+      "questionIds": [
+        "lesson-9-woop-plan"
+      ]
+    },
+    {
+      "id": "question-lesson-9-nivea",
+      "label": "Waar staat NIVEA voor in gespreksvoering?",
+      "questionIds": [
+        "lesson-9-nivea"
+      ]
+    },
+    {
+      "id": "question-lesson-9-oma",
+      "label": "Wat betekent “OMA thuislaten” bij coaching?",
+      "questionIds": [
+        "lesson-9-oma"
+      ]
+    },
+    {
+      "id": "question-lesson-9-lsd",
+      "label": "Waar staat het LSD-model voor?",
+      "questionIds": [
+        "lesson-9-lsd"
+      ]
+    },
+    {
+      "id": "question-lesson-9-grow-reality",
+      "label": "Wat onderzoekt de Reality-stap in het GROW-model?",
+      "questionIds": [
+        "lesson-9-grow-reality"
+      ]
+    },
+    {
+      "id": "question-lesson-9-grow-options",
+      "label": "Wat gebeurt er in de Options-stap van het GROW-model?",
+      "questionIds": [
+        "lesson-9-grow-options"
+      ]
+    },
+    {
+      "id": "question-lesson-9-bewegingsanalyse",
+      "label": "Wat is een doel van bewegingsanalyse?",
+      "questionIds": [
+        "lesson-9-bewegingsanalyse"
+      ]
+    },
+    {
+      "id": "question-lesson-9-bewegingspatronen",
+      "label": "Welke hoort bij de zes bewegingspatronen uit de les?",
+      "questionIds": [
+        "lesson-9-bewegingspatronen"
+      ]
+    },
+    {
+      "id": "question-lesson-9-romprichtingen",
+      "label": "Welke richting hoort bij de rompstijfheidanalyse?",
+      "questionIds": [
+        "lesson-9-romprichtingen"
+      ]
+    },
+    {
+      "id": "question-lesson-9-hip-disassociation",
+      "label": "Wat betekent hip disassociation?",
+      "questionIds": [
+        "lesson-9-hip-disassociation"
+      ]
+    },
+    {
+      "id": "question-lesson-9-werkgeheugen",
+      "label": "Waarom geeft een coach het best niet te veel aanwijzingen tegelijk?",
+      "questionIds": [
+        "lesson-9-werkgeheugen"
+      ]
+    },
+    {
+      "id": "question-lesson-9-actief-leren",
+      "label": "Welke strategie ondersteunt volgens de les effectief leren?",
+      "questionIds": [
+        "lesson-9-actief-leren"
+      ]
+    },
+    {
+      "id": "question-lesson-9-motorisch-leren",
+      "label": "In welke fase van motorisch leren is de beweging geautomatiseerd?",
+      "questionIds": [
+        "lesson-9-motorisch-leren"
+      ]
+    },
+    {
+      "id": "question-lesson-9-externe-focus",
+      "label": "Waar richt een externe cue de aandacht op?",
+      "questionIds": [
+        "lesson-9-externe-focus"
+      ]
+    },
+    {
+      "id": "question-lesson-9-coachdriehoek",
+      "label": "Welke rol hoort bij de winnende coachdriehoek?",
+      "questionIds": [
+        "lesson-9-coachdriehoek"
+      ]
+    },
+    {
+      "id": "question-lesson-9-loopt-lukt-leeft",
+      "label": "Wat helpt de vraag “Leeft ’t?” een coach te beoordelen?",
+      "questionIds": [
+        "lesson-9-loopt-lukt-leeft"
+      ]
     }
   ],
   "cards": [
@@ -37831,6 +38244,1009 @@
         "title": "Anatomie & Biomechanica",
         "section": "Squat en heupmobiliteit",
         "page": 20
+      }
+    },
+    {
+      "id": "lesson-7-obesogene-omgeving",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat bevordert een obesogene omgeving?",
+      "answer": "Ongezonde voedingskeuzes en een inactieve leefstijl",
+      "distractors": [
+        "Alleen topsport",
+        "Uitsluitend voldoende slaap",
+        "Alleen genetische aanleg"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Sociaal"
+      }
+    },
+    {
+      "id": "lesson-7-sct-wisselwerking",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat beschrijft de Sociale Cognitieve Theorie?",
+      "answer": "De wisselwerking tussen persoonlijke factoren, gedrag en omgeving",
+      "distractors": [
+        "Dat gedrag alleen door wilskracht ontstaat",
+        "Dat de omgeving geen invloed heeft",
+        "Dat alleen beloning gedrag bepaalt"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Sociale Cognitieve Theorie"
+      }
+    },
+    {
+      "id": "lesson-7-zelfeffectiviteit",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat betekent zelfeffectiviteit in de Sociale Cognitieve Theorie?",
+      "answer": "Vertrouwen dat je een actie succesvol kunt uitvoeren",
+      "distractors": [
+        "Anderen altijd beter kunnen nadoen",
+        "Je omgeving volledig kunnen controleren",
+        "Een externe beloning verwachten"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Sociale Cognitieve Theorie"
+      }
+    },
+    {
+      "id": "lesson-7-dieetmindset",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welk patroon kan een strikte dieetmindset versterken?",
+      "answer": "Een cyclus van restrictie en overeten",
+      "distractors": [
+        "Een flexibele omgang met eten",
+        "Meer zelfcompassie na een misstap",
+        "Automatisch duurzame motivatie"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Psychologie"
+      }
+    },
+    {
+      "id": "lesson-7-zelfdeterminatie",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welke drie basisbehoeften horen bij de zelfdeterminatietheorie?",
+      "answer": "Autonomie, competentie en verbondenheid",
+      "distractors": [
+        "Prestatie, perfectie en controle",
+        "Restrictie, beloning en competitie",
+        "Snelheid, kracht en uithoudingsvermogen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Psychologie"
+      }
+    },
+    {
+      "id": "lesson-7-stress-coping",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welke drie aangrijpingspunten noemt de les bij stress?",
+      "answer": "De situatie aanpakken, middelen vergroten of de beleving beïnvloeden",
+      "distractors": [
+        "Stress altijd negeren, harder trainen of minder slapen",
+        "Alleen ademhaling aanpassen",
+        "Alleen de omgeving veranderen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Psychologie"
+      }
+    },
+    {
+      "id": "lesson-7-metabolisme",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat is metabolisme?",
+      "answer": "Alle chemische processen die voedingsstoffen omzetten voor lichaamsfuncties",
+      "distractors": [
+        "Alleen de vertering van vetten",
+        "Alleen energieverbruik tijdens training",
+        "De opslag van water in cellen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Biologie: kwantiteit"
+      }
+    },
+    {
+      "id": "lesson-7-energiebalans",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat gebeurt er bij energie-inname die structureel hoger is dan energieverbruik?",
+      "answer": "Er wordt energie opgeslagen en het gewicht kan toenemen",
+      "distractors": [
+        "Energie verdwijnt uit het lichaam",
+        "Het rustmetabolisme stopt",
+        "Gewicht moet altijd dalen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Energiebalans"
+      }
+    },
+    {
+      "id": "lesson-7-tdee-neat",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Waar staat NEAT binnen het totale dagelijkse energieverbruik voor?",
+      "answer": "Alledaagse beweging, zoals lopen en huishoudelijk werk",
+      "distractors": [
+        "Geplande zware training",
+        "Energie voor vertering",
+        "Energie voor vitale functies in rust"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Factoren die energieverbruik bepalen (TDEE)"
+      }
+    },
+    {
+      "id": "lesson-7-tef",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welk macronutriënt heeft volgens de les het hoogste thermische effect van voeding?",
+      "answer": "Eiwit",
+      "distractors": [
+        "Vet",
+        "Koolhydraten",
+        "Water"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Factoren die energieverbruik bepalen (TDEE)"
+      }
+    },
+    {
+      "id": "lesson-7-ghreline",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welk hormoon verhoogt eetlust wanneer de maag leeg is?",
+      "answer": "Ghreline",
+      "distractors": [
+        "Leptine",
+        "Insuline",
+        "Melatonine"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Eetlust"
+      }
+    },
+    {
+      "id": "lesson-7-hedonisch-eten",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat is hedonistische regulering van eetgedrag?",
+      "answer": "Trek zonder fysieke behoefte, vaak door prikkels, emoties of beloning",
+      "distractors": [
+        "Eten door een fysiek energietekort",
+        "Het verteren van vezels",
+        "Het plannen van een maaltijd na training"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Eetlust"
+      }
+    },
+    {
+      "id": "lesson-7-calorische-dichtheid",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat betekent calorische dichtheid?",
+      "answer": "Het aantal calorieën per gram voeding",
+      "distractors": [
+        "Het aandeel vitamines per liter",
+        "De hoeveelheid eiwit per maaltijd",
+        "De snelheid waarmee voedsel wordt gegeten"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Type voeding"
+      }
+    },
+    {
+      "id": "lesson-7-slaapdruk",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Waardoor bouwt homeostatische slaapdruk op tijdens het waken?",
+      "answer": "Adenosine dat vrijkomt bij ATP-gebruik",
+      "distractors": [
+        "Alleen blauw licht",
+        "Een daling van leptine",
+        "Een stijging van glycogeen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Slaap"
+      }
+    },
+    {
+      "id": "lesson-7-macronutrienten",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welke drie voedingsstoffen zijn macronutriënten?",
+      "answer": "Eiwitten, vetten en koolhydraten",
+      "distractors": [
+        "Vitamines, mineralen en water",
+        "Vezels, natrium en ijzer",
+        "Omega-3, omega-6 en cholesterol"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Macronutriënten"
+      }
+    },
+    {
+      "id": "lesson-7-eiwitfunctie",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welke combinatie ondersteunt volgens de les het behoud en de opbouw van spiermassa het meest?",
+      "answer": "Krachttraining en voldoende eiwitinname",
+      "distractors": [
+        "Alleen extra vetinname",
+        "Alleen slaap verlengen",
+        "Alleen calorieën tellen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Eiwitten"
+      }
+    },
+    {
+      "id": "lesson-7-vetoplosbare-vitamines",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welke vitamines zijn vetoplosbaar?",
+      "answer": "A, D, E en K",
+      "distractors": [
+        "B en C",
+        "B, C en D",
+        "Alleen C en K"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Micronutriënten"
+      }
+    },
+    {
+      "id": "lesson-7-complexe-koolhydraten",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Welke bron past het best bij complexe koolhydraten?",
+      "answer": "Volkoren granen en peulvruchten",
+      "distractors": [
+        "Frisdrank en snoep",
+        "Alleen olie",
+        "Zuivere suiker"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Koolhydraten"
+      }
+    },
+    {
+      "id": "lesson-7-volwaardige-voeding",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat is volgens de les de belangrijkste bron van micronutriënten?",
+      "answer": "Volwaardige, minimaal bewerkte voeding",
+      "distractors": [
+        "Supplementen als standaardvervanging",
+        "Alleen eiwitpoeder",
+        "Sterk bewerkte producten"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Volwaardige voeding"
+      }
+    },
+    {
+      "id": "lesson-7-evidence-based-practice",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat combineert evidence-based practice in leefstijlcoaching?",
+      "answer": "Wetenschappelijk bewijs, expertise en de behoeften van de cliënt",
+      "distractors": [
+        "Alleen de nieuwste trend",
+        "Alleen de voorkeur van de coach",
+        "Een vast programma voor iedereen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Gedragsverandering"
+      }
+    },
+    {
+      "id": "lesson-7-hefbomeffect",
+      "region": "voeding",
+      "type": "choice",
+      "prompt": "Wat betekent het hefboomeffect in leefstijlcoaching?",
+      "answer": "Maximale resultaten met minimale inspanning",
+      "distractors": [
+        "Zoveel mogelijk tegelijk veranderen",
+        "Alleen zware training inzetten",
+        "Alle voeding nauwkeurig wegen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 7: Voeding & leefstijl",
+        "section": "Gedragsverandering"
+      }
+    },
+    {
+      "id": "lesson-8-force",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat betekent force in de les over kracht?",
+      "answer": "De kracht die intern of tegen externe weerstand wordt gegenereerd",
+      "distractors": [
+        "Alleen hoeveel iemand kan deadliften",
+        "Alleen spiermassa",
+        "De rusthartslag"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Krachtige professor"
+      }
+    },
+    {
+      "id": "lesson-8-power-formule",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Welke formule hoort bij power?",
+      "answer": "Force × velocity",
+      "distractors": [
+        "Force ÷ velocity",
+        "Massa × tijd",
+        "Volume × frequentie"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Krachtige professor"
+      }
+    },
+    {
+      "id": "lesson-8-type-i",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Welke spiervezels zijn traag en sterk vermoeidheidsresistent?",
+      "answer": "Type I-vezels",
+      "distractors": [
+        "Type IIx-vezels",
+        "Alleen hybride vezels",
+        "Type IIa-vezels"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Genereren van kracht"
+      }
+    },
+    {
+      "id": "lesson-8-type-iix",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Welke spiervezels trekken het snelst samen maar vermoeien ook snel?",
+      "answer": "Type IIx-vezels",
+      "distractors": [
+        "Type I-vezels",
+        "Type IIa-vezels",
+        "Alleen hybride vezels"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Genereren van kracht"
+      }
+    },
+    {
+      "id": "lesson-8-size-principle",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Welke motor units worden volgens het size principle eerst gerekruteerd?",
+      "answer": "Kleine, langzame motor units",
+      "distractors": [
+        "De grootste en snelste motor units",
+        "Alle motor units tegelijk",
+        "Alleen motor units van type IIx"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Motor units en de size principle theory"
+      }
+    },
+    {
+      "id": "lesson-8-spiermassa",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Welke uitspraak over spiermassa en maximale kracht past bij de les?",
+      "answer": "Spiervolume is relevant, maar slechts één van meerdere factoren",
+      "distractors": [
+        "Spiervolume bepaalt kracht volledig",
+        "Spiermassa speelt nooit een rol",
+        "Alleen lengte bepaalt kracht"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Spiercontractie en -vermogen"
+      }
+    },
+    {
+      "id": "lesson-8-kracht-coachingslus",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Welke volgorde hoort bij de coachingslus?",
+      "answer": "Observeren, analyseren, interventie kiezen, uitvoeren en evalueren",
+      "distractors": [
+        "Alleen corrigeren en doorgaan",
+        "Eerst straffen, dan uitleggen",
+        "Alleen een oefening demonstreren"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Krachtig coachen"
+      }
+    },
+    {
+      "id": "lesson-8-trainen-met-intentie",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat is het doel van trainen met intentie?",
+      "answer": "De gewenste bewegingskwaliteit en inzet bewust uitvoeren",
+      "distractors": [
+        "Zo snel mogelijk elke set afmaken",
+        "Alleen meer gewicht gebruiken",
+        "Geen aandacht aan techniek geven"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Het doel van trainen met intentie"
+      }
+    },
+    {
+      "id": "lesson-8-sticking-point",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat is een sticking point?",
+      "answer": "Het punt in een beweging waar de weerstand tijdelijk het moeilijkst te overwinnen is",
+      "distractors": [
+        "Het begin van elke warming-up",
+        "Een rustdag",
+        "Een willekeurige houding zonder weerstand"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Sticking point en energielek"
+      }
+    },
+    {
+      "id": "lesson-8-transferwaarde",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat kenmerkt een oefening met een hoge transferwaarde voor kracht?",
+      "answer": "Ze sluit goed aan op de gewenste prestatie of beweging",
+      "distractors": [
+        "Ze is altijd de meest instabiele oefening",
+        "Ze gebruikt altijd één gewricht",
+        "Ze vraagt nooit techniek"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Oefeningen gericht op een hoge transferwaarde"
+      }
+    },
+    {
+      "id": "lesson-8-intensiteit",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Hoe wordt trainingsintensiteit voor kracht vaak uitgedrukt?",
+      "answer": "Als percentage van de 1RM",
+      "distractors": [
+        "Alleen als aantal trainingsdagen",
+        "Alleen als aantal oefeningen",
+        "Als lichaamstemperatuur"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Intensiteit"
+      }
+    },
+    {
+      "id": "lesson-8-volume",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat vormt trainingsvolume in de basis?",
+      "answer": "De totale hoeveelheid uitgevoerd werk, zoals sets en herhalingen",
+      "distractors": [
+        "Alleen het gebruikte gewicht",
+        "Alleen de rusttijd",
+        "Alleen de warming-up"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Volume"
+      }
+    },
+    {
+      "id": "lesson-8-algemene-warming-up",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat is het hoofddoel van een algemene warming-up?",
+      "answer": "Lichaamstemperatuur verhogen en het lichaam voorbereiden op inspanning",
+      "distractors": [
+        "De werksets al tot falen uitvoeren",
+        "De techniek van één specifieke lift testen",
+        "Maximale vermoeidheid opbouwen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Algemene warming up"
+      }
+    },
+    {
+      "id": "lesson-8-specifieke-warming-up",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat voeg je met een specifieke warming-up toe?",
+      "answer": "Bewegingen die aansluiten bij het doelpatroon en de komende belasting",
+      "distractors": [
+        "Alleen passief rekken",
+        "Een willekeurige cardio-oefening",
+        "Zoveel mogelijk nieuwe oefeningen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Specifieke warming up"
+      }
+    },
+    {
+      "id": "lesson-8-opbouwsets",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Hoe verandert de opbouw naar werksets voor maximale kracht meestal?",
+      "answer": "Het gewicht stijgt terwijl de herhalingen dalen",
+      "distractors": [
+        "Gewicht en herhalingen stijgen beide steeds",
+        "Het gewicht daalt en herhalingen dalen",
+        "Er zijn nooit opbouwsets nodig"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Opwarmen van de hoofdoefening"
+      }
+    },
+    {
+      "id": "lesson-8-beginsituatie",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat is de eerste stap van het programmeerstappenplan?",
+      "answer": "De beginsituatie in kaart brengen",
+      "distractors": [
+        "De laatste check uitvoeren",
+        "Direct leefstijlinterventies kiezen",
+        "Alle trainingen invullen zonder informatie"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Stappenplan programmeren"
+      }
+    },
+    {
+      "id": "lesson-8-belasting-uitschrijven",
+      "region": "kracht",
+      "type": "choice",
+      "prompt": "Wat volgt in het stappenplan na de beginsituatie?",
+      "answer": "De belasting uitschrijven",
+      "distractors": [
+        "De laatste check",
+        "De week invullen",
+        "De warming-up overslaan"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 8: Kracht maximaliseren",
+        "section": "Stappenplan programmeren"
+      }
+    },
+    {
+      "id": "lesson-9-effectieve-doelen",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Welke eigenschap hoort volgens goal-setting theory bij effectieve doelen?",
+      "answer": "Specifiek en uitdagend",
+      "distractors": [
+        "Vaag en vrijblijvend",
+        "Altijd volledig extern opgelegd",
+        "Niet meetbaar"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Coaching op doelen"
+      }
+    },
+    {
+      "id": "lesson-9-procesdoel",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat is een procesdoel?",
+      "answer": "Een concrete actie die nodig is om een einddoel te bereiken",
+      "distractors": [
+        "Alleen het uiteindelijke resultaat",
+        "Een willekeurige wens zonder actie",
+        "Een medische diagnose"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Coaching op doelen"
+      }
+    },
+    {
+      "id": "lesson-9-zelfregulatie",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Welke stap hoort bij de zelfregulerende cyclus na uitvoeren?",
+      "answer": "Monitoren",
+      "distractors": [
+        "Stoppen zonder evaluatie",
+        "Een nieuw doel kiezen zonder te meten",
+        "Alleen anderen vergelijken"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Coaching op doelen"
+      }
+    },
+    {
+      "id": "lesson-9-sd-theorie",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Welke behoefte hoort bij de zelfdeterminatietheorie?",
+      "answer": "Verbondenheid",
+      "distractors": [
+        "Perfectie",
+        "Externe druk",
+        "Controle over anderen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Wat drijft de cliënt?"
+      }
+    },
+    {
+      "id": "lesson-9-woop",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Waar staat de O in WOOP voor?",
+      "answer": "Obstacle",
+      "distractors": [
+        "Objective",
+        "Outcome only",
+        "Organisation"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Doelen duurzaam maken"
+      }
+    },
+    {
+      "id": "lesson-9-woop-plan",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat is het doel van de Plan-stap in WOOP?",
+      "answer": "Een als-danreactie formuleren voor een verwacht obstakel",
+      "distractors": [
+        "Alleen een positief eindbeeld bedenken",
+        "Het doel minder specifiek maken",
+        "Alle obstakels negeren"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Doelen duurzaam maken"
+      }
+    },
+    {
+      "id": "lesson-9-nivea",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Waar staat NIVEA voor in gespreksvoering?",
+      "answer": "Niet Invullen Voor Een Ander",
+      "distractors": [
+        "Nieuwe Informatie Verandert Elk Antwoord",
+        "Niet Informeren Voor Een Actie",
+        "Niets Invoeren Voor Een Afspraak"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Gesprekstechnieken"
+      }
+    },
+    {
+      "id": "lesson-9-oma",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat betekent “OMA thuislaten” bij coaching?",
+      "answer": "Oordelen, Meningen en Adviezen niet ongevraagd invullen",
+      "distractors": [
+        "Een ouder familielid om advies vragen",
+        "Alleen met gesloten vragen werken",
+        "De cliënt geen keuzes geven"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Gesprekstechnieken"
+      }
+    },
+    {
+      "id": "lesson-9-lsd",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Waar staat het LSD-model voor?",
+      "answer": "Luisteren, Samenvatten en Doorvragen",
+      "distractors": [
+        "Leren, Sturen en Doen",
+        "Lezen, Schrijven en Delen",
+        "Lichaam, Stress en Dieet"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Gesprekstechnieken"
+      }
+    },
+    {
+      "id": "lesson-9-grow-reality",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat onderzoekt de Reality-stap in het GROW-model?",
+      "answer": "De huidige situatie",
+      "distractors": [
+        "Alle mogelijke eindresultaten",
+        "Alleen de rol van de trainer",
+        "De kalender voor volgend jaar"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Intakegesprek"
+      }
+    },
+    {
+      "id": "lesson-9-grow-options",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat gebeurt er in de Options-stap van het GROW-model?",
+      "answer": "Mogelijkheden en alternatieven onderzoeken",
+      "distractors": [
+        "De huidige situatie vastleggen",
+        "Een doel zonder acties formuleren",
+        "De intake beëindigen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Intakegesprek"
+      }
+    },
+    {
+      "id": "lesson-9-bewegingsanalyse",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat is een doel van bewegingsanalyse?",
+      "answer": "Energielekken, kwaliteit, competentie en beperkingen in beeld brengen",
+      "distractors": [
+        "Alleen het lichaamsgewicht bepalen",
+        "Een voedingsschema voorschrijven",
+        "Alleen maximale kracht testen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Bewegingsanalyse"
+      }
+    },
+    {
+      "id": "lesson-9-bewegingspatronen",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Welke hoort bij de zes bewegingspatronen uit de les?",
+      "answer": "Hip hinge",
+      "distractors": [
+        "Wrist curl",
+        "Nekrotatie",
+        "Adem vasthouden"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Bewegingsanalyse"
+      }
+    },
+    {
+      "id": "lesson-9-romprichtingen",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Welke richting hoort bij de rompstijfheidanalyse?",
+      "answer": "Anti-rotatie",
+      "distractors": [
+        "Alleen schouderabductie",
+        "Alleen knie-extensie",
+        "Enkelplantairflexie"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "De romp"
+      }
+    },
+    {
+      "id": "lesson-9-hip-disassociation",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat betekent hip disassociation?",
+      "answer": "De heup los van de lumbale wervelkolom kunnen bewegen",
+      "distractors": [
+        "De knie volledig stilhouden",
+        "De schouderbladen vastzetten",
+        "Alleen de enkel bewegen"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Hip hinge en squat"
+      }
+    },
+    {
+      "id": "lesson-9-werkgeheugen",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Waarom geeft een coach het best niet te veel aanwijzingen tegelijk?",
+      "answer": "Het werkgeheugen kan maar beperkte informatie tegelijk verwerken",
+      "distractors": [
+        "Meer aanwijzingen zijn altijd beter voor automatisering",
+        "Cliënten negeren alle uitleg",
+        "Techniek verandert nooit door feedback"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Coachen gebaseerd op leren"
+      }
+    },
+    {
+      "id": "lesson-9-actief-leren",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Welke strategie ondersteunt volgens de les effectief leren?",
+      "answer": "Uitvoeren, toepassen en experimenteren",
+      "distractors": [
+        "Alleen één keer uitleggen",
+        "Feedback vermijden",
+        "Complexiteit meteen maximaliseren"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Coachen gebaseerd op leren"
+      }
+    },
+    {
+      "id": "lesson-9-motorisch-leren",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "In welke fase van motorisch leren is de beweging geautomatiseerd?",
+      "answer": "De autonome fase",
+      "distractors": [
+        "De cognitieve fase",
+        "De associatieve fase",
+        "De oriënterende fase"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Coachen op kwaliteit van bewegen"
+      }
+    },
+    {
+      "id": "lesson-9-externe-focus",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Waar richt een externe cue de aandacht op?",
+      "answer": "Een begrijpelijk element buiten het lichaam",
+      "distractors": [
+        "Alleen op een spier die moet aanspannen",
+        "Alleen op het aantal calorieën",
+        "Alleen op een fout uit het verleden"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Coachen naar beter bewegen"
+      }
+    },
+    {
+      "id": "lesson-9-coachdriehoek",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Welke rol hoort bij de winnende coachdriehoek?",
+      "answer": "Motivator",
+      "distractors": [
+        "Scheidsrechter",
+        "Arts",
+        "Boekhouder"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Coachen naar beter bewegen"
+      }
+    },
+    {
+      "id": "lesson-9-loopt-lukt-leeft",
+      "region": "coaching",
+      "type": "choice",
+      "prompt": "Wat helpt de vraag “Leeft ’t?” een coach te beoordelen?",
+      "answer": "Of de beoogde intentie van de oefening wordt bereikt",
+      "distractors": [
+        "Of alle materialen nieuw zijn",
+        "Of de les lang genoeg duurt",
+        "Of de cliënt een voedingsdagboek bijhoudt"
+      ],
+      "source": {
+        "kind": "course-detail",
+        "title": "Les 9: Holistische benadering",
+        "section": "Coachen naar beter bewegen"
       }
     }
   ]

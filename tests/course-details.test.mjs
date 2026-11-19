@@ -6,8 +6,10 @@ import { withModelContexts } from '../src/data/model-contexts.js';
 import { levelPath, levelQuestions, readGame, isOpenAnswerCorrect } from '../src/learning.js';
 
 const curriculum = JSON.parse(readFileSync(new URL('../src/data/curriculum.json', import.meta.url)));
-const details = curriculum.questions.filter(q => q.source.kind === 'course-detail' && q.type === 'choice');
-const earlier = curriculum.questions.filter(q => q.source.kind !== 'course-detail');
+const details = curriculum.questions.filter(q => q.source.kind === 'course-detail' && q.source.title === 'Anatomie & Biomechanica' && q.type === 'choice');
+const advancedRegions = new Set(['voeding', 'kracht', 'coaching']);
+const earlier = curriculum.questions.filter(q => !advancedRegions.has(q.region) && q.source.kind !== 'course-detail');
+const existingOnly = curriculum.questions.filter(q => !advancedRegions.has(q.region));
 const question = suffix => details.find(q => q.id === 'course-detail-' + suffix);
 
 test('audit additions survive import and recall accepts names without confusing anatomical parts', () => {
@@ -28,9 +30,9 @@ test('audit additions survive import and recall accepts names without confusing 
 test('new detail lessons preserve all existing lessons and require their own completion', () => {
   const oldPath = levelPath({ completed: [] }, earlier);
   const oldIds = new Set(oldPath.map(level => level.id));
-  const newPath = levelPath({ completed: [...oldIds] });
+  const newPath = levelPath({ completed: [...oldIds] }, existingOnly);
   for (const level of oldPath) {
-    assert.deepEqual(levelQuestions(curriculum.questions, level.topic.id, level.stage), levelQuestions(earlier, level.topic.id, level.stage), level.id);
+    assert.deepEqual(levelQuestions(existingOnly, level.topic.id, level.stage), levelQuestions(earlier, level.topic.id, level.stage), level.id);
     assert.equal(newPath.find(current => current.id === level.id).done, true);
   }
   const extra = newPath.filter(level => !oldIds.has(level.id));
@@ -38,7 +40,7 @@ test('new detail lessons preserve all existing lessons and require their own com
   assert.ok(extra.every(level => !level.done));
   assert.equal(extra.filter(level => !level.locked).length, new Set(extra.map(level => level.topic.id)).size);
   const reached = new Set(extra.flatMap(level => {
-    const queue = levelQuestions(curriculum.questions, level.topic.id, level.stage);
+    const queue = levelQuestions(existingOnly, level.topic.id, level.stage);
     assert.equal(queue.length, 7);
     assert.equal(new Set(queue.map(q => q.id)).size, 7);
     return queue.filter(q => q.source.kind === 'course-detail' && q.type === 'choice').map(q => q.id);

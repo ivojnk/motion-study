@@ -163,7 +163,10 @@ export const topics = [
   ['patronen', 'Van anatomie naar beweging', 'Squat, hinge, duwen & trekken', 'arrows'],
   ['groei', 'Waarom spieren groeien', 'Hypertrofie, volume & progressie', 'growth'],
   ['combinaties', 'Oefeningen in 3D', 'Herken oefeningen aan spiercombinaties', 'barbell'],
-  ['verdieping', 'Spieren & toepassing in 3D', 'Spierkennis, oefeningskeuze, lengteprofielen & techniek', 'school']
+  ['verdieping', 'Spieren & toepassing in 3D', 'Spierkennis, oefeningskeuze, lengteprofielen & techniek', 'school'],
+  ['voeding', 'Voeding & leefstijl', 'Gedrag, energiebalans en voedingskwaliteit', 'target'],
+  ['kracht', 'Kracht maximaliseren', 'Vermogen, programmeren en warming-up', 'barbell'],
+  ['coaching', 'Holistische benadering', 'Doelen, intake en cliëntgericht coachen', 'school']
 ].map(([id, title, subtitle, icon]) => ({ id, title, subtitle, icon }));
 
 export function shuffled(items, random = Math.random) {
