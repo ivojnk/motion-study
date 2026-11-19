@@ -33,6 +33,8 @@ test('accounts, daily activity and completed lessons count once across retries a
   let report = f.service.analytics.summary(7);
   assert.deepEqual(report.totals, { accounts: 2, lessons: 2, learners: 2, activeAccounts: 2, activeToday: 2 });
   assert.deepEqual(report.daily.at(-1), { day: '2026-10-05', accounts: 2, activeAccounts: 2, lessons: 2 });
+  assert.deepEqual(report.users.map(({ username, lessons, lastActiveAt }) => ({ username, lessons, lastActiveAt })),
+    [{ username: 'lotte', lessons: 1, lastActiveAt: f.now() }, { username: 'ivo', lessons: 1, lastActiveAt: f.now() }]);
   assert.equal(report.daily[0].activeAccounts, null);
   assert.equal(report.daily[0].lessons, null);
   f.setTime(f.now() + 86_400_000);
@@ -47,7 +49,8 @@ test('accounts, daily activity and completed lessons count once across retries a
   assert.equal(receipts.length, 2);
   assert.ok(receipts.every(row => /^[a-f0-9]{64}$/.test(row.hash) && Object.keys(row).length === 2));
   assert.ok(!JSON.stringify(report).includes(first.user.id));
-  assert.ok(!JSON.stringify(report).includes('lotte'));
+  // Usernames are shown to the owner since notice 2026-11-19; account IDs stay out of the report.
+  assert.deepEqual(report.users.map(user => user.username), ['lotte', 'ivo']);
 });
 
 test('usage rejects unauthenticated, cross-origin, wrong-account and invalid completion requests', async t => {

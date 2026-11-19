@@ -65,7 +65,9 @@ export function createAnalytics({ db, now = Date.now, transaction = action => ac
     const rows = dates.map(day => ({ day, accounts: newAccounts.get(day) || 0,
       activeAccounts: day < analyticsDay(startedAt) ? null : daily.get(day)?.active_accounts || 0,
       lessons: day < analyticsDay(startedAt) ? null : daily.get(day)?.lessons || 0 }));
-    return { generatedAt: time, measuredFrom: startedAt, timezone: 'Europe/Amsterdam', days,
+    const users = db.prepare(`SELECT username, created_at, last_active_at, completed_lessons FROM users WHERE ${realAccounts} ORDER BY last_active_at DESC, created_at DESC LIMIT 500`).all()
+      .map(row => ({ username: row.username, createdAt: row.created_at, lastActiveAt: row.last_active_at || null, lessons: row.completed_lessons }));
+    return { generatedAt: time, measuredFrom: startedAt, timezone: 'Europe/Amsterdam', days, users,
       totals: { ...totals, activeAccounts: activeCount, activeToday: todayCount },
       period: { accounts: rows.reduce((sum, row) => sum + row.accounts, 0), lessons: rows.reduce((sum, row) => sum + (row.lessons || 0), 0) }, daily: rows };
   }
