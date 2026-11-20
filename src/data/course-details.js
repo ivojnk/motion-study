@@ -5,11 +5,11 @@ const source = (section, page) => ({
 });
 
 const terminology = [
-  ['sternocostalis', 'borst', 'Hoe heten de middelste borstvezels die bij een bovenarmhoek van 90° worden benadrukt?', 'Sternocostalis', ['Pars clavicularis', 'Pars abdominalis', 'Pars acromialis'], ['Pars sternocostalis'], 6],
+  ['sternocostalis', 'borst', 'Hoe heten de middelste borstvezels die bij een bovenarmhoek van 90° worden benadrukt?', 'Sternocostalis', ['Clavicularis', 'Abdominalis', 'Acromialis'], ['Pars sternocostalis'], 6],
   ['trapezius-descendens', 'rug', 'Welke Latijnse naam hoort bij het bovenste deel van de trapezius?', 'Descendens', ['Transversa', 'Ascendens', 'Clavicularis'], ['Pars descendens', 'Trapezius pars descendens'], 8],
   ['trapezius-transversa', 'rug', 'Welke Latijnse naam hoort bij het middelste deel van de trapezius?', 'Transversa', ['Descendens', 'Ascendens', 'Clavicularis'], ['Pars transversa', 'Trapezius pars transversa'], 9],
   ['trapezius-ascendens', 'rug', 'Welke Latijnse naam hoort bij het onderste deel van de trapezius?', 'Ascendens', ['Descendens', 'Transversa', 'Clavicularis'], ['Pars ascendens', 'Trapezius pars ascendens'], 9],
-  ['rhomboideus-members', 'rug', 'Welke twee spieren worden samen bedoeld met rhomboideus?', 'Rhomboideus minor en major', ['Teres minor en major', 'Pectoralis minor en major', 'Gluteus medius en minimus'], ['Rhomboideus minor en rhomboideus major', 'Rhomboideus minor/major', 'Rhomboideus major en minor'], 9]
+  ['rhomboideus-members', 'rug', 'Welke twee spieren worden samen bedoeld met rhomboideus?', 'Rhomboideus minor en major', ['Teres minor en major', 'Pectoralis minor en major', 'Serratus anterior en posterior'], ['Rhomboideus minor en rhomboideus major', 'Rhomboideus minor/major', 'Rhomboideus major en minor'], 9]
 ].map(([id, region, prompt, answer, distractors, acceptedAnswers, page]) => ({
   id: 'course-detail-' + id, region, type: 'choice', prompt, answer, distractors, acceptedAnswers,
   source: source(region, page)
@@ -28,10 +28,13 @@ const roles = [
   ['traps-mid', 'het middelste deel van de trapezius', 'rug', 'Trekspier', 9],
   ['traps-lower', 'het onderste deel van de trapezius', 'rug', 'Trekspier', 9],
   ['rhomboids', 'Rhomboideus minor/major', 'rug', 'Trekspier', 9]
-].map(([id, name, region, answer, page]) => ({
+].map(([id, name, region, answer, page], index) => ({
   id: 'course-detail-role-' + id, region, type: 'choice',
   prompt: 'Welke rol hoort bij ' + name + '?', answer,
-  distractors: ['Duwspier', 'Trekspier', 'Stabilisator', 'Elleboogflexor'].filter(role => role !== answer),
+  distractors: [
+    ...['Duwspier', 'Trekspier', 'Stabilisator'].filter(role => role !== answer),
+    ['Elleboogflexor', 'Heupextensor', 'Kniestrekker', 'Rompflexor'][index % 4]
+  ],
   acceptedAnswers: [answer === 'Duwspier' ? 'Duwende spier' : answer === 'Trekspier' ? 'Trekkende spier' : 'Stabiliserende spier'],
   source: source(region, page)
 }));
@@ -42,14 +45,14 @@ export const courseDetailQuestions = [
     id: 'course-detail-outer-core-role', region: 'core', type: 'choice',
     prompt: 'Welke gezamenlijke rol heeft de outer core unit?',
     answer: 'Beweging en kracht leveren',
-    distractors: ['Ademhalingsgebonden stabilisatie en buikdruk opbouwen', 'Uitsluitend de schouderkop in de kom stabiliseren', 'Alleen de elleboog buigen'],
+    distractors: ['Diepe stabilisatie en buikdruk opbouwen', 'Gewrichten centreren en fijn afstellen', 'Houding bewaken in rust zonder beweging'],
     source: source('Inner en outer core', 11)
   },
   {
     id: 'course-detail-squat-hip-phase', region: 'patronen', type: 'choice',
     prompt: 'Tijdens welke fase van de squat kan beperkte heupmobiliteit je voorover laten leunen?',
     answer: 'Excentrisch',
-    distractors: ['Concentrisch', 'Isometrisch', 'Alleen na afloop van de squat'],
+    distractors: ['Concentrisch', 'Isometrisch', 'Plyometrisch'],
     acceptedAnswers: ['Excentrische fase', 'Tijdens het zakken', 'Zakken', 'Neergaande fase'],
     source: source('Squat en heupmobiliteit', 20)
   }
