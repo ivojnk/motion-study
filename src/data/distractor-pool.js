@@ -23,7 +23,9 @@ export function regionTiers(region, items) {
   return [same, zone, rest].map(tier => tier.map(item => item.value));
 }
 
-const defaultAlike = (a, b) => similarity(a, b) >= 0.6;
+// Same opening word plus a "label: ..." layout reads as one template.
+const shape = text => String(text).toLowerCase().split(/[\s:;]/)[0] + (/[:;]/.test(text) ? ':' : '');
+const defaultAlike = (a, b) => similarity(a, b) >= 0.6 || (/[:;]/.test(a) && shape(a) === shape(b));
 
 // tiers: arrays of candidate strings, most relevant first.
 // ambiguous: drop candidates so close to the answer that they could also be right.
@@ -40,11 +42,13 @@ export function pickDistractors(answer, tiers, { limit = 5, ambiguous = 0.6, ali
     return !strict || !chosen.some(other => alike(candidate, other) && !alike(candidate, answer));
   };
   for (const strict of [true, false]) {
-    for (const tier of tiers) {
+    for (const [tierIndex, tier] of tiers.entries()) {
+      // The last tier (other body areas) only tops up to three options.
+      const cap = tiers.length > 1 && tierIndex === tiers.length - 1 ? 3 : limit;
       const ranked = [...new Set(tier)].map((value, index) => ({ value, index }))
         .sort((a, b) => Math.abs(a.value.length - length) - Math.abs(b.value.length - length) || a.index - b.index);
       for (const { value } of ranked) {
-        if (chosen.length >= limit || (!strict && chosen.length >= 3)) break;
+        if (chosen.length >= cap || (!strict && chosen.length >= 3)) break;
         if (accept(value, strict)) chosen.push(value);
       }
     }

@@ -33,7 +33,8 @@ const roles = [
   prompt: 'Welke rol hoort bij ' + name + '?', answer,
   distractors: [
     ...['Duwspier', 'Trekspier', 'Stabilisator'].filter(role => role !== answer),
-    ['Elleboogflexor', 'Heupextensor', 'Kniestrekker', 'Rompflexor'][index % 4]
+    // Flexor and extensor are the course's labels for the arm muscles.
+    ['Flexor', 'Extensor'][index % 2]
   ],
   acceptedAnswers: [answer === 'Duwspier' ? 'Duwende spier' : answer === 'Trekspier' ? 'Trekkende spier' : 'Stabiliserende spier'],
   source: source(region, page)

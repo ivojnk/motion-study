@@ -115,8 +115,8 @@ export const extraMuscles = [
     "answer": "De borst kan eerder limiteren dan stabiliteit of balans",
     "distractors": [
       "De stabiliteit kan eerder limiteren dan de borst, omdat de machine meebeweegt",
-      "De grip kan eerder limiteren dan de borst of de stabiliteit",
-      "De voorste deltoideus limiteert eerder dan de borst of de balans"
+      "De stabiliteit kan eerder limiteren dan de borst of de triceps",
+      "De grip kan eerder limiteren dan de borst of de stabiliteit"
     ],
     "anchor": "Machine presses Pectoralis major"
   },
@@ -164,7 +164,7 @@ export const extraMuscles = [
     "distractors": [
       "Staand een paal vasthouden beperkt momentum",
       "Zittend met borststeun maakt stabiliteit de beperkende factor",
-      "Zittend met borststeun vergroot de weerstand halverwege de beweging"
+      "Staand een paal vasthouden maakt balans juist de beperkende factor"
     ],
     "anchor": "Chest supported DB\nside raise"
   },
@@ -235,7 +235,7 @@ export const extraMuscles = [
     "answer": "Zittend met borststeun beperkt momentum",
     "distractors": [
       "Staand een paal vasthouden voorkomt dat stabiliteit beperkt",
-      "Met kabel meer spanning gedurende de hele beweging",
+      "Staand met kabel meer spanning gedurende de hele beweging",
       "De borststeun maakt balans de beperkende factor"
     ],
     "anchor": "Incline DB rear delt\nfly"
@@ -259,8 +259,8 @@ export const extraMuscles = [
     "answer": "Staand een paal vasthouden voorkomt dat stabiliteit beperkt",
     "distractors": [
       "Zittend met borststeun beperkt momentum",
-      "Staand een paal vasthouden maakt balans juist de beperkende factor",
-      "Staand zonder steun vergroot de weerstand in de verkorte positie"
+      "Zittend met borststeun maakt balans de beperkende factor",
+      "Staand zonder paal vergroot de weerstand in de verkorte positie"
     ],
     "anchor": "Single arm rear delt\ncable fly"
   },
@@ -282,8 +282,8 @@ export const extraMuscles = [
     "prompt": "Welk voordeel of aandachtspunt hoort bij lat pulldown?",
     "answer": "Laagdrempelig, omdat lichaamsgewicht niet de beperkende factor is",
     "distractors": [
-      "Laagdrempelig, omdat de gripbreedte de lat-activatie sterk bepaalt",
       "Isolatie van de lats zonder de biceps als limiterende factor",
+      "Accent op lats zonder te veel trapezius",
       "Veel stabiliteit door de bovenarm te fixeren in een kussen"
     ],
     "anchor": "Lat pulldown Latissimus dorsi"
@@ -330,9 +330,9 @@ export const extraMuscles = [
     "prompt": "Welk voordeel of aandachtspunt hoort bij lat prayer?",
     "answer": "Isolatie van de lats zonder de biceps als limiterende factor",
     "distractors": [
-      "Isolatie van de achterste deltoideus zonder de biceps als limiterende factor",
-      "Isolatie van de lats met de biceps als belangrijkste synergist",
-      "Isolatie van de middelste trapezius zonder de lats als limiterende factor"
+      "Laagdrempelig, omdat lichaamsgewicht niet de beperkende factor is",
+      "Accent op lats zonder te veel trapezius",
+      "Veel stabiliteit door de bovenarm te fixeren in een kussen"
     ],
     "anchor": "Lat prayer Latissimus dorsi"
   },
@@ -439,8 +439,8 @@ export const extraMuscles = [
     "answer": "Met kabel meer spanning gedurende de hele beweging",
     "distractors": [
       "Met barbell meer spanning gedurende de hele beweging",
-      "Met dumbbell de hoogste weerstand in de verlengde positie",
-      "Met kabel de bovenarm fixeren voor extra stabiliteit"
+      "Met barbell de bovenarm fixeren voor extra stabiliteit",
+      "Met dumbbell de hoogste weerstand in de verlengde positie"
     ],
     "anchor": "Bicep curl\n(DB/BB/cable)"
   },
@@ -546,9 +546,9 @@ export const extraMuscles = [
     "prompt": "Welk voordeel of aandachtspunt hoort bij single arm cross tricep extension?",
     "answer": "Kruislings pakken lijnt de weerstand uit met de bovenarm en wordt gewrichtsvriendelijker genoemd",
     "distractors": [
-      "Kruislings pakken lijnt de weerstand uit met de onderarm en geeft meer spanning in de verkorte positie",
-      "Kruislings pakken geeft meer bewegingsuitslag dan een barbell en wordt gewrichtsvriendelijker genoemd",
-      "Kruislings pakken geeft veel stabiliteit door de bovenarm in een kussen te fixeren"
+      "Kruislings pakken lijnt de weerstand uit met de bovenarm en geeft meer bewegingsuitslag dan een barbell",
+      "Kruislings pakken lijnt de weerstand uit met de onderarm en wordt gewrichtsvriendelijker genoemd",
+      "Kruislings pakken lijnt de weerstand uit met de onderarm en geeft meer bewegingsuitslag dan een barbell"
     ],
     "anchor": "Single arm cross\ntricep extension"
   },
@@ -570,9 +570,9 @@ export const extraMuscles = [
     "prompt": "Welk voordeel of aandachtspunt hoort bij Kantana extension?",
     "answer": "Uitlijnen met de bovenarm wordt gewrichtsvriendelijker genoemd",
     "distractors": [
+      "Uitlijnen met de bovenarm benadrukt de verkorte positie van de lange kop",
       "Uitlijnen met de onderarm wordt gewrichtsvriendelijker genoemd",
-      "Overhead starten benadrukt de verkorte positie van de lange kop",
-      "Uitlijnen met de bovenarm zorgt voor veel stabiliteit in een kussen"
+      "Uitlijnen met de onderarm benadrukt de verkorte positie van de lange kop"
     ],
     "anchor": "Kantana extension Triceps (lange kop)"
   },
@@ -594,9 +594,9 @@ export const extraMuscles = [
     "prompt": "Welk voordeel of aandachtspunt hoort bij skull crusher met DB of BB?",
     "answer": "Een variant om de lange kop zonder kabels te trainen",
     "distractors": [
-      "Een variant om de lange kop met meer spanning in de verkorte positie te trainen",
-      "Een variant om de brachialis zonder kabels te trainen",
-      "Een variant om de lange kop met minder axiale druk te trainen"
+      "Een variant met kabel voor meer spanning gedurende de hele beweging",
+      "Een variant met de weerstand uitgelijnd met de bovenarm, gewrichtsvriendelijker genoemd",
+      "Een variant met de bovenarm in een kussen gefixeerd voor veel stabiliteit"
     ],
     "anchor": "Skull crusher\n(DB/BB)"
   },
@@ -620,7 +620,7 @@ export const extraMuscles = [
     "distractors": [
       "Voorkom een heup die te hoog of laag staat ten opzichte van de rechte lijn naar de hak",
       "Voorkom verlies van bovenrugstabilisatie tijdens het touwtrekken",
-      "Voorkom een bolle bovenrug en een romp die naar één kant wegdraait"
+      "Voorkom dat de knie naar binnen valt"
     ],
     "anchor": "Dead bug Extensiemoment"
   },
@@ -656,7 +656,7 @@ export const extraMuscles = [
     "distractors": [
       "Voorkom een heup die te hoog of laag staat ten opzichte van de rechte lijn naar de hak",
       "Voorkom verlies van bovenrugstabilisatie tijdens het touwtrekken",
-      "Voorkom een te grote knie-extensie bij het terugbrengen van het been"
+      "Voorkom een schouderdump waarbij de schouderkop te ver naar voren glijdt"
     ],
     "anchor": "Bird dog Extensiemoment"
   },
@@ -691,8 +691,8 @@ export const extraMuscles = [
     "answer": "Voorkom een heup die te hoog of laag staat ten opzichte van de rechte lijn naar de hak",
     "distractors": [
       "Voorkom verlies van bovenrugstabilisatie tijdens het touwtrekken",
-      "Voorkom schouders die naar achteren trekken en afwijken van de streklijn",
-      "Voorkom compensatie vanuit heup of schouder bij het wisselen van been"
+      "Voorkom lateroflexie van de romp",
+      "Voorkom dat de knie naar binnen valt"
     ],
     "anchor": "Plank Extensiemoment"
   },
@@ -728,7 +728,7 @@ export const extraMuscles = [
     "distractors": [
       "Voorkom een heup die te hoog of laag staat",
       "Voorkom verlies van bovenrugstabilisatie",
-      "Voorkom schouders die naar achteren trekken"
+      "Voorkom dat de knie naar binnen valt"
     ],
     "anchor": "Back extension hold\n(+ reach/KB)"
   },
@@ -799,8 +799,8 @@ export const extraMuscles = [
     "answer": "Voorkom verlies van bovenrugstabilisatie tijdens het touwtrekken",
     "distractors": [
       "Voorkom een heup die te hoog of laag staat ten opzichte van de rechte lijn naar de hak",
-      "Voorkom verlies van heupspanning tijdens het strekken",
-      "Voorkom verlies van balans tijdens het stappen met de kettlebell"
+      "Voorkom verlies van 360°-rompspanning tijdens het strekken",
+      "Voorkom dat de knie naar binnen valt"
     ],
     "anchor": "Anti-rotation chop Rotatiemoment"
   },
@@ -870,9 +870,9 @@ export const extraMuscles = [
     "prompt": "Welk voordeel of aandachtspunt hoort bij cable crunch?",
     "answer": "Krul de wervelkolom op en breng ribben naar bekken, geschikt voor progressive overload",
     "distractors": [
+      "Krul de wervelkolom op en breng ribben naar bekken, een langere momentarm maakt de oefening zwaarder",
       "Houd de wervelkolom lang en buig vanuit de heupen, geschikt voor progressive overload",
-      "Kantel het bekken en til met de buikspieren, een langere momentarm maakt de oefening zwaarder",
-      "Roteer de romp en breng de ribben naar de heup, geschikt voor progressive overload"
+      "Roteer de romp en breng de ribben naar de heup, een langere momentarm maakt de oefening zwaarder"
     ],
     "anchor": "Cable crunch Flexie Rectus abdominis"
   },
@@ -918,9 +918,9 @@ export const extraMuscles = [
     "prompt": "Welk voordeel of aandachtspunt hoort bij hanging leg raise?",
     "answer": "Kantel het bekken en til met de buikspieren, een langere momentarm maakt de oefening zwaarder",
     "distractors": [
-      "Houd het bekken neutraal en til met de heupbuigers, een langere momentarm maakt de oefening zwaarder",
       "Kantel het bekken en til met de buikspieren, een kortere momentarm maakt de oefening zwaarder",
-      "Zwaai met de benen voor momentum, een langere momentarm maakt de oefening zwaarder"
+      "Houd het bekken neutraal en til met de heupbuigers, een langere momentarm maakt de oefening zwaarder",
+      "Zwaai met de benen voor momentum, een kortere momentarm maakt de oefening zwaarder"
     ],
     "anchor": "Hanging leg raise Flexie Rectus abdominis"
   },
@@ -991,7 +991,7 @@ export const extraMuscles = [
     "answer": "Stop bij neutraal en vermijd hyperextensie",
     "distractors": [
       "Ga door tot een lichte hyperextensie voor extra spanning",
-      "Stop bij neutraal en laat het bekken meekantelen",
+      "Ga door tot een lichte hyperextensie en zwaai het gewicht omhoog",
       "Beweeg segmentaal en rond de rug bewust af"
     ],
     "anchor": "45° back extension\n(gewicht)"
@@ -1040,7 +1040,7 @@ export const extraMuscles = [
     "distractors": [
       "Beweeg als één blok vanuit de heup, met licht gewicht en geleidelijke opbouw",
       "Beweeg segmentaal en gecontroleerd, met zwaar gewicht en een snelle opbouw",
-      "Beweeg segmentaal, met licht gewicht, en stop bij neutraal zonder verder te buigen"
+      "Beweeg als één blok vanuit de heup, met zwaar gewicht en een snelle opbouw"
     ],
     "anchor": "Jefferson curl Extensie Erector spinae"
   },
@@ -1086,9 +1086,9 @@ export const extraMuscles = [
     "prompt": "Welk voordeel of aandachtspunt hoort bij landmine rotation?",
     "answer": "Roteer vanuit de romp en houd de armen relatief gestrekt",
     "distractors": [
-      "Roteer vanuit de heup en klap de armen sterk in",
+      "Roteer vanuit de romp en buig de ellebogen sterk",
       "Roteer vanuit de schouders en houd de armen relatief gestrekt",
-      "Houd de romp stabiel en draai vanuit de armen met gebogen ellebogen"
+      "Roteer vanuit de heupen en buig de ellebogen sterk"
     ],
     "anchor": "Landmine rotation Rotatie (geladen)"
   },
@@ -1111,8 +1111,8 @@ export const extraMuscles = [
     "answer": "Roteer de romp met een stabiele wervelkolom",
     "distractors": [
       "Roteer de romp met een afgeronde wervelkolom",
-      "Roteer de armen met een stabiele romp",
-      "Roteer de romp en buig de wervelkolom actief mee"
+      "Roteer de armen met een stabiele wervelkolom",
+      "Roteer de armen met een afgeronde wervelkolom"
     ],
     "anchor": "Weighted Russian\ntwist"
   },
@@ -1230,9 +1230,9 @@ export const extraMuscles = [
     "prompt": "Welk voordeel of aandachtspunt hoort bij hand supported Bulgarian split squat met heupaccent?",
     "answer": "Unilaterale belasting met veel mechanische spanning in de verlengde positie",
     "distractors": [
+      "Unilaterale belasting met vooral spanning in de verkorte positie",
       "Bilaterale belasting met veel mechanische spanning in de verlengde positie",
-      "Unilaterale belasting met veel axiale druk op de wervelkolom",
-      "Unilaterale belasting met vooral spanning in de verkorte positie"
+      "Bilaterale belasting met veel axiale druk op de wervelkolom"
     ],
     "anchor": "Hand supported\nBulgarian split\nsquat"
   },
@@ -1256,7 +1256,7 @@ export const extraMuscles = [
     "distractors": [
       "Isoleert de gluteus medius bij een gebogen heup",
       "Isoleert de gluteus maximus bij een gestrekte heup",
-      "Isoleert de adductoren bij een gestrekte heup"
+      "Isoleert de adductoren bij een gebogen heup"
     ],
     "anchor": "Cable side kicks Gluteus medius"
   },
@@ -1279,7 +1279,7 @@ export const extraMuscles = [
     "answer": "Veel machinestabiliteit om dicht bij spierfalen te trainen",
     "distractors": [
       "Isolatie van de quads met een stilstaande heup",
-      "Weinig machinestabiliteit, zodat de romp de balans moet bewaren",
+      "Weinig stabiliteit, zodat de romp de balans moet bewaren",
       "Unilaterale belasting met veel mechanische spanning in de verlengde positie"
     ],
     "anchor": "Leg press Rectus femoris +"
@@ -1328,7 +1328,7 @@ export const extraMuscles = [
     "distractors": [
       "Veel stabiliteit met extra axiale druk op de wervelkolom",
       "Minder stabiliteit, maar zonder axiale druk op de wervelkolom",
-      "Veel stabiliteit, maar de grip beperkt de set"
+      "Minder stabiliteit en extra axiale druk op de wervelkolom"
     ],
     "anchor": "Belt squat Rectus femoris +"
   },
@@ -1350,9 +1350,9 @@ export const extraMuscles = [
     "prompt": "Welk voordeel of aandachtspunt hoort bij hand supported split squat-varianten?",
     "answer": "Meer stabiliteit dan een reguliere split squat, om dichter bij spierfalen te komen",
     "distractors": [
-      "Minder stabiliteit dan een reguliere split squat, om meer balans te trainen",
-      "Meer stabiliteit dan een leg press, om dichter bij spierfalen te komen",
-      "Meer axiale druk dan een reguliere split squat, om dichter bij spierfalen te komen"
+      "Meer stabiliteit dan een reguliere split squat, om meer balans te trainen",
+      "Minder stabiliteit dan een reguliere split squat, om dichter bij spierfalen te komen",
+      "Minder stabiliteit dan een reguliere split squat, om meer balans te trainen"
     ],
     "anchor": "(Hand supported)\nsplit squat"
   },
@@ -1398,8 +1398,8 @@ export const extraMuscles = [
     "prompt": "Welk voordeel of aandachtspunt hoort bij RDL met hamstring-focus?",
     "answer": "Makkelijk te overloaden met veel spanning in de verlengde positie",
     "distractors": [
+      "Grotere bewegingsuitslag dan bij een barbell",
       "Hogere herhalingen mogelijk zonder beperking door bovenrugstabiliteit of grip",
-      "Isolatie in de verlengde positie",
       "Veel stabiliteit zonder axiale druk op de wervelkolom"
     ],
     "anchor": "RDL (hamstring\nfocus)"
@@ -1447,8 +1447,8 @@ export const extraMuscles = [
     "answer": "Isolatie in de verlengde positie",
     "distractors": [
       "Isolatie in de verkorte positie",
-      "Isolatie in de middenpositie",
-      "Isolatie van de quads in de verlengde positie"
+      "Isolatie van de quads in de verlengde positie",
+      "Isolatie van de quads in de verkorte positie"
     ],
     "anchor": "Seated leg curl Biceps femoris,"
   },
@@ -1471,8 +1471,8 @@ export const extraMuscles = [
     "answer": "Isolatie in de verkorte positie",
     "distractors": [
       "Isolatie in de verlengde positie",
-      "Isolatie in de middenpositie",
-      "Isolatie van de glutes in de verkorte positie"
+      "Isolatie van de glutes in de verkorte positie",
+      "Isolatie van de glutes in de verlengde positie"
     ],
     "anchor": "Lying leg curl Biceps femoris,"
   },
@@ -1568,7 +1568,7 @@ export const extraMuscles = [
     "distractors": [
       "Gewicht op de heupen voorkomt een gripbeperking, maar vergroot de axiale druk",
       "Gewicht in de handen voorkomt een gripbeperking en axiale druk",
-      "Gewicht op de schouders voorkomt een gripbeperking en axiale druk"
+      "Gewicht op de schouders voorkomt een gripbeperking, maar vergroot de axiale druk"
     ],
     "anchor": "Hip loaded calf raise\n(staand)"
   },
@@ -1603,8 +1603,8 @@ export const extraMuscles = [
     "answer": "Meer voorste-deltoideusactivatie en iets minder borstactivatie",
     "distractors": [
       "Meer voorste-deltoideusactivatie en iets meer borstactivatie",
-      "Minder voorste-deltoideusactivatie en iets meer bovenste borstactivatie",
-      "Meer middelste-deltoideusactivatie en iets minder borstactivatie"
+      "Minder voorste-deltoideusactivatie en iets minder borstactivatie",
+      "Minder voorste-deltoideusactivatie en iets meer borstactivatie"
     ],
     "anchor": "boven 30° neemt voorste-delt-activatie toe"
   },
@@ -1650,9 +1650,9 @@ export const extraMuscles = [
     "prompt": "Wat zijn de functies van teres minor?",
     "answer": "Exorotatie, verticale adductie en stabilisatie",
     "distractors": [
-      "Exorotatie, verticale abductie en stabilisatie",
-      "Endorotatie, verticale adductie en stabilisatie",
-      "Exorotatie, horizontale adductie en stabilisatie"
+      "Exorotatie, verticale abductie en retroflexie",
+      "Endorotatie, verticale adductie en retroflexie",
+      "Endorotatie, verticale abductie en stabilisatie"
     ],
     "anchor": "TERES MINOR Exorotatie, vert. adductie +"
   },
@@ -1674,9 +1674,9 @@ export const extraMuscles = [
     "prompt": "Wat zijn de functies van teres major?",
     "answer": "Retroflexie, verticale adductie en endorotatie",
     "distractors": [
-      "Retroflexie, verticale adductie en exorotatie",
-      "Anteflexie, verticale adductie en endorotatie",
-      "Retroflexie, verticale abductie en endorotatie"
+      "Retroflexie, verticale abductie en exorotatie",
+      "Anteflexie, verticale adductie en exorotatie",
+      "Anteflexie, verticale abductie en endorotatie"
     ],
     "anchor": "TERES MAJOR Retroflexie, vert. adductie,"
   },
@@ -1770,9 +1770,9 @@ export const extraMuscles = [
     "prompt": "Wat zijn de vier bewegingsrichtingen voor core-training?",
     "answer": "Extensie, flexie, rotatie en lateroflexie",
     "distractors": [
-      "Extensie, flexie, rotatie en abductie",
-      "Extensie, flexie, lateroflexie en elevatie",
-      "Flexie, rotatie, lateroflexie en anteflexie"
+      "Extensie, rotatie, abductie en elevatie",
+      "Flexie, anteflexie, abductie en retractie",
+      "Lateroflexie, anteflexie, elevatie en retractie"
     ],
     "anchor": "4 bewegingsrichtingen:"
   },
@@ -1782,9 +1782,9 @@ export const extraMuscles = [
     "prompt": "Hoe bouw je core-training op?",
     "answer": "Eerst statische anti-core als basis, daarna geladen dynamische hypertrofie met spanning, volume en progressive overload",
     "distractors": [
-      "Eerst geladen dynamische hypertrofie, daarna statische anti-core als aanvulling met spanning, volume en progressive overload",
       "Eerst statische anti-core als basis, daarna ongeladen dynamische bewegingen zonder progressive overload",
-      "Eerst mobiliteit van de wervelkolom als basis, daarna geladen dynamische hypertrofie met spanning, volume en progressive overload"
+      "Eerst mobiliteit van de wervelkolom als basis, daarna geladen dynamische hypertrofie met spanning, volume en progressive overload",
+      "Eerst geladen dynamische hypertrofie als basis, daarna statische anti-core met spanning, volume en progressive overload"
     ],
     "anchor": "Anti-core (statisch/isometrisch"
   },
@@ -1794,9 +1794,9 @@ export const extraMuscles = [
     "prompt": "Wanneer komen de obliques het sterkst tot uiting, en wat vraagt flexietraining?",
     "answer": "Rotatie en lateroflexie onder weerstand, bij flexie moet je ze actief aansturen",
     "distractors": [
-      "Flexie en extensie onder weerstand, bij rotatie moet je ze actief aansturen",
       "Rotatie en lateroflexie onder weerstand, bij flexie doen ze automatisch het meeste werk",
-      "Flexie en lateroflexie onder weerstand, bij rotatie moeten ze juist ontspannen blijven"
+      "Flexie en extensie onder weerstand, bij flexie moet je ze actief aansturen",
+      "Flexie en lateroflexie onder weerstand, bij rotatie moet je ze actief aansturen"
     ],
     "anchor": "Obliques\nworden alléén goed getraind in flexie"
   },
@@ -1807,8 +1807,8 @@ export const extraMuscles = [
     "answer": "Een voldoende laag vetpercentage, core-training geeft geen lokale vetreductie",
     "distractors": [
       "Een voldoende laag vetpercentage, core-training versnelt de lokale vetreductie",
-      "Een voldoende hoge trainingsfrequentie, core-training geeft lokale vetreductie",
-      "Voldoende dikke buikspieren, core-training geeft geen lokale vetreductie"
+      "Voldoende dikke buikspieren, core-training geeft geen lokale vetreductie",
+      "Een voldoende hoge trainingsfrequentie, core-training versnelt de lokale vetreductie"
     ],
     "anchor": "Zichtbaarheid van de buik komt niet uit core-training"
   },
@@ -1818,9 +1818,9 @@ export const extraMuscles = [
     "prompt": "Welke vier onderdelen vormen de inner core unit?",
     "answer": "Diafragma, bekkenbodem, transversus abdominis en multifidus",
     "distractors": [
-      "Diafragma, bekkenbodem, rectus abdominis en multifidus",
-      "Diafragma, bekkenbodem, transversus abdominis en erector spinae",
-      "Diafragma, quadratus lumborum, transversus abdominis en multifidus"
+      "Diafragma, bekkenbodem, rectus abdominis en erector spinae",
+      "Obliques, quadratus lumborum, transversus abdominis en erector spinae",
+      "Rectus abdominis, quadratus lumborum, iliopsoas en multifidus"
     ],
     "anchor": "Inner core unit (stabiliserend, ademhalingsgebonden):"
   },
@@ -1842,9 +1842,9 @@ export const extraMuscles = [
     "prompt": "Welke spieren vormen de outer core unit?",
     "answer": "Rectus abdominis, obliques, erector spinae, glutes en latissimus dorsi",
     "distractors": [
-      "Rectus abdominis, obliques, erector spinae, glutes en trapezius",
-      "Rectus abdominis, obliques, transversus abdominis, glutes en latissimus dorsi",
-      "Rectus abdominis, obliques, erector spinae, hamstrings en latissimus dorsi"
+      "Rectus abdominis, obliques, transversus abdominis, multifidus en hamstrings",
+      "Multifidus, erector spinae, glutes, hamstrings en trapezius",
+      "Transversus abdominis, multifidus, hamstrings, trapezius en latissimus dorsi"
     ],
     "anchor": "Outer core unit\n(bewegend/krachtleverend):"
   },
@@ -1855,8 +1855,8 @@ export const extraMuscles = [
     "answer": "Horizontale 360°-ademhaling verhoogt buikdruk, bij zware compounds wordt de Valsalva-manoeuvre genoemd",
     "distractors": [
       "Verticale ademhaling verhoogt buikdruk, bij zware compounds wordt de Valsalva-manoeuvre genoemd",
-      "Horizontale 360°-ademhaling verlaagt de buikdruk, bij zware compounds wordt de Valsalva-manoeuvre genoemd",
-      "Horizontale 360°-ademhaling verhoogt buikdruk, bij zware compounds wordt de Valsalva-manoeuvre afgeraden"
+      "Horizontale 360°-ademhaling verhoogt buikdruk, bij zware compounds wordt een snelle borstademhaling genoemd",
+      "Verticale ademhaling verlaagt de buikdruk, bij zware compounds wordt een snelle borstademhaling genoemd"
     ],
     "anchor": "Goede\n360°-ademhaling"
   },
@@ -1867,8 +1867,8 @@ export const extraMuscles = [
     "answer": "Onderkant ribbenkast en borstbeen, onderrugwervels en kraakbeen van de onderste zes ribben",
     "distractors": [
       "Onderkant ribbenkast en borstbeen, bovenrugwervels en kraakbeen van de bovenste zes ribben",
-      "Bovenkant ribbenkast en sleutelbeen, onderrugwervels en kraakbeen van de onderste zes ribben",
-      "Onderkant ribbenkast en schaambeen, onderrugwervels en kraakbeen van de onderste zes ribben"
+      "Bovenkant ribbenkast en sleutelbeen, onderrugwervels en kraakbeen van de bovenste zes ribben",
+      "Bovenkant ribbenkast en sleutelbeen, bovenrugwervels en kraakbeen van de onderste zes ribben"
     ],
     "anchor": "Middenrif / diafragma\nAANHECHT."
   },
@@ -1902,9 +1902,9 @@ export const extraMuscles = [
     "prompt": "Wat zijn de functies van de bekkenbodem?",
     "answer": "Organen ondersteunen, prolaps voorkomen en continentie van blaas en endeldarm regelen",
     "distractors": [
-      "Organen ondersteunen, heupabductie leveren en continentie van blaas en endeldarm regelen",
-      "Organen ondersteunen, prolaps voorkomen en de ribbenkast 360° vergroten",
-      "Rompflexie leveren, prolaps voorkomen en continentie van blaas en endeldarm regelen"
+      "Organen ondersteunen, heupabductie leveren en de ribbenkast 360° vergroten",
+      "Rompflexie leveren, prolaps voorkomen en de ribbenkast 360° vergroten",
+      "Rompflexie leveren, heupabductie leveren en continentie van blaas en endeldarm regelen"
     ],
     "anchor": "Bekkenbodem\nFUNCTIE"
   },
@@ -1962,9 +1962,9 @@ export const extraMuscles = [
     "prompt": "Hoe vergroot je de rek op gluteus maximus?",
     "answer": "Voeten hoger op leg press, standbeen verder van de bank bij Bulgarian split squat, verder voorover bij RDL",
     "distractors": [
-      "Voeten hoger op leg press, standbeen dichter bij de bank bij Bulgarian split squat, verder voorover bij RDL",
-      "Voeten lager op leg press, standbeen verder van de bank bij Bulgarian split squat, verder voorover bij RDL",
-      "Voeten hoger op leg press, standbeen verder van de bank bij Bulgarian split squat, rechter blijven bij RDL"
+      "Voeten hoger op leg press, standbeen dichter bij de bank bij Bulgarian split squat, rechter blijven bij RDL",
+      "Voeten lager op leg press, standbeen verder van de bank bij Bulgarian split squat, rechter blijven bij RDL",
+      "Voeten lager op leg press, standbeen dichter bij de bank bij Bulgarian split squat, verder voorover bij RDL"
     ],
     "anchor": "hogere voetplaatsing op leg press,"
   },
@@ -1986,9 +1986,9 @@ export const extraMuscles = [
     "prompt": "Hoe moet het bekken tijdens een lift blijven, en wanneer mag je sluiten?",
     "answer": "Neutraal tijdens de lift, sluiten mag aan het eind",
     "distractors": [
-      "Gesloten tijdens de lift, neutraal aan het eind",
       "Neutraal tijdens de lift, sluiten mag aan het begin",
-      "Neutraal tijdens de lift, hol trekken mag aan het eind"
+      "Hol getrokken tijdens de lift, sluiten mag aan het eind",
+      "Gesloten tijdens de lift, sluiten mag aan het begin"
     ],
     "anchor": "neutraal houden tijdens de\nlift, sluiten mag aan het eind"
   },
@@ -1998,9 +1998,9 @@ export const extraMuscles = [
     "prompt": "Hoe stuur je meer quadricepsrek via voetplaatsing en enkelmobiliteit?",
     "answer": "Voeten laag op leg press/hack squat, eventueel hakken verhogen met plaatjes of schoenen",
     "distractors": [
-      "Voeten hoog op leg press/hack squat, eventueel hakken verhogen met plaatjes of schoenen",
       "Voeten laag op leg press/hack squat, eventueel de tenen verhogen met plaatjes of schoenen",
-      "Voeten breed en hoog op leg press/hack squat, hakken zo laag mogelijk houden"
+      "Voeten hoog op leg press/hack squat, eventueel hakken verhogen met plaatjes of schoenen",
+      "Voeten hoog op leg press/hack squat, eventueel de tenen verhogen met plaatjes of schoenen"
     ],
     "anchor": "Te sturen via voetpositie (laag op het leg"
   },
@@ -2010,9 +2010,9 @@ export const extraMuscles = [
     "prompt": "Hoe zoek je hamstringrek in beide trainingspatronen?",
     "answer": "Bij heupstrekking via een kleine heuphoek en neutrale wervelkolom, bij kniebuiging via een gestrekte knie",
     "distractors": [
-      "Bij heupstrekking via een grote heuphoek en neutrale wervelkolom, bij kniebuiging via een gestrekte knie",
-      "Bij heupstrekking via een kleine heuphoek en neutrale wervelkolom, bij kniebuiging via een gebogen knie",
-      "Bij heupstrekking via een kleine heuphoek en bolle rug, bij kniebuiging via een gestrekte knie"
+      "Bij heupstrekking via een kleine heuphoek en bolle rug, bij kniebuiging via een gebogen knie",
+      "Bij heupstrekking via een grote heuphoek en neutrale wervelkolom, bij kniebuiging via een gebogen knie",
+      "Bij heupstrekking via een grote heuphoek en bolle rug, bij kniebuiging via een gestrekte knie"
     ],
     "anchor": "rek via een kleine heuphoek, met"
   },
@@ -2058,9 +2058,9 @@ export const extraMuscles = [
     "prompt": "Welke vijf spieren vormen de adductoren?",
     "answer": "Adductor longus, brevis en magnus, gracilis en pectineus",
     "distractors": [
-      "Adductor longus, brevis en magnus, gracilis en tensor fasciae latae",
-      "Adductor longus, brevis en magnus, pectineus en gluteus medius",
-      "Adductor longus en brevis, gracilis, pectineus en rectus femoris"
+      "Adductor longus en brevis, gluteus medius, tensor fasciae latae en rectus femoris",
+      "Adductor magnus, gracilis, iliopsoas, tensor fasciae latae en gluteus minimus",
+      "Pectineus, gluteus medius, gluteus minimus, iliopsoas en rectus femoris"
     ],
     "anchor": "Adductoren (longus/brevis/magnus,\ngracilis, pectineus)"
   }

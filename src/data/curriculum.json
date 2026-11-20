@@ -10655,9 +10655,9 @@
       "distractors": [
         "Achterhoofdsbeen, cervicale wervels",
         "Lange kop: boven schouderkom · korte kop: processus coracoideus",
-        "Lange kop: onder schouderkom · laterale kop: bovenkant humerus",
         "Sleutelbeen, borstbeen, rectusschede",
-        "Spina scapulae"
+        "Spina scapulae",
+        "Sleutelbeen"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11358,8 +11358,7 @@
         "Buitenkant rib 5–12",
         "Crista iliaca + lig. iliolumbale",
         "Sacrum, crista iliaca, onderste lenden/borstwervels",
-        "Crista iliaca / lig. inguinale / thoracolumbale fascie",
-        "Sleutelbeen"
+        "Crista iliaca / lig. inguinale / thoracolumbale fascie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11385,8 +11384,7 @@
         "Crista iliaca / schaambeen / rectusschede",
         "Onderrand rib 10–12 / rectusschede",
         "Rib 12 / dwarsuitsteeksels L1–4",
-        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen",
-        "Boven: IT-band · Onder: bovenkant femur"
+        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11410,10 +11408,8 @@
       "answer": "Flexie romp, samendrukken organen, ademsteun",
       "distractors": [
         "Bilateraal: extensie; unilateraal: lateroflexie + rotatie",
-        "Bilateraal: flexie; unilateraal: lateroflexie + ipsilaterale rotatie",
-        "Bilateraal: samendrukken organen + ademsteun; unilateraal: ipsilaterale rotatie",
-        "Bilateraal: stabiliseert ribben bij inademing+extensie; unilateraal: lateroflexie",
-        "Heup: anteflexie + exorotatie been. Romp: extensie + lateroflexie wervelkolom bij de heup"
+        "Heup: anteflexie + exorotatie been. Romp: extensie + lateroflexie wervelkolom bij de heup",
+        "Retroflexie, verticale adductie, endorotatie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11438,9 +11434,7 @@
       "distractors": [
         "Lateroflexie andere zijde",
         "Volledige flexie wervelkolom (segmentaal)",
-        "Extensie + lateroflexie andere zijde + rotatie eigen zijde",
-        "Verticale adductie",
-        "Anteflexie heup"
+        "Extensie + lateroflexie andere zijde + rotatie eigen zijde"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11466,8 +11460,7 @@
         "Schaambeen",
         "Crista iliaca + lig. iliolumbale",
         "Sacrum, crista iliaca, onderste lenden/borstwervels",
-        "Crista iliaca / lig. inguinale / thoracolumbale fascie",
-        "Thoracale wervels 1–4"
+        "Crista iliaca / lig. inguinale / thoracolumbale fascie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11493,8 +11486,7 @@
         "Kraakbeen rib 5–7 / processus xiphoideus",
         "Onderrand rib 10–12 / rectusschede",
         "Rib 12 / dwarsuitsteeksels L1–4",
-        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen",
-        "Boven: IT-band · Onder: bovenkant femur"
+        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11546,9 +11538,7 @@
       "distractors": [
         "Volledige flexie wervelkolom (segmentaal)",
         "Extensie wervelkolom",
-        "Extensie elleboog, retroflexie bovenarm, pronatie onderarm",
-        "Anteflexie heup ÓF knie-extensie (niet beide — passieve insuff.)",
-        "Horizontale adductie in 90° anteflexie, endorotatie"
+        "Extensie elleboog, retroflexie bovenarm, pronatie onderarm"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11574,8 +11564,7 @@
         "Sacrum, crista iliaca, onderste lenden/borstwervels",
         "Crista iliaca + lig. iliolumbale",
         "Buitenkant rib 5–12",
-        "Schaambeen",
-        "Lange kop: onderkant bekken · Korte kop: midden femur"
+        "Schaambeen"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11601,8 +11590,7 @@
         "Rib 12 / dwarsuitsteeksels L1–4",
         "Kraakbeen rib 5–7 / processus xiphoideus",
         "Crista iliaca / schaambeen / rectusschede",
-        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen",
-        "Boven: IT-band · Onder: bovenkant femur"
+        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11654,9 +11642,7 @@
       "distractors": [
         "Volledige flexie wervelkolom (segmentaal)",
         "Extensie wervelkolom",
-        "Horiz./vert. abductie boven 90° in exorotatie",
-        "Horizontale abductie, retroflexie, exorotatie",
-        "Horizontale adductie in 90° anteflexie, endorotatie"
+        "Horiz./vert. abductie boven 90° in exorotatie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11682,8 +11668,8 @@
         "Bilateraal: stabiliseert ribben bij inademing+extensie; unilateraal: lateroflexie",
         "Bilateraal: flexie; unilateraal: lateroflexie + contralaterale rotatie",
         "Heup: anteflexie + exorotatie been. Romp: extensie + lateroflexie wervelkolom bij de heup",
-        "Bilateraal: extensie; unilateraal: lateroflexie + rotatie",
-        "Flexie romp, samendrukken organen, ademsteun"
+        "Bilateraal: flexie; unilateraal: lateroflexie + ipsilaterale rotatie",
+        "Bilateraal: extensie; unilateraal: lateroflexie + rotatie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11709,8 +11695,7 @@
         "Buitenkant rib 5–12",
         "Sacrum, crista iliaca, onderste lenden/borstwervels",
         "Schaambeen",
-        "Crista iliaca / lig. inguinale / thoracolumbale fascie",
-        "Spina iliaca anterior inferior"
+        "Crista iliaca / lig. inguinale / thoracolumbale fascie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11736,8 +11721,7 @@
         "Onderrand rib 10–12 / rectusschede",
         "Kraakbeen rib 5–7 / processus xiphoideus",
         "Crista iliaca / schaambeen / rectusschede",
-        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen",
-        "Kop van het kuitbeen (fibula)"
+        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11763,8 +11747,8 @@
         "Bilateraal: samendrukken organen + ademsteun; unilateraal: ipsilaterale rotatie",
         "Heup: anteflexie + exorotatie been. Romp: extensie + lateroflexie wervelkolom bij de heup",
         "Bilateraal: flexie; unilateraal: lateroflexie + contralaterale rotatie",
-        "Bilateraal: extensie; unilateraal: lateroflexie + rotatie",
-        "Flexie romp, samendrukken organen, ademsteun"
+        "Bilateraal: flexie; unilateraal: lateroflexie + ipsilaterale rotatie",
+        "Bilateraal: extensie; unilateraal: lateroflexie + rotatie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11789,9 +11773,7 @@
       "distractors": [
         "Extensie wervelkolom",
         "Volledige flexie wervelkolom (segmentaal)",
-        "Extensie + lateroflexie andere zijde + rotatie eigen zijde",
-        "Depressie, deels protractie",
-        "Flexie elleboog, anteflexie arm"
+        "Extensie + lateroflexie andere zijde + rotatie eigen zijde"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11817,8 +11799,7 @@
         "Crista iliaca / lig. inguinale / thoracolumbale fascie",
         "Crista iliaca + lig. iliolumbale",
         "Buitenkant rib 5–12",
-        "Schaambeen",
-        "Lange kop: onderkant bekken · Korte kop: midden femur"
+        "Schaambeen"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11844,8 +11825,7 @@
         "Crista iliaca / schaambeen / rectusschede",
         "Kraakbeen rib 5–7 / processus xiphoideus",
         "Onderrand rib 10–12 / rectusschede",
-        "Rib 12 / dwarsuitsteeksels L1–4",
-        "Boven: IT-band · Onder: bovenkant femur"
+        "Rib 12 / dwarsuitsteeksels L1–4"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11870,9 +11850,9 @@
       "distractors": [
         "Bilateraal: flexie; unilateraal: lateroflexie + ipsilaterale rotatie",
         "Flexie romp, samendrukken organen, ademsteun",
+        "Bilateraal: flexie; unilateraal: lateroflexie + contralaterale rotatie",
         "Bilateraal: samendrukken organen + ademsteun; unilateraal: ipsilaterale rotatie",
-        "Bilateraal: stabiliseert ribben bij inademing+extensie; unilateraal: lateroflexie",
-        "Heup: anteflexie + exorotatie been. Romp: extensie + lateroflexie wervelkolom bij de heup"
+        "Bilateraal: stabiliseert ribben bij inademing+extensie; unilateraal: lateroflexie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11897,9 +11877,7 @@
       "distractors": [
         "Extensie + lateroflexie/rotatie andere zijde",
         "Extensie wervelkolom",
-        "Horiz./vert. abductie boven 90° in exorotatie",
-        "Horizontale abductie, retroflexie, exorotatie",
-        "Elevatie, laterorotatie, protractie"
+        "Horiz./vert. abductie boven 90° in exorotatie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11923,10 +11901,8 @@
       "answer": "Heup: anteflexie + exorotatie been. Romp: extensie + lateroflexie wervelkolom bij de heup",
       "distractors": [
         "Bilateraal: stabiliseert ribben bij inademing+extensie; unilateraal: lateroflexie",
-        "Bilateraal: samendrukken organen + ademsteun; unilateraal: ipsilaterale rotatie",
-        "Bilateraal: flexie; unilateraal: lateroflexie + contralaterale rotatie",
-        "Bilateraal: extensie; unilateraal: lateroflexie + rotatie",
-        "Flexie romp, samendrukken organen, ademsteun"
+        "Flexie romp, samendrukken organen, ademsteun",
+        "Extensie elleboog (alle koppen); retroflexie + verticale adductie bovenarm (lange kop, zwak)"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -11979,8 +11955,7 @@
         "Kop van het kuitbeen (fibula)",
         "Via achillespees op hielbot",
         "Binnenkant tibia",
-        "Patellaligament",
-        "Kraakbeen rib 5–7 / processus xiphoideus"
+        "Patellaligament"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -12303,8 +12278,7 @@
         "Anteflexie heup ÓF knie-extensie (niet beide — passieve insuff.)",
         "Anteflexie heup",
         "Dorsaalflexie",
-        "Adductie",
-        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)"
+        "Adductie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -12519,8 +12493,7 @@
         "Extensie heup + flexie knie (niet beide tegelijk — passieve insufficiëntie)",
         "Dorsaalflexie",
         "Flexie knie",
-        "Adductie",
-        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)"
+        "Adductie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -12627,8 +12600,7 @@
         "Extensie heup + flexie knie (niet beide tegelijk — passieve insufficiëntie)",
         "Dorsaalflexie",
         "Flexie knie",
-        "Adductie",
-        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)"
+        "Adductie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -12883,7 +12855,7 @@
       "answer": "Dichter bij de kern van het lichaam",
       "distractors": [
         "Verder van de kern van het lichaam",
-        "Dichter bij de middenlijn van het lichaam",
+        "Verder van de middenlijn van het lichaam",
         "Aan de voorzijde van het lichaam"
       ],
       "type": "choice",
@@ -13138,8 +13110,8 @@
       "answer": "Het moment wordt groter",
       "distractors": [
         "Het moment wordt kleiner",
-        "Het moment blijft gelijk",
-        "De kracht wordt groter"
+        "De kracht wordt kleiner",
+        "Het moment blijft gelijk"
       ],
       "type": "choice",
       "source": {
@@ -13173,7 +13145,7 @@
       "distractors": [
         "Moeite om over één gewricht te verkorten",
         "Moeite om over meerdere gewrichten tegelijk te verlengen",
-        "Moeite om een spier in de middenpositie te belasten"
+        "Moeite om over één gewricht te verlengen"
       ],
       "type": "choice",
       "source": {
@@ -13411,7 +13383,7 @@
       "distractors": [
         "Minder rek op gluteus maximus",
         "Meer verkorting van gluteus maximus",
-        "Meer rek op de heupflexoren"
+        "Minder rek op de hamstrings en gluteus maximus"
       ],
       "type": "choice",
       "source": {
@@ -13461,8 +13433,8 @@
       "answer": "Knie-extensie",
       "distractors": [
         "Heup-extensie",
-        "Knie-flexie",
-        "Enkel-plantairflexie"
+        "Heup-flexie",
+        "Knie-flexie"
       ],
       "type": "choice",
       "source": {
@@ -13530,7 +13502,7 @@
       "distractors": [
         "De gastrocnemius is al verlengd over de gebogen knie",
         "De soleus is al verkort over de gebogen knie",
-        "De gastrocnemius ligt vast over de gestrekte knie"
+        "De soleus is al verlengd over de gebogen knie"
       ],
       "type": "choice",
       "source": {
@@ -13615,7 +13587,7 @@
       "distractors": [
         "De heup strekt eerst, de knieën pas daarna",
         "De heup en knieën strekken gelijktijdig",
-        "De enkels strekken eerst, de knieën pas daarna"
+        "De heup strekt eerst, de enkels pas daarna"
       ],
       "type": "choice",
       "source": {
@@ -13630,8 +13602,8 @@
       "prompt": "Welke drie punten verdelen de voetdruk?",
       "answer": "Grote teen, kleine teen en hiel",
       "distractors": [
-        "Grote teen, hiel en binnenenkel",
-        "Kleine teen, hiel en buitenenkel",
+        "Grote teen, middenvoet en binnenenkel",
+        "Kleine teen, middenvoet en buitenenkel",
         "Hiel, middenvoet en voorvoet"
       ],
       "type": "choice",
@@ -13649,7 +13621,7 @@
       "distractors": [
         "Voor een langere momentarm op de onderrug",
         "Voor een kortere momentarm op de knie",
-        "Voor een grotere kniebuiging in de bodempositie"
+        "Voor een langere momentarm op de knie"
       ],
       "type": "choice",
       "source": {
@@ -14174,9 +14146,9 @@
       "prompt": "Wat is protractie van de scapulae?",
       "answer": "De schouderbladen van elkaar af bewegen",
       "distractors": [
-        "De schouderbladen naar elkaar toe bewegen",
-        "De schouderbladen neerwaarts bewegen",
-        "De schouderbladen opwaarts bewegen"
+        "De schouderbladen naar de wervelkolom toe trekken",
+        "De schouderbladen opwaarts roteren",
+        "De schouderbladen neerwaarts roteren"
       ],
       "type": "choice",
       "source": {
@@ -14192,8 +14164,8 @@
       "answer": "Opwaarts roteren",
       "distractors": [
         "Neerwaarts roteren",
-        "Opwaarts bewegen zonder rotatie",
-        "Van elkaar af bewegen"
+        "Neerwaarts bewegen zonder rotatie",
+        "Naar elkaar toe bewegen"
       ],
       "type": "choice",
       "source": {
@@ -14209,8 +14181,8 @@
       "answer": "Neerwaarts roteren",
       "distractors": [
         "Opwaarts roteren",
-        "Neerwaarts bewegen zonder rotatie",
-        "Naar elkaar toe bewegen"
+        "Opwaarts bewegen zonder rotatie",
+        "Van elkaar af bewegen"
       ],
       "type": "choice",
       "source": {
@@ -14310,9 +14282,9 @@
       "prompt": "Wat blijft gelijk tijdens een isometrische contractie?",
       "answer": "De spierlengte, terwijl er spanning is",
       "distractors": [
-        "De spierlengte, terwijl de spanning wegvalt",
         "De spanning, terwijl de spier verlengt",
-        "De spanning, terwijl de spier verkort"
+        "De spanning, terwijl de spier verkort",
+        "De spierkracht, terwijl de spier verkort"
       ],
       "type": "choice",
       "source": {
@@ -14412,9 +14384,9 @@
       "prompt": "Welke combinatie valt in het sagittale vlak?",
       "answer": "Een lunge voor-achter en het been voorwaarts heffen",
       "distractors": [
-        "Een woodchop en romprotatie",
-        "Arm en been zijwaarts heffen",
-        "Een zijwaartse lunge en lateroflexie"
+        "Een zijwaartse lunge en het been zijwaarts heffen",
+        "Een zijwaartse stap en de arm zijwaarts heffen",
+        "Een woodchop en romprotatie"
       ],
       "type": "choice",
       "source": {
@@ -14514,9 +14486,9 @@
       "prompt": "Wat is een kinetische keten?",
       "answer": "Gewrichten en spieren die samenwerken voor één beweging",
       "distractors": [
-        "Een rij spieren die in één sessie na elkaar worden getraind",
-        "Een reeks oefeningen met dezelfde weerstandscurve",
-        "Gewrichten die vastzitten tijdens een beweging"
+        "Een reeks oefeningen die in één sessie na elkaar worden uitgevoerd",
+        "Een reeks spieren die in één sessie na elkaar worden getraind",
+        "Een reeks oefeningen met dezelfde weerstandscurve"
       ],
       "type": "choice",
       "source": {
@@ -14531,9 +14503,9 @@
       "prompt": "Welke gewrichten vormen de kinetische keten bij een squat?",
       "answer": "Enkel, knie en heup",
       "distractors": [
-        "Pols, knie en heup",
-        "Enkel, heup en schouder",
-        "Knie, heup en onderrug"
+        "Pols, knie en schouder",
+        "Pols, heup en schouder",
+        "Enkel, heup en schouder"
       ],
       "type": "choice",
       "source": {
@@ -14599,9 +14571,9 @@
       "prompt": "Wat kenmerkt een open-ketenoefening?",
       "answer": "Gewrichtsspecifiek, één segment beweegt, stabiliteit minder belangrijk",
       "distractors": [
-        "Meerdere gewrichten bewegen, stabiliteit cruciaal",
-        "Gewrichtsspecifiek, één segment beweegt, stabiliteit cruciaal",
-        "Compound, meerdere segmenten bewegen, stabiliteit minder belangrijk"
+        "Compound, meerdere segmenten bewegen, stabiliteit cruciaal",
+        "Compound, meerdere gewrichten bewegen, stabiliteit cruciaal",
+        "Meerdere segmenten bewegen, stabiliteit minder belangrijk"
       ],
       "type": "choice",
       "source": {
@@ -14634,8 +14606,8 @@
       "answer": "Meerdere segmenten gelijktijdig in een voorspelbaar patroon",
       "distractors": [
         "Eén vrij distaal segment in een los patroon",
-        "Meerdere segmenten na elkaar in een willekeurig patroon",
-        "Eén proximaal segment in een voorspelbaar patroon"
+        "Eén vrij segment in een willekeurig patroon",
+        "Eén proximaal segment in een los patroon"
       ],
       "type": "choice",
       "source": {
@@ -14684,9 +14656,9 @@
       "prompt": "Welke spieren vormen de anterior chain?",
       "answer": "Pectoralis, heupflexoren, buikspieren en quadriceps",
       "distractors": [
-        "Kuiten, hamstrings, gluteus, latissimus en erector spinae",
-        "Pectoralis, heupflexoren, buikspieren en hamstrings",
-        "Latissimus, heupflexoren, gluteus en quadriceps"
+        "Latissimus, hamstrings, gluteus en erector spinae",
+        "Kuiten, hamstrings, gluteus en trapezius",
+        "Pectoralis, hamstrings, gluteus en kuiten"
       ],
       "type": "choice",
       "source": {
@@ -14745,9 +14717,9 @@
       "prompt": "Wat is de momentarm?",
       "answer": "Afstand tussen het aangrijpingspunt van de kracht en het draaipunt",
       "distractors": [
-        "Afstand tussen het aangrijpingspunt van de kracht en de last",
-        "Afstand tussen het draaipunt en het zwaartepunt van het lichaam",
-        "Lengte van het botsegment tussen twee gewrichten"
+        "Lengte van het botsegment tussen twee gewrichten",
+        "Lengte van de spier tussen twee aanhechtingen",
+        "Afstand tussen het draaipunt en het zwaartepunt van het lichaam"
       ],
       "type": "choice",
       "source": {
@@ -14762,9 +14734,9 @@
       "prompt": "Wat vraagt een langere momentarm bij dezelfde kracht van de spieren?",
       "answer": "Meer spierkracht om te compenseren",
       "distractors": [
-        "Minder spierkracht om te compenseren",
-        "Dezelfde spierkracht om te compenseren",
-        "Meer spierlengte om te compenseren"
+        "Minder spierkracht om de last te dragen",
+        "Minder spierlengte om de last te dragen",
+        "Dezelfde spierlengte om de last te dragen"
       ],
       "type": "choice",
       "source": {
@@ -15153,9 +15125,9 @@
       "prompt": "Welke weerstandscurves combineer je om de volledige spierlengte te belasten?",
       "answer": "Oplopend en aflopend, eventueel aangevuld met bell-shaped",
       "distractors": [
-        "Drie oefeningen met dezelfde oplopende curve",
-        "Bell-shaped en isometrisch, zonder aflopende varianten",
-        "Aflopend en isometrisch, eventueel aangevuld met oplopend"
+        "Aflopend en isometrisch, eventueel aangevuld met oplopend",
+        "Bell-shaped en isometrisch, eventueel aangevuld met aflopend",
+        "Isometrisch en oplopend, eventueel aangevuld met aflopend"
       ],
       "type": "choice",
       "source": {
@@ -15272,9 +15244,9 @@
       "prompt": "Hoe hangen spiercontractie en gewrichtsbeweging samen?",
       "answer": "De spier is de motor en de gewrichtsbeweging het resultaat",
       "distractors": [
-        "De gewrichtsbeweging is de motor en de spiercontractie het resultaat",
-        "De spier is de motor en de pees het resultaat",
-        "De spiercontractie en de gewrichtsbeweging staan los van elkaar"
+        "De pees is de motor en de spier het resultaat",
+        "De pees is de rem en de spier het resultaat",
+        "De gewrichtsbeweging is de motor en de spier het resultaat"
       ],
       "type": "choice",
       "source": {
@@ -15371,7 +15343,7 @@
       "answer": "Beide werken; daag de spier ook in de verlengde positie uit",
       "distractors": [
         "Full ROM werkt beter; partial ROM is overbodig",
-        "Beide werken; daag de spier vooral in de verkorte positie uit",
+        "Full ROM werkt beter; vermijd belasting in de verkorte positie",
         "Partial ROM werkt beter; vermijd belasting in de verlengde positie"
       ],
       "type": "choice",
@@ -15551,8 +15523,8 @@
       "answer": "De borst kan eerder limiteren dan stabiliteit of balans",
       "distractors": [
         "De stabiliteit kan eerder limiteren dan de borst, omdat de machine meebeweegt",
-        "De grip kan eerder limiteren dan de borst of de stabiliteit",
-        "De voorste deltoideus limiteert eerder dan de borst of de balans"
+        "De stabiliteit kan eerder limiteren dan de borst of de triceps",
+        "De grip kan eerder limiteren dan de borst of de stabiliteit"
       ],
       "type": "choice",
       "source": {
@@ -15624,7 +15596,7 @@
       "distractors": [
         "Staand een paal vasthouden beperkt momentum",
         "Zittend met borststeun maakt stabiliteit de beperkende factor",
-        "Zittend met borststeun vergroot de weerstand halverwege de beweging"
+        "Staand een paal vasthouden maakt balans juist de beperkende factor"
       ],
       "type": "choice",
       "source": {
@@ -15731,7 +15703,7 @@
       "answer": "Zittend met borststeun beperkt momentum",
       "distractors": [
         "Staand een paal vasthouden voorkomt dat stabiliteit beperkt",
-        "Met kabel meer spanning gedurende de hele beweging",
+        "Staand met kabel meer spanning gedurende de hele beweging",
         "De borststeun maakt balans de beperkende factor"
       ],
       "type": "choice",
@@ -15767,8 +15739,8 @@
       "answer": "Staand een paal vasthouden voorkomt dat stabiliteit beperkt",
       "distractors": [
         "Zittend met borststeun beperkt momentum",
-        "Staand een paal vasthouden maakt balans juist de beperkende factor",
-        "Staand zonder steun vergroot de weerstand in de verkorte positie"
+        "Zittend met borststeun maakt balans de beperkende factor",
+        "Staand zonder paal vergroot de weerstand in de verkorte positie"
       ],
       "type": "choice",
       "source": {
@@ -15802,8 +15774,8 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij lat pulldown?",
       "answer": "Laagdrempelig, omdat lichaamsgewicht niet de beperkende factor is",
       "distractors": [
-        "Laagdrempelig, omdat de gripbreedte de lat-activatie sterk bepaalt",
         "Isolatie van de lats zonder de biceps als limiterende factor",
+        "Accent op lats zonder te veel trapezius",
         "Veel stabiliteit door de bovenarm te fixeren in een kussen"
       ],
       "type": "choice",
@@ -15874,9 +15846,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij lat prayer?",
       "answer": "Isolatie van de lats zonder de biceps als limiterende factor",
       "distractors": [
-        "Isolatie van de achterste deltoideus zonder de biceps als limiterende factor",
-        "Isolatie van de lats met de biceps als belangrijkste synergist",
-        "Isolatie van de middelste trapezius zonder de lats als limiterende factor"
+        "Laagdrempelig, omdat lichaamsgewicht niet de beperkende factor is",
+        "Accent op lats zonder te veel trapezius",
+        "Veel stabiliteit door de bovenarm te fixeren in een kussen"
       ],
       "type": "choice",
       "source": {
@@ -16038,8 +16010,8 @@
       "answer": "Met kabel meer spanning gedurende de hele beweging",
       "distractors": [
         "Met barbell meer spanning gedurende de hele beweging",
-        "Met dumbbell de hoogste weerstand in de verlengde positie",
-        "Met kabel de bovenarm fixeren voor extra stabiliteit"
+        "Met barbell de bovenarm fixeren voor extra stabiliteit",
+        "Met dumbbell de hoogste weerstand in de verlengde positie"
       ],
       "type": "choice",
       "source": {
@@ -16200,9 +16172,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij single arm cross tricep extension?",
       "answer": "Kruislings pakken lijnt de weerstand uit met de bovenarm en wordt gewrichtsvriendelijker genoemd",
       "distractors": [
-        "Kruislings pakken lijnt de weerstand uit met de onderarm en geeft meer spanning in de verkorte positie",
-        "Kruislings pakken geeft meer bewegingsuitslag dan een barbell en wordt gewrichtsvriendelijker genoemd",
-        "Kruislings pakken geeft veel stabiliteit door de bovenarm in een kussen te fixeren"
+        "Kruislings pakken lijnt de weerstand uit met de bovenarm en geeft meer bewegingsuitslag dan een barbell",
+        "Kruislings pakken lijnt de weerstand uit met de onderarm en wordt gewrichtsvriendelijker genoemd",
+        "Kruislings pakken lijnt de weerstand uit met de onderarm en geeft meer bewegingsuitslag dan een barbell"
       ],
       "type": "choice",
       "source": {
@@ -16236,9 +16208,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij Kantana extension?",
       "answer": "Uitlijnen met de bovenarm wordt gewrichtsvriendelijker genoemd",
       "distractors": [
+        "Uitlijnen met de bovenarm benadrukt de verkorte positie van de lange kop",
         "Uitlijnen met de onderarm wordt gewrichtsvriendelijker genoemd",
-        "Overhead starten benadrukt de verkorte positie van de lange kop",
-        "Uitlijnen met de bovenarm zorgt voor veel stabiliteit in een kussen"
+        "Uitlijnen met de onderarm benadrukt de verkorte positie van de lange kop"
       ],
       "type": "choice",
       "source": {
@@ -16272,9 +16244,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij skull crusher met DB of BB?",
       "answer": "Een variant om de lange kop zonder kabels te trainen",
       "distractors": [
-        "Een variant om de lange kop met meer spanning in de verkorte positie te trainen",
-        "Een variant om de brachialis zonder kabels te trainen",
-        "Een variant om de lange kop met minder axiale druk te trainen"
+        "Een variant met kabel voor meer spanning gedurende de hele beweging",
+        "Een variant met de weerstand uitgelijnd met de bovenarm, gewrichtsvriendelijker genoemd",
+        "Een variant met de bovenarm in een kussen gefixeerd voor veel stabiliteit"
       ],
       "type": "choice",
       "source": {
@@ -16289,11 +16261,11 @@
       "prompt": "Welke spieren en bewegingen horen bij dead bug?",
       "answer": "Rectus, obliques en transversus: heupanteflexie/retroflexie, knieflexie/extensie en schouderanteflexie/retroflexie, neutrale wervelkolom",
       "distractors": [
+        "Quadratus lumborum en obliques: isometrisch met steunende schouder in abductie, bij march heupanteflexie/retroflexie, geen lateroflexie van de rug",
+        "Obliques en transversus: horizontale schouderadductie en abductie met het touw langs het lichaam, zonder romprotatie",
         "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Erector spinae: extensie",
-        "Onderste trapezius: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire retractie en depressie",
-        "Latissimus: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire mediorotatie en depressie",
-        "Onderste borst (pars abdominalis): horizontale schouderadductie richting heup en elleboogextensie"
+        "Obliques en rectus abdominis: diagonale flexie",
+        "Externe en interne obliques: geladen rotatie"
       ],
       "type": "choice",
       "source": {
@@ -16310,7 +16282,7 @@
       "distractors": [
         "Voorkom een heup die te hoog of laag staat ten opzichte van de rechte lijn naar de hak",
         "Voorkom verlies van bovenrugstabilisatie tijdens het touwtrekken",
-        "Voorkom een bolle bovenrug en een romp die naar één kant wegdraait"
+        "Voorkom dat de knie naar binnen valt"
       ],
       "type": "choice",
       "source": {
@@ -16342,11 +16314,11 @@
       "prompt": "Welke spieren en bewegingen horen bij bird dog?",
       "answer": "Rectus, obliques en transversus, met erector als stabilisator: been naar achteren, knie gestrekt, arm naar voren en neutrale rug",
       "distractors": [
-        "Onderste trapezius: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire retractie en depressie",
-        "Latissimus: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire mediorotatie en depressie",
-        "Onderste borst (pars abdominalis): horizontale schouderadductie richting heup en elleboogextensie",
-        "Bovenste borst (pars clavicularis): schouderanteflexie en horizontale adductie, elleboogextensie",
-        "Gluteus maximus: heupretroflexie en anteflexie van het voorste been met relatief stabiele knie"
+        "Obliques en transversus: horizontale schouderadductie en abductie met het touw langs het lichaam, zonder romprotatie",
+        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
+        "Quadratus lumborum en obliques: isometrisch met steunende schouder in abductie, bij march heupanteflexie/retroflexie, geen lateroflexie van de rug",
+        "Obliques en rectus abdominis: diagonale flexie",
+        "Externe en interne obliques: geladen rotatie"
       ],
       "type": "choice",
       "source": {
@@ -16363,7 +16335,7 @@
       "distractors": [
         "Voorkom een heup die te hoog of laag staat ten opzichte van de rechte lijn naar de hak",
         "Voorkom verlies van bovenrugstabilisatie tijdens het touwtrekken",
-        "Voorkom een te grote knie-extensie bij het terugbrengen van het been"
+        "Voorkom een schouderdump waarbij de schouderkop te ver naar voren glijdt"
       ],
       "type": "choice",
       "source": {
@@ -16395,11 +16367,11 @@
       "prompt": "Welke spieren en bewegingen horen bij plank?",
       "answer": "Rectus, obliques en transversus: isometrisch, lichte schouderanteflexie, heup gestrekt en neutrale rug zonder gewrichtsbeweging",
       "distractors": [
+        "Obliques en transversus: horizontale schouderadductie en abductie met het touw langs het lichaam, zonder romprotatie",
         "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Erector spinae: extensie",
-        "Onderste trapezius: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire retractie en depressie",
-        "Latissimus: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire mediorotatie en depressie",
-        "Onderste borst (pars abdominalis): horizontale schouderadductie richting heup en elleboogextensie"
+        "Quadratus lumborum en obliques: isometrisch met steunende schouder in abductie, bij march heupanteflexie/retroflexie, geen lateroflexie van de rug",
+        "Obliques en rectus abdominis: diagonale flexie",
+        "Externe en interne obliques: geladen rotatie"
       ],
       "type": "choice",
       "source": {
@@ -16415,8 +16387,8 @@
       "answer": "Voorkom een heup die te hoog of laag staat ten opzichte van de rechte lijn naar de hak",
       "distractors": [
         "Voorkom verlies van bovenrugstabilisatie tijdens het touwtrekken",
-        "Voorkom schouders die naar achteren trekken en afwijken van de streklijn",
-        "Voorkom compensatie vanuit heup of schouder bij het wisselen van been"
+        "Voorkom lateroflexie van de romp",
+        "Voorkom dat de knie naar binnen valt"
       ],
       "type": "choice",
       "source": {
@@ -16450,9 +16422,9 @@
       "distractors": [
         "Obliques en transversus: horizontale schouderadductie en abductie met het touw langs het lichaam, zonder romprotatie",
         "Rectus, obliques en transversus: isometrisch, lichte schouderanteflexie, heup gestrekt en neutrale rug zonder gewrichtsbeweging",
+        "Rectus, obliques en transversus, met erector als stabilisator: been naar achteren, knie gestrekt, arm naar voren en neutrale rug",
         "Quadratus lumborum en obliques: isometrisch met steunende schouder in abductie, bij march heupanteflexie/retroflexie, geen lateroflexie van de rug",
-        "Obliques en rectus abdominis: diagonale flexie",
-        "Externe en interne obliques: geladen rotatie"
+        "Obliques en rectus abdominis: diagonale flexie"
       ],
       "type": "choice",
       "source": {
@@ -16469,7 +16441,7 @@
       "distractors": [
         "Voorkom een heup die te hoog of laag staat",
         "Voorkom verlies van bovenrugstabilisatie",
-        "Voorkom schouders die naar achteren trekken"
+        "Voorkom dat de knie naar binnen valt"
       ],
       "type": "choice",
       "source": {
@@ -16502,10 +16474,10 @@
       "answer": "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom",
       "distractors": [
         "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Rectus abdominis: geladen rompflexie",
-        "Erector spinae: extensie",
-        "Onderste borst (pars abdominalis): horizontale schouderadductie richting heup en elleboogextensie",
-        "Bovenste borst (pars clavicularis): schouderanteflexie en horizontale adductie, elleboogextensie"
+        "Rectus, obliques en transversus: isometrisch, lichte schouderanteflexie, heup gestrekt en neutrale rug zonder gewrichtsbeweging",
+        "Rectus, obliques en transversus, met erector als stabilisator: been naar achteren, knie gestrekt, arm naar voren en neutrale rug",
+        "Quadratus lumborum en obliques: isometrisch met steunende schouder in abductie, bij march heupanteflexie/retroflexie, geen lateroflexie van de rug",
+        "Externe en interne obliques: geladen rotatie"
       ],
       "type": "choice",
       "source": {
@@ -16555,10 +16527,10 @@
       "answer": "Obliques en transversus: horizontale schouderadductie en abductie met het touw langs het lichaam, zonder romprotatie",
       "distractors": [
         "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Rectus abdominis: geladen rompflexie",
-        "Erector spinae: extensie",
-        "Onderste trapezius: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire retractie en depressie",
-        "Latissimus: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire mediorotatie en depressie"
+        "Rectus, obliques en transversus: isometrisch, lichte schouderanteflexie, heup gestrekt en neutrale rug zonder gewrichtsbeweging",
+        "Rectus, obliques en transversus, met erector als stabilisator: been naar achteren, knie gestrekt, arm naar voren en neutrale rug",
+        "Quadratus lumborum en obliques: isometrisch met steunende schouder in abductie, bij march heupanteflexie/retroflexie, geen lateroflexie van de rug",
+        "Externe en interne obliques: geladen rotatie"
       ],
       "type": "choice",
       "source": {
@@ -16574,8 +16546,8 @@
       "answer": "Voorkom verlies van bovenrugstabilisatie tijdens het touwtrekken",
       "distractors": [
         "Voorkom een heup die te hoog of laag staat ten opzichte van de rechte lijn naar de hak",
-        "Voorkom verlies van heupspanning tijdens het strekken",
-        "Voorkom verlies van balans tijdens het stappen met de kettlebell"
+        "Voorkom verlies van 360°-rompspanning tijdens het strekken",
+        "Voorkom dat de knie naar binnen valt"
       ],
       "type": "choice",
       "source": {
@@ -16607,11 +16579,11 @@
       "prompt": "Welke spieren en bewegingen horen bij side plank of KB march & walk?",
       "answer": "Quadratus lumborum en obliques: isometrisch met steunende schouder in abductie, bij march heupanteflexie/retroflexie, geen lateroflexie van de rug",
       "distractors": [
+        "Rectus, obliques en transversus: heupanteflexie/retroflexie, knieflexie/extensie en schouderanteflexie/retroflexie, neutrale wervelkolom",
+        "Rectus, obliques en transversus, met erector als stabilisator: been naar achteren, knie gestrekt, arm naar voren en neutrale rug",
+        "Obliques en transversus: horizontale schouderadductie en abductie met het touw langs het lichaam, zonder romprotatie",
         "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Rectus abdominis: geladen rompflexie",
-        "Erector spinae: extensie",
-        "Onderste trapezius: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire retractie en depressie",
-        "Latissimus: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire mediorotatie en depressie"
+        "Obliques en rectus abdominis: diagonale flexie"
       ],
       "type": "choice",
       "source": {
@@ -16662,9 +16634,9 @@
       "distractors": [
         "Quadratus lumborum en obliques: lateroflexie",
         "Externe en interne obliques: geladen rotatie",
+        "Obliques en rectus abdominis: diagonale flexie",
         "Erector spinae: extensie",
-        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden"
+        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom"
       ],
       "type": "choice",
       "source": {
@@ -16679,9 +16651,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij cable crunch?",
       "answer": "Krul de wervelkolom op en breng ribben naar bekken, geschikt voor progressive overload",
       "distractors": [
+        "Krul de wervelkolom op en breng ribben naar bekken, een langere momentarm maakt de oefening zwaarder",
         "Houd de wervelkolom lang en buig vanuit de heupen, geschikt voor progressive overload",
-        "Kantel het bekken en til met de buikspieren, een langere momentarm maakt de oefening zwaarder",
-        "Roteer de romp en breng de ribben naar de heup, geschikt voor progressive overload"
+        "Roteer de romp en breng de ribben naar de heup, een langere momentarm maakt de oefening zwaarder"
       ],
       "type": "choice",
       "source": {
@@ -16698,9 +16670,9 @@
       "distractors": [
         "Quadratus lumborum en obliques: lateroflexie",
         "Externe en interne obliques: geladen rotatie",
+        "Obliques en rectus abdominis: diagonale flexie",
         "Erector spinae: extensie",
-        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden"
+        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom"
       ],
       "type": "choice",
       "source": {
@@ -16751,9 +16723,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij hanging leg raise?",
       "answer": "Kantel het bekken en til met de buikspieren, een langere momentarm maakt de oefening zwaarder",
       "distractors": [
-        "Houd het bekken neutraal en til met de heupbuigers, een langere momentarm maakt de oefening zwaarder",
         "Kantel het bekken en til met de buikspieren, een kortere momentarm maakt de oefening zwaarder",
-        "Zwaai met de benen voor momentum, een langere momentarm maakt de oefening zwaarder"
+        "Houd het bekken neutraal en til met de heupbuigers, een langere momentarm maakt de oefening zwaarder",
+        "Zwaai met de benen voor momentum, een kortere momentarm maakt de oefening zwaarder"
       ],
       "type": "choice",
       "source": {
@@ -16768,11 +16740,11 @@
       "prompt": "Welke spieren en bewegingen horen bij weighted side bend?",
       "answer": "Quadratus lumborum en obliques: lateroflexie",
       "distractors": [
+        "Externe en interne obliques: geladen rotatie",
+        "Obliques en rectus abdominis: diagonale flexie",
         "Rectus abdominis: geladen rompflexie",
         "Erector spinae: extensie",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Biceps femoris en semi-spieren: knieflexie",
-        "Middelste deltoideus: verticale schouderabductie"
+        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom"
       ],
       "type": "choice",
       "source": {
@@ -16804,11 +16776,11 @@
       "prompt": "Welke spieren en bewegingen horen bij side plank crunch?",
       "answer": "Quadratus lumborum en obliques: lateroflexie",
       "distractors": [
+        "Externe en interne obliques: geladen rotatie",
+        "Obliques en rectus abdominis: diagonale flexie",
         "Rectus abdominis: geladen rompflexie",
         "Erector spinae: extensie",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Biceps femoris en semi-spieren: knieflexie",
-        "Middelste deltoideus: verticale schouderabductie"
+        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom"
       ],
       "type": "choice",
       "source": {
@@ -16860,7 +16832,7 @@
       "answer": "Stop bij neutraal en vermijd hyperextensie",
       "distractors": [
         "Ga door tot een lichte hyperextensie voor extra spanning",
-        "Stop bij neutraal en laat het bekken meekantelen",
+        "Ga door tot een lichte hyperextensie en zwaai het gewicht omhoog",
         "Beweeg segmentaal en rond de rug bewust af"
       ],
       "type": "choice",
@@ -16933,7 +16905,7 @@
       "distractors": [
         "Beweeg als één blok vanuit de heup, met licht gewicht en geleidelijke opbouw",
         "Beweeg segmentaal en gecontroleerd, met zwaar gewicht en een snelle opbouw",
-        "Beweeg segmentaal, met licht gewicht, en stop bij neutraal zonder verder te buigen"
+        "Beweeg als één blok vanuit de heup, met zwaar gewicht en een snelle opbouw"
       ],
       "type": "choice",
       "source": {
@@ -16948,11 +16920,11 @@
       "prompt": "Welke spieren en bewegingen horen bij cable woodchop?",
       "answer": "Externe en interne obliques: geladen rotatie",
       "distractors": [
+        "Quadratus lumborum en obliques: lateroflexie",
+        "Obliques en rectus abdominis: diagonale flexie",
         "Rectus abdominis: geladen rompflexie",
         "Erector spinae: extensie",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Biceps femoris en semi-spieren: knieflexie",
-        "Middelste deltoideus: verticale schouderabductie"
+        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom"
       ],
       "type": "choice",
       "source": {
@@ -16984,11 +16956,11 @@
       "prompt": "Welke spieren en bewegingen horen bij landmine rotation?",
       "answer": "Externe en interne obliques: geladen rotatie",
       "distractors": [
+        "Quadratus lumborum en obliques: lateroflexie",
+        "Obliques en rectus abdominis: diagonale flexie",
         "Rectus abdominis: geladen rompflexie",
         "Erector spinae: extensie",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Biceps femoris en semi-spieren: knieflexie",
-        "Middelste deltoideus: verticale schouderabductie"
+        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom"
       ],
       "type": "choice",
       "source": {
@@ -17003,9 +16975,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij landmine rotation?",
       "answer": "Roteer vanuit de romp en houd de armen relatief gestrekt",
       "distractors": [
-        "Roteer vanuit de heup en klap de armen sterk in",
+        "Roteer vanuit de romp en buig de ellebogen sterk",
         "Roteer vanuit de schouders en houd de armen relatief gestrekt",
-        "Houd de romp stabiel en draai vanuit de armen met gebogen ellebogen"
+        "Roteer vanuit de heupen en buig de ellebogen sterk"
       ],
       "type": "choice",
       "source": {
@@ -17020,11 +16992,11 @@
       "prompt": "Welke spieren en bewegingen horen bij weighted Russian twist?",
       "answer": "Externe en interne obliques: geladen rotatie",
       "distractors": [
+        "Quadratus lumborum en obliques: lateroflexie",
+        "Obliques en rectus abdominis: diagonale flexie",
         "Rectus abdominis: geladen rompflexie",
         "Erector spinae: extensie",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Biceps femoris en semi-spieren: knieflexie",
-        "Middelste deltoideus: verticale schouderabductie"
+        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom"
       ],
       "type": "choice",
       "source": {
@@ -17040,8 +17012,8 @@
       "answer": "Roteer de romp met een stabiele wervelkolom",
       "distractors": [
         "Roteer de romp met een afgeronde wervelkolom",
-        "Roteer de armen met een stabiele romp",
-        "Roteer de romp en buig de wervelkolom actief mee"
+        "Roteer de armen met een stabiele wervelkolom",
+        "Roteer de armen met een afgeronde wervelkolom"
       ],
       "type": "choice",
       "source": {
@@ -17056,11 +17028,11 @@
       "prompt": "Welke spieren en bewegingen horen bij cable high-to-low chop?",
       "answer": "Obliques en rectus abdominis: diagonale flexie",
       "distractors": [
+        "Quadratus lumborum en obliques: lateroflexie",
+        "Externe en interne obliques: geladen rotatie",
+        "Rectus abdominis: geladen rompflexie",
         "Erector spinae: extensie",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Biceps femoris en semi-spieren: heupretroflexie",
-        "Middelste deltoideus: verticale schouderabductie",
-        "Latissimus: schouderretroflexie met gestrekte elleboog"
+        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden"
       ],
       "type": "choice",
       "source": {
@@ -17221,9 +17193,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij hand supported Bulgarian split squat met heupaccent?",
       "answer": "Unilaterale belasting met veel mechanische spanning in de verlengde positie",
       "distractors": [
+        "Unilaterale belasting met vooral spanning in de verkorte positie",
         "Bilaterale belasting met veel mechanische spanning in de verlengde positie",
-        "Unilaterale belasting met veel axiale druk op de wervelkolom",
-        "Unilaterale belasting met vooral spanning in de verkorte positie"
+        "Bilaterale belasting met veel axiale druk op de wervelkolom"
       ],
       "type": "choice",
       "source": {
@@ -17259,7 +17231,7 @@
       "distractors": [
         "Isoleert de gluteus medius bij een gebogen heup",
         "Isoleert de gluteus maximus bij een gestrekte heup",
-        "Isoleert de adductoren bij een gestrekte heup"
+        "Isoleert de adductoren bij een gebogen heup"
       ],
       "type": "choice",
       "source": {
@@ -17294,7 +17266,7 @@
       "answer": "Veel machinestabiliteit om dicht bij spierfalen te trainen",
       "distractors": [
         "Isolatie van de quads met een stilstaande heup",
-        "Weinig machinestabiliteit, zodat de romp de balans moet bewaren",
+        "Weinig stabiliteit, zodat de romp de balans moet bewaren",
         "Unilaterale belasting met veel mechanische spanning in de verlengde positie"
       ],
       "type": "choice",
@@ -17367,7 +17339,7 @@
       "distractors": [
         "Veel stabiliteit met extra axiale druk op de wervelkolom",
         "Minder stabiliteit, maar zonder axiale druk op de wervelkolom",
-        "Veel stabiliteit, maar de grip beperkt de set"
+        "Minder stabiliteit en extra axiale druk op de wervelkolom"
       ],
       "type": "choice",
       "source": {
@@ -17401,9 +17373,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij hand supported split squat-varianten?",
       "answer": "Meer stabiliteit dan een reguliere split squat, om dichter bij spierfalen te komen",
       "distractors": [
-        "Minder stabiliteit dan een reguliere split squat, om meer balans te trainen",
-        "Meer stabiliteit dan een leg press, om dichter bij spierfalen te komen",
-        "Meer axiale druk dan een reguliere split squat, om dichter bij spierfalen te komen"
+        "Meer stabiliteit dan een reguliere split squat, om meer balans te trainen",
+        "Minder stabiliteit dan een reguliere split squat, om dichter bij spierfalen te komen",
+        "Minder stabiliteit dan een reguliere split squat, om meer balans te trainen"
       ],
       "type": "choice",
       "source": {
@@ -17473,8 +17445,8 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij RDL met hamstring-focus?",
       "answer": "Makkelijk te overloaden met veel spanning in de verlengde positie",
       "distractors": [
+        "Grotere bewegingsuitslag dan bij een barbell",
         "Hogere herhalingen mogelijk zonder beperking door bovenrugstabiliteit of grip",
-        "Isolatie in de verlengde positie",
         "Veel stabiliteit zonder axiale druk op de wervelkolom"
       ],
       "type": "choice",
@@ -17546,8 +17518,8 @@
       "answer": "Isolatie in de verlengde positie",
       "distractors": [
         "Isolatie in de verkorte positie",
-        "Isolatie in de middenpositie",
-        "Isolatie van de quads in de verlengde positie"
+        "Isolatie van de quads in de verlengde positie",
+        "Isolatie van de quads in de verkorte positie"
       ],
       "type": "choice",
       "source": {
@@ -17582,8 +17554,8 @@
       "answer": "Isolatie in de verkorte positie",
       "distractors": [
         "Isolatie in de verlengde positie",
-        "Isolatie in de middenpositie",
-        "Isolatie van de glutes in de verkorte positie"
+        "Isolatie van de glutes in de verkorte positie",
+        "Isolatie van de glutes in de verlengde positie"
       ],
       "type": "choice",
       "source": {
@@ -17601,8 +17573,7 @@
         "Gluteus maximus: geïsoleerde heupretroflexie, been naar achteren",
         "Rectus femoris en vasti: knie-extensie met stilstaande heup",
         "Biceps femoris en semi-spieren: heupanteflexie en retroflexie als hinge",
-        "Gluteus medius: heupabductie",
-        "Pectoralis major: horizontale schouderadductie en elleboogextensie"
+        "Gluteus medius: heupabductie"
       ],
       "type": "choice",
       "source": {
@@ -17637,8 +17608,7 @@
         "Gluteus maximus: geïsoleerde heupretroflexie, been naar achteren",
         "Rectus femoris en vasti: knie-extensie met stilstaande heup",
         "Biceps femoris en semi-spieren: heupanteflexie en retroflexie als hinge",
-        "Gluteus medius: heupabductie",
-        "Pectoralis major: horizontale schouderadductie en elleboogextensie"
+        "Gluteus medius: heupabductie"
       ],
       "type": "choice",
       "source": {
@@ -17673,8 +17643,7 @@
         "Gluteus maximus: geïsoleerde heupretroflexie, been naar achteren",
         "Rectus femoris en vasti: knie-extensie met stilstaande heup",
         "Biceps femoris en semi-spieren: heupanteflexie en retroflexie als hinge",
-        "Gluteus medius: heupabductie",
-        "Pectoralis major: horizontale schouderadductie en elleboogextensie"
+        "Gluteus medius: heupabductie"
       ],
       "type": "choice",
       "source": {
@@ -17709,8 +17678,7 @@
         "Gluteus maximus: geïsoleerde heupretroflexie, been naar achteren",
         "Rectus femoris en vasti: knie-extensie met stilstaande heup",
         "Biceps femoris en semi-spieren: heupanteflexie en retroflexie als hinge",
-        "Gluteus medius: heupabductie",
-        "Pectoralis major: horizontale schouderadductie en elleboogextensie"
+        "Gluteus medius: heupabductie"
       ],
       "type": "choice",
       "source": {
@@ -17727,7 +17695,7 @@
       "distractors": [
         "Gewicht op de heupen voorkomt een gripbeperking, maar vergroot de axiale druk",
         "Gewicht in de handen voorkomt een gripbeperking en axiale druk",
-        "Gewicht op de schouders voorkomt een gripbeperking en axiale druk"
+        "Gewicht op de schouders voorkomt een gripbeperking, maar vergroot de axiale druk"
       ],
       "type": "choice",
       "source": {
@@ -17777,8 +17745,8 @@
       "answer": "Meer voorste-deltoideusactivatie en iets minder borstactivatie",
       "distractors": [
         "Meer voorste-deltoideusactivatie en iets meer borstactivatie",
-        "Minder voorste-deltoideusactivatie en iets meer bovenste borstactivatie",
-        "Meer middelste-deltoideusactivatie en iets minder borstactivatie"
+        "Minder voorste-deltoideusactivatie en iets minder borstactivatie",
+        "Minder voorste-deltoideusactivatie en iets meer borstactivatie"
       ],
       "type": "choice",
       "source": {
@@ -17844,9 +17812,9 @@
       "prompt": "Wat zijn de functies van teres minor?",
       "answer": "Exorotatie, verticale adductie en stabilisatie",
       "distractors": [
-        "Exorotatie, verticale abductie en stabilisatie",
-        "Endorotatie, verticale adductie en stabilisatie",
-        "Exorotatie, horizontale adductie en stabilisatie"
+        "Exorotatie, verticale abductie en retroflexie",
+        "Endorotatie, verticale adductie en retroflexie",
+        "Endorotatie, verticale abductie en stabilisatie"
       ],
       "type": "choice",
       "source": {
@@ -17878,9 +17846,9 @@
       "prompt": "Wat zijn de functies van teres major?",
       "answer": "Retroflexie, verticale adductie en endorotatie",
       "distractors": [
-        "Retroflexie, verticale adductie en exorotatie",
-        "Anteflexie, verticale adductie en endorotatie",
-        "Retroflexie, verticale abductie en endorotatie"
+        "Retroflexie, verticale abductie en exorotatie",
+        "Anteflexie, verticale adductie en exorotatie",
+        "Anteflexie, verticale abductie en endorotatie"
       ],
       "type": "choice",
       "source": {
@@ -18014,9 +17982,9 @@
       "prompt": "Wat zijn de vier bewegingsrichtingen voor core-training?",
       "answer": "Extensie, flexie, rotatie en lateroflexie",
       "distractors": [
-        "Extensie, flexie, rotatie en abductie",
-        "Extensie, flexie, lateroflexie en elevatie",
-        "Flexie, rotatie, lateroflexie en anteflexie"
+        "Extensie, rotatie, abductie en elevatie",
+        "Flexie, anteflexie, abductie en retractie",
+        "Lateroflexie, anteflexie, elevatie en retractie"
       ],
       "type": "choice",
       "source": {
@@ -18031,9 +17999,9 @@
       "prompt": "Hoe bouw je core-training op?",
       "answer": "Eerst statische anti-core als basis, daarna geladen dynamische hypertrofie met spanning, volume en progressive overload",
       "distractors": [
-        "Eerst geladen dynamische hypertrofie, daarna statische anti-core als aanvulling met spanning, volume en progressive overload",
         "Eerst statische anti-core als basis, daarna ongeladen dynamische bewegingen zonder progressive overload",
-        "Eerst mobiliteit van de wervelkolom als basis, daarna geladen dynamische hypertrofie met spanning, volume en progressive overload"
+        "Eerst mobiliteit van de wervelkolom als basis, daarna geladen dynamische hypertrofie met spanning, volume en progressive overload",
+        "Eerst geladen dynamische hypertrofie als basis, daarna statische anti-core met spanning, volume en progressive overload"
       ],
       "type": "choice",
       "source": {
@@ -18048,9 +18016,9 @@
       "prompt": "Wanneer komen de obliques het sterkst tot uiting, en wat vraagt flexietraining?",
       "answer": "Rotatie en lateroflexie onder weerstand, bij flexie moet je ze actief aansturen",
       "distractors": [
-        "Flexie en extensie onder weerstand, bij rotatie moet je ze actief aansturen",
         "Rotatie en lateroflexie onder weerstand, bij flexie doen ze automatisch het meeste werk",
-        "Flexie en lateroflexie onder weerstand, bij rotatie moeten ze juist ontspannen blijven"
+        "Flexie en extensie onder weerstand, bij flexie moet je ze actief aansturen",
+        "Flexie en lateroflexie onder weerstand, bij rotatie moet je ze actief aansturen"
       ],
       "type": "choice",
       "source": {
@@ -18066,8 +18034,8 @@
       "answer": "Een voldoende laag vetpercentage, core-training geeft geen lokale vetreductie",
       "distractors": [
         "Een voldoende laag vetpercentage, core-training versnelt de lokale vetreductie",
-        "Een voldoende hoge trainingsfrequentie, core-training geeft lokale vetreductie",
-        "Voldoende dikke buikspieren, core-training geeft geen lokale vetreductie"
+        "Voldoende dikke buikspieren, core-training geeft geen lokale vetreductie",
+        "Een voldoende hoge trainingsfrequentie, core-training versnelt de lokale vetreductie"
       ],
       "type": "choice",
       "source": {
@@ -18082,9 +18050,9 @@
       "prompt": "Welke vier onderdelen vormen de inner core unit?",
       "answer": "Diafragma, bekkenbodem, transversus abdominis en multifidus",
       "distractors": [
-        "Diafragma, bekkenbodem, rectus abdominis en multifidus",
-        "Diafragma, bekkenbodem, transversus abdominis en erector spinae",
-        "Diafragma, quadratus lumborum, transversus abdominis en multifidus"
+        "Diafragma, bekkenbodem, rectus abdominis en erector spinae",
+        "Obliques, quadratus lumborum, transversus abdominis en erector spinae",
+        "Rectus abdominis, quadratus lumborum, iliopsoas en multifidus"
       ],
       "type": "choice",
       "source": {
@@ -18116,9 +18084,9 @@
       "prompt": "Welke spieren vormen de outer core unit?",
       "answer": "Rectus abdominis, obliques, erector spinae, glutes en latissimus dorsi",
       "distractors": [
-        "Rectus abdominis, obliques, erector spinae, glutes en trapezius",
-        "Rectus abdominis, obliques, transversus abdominis, glutes en latissimus dorsi",
-        "Rectus abdominis, obliques, erector spinae, hamstrings en latissimus dorsi"
+        "Rectus abdominis, obliques, transversus abdominis, multifidus en hamstrings",
+        "Multifidus, erector spinae, glutes, hamstrings en trapezius",
+        "Transversus abdominis, multifidus, hamstrings, trapezius en latissimus dorsi"
       ],
       "type": "choice",
       "source": {
@@ -18134,8 +18102,8 @@
       "answer": "Horizontale 360°-ademhaling verhoogt buikdruk, bij zware compounds wordt de Valsalva-manoeuvre genoemd",
       "distractors": [
         "Verticale ademhaling verhoogt buikdruk, bij zware compounds wordt de Valsalva-manoeuvre genoemd",
-        "Horizontale 360°-ademhaling verlaagt de buikdruk, bij zware compounds wordt de Valsalva-manoeuvre genoemd",
-        "Horizontale 360°-ademhaling verhoogt buikdruk, bij zware compounds wordt de Valsalva-manoeuvre afgeraden"
+        "Horizontale 360°-ademhaling verhoogt buikdruk, bij zware compounds wordt een snelle borstademhaling genoemd",
+        "Verticale ademhaling verlaagt de buikdruk, bij zware compounds wordt een snelle borstademhaling genoemd"
       ],
       "type": "choice",
       "source": {
@@ -18151,8 +18119,8 @@
       "answer": "Onderkant ribbenkast en borstbeen, onderrugwervels en kraakbeen van de onderste zes ribben",
       "distractors": [
         "Onderkant ribbenkast en borstbeen, bovenrugwervels en kraakbeen van de bovenste zes ribben",
-        "Bovenkant ribbenkast en sleutelbeen, onderrugwervels en kraakbeen van de onderste zes ribben",
-        "Onderkant ribbenkast en schaambeen, onderrugwervels en kraakbeen van de onderste zes ribben"
+        "Bovenkant ribbenkast en sleutelbeen, onderrugwervels en kraakbeen van de bovenste zes ribben",
+        "Bovenkant ribbenkast en sleutelbeen, bovenrugwervels en kraakbeen van de onderste zes ribben"
       ],
       "type": "choice",
       "source": {
@@ -18201,9 +18169,9 @@
       "prompt": "Wat zijn de functies van de bekkenbodem?",
       "answer": "Organen ondersteunen, prolaps voorkomen en continentie van blaas en endeldarm regelen",
       "distractors": [
-        "Organen ondersteunen, heupabductie leveren en continentie van blaas en endeldarm regelen",
-        "Organen ondersteunen, prolaps voorkomen en de ribbenkast 360° vergroten",
-        "Rompflexie leveren, prolaps voorkomen en continentie van blaas en endeldarm regelen"
+        "Organen ondersteunen, heupabductie leveren en de ribbenkast 360° vergroten",
+        "Rompflexie leveren, prolaps voorkomen en de ribbenkast 360° vergroten",
+        "Rompflexie leveren, heupabductie leveren en continentie van blaas en endeldarm regelen"
       ],
       "type": "choice",
       "source": {
@@ -18286,9 +18254,9 @@
       "prompt": "Hoe vergroot je de rek op gluteus maximus?",
       "answer": "Voeten hoger op leg press, standbeen verder van de bank bij Bulgarian split squat, verder voorover bij RDL",
       "distractors": [
-        "Voeten hoger op leg press, standbeen dichter bij de bank bij Bulgarian split squat, verder voorover bij RDL",
-        "Voeten lager op leg press, standbeen verder van de bank bij Bulgarian split squat, verder voorover bij RDL",
-        "Voeten hoger op leg press, standbeen verder van de bank bij Bulgarian split squat, rechter blijven bij RDL"
+        "Voeten hoger op leg press, standbeen dichter bij de bank bij Bulgarian split squat, rechter blijven bij RDL",
+        "Voeten lager op leg press, standbeen verder van de bank bij Bulgarian split squat, rechter blijven bij RDL",
+        "Voeten lager op leg press, standbeen dichter bij de bank bij Bulgarian split squat, verder voorover bij RDL"
       ],
       "type": "choice",
       "source": {
@@ -18320,9 +18288,9 @@
       "prompt": "Hoe moet het bekken tijdens een lift blijven, en wanneer mag je sluiten?",
       "answer": "Neutraal tijdens de lift, sluiten mag aan het eind",
       "distractors": [
-        "Gesloten tijdens de lift, neutraal aan het eind",
         "Neutraal tijdens de lift, sluiten mag aan het begin",
-        "Neutraal tijdens de lift, hol trekken mag aan het eind"
+        "Hol getrokken tijdens de lift, sluiten mag aan het eind",
+        "Gesloten tijdens de lift, sluiten mag aan het begin"
       ],
       "type": "choice",
       "source": {
@@ -18337,9 +18305,9 @@
       "prompt": "Hoe stuur je meer quadricepsrek via voetplaatsing en enkelmobiliteit?",
       "answer": "Voeten laag op leg press/hack squat, eventueel hakken verhogen met plaatjes of schoenen",
       "distractors": [
-        "Voeten hoog op leg press/hack squat, eventueel hakken verhogen met plaatjes of schoenen",
         "Voeten laag op leg press/hack squat, eventueel de tenen verhogen met plaatjes of schoenen",
-        "Voeten breed en hoog op leg press/hack squat, hakken zo laag mogelijk houden"
+        "Voeten hoog op leg press/hack squat, eventueel hakken verhogen met plaatjes of schoenen",
+        "Voeten hoog op leg press/hack squat, eventueel de tenen verhogen met plaatjes of schoenen"
       ],
       "type": "choice",
       "source": {
@@ -18354,9 +18322,9 @@
       "prompt": "Hoe zoek je hamstringrek in beide trainingspatronen?",
       "answer": "Bij heupstrekking via een kleine heuphoek en neutrale wervelkolom, bij kniebuiging via een gestrekte knie",
       "distractors": [
-        "Bij heupstrekking via een grote heuphoek en neutrale wervelkolom, bij kniebuiging via een gestrekte knie",
-        "Bij heupstrekking via een kleine heuphoek en neutrale wervelkolom, bij kniebuiging via een gebogen knie",
-        "Bij heupstrekking via een kleine heuphoek en bolle rug, bij kniebuiging via een gestrekte knie"
+        "Bij heupstrekking via een kleine heuphoek en bolle rug, bij kniebuiging via een gebogen knie",
+        "Bij heupstrekking via een grote heuphoek en neutrale wervelkolom, bij kniebuiging via een gebogen knie",
+        "Bij heupstrekking via een grote heuphoek en bolle rug, bij kniebuiging via een gestrekte knie"
       ],
       "type": "choice",
       "source": {
@@ -18422,9 +18390,9 @@
       "prompt": "Welke vijf spieren vormen de adductoren?",
       "answer": "Adductor longus, brevis en magnus, gracilis en pectineus",
       "distractors": [
-        "Adductor longus, brevis en magnus, gracilis en tensor fasciae latae",
-        "Adductor longus, brevis en magnus, pectineus en gluteus medius",
-        "Adductor longus en brevis, gracilis, pectineus en rectus femoris"
+        "Adductor longus en brevis, gluteus medius, tensor fasciae latae en rectus femoris",
+        "Adductor magnus, gracilis, iliopsoas, tensor fasciae latae en gluteus minimus",
+        "Pectineus, gluteus medius, gluteus minimus, iliopsoas en rectus femoris"
       ],
       "type": "choice",
       "source": {
@@ -18439,9 +18407,9 @@
       "prompt": "Welke rol heeft de rug bij squat en hinge?",
       "answer": "Positiebehoud en rompstijfheid: de rug verbindt onder- en bovenlichaam isometrisch; de heup levert kracht",
       "distractors": [
-        "Krachtlevering en bewegingsuitslag: de rug strekt en buigt actief mee; de heup houdt de positie vast",
-        "Positiebehoud en rompstijfheid: de rug verbindt onder- en bovenlichaam isometrisch; de bovenrug levert kracht",
-        "Mobiliteit en bewegingsuitslag: de rug ontkoppelt onder- en bovenlichaam dynamisch; de knie levert kracht"
+        "Krachtlevering en bewegingsuitslag: de rug strekt en buigt actief mee; de heup levert kracht",
+        "Krachtlevering en bewegingsuitslag: de rug strekt en buigt actief mee; de bovenrug levert kracht",
+        "Positiebehoud en rompstijfheid: de rug ontkoppelt onder- en bovenlichaam dynamisch; de knie houdt de positie vast"
       ],
       "type": "choice",
       "source": {
@@ -18463,9 +18431,9 @@
       "prompt": "Wat betekent hip disassociation?",
       "answer": "De heupen kunnen los van de onderrug bewegen",
       "distractors": [
-        "De bovenrug kan los van de onderrug bewegen",
-        "De heupen bewegen mee met de onderrug als één stijf blok",
-        "De knieën kunnen los van de voeten bewegen"
+        "De schouders kunnen los van de bovenrug bewegen",
+        "De bovenrug kan los van de schouders bewegen",
+        "De heupen bewegen mee met de onderrug als één stijf blok"
       ],
       "type": "choice",
       "source": {
@@ -18481,8 +18449,8 @@
       "answer": "Zo verticaal mogelijk, boven het zwaartepunt",
       "distractors": [
         "Licht schuin naar voren, boven de tenen",
-        "Een ruime boog, achter het zwaartepunt",
-        "Zo recht mogelijk, boven de hielen"
+        "Licht schuin naar achteren, boven de hielen",
+        "Een ruime boog, boven de tenen"
       ],
       "type": "choice",
       "source": {
@@ -18498,7 +18466,7 @@
       "answer": "Isometrische kracht houdt de stang dichtbij en verticaal",
       "distractors": [
         "Dynamische kracht trekt de stang actief omhoog tijdens de opwaartse fase",
-        "Isometrische kracht houdt de schouders omhoog en de borst open",
+        "Dynamische kracht trekt de stang actief omlaag tijdens de neerwaartse fase",
         "Excentrische kracht remt de stang af en duwt hem iets naar voren"
       ],
       "type": "choice",
@@ -18572,9 +18540,9 @@
       "prompt": "Wat is de setup voor een squat?",
       "answer": "Stang op sleutelbeenhoogte, individuele voetbreedte, verticale bar path; front squat met hoge ellebogen",
       "distractors": [
-        "Stang op heuphoogte, vaste voetbreedte op heupbreedte, verticale bar path; front squat met lage ellebogen",
-        "Stang op sleutelbeenhoogte, brede voetstand voor iedereen, schuine bar path; front squat met hoge ellebogen",
-        "Stang op navelhoogte, individuele voetbreedte, horizontale bar path; front squat met ellebogen naar buiten"
+        "Stang op heuphoogte, vaste voetbreedte op heupbreedte, schuine bar path; front squat met lage ellebogen",
+        "Stang op heuphoogte, vaste voetbreedte op heupbreedte, verticale bar path; front squat met ellebogen naar buiten",
+        "Stang op sleutelbeenhoogte, vaste brede voetstand, schuine bar path; front squat met lage ellebogen"
       ],
       "type": "choice",
       "source": {
@@ -18623,9 +18591,9 @@
       "prompt": "Waarom is de bovenrug belangrijk voor de squat?",
       "answer": "Om de stang boven het midden van de voet te positioneren",
       "distractors": [
-        "Om de stang boven de hielen te positioneren",
-        "Om de stang boven de tenen te positioneren",
-        "Om de knieën boven het midden van de voet te positioneren"
+        "Om de ellebogen boven de hielen te positioneren",
+        "Om de knieën boven de hielen te positioneren",
+        "Om de heupen boven de tenen te positioneren"
       ],
       "type": "choice",
       "source": {
@@ -18708,9 +18676,9 @@
       "prompt": "Wanneer treedt butt wink vaker op?",
       "answer": "Bij verhoogde hakken en dieper zakken",
       "distractors": [
-        "Bij platte schoenen en dieper zakken",
-        "Bij verhoogde hakken en minder diep zakken",
-        "Bij een bredere stand en een hogere stang"
+        "Bij platte schoenen en minder diep zakken",
+        "Bij platte schoenen en een rechtere romphouding",
+        "Bij een rechtere romphouding en minder diep zakken"
       ],
       "type": "choice",
       "source": {
@@ -18789,9 +18757,9 @@
       "prompt": "Welke drie factoren bepalen de juiste hinge-diepte?",
       "answer": "Hamstringflexibiliteit/heupmobiliteit, rompspanning en heupkracht",
       "distractors": [
-        "Kniemobiliteit, rompspanning en quadricepskracht",
-        "Hamstringflexibiliteit/heupmobiliteit, schoudermobiliteit en gripkracht",
-        "Enkelmobiliteit, heupmobiliteit en kuitkracht"
+        "Kniemobiliteit, enkelmobiliteit en quadricepskracht",
+        "Kniemobiliteit, schoudermobiliteit en gripkracht",
+        "Enkelmobiliteit, rompspanning en kuitkracht"
       ],
       "type": "choice",
       "source": {
@@ -18807,7 +18775,7 @@
       "answer": "Vergroot de uitdaging voor de romp",
       "distractors": [
         "Verkleint de uitdaging voor de romp",
-        "Vergroot de uitdaging voor de quadriceps",
+        "Verkleint de uitdaging voor de grip",
         "Verplaatst de uitdaging van de romp naar de enkels"
       ],
       "type": "choice",
@@ -18840,9 +18808,9 @@
       "prompt": "Welke cues helpen je de romp te spannen tijdens een hinge?",
       "answer": "360° spanning, touwtje tussen de ribben en een sternum-oefening met dumbbell",
       "distractors": [
-        "Buik intrekken, touwtje tussen de ribben en een sternum-oefening met dumbbell",
-        "360° spanning, touwtje tussen de knieën en een heup-oefening met dumbbell",
-        "Adem vasthouden, touwtje tussen de schouderbladen en een sternum-oefening met kettlebell"
+        "Buik intrekken, touwtje tussen de knieën en een heup-oefening met dumbbell",
+        "Buik intrekken, touwtje tussen de schouderbladen en een heup-oefening met kettlebell",
+        "Buik intrekken, touwtje tussen de ribben en een sternum-oefening met kettlebell"
       ],
       "type": "choice",
       "source": {
@@ -18859,7 +18827,7 @@
       "distractors": [
         "Bil, rug en hoofd raken een stok; een horizontale stok achter de schenen stevig wegduwen",
         "Bil, hielen en hoofd raken een stok; een horizontale stok achter de schenen niet aanraken",
-        "Rug, hoofd en hielen raken een stok; een horizontale stok voor de knieën niet aanraken"
+        "Bil, hielen en hoofd raken een stok; een horizontale stok achter de schenen stevig wegduwen"
       ],
       "type": "choice",
       "source": {
@@ -18874,9 +18842,9 @@
       "prompt": "Welke cue helpt bij hinge-hyperextensie?",
       "answer": "Borst en hoofd mee naar beneden; duw met de bil de lade dicht",
       "distractors": [
+        "Borst en hoofd mee naar beneden; houd de stang ver van de benen",
         "Borst omhoog en hoofd mee naar achteren; duw met de bil de lade dicht",
-        "Borst en hoofd mee naar beneden; houd de stok achter je schenen met rust",
-        "Bil, rug en hoofd tegen de stok; laat de stang langs je broek glijden"
+        "Borst omhoog en hoofd mee naar achteren; zak door de knieën"
       ],
       "type": "choice",
       "source": {
@@ -18892,8 +18860,8 @@
       "answer": "Te diepe RDL, bolling van rug/schouders en druk op tenen/onderrug",
       "distractors": [
         "Te ondiepe RDL, holle onderrug en druk op hielen/bovenrug",
-        "Te diepe RDL, schouderdump en druk op tenen/knieën",
-        "Te veel kniebuiging, bolling van schouders/nek en druk op hielen/onderrug"
+        "Te ondiepe RDL, holle onderrug en druk op hielen/knieën",
+        "Te diepe RDL, schouderdump en druk op tenen/knieën"
       ],
       "type": "choice",
       "source": {
@@ -18925,9 +18893,9 @@
       "prompt": "Wat is een hip shift in de hinge?",
       "answer": "De heup beweegt naar één kant tijdens excentrisch of concentrisch",
       "distractors": [
-        "De romp buigt zijwaarts tijdens excentrisch of concentrisch",
-        "De knieën bewegen naar binnen tijdens excentrisch of concentrisch",
-        "De heup draait tijdens excentrisch of concentrisch mee met de stang"
+        "De romp buigt zijwaarts tijdens de excentrische fase",
+        "De romp draait zijwaarts tijdens de excentrische fase",
+        "De knieën bewegen naar binnen tijdens excentrisch of concentrisch"
       ],
       "type": "choice",
       "source": {
@@ -18943,8 +18911,8 @@
       "answer": "Heup niet ver genoeg terug of te weinig druk onder de oksels",
       "distractors": [
         "Knieën te veel gebogen of te weinig druk op de tenen",
-        "Heup te ver terug of te weinig spanning in de onderrug",
-        "Borst te hoog of te veel druk onder de oksels"
+        "Knieën te veel gebogen of te veel druk op de hielen",
+        "Borst te hoog of te veel druk op de tenen"
       ],
       "type": "choice",
       "source": {
@@ -19010,9 +18978,9 @@
       "prompt": "Waar let je op tijdens een push-up?",
       "answer": "Neutrale s-curve, handen op schouderhoogte net buiten schouders, hakken ontspannen, protractie → retractie",
       "distractors": [
-        "Neutrale s-curve, handen ver voor de schouders, hakken aangespannen, retractie → protractie",
-        "Platte rug, handen op schouderhoogte net buiten schouders, hakken ontspannen, elevatie → depressie",
-        "Neutrale s-curve, handen naast het middel, hakken ontspannen, protractie → elevatie"
+        "Platte rug, handen ver voor de schouders, hakken aangespannen, retractie → protractie",
+        "Platte rug, handen ver voor de schouders, hakken ontspannen, elevatie → depressie",
+        "Neutrale s-curve, handen naast het middel, hakken aangespannen, protractie → elevatie"
       ],
       "type": "choice",
       "source": {
@@ -19027,9 +18995,9 @@
       "prompt": "Waar let je op tijdens een DB bench press?",
       "answer": "Spanning van voet tot schouder, schouders achter/laag, ellebogen en polsen boven elkaar onderin",
       "distractors": [
-        "Spanning van voet tot schouder, schouders voor/hoog, ellebogen en polsen boven elkaar onderin",
-        "Spanning van voet tot schouder, schouders achter/laag, polsen voorbij de ellebogen onderin",
-        "Spanning van heup tot hand, schouders achter/laag, ellebogen onder de polsen onderin"
+        "Spanning van heup tot hand, schouders voor/hoog, ellebogen en polsen boven elkaar onderin",
+        "Spanning van heup tot hand, schouders voor/hoog, polsen voorbij de ellebogen onderin",
+        "Spanning van voet tot schouder, schouders voor/hoog, ellebogen onder de polsen onderin"
       ],
       "type": "choice",
       "source": {
@@ -19078,8 +19046,8 @@
       "prompt": "Wat zijn flairing ellebogen?",
       "answer": "Ellebogen te ver van het lichaam",
       "distractors": [
-        "Ellebogen te dicht tegen het lichaam",
         "Polsen te ver achter de ellebogen",
+        "Polsen te ver voor de ellebogen",
         "Schouders te ver naar voren"
       ],
       "type": "choice",
@@ -19095,9 +19063,9 @@
       "prompt": "Welke extra energielekken kunnen optreden bij een bench press?",
       "answer": "Voeten van de grond, billen van de bank en hoofd optillen",
       "distractors": [
-        "Voeten van de grond, billen van de bank en polsen boven de ellebogen",
-        "Voeten van de grond, schouders achter en hoofd optillen",
-        "Billen van de bank, ellebogen onder de polsen en hoofd tegen de bank"
+        "Voeten van de grond, hip shift en butt wink",
+        "Knieën naar binnen, billen van de bank en butt wink",
+        "Hip shift, lateroflexie van de romp en hoofd optillen"
       ],
       "type": "choice",
       "source": {
@@ -19156,9 +19124,9 @@
       "prompt": "Wat is de startpositie van een row?",
       "answer": "Schouder in protractie zonder elevatie; bovenrug mag licht flexen, onderrug neutraal",
       "distractors": [
-        "Schouder in retractie zonder elevatie; bovenrug mag licht flexen, onderrug neutraal",
-        "Schouder in protractie met elevatie; bovenrug mag licht flexen, onderrug licht hol",
-        "Schouder in protractie zonder elevatie; bovenrug strak gestrekt, onderrug licht gerond"
+        "Schouder in retractie met elevatie; bovenrug strak gestrekt, onderrug neutraal",
+        "Schouder in retractie met elevatie; bovenrug strak gestrekt, onderrug licht gerond",
+        "Schouder in protractie zonder elevatie; bovenrug strak gestrekt, onderrug licht hol"
       ],
       "type": "choice",
       "source": {
@@ -19190,9 +19158,9 @@
       "prompt": "Welke drie energielekken kunnen optreden bij een row?",
       "answer": "Lumbale hyperextensie, schouderdump en scapula-elevatie",
       "distractors": [
-        "Lumbale hyperextensie, schouder-exorotatie en scapula-depressie",
-        "Lumbale flexie, schouderdump en polsextensie",
-        "Thoracale extensie, scapula-retractie en elleboogflexie"
+        "Thoracale extensie, scapula-retractie en elleboogflexie",
+        "Thoracale extensie, scapula-depressie en polsextensie",
+        "Scapula-retractie, schouder-exorotatie en polsextensie"
       ],
       "type": "choice",
       "source": {
@@ -19224,9 +19192,9 @@
       "prompt": "Hoe bewegen de scapula en bovenrug bij verticaal duwen?",
       "answer": "Vooral laterorotatie/mediorotatie en meer bovenrugstrekking dan bij horizontaal duwen",
       "distractors": [
-        "Vooral protractie/retractie en meer bovenrugstrekking dan bij horizontaal duwen",
-        "Vooral laterorotatie/mediorotatie en minder bovenrugstrekking dan bij horizontaal duwen",
-        "Vooral elevatie/depressie en meer onderrugstrekking dan bij horizontaal duwen"
+        "Vooral protractie/retractie en minder bovenrugstrekking dan bij horizontaal duwen",
+        "Vooral protractie/retractie en meer onderrugstrekking dan bij horizontaal duwen",
+        "Vooral elevatie/depressie en minder onderrugstrekking dan bij horizontaal duwen"
       ],
       "type": "choice",
       "source": {
@@ -19241,9 +19209,9 @@
       "prompt": "Waar let je op bij verticaal duwen?",
       "answer": "Pols boven elleboog, neutraal/depressie → laterorotatie/lichte elevatie, exorotatie, neutrale onderrug en bovenrugstrekking",
       "distractors": [
-        "Pols boven elleboog, neutraal/elevatie → mediorotatie/depressie, endorotatie, neutrale onderrug en bovenrugstrekking",
-        "Pols vóór elleboog, neutraal/depressie → laterorotatie/lichte elevatie, exorotatie, holle onderrug en bovenrugstrekking",
-        "Pols boven elleboog, neutraal/depressie → laterorotatie/lichte elevatie, endorotatie, neutrale onderrug en bovenrugflexie"
+        "Pols vóór elleboog, neutraal/elevatie → mediorotatie/depressie, endorotatie, holle onderrug en bovenrugflexie",
+        "Pols vóór elleboog, neutraal/elevatie → mediorotatie/depressie, endorotatie, neutrale onderrug en bovenrugflexie",
+        "Pols boven elleboog, neutraal/depressie → laterorotatie/lichte elevatie, endorotatie, holle onderrug en bovenrugstrekking"
       ],
       "type": "choice",
       "source": {
@@ -19258,8 +19226,8 @@
       "prompt": "Welke combinatie bevat uitsluitend energielekken bij verticaal duwen?",
       "answer": "Lumbale hyperextensie, scapula-elevatie, romplateroflexie en pols/elleboog niet uitgelijnd boven schouder",
       "distractors": [
-        "Lumbale hyperextensie, scapula-elevatie, bovenrugstrekking en pols/elleboog niet uitgelijnd boven schouder",
-        "Neutrale onderrug, scapula-elevatie, romplateroflexie en pols/elleboog niet uitgelijnd boven schouder",
+        "Neutrale onderrug, scapula-elevatie, bovenrugstrekking en pols/elleboog niet uitgelijnd boven schouder",
+        "Neutrale onderrug, scapula-depressie, bovenrugstrekking en pols/elleboog niet uitgelijnd boven schouder",
         "Lumbale hyperextensie, scapula-depressie, romplateroflexie en pols/elleboog uitgelijnd boven schouder"
       ],
       "type": "choice",
@@ -19343,8 +19311,8 @@
       "prompt": "Welke drie energielekken kunnen optreden bij verticaal trekken?",
       "answer": "Schouderdump, lumbale hyperextensie en onderarm die meer horizontaal dan verticaal eindigt",
       "distractors": [
-        "Schouderdump, lumbale flexie en onderarm die meer verticaal dan horizontaal eindigt",
-        "Scapula-depressie, lumbale hyperextensie en onderarm die meer horizontaal dan verticaal eindigt",
+        "Scapula-depressie, bovenrugextensie en onderarm die meer verticaal dan horizontaal eindigt",
+        "Scapula-depressie, bovenrugextensie en pols die voor de elleboog eindigt",
         "Schouderdump, bovenrugextensie en pols die voor de elleboog eindigt"
       ],
       "type": "choice",
@@ -19379,7 +19347,7 @@
       "distractors": [
         "Gerichte vervanging van bilaterale compounds, met ongeveer twee keer zoveel sets voor beide kanten",
         "Gerichte aanvulling op bilaterale compounds, met ongeveer evenveel sets voor beide kanten samen",
-        "Gerichte aanvulling op bilaterale compounds, met ongeveer drie keer zoveel sets voor beide kanten"
+        "Gerichte vervanging van bilaterale compounds, met ongeveer drie keer zoveel sets voor beide kanten"
       ],
       "type": "choice",
       "source": {
@@ -19394,8 +19362,8 @@
       "prompt": "Wat zijn vier redenen om unilateraal te trainen?",
       "answer": "Links-rechts asymmetrie, minder axiale belasting, grotere ROM en gerichtere spierspanning",
       "distractors": [
-        "Links-rechts asymmetrie, meer axiale belasting, kleinere ROM en gerichtere spierspanning",
-        "Zwaardere absolute belasting, minder axiale belasting, grotere ROM en gerichtere spierspanning",
+        "Zwaardere absolute belasting, meer axiale belasting, kleinere ROM en gerichtere spierspanning",
+        "Zwaardere absolute belasting, meer axiale belasting, grotere stabiliteit en kortere trainingstijd",
         "Links-rechts asymmetrie, minder axiale belasting, grotere stabiliteit en kortere trainingstijd"
       ],
       "type": "choice",
@@ -19412,7 +19380,7 @@
       "answer": "Op de bosu kunnen stabilisatoren technisch falen vóór spierfalen van quads/glutes",
       "distractors": [
         "Op de leg press kunnen stabilisatoren technisch falen vóór spierfalen van quads/glutes",
-        "Op de bosu kunnen quads/glutes spierfalen bereiken vóór technisch falen van stabilisatoren",
+        "Op de bosu kan de onderrug spierfalen bereiken vóór technisch falen van quads/glutes",
         "Op de leg press kan de balans technisch falen vóór spierfalen van de onderrug"
       ],
       "type": "choice",
@@ -19430,7 +19398,7 @@
       "distractors": [
         "Bij gelijk aantal sets per ledemaat grotere groei bij unilateraal; kies praktisch op belastbaarheid, balans, historie en tijd",
         "Bij gelijk aantal sets per ledemaat grotere groei bij bilateraal; kies op het zwaarst haalbare gewicht",
-        "Bij gelijk aantal sets per ledemaat geen aantoonbaar verschil; kies op de oefening met de meeste instabiliteit"
+        "Bij gelijk aantal sets per ledemaat grotere groei bij unilateraal; kies op de oefening met de meeste instabiliteit"
       ],
       "type": "choice",
       "source": {
@@ -19445,9 +19413,9 @@
       "prompt": "Hoe vergroot je de stabiliteit bij unilateraal trainen?",
       "answer": "Smith in plaats van losse DB’s, rek vasthouden en banksteun bij single-leg RDL",
       "distractors": [
-        "Smith in plaats van losse DB’s, vrij staan en handsteun weghalen bij single-leg RDL",
-        "Bosu in plaats van vlakke vloer, rek vasthouden en banksteun bij single-leg RDL",
-        "Losse DB’s in plaats van Smith, rek vasthouden en tegenwicht met de vrije hand bij single-leg RDL"
+        "Losse DB’s in plaats van Smith, vrij staan en handsteun weghalen bij single-leg RDL",
+        "Losse DB’s in plaats van Smith, rek vasthouden en tegenwicht met de vrije hand bij single-leg RDL",
+        "Losse DB’s in plaats van Smith, vrij staan en banksteun weghalen bij single-leg RDL"
       ],
       "type": "choice",
       "source": {
@@ -19479,9 +19447,9 @@
       "prompt": "Wat is myofibrillaire hypertrofie?",
       "answer": "Toename van actine/myosine in de spiercel, een langdurige vorm",
       "distractors": [
-        "Toename van vocht, eiwitten en glycogeen rond de fibrillen, een langdurige vorm",
-        "Toename van actine/myosine in de spiercel, een kortdurende vorm",
-        "Toename van het aantal spiercellen, een langdurige vorm"
+        "Toename van vocht, eiwitten en glycogeen rond de fibrillen, een kortdurende vorm",
+        "Toename van het aantal spiercellen, een kortdurende vorm",
+        "Toename van vocht, eiwitten en glycogeen rond de fibrillen, een langdurige vorm"
       ],
       "type": "choice",
       "source": {
@@ -19497,7 +19465,7 @@
       "answer": "Meer vocht, eiwitten en glycogeen rond fibrillen voor de verhoogde energiebehoefte tijdens sets",
       "distractors": [
         "Meer actine en myosine in de fibrillen voor de verhoogde krachtbehoefte tijdens sets",
-        "Meer vocht, eiwitten en glycogeen rond fibrillen voor de verhoogde herstelbehoefte tussen sessies",
+        "Meer actine en myosine in de fibrillen voor de verhoogde krachtbehoefte tussen sessies",
         "Meer mitochondriën en capillairen rond fibrillen voor de verhoogde zuurstofbehoefte tijdens sets"
       ],
       "type": "choice",
@@ -19513,9 +19481,9 @@
       "prompt": "Wat zijn drie drijfveren voor spiergroei?",
       "answer": "Mechanische spanning, metabole stress en spierschade",
       "distractors": [
-        "Mechanische spanning, metabole stress en hormonale respons",
-        "Mechanische spanning, spierpijn en zenuwprikkeling",
-        "Metabole stress, spierschade en trainingsduur"
+        "Hormonale respons, spierpijn en zenuwprikkeling",
+        "Hormonale respons, trainingsduur en zenuwprikkeling",
+        "Mechanische spanning, spierpijn en trainingsduur"
       ],
       "type": "choice",
       "source": {
@@ -19530,8 +19498,8 @@
       "prompt": "Wat is actieve versus passieve mechanische spanning?",
       "answer": "Actief: filamenten schuiven onder weerstand bij elke contractievorm; passief: elastische trekkracht/ROM",
       "distractors": [
-        "Actief: elastische trekkracht bij een gestrekte spier; passief: filamenten schuiven onder weerstand bij elke contractievorm",
-        "Actief: filamenten schuiven onder weerstand bij concentrische contractie; passief: elastische trekkracht/ROM",
+        "Actief: elastische trekkracht bij een gestrekte spier; passief: ophoping van metabolieten onder weerstand",
+        "Actief: elastische trekkracht bij een gestrekte spier; passief: filamenten schuiven onder weerstand",
         "Actief: ophoping van metabolieten onder weerstand bij elke contractievorm; passief: elastische trekkracht/ROM"
       ],
       "type": "choice",
@@ -19548,8 +19516,8 @@
       "answer": "Uitputting en metabolietophoping na meer dan 10 seconden anaeroob-lactisch, met tijdelijke celzwelling",
       "distractors": [
         "Uitputting en metabolietophoping na minder dan 10 seconden anaeroob-alactisch, met tijdelijke celzwelling",
-        "Micro-scheurtjes en herstelhormonen na meer dan 10 seconden anaeroob-lactisch, met tijdelijke celzwelling",
-        "Uitputting en metabolietophoping na meer dan 10 seconden aeroob, met blijvende celzwelling"
+        "Micro-scheurtjes en herstelhormonen na minder dan 10 seconden anaeroob-alactisch, met blijvende celzwelling",
+        "Micro-scheurtjes en herstelhormonen na meer dan 10 seconden aeroob, met blijvende celzwelling"
       ],
       "type": "choice",
       "source": {
@@ -19564,9 +19532,9 @@
       "prompt": "Wat is het netto-groeieffect van spierschade?",
       "answer": "Micro-schade activeert herstelhormonen, maar netto-groei is verwaarloosbaar: energie gaat naar herstel",
       "distractors": [
-        "Micro-schade activeert herstelhormonen, en netto-groei is aanzienlijk: de energie gaat vooral naar nieuwe spiereiwitten",
         "Micro-schade remt herstelhormonen, waardoor netto-groei verwaarloosbaar is: energie gaat naar vetopslag",
-        "Micro-schade activeert herstelhormonen, maar netto-groei is negatief: energie gaat naar afbraak van spiereiwit"
+        "Micro-schade remt herstelhormonen, waardoor netto-groei negatief is: energie gaat naar afbraak van spiereiwit",
+        "Micro-schade activeert herstelhormonen, en netto-groei is aanzienlijk: de energie gaat vooral naar nieuwe spiereiwitten"
       ],
       "type": "choice",
       "source": {
@@ -19581,9 +19549,9 @@
       "prompt": "Hoe druk je trainingsvolume uit?",
       "answer": "Sets per spier per week",
       "distractors": [
-        "Sets per oefening per maand",
         "Herhalingen per set per sessie",
-        "Trainingen per spiergroep per week"
+        "Herhalingen per oefening per sessie",
+        "Kilo’s per oefening per maand"
       ],
       "type": "choice",
       "source": {
@@ -19700,9 +19668,9 @@
       "prompt": "Welke herstelfactoren controleer je als spiergroei uitblijft?",
       "answer": "Slaap en stress; te veel totaalvolume kan supercompensatie verhinderen",
       "distractors": [
-        "Slaap en stress; te veel variatie in oefeningen kan supercompensatie verhinderen",
-        "Hartslag en lichaamstemperatuur; te veel totaalvolume kan supercompensatie verhinderen",
-        "Slaap en stress; te weinig herhalingen per set kunnen supercompensatie verhinderen"
+        "Hartslag en lichaamstemperatuur; te veel variatie in oefeningen kan spiergroei verhinderen",
+        "Hartslag en lichaamstemperatuur; te weinig herhalingen per set kunnen spiergroei verhinderen",
+        "Slaap en stress; te veel variatie in oefeningen kan spiergroei verhinderen"
       ],
       "type": "choice",
       "source": {
@@ -19717,9 +19685,9 @@
       "prompt": "Voor wie kan een ontbrekend calorie-overschot vooral de spiergroei beperken?",
       "answer": "Vooral gevorderde sporters",
       "distractors": [
-        "Vooral beginners",
-        "Vooral sporters die terugkeren na een blessure",
-        "Vooral sporters met een lage trainingsfrequentie"
+        "Beginners met een lage trainingsfrequentie",
+        "Beginners die terugkeren na een blessure",
+        "Sporters met een lage trainingsfrequentie"
       ],
       "type": "choice",
       "source": {
@@ -19786,7 +19754,7 @@
       "answer": "Drie opeenvolgende sessies met slechte motivatie",
       "distractors": [
         "Twee opeenvolgende sessies met dalende prestatie",
-        "Vier slechte nachten of opeenvolgende dagen met extra vermoeidheid",
+        "Twee opeenvolgende sessies met extra vermoeidheid",
         "Vijf workouts zonder mogelijkheid tot vooruitgang"
       ],
       "type": "choice",
@@ -19905,8 +19873,8 @@
       "answer": "Vergelijkbare oefeningen binnen het functieprofiel van de spier of bewegingspatroon",
       "distractors": [
         "Andere oefeningen binnen het functieprofiel van een andere spier of ander bewegingspatroon",
-        "Vergelijkbare oefeningen buiten het functieprofiel van de spier of bewegingspatroon",
-        "Vergelijkbare oefeningen met een tegengestelde bewegingsrichting van de spier"
+        "Andere oefeningen buiten het functieprofiel van een andere spier of ander bewegingspatroon",
+        "Andere oefeningen buiten het functieprofiel van de spier of bewegingspatroon"
       ],
       "type": "choice",
       "source": {
@@ -19938,9 +19906,9 @@
       "prompt": "Hoe meet je spiergroei, en wat is de beperking van visueel beoordelen?",
       "answer": "Omtrek arm/dijbeen, huidplooien of DEXA; visueel beoordelen is minder objectief maar bruikbaar als aanvulling",
       "distractors": [
+        "Lichaamsgewicht, BMI of bloeddruk; visueel beoordelen is nauwkeuriger dan meten en bruikbaar als vervanging",
         "Lichaamsgewicht, BMI of bloeddruk; visueel beoordelen is minder objectief maar bruikbaar als aanvulling",
-        "Omtrek arm/dijbeen, huidplooien of DEXA; visueel beoordelen is nauwkeuriger dan meten en bruikbaar als vervanging",
-        "Spierpijn, pompgevoel of gewichtstoename; visueel beoordelen is minder objectief maar bruikbaar als aanvulling"
+        "Spierpijn, pompgevoel of gewichtstoename; visueel beoordelen is nauwkeuriger dan meten en bruikbaar als vervanging"
       ],
       "type": "choice",
       "source": {
@@ -20284,9 +20252,7 @@
         "Quadratus lumborum",
         "Erector spinae",
         "Transversus abdominis",
-        "Iliopsoas",
-        "Pectoralis major",
-        "Latissimus dorsi"
+        "Iliopsoas"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -20307,9 +20273,7 @@
         "Quadratus lumborum",
         "Erector spinae",
         "Transversus abdominis",
-        "Iliopsoas",
-        "Pectoralis major",
-        "Latissimus dorsi"
+        "Iliopsoas"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -20330,9 +20294,7 @@
         "Quadratus lumborum",
         "Erector spinae",
         "Transversus abdominis",
-        "Iliopsoas",
-        "Pectoralis major",
-        "Latissimus dorsi"
+        "Iliopsoas"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -20353,9 +20315,7 @@
         "Externe obliques",
         "Interne obliques",
         "Erector spinae",
-        "Iliopsoas",
-        "Tensor fasciae latae",
-        "Deltoideus · voorste kop"
+        "Iliopsoas"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -20376,9 +20336,7 @@
         "Interne obliques",
         "Transversus abdominis",
         "Erector spinae",
-        "Iliopsoas",
-        "Trapezius · midden",
-        "Serratus anterior"
+        "Iliopsoas"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -20399,9 +20357,7 @@
         "Interne obliques",
         "Quadratus lumborum",
         "Iliopsoas",
-        "Transversus abdominis",
-        "Biceps brachii",
-        "Triceps brachii"
+        "Transversus abdominis"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -20422,9 +20378,7 @@
         "Externe obliques",
         "Interne obliques",
         "Quadratus lumborum",
-        "Transversus abdominis",
-        "Brachialis",
-        "Adductoren"
+        "Transversus abdominis"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -26493,9 +26447,9 @@
       "distractors": [
         "Achterhoofdsbeen, cervicale wervels",
         "Lange kop: boven schouderkom · korte kop: processus coracoideus",
-        "Lange kop: onder schouderkom · laterale kop: bovenkant humerus",
         "Sleutelbeen, borstbeen, rectusschede",
-        "Spina scapulae"
+        "Spina scapulae",
+        "Sleutelbeen"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27196,8 +27150,7 @@
         "Buitenkant rib 5–12",
         "Crista iliaca + lig. iliolumbale",
         "Sacrum, crista iliaca, onderste lenden/borstwervels",
-        "Crista iliaca / lig. inguinale / thoracolumbale fascie",
-        "Sleutelbeen"
+        "Crista iliaca / lig. inguinale / thoracolumbale fascie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27223,8 +27176,7 @@
         "Crista iliaca / schaambeen / rectusschede",
         "Onderrand rib 10–12 / rectusschede",
         "Rib 12 / dwarsuitsteeksels L1–4",
-        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen",
-        "Boven: IT-band · Onder: bovenkant femur"
+        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27248,10 +27200,8 @@
       "answer": "Flexie romp, samendrukken organen, ademsteun",
       "distractors": [
         "Bilateraal: extensie; unilateraal: lateroflexie + rotatie",
-        "Bilateraal: flexie; unilateraal: lateroflexie + ipsilaterale rotatie",
-        "Bilateraal: samendrukken organen + ademsteun; unilateraal: ipsilaterale rotatie",
-        "Bilateraal: stabiliseert ribben bij inademing+extensie; unilateraal: lateroflexie",
-        "Heup: anteflexie + exorotatie been. Romp: extensie + lateroflexie wervelkolom bij de heup"
+        "Heup: anteflexie + exorotatie been. Romp: extensie + lateroflexie wervelkolom bij de heup",
+        "Retroflexie, verticale adductie, endorotatie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27276,9 +27226,7 @@
       "distractors": [
         "Lateroflexie andere zijde",
         "Volledige flexie wervelkolom (segmentaal)",
-        "Extensie + lateroflexie andere zijde + rotatie eigen zijde",
-        "Verticale adductie",
-        "Anteflexie heup"
+        "Extensie + lateroflexie andere zijde + rotatie eigen zijde"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27304,8 +27252,7 @@
         "Schaambeen",
         "Crista iliaca + lig. iliolumbale",
         "Sacrum, crista iliaca, onderste lenden/borstwervels",
-        "Crista iliaca / lig. inguinale / thoracolumbale fascie",
-        "Thoracale wervels 1–4"
+        "Crista iliaca / lig. inguinale / thoracolumbale fascie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27331,8 +27278,7 @@
         "Kraakbeen rib 5–7 / processus xiphoideus",
         "Onderrand rib 10–12 / rectusschede",
         "Rib 12 / dwarsuitsteeksels L1–4",
-        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen",
-        "Boven: IT-band · Onder: bovenkant femur"
+        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27384,9 +27330,7 @@
       "distractors": [
         "Volledige flexie wervelkolom (segmentaal)",
         "Extensie wervelkolom",
-        "Extensie elleboog, retroflexie bovenarm, pronatie onderarm",
-        "Anteflexie heup ÓF knie-extensie (niet beide — passieve insuff.)",
-        "Horizontale adductie in 90° anteflexie, endorotatie"
+        "Extensie elleboog, retroflexie bovenarm, pronatie onderarm"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27412,8 +27356,7 @@
         "Sacrum, crista iliaca, onderste lenden/borstwervels",
         "Crista iliaca + lig. iliolumbale",
         "Buitenkant rib 5–12",
-        "Schaambeen",
-        "Lange kop: onderkant bekken · Korte kop: midden femur"
+        "Schaambeen"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27439,8 +27382,7 @@
         "Rib 12 / dwarsuitsteeksels L1–4",
         "Kraakbeen rib 5–7 / processus xiphoideus",
         "Crista iliaca / schaambeen / rectusschede",
-        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen",
-        "Boven: IT-band · Onder: bovenkant femur"
+        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27492,9 +27434,7 @@
       "distractors": [
         "Volledige flexie wervelkolom (segmentaal)",
         "Extensie wervelkolom",
-        "Horiz./vert. abductie boven 90° in exorotatie",
-        "Horizontale abductie, retroflexie, exorotatie",
-        "Horizontale adductie in 90° anteflexie, endorotatie"
+        "Horiz./vert. abductie boven 90° in exorotatie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27520,8 +27460,8 @@
         "Bilateraal: stabiliseert ribben bij inademing+extensie; unilateraal: lateroflexie",
         "Bilateraal: flexie; unilateraal: lateroflexie + contralaterale rotatie",
         "Heup: anteflexie + exorotatie been. Romp: extensie + lateroflexie wervelkolom bij de heup",
-        "Bilateraal: extensie; unilateraal: lateroflexie + rotatie",
-        "Flexie romp, samendrukken organen, ademsteun"
+        "Bilateraal: flexie; unilateraal: lateroflexie + ipsilaterale rotatie",
+        "Bilateraal: extensie; unilateraal: lateroflexie + rotatie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27547,8 +27487,7 @@
         "Buitenkant rib 5–12",
         "Sacrum, crista iliaca, onderste lenden/borstwervels",
         "Schaambeen",
-        "Crista iliaca / lig. inguinale / thoracolumbale fascie",
-        "Spina iliaca anterior inferior"
+        "Crista iliaca / lig. inguinale / thoracolumbale fascie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27574,8 +27513,7 @@
         "Onderrand rib 10–12 / rectusschede",
         "Kraakbeen rib 5–7 / processus xiphoideus",
         "Crista iliaca / schaambeen / rectusschede",
-        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen",
-        "Kop van het kuitbeen (fibula)"
+        "Ribben, dwars-/doornuitsteeksels hogere wervels, achterhoofdsbeen"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27601,8 +27539,8 @@
         "Bilateraal: samendrukken organen + ademsteun; unilateraal: ipsilaterale rotatie",
         "Heup: anteflexie + exorotatie been. Romp: extensie + lateroflexie wervelkolom bij de heup",
         "Bilateraal: flexie; unilateraal: lateroflexie + contralaterale rotatie",
-        "Bilateraal: extensie; unilateraal: lateroflexie + rotatie",
-        "Flexie romp, samendrukken organen, ademsteun"
+        "Bilateraal: flexie; unilateraal: lateroflexie + ipsilaterale rotatie",
+        "Bilateraal: extensie; unilateraal: lateroflexie + rotatie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27627,9 +27565,7 @@
       "distractors": [
         "Extensie wervelkolom",
         "Volledige flexie wervelkolom (segmentaal)",
-        "Extensie + lateroflexie andere zijde + rotatie eigen zijde",
-        "Depressie, deels protractie",
-        "Flexie elleboog, anteflexie arm"
+        "Extensie + lateroflexie andere zijde + rotatie eigen zijde"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27655,8 +27591,7 @@
         "Crista iliaca / lig. inguinale / thoracolumbale fascie",
         "Crista iliaca + lig. iliolumbale",
         "Buitenkant rib 5–12",
-        "Schaambeen",
-        "Lange kop: onderkant bekken · Korte kop: midden femur"
+        "Schaambeen"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27682,8 +27617,7 @@
         "Crista iliaca / schaambeen / rectusschede",
         "Kraakbeen rib 5–7 / processus xiphoideus",
         "Onderrand rib 10–12 / rectusschede",
-        "Rib 12 / dwarsuitsteeksels L1–4",
-        "Boven: IT-band · Onder: bovenkant femur"
+        "Rib 12 / dwarsuitsteeksels L1–4"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27708,9 +27642,9 @@
       "distractors": [
         "Bilateraal: flexie; unilateraal: lateroflexie + ipsilaterale rotatie",
         "Flexie romp, samendrukken organen, ademsteun",
+        "Bilateraal: flexie; unilateraal: lateroflexie + contralaterale rotatie",
         "Bilateraal: samendrukken organen + ademsteun; unilateraal: ipsilaterale rotatie",
-        "Bilateraal: stabiliseert ribben bij inademing+extensie; unilateraal: lateroflexie",
-        "Heup: anteflexie + exorotatie been. Romp: extensie + lateroflexie wervelkolom bij de heup"
+        "Bilateraal: stabiliseert ribben bij inademing+extensie; unilateraal: lateroflexie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27735,9 +27669,7 @@
       "distractors": [
         "Extensie + lateroflexie/rotatie andere zijde",
         "Extensie wervelkolom",
-        "Horiz./vert. abductie boven 90° in exorotatie",
-        "Horizontale abductie, retroflexie, exorotatie",
-        "Elevatie, laterorotatie, protractie"
+        "Horiz./vert. abductie boven 90° in exorotatie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27761,10 +27693,8 @@
       "answer": "Heup: anteflexie + exorotatie been. Romp: extensie + lateroflexie wervelkolom bij de heup",
       "distractors": [
         "Bilateraal: stabiliseert ribben bij inademing+extensie; unilateraal: lateroflexie",
-        "Bilateraal: samendrukken organen + ademsteun; unilateraal: ipsilaterale rotatie",
-        "Bilateraal: flexie; unilateraal: lateroflexie + contralaterale rotatie",
-        "Bilateraal: extensie; unilateraal: lateroflexie + rotatie",
-        "Flexie romp, samendrukken organen, ademsteun"
+        "Flexie romp, samendrukken organen, ademsteun",
+        "Extensie elleboog (alle koppen); retroflexie + verticale adductie bovenarm (lange kop, zwak)"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -27817,8 +27747,7 @@
         "Kop van het kuitbeen (fibula)",
         "Via achillespees op hielbot",
         "Binnenkant tibia",
-        "Patellaligament",
-        "Kraakbeen rib 5–7 / processus xiphoideus"
+        "Patellaligament"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -28141,8 +28070,7 @@
         "Anteflexie heup ÓF knie-extensie (niet beide — passieve insuff.)",
         "Anteflexie heup",
         "Dorsaalflexie",
-        "Adductie",
-        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)"
+        "Adductie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -28357,8 +28285,7 @@
         "Extensie heup + flexie knie (niet beide tegelijk — passieve insufficiëntie)",
         "Dorsaalflexie",
         "Flexie knie",
-        "Adductie",
-        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)"
+        "Adductie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -28465,8 +28392,7 @@
         "Extensie heup + flexie knie (niet beide tegelijk — passieve insufficiëntie)",
         "Dorsaalflexie",
         "Flexie knie",
-        "Adductie",
-        "Volledig anteflexie+exorotatie; abductie tot ~150° (arm vóór lichaam)"
+        "Adductie"
       ],
       "source": {
         "title": "Anatomie & Biomechanica",
@@ -28946,8 +28872,8 @@
       "answer": "De borst kan eerder limiteren dan stabiliteit of balans",
       "distractors": [
         "De stabiliteit kan eerder limiteren dan de borst, omdat de machine meebeweegt",
-        "De grip kan eerder limiteren dan de borst of de stabiliteit",
-        "De voorste deltoideus limiteert eerder dan de borst of de balans"
+        "De stabiliteit kan eerder limiteren dan de borst of de triceps",
+        "De grip kan eerder limiteren dan de borst of de stabiliteit"
       ],
       "type": "model-fact",
       "source": {
@@ -29047,7 +28973,7 @@
       "distractors": [
         "Staand een paal vasthouden beperkt momentum",
         "Zittend met borststeun maakt stabiliteit de beperkende factor",
-        "Zittend met borststeun vergroot de weerstand halverwege de beweging"
+        "Staand een paal vasthouden maakt balans juist de beperkende factor"
       ],
       "type": "model-fact",
       "source": {
@@ -29196,7 +29122,7 @@
       "answer": "Zittend met borststeun beperkt momentum",
       "distractors": [
         "Staand een paal vasthouden voorkomt dat stabiliteit beperkt",
-        "Met kabel meer spanning gedurende de hele beweging",
+        "Staand met kabel meer spanning gedurende de hele beweging",
         "De borststeun maakt balans de beperkende factor"
       ],
       "type": "model-fact",
@@ -29246,8 +29172,8 @@
       "answer": "Staand een paal vasthouden voorkomt dat stabiliteit beperkt",
       "distractors": [
         "Zittend met borststeun beperkt momentum",
-        "Staand een paal vasthouden maakt balans juist de beperkende factor",
-        "Staand zonder steun vergroot de weerstand in de verkorte positie"
+        "Zittend met borststeun maakt balans de beperkende factor",
+        "Staand zonder paal vergroot de weerstand in de verkorte positie"
       ],
       "type": "model-fact",
       "source": {
@@ -29295,8 +29221,8 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij lat pulldown?",
       "answer": "Laagdrempelig, omdat lichaamsgewicht niet de beperkende factor is",
       "distractors": [
-        "Laagdrempelig, omdat de gripbreedte de lat-activatie sterk bepaalt",
         "Isolatie van de lats zonder de biceps als limiterende factor",
+        "Accent op lats zonder te veel trapezius",
         "Veel stabiliteit door de bovenarm te fixeren in een kussen"
       ],
       "type": "model-fact",
@@ -29395,9 +29321,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij lat prayer?",
       "answer": "Isolatie van de lats zonder de biceps als limiterende factor",
       "distractors": [
-        "Isolatie van de achterste deltoideus zonder de biceps als limiterende factor",
-        "Isolatie van de lats met de biceps als belangrijkste synergist",
-        "Isolatie van de middelste trapezius zonder de lats als limiterende factor"
+        "Laagdrempelig, omdat lichaamsgewicht niet de beperkende factor is",
+        "Accent op lats zonder te veel trapezius",
+        "Veel stabiliteit door de bovenarm te fixeren in een kussen"
       ],
       "type": "model-fact",
       "source": {
@@ -29622,8 +29548,8 @@
       "answer": "Met kabel meer spanning gedurende de hele beweging",
       "distractors": [
         "Met barbell meer spanning gedurende de hele beweging",
-        "Met dumbbell de hoogste weerstand in de verlengde positie",
-        "Met kabel de bovenarm fixeren voor extra stabiliteit"
+        "Met barbell de bovenarm fixeren voor extra stabiliteit",
+        "Met dumbbell de hoogste weerstand in de verlengde positie"
       ],
       "type": "model-fact",
       "source": {
@@ -29847,9 +29773,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij single arm cross tricep extension?",
       "answer": "Kruislings pakken lijnt de weerstand uit met de bovenarm en wordt gewrichtsvriendelijker genoemd",
       "distractors": [
-        "Kruislings pakken lijnt de weerstand uit met de onderarm en geeft meer spanning in de verkorte positie",
-        "Kruislings pakken geeft meer bewegingsuitslag dan een barbell en wordt gewrichtsvriendelijker genoemd",
-        "Kruislings pakken geeft veel stabiliteit door de bovenarm in een kussen te fixeren"
+        "Kruislings pakken lijnt de weerstand uit met de bovenarm en geeft meer bewegingsuitslag dan een barbell",
+        "Kruislings pakken lijnt de weerstand uit met de onderarm en wordt gewrichtsvriendelijker genoemd",
+        "Kruislings pakken lijnt de weerstand uit met de onderarm en geeft meer bewegingsuitslag dan een barbell"
       ],
       "type": "model-fact",
       "source": {
@@ -29901,9 +29827,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij Kantana extension?",
       "answer": "Uitlijnen met de bovenarm wordt gewrichtsvriendelijker genoemd",
       "distractors": [
+        "Uitlijnen met de bovenarm benadrukt de verkorte positie van de lange kop",
         "Uitlijnen met de onderarm wordt gewrichtsvriendelijker genoemd",
-        "Overhead starten benadrukt de verkorte positie van de lange kop",
-        "Uitlijnen met de bovenarm zorgt voor veel stabiliteit in een kussen"
+        "Uitlijnen met de onderarm benadrukt de verkorte positie van de lange kop"
       ],
       "type": "model-fact",
       "source": {
@@ -29959,9 +29885,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij skull crusher met DB of BB?",
       "answer": "Een variant om de lange kop zonder kabels te trainen",
       "distractors": [
-        "Een variant om de lange kop met meer spanning in de verkorte positie te trainen",
-        "Een variant om de brachialis zonder kabels te trainen",
-        "Een variant om de lange kop met minder axiale druk te trainen"
+        "Een variant met kabel voor meer spanning gedurende de hele beweging",
+        "Een variant met de weerstand uitgelijnd met de bovenarm, gewrichtsvriendelijker genoemd",
+        "Een variant met de bovenarm in een kussen gefixeerd voor veel stabiliteit"
       ],
       "type": "model-fact",
       "source": {
@@ -29987,11 +29913,11 @@
       "prompt": "Welke spieren en bewegingen horen bij dead bug?",
       "answer": "Rectus, obliques en transversus: heupanteflexie/retroflexie, knieflexie/extensie en schouderanteflexie/retroflexie, neutrale wervelkolom",
       "distractors": [
+        "Quadratus lumborum en obliques: isometrisch met steunende schouder in abductie, bij march heupanteflexie/retroflexie, geen lateroflexie van de rug",
+        "Obliques en transversus: horizontale schouderadductie en abductie met het touw langs het lichaam, zonder romprotatie",
         "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Erector spinae: extensie",
-        "Onderste trapezius: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire retractie en depressie",
-        "Latissimus: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire mediorotatie en depressie",
-        "Onderste borst (pars abdominalis): horizontale schouderadductie richting heup en elleboogextensie"
+        "Obliques en rectus abdominis: diagonale flexie",
+        "Externe en interne obliques: geladen rotatie"
       ],
       "type": "model-fact",
       "source": {
@@ -30018,7 +29944,7 @@
       "distractors": [
         "Voorkom een heup die te hoog of laag staat ten opzichte van de rechte lijn naar de hak",
         "Voorkom verlies van bovenrugstabilisatie tijdens het touwtrekken",
-        "Voorkom een bolle bovenrug en een romp die naar één kant wegdraait"
+        "Voorkom dat de knie naar binnen valt"
       ],
       "type": "model-fact",
       "source": {
@@ -30070,11 +29996,11 @@
       "prompt": "Welke spieren en bewegingen horen bij bird dog?",
       "answer": "Rectus, obliques en transversus, met erector als stabilisator: been naar achteren, knie gestrekt, arm naar voren en neutrale rug",
       "distractors": [
-        "Onderste trapezius: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire retractie en depressie",
-        "Latissimus: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire mediorotatie en depressie",
-        "Onderste borst (pars abdominalis): horizontale schouderadductie richting heup en elleboogextensie",
-        "Bovenste borst (pars clavicularis): schouderanteflexie en horizontale adductie, elleboogextensie",
-        "Gluteus maximus: heupretroflexie en anteflexie van het voorste been met relatief stabiele knie"
+        "Obliques en transversus: horizontale schouderadductie en abductie met het touw langs het lichaam, zonder romprotatie",
+        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
+        "Quadratus lumborum en obliques: isometrisch met steunende schouder in abductie, bij march heupanteflexie/retroflexie, geen lateroflexie van de rug",
+        "Obliques en rectus abdominis: diagonale flexie",
+        "Externe en interne obliques: geladen rotatie"
       ],
       "type": "model-fact",
       "source": {
@@ -30102,7 +30028,7 @@
       "distractors": [
         "Voorkom een heup die te hoog of laag staat ten opzichte van de rechte lijn naar de hak",
         "Voorkom verlies van bovenrugstabilisatie tijdens het touwtrekken",
-        "Voorkom een te grote knie-extensie bij het terugbrengen van het been"
+        "Voorkom een schouderdump waarbij de schouderkop te ver naar voren glijdt"
       ],
       "type": "model-fact",
       "source": {
@@ -30156,11 +30082,11 @@
       "prompt": "Welke spieren en bewegingen horen bij plank?",
       "answer": "Rectus, obliques en transversus: isometrisch, lichte schouderanteflexie, heup gestrekt en neutrale rug zonder gewrichtsbeweging",
       "distractors": [
+        "Obliques en transversus: horizontale schouderadductie en abductie met het touw langs het lichaam, zonder romprotatie",
         "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Erector spinae: extensie",
-        "Onderste trapezius: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire retractie en depressie",
-        "Latissimus: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire mediorotatie en depressie",
-        "Onderste borst (pars abdominalis): horizontale schouderadductie richting heup en elleboogextensie"
+        "Quadratus lumborum en obliques: isometrisch met steunende schouder in abductie, bij march heupanteflexie/retroflexie, geen lateroflexie van de rug",
+        "Obliques en rectus abdominis: diagonale flexie",
+        "Externe en interne obliques: geladen rotatie"
       ],
       "type": "model-fact",
       "source": {
@@ -30186,8 +30112,8 @@
       "answer": "Voorkom een heup die te hoog of laag staat ten opzichte van de rechte lijn naar de hak",
       "distractors": [
         "Voorkom verlies van bovenrugstabilisatie tijdens het touwtrekken",
-        "Voorkom schouders die naar achteren trekken en afwijken van de streklijn",
-        "Voorkom compensatie vanuit heup of schouder bij het wisselen van been"
+        "Voorkom lateroflexie van de romp",
+        "Voorkom dat de knie naar binnen valt"
       ],
       "type": "model-fact",
       "source": {
@@ -30241,9 +30167,9 @@
       "distractors": [
         "Obliques en transversus: horizontale schouderadductie en abductie met het touw langs het lichaam, zonder romprotatie",
         "Rectus, obliques en transversus: isometrisch, lichte schouderanteflexie, heup gestrekt en neutrale rug zonder gewrichtsbeweging",
+        "Rectus, obliques en transversus, met erector als stabilisator: been naar achteren, knie gestrekt, arm naar voren en neutrale rug",
         "Quadratus lumborum en obliques: isometrisch met steunende schouder in abductie, bij march heupanteflexie/retroflexie, geen lateroflexie van de rug",
-        "Obliques en rectus abdominis: diagonale flexie",
-        "Externe en interne obliques: geladen rotatie"
+        "Obliques en rectus abdominis: diagonale flexie"
       ],
       "type": "model-fact",
       "source": {
@@ -30270,7 +30196,7 @@
       "distractors": [
         "Voorkom een heup die te hoog of laag staat",
         "Voorkom verlies van bovenrugstabilisatie",
-        "Voorkom schouders die naar achteren trekken"
+        "Voorkom dat de knie naar binnen valt"
       ],
       "type": "model-fact",
       "source": {
@@ -30323,10 +30249,10 @@
       "answer": "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom",
       "distractors": [
         "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Rectus abdominis: geladen rompflexie",
-        "Erector spinae: extensie",
-        "Onderste borst (pars abdominalis): horizontale schouderadductie richting heup en elleboogextensie",
-        "Bovenste borst (pars clavicularis): schouderanteflexie en horizontale adductie, elleboogextensie"
+        "Rectus, obliques en transversus: isometrisch, lichte schouderanteflexie, heup gestrekt en neutrale rug zonder gewrichtsbeweging",
+        "Rectus, obliques en transversus, met erector als stabilisator: been naar achteren, knie gestrekt, arm naar voren en neutrale rug",
+        "Quadratus lumborum en obliques: isometrisch met steunende schouder in abductie, bij march heupanteflexie/retroflexie, geen lateroflexie van de rug",
+        "Externe en interne obliques: geladen rotatie"
       ],
       "type": "model-fact",
       "source": {
@@ -30403,10 +30329,10 @@
       "answer": "Obliques en transversus: horizontale schouderadductie en abductie met het touw langs het lichaam, zonder romprotatie",
       "distractors": [
         "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Rectus abdominis: geladen rompflexie",
-        "Erector spinae: extensie",
-        "Onderste trapezius: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire retractie en depressie",
-        "Latissimus: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire mediorotatie en depressie"
+        "Rectus, obliques en transversus: isometrisch, lichte schouderanteflexie, heup gestrekt en neutrale rug zonder gewrichtsbeweging",
+        "Rectus, obliques en transversus, met erector als stabilisator: been naar achteren, knie gestrekt, arm naar voren en neutrale rug",
+        "Quadratus lumborum en obliques: isometrisch met steunende schouder in abductie, bij march heupanteflexie/retroflexie, geen lateroflexie van de rug",
+        "Externe en interne obliques: geladen rotatie"
       ],
       "type": "model-fact",
       "source": {
@@ -30431,8 +30357,8 @@
       "answer": "Voorkom verlies van bovenrugstabilisatie tijdens het touwtrekken",
       "distractors": [
         "Voorkom een heup die te hoog of laag staat ten opzichte van de rechte lijn naar de hak",
-        "Voorkom verlies van heupspanning tijdens het strekken",
-        "Voorkom verlies van balans tijdens het stappen met de kettlebell"
+        "Voorkom verlies van 360°-rompspanning tijdens het strekken",
+        "Voorkom dat de knie naar binnen valt"
       ],
       "type": "model-fact",
       "source": {
@@ -30482,11 +30408,11 @@
       "prompt": "Welke spieren en bewegingen horen bij side plank of KB march & walk?",
       "answer": "Quadratus lumborum en obliques: isometrisch met steunende schouder in abductie, bij march heupanteflexie/retroflexie, geen lateroflexie van de rug",
       "distractors": [
+        "Rectus, obliques en transversus: heupanteflexie/retroflexie, knieflexie/extensie en schouderanteflexie/retroflexie, neutrale wervelkolom",
+        "Rectus, obliques en transversus, met erector als stabilisator: been naar achteren, knie gestrekt, arm naar voren en neutrale rug",
+        "Obliques en transversus: horizontale schouderadductie en abductie met het touw langs het lichaam, zonder romprotatie",
         "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Rectus abdominis: geladen rompflexie",
-        "Erector spinae: extensie",
-        "Onderste trapezius: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire retractie en depressie",
-        "Latissimus: verticale schouderadductie of retroflexie, elleboogflexie, scapulaire mediorotatie en depressie"
+        "Obliques en rectus abdominis: diagonale flexie"
       ],
       "type": "model-fact",
       "source": {
@@ -30564,9 +30490,9 @@
       "distractors": [
         "Quadratus lumborum en obliques: lateroflexie",
         "Externe en interne obliques: geladen rotatie",
+        "Obliques en rectus abdominis: diagonale flexie",
         "Erector spinae: extensie",
-        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden"
+        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom"
       ],
       "type": "model-fact",
       "source": {
@@ -30588,9 +30514,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij cable crunch?",
       "answer": "Krul de wervelkolom op en breng ribben naar bekken, geschikt voor progressive overload",
       "distractors": [
+        "Krul de wervelkolom op en breng ribben naar bekken, een langere momentarm maakt de oefening zwaarder",
         "Houd de wervelkolom lang en buig vanuit de heupen, geschikt voor progressive overload",
-        "Kantel het bekken en til met de buikspieren, een langere momentarm maakt de oefening zwaarder",
-        "Roteer de romp en breng de ribben naar de heup, geschikt voor progressive overload"
+        "Roteer de romp en breng de ribben naar de heup, een langere momentarm maakt de oefening zwaarder"
       ],
       "type": "model-fact",
       "source": {
@@ -30614,9 +30540,9 @@
       "distractors": [
         "Quadratus lumborum en obliques: lateroflexie",
         "Externe en interne obliques: geladen rotatie",
+        "Obliques en rectus abdominis: diagonale flexie",
         "Erector spinae: extensie",
-        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden"
+        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom"
       ],
       "type": "model-fact",
       "source": {
@@ -30688,9 +30614,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij hanging leg raise?",
       "answer": "Kantel het bekken en til met de buikspieren, een langere momentarm maakt de oefening zwaarder",
       "distractors": [
-        "Houd het bekken neutraal en til met de heupbuigers, een langere momentarm maakt de oefening zwaarder",
         "Kantel het bekken en til met de buikspieren, een kortere momentarm maakt de oefening zwaarder",
-        "Zwaai met de benen voor momentum, een langere momentarm maakt de oefening zwaarder"
+        "Houd het bekken neutraal en til met de heupbuigers, een langere momentarm maakt de oefening zwaarder",
+        "Zwaai met de benen voor momentum, een kortere momentarm maakt de oefening zwaarder"
       ],
       "type": "model-fact",
       "source": {
@@ -30712,11 +30638,11 @@
       "prompt": "Welke spieren en bewegingen horen bij weighted side bend?",
       "answer": "Quadratus lumborum en obliques: lateroflexie",
       "distractors": [
+        "Externe en interne obliques: geladen rotatie",
+        "Obliques en rectus abdominis: diagonale flexie",
         "Rectus abdominis: geladen rompflexie",
         "Erector spinae: extensie",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Biceps femoris en semi-spieren: knieflexie",
-        "Middelste deltoideus: verticale schouderabductie"
+        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom"
       ],
       "type": "model-fact",
       "source": {
@@ -30766,11 +30692,11 @@
       "prompt": "Welke spieren en bewegingen horen bij side plank crunch?",
       "answer": "Quadratus lumborum en obliques: lateroflexie",
       "distractors": [
+        "Externe en interne obliques: geladen rotatie",
+        "Obliques en rectus abdominis: diagonale flexie",
         "Rectus abdominis: geladen rompflexie",
         "Erector spinae: extensie",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Biceps femoris en semi-spieren: knieflexie",
-        "Middelste deltoideus: verticale schouderabductie"
+        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom"
       ],
       "type": "model-fact",
       "source": {
@@ -30847,7 +30773,7 @@
       "answer": "Stop bij neutraal en vermijd hyperextensie",
       "distractors": [
         "Ga door tot een lichte hyperextensie voor extra spanning",
-        "Stop bij neutraal en laat het bekken meekantelen",
+        "Ga door tot een lichte hyperextensie en zwaai het gewicht omhoog",
         "Beweeg segmentaal en rond de rug bewust af"
       ],
       "type": "model-fact",
@@ -30948,7 +30874,7 @@
       "distractors": [
         "Beweeg als één blok vanuit de heup, met licht gewicht en geleidelijke opbouw",
         "Beweeg segmentaal en gecontroleerd, met zwaar gewicht en een snelle opbouw",
-        "Beweeg segmentaal, met licht gewicht, en stop bij neutraal zonder verder te buigen"
+        "Beweeg als één blok vanuit de heup, met zwaar gewicht en een snelle opbouw"
       ],
       "type": "model-fact",
       "source": {
@@ -30970,11 +30896,11 @@
       "prompt": "Welke spieren en bewegingen horen bij cable woodchop?",
       "answer": "Externe en interne obliques: geladen rotatie",
       "distractors": [
+        "Quadratus lumborum en obliques: lateroflexie",
+        "Obliques en rectus abdominis: diagonale flexie",
         "Rectus abdominis: geladen rompflexie",
         "Erector spinae: extensie",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Biceps femoris en semi-spieren: knieflexie",
-        "Middelste deltoideus: verticale schouderabductie"
+        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom"
       ],
       "type": "model-fact",
       "source": {
@@ -31022,11 +30948,11 @@
       "prompt": "Welke spieren en bewegingen horen bij landmine rotation?",
       "answer": "Externe en interne obliques: geladen rotatie",
       "distractors": [
+        "Quadratus lumborum en obliques: lateroflexie",
+        "Obliques en rectus abdominis: diagonale flexie",
         "Rectus abdominis: geladen rompflexie",
         "Erector spinae: extensie",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Biceps femoris en semi-spieren: knieflexie",
-        "Middelste deltoideus: verticale schouderabductie"
+        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom"
       ],
       "type": "model-fact",
       "source": {
@@ -31049,9 +30975,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij landmine rotation?",
       "answer": "Roteer vanuit de romp en houd de armen relatief gestrekt",
       "distractors": [
-        "Roteer vanuit de heup en klap de armen sterk in",
+        "Roteer vanuit de romp en buig de ellebogen sterk",
         "Roteer vanuit de schouders en houd de armen relatief gestrekt",
-        "Houd de romp stabiel en draai vanuit de armen met gebogen ellebogen"
+        "Roteer vanuit de heupen en buig de ellebogen sterk"
       ],
       "type": "model-fact",
       "source": {
@@ -31074,11 +31000,11 @@
       "prompt": "Welke spieren en bewegingen horen bij weighted Russian twist?",
       "answer": "Externe en interne obliques: geladen rotatie",
       "distractors": [
+        "Quadratus lumborum en obliques: lateroflexie",
+        "Obliques en rectus abdominis: diagonale flexie",
         "Rectus abdominis: geladen rompflexie",
         "Erector spinae: extensie",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Biceps femoris en semi-spieren: knieflexie",
-        "Middelste deltoideus: verticale schouderabductie"
+        "Obliques en transversus: horizontale schouderadductie en abductie zonder rotatie van de wervelkolom"
       ],
       "type": "model-fact",
       "source": {
@@ -31102,8 +31028,8 @@
       "answer": "Roteer de romp met een stabiele wervelkolom",
       "distractors": [
         "Roteer de romp met een afgeronde wervelkolom",
-        "Roteer de armen met een stabiele romp",
-        "Roteer de romp en buig de wervelkolom actief mee"
+        "Roteer de armen met een stabiele wervelkolom",
+        "Roteer de armen met een afgeronde wervelkolom"
       ],
       "type": "model-fact",
       "source": {
@@ -31126,11 +31052,11 @@
       "prompt": "Welke spieren en bewegingen horen bij cable high-to-low chop?",
       "answer": "Obliques en rectus abdominis: diagonale flexie",
       "distractors": [
+        "Quadratus lumborum en obliques: lateroflexie",
+        "Externe en interne obliques: geladen rotatie",
+        "Rectus abdominis: geladen rompflexie",
         "Erector spinae: extensie",
-        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden",
-        "Biceps femoris en semi-spieren: heupretroflexie",
-        "Middelste deltoideus: verticale schouderabductie",
-        "Latissimus: schouderretroflexie met gestrekte elleboog"
+        "Erector spinae met gluteus en hamstrings als synergisten: heupretroflexie tot neutraal, isometrisch vasthouden"
       ],
       "type": "model-fact",
       "source": {
@@ -31358,9 +31284,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij hand supported Bulgarian split squat met heupaccent?",
       "answer": "Unilaterale belasting met veel mechanische spanning in de verlengde positie",
       "distractors": [
+        "Unilaterale belasting met vooral spanning in de verkorte positie",
         "Bilaterale belasting met veel mechanische spanning in de verlengde positie",
-        "Unilaterale belasting met veel axiale druk op de wervelkolom",
-        "Unilaterale belasting met vooral spanning in de verkorte positie"
+        "Bilaterale belasting met veel axiale druk op de wervelkolom"
       ],
       "type": "model-fact",
       "source": {
@@ -31414,7 +31340,7 @@
       "distractors": [
         "Isoleert de gluteus medius bij een gebogen heup",
         "Isoleert de gluteus maximus bij een gestrekte heup",
-        "Isoleert de adductoren bij een gestrekte heup"
+        "Isoleert de adductoren bij een gebogen heup"
       ],
       "type": "model-fact",
       "source": {
@@ -31468,7 +31394,7 @@
       "answer": "Veel machinestabiliteit om dicht bij spierfalen te trainen",
       "distractors": [
         "Isolatie van de quads met een stilstaande heup",
-        "Weinig machinestabiliteit, zodat de romp de balans moet bewaren",
+        "Weinig stabiliteit, zodat de romp de balans moet bewaren",
         "Unilaterale belasting met veel mechanische spanning in de verlengde positie"
       ],
       "type": "model-fact",
@@ -31573,7 +31499,7 @@
       "distractors": [
         "Veel stabiliteit met extra axiale druk op de wervelkolom",
         "Minder stabiliteit, maar zonder axiale druk op de wervelkolom",
-        "Veel stabiliteit, maar de grip beperkt de set"
+        "Minder stabiliteit en extra axiale druk op de wervelkolom"
       ],
       "type": "model-fact",
       "source": {
@@ -31623,9 +31549,9 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij hand supported split squat-varianten?",
       "answer": "Meer stabiliteit dan een reguliere split squat, om dichter bij spierfalen te komen",
       "distractors": [
-        "Minder stabiliteit dan een reguliere split squat, om meer balans te trainen",
-        "Meer stabiliteit dan een leg press, om dichter bij spierfalen te komen",
-        "Meer axiale druk dan een reguliere split squat, om dichter bij spierfalen te komen"
+        "Meer stabiliteit dan een reguliere split squat, om meer balans te trainen",
+        "Minder stabiliteit dan een reguliere split squat, om dichter bij spierfalen te komen",
+        "Minder stabiliteit dan een reguliere split squat, om meer balans te trainen"
       ],
       "type": "model-fact",
       "source": {
@@ -31727,8 +31653,8 @@
       "prompt": "Welk voordeel of aandachtspunt hoort bij RDL met hamstring-focus?",
       "answer": "Makkelijk te overloaden met veel spanning in de verlengde positie",
       "distractors": [
+        "Grotere bewegingsuitslag dan bij een barbell",
         "Hogere herhalingen mogelijk zonder beperking door bovenrugstabiliteit of grip",
-        "Isolatie in de verlengde positie",
         "Veel stabiliteit zonder axiale druk op de wervelkolom"
       ],
       "type": "model-fact",
@@ -31832,8 +31758,8 @@
       "answer": "Isolatie in de verlengde positie",
       "distractors": [
         "Isolatie in de verkorte positie",
-        "Isolatie in de middenpositie",
-        "Isolatie van de quads in de verlengde positie"
+        "Isolatie van de quads in de verlengde positie",
+        "Isolatie van de quads in de verkorte positie"
       ],
       "type": "model-fact",
       "source": {
@@ -31884,8 +31810,8 @@
       "answer": "Isolatie in de verkorte positie",
       "distractors": [
         "Isolatie in de verlengde positie",
-        "Isolatie in de middenpositie",
-        "Isolatie van de glutes in de verkorte positie"
+        "Isolatie van de glutes in de verkorte positie",
+        "Isolatie van de glutes in de verlengde positie"
       ],
       "type": "model-fact",
       "source": {
@@ -31911,8 +31837,7 @@
         "Gluteus maximus: geïsoleerde heupretroflexie, been naar achteren",
         "Rectus femoris en vasti: knie-extensie met stilstaande heup",
         "Biceps femoris en semi-spieren: heupanteflexie en retroflexie als hinge",
-        "Gluteus medius: heupabductie",
-        "Pectoralis major: horizontale schouderadductie en elleboogextensie"
+        "Gluteus medius: heupabductie"
       ],
       "type": "model-fact",
       "source": {
@@ -31961,8 +31886,7 @@
         "Gluteus maximus: geïsoleerde heupretroflexie, been naar achteren",
         "Rectus femoris en vasti: knie-extensie met stilstaande heup",
         "Biceps femoris en semi-spieren: heupanteflexie en retroflexie als hinge",
-        "Gluteus medius: heupabductie",
-        "Pectoralis major: horizontale schouderadductie en elleboogextensie"
+        "Gluteus medius: heupabductie"
       ],
       "type": "model-fact",
       "source": {
@@ -32013,8 +31937,7 @@
         "Gluteus maximus: geïsoleerde heupretroflexie, been naar achteren",
         "Rectus femoris en vasti: knie-extensie met stilstaande heup",
         "Biceps femoris en semi-spieren: heupanteflexie en retroflexie als hinge",
-        "Gluteus medius: heupabductie",
-        "Pectoralis major: horizontale schouderadductie en elleboogextensie"
+        "Gluteus medius: heupabductie"
       ],
       "type": "model-fact",
       "source": {
@@ -32065,8 +31988,7 @@
         "Gluteus maximus: geïsoleerde heupretroflexie, been naar achteren",
         "Rectus femoris en vasti: knie-extensie met stilstaande heup",
         "Biceps femoris en semi-spieren: heupanteflexie en retroflexie als hinge",
-        "Gluteus medius: heupabductie",
-        "Pectoralis major: horizontale schouderadductie en elleboogextensie"
+        "Gluteus medius: heupabductie"
       ],
       "type": "model-fact",
       "source": {
@@ -32091,7 +32013,7 @@
       "distractors": [
         "Gewicht op de heupen voorkomt een gripbeperking, maar vergroot de axiale druk",
         "Gewicht in de handen voorkomt een gripbeperking en axiale druk",
-        "Gewicht op de schouders voorkomt een gripbeperking en axiale druk"
+        "Gewicht op de schouders voorkomt een gripbeperking, maar vergroot de axiale druk"
       ],
       "type": "model-fact",
       "source": {
@@ -33668,9 +33590,7 @@
         "Teres minor",
         "Bekkenbodem",
         "Multifidus",
-        "Diafragma",
-        "Gastrocnemius",
-        "Biceps brachii"
+        "Diafragma"
       ],
       "acceptedAnswers": [],
       "source": {
@@ -33716,9 +33636,7 @@
         "Teres minor",
         "Bekkenbodem",
         "Multifidus",
-        "Diafragma",
-        "Gastrocnemius",
-        "Biceps brachii"
+        "Diafragma"
       ],
       "acceptedAnswers": [],
       "source": {
@@ -33733,9 +33651,9 @@
       "prompt": "Wat zijn de functies van teres minor?",
       "answer": "Exorotatie, verticale adductie en stabilisatie",
       "distractors": [
-        "Exorotatie, verticale abductie en stabilisatie",
-        "Endorotatie, verticale adductie en stabilisatie",
-        "Exorotatie, horizontale adductie en stabilisatie"
+        "Exorotatie, verticale abductie en retroflexie",
+        "Endorotatie, verticale adductie en retroflexie",
+        "Endorotatie, verticale abductie en stabilisatie"
       ],
       "type": "model-fact",
       "source": {
@@ -33765,8 +33683,7 @@
         "Supraspinatus",
         "Infraspinatus",
         "Subscapularis",
-        "Diafragma",
-        "Rhomboideus"
+        "Diafragma"
       ],
       "acceptedAnswers": [],
       "source": {
@@ -33812,9 +33729,7 @@
         "Teres minor",
         "Bekkenbodem",
         "Multifidus",
-        "Diafragma",
-        "Gastrocnemius",
-        "Biceps brachii"
+        "Diafragma"
       ],
       "acceptedAnswers": [],
       "source": {
@@ -33829,9 +33744,9 @@
       "prompt": "Wat zijn de functies van teres major?",
       "answer": "Retroflexie, verticale adductie en endorotatie",
       "distractors": [
-        "Retroflexie, verticale adductie en exorotatie",
-        "Anteflexie, verticale adductie en endorotatie",
-        "Retroflexie, verticale abductie en endorotatie"
+        "Retroflexie, verticale abductie en exorotatie",
+        "Anteflexie, verticale adductie en exorotatie",
+        "Anteflexie, verticale abductie en endorotatie"
       ],
       "type": "model-fact",
       "source": {
@@ -33861,8 +33776,7 @@
         "Supraspinatus",
         "Infraspinatus",
         "Subscapularis",
-        "Diafragma",
-        "Rhomboideus"
+        "Diafragma"
       ],
       "acceptedAnswers": [],
       "source": {
@@ -33878,8 +33792,8 @@
       "answer": "Onderkant ribbenkast en borstbeen, onderrugwervels en kraakbeen van de onderste zes ribben",
       "distractors": [
         "Onderkant ribbenkast en borstbeen, bovenrugwervels en kraakbeen van de bovenste zes ribben",
-        "Bovenkant ribbenkast en sleutelbeen, onderrugwervels en kraakbeen van de onderste zes ribben",
-        "Onderkant ribbenkast en schaambeen, onderrugwervels en kraakbeen van de onderste zes ribben"
+        "Bovenkant ribbenkast en sleutelbeen, onderrugwervels en kraakbeen van de bovenste zes ribben",
+        "Bovenkant ribbenkast en sleutelbeen, bovenrugwervels en kraakbeen van de onderste zes ribben"
       ],
       "type": "model-fact",
       "source": {
@@ -33956,9 +33870,7 @@
         "Bekkenbodem",
         "Supraspinatus",
         "Infraspinatus",
-        "Subscapularis",
-        "Iliopsoas",
-        "Brachialis"
+        "Subscapularis"
       ],
       "acceptedAnswers": [
         "middenrif"
@@ -33975,9 +33887,9 @@
       "prompt": "Wat zijn de functies van de bekkenbodem?",
       "answer": "Organen ondersteunen, prolaps voorkomen en continentie van blaas en endeldarm regelen",
       "distractors": [
-        "Organen ondersteunen, heupabductie leveren en continentie van blaas en endeldarm regelen",
-        "Organen ondersteunen, prolaps voorkomen en de ribbenkast 360° vergroten",
-        "Rompflexie leveren, prolaps voorkomen en continentie van blaas en endeldarm regelen"
+        "Organen ondersteunen, heupabductie leveren en de ribbenkast 360° vergroten",
+        "Rompflexie leveren, prolaps voorkomen en de ribbenkast 360° vergroten",
+        "Rompflexie leveren, heupabductie leveren en continentie van blaas en endeldarm regelen"
       ],
       "type": "model-fact",
       "source": {
@@ -34030,9 +33942,7 @@
         "Supraspinatus",
         "Infraspinatus",
         "Subscapularis",
-        "Diafragma",
-        "Rhomboideus",
-        "Brachialis"
+        "Diafragma"
       ],
       "acceptedAnswers": [
         "bekkenbodemspieren"
@@ -34056,9 +33966,7 @@
         "Bekkenbodem",
         "Supraspinatus",
         "Infraspinatus",
-        "Subscapularis",
-        "Brachialis",
-        "Adductoren"
+        "Subscapularis"
       ],
       "acceptedAnswers": [],
       "source": {
@@ -34073,9 +33981,9 @@
       "prompt": "Welke vier onderdelen vormen de inner core unit?",
       "answer": "Diafragma, bekkenbodem, transversus abdominis en multifidus",
       "distractors": [
-        "Diafragma, bekkenbodem, rectus abdominis en multifidus",
-        "Diafragma, bekkenbodem, transversus abdominis en erector spinae",
-        "Diafragma, quadratus lumborum, transversus abdominis en multifidus"
+        "Diafragma, bekkenbodem, rectus abdominis en erector spinae",
+        "Obliques, quadratus lumborum, transversus abdominis en erector spinae",
+        "Rectus abdominis, quadratus lumborum, iliopsoas en multifidus"
       ],
       "type": "model-fact",
       "source": {
@@ -34127,9 +34035,9 @@
       "prompt": "Welke spieren vormen de outer core unit?",
       "answer": "Rectus abdominis, obliques, erector spinae, glutes en latissimus dorsi",
       "distractors": [
-        "Rectus abdominis, obliques, erector spinae, glutes en trapezius",
-        "Rectus abdominis, obliques, transversus abdominis, glutes en latissimus dorsi",
-        "Rectus abdominis, obliques, erector spinae, hamstrings en latissimus dorsi"
+        "Rectus abdominis, obliques, transversus abdominis, multifidus en hamstrings",
+        "Multifidus, erector spinae, glutes, hamstrings en trapezius",
+        "Transversus abdominis, multifidus, hamstrings, trapezius en latissimus dorsi"
       ],
       "type": "model-fact",
       "source": {
@@ -34158,8 +34066,8 @@
       "answer": "Horizontale 360°-ademhaling verhoogt buikdruk, bij zware compounds wordt de Valsalva-manoeuvre genoemd",
       "distractors": [
         "Verticale ademhaling verhoogt buikdruk, bij zware compounds wordt de Valsalva-manoeuvre genoemd",
-        "Horizontale 360°-ademhaling verlaagt de buikdruk, bij zware compounds wordt de Valsalva-manoeuvre genoemd",
-        "Horizontale 360°-ademhaling verhoogt buikdruk, bij zware compounds wordt de Valsalva-manoeuvre afgeraden"
+        "Horizontale 360°-ademhaling verhoogt buikdruk, bij zware compounds wordt een snelle borstademhaling genoemd",
+        "Verticale ademhaling verlaagt de buikdruk, bij zware compounds wordt een snelle borstademhaling genoemd"
       ],
       "type": "model-fact",
       "source": {
@@ -34238,9 +34146,9 @@
       "prompt": "Wat is de setup voor een squat?",
       "answer": "Stang op sleutelbeenhoogte, individuele voetbreedte, verticale bar path; front squat met hoge ellebogen",
       "distractors": [
-        "Stang op heuphoogte, vaste voetbreedte op heupbreedte, verticale bar path; front squat met lage ellebogen",
-        "Stang op sleutelbeenhoogte, brede voetstand voor iedereen, schuine bar path; front squat met hoge ellebogen",
-        "Stang op navelhoogte, individuele voetbreedte, horizontale bar path; front squat met ellebogen naar buiten"
+        "Stang op heuphoogte, vaste voetbreedte op heupbreedte, schuine bar path; front squat met lage ellebogen",
+        "Stang op heuphoogte, vaste voetbreedte op heupbreedte, verticale bar path; front squat met ellebogen naar buiten",
+        "Stang op sleutelbeenhoogte, vaste brede voetstand, schuine bar path; front squat met lage ellebogen"
       ],
       "type": "model-fact",
       "source": {
@@ -34319,9 +34227,9 @@
       "prompt": "Waarom is de bovenrug belangrijk voor de squat?",
       "answer": "Om de stang boven het midden van de voet te positioneren",
       "distractors": [
-        "Om de stang boven de hielen te positioneren",
-        "Om de stang boven de tenen te positioneren",
-        "Om de knieën boven het midden van de voet te positioneren"
+        "Om de ellebogen boven de hielen te positioneren",
+        "Om de knieën boven de hielen te positioneren",
+        "Om de heupen boven de tenen te positioneren"
       ],
       "type": "model-fact",
       "source": {
@@ -34427,9 +34335,9 @@
       "prompt": "Wanneer treedt butt wink vaker op?",
       "answer": "Bij verhoogde hakken en dieper zakken",
       "distractors": [
-        "Bij platte schoenen en dieper zakken",
-        "Bij verhoogde hakken en minder diep zakken",
-        "Bij een bredere stand en een hogere stang"
+        "Bij platte schoenen en minder diep zakken",
+        "Bij platte schoenen en een rechtere romphouding",
+        "Bij een rechtere romphouding en minder diep zakken"
       ],
       "type": "model-fact",
       "source": {
@@ -34508,9 +34416,9 @@
       "prompt": "Welke drie factoren bepalen de juiste hinge-diepte?",
       "answer": "Hamstringflexibiliteit/heupmobiliteit, rompspanning en heupkracht",
       "distractors": [
-        "Kniemobiliteit, rompspanning en quadricepskracht",
-        "Hamstringflexibiliteit/heupmobiliteit, schoudermobiliteit en gripkracht",
-        "Enkelmobiliteit, heupmobiliteit en kuitkracht"
+        "Kniemobiliteit, enkelmobiliteit en quadricepskracht",
+        "Kniemobiliteit, schoudermobiliteit en gripkracht",
+        "Enkelmobiliteit, rompspanning en kuitkracht"
       ],
       "type": "model-fact",
       "source": {
@@ -34536,7 +34444,7 @@
       "answer": "Vergroot de uitdaging voor de romp",
       "distractors": [
         "Verkleint de uitdaging voor de romp",
-        "Vergroot de uitdaging voor de quadriceps",
+        "Verkleint de uitdaging voor de grip",
         "Verplaatst de uitdaging van de romp naar de enkels"
       ],
       "type": "model-fact",
@@ -34589,9 +34497,9 @@
       "prompt": "Welke cues helpen je de romp te spannen tijdens een hinge?",
       "answer": "360° spanning, touwtje tussen de ribben en een sternum-oefening met dumbbell",
       "distractors": [
-        "Buik intrekken, touwtje tussen de ribben en een sternum-oefening met dumbbell",
-        "360° spanning, touwtje tussen de knieën en een heup-oefening met dumbbell",
-        "Adem vasthouden, touwtje tussen de schouderbladen en een sternum-oefening met kettlebell"
+        "Buik intrekken, touwtje tussen de knieën en een heup-oefening met dumbbell",
+        "Buik intrekken, touwtje tussen de schouderbladen en een heup-oefening met kettlebell",
+        "Buik intrekken, touwtje tussen de ribben en een sternum-oefening met kettlebell"
       ],
       "type": "model-fact",
       "source": {
@@ -34618,7 +34526,7 @@
       "distractors": [
         "Bil, rug en hoofd raken een stok; een horizontale stok achter de schenen stevig wegduwen",
         "Bil, hielen en hoofd raken een stok; een horizontale stok achter de schenen niet aanraken",
-        "Rug, hoofd en hielen raken een stok; een horizontale stok voor de knieën niet aanraken"
+        "Bil, hielen en hoofd raken een stok; een horizontale stok achter de schenen stevig wegduwen"
       ],
       "type": "model-fact",
       "source": {
@@ -34643,9 +34551,9 @@
       "prompt": "Welke cue helpt bij hinge-hyperextensie?",
       "answer": "Borst en hoofd mee naar beneden; duw met de bil de lade dicht",
       "distractors": [
+        "Borst en hoofd mee naar beneden; houd de stang ver van de benen",
         "Borst omhoog en hoofd mee naar achteren; duw met de bil de lade dicht",
-        "Borst en hoofd mee naar beneden; houd de stok achter je schenen met rust",
-        "Bil, rug en hoofd tegen de stok; laat de stang langs je broek glijden"
+        "Borst omhoog en hoofd mee naar achteren; zak door de knieën"
       ],
       "type": "model-fact",
       "source": {
@@ -34671,8 +34579,8 @@
       "answer": "Te diepe RDL, bolling van rug/schouders en druk op tenen/onderrug",
       "distractors": [
         "Te ondiepe RDL, holle onderrug en druk op hielen/bovenrug",
-        "Te diepe RDL, schouderdump en druk op tenen/knieën",
-        "Te veel kniebuiging, bolling van schouders/nek en druk op hielen/onderrug"
+        "Te ondiepe RDL, holle onderrug en druk op hielen/knieën",
+        "Te diepe RDL, schouderdump en druk op tenen/knieën"
       ],
       "type": "model-fact",
       "source": {
@@ -34724,9 +34632,9 @@
       "prompt": "Wat is een hip shift in de hinge?",
       "answer": "De heup beweegt naar één kant tijdens excentrisch of concentrisch",
       "distractors": [
-        "De romp buigt zijwaarts tijdens excentrisch of concentrisch",
-        "De knieën bewegen naar binnen tijdens excentrisch of concentrisch",
-        "De heup draait tijdens excentrisch of concentrisch mee met de stang"
+        "De romp buigt zijwaarts tijdens de excentrische fase",
+        "De romp draait zijwaarts tijdens de excentrische fase",
+        "De knieën bewegen naar binnen tijdens excentrisch of concentrisch"
       ],
       "type": "model-fact",
       "source": {
@@ -34752,8 +34660,8 @@
       "answer": "Heup niet ver genoeg terug of te weinig druk onder de oksels",
       "distractors": [
         "Knieën te veel gebogen of te weinig druk op de tenen",
-        "Heup te ver terug of te weinig spanning in de onderrug",
-        "Borst te hoog of te veel druk onder de oksels"
+        "Knieën te veel gebogen of te veel druk op de hielen",
+        "Borst te hoog of te veel druk op de tenen"
       ],
       "type": "model-fact",
       "source": {
@@ -34857,9 +34765,9 @@
       "prompt": "Waar let je op tijdens een DB bench press?",
       "answer": "Spanning van voet tot schouder, schouders achter/laag, ellebogen en polsen boven elkaar onderin",
       "distractors": [
-        "Spanning van voet tot schouder, schouders voor/hoog, ellebogen en polsen boven elkaar onderin",
-        "Spanning van voet tot schouder, schouders achter/laag, polsen voorbij de ellebogen onderin",
-        "Spanning van heup tot hand, schouders achter/laag, ellebogen onder de polsen onderin"
+        "Spanning van heup tot hand, schouders voor/hoog, ellebogen en polsen boven elkaar onderin",
+        "Spanning van heup tot hand, schouders voor/hoog, polsen voorbij de ellebogen onderin",
+        "Spanning van voet tot schouder, schouders voor/hoog, ellebogen onder de polsen onderin"
       ],
       "type": "model-fact",
       "source": {
@@ -34909,8 +34817,8 @@
       "prompt": "Wat zijn flairing ellebogen?",
       "answer": "Ellebogen te ver van het lichaam",
       "distractors": [
-        "Ellebogen te dicht tegen het lichaam",
         "Polsen te ver achter de ellebogen",
+        "Polsen te ver voor de ellebogen",
         "Schouders te ver naar voren"
       ],
       "type": "model-fact",
@@ -34935,9 +34843,9 @@
       "prompt": "Welke extra energielekken kunnen optreden bij een bench press?",
       "answer": "Voeten van de grond, billen van de bank en hoofd optillen",
       "distractors": [
-        "Voeten van de grond, billen van de bank en polsen boven de ellebogen",
-        "Voeten van de grond, schouders achter en hoofd optillen",
-        "Billen van de bank, ellebogen onder de polsen en hoofd tegen de bank"
+        "Voeten van de grond, hip shift en butt wink",
+        "Knieën naar binnen, billen van de bank en butt wink",
+        "Hip shift, lateroflexie van de romp en hoofd optillen"
       ],
       "type": "model-fact",
       "source": {
@@ -35014,9 +34922,9 @@
       "prompt": "Wat is de startpositie van een row?",
       "answer": "Schouder in protractie zonder elevatie; bovenrug mag licht flexen, onderrug neutraal",
       "distractors": [
-        "Schouder in retractie zonder elevatie; bovenrug mag licht flexen, onderrug neutraal",
-        "Schouder in protractie met elevatie; bovenrug mag licht flexen, onderrug licht hol",
-        "Schouder in protractie zonder elevatie; bovenrug strak gestrekt, onderrug licht gerond"
+        "Schouder in retractie met elevatie; bovenrug strak gestrekt, onderrug neutraal",
+        "Schouder in retractie met elevatie; bovenrug strak gestrekt, onderrug licht gerond",
+        "Schouder in protractie zonder elevatie; bovenrug strak gestrekt, onderrug licht hol"
       ],
       "type": "model-fact",
       "source": {
@@ -35068,9 +34976,9 @@
       "prompt": "Welke drie energielekken kunnen optreden bij een row?",
       "answer": "Lumbale hyperextensie, schouderdump en scapula-elevatie",
       "distractors": [
-        "Lumbale hyperextensie, schouder-exorotatie en scapula-depressie",
-        "Lumbale flexie, schouderdump en polsextensie",
-        "Thoracale extensie, scapula-retractie en elleboogflexie"
+        "Thoracale extensie, scapula-retractie en elleboogflexie",
+        "Thoracale extensie, scapula-depressie en polsextensie",
+        "Scapula-retractie, schouder-exorotatie en polsextensie"
       ],
       "type": "model-fact",
       "source": {
@@ -35122,9 +35030,9 @@
       "prompt": "Hoe bewegen de scapula en bovenrug bij verticaal duwen?",
       "answer": "Vooral laterorotatie/mediorotatie en meer bovenrugstrekking dan bij horizontaal duwen",
       "distractors": [
-        "Vooral protractie/retractie en meer bovenrugstrekking dan bij horizontaal duwen",
-        "Vooral laterorotatie/mediorotatie en minder bovenrugstrekking dan bij horizontaal duwen",
-        "Vooral elevatie/depressie en meer onderrugstrekking dan bij horizontaal duwen"
+        "Vooral protractie/retractie en minder bovenrugstrekking dan bij horizontaal duwen",
+        "Vooral protractie/retractie en meer onderrugstrekking dan bij horizontaal duwen",
+        "Vooral elevatie/depressie en minder onderrugstrekking dan bij horizontaal duwen"
       ],
       "type": "model-fact",
       "source": {
@@ -35148,9 +35056,9 @@
       "prompt": "Waar let je op bij verticaal duwen?",
       "answer": "Pols boven elleboog, neutraal/depressie → laterorotatie/lichte elevatie, exorotatie, neutrale onderrug en bovenrugstrekking",
       "distractors": [
-        "Pols boven elleboog, neutraal/elevatie → mediorotatie/depressie, endorotatie, neutrale onderrug en bovenrugstrekking",
-        "Pols vóór elleboog, neutraal/depressie → laterorotatie/lichte elevatie, exorotatie, holle onderrug en bovenrugstrekking",
-        "Pols boven elleboog, neutraal/depressie → laterorotatie/lichte elevatie, endorotatie, neutrale onderrug en bovenrugflexie"
+        "Pols vóór elleboog, neutraal/elevatie → mediorotatie/depressie, endorotatie, holle onderrug en bovenrugflexie",
+        "Pols vóór elleboog, neutraal/elevatie → mediorotatie/depressie, endorotatie, neutrale onderrug en bovenrugflexie",
+        "Pols boven elleboog, neutraal/depressie → laterorotatie/lichte elevatie, endorotatie, holle onderrug en bovenrugstrekking"
       ],
       "type": "model-fact",
       "source": {
@@ -35174,8 +35082,8 @@
       "prompt": "Welke combinatie bevat uitsluitend energielekken bij verticaal duwen?",
       "answer": "Lumbale hyperextensie, scapula-elevatie, romplateroflexie en pols/elleboog niet uitgelijnd boven schouder",
       "distractors": [
-        "Lumbale hyperextensie, scapula-elevatie, bovenrugstrekking en pols/elleboog niet uitgelijnd boven schouder",
-        "Neutrale onderrug, scapula-elevatie, romplateroflexie en pols/elleboog niet uitgelijnd boven schouder",
+        "Neutrale onderrug, scapula-elevatie, bovenrugstrekking en pols/elleboog niet uitgelijnd boven schouder",
+        "Neutrale onderrug, scapula-depressie, bovenrugstrekking en pols/elleboog niet uitgelijnd boven schouder",
         "Lumbale hyperextensie, scapula-depressie, romplateroflexie en pols/elleboog uitgelijnd boven schouder"
       ],
       "type": "model-fact",
@@ -35304,8 +35212,8 @@
       "prompt": "Welke drie energielekken kunnen optreden bij verticaal trekken?",
       "answer": "Schouderdump, lumbale hyperextensie en onderarm die meer horizontaal dan verticaal eindigt",
       "distractors": [
-        "Schouderdump, lumbale flexie en onderarm die meer verticaal dan horizontaal eindigt",
-        "Scapula-depressie, lumbale hyperextensie en onderarm die meer horizontaal dan verticaal eindigt",
+        "Scapula-depressie, bovenrugextensie en onderarm die meer verticaal dan horizontaal eindigt",
+        "Scapula-depressie, bovenrugextensie en pols die voor de elleboog eindigt",
         "Schouderdump, bovenrugextensie en pols die voor de elleboog eindigt"
       ],
       "type": "model-fact",
@@ -36855,7 +36763,7 @@
       "distractors": [
         "Trekspier",
         "Stabilisator",
-        "Elleboogflexor"
+        "Flexor"
       ],
       "acceptedAnswers": [
         "Duwende spier"
@@ -36883,7 +36791,7 @@
       "distractors": [
         "Trekspier",
         "Stabilisator",
-        "Heupextensor"
+        "Extensor"
       ],
       "acceptedAnswers": [
         "Duwende spier"
@@ -36911,7 +36819,7 @@
       "distractors": [
         "Trekspier",
         "Stabilisator",
-        "Kniestrekker"
+        "Flexor"
       ],
       "acceptedAnswers": [
         "Duwende spier"
@@ -36939,7 +36847,7 @@
       "distractors": [
         "Trekspier",
         "Stabilisator",
-        "Rompflexor"
+        "Extensor"
       ],
       "acceptedAnswers": [
         "Duwende spier"
@@ -36967,7 +36875,7 @@
       "distractors": [
         "Duwspier",
         "Trekspier",
-        "Elleboogflexor"
+        "Flexor"
       ],
       "acceptedAnswers": [
         "Stabiliserende spier"
@@ -36999,7 +36907,7 @@
       "distractors": [
         "Duwspier",
         "Trekspier",
-        "Heupextensor"
+        "Extensor"
       ],
       "acceptedAnswers": [
         "Stabiliserende spier"
@@ -37027,7 +36935,7 @@
       "distractors": [
         "Trekspier",
         "Stabilisator",
-        "Kniestrekker"
+        "Flexor"
       ],
       "acceptedAnswers": [
         "Duwende spier"
@@ -37055,7 +36963,7 @@
       "distractors": [
         "Duwspier",
         "Stabilisator",
-        "Rompflexor"
+        "Extensor"
       ],
       "acceptedAnswers": [
         "Trekkende spier"
@@ -37083,7 +36991,7 @@
       "distractors": [
         "Duwspier",
         "Stabilisator",
-        "Elleboogflexor"
+        "Flexor"
       ],
       "acceptedAnswers": [
         "Trekkende spier"
@@ -37111,7 +37019,7 @@
       "distractors": [
         "Duwspier",
         "Stabilisator",
-        "Heupextensor"
+        "Extensor"
       ],
       "acceptedAnswers": [
         "Trekkende spier"
@@ -37139,7 +37047,7 @@
       "distractors": [
         "Duwspier",
         "Stabilisator",
-        "Kniestrekker"
+        "Flexor"
       ],
       "acceptedAnswers": [
         "Trekkende spier"
@@ -37167,7 +37075,7 @@
       "distractors": [
         "Duwspier",
         "Stabilisator",
-        "Rompflexor"
+        "Extensor"
       ],
       "acceptedAnswers": [
         "Trekkende spier"
@@ -37282,8 +37190,8 @@
       "prompt": "Wat betekent zelfeffectiviteit in de Sociale Cognitieve Theorie?",
       "answer": "Vertrouwen dat je een actie succesvol kunt uitvoeren",
       "distractors": [
-        "De overtuiging dat je omgeving je gedrag bepaalt",
         "Het verwachte resultaat van een actie voor je gezondheid",
+        "Het verwachte resultaat van een actie voor je omgeving",
         "De wens om door anderen goedgekeurd te worden"
       ],
       "source": {
@@ -37317,8 +37225,8 @@
       "answer": "Autonomie, competentie en verbondenheid",
       "distractors": [
         "Autonomie, prestatie en erkenning",
-        "Competentie, controle en zekerheid",
-        "Verbondenheid, discipline en beloning"
+        "Competentie, prestatie en zekerheid",
+        "Prestatie, erkenning en verbondenheid"
       ],
       "source": {
         "kind": "course-detail",
@@ -37487,8 +37395,8 @@
       "answer": "Eiwitten, vetten en koolhydraten",
       "distractors": [
         "Eiwitten, vitamines en mineralen",
-        "Vetten, water en vezels",
-        "Koolhydraten, natrium en ijzer"
+        "Vetten, vitamines en vezels",
+        "Koolhydraten, mineralen en vezels"
       ],
       "source": {
         "kind": "course-detail",
@@ -37503,9 +37411,9 @@
       "prompt": "Welke combinatie ondersteunt volgens de les het behoud en de opbouw van spiermassa het meest?",
       "answer": "Krachttraining en voldoende eiwitinname",
       "distractors": [
-        "Duurtraining en voldoende koolhydraten",
         "Krachttraining en een lage energie-inname",
-        "Rust en een hoge vetinname"
+        "Duurtraining en voldoende eiwitinname",
+        "Duurtraining en een lage energie-inname"
       ],
       "source": {
         "kind": "course-detail",
@@ -38200,9 +38108,9 @@
       "prompt": "Hoe verandert de opbouw naar werksets voor maximale kracht meestal?",
       "answer": "Het gewicht stijgt terwijl de herhalingen dalen",
       "distractors": [
-        "Het gewicht daalt terwijl de herhalingen stijgen",
+        "Het gewicht stijgt terwijl de herhalingen gelijk blijven",
         "Het gewicht blijft gelijk terwijl de herhalingen dalen",
-        "Het gewicht en de herhalingen dalen beide"
+        "Het gewicht daalt terwijl de herhalingen gelijk blijven"
       ],
       "source": {
         "kind": "course-detail",
@@ -38389,7 +38297,7 @@
       "distractors": [
         "De kracht van armen en benen overnemen bij zware lifts",
         "Een soepele romp bieden die vooral meebeweegt met de last",
-        "Zelf de meeste snelheid opwekken tijdens de beweging"
+        "Een soepele romp bieden die de kracht van armen en benen overneemt"
       ],
       "source": {
         "kind": "course-detail",
@@ -38676,9 +38584,9 @@
       "prompt": "Welke leefstijlfactoren ondersteunen volgens de les een krachttraject?",
       "answer": "Voeding, slaap en stressmanagement",
       "distractors": [
-        "Voeding, schermtijd en sociale activiteit",
-        "Slaap, cardio en rekoefeningen",
-        "Cafeïne, supplementen en compressiekleding"
+        "Voeding, rekoefeningen en schermtijd",
+        "Slaap, rekoefeningen en compressiekleding",
+        "Stressmanagement, schermtijd en compressiekleding"
       ],
       "source": {
         "kind": "course-detail",
@@ -38711,8 +38619,8 @@
       "answer": "Een concrete actie die nodig is om een einddoel te bereiken",
       "distractors": [
         "Het resultaat dat je uiteindelijk wilt bereiken",
-        "Een prestatie waarmee je jezelf met anderen vergelijkt",
-        "Een norm die de coach voor de cliënt bepaalt"
+        "Een resultaat dat de coach voor de cliënt bepaalt",
+        "Een prestatie waarmee je jezelf met anderen vergelijkt"
       ],
       "source": {
         "kind": "course-detail",
@@ -39050,9 +38958,9 @@
       "prompt": "Wat is een kinetische keten?",
       "answer": "Een aaneenschakeling van gewrichten en spieren die energie overdraagt",
       "distractors": [
-        "Een reeks oefeningen die in vaste volgorde wordt uitgevoerd",
-        "Een keten van reacties die energie uit voeding omzet",
-        "Een aaneenschakeling van sets met afnemende rust"
+        "Een aaneenschakeling van oefeningen die in vaste volgorde wordt uitgevoerd",
+        "Een aaneenschakeling van sets met afnemende rust in vaste volgorde",
+        "Een keten van reacties die energie uit voeding omzet"
       ],
       "source": {
         "kind": "course-detail",
@@ -39069,7 +38977,7 @@
       "distractors": [
         "De last die het gewricht moet overwinnen",
         "Het punt waar de spier aan het bot vastzit",
-        "De kortste afstand tussen kracht en rotatieas"
+        "Het punt waar de last aangrijpt op het bot"
       ],
       "source": {
         "kind": "course-detail",
@@ -39103,7 +39011,7 @@
       "distractors": [
         "De afstand tussen de kracht en de rotatieas",
         "De hoek waarin het gewricht maximaal kan bewegen",
-        "De lijn waarlangs het lichaamszwaartepunt valt"
+        "De afstand waarlangs het lichaamszwaartepunt zich verplaatst"
       ],
       "source": {
         "kind": "course-detail",
@@ -39254,9 +39162,9 @@
       "prompt": "Welke frequentie noemt de les vaak voor het trainen van een spier bij spiergroei?",
       "answer": "Twee tot drie keer per week",
       "distractors": [
-        "Eén keer per maand",
-        "Zes tot zeven keer per week",
-        "Eén keer per twee weken"
+        "Twee keer per maand",
+        "Eén keer per twee weken",
+        "Zes tot zeven keer per week"
       ],
       "source": {
         "kind": "course-detail",
@@ -39271,9 +39179,9 @@
       "prompt": "Waar richt de intentie van een effectieve set voor spiergroei zich op?",
       "answer": "Dicht bij spierfalen werken met voldoende rust en herstel",
       "distractors": [
-        "Ruim voor spierfalen stoppen en de set licht houden",
-        "Elke set tot volledig falen drijven met minimale rust",
-        "Snel door de sets gaan en herstel overslaan"
+        "Ruim voor spierfalen stoppen met voldoende rust en herstel",
+        "Dicht bij spierfalen werken met minimale rust en weinig herstel",
+        "Ruim voor spierfalen stoppen met minimale rust en weinig herstel"
       ],
       "source": {
         "kind": "course-detail",

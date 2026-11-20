@@ -54,7 +54,13 @@ const profileMuscles = new Map(exerciseRows.map(row => [row.sourceQuestionId, ro
 const profiles = questions.filter(q => /^extra-muscles-.+-profile$/.test(q.id));
 for (const profile of profiles) {
   const muscleIds = profileMuscles.get(profile.id) || [];
-  const others = profiles.filter(other => other.id !== profile.id && !(profileMuscles.get(other.id) || []).some(id => muscleIds.includes(id)));
+  const label = text => text.split(/[:, ]/)[0];
+  const movement = text => text.split(':').slice(1).join(':');
+  // Core exercises share muscles but differ in direction (flexie, lateroflexie, rotatie, neutraal),
+  // so a core sibling with another label and another movement stays a fair wrong option.
+  const fair = other => !(profileMuscles.get(other.id) || []).some(id => muscleIds.includes(id)) ||
+    (profile.region === 'core' && other.region === 'core' && label(other.answer) !== label(profile.answer) && similarity(movement(other.answer), movement(profile.answer)) < 0.2);
+  const others = profiles.filter(other => other.id !== profile.id && fair(other));
   profile.distractors = pickDistractors(profile.answer, regionTiers(profile.region, others.map(other => ({ region: other.region, value: other.answer }))), { alike: (a, b) => a.split(':')[0] === b.split(':')[0] || similarity(a, b) >= 0.6 });
 }
 // Two names look alike when they start with the same muscle (the three deltoid heads).
