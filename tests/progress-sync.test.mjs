@@ -263,3 +263,21 @@ test('answers given offline stay on the device and upload once the connection is
   assert.equal(JSON.parse(storage.getItem(SYNC_KEY)).dirty, false);
   sync.stop();
 });
+
+test('typing an answer uploads once after a pause, not on every letter', async t => {
+  const f = fixture(t); const cookie = await f.login(); const storage = local();
+  let posts = 0;
+  const sync = f.client(cookie, storage, { uploadDelay: 30, fetchImpl: async (_, init) => {
+    if (init.body) posts++;
+    return f.service.handle(f.request(init.body && JSON.parse(init.body), cookie));
+  } });
+  await sync.initialize();
+  for (const text of ['b', 'bi', 'bic', 'bice', 'biceps']) sync.storage.setItem(PROGRESS_KEYS[3], JSON.stringify({ openDraft: text }));
+  assert.equal(posts, 0);
+  assert.equal(JSON.parse(storage.getItem(SYNC_KEY)).dirty, true);
+  await new Promise(resolve => setTimeout(resolve, 80));
+  assert.equal(posts, 1);
+  const remote = (await (await f.service.handle(f.request(undefined, cookie))).json()).snapshot;
+  assert.equal(JSON.parse(remote[PROGRESS_KEYS[3]]).openDraft, 'biceps');
+  sync.stop();
+});

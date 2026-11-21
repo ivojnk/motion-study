@@ -25,8 +25,9 @@ let progressSync = null;
 let appOpening = false;
 function syncStatus(state) {
   const status = $('#progress-sync-status');
-  status.hidden = state === 'saved';
-  status.textContent = { pending: 'Voortgang opslaan…', offline: 'Geen verbinding. Nieuwe voortgang blijft lokaal totdat opslaan op de server lukt.', conflict: 'Voortgang op een ander apparaat gewijzigd. Kies welke je wilt gebruiken.' }[state] || '';
+  // Saving happens silently; only a problem that needs attention is shown.
+  status.hidden = !['offline', 'conflict'].includes(state);
+  status.textContent = { offline: 'Geen verbinding. Nieuwe voortgang blijft lokaal totdat opslaan op de server lukt.', conflict: 'Voortgang op een ander apparaat gewijzigd. Kies welke je wilt gebruiken.' }[state] || '';
 }
 function resolveProgressConflict() {
   const dialog = $('#progress-conflict');
@@ -115,7 +116,7 @@ async function openApp(user, preferences = {}) {
       initialSnapshot = recoverySnapshot(readStagedRecovery(sessionStorage));
     }
     const withLock = action => navigator.locks ? navigator.locks.request('motionstudy-progress:' + user.id, action) : action();
-    progressSync = createProgressSync({ storage: local, accountId: user.id, initialSnapshot, withLock, onStatus: syncStatus,
+    progressSync = createProgressSync({ storage: local, accountId: user.id, initialSnapshot, withLock, uploadDelay: 1500, onStatus: syncStatus,
       onConflict: resolveProgressConflict, onReload: () => location.reload() });
     // Export during a startup conflict needs the local account scope too.
     window.motionStudyStorage = local;
