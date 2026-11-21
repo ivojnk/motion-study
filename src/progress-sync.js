@@ -14,8 +14,9 @@ const meaningful = snapshot => {
 
 // Main's synchronous storage interface stays intact. A complete save is uploaded
 // after the current JS turn, under the same account lock as lesson writes.
-export function createProgressSync({ storage, accountId, initialSnapshot = null, fetchImpl = fetch, withLock = action => action(), onStatus = () => {}, onConflict = async () => 'cancel', onReload = () => {} }) {
+export function createProgressSync({ storage, accountId, initialSnapshot = null, fetchImpl = fetch, uploadDelay = 0, withLock = action => action(), onStatus = () => {}, onConflict = async () => 'cancel', onReload = () => {} }) {
   let inFlight = null;
+  let uploadTimer = null;
   let stopped = false;
   let initialized = false;
   let conflictPaused = false;
@@ -160,6 +161,7 @@ export function createProgressSync({ storage, accountId, initialSnapshot = null,
     });
   }
   function flush() {
+    if (uploadTimer) { clearTimeout(uploadTimer); uploadTimer = null; }
     if (stopped || !initialized || conflictPaused) return Promise.resolve(false);
     if (inFlight) return inFlight;
     inFlight = Promise.resolve(withLock(upload)).catch(() => { onStatus('offline'); return false; }).finally(() => { inFlight = null; });
@@ -169,7 +171,11 @@ export function createProgressSync({ storage, accountId, initialSnapshot = null,
     if (!PROGRESS_KEYS.includes(key)) return;
     const current = meta() || { revision: 0 };
     setMeta({ revision: current.revision, dirty: true });
-    queueMicrotask(() => { void flush(); });
+    // Typing saves on every letter; upload once the learner pauses. The change is
+    // already on the device and marked dirty, so waiting can't lose it.
+    if (!uploadDelay) { queueMicrotask(() => { void flush(); }); return; }
+    clearTimeout(uploadTimer);
+    uploadTimer = setTimeout(() => { uploadTimer = null; void flush(); }, uploadDelay);
   }
   const syncedStorage = {
     ...storage,
@@ -212,5 +218,5 @@ export function createProgressSync({ storage, accountId, initialSnapshot = null,
     })).finally(() => { inFlight = null; });
     return inFlight;
   }
-  return { storage: syncedStorage, initialize, flush, refresh, replace, stop() { stopped = true; } };
+  return { storage: syncedStorage, initialize, flush, refresh, replace, stop() { stopped = true; clearTimeout(uploadTimer); } };
 }

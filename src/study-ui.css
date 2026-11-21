@@ -716,3 +716,6 @@ main:not([hidden]) { padding-bottom: calc(112px + env(safe-area-inset-bottom)); 
   .lesson-focus .question-card:has(.open-answer-form) .answers { padding-top: 12px; }
   .lesson-focus .question-card:has(.open-answer-form) .open-answer-input { font-size: 16px; }
 }
+
+/* Sync problems float over the page, so showing or hiding one never moves the layout. */
+#progress-sync-status { position: fixed; top: max(12px, env(safe-area-inset-top)); left: 16px; right: 16px; z-index: 50; max-width: 560px; margin: 0 auto; box-shadow: 0 6px 20px rgb(0 0 0 / 0.12); }
