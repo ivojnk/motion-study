@@ -39,7 +39,9 @@ export function createUsageClient({ accountId, storage, enabled = false, fetchIm
   }
   async function active() {
     if (!allowed || (lastActive && now() - lastActive < 60_000)) return;
-    if (await send('active')) lastActive = now();
+    // Claim the minute before the request, so taps during a slow or failing call don't pile up.
+    const claimed = lastActive = now();
+    if (!await send('active') && lastActive === claimed) lastActive = claimed - 45_000;
     await flush();
   }
   function lessonFinished(session) {

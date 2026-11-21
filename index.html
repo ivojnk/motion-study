@@ -48,8 +48,8 @@
         <button class="account-menu-action" data-install-app type="button" aria-haspopup="dialog" aria-controls="install-app" hidden><img class="icon" src="./icons/arrow-square-out.svg" alt="" />Op je beginscherm</button>
         <button class="account-menu-action" data-legal-dialog="privacy" type="button" aria-haspopup="dialog" aria-controls="privacy"><img class="icon" src="./icons/lock.svg" alt="" />Privacy & opslag</button>
         <button class="account-menu-action" data-legal-dialog="usage" type="button" aria-haspopup="dialog" aria-controls="usage"><img class="icon" src="./icons/book-2.svg" alt="" />Gebruik & contact</button>
-        <button class="account-menu-action" data-progress-recovery type="button" aria-haspopup="dialog" aria-controls="progress-recovery"><img class="icon" src="./icons/refresh.svg" alt="" />Voortgang herstellen</button>
         <button id="credits-button" class="account-menu-action" type="button" aria-haspopup="dialog" aria-controls="credits"><img class="icon" src="./icons/book-2.svg" alt="" />Licenties</button>
+        <button class="account-menu-action" data-progress-recovery type="button" aria-haspopup="dialog" aria-controls="progress-recovery"><img class="icon" src="./icons/refresh.svg" alt="" />Voortgang herstellen</button>
         <button id="account-logout" class="account-menu-action" type="button"><img class="icon" src="./icons/arrow-square-out.svg" alt="" />Uitloggen</button>
         <span id="logout-message" role="alert"></span>
       </div>
@@ -74,8 +74,8 @@
   </section>
   <noscript><p class="account-screen">Zet JavaScript aan om MotionStudy te gebruiken.</p></noscript>
   <main id="main" tabindex="-1" hidden>
-    <p id="progress-sync-status" class="storage-warning" role="status" aria-live="polite" hidden></p>
     <p id="storage-warning" class="storage-warning" role="alert" hidden>Je browser kan je voortgang niet opslaan. Laat dit tabblad open: bij sluiten of vernieuwen kunnen je laatste antwoorden verloren gaan. Controleer of siteopslag is toegestaan en of er voldoende ruimte is.</p>
+    <p id="progress-sync-status" class="storage-warning" role="status" aria-live="polite" hidden></p>
     <section id="intro"></section>
     <div class="workspace">
       <section class="learning-panel" id="learning" aria-label="Leeromgeving"></section>
@@ -102,7 +102,7 @@
   <dialog id="privacy" class="legal-dialog" aria-labelledby="privacy-title">
     <button class="close-dialog" data-legal-close type="button" aria-label="Sluiten" autofocus><img class="icon" src="./icons/x.svg" alt="" /></button>
     <h2 id="privacy-title">Privacy & opslag</h2>
-    <p class="legal-date">Bijgewerkt op 10 oktober 2026</p>
+    <p class="legal-date">Bijgewerkt op 21 november 2026</p>
     <h3>Je account</h3>
     <p>De server bewaart je gebruikersnaam, accountnummer en aanmaakdatum. Wie je gebruikersnaam kent, kan inloggen. Gebruik een bijnaam zonder gevoelige gegevens.</p>
     <h3>Je voortgang</h3>
@@ -127,7 +127,7 @@
     <h3>Cookies en beveiliging</h3>
     <p>Een noodzakelijke inlogcookie werkt maximaal 30 dagen. Uitloggen beëindigt de sessie. De server bewaart de sessiecode gehasht, de vervaldatum, deze informatieversie en je statistiekkeuze. Je IP-adres wordt kort gebruikt om inlogpogingen te beperken. De app plaatst geen advertentie- of trackingcookies.</p>
     <h3>Optionele gebruiksstatistieken</h3>
-    <p>Met jouw toestemming bewaren we de laatste activiteit en het aantal afgeronde lessen bij je account. De beheerder ziet totalen. Deze statistieken staan los van de opslag van je leergegevens. Je keuze geldt voor deze sessie. Het aantal aangemaakte accounts tellen we uit de accountadministratie.</p>
+    <p>Met jouw toestemming bewaren we de laatste activiteit en het aantal afgeronde lessen bij je account. De beheerder ziet je gebruikersnaam en wanneer je account is aangemaakt. Als je statistieken deelt, ziet de beheerder ook je laatste activiteit en het aantal afgeronde lessen. Deze statistieken staan los van de opslag van je leergegevens. Je keuze geldt voor deze sessie. Het aantal aangemaakte accounts tellen we uit de accountadministratie.</p>
     <p>Dagtotalen ouder dan 90 dagen en controlecodes ouder dan 35 dagen worden bij de volgende statistiekverwerking opgeruimd. Niet-verstuurde lesmeldingen blijven maximaal 30 dagen in je browser. Uitzetten wist die meldingen en stopt nieuwe statistieken voor deze sessie. Eerdere servergegevens blijven staan.</p>
     <div id="privacy-preferences" class="privacy-preferences" hidden>
       <label class="account-check"><input id="privacy-analytics" type="checkbox" aria-describedby="privacy-choice-help" /><span>Gebruiksstatistieken delen</span></label>
@@ -144,7 +144,7 @@
   <dialog id="usage" class="legal-dialog" aria-labelledby="usage-title">
     <button class="close-dialog" data-legal-close type="button" aria-label="Sluiten" autofocus><img class="icon" src="./icons/x.svg" alt="" /></button>
     <h2 id="usage-title">Gebruik & contact</h2>
-    <p class="legal-date">Bijgewerkt op 10 oktober 2026</p>
+    <p class="legal-date">Bijgewerkt op 5 oktober 2026</p>
     <p>MotionStudy is een privéleerhulp voor anatomie en biomechanica. De inhoud is geen officiële toets, medisch advies of persoonlijk trainingsadvies.</p>
     <p>Gebruik je eigen account. Deel de link alleen binnen je studiekring. De app controleert geen uitnodigingen of identiteit.</p>
     <h3>Lesstof en licenties</h3>
@@ -176,15 +176,12 @@
       <button class="install-continue" data-install-close type="button">Verder leren</button>
     </div>
   </dialog>
-  <dialog id="progress-recovery" class="legal-dialog" aria-labelledby="progress-recovery-title" aria-describedby="progress-recovery-description">
-    <h2 id="progress-recovery-title">Waar wil je verdergaan?</h2>
-    <p id="progress-recovery-description">Kies de voortgang die je wilt gebruiken.</p>
-    <fieldset class="recovery-list" aria-label="Gevonden voortgang" id="progress-recovery-list"></fieldset>
-    <p id="progress-recovery-status" role="status" aria-live="polite"></p>
-    <div class="progress-transfer-actions">
-      <button id="progress-recovery-use" class="primary" type="button" disabled>Verder met deze voortgang</button>
-      <button id="progress-recovery-close" class="progress-import-button" type="button" autofocus>Sluiten</button>
-    </div>
+  <dialog id="app-update" class="update-dialog" aria-labelledby="app-update-title" aria-describedby="app-update-description">
+    <h2 id="app-update-title">Nieuwe versie beschikbaar</h2>
+    <p id="app-update-description">Er staat een update klaar voor MotionStudy. Werk bij om de nieuwste versie te gebruiken.</p>
+    <p>Je voortgang wordt eerst opgeslagen.</p>
+    <p id="app-update-status" role="status" hidden></p>
+    <div class="update-actions"><button id="app-update-confirm" class="primary" type="button">Bijwerken</button><button id="app-update-later" type="button" autofocus>Later</button></div>
   </dialog>
   <dialog id="progress-conflict" class="legal-dialog" aria-labelledby="progress-conflict-title" aria-describedby="progress-conflict-description">
     <h2 id="progress-conflict-title">Welke voortgang wil je gebruiken?</h2>
@@ -197,12 +194,15 @@
       <button class="progress-import-button" type="button" data-progress-choice="cancel">Later</button>
     </div>
   </dialog>
-  <dialog id="app-update" class="update-dialog" aria-labelledby="app-update-title" aria-describedby="app-update-description">
-    <h2 id="app-update-title">Nieuwe versie beschikbaar</h2>
-    <p id="app-update-description">Er staat een update klaar voor MotionStudy. Werk bij om de nieuwste versie te gebruiken.</p>
-    <p>Je voortgang wordt eerst opgeslagen.</p>
-    <p id="app-update-status" role="status" hidden></p>
-    <div class="update-actions"><button id="app-update-confirm" class="primary" type="button">Bijwerken</button><button id="app-update-later" type="button" autofocus>Later</button></div>
+  <dialog id="progress-recovery" class="legal-dialog" aria-labelledby="progress-recovery-title" aria-describedby="progress-recovery-description">
+    <h2 id="progress-recovery-title">Waar wil je verdergaan?</h2>
+    <p id="progress-recovery-description">Kies de voortgang die je wilt gebruiken.</p>
+    <fieldset class="recovery-list" aria-label="Gevonden voortgang" id="progress-recovery-list"></fieldset>
+    <p id="progress-recovery-status" role="status" aria-live="polite"></p>
+    <div class="progress-transfer-actions">
+      <button id="progress-recovery-use" class="primary" type="button" disabled>Verder met deze voortgang</button>
+      <button id="progress-recovery-close" class="progress-import-button" type="button" autofocus>Sluiten</button>
+    </div>
   </dialog>
   <script type="module" src="/src/bootstrap.js"></script>
 </body>

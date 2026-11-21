@@ -46,7 +46,7 @@ export function parseProgressBackup(text) {
   if (Object.keys(progress.questions).length !== Object.keys(data.progress.questions).length ||
     !Object.keys(data.progress.questions).every(id => questions.has(id)) ||
     progress.sessions.length !== data.progress.sessions.length ||
-    !data.progress.sessions.every(item => count(item.correct) && count(item.total) && item.correct <= item.total && Number.isFinite(item.at)) ||
+    !data.progress.sessions.every(item => item && count(item.correct) && count(item.total) && item.correct <= item.total && Number.isFinite(item.at)) ||
     Object.keys(game.days).length !== Object.keys(data.game.days).length ||
     game.completed.length !== data.game.completed.length ||
     Object.keys(drafts).length !== Object.keys(data.drafts).length ||

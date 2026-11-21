@@ -6,12 +6,12 @@ export const coachingReferences = [
 ];
 
 const principles = [
-  ['external-focus', 'Wat betekent externe focus bij een bewegingscue?', 'Aandacht richten op het effect van de beweging op de omgeving of het materiaal', ['Aandacht richten op de spanning van één spier', 'Iedere gewrichtshoek bewust controleren', 'Alleen luisteren naar een instructie van iemand anders'], '“Duw de vloer weg” richt de aandacht op de vloer. Een cue van een trainer is niet automatisch extern: “span je quadriceps aan” heeft interne focus.'],
-  ['implicit-analogy', 'Hoe gebruik je een analogie als impliciete cue?', 'Een herkenbaar beeld gebruiken dat meerdere technische regels samenvat', ['Alle gewrichtshoeken één voor één laten opnoemen', 'Uitleggen welke spiervezels moeten aanspannen', 'De sporter tijdens elke herhaling alle fouten laten analyseren'], '“Duw de lade dicht” geeft een bewegingsbeeld. Dit kan impliciet leren ondersteunen, maar één beeld bewijst niet dat de beweging al automatisch is geleerd.'],
-  ['focus-versus-implicit', 'Zijn externe focus en impliciete cues hetzelfde?', 'Nee: externe focus beschrijft het aandachtsdoel, impliciete cues beperken expliciete technische regels', ['Ja: elke instructie van een trainer is extern en impliciet', 'Ja: beide betekenen dat je geen feedback geeft', 'Nee: een analogie kan nooit een externe focus hebben'], 'Een cue kan beide combineren: “duw de lade dicht” is een analogie met een extern doel. Een exacte instructie over het pad van een stang kan externe focus hebben en toch expliciet zijn.'],
-  ['one-cue', 'Hoe test je een cue bij een zichtbaar energielek?', 'Kies één cue, observeer enkele herhalingen en vergelijk het lek met de uitgangssituatie', ['Geef vijf nieuwe aanwijzingen tegelijk en verhoog direct het gewicht', 'Beoordeel alleen of de sporter de uitleg kan herhalen', 'Blijf dezelfde cue herhalen zonder de beweging te bekijken'], 'Kies vooraf een zichtbaar controlepunt. Kijk ook of de cue een andere compensatie oproept. Een mooi beeld is pas bruikbaar wanneer de uitvoering verbetert.'],
-  ['no-improvement', 'Wat doe je als een energielek ondanks een cue blijft bestaan?', 'Pas belasting, bewegingsuitslag, steun of oefenvariant aan en beoordeel opnieuw', ['Neem aan dat de sporter de cue niet goed genoeg gehoorzaamt', 'Vergroot de bewegingsuitslag en belasting tegelijk', 'Negeer het lek zodra de sporter de cue begrijpt'], 'Een cue kan een beperking in kracht, mobiliteit, balans of belastbaarheid niet automatisch oplossen. Kies een uitvoerbare variant en toets dezelfde beweging opnieuw.'],
-  ['retention', 'Hoe controleer je of een correctie ook zonder de cue behouden blijft?', 'Laat later enkele herhalingen zonder herinnering of hulpmiddel uitvoeren en observeer opnieuw', ['Herhaal de cue onafgebroken en neem aan dat de beweging geleerd is', 'Vraag alleen of de sporter de zin uit het hoofd kent', 'Test uitsluitend met een zwaarder gewicht en meer aanwijzingen'], 'Verbetering tijdens coaching en zelfstandig behoud zijn verschillende uitkomsten. Bouw de hulp af zodra dat lukt en kijk of de correctie standhoudt.']
+  ['external-focus', 'Wat betekent externe focus bij een bewegingscue?', 'Aandacht richten op het effect van de beweging op de omgeving of het materiaal', ['Aandacht richten op de werking van een spier of gewricht tijdens de beweging', 'Aandacht richten op de eigen houding en gewrichtshoeken tijdens de beweging', 'Aandacht richten op de ademhaling en het tempo van de beweging'], '“Duw de vloer weg” richt de aandacht op de vloer. Een cue van een trainer is niet automatisch extern: “span je quadriceps aan” heeft interne focus.'],
+  ['implicit-analogy', 'Hoe gebruik je een analogie als impliciete cue?', 'Een herkenbaar beeld gebruiken dat meerdere technische regels samenvat', ['Een gedetailleerde uitleg geven die elke technische regel apart benoemt', 'Een metafoor gebruiken die één spier benoemt die moet aanspannen', 'Een video van een topsporter tonen met uitleg over iedere gewrichtshoek'], '“Duw de lade dicht” geeft een bewegingsbeeld. Dit kan impliciet leren ondersteunen, maar één beeld bewijst niet dat de beweging al automatisch is geleerd.'],
+  ['focus-versus-implicit', 'Zijn externe focus en impliciete cues hetzelfde?', 'Nee: externe focus beschrijft het aandachtsdoel, impliciete cues beperken expliciete technische regels', ['Nee: externe focus beschrijft de technische regels, impliciete cues bepalen het aandachtsdoel', 'Ja: beide beschrijven het aandachtsdoel, het verschil zit in de woordkeuze', 'Nee: externe focus geldt voor beginners, impliciete cues voor gevorderde sporters'], 'Een cue kan beide combineren: “duw de lade dicht” is een analogie met een extern doel. Een exacte instructie over het pad van een stang kan externe focus hebben en toch expliciet zijn.'],
+  ['one-cue', 'Hoe test je een cue bij een zichtbaar energielek?', 'Kies één cue, observeer enkele herhalingen en vergelijk het lek met de uitgangssituatie', ['Kies drie cues, laat de sporter ze combineren en beoordeel het gevoel na de set', 'Kies één cue, laat de sporter hem herhalen en vraag of de uitleg duidelijk was', 'Kies één cue, observeer enkele herhalingen en verhoog daarna direct het gewicht'], 'Kies vooraf een zichtbaar controlepunt. Kijk ook of de cue een andere compensatie oproept. Een mooi beeld is pas bruikbaar wanneer de uitvoering verbetert.'],
+  ['no-improvement', 'Wat doe je als een energielek ondanks een cue blijft bestaan?', 'Pas belasting, bewegingsuitslag, steun of oefenvariant aan en beoordeel opnieuw', ['Voeg meer cues, extra uitleg en een zwaardere variant toe en beoordeel opnieuw', 'Herhaal dezelfde cue luider, vaker en met meer nadruk en beoordeel opnieuw', 'Verhoog belasting, bewegingsuitslag en tempo tegelijk en beoordeel pas na enkele weken'], 'Een cue kan een beperking in kracht, mobiliteit, balans of belastbaarheid niet automatisch oplossen. Kies een uitvoerbare variant en toets dezelfde beweging opnieuw.'],
+  ['retention', 'Hoe controleer je of een correctie ook zonder de cue behouden blijft?', 'Laat later enkele herhalingen zonder herinnering of hulpmiddel uitvoeren en observeer opnieuw', ['Laat direct na de cue enkele herhalingen uitvoeren en observeer of de beweging beter oogt', 'Laat later enkele herhalingen uitvoeren terwijl je de cue blijft herhalen en observeer opnieuw', 'Laat de sporter later uitleggen hoe de correctie werkt en observeer of de uitleg klopt'], 'Verbetering tijdens coaching en zelfstandig behoud zijn verschillende uitkomsten. Bouw de hulp af zodra dat lukt en kijk of de correctie standhoudt.']
 ];
 
 // key, chapter, leak, related course question, cue, observable check, adaptation.
@@ -54,45 +54,52 @@ const corrections = [
 ];
 
 
-// Contrast with mistakes in this specific correction, rather than other cues
-// that might also be useful for the same movement.
-const correctionDistractors = {
-  'squat-hyperextension': ['“Maak je onderrug zo hol mogelijk.”', '“Til je borst omhoog zonder je bekken mee te nemen.”', '“Leun bovenin achterover om de herhaling af te maken.”'],
-  'squat-stripper': ['“Laat je heup eerst omhoog schieten.”', '“Strek eerst je knieën en til daarna de stang op.”', '“Laat de stang laag terwijl je heup omhooggaat.”'],
-  'squat-valgus': ['“Laat je knieën naar elkaar toe bewegen.”', '“Rol op de buitenranden van je voeten.”', '“Houd je knieën bij elkaar, ongeacht je teenrichting.”'],
-  'squat-shift': ['“Zak steeds naar je sterkste kant.”', '“Verplaats al je druk naar één voet.”', '“Laat je bekken zijwaarts uitwijken voor extra diepte.”'],
-  'front-squat-collapse': ['“Laat je dienblad naar voren kantelen.”', '“Laat je ellebogen onderin naar de vloer wijzen.”', '“Rol de stang tijdens het zakken van zijn steunplaats.”'],
-  'squat-butt-wink': ['“Zak verder zodra je onderrug begint te ronden.”', '“Raak de vloer aan, ongeacht je bekkenpositie.”', '“Gebruik dezelfde boxhoogte voor iedere sporter.”'],
-  'hinge-hyperextension': ['“Houd je borst zo hoog mogelijk terwijl je heup teruggaat.”', '“Leun bovenin achterover.”', '“Maak de boog in je onderrug groter tijdens het zakken.”'],
-  'hinge-hyperflexion': ['“Laat je hoofd loskomen van de stok voor extra diepte.”', '“Zak tot de vloer, ook als de rug rondt.”', '“Verplaats alle druk naar je tenen en zak verder.”'],
-  'hinge-knees': ['“Duw de stok achter je schenen weg.”', '“Strek je knieën maximaal op slot vóór je beweegt.”', '“Zak met je knieën ver naar voren alsof je een squat doet.”'],
-  'hinge-shift': ['“Duw de lade met één kant van je bekken dicht.”', '“Verplaats alle druk naar één voet.”', '“Schuif je heup naar de kant die het makkelijkst beweegt.”'],
-  'hinge-bar-away': ['“Duw de stang ver voor je tenen.”', '“Laat de stang van je broek weg zweven.”', '“Houd je heup vooraan terwijl de stang naar voren gaat.”'],
-  'push-hyperextension': ['“Vergroot de holling tijdens het duwen.”', '“Duw je ribben omhoog voor extra bereik.”', '“Laat je bekken zakken terwijl je borst omhooggaat.”'],
-  'push-shoulder-dump': ['“Laat de gewichten zo diep mogelijk zakken.”', '“Rol je schouderkop naar voren aan het einde.”', '“Vergroot de diepte zodra je schouder naar voren rolt.”'],
-  'push-flaring': ['“Laat je ellebogen haaks op je romp uitwaaieren.”', '“Schuif je polsen ver buiten je ellebogen.”', '“Duw de gewichten naar buiten, weg van de gekozen rails.”'],
-  'bench-feet': ['“Til je voeten op zodra het gewicht stijgt.”', '“Laat je voeten boven de vloer zweven.”', '“Verplaats je voeten tijdens iedere duwfase.”'],
-  'bench-butt': ['“Til je afdruk van de bank.”', '“Duw met je voeten totdat je bekken loskomt.”', '“Maak ruimte tussen je billen en de bank.”'],
-  'bench-head': ['“Til je hoofd op om het gewicht te volgen.”', '“Duw je achterhoofd zo hard mogelijk in de bank.”', '“Maak je hoofd los van de steun bij iedere herhaling.”'],
-  'row-hyperextension': ['“Trek je borst los van de steun.”', '“Gooi je romp achterover om de trek af te maken.”', '“Maak je onderrug holler zodra het handvat dichterbij komt.”'],
-  'row-shoulder-dump': ['“Trek het handvat altijd zo ver mogelijk door.”', '“Duw je schouderkop naar voren terwijl je elleboog naar achteren gaat.”', '“Laat het doel steeds verder achter je romp liggen.”'],
-  'row-elevation': ['“Trek het handvat met een shrug omhoog.”', '“Breng je schouders eerst naar je oren.”', '“Haal de trek vooral uit het optillen van je schouders.”'],
-  'press-hyperextension': ['“Duw je ribben omhoog voor extra hoogte.”', '“Leun achterover om onder het gewicht te komen.”', '“Maak je onderrug holler terwijl het gewicht stijgt.”'],
-  'press-elevation': ['“Zet je schouderbladen tijdens de hele press vast naar beneden.”', '“Begin elke press met een losse shrug.”', '“Laat je schouderbladen niet omhoog draaien.”'],
-  'press-sidebend': ['“Leun opzij om ruimte te maken voor het gewicht.”', '“Laat borst en bekken naar verschillende kanten bewegen.”', '“Schuif je romp buiten de denkbeeldige muren.”'],
-  'press-stack': ['“Laat de dumbbell ver naast de onderarm zweven.”', '“Laat je pols buiten de elleboog uitwijken.”', '“Kantel de toren tijdens het omhoogduwen.”'],
-  'pull-shoulder-dump': ['“Trek door zodra je schouderkop naar voren rolt.”', '“Breng het handvat zo laag mogelijk, ongeacht de schouderstand.”', '“Rol de schouders naar voren in de eindpositie.”'],
-  'pull-hyperextension': ['“Maak je onderrug holler terwijl het handvat daalt.”', '“Gooi je romp achterover voor extra trekafstand.”', '“Laat de ribben omhoogkomen terwijl het bekken blijft staan.”'],
-  'pull-forearm': ['“Draai je onderarmen achterwaarts naar horizontaal.”', '“Trek het handvat lager, ook als de onderarmen kantelen.”', '“Laat de greep ver vóór de ellebogen eindigen.”'],
-  deadbug: ['“Laat de druk op het handdoekje verdwijnen.”', '“Duw je ribben omhoog zodra het been strekt.”', '“Vergroot de uitslag terwijl de rug holler wordt.”'],
-  birddog: ['“Kantel het dienblad naar de uitgestrekte kant.”', '“Draai je bekken mee met je been.”', '“Til arm en been zo hoog mogelijk, ook als je romp wegzakt.”'],
-  plank: ['“Laat de brug in het midden doorzakken.”', '“Maak een hoge punt van de brug.”', '“Verleng de houdtijd terwijl de rompstand wegvalt.”'],
-  'back-hold': ['“Knik voorbij de lijn van de bank naar achteren.”', '“Til de romp altijd hoger dan de benen.”', '“Maak je onderrug maximaal hol om de houding vast te houden.”'],
-  pallof: ['“Laat het handvat naar de kabel toe afbuigen.”', '“Draai je koplampen mee richting de kabel.”', '“Vergroot de holling om verder te kunnen reiken.”'],
-  'anti-chop': ['“Draai je romp mee met het touw.”', '“Laat de bovenrug inzakken terwijl het touw beweegt.”', '“Laat je koplampen met elke trek meedraaien.”'],
-  'side-plank': ['“Laat het midden van de brug zakken.”', '“Til je heup zo hoog mogelijk boven de lijn.”', '“Rol voorover om de positie langer vol te houden.”'],
-  carry: ['“Kantel het dienblad bij iedere stap.”', '“Leun met je romp naar het gewicht toe.”', '“Hang zijwaarts van het gewicht weg.”']
+// Distractors are the cues of other leaks in this list (same style, same
+// length, real course material), so the learner has to match cue to leak.
+// Cues that share an image with the answer (blikje, rails, lade, stok, dienblad,
+// koplampen, brug) are never offered together.
+const distractorKeys = {
+  'squat-hyperextension': ['squat-valgus', 'hinge-bar-away', 'press-sidebend'],
+  'squat-stripper': ['hinge-shift', 'squat-butt-wink', 'bench-head'],
+  'squat-valgus': ['squat-shift', 'front-squat-collapse', 'hinge-hyperflexion'],
+  'squat-shift': ['squat-valgus', 'press-stack', 'bench-butt'],
+  'front-squat-collapse': ['squat-butt-wink', 'hinge-hyperextension', 'squat-stripper'],
+  'squat-butt-wink': ['hinge-knees', 'press-elevation', 'anti-chop'],
+  'hinge-hyperextension': ['hinge-bar-away', 'squat-butt-wink', 'row-elevation'],
+  'hinge-hyperflexion': ['squat-stripper', 'push-flaring', 'deadbug'],
+  'hinge-knees': ['squat-hyperextension', 'press-sidebend', 'bench-feet'],
+  'hinge-shift': ['pull-forearm', 'birddog', 'hinge-bar-away'],
+  'hinge-bar-away': ['squat-stripper', 'hinge-knees', 'press-elevation'],
+  'push-hyperextension': ['push-shoulder-dump', 'push-flaring', 'press-stack'],
+  'push-shoulder-dump': ['hinge-bar-away', 'bench-head', 'press-sidebend'],
+  'push-flaring': ['squat-shift', 'bench-butt', 'pallof'],
+  'bench-feet': ['bench-butt', 'bench-head', 'row-hyperextension'],
+  'bench-butt': ['bench-feet', 'bench-head', 'squat-shift'],
+  'bench-head': ['bench-feet', 'bench-butt', 'press-elevation'],
+  'row-hyperextension': ['row-shoulder-dump', 'row-elevation', 'bench-head'],
+  'row-shoulder-dump': ['row-hyperextension', 'row-elevation', 'press-elevation'],
+  'row-elevation': ['row-hyperextension', 'row-shoulder-dump', 'hinge-bar-away'],
+  'press-hyperextension': ['press-sidebend', 'press-stack', 'hinge-hyperextension'],
+  'press-elevation': ['press-hyperextension', 'press-sidebend', 'press-stack'],
+  'press-sidebend': ['press-hyperextension', 'press-elevation', 'pallof'],
+  'press-stack': ['press-hyperextension', 'press-sidebend', 'push-flaring'],
+  'pull-shoulder-dump': ['pull-hyperextension', 'pull-forearm', 'row-elevation'],
+  'pull-hyperextension': ['pull-shoulder-dump', 'pull-forearm', 'press-elevation'],
+  'pull-forearm': ['pull-shoulder-dump', 'pull-hyperextension', 'push-flaring'],
+  deadbug: ['birddog', 'plank', 'pallof'],
+  birddog: ['deadbug', 'side-plank', 'press-sidebend'],
+  plank: ['deadbug', 'birddog', 'back-hold'],
+  'back-hold': ['plank', 'deadbug', 'hinge-hyperextension'],
+  pallof: ['plank', 'birddog', 'press-sidebend'],
+  'anti-chop': ['deadbug', 'side-plank', 'birddog'],
+  'side-plank': ['deadbug', 'back-hold', 'pallof'],
+  carry: ['pallof', 'deadbug', 'plank']
 };
+const cueByKey = new Map(corrections.map(row => [row[0], row[4]]));
+const correctionDistractors = Object.fromEntries(Object.entries(distractorKeys).map(([key, others]) => [key, others.map(other => {
+  if (!cueByKey.has(other)) throw new Error('Unknown coaching cue: ' + other);
+  return cueByKey.get(other);
+})]));
 
 export function coachingQuestions(courseQuestions) {
   const lookup = new Map(courseQuestions.map(question => [question.id, question]));

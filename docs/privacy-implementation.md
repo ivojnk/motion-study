@@ -16,5 +16,3 @@ Official sources checked on 5 October 2026:
 - [Cloudflare: data processing addendum](https://www.cloudflare.com/cloudflare-customer-dpa/)
 
 Verification: all 140 tests passed, including acknowledgement rejection, legacy-session migration, analytics refusal/withdrawal, and pending-buffer cleanup. Build passed. Browser checks covered login validation, pre-login dialogs, keyboard/Escape/focus restoration, opt-in/withdrawal/reload, unrelated learning storage preservation, 320/390/1280px overflow and emulated mobile taps. Screenshots are in output/playwright/privacy-*.png. No physical-device or screen-reader check was performed. No deployment was requested in this chat.
-
-Release integration: the isolated account-privacy checkout was based on the latest origin/main, preserving the merged home-screen installation. All 143 current tests, the production build and Cloudflare Worker dry-run passed. Local data, secrets, browser artifacts and unrelated logo work were excluded.

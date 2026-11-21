@@ -158,7 +158,8 @@ function renderHome() {
   if (homeStats) {
     homeStats.hidden = false;
     homeStats.innerHTML = '<span class="home-metric metric-streak" title="Dagelijkse streak">' + icon('flame') + '<strong>' + stats.streak + '</strong><span class="visually-hidden"> ' + (stats.streak === 1 ? 'dag' : 'dagen') + ' streak</span></span>' +
-      '<span class="home-metric metric-points" title="Verzamelde punten">' + icon('sparkles') + '<strong>' + stats.xp + '</strong><span class="visually-hidden"> verzamelde punten</span></span>';
+      '<span class="home-metric metric-points" title="Verzamelde punten">' + icon('sparkles') + '<strong>' + stats.xp + '</strong><span class="visually-hidden"> verzamelde punten</span></span>' +
+      '<span class="home-metric metric-lessons" title="Afgeronde lessen van het totaal">' + icon('book-2') + '<strong>' + levels.filter(level => level.done).length + '/' + levels.length + '</strong><span class="visually-hidden"> lessen afgerond</span></span>';
   }
   const activeTopic = topic || levels.find(level => !level.done)?.topic || topics.at(-1);
   const activeLevel = current || levels.find(level => !level.done);
@@ -250,7 +251,8 @@ function start(region, levelId = null) {
   pendingStreakSession = null;
   pendingPointSelection = null;
   refreshProgress();
-  if (levelId && !levelPath(game).some(level => level.id === levelId && !level.locked)) return;
+  // An unknown or locked level would otherwise leave the previous screen up under a lesson URL.
+  if (levelId && !levelPath(game).some(level => level.id === levelId && !level.locked)) { location.replace('#leren'); return; }
   if (!session || session.region !== region || session.finished || session.levelId !== levelId) {
     save();
     pairSelection = null; pairMessage = '';
@@ -416,8 +418,11 @@ function extraExplanationMarkup(q) {
   const cards = curriculum.cards.filter(card => muscleIds.includes(card.id));
   const fields = cards.flatMap(card => Object.entries(card.fields || {}).filter(([, value]) => value !== q.answer)
     .map(([label, value]) => '<p><strong>' + escape((cards.length > 1 ? card.name + ' · ' : '') + label) + '</strong><br>' + escape(value) + '</p>')).slice(0, 4);
+  // Neighbouring questions on the same course page follow the sheet's order, so they cover the same topic.
+  const position = other => curriculum.questions.findIndex(item => item.id === other.id), here = position(q);
   const related = fields.length ? [] : curriculum.questions.filter(other => other.id !== q.id && other.type !== 'recognition' &&
-    other.region === q.region && other.source?.section === q.source?.section && other.answer !== q.answer).slice(0, 3)
+    other.region === q.region && other.source?.section === q.source?.section && other.source?.page === q.source?.page &&
+    other.answer !== q.answer).sort((a, b) => Math.abs(position(a) - here) - Math.abs(position(b) - here)).slice(0, 3)
     .map(other => '<p><strong>' + escape(other.prompt) + '</strong><br>' + escape(other.explanation || other.answer) + '</p>');
   const content = (q.modelContext?.hint ? '<p>' + escape(q.modelContext.hint) + '</p>' : '') + fields.join('') + related.join('');
   return content ? '<details class="extra-explanation"><summary>Meer uitleg</summary><div class="extra-explanation-content">' + content + '</div></details>' : '';
@@ -855,8 +860,7 @@ window.addEventListener('hashchange', navigate);
 window.matchMedia('(max-width:620px)').addEventListener('change', arrangeModelQuestion);
 window.addEventListener('storage', event => {
   if ([DRAFTS_KEY, SESSION_KEY].map(key => storage.keyFor ? storage.keyFor(key) : key).includes(event.key) && !canSaveLesson()) return;
-  if ([PROGRESS_KEY, GAME_KEY].map(key => storage.keyFor ? storage.keyFor(key) : key).includes(event.key)) { refreshProgress(); if (route === 'leren') renderHome(); else if (route === 'voortgang') renderProgress();
-  else if (route === 'vragen') renderQuestionBank(); }
+  if ([PROGRESS_KEY, GAME_KEY].map(key => storage.keyFor ? storage.keyFor(key) : key).includes(event.key)) { refreshProgress(); if (route === 'leren') renderHome(); else if (route === 'voortgang') renderProgress(); }
 });
 const modelPrompt = document.createElement('p');
 modelPrompt.id = 'model-prompt'; modelPrompt.tabIndex = -1; modelPrompt.className = 'model-prompt'; modelPrompt.hidden = true;

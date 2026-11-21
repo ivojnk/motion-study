@@ -65,7 +65,14 @@ export async function createViewer(canvas, onSelect, onStatus) {
   let pickingEnabled = true;
   const muscleMeshes = [];
   const available = new Set();
-  const gltf = await loader.loadAsync(import.meta.env.BASE_URL + 'models/muscular.glb');
+  let gltf;
+  try { gltf = await loader.loadAsync(import.meta.env.BASE_URL + 'models/muscular.glb'); }
+  catch (error) {
+    // The caller never gets a viewer to dispose, so tear down what exists so far before a retry.
+    observer.disconnect(); controls.dispose(); draco.dispose(); if (frame !== null) cancelAnimationFrame(frame);
+    [muscleMaterial, boneMaterial, focusMaterial, dimMaterial, ...choiceMaterials].forEach(m => m.dispose()); renderer.dispose();
+    throw error;
+  }
   gltf.scene.updateMatrixWorld(true);
   // Flatten only owned meshes, preserving world transforms; nested structures stay independently visible.
   const candidates = [];
@@ -301,7 +308,7 @@ export async function createViewer(canvas, onSelect, onStatus) {
     updateMaterials();
     choicePanel.open(choices);
   });
-  canvas.addEventListener('keydown', event => {
+  const onKeyDown = event => {
     if (event.key === 'Escape' && choiceState) { event.preventDefault(); clearChoice(); return; }
     const delta = camera.position.clone().sub(controls.target);
     const spherical = new THREE.Spherical().setFromVector3(delta);
@@ -318,7 +325,8 @@ export async function createViewer(canvas, onSelect, onStatus) {
     camera.position.copy(controls.target).add(new THREE.Vector3().setFromSpherical(spherical));
     controls.update();
     render();
-  });
+  };
+  canvas.addEventListener('keydown', onKeyDown);
   async function showSkeleton(show) {
     if (!show) { if (skeleton) skeleton.visible = false; render(); return; }
     if (!skeletonPromise) skeletonPromise = loader.loadAsync(import.meta.env.BASE_URL + 'models/skeletal.glb').then(result => {
@@ -333,5 +341,5 @@ export async function createViewer(canvas, onSelect, onStatus) {
   onStatus('ready');
   return { available, select, highlight, view, render, showSkeleton, showModelChoices, setIsolated,
     setPickingEnabled(value) { pickingEnabled = value; if (!value) clearChoice(); },
-    dispose() { clearChoice(); clearModelChoices(); choicePanel?.dispose(); unbindTapSelection(); observer.disconnect(); controls.dispose(); draco.dispose(); if (frame !== null) cancelAnimationFrame(frame); scene.traverse(n => n.geometry?.dispose()); [muscleMaterial, boneMaterial, focusMaterial, dimMaterial, ...choiceMaterials].forEach(m => m.dispose()); renderer.dispose(); } };
+    dispose() { clearChoice(); clearModelChoices(); choicePanel?.dispose(); unbindTapSelection(); canvas.removeEventListener('keydown', onKeyDown); observer.disconnect(); controls.dispose(); draco.dispose(); if (frame !== null) cancelAnimationFrame(frame); scene.traverse(n => n.geometry?.dispose()); [muscleMaterial, boneMaterial, focusMaterial, dimMaterial, ...choiceMaterials].forEach(m => m.dispose()); renderer.dispose(); } };
 }

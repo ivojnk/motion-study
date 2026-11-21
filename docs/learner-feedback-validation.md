@@ -8,3 +8,6 @@
 Validation: 293 tests passed. Account/static builds passed (existing chunk-size warnings). Browser checks at 320, 390 and 1280 pixels: no horizontal overflow; expanded explanation preserves the next button. Keyboard focus/Space and emulated touch checked; reduced motion supported without adding animation. Input position/focus/draft checked during character-by-character typing. Physical iPhone keyboard behaviour was not tested.
 
 Screenshot: `output/playwright/learner-feedback-320.png`. No deployment performed.
+## Production release
+
+Released 10 October 2026 via PR [#25](https://github.com/ivojnk/motion-study/pull/25), merge `3028c4f`. Current-main verification passed 316 tests and both builds. Worker deployment `b13ba51d-f240-4edb-a8e7-dfddb0328eca` and GitHub Pages static commit `b3df93d` are live; remote HTML and version endpoints match the built output. Live account/security checks and browser lesson flows passed, including the absent repeated streak on the next lesson.

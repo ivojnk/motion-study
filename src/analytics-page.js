@@ -27,6 +27,17 @@ async function load() {
       }
       return tr;
     }));
+    $('#users').replaceChildren(...data.users.map(user => {
+      const tr = document.createElement('tr');
+      for (const [index, value] of [user.username, date.format(new Date(user.createdAt)), user.lastActiveAt ? date.format(new Date(user.lastActiveAt)) : 'Onbekend', number.format(user.lessons)].entries()) {
+        const cell = document.createElement(index === 0 ? 'th' : 'td');
+        if (index === 0) cell.scope = 'row';
+        cell.textContent = value;
+        tr.append(cell);
+      }
+      return tr;
+    }));
+    $('#users-section').hidden = !data.users.length;
     $('#metrics').hidden = false;
     $('#daily-section').hidden = false;
     $('#measured-from').textContent = 'Gebruik en lessen worden gemeten sinds ' + date.format(new Date(data.measuredFrom)) + ' om ' + time.format(new Date(data.measuredFrom)) + '. Eerdere dagen staan als n.v.t. Dagtotalen blijven 90 dagen beschikbaar.';

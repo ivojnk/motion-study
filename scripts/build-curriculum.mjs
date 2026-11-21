@@ -9,7 +9,10 @@ import { exerciseCombinationQuestions } from '../src/data/exercise-combinations.
 import { additionalMuscleCards, modelKnowledgeQuestions } from '../src/data/model-knowledge.js';
 import { coachingQuestions } from '../src/data/coaching-cues.js';
 import { courseDetailQuestions } from '../src/data/course-details.js';
+import { advancedLessonQuestions } from '../src/data/advanced-lessons.js';
 import { withModelContexts } from '../src/data/model-contexts.js';
+import { exerciseRows } from '../src/data/exercise-catalog.js';
+import { pickDistractors, regionTiers, similarity } from '../src/data/distractor-pool.js';
 // Optional local import; the public build uses the checked-in question bank.
 const raw = (await readFile('sources/course.txt', 'utf8')).replace(/\r/g, '');
 const clean = value => value.replace(/[\u0000-\u0008]/g, '').replace(/\s+/g, ' ').trim();
@@ -34,9 +37,10 @@ const cards = muscles.map(muscle => {
   });
   return { ...muscle, fields, source: { section: muscle.name, page: pageFor(muscle.anchor), excerpt, start, end } };
 });
-const questions = cards.flatMap(card => Object.entries(card.fields).map(([field, answer]) => {
-  const distractors = [...new Set(cards.filter(other => other.id !== card.id).map(other => other.fields[field]).filter(value => value && value !== answer))].slice(0, 8);
-  if (distractors.length < 3) throw new Error('Not enough distinct options for ' + card.id);
+let questions = cards.flatMap(card => Object.entries(card.fields).map(([field, answer]) => {
+  // Wrong options come from muscles in the same area, so they look like real candidates.
+  const others = cards.filter(other => other.id !== card.id && other.fields[field]).map(other => ({ region: other.region, value: other.fields[field] }));
+  const distractors = pickDistractors(answer, regionTiers(card.region, others));
   return { id: card.id + '-' + field, region: card.region, muscleId: card.id, type: 'choice', prompt: 'Wat is de ' + field + ' van ' + card.name + '?', answer, distractors, source: card.source };
 }));
 for (const concept of [...concepts, ...extraBasis, ...extraMuscles, ...extraPatterns]) {
@@ -44,14 +48,31 @@ for (const concept of [...concepts, ...extraBasis, ...extraMuscles, ...extraPatt
   if (start < 0) throw new Error('Missing concept anchor: ' + concept.anchor);
   questions.push({ ...concept, type: 'choice', source: { section: concept.region, page: pageFor(concept.anchor), excerpt: raw.slice(start, start + Math.max(450, concept.anchor.length)), start, end: start + Math.max(450, concept.anchor.length) } });
 }
+// Exercise profiles: wrong options are other exercises' profiles from the same
+// area that train different muscles, so none of them is also true.
+const profileMuscles = new Map(exerciseRows.map(row => [row.sourceQuestionId, row.muscleIds]));
+const profiles = questions.filter(q => /^extra-muscles-.+-profile$/.test(q.id));
+for (const profile of profiles) {
+  const muscleIds = profileMuscles.get(profile.id) || [];
+  const label = text => text.split(/[:, ]/)[0];
+  const movement = text => text.split(':').slice(1).join(':');
+  // Core exercises share muscles but differ in direction (flexie, lateroflexie, rotatie, neutraal),
+  // so a core sibling with another label and another movement stays a fair wrong option.
+  const fair = other => !(profileMuscles.get(other.id) || []).some(id => muscleIds.includes(id)) ||
+    (profile.region === 'core' && other.region === 'core' && label(other.answer) !== label(profile.answer) && similarity(movement(other.answer), movement(profile.answer)) < 0.2);
+  const others = profiles.filter(other => other.id !== profile.id && fair(other));
+  profile.distractors = pickDistractors(profile.answer, regionTiers(profile.region, others.map(other => ({ region: other.region, value: other.answer }))), { alike: (a, b) => a.split(':')[0] === b.split(':')[0] || similarity(a, b) >= 0.6 });
+}
+// Two names look alike when they start with the same muscle (the three deltoid heads).
+const sameMuscleFamily = (a, b) => a.split(/[ ·]/)[0] === b.split(/[ ·]/)[0];
 // Recognition uses the same source-linked muscle cards and verified mesh names.
-for (const card of cards) questions.push({ id: card.id + '-recognition', region: card.region, muscleId: card.id, type: 'recognition', prompt: 'Welke spier is paars gemarkeerd?', answer: card.name, distractors: cards.filter(other => other.id !== card.id).map(other => other.name), source: card.source });
+for (const card of cards) questions.push({ id: card.id + '-recognition', region: card.region, muscleId: card.id, type: 'recognition', prompt: 'Welke spier is paars gemarkeerd?', answer: card.name, distractors: pickDistractors(card.name, regionTiers(card.region, cards.filter(other => other.id !== card.id).map(other => ({ region: other.region, value: other.name }))), { limit: 8, ambiguous: 1.01, alike: sameMuscleFamily }), source: card.source });
 questions.push(...profileQuestions);
 cards.push(...additionalMuscleCards(questions));
 questions.push(...exerciseCombinationQuestions(questions));
 questions.push(...modelKnowledgeQuestions(questions, cards));
 questions.push(...coachingQuestions(questions));
-questions.push(...courseDetailQuestions);
+questions = [...questions, ...courseDetailQuestions, ...advancedLessonQuestions];
 const coverage = [
   ...basisCoverage, ...muscleCoverage, ...patternCoverage,
   ...cards.filter(card => muscles.some(muscle => muscle.id === card.id)).map(card => ({ id: 'card-' + card.id, label: card.name + ': spierkennis en herkenning', questionIds: [...Object.keys(card.fields).map(field => card.id + '-' + field), card.id + '-recognition'] })),
@@ -68,7 +89,7 @@ for (const unit of coverage) {
 }
 await mkdir('src/data', { recursive: true });
 for (const item of [...cards, ...questions]) {
-  if (item.source.kind !== 'supplement') item.source = { ...(item.source.kind === 'course-detail' ? { kind: 'course-detail' } : {}), title: 'Anatomie & Biomechanica', section: item.source.section, page: item.source.page };
+  if (item.source.kind !== 'supplement') item.source = { ...(item.source.kind === 'course-detail' ? { kind: 'course-detail' } : {}), title: item.source.title || 'Anatomie & Biomechanica', section: item.source.section, page: item.source.page };
   delete item.anchor; delete item.end;
 }
 await writeFile('src/data/curriculum.json', JSON.stringify({ license: 'CC-BY-SA-4.0', title: 'Anatomie & Biomechanica', fetchedAt: '2026-10-05', sourcePages: 28, coverage, cards, questions: withModelContexts(questions) }, null, 2));

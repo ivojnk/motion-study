@@ -1,6 +1,7 @@
 import { extraMuscleGroups } from './muscles.js';
 import { exerciseRows } from './exercise-catalog.js';
 import { lengthProfiles } from './length-profiles.js';
+import { pickDistractors, regionTiers } from './distractor-pool.js';
 
 export function additionalMuscleCards(questions) {
   return extraMuscleGroups.map(group => {
@@ -47,7 +48,10 @@ export function modelKnowledgeQuestions(questions, cards) {
       group.id === 'pelvic-floor' ? sourceQuestions.filter(q => q.id.startsWith('extra-muscles-pelvic-') && !/positions|lift/.test(q.id)) :
       sourceQuestions.filter(q => q.id === group.sourceQuestionId);
     for (const fact of related) add(fact, [group.id], card.view, 'De gemarkeerde structuur is ' + group.name + '.');
-    const names = cards.filter(other => other.id !== card.id).map(other => other.name);
+    // Nearby structures first, and never three heads of one muscle next to a different answer.
+    const others = cards.filter(other => other.id !== card.id).map(other => ({ region: other.region, value: other.name }));
+    const names = pickDistractors(card.name, regionTiers(card.region, others), { limit: 8, ambiguous: 1.01,
+      alike: (a, b) => a.split(/[ ·]/)[0] === b.split(/[ ·]/)[0] });
     generated.push({ id: 'model-name-' + card.id, region: 'verdieping', muscleId: card.id, type: 'recognition',
       prompt: 'Welke spier of structuur is paars gemarkeerd?', answer: card.name, distractors: names,
       acceptedAnswers: group.id === 'diaphragm' ? ['middenrif'] : group.id === 'pelvic-floor' ? ['bekkenbodemspieren'] : [], source: { ...card.source } });

@@ -1,11 +1,21 @@
-# Browser progress verification — 2026-10-05
+# Browser progress check — 2026-10-05
 
-Scope: prevent stale tabs from overwriting saved lessons and expose browser storage failures. Account-local storage keys and existing progress remain compatible.
+Initial result: browser-local persistence works, but stale tabs could overwrite lesson drafts and storage errors were silent.
 
-Four regression tests reproduce stale lesson overwrites, duplicate grading, restored completed drafts and storage failure/recovery. Independent browser checks retained answer feedback after reload, 5 XP after closing/reopening the tab, and 10 XP plus the unfinished lesson after logout/re-entry. A second tab reloaded to the new answer with answered buttons disabled.
+Evidence: four regression tests failed before the fix. All 163 tests initially passed after the fix. After concurrent curriculum edits, the final 57 focused app/account/open-answer tests passed and the production build passed. The final full suite passed 159/163: four failures concern new exercise-combination modes, 89 versus 88 lessons and lesson-group sizes. These changes were outside this patch.
 
-The release is prepared on current origin/main with only the persistence changes. Concurrent mistake-review and exercise-combination work is excluded.
+| Verification question | Independent result |
+| --- | --- |
+| Does feedback survive reload? | Chrome retained answer, 1/7 progress and +5 XP. |
+| Does closing/reopening a tab retain progress? | Chrome restored the unfinished lesson and 5 XP. |
+| Do two tabs preserve newer answers? | Second Chrome tab reloaded to 2/7 and disabled answered buttons. |
+| Does logout/re-entry retain progress? | Chrome retained 10 XP and “Ga verder”. |
+| What happens when storage fails? | Regression test verifies warning and recovery of lesson, XP and answer history. |
 
-Storage stays per browser, origin and account. Clearing site data removes local progress. Browser-process shutdown and private-mode shutdown were not directly tested. Unconfirmed pointing previews are not saved answers.
+Delta: stale writes, repeated grading and resurrected drafts now reload before writing. Storage failures show an alert; recovery saves outstanding rewards.
 
-Release validation: all 152 tests pass, production build passes, Wrangler dry run passes, and the isolated local Worker check passes current assets, account identity/session rotation/logout, protected atlas/private files and origin guards. The previously observed curriculum failures are absent from this focused release.
+Revised result: checked scenarios preserve progress. The final persistence cross-check found no additional contradictions; the four full-suite curriculum failures remain unresolved. Browser shutdown itself and private-mode shutdown were not tested. Storage remains per browser, account and origin; clearing site data or changing browser/device removes access to local progress. No server backup exists. Unconfirmed pointing previews are not saved answers.
+
+Stop status: verification complete for these scenarios. The focused persistence release was subsequently validated with 152 passing tests on current main, merged as fe75105 and pushed. Concurrent curriculum work in this checkout remains separate.
+
+Screenshot: `../output/playwright/browser-progress-restored.png`.

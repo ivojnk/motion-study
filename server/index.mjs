@@ -4,6 +4,7 @@ import { resolve, sep, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { progressRequestLimit } from '../shared/progress.mjs';
 import { createAccounts } from './accounts.mjs';
+import { cacheControlFor } from '../shared/cache-control.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.png': 'image/png', '.svg': 'image/svg+xml', '.ico': 'image/vnd.microsoft.icon', '.woff2': 'font/woff2', '.glb': 'model/gltf-binary', '.gltf': 'model/gltf+json', '.bin': 'application/octet-stream', '.wasm': 'application/wasm', '.txt': 'text/plain; charset=utf-8' };
@@ -46,7 +47,7 @@ export async function startServer({ port = 5173, host = '127.0.0.1', origin = `h
       const realRoot = await realpath(distPath);
       const realFile = await realpath(path);
       if (!realFile.startsWith(realRoot + sep) || !(await stat(realFile)).isFile()) { res.writeHead(404); res.end(); return; }
-      res.writeHead(200, { 'Content-Type': types[extname(realFile)] || 'application/octet-stream', 'Cache-Control': 'no-store' });
+      res.writeHead(200, { 'Content-Type': types[extname(realFile)] || 'application/octet-stream', 'Cache-Control': cacheControlFor(pathname, 200) });
       res.end(req.method === 'HEAD' ? undefined : await readFile(realFile));
     } catch (error) {
       res.writeHead(error.code === 'ENOENT' || error instanceof URIError ? 404 : 500);

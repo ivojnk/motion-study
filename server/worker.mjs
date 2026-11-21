@@ -2,6 +2,7 @@ import { DurableObject } from 'cloudflare:workers';
 import { createAccountService } from './account-service.mjs';
 import { progressRequestLimit } from '../shared/progress.mjs';
 import { hasOwnerSession, ownerRoute } from './owner-routes.mjs';
+import { cacheControlFor } from '../shared/cache-control.mjs';
 export { OwnerAuth } from './owner-auth.mjs';
 
 export class Accounts extends DurableObject {
@@ -57,9 +58,10 @@ export class Accounts extends DurableObject {
 export default {
   async fetch(request, env) {
     let response;
+    let pathname = '';
     try {
       const url = new URL(request.url);
-      const pathname = decodeURIComponent(url.pathname);
+      pathname = decodeURIComponent(url.pathname);
       const accounts = env.ACCOUNTS.get(env.ACCOUNTS.idFromName('accounts-v1'));
       if (url.pathname.startsWith('/api/owner/')) {
         response = await ownerRoute(request, env);
@@ -86,7 +88,7 @@ export default {
     secured.headers.set('Referrer-Policy', 'same-origin');
     secured.headers.set('X-Frame-Options', 'DENY');
     secured.headers.set('Strict-Transport-Security', 'max-age=31536000');
-    secured.headers.set('Cache-Control', 'no-store');
+    secured.headers.set('Cache-Control', pathname.startsWith('/api/') ? 'no-store' : cacheControlFor(pathname, secured.status));
     return secured;
   },
 };

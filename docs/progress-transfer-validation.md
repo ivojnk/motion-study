@@ -1,9 +1,7 @@
 # Progress export/import — 6 October 2026
 
-Privacy & opslag exports learning-only JSON and imports it after validation and replacement confirmation. Includes answers, review planning, XP, completed lessons and unfinished drafts. Identity and analytics remain excluded.
+Privacy & opslag now exports learning-only JSON and imports it after validation and replacement confirmation. Includes answers, review planning, XP, completed lessons and unfinished drafts. Account identity and analytics remain excluded.
 
-The original workspace passed 266 tests and both account/static builds. Browser checks verified download/restore, feedback and 5 XP, invalid files, cancellation, keyboard focus, Escape, 320/390/1280px layouts and emulated touch.
+All 266 tests passed. Both production builds passed. Browser checks verified real download/restore, retained feedback and 5 XP, invalid-file rejection, cancellation, keyboard focus, Escape, 320/390/1280px layouts and emulated mobile taps. Failed-write rollback and account isolation have regression coverage.
 
-This release applies the transfer change to current main. The static-edition source remains separate local work. Current-main release validation is recorded below.
-
-Current-main release: all 265 tests pass and the production build passes. Nine transfer regressions cover roundtrip, old keys, clearing, invalid files, failed-write rollback, account scope, confirmation/cancellation, closing during file reading and blocked storage. The release adds no dependency or external asset.
+Screenshots: `output/playwright/progress-transfer-*.png`. No physical-device check or deployment performed.
