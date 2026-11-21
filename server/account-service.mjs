@@ -1,6 +1,7 @@
 import { createHash, randomBytes, randomUUID } from 'node:crypto';
 import { createAnalytics } from './analytics.mjs';
 import { NOTICE_VERSION } from '../shared/legal.mjs';
+import { MAX_PROGRESS_BYTES, validateProgressSnapshot } from '../shared/progress.mjs';
 
 const SESSION_SECONDS = 30 * 24 * 60 * 60;
 const digest = token => createHash('sha256').update(token).digest('hex');
@@ -14,6 +15,7 @@ export function createAccountService({ db, origin, now = Date.now, sessionSecond
     CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, username TEXT NOT NULL UNIQUE, created_at INTEGER NOT NULL);
     CREATE TABLE IF NOT EXISTS sessions (token_hash TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, expires_at INTEGER NOT NULL, created_at INTEGER NOT NULL);
     CREATE INDEX IF NOT EXISTS sessions_expiry ON sessions(expires_at);
+    CREATE TABLE IF NOT EXISTS account_progress (user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE, revision INTEGER NOT NULL, snapshot TEXT NOT NULL, updated_at INTEGER NOT NULL);
   `);
   const sessionColumns = db.prepare('PRAGMA table_info(sessions)').all().map(row => row.name);
   for (const [name, definition] of [['notice_version', "TEXT NOT NULL DEFAULT ''"], ['analytics_allowed', 'INTEGER NOT NULL DEFAULT 0'], ['preferences_updated_at', 'INTEGER NOT NULL DEFAULT 0']]) {
@@ -63,6 +65,39 @@ export function createAccountService({ db, origin, now = Date.now, sessionSecond
       if (!preferencesFor(request).analytics) return json({ recorded: false, disabled: true });
       const result = analytics.record(user, path.slice('/api/usage/'.length), input);
       return json(result, result.status || 200);
+    }
+    if (path === '/api/account/progress') {
+      if (!['GET', 'POST'].includes(request.method)) return json({ error: 'Gebruik GET of POST.' }, 405, { Allow: 'GET, POST' });
+      if (request.headers.get('sec-fetch-site') === 'cross-site' || (request.method === 'POST' && request.headers.get('origin') !== appOrigin)) return json({ error: 'Ongeldig verzoek.' }, 403);
+      const user = userFor(request);
+      if (!user) return json({ error: 'Log opnieuw in.' }, 401);
+      const expectedAccount = request.headers.get('x-motionstudy-account');
+      if (expectedAccount && expectedAccount !== user.id) return json({ error: 'Je account is gewijzigd. Log opnieuw in.' }, 401);
+      const read = () => {
+        const row = db.prepare('SELECT revision, snapshot, updated_at FROM account_progress WHERE user_id = ?').get(user.id);
+        return row ? { revision: row.revision, snapshot: JSON.parse(row.snapshot), updatedAt: row.updated_at } : { revision: 0, snapshot: null, updatedAt: null };
+      };
+      if (request.method === 'GET') return json(read());
+      if (!request.headers.get('content-type')?.startsWith('application/json')) return json({ error: 'Ongeldig verzoek.' }, 415);
+      let input, snapshot;
+      try {
+        const text = await request.text();
+        if (Buffer.byteLength(text) > MAX_PROGRESS_BYTES + 4096) return json({ error: 'Dit verzoek is te groot.' }, 413);
+        input = JSON.parse(text);
+        if (!Number.isSafeInteger(input?.revision) || input.revision < 0) throw new Error('Ongeldige versie.');
+        snapshot = validateProgressSnapshot(input.snapshot);
+      } catch { return json({ error: 'Ongeldige voortgang.' }, 400); }
+      const write = () => {
+        const current = read();
+        if (input.revision !== current.revision && JSON.stringify(snapshot) === JSON.stringify(current.snapshot)) return json({ revision: current.revision, updatedAt: current.updatedAt });
+        if (input.revision !== current.revision) return json({ ...current, error: 'Voortgang is op een ander apparaat gewijzigd.' }, 409);
+        const revision = current.revision + 1;
+        const updatedAt = now();
+        db.prepare('INSERT INTO account_progress (user_id, revision, snapshot, updated_at) VALUES (?, ?, ?, ?) ON CONFLICT(user_id) DO UPDATE SET revision = excluded.revision, snapshot = excluded.snapshot, updated_at = excluded.updated_at').run(user.id, revision, JSON.stringify(snapshot), updatedAt);
+        return json({ revision, updatedAt });
+      };
+      // No await inside this transaction: read/version-check/write are indivisible.
+      return transaction ? transaction(write) : write();
     }
     if (path === '/api/account/session' && request.method === 'GET') return json({ user: userFor(request), preferences: preferencesFor(request) });
     if (!['/api/account/enter', '/api/account/logout', '/api/account/preferences'].includes(path)) return json({ error: 'Deze pagina bestaat niet.' }, 404);

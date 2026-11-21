@@ -6,6 +6,7 @@ import './app-update.css';
 import './legal-ui.css';
 import { setupAppUpdates } from './app-update.js';
 import { setupAppInstall } from './install-app.js';
+import { setupRecoveryLoader } from './recovery-loader.js';
 import { setupLegalInfo } from './legal-ui.js';
 
 setupAppUpdates({ window, document, base: import.meta.env.BASE_URL });
@@ -39,3 +40,10 @@ try {
   status.textContent = 'De app kon niet laden. Controleer je verbinding en vernieuw de pagina.';
   status.setAttribute('role', 'alert');
 }
+
+setupRecoveryLoader({ window, document, restore: async data => {
+  const { restoreStaticRecovery } = await import('./progress-recovery.js');
+  const withLock = action => navigator.locks ? navigator.locks.request('motionstudy-progress', action) : action();
+  await restoreStaticRecovery(localStorage, data, withLock);
+  location.reload();
+} });

@@ -29,3 +29,14 @@
   .legal-dialog { padding: 24px; }
   .legal-dialog h2 { font-size: 26px; }
 }
+
+.recovery-login-button { display: block; margin: 18px auto 0; min-height: 48px; }
+.recovery-list { border: 0; padding: 0; margin: 20px 0; display: grid; gap: 12px; min-width: 0; }
+.recovery-option { display: flex; align-items: flex-start; gap: 12px; padding: 16px; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; min-height: 48px; }
+.recovery-option:has(input:checked) { border-color: var(--accent); background: var(--soft); }
+.recovery-option:focus-within { outline: 3px solid var(--accent); outline-offset: 3px; }
+.recovery-option input { flex: 0 0 auto; margin-top: 4px; accent-color: var(--accent); }
+.recovery-option > span { display: grid; gap: 6px; min-width: 0; font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+.recovery-option strong { font-size: 15px; }
+
+#account-recovery-cancel { min-height: 48px; }
