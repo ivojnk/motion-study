@@ -231,3 +231,35 @@ test('normal startup preserves recovery copies when the current cache already ma
   await f.client(cookie, storage).initialize();
   assert.equal(storage.getItem(RECOVERY_KEY), originalCopy);
 });
+
+test('a device whose copy differs from the server is combined, never overwritten', async t => {
+  const f = fixture(t); const cookie = await f.login();
+  const phone = local(snapshot(1)); await f.client(cookie, phone).initialize();
+  // Something reached this device without passing through the sync (an older app version wrote it).
+  phone.setItem(PROGRESS_KEYS[1], JSON.stringify({ days: { '2026-10-10': 5, '2026-11-18': 60 }, completed: ['basis:3'] }));
+  await f.service.handle(f.request({ revision: 1, snapshot: snapshot(2) }, cookie));
+  const sync = f.client(cookie, phone, { onReload: () => {} }); await sync.initialize(); await sync.refresh();
+  const game = JSON.parse((await (await f.service.handle(f.request(undefined, cookie))).json()).snapshot[PROGRESS_KEYS[1]]);
+  assert.equal(game.days['2026-11-18'], 60); assert.deepEqual(game.completed, ['basis:3']);
+  assert.equal(JSON.parse(phone.getItem(PROGRESS_KEYS[0])).questions['q-1'].attempts, 2);
+});
+
+test('answers given offline stay on the device and upload once the connection is back', async t => {
+  const f = fixture(t); const cookie = await f.login(); const storage = local();
+  let online = true;
+  const sync = f.client(cookie, storage, { fetchImpl: async (_, init) => {
+    if (!online) throw new Error('offline');
+    return f.service.handle(f.request(init.body && JSON.parse(init.body), cookie));
+  } });
+  await sync.initialize();
+  online = false;
+  sync.storage.setItem(PROGRESS_KEYS[0], progress(4));
+  assert.equal(await sync.flush(), false);
+  assert.equal(JSON.parse(storage.getItem(SYNC_KEY)).dirty, true);
+  online = true;
+  await sync.refresh();
+  const remote = (await (await f.service.handle(f.request(undefined, cookie))).json()).snapshot;
+  assert.equal(remote[PROGRESS_KEYS[0]], progress(4));
+  assert.equal(JSON.parse(storage.getItem(SYNC_KEY)).dirty, false);
+  sync.stop();
+});
