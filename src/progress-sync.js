@@ -1,4 +1,4 @@
-import { PROGRESS_KEYS, validateProgressSnapshot } from '../shared/progress.mjs';
+import { PROGRESS_KEYS, mergeProgressSnapshots, validateProgressSnapshot } from '../shared/progress.mjs';
 
 export const SYNC_KEY = 'motionstudy.sync.v1';
 export const RECOVERY_KEY = 'motionstudy.sync.recovery.v1';
@@ -33,7 +33,7 @@ export function createProgressSync({ storage, accountId, initialSnapshot = null,
     const data = await response.json();
     if (!response.ok && response.status !== 409) throw new Error(data.error || 'Opslaan op de server lukt niet.');
     if (!Number.isSafeInteger(data.revision) || data.revision < 0) throw new Error('Ongeldige serverversie.');
-    if (!body || response.status === 409) {
+    if (!body || response.status === 409 || data.merged) {
       if (data.snapshot !== null) data.snapshot = validateProgressSnapshot(data.snapshot);
     }
     return { ...data, conflict: response.status === 409 };
@@ -95,6 +95,17 @@ export function createProgressSync({ storage, accountId, initialSnapshot = null,
       submitted = snapshotOf(storage);
       result = await request({ revision: result.revision, snapshot: submitted });
       if (result.conflict) { onStatus('conflict'); return false; }
+    }
+    if (result.merged) {
+      // The server combined this device with another one. Take the combined copy,
+      // plus anything this device saved while the request was on its way.
+      const local = snapshotOf(storage);
+      const combined = JSON.stringify(local) === JSON.stringify(submitted) ? result.snapshot : mergeProgressSnapshots(result.snapshot, local);
+      const pending = JSON.stringify(combined) !== JSON.stringify(result.snapshot);
+      adopt({ revision: result.revision, snapshot: combined }, pending);
+      onStatus(pending ? 'pending' : 'saved');
+      onReload();
+      return !pending;
     }
     const dirty = JSON.stringify(snapshotOf(storage)) !== JSON.stringify(submitted);
     setMeta({ revision: result.revision, dirty });

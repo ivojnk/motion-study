@@ -1,7 +1,10 @@
 import { createHash, randomBytes, randomUUID } from 'node:crypto';
 import { createAnalytics } from './analytics.mjs';
 import { NOTICE_VERSION } from '../shared/legal.mjs';
-import { MAX_PROGRESS_BYTES, validateProgressSnapshot } from '../shared/progress.mjs';
+import { MAX_PROGRESS_BYTES, mergeProgressSnapshots, validateProgressSnapshot } from '../shared/progress.mjs';
+
+// Earlier server copies kept per account, so a bad save can always be undone.
+const PROGRESS_HISTORY = 20;
 
 const SESSION_SECONDS = 30 * 24 * 60 * 60;
 const digest = token => createHash('sha256').update(token).digest('hex');
@@ -16,6 +19,7 @@ export function createAccountService({ db, origin, now = Date.now, sessionSecond
     CREATE TABLE IF NOT EXISTS sessions (token_hash TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, expires_at INTEGER NOT NULL, created_at INTEGER NOT NULL);
     CREATE INDEX IF NOT EXISTS sessions_expiry ON sessions(expires_at);
     CREATE TABLE IF NOT EXISTS account_progress (user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE, revision INTEGER NOT NULL, snapshot TEXT NOT NULL, updated_at INTEGER NOT NULL);
+    CREATE TABLE IF NOT EXISTS account_progress_history (user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, revision INTEGER NOT NULL, snapshot TEXT NOT NULL, updated_at INTEGER NOT NULL, PRIMARY KEY (user_id, revision));
   `);
   const sessionColumns = db.prepare('PRAGMA table_info(sessions)').all().map(row => row.name);
   for (const [name, definition] of [['notice_version', "TEXT NOT NULL DEFAULT ''"], ['analytics_allowed', 'INTEGER NOT NULL DEFAULT 0'], ['preferences_updated_at', 'INTEGER NOT NULL DEFAULT 0']]) {
@@ -90,11 +94,20 @@ export function createAccountService({ db, origin, now = Date.now, sessionSecond
       const write = () => {
         const current = read();
         if (input.revision !== current.revision && JSON.stringify(snapshot) === JSON.stringify(current.snapshot)) return json({ revision: current.revision, updatedAt: current.updatedAt });
-        if (input.revision !== current.revision) return json({ ...current, error: 'Voortgang is op een ander apparaat gewijzigd.' }, 409);
+        // Another device saved in between: combine both instead of choosing one.
+        let merged = null;
+        if (input.revision !== current.revision) {
+          try { merged = mergeProgressSnapshots(current.snapshot, snapshot); }
+          catch { return json({ ...current, error: 'Voortgang is op een ander apparaat gewijzigd.' }, 409); }
+        }
         const revision = current.revision + 1;
         const updatedAt = now();
-        db.prepare('INSERT INTO account_progress (user_id, revision, snapshot, updated_at) VALUES (?, ?, ?, ?) ON CONFLICT(user_id) DO UPDATE SET revision = excluded.revision, snapshot = excluded.snapshot, updated_at = excluded.updated_at').run(user.id, revision, JSON.stringify(snapshot), updatedAt);
-        return json({ revision, updatedAt });
+        if (current.snapshot) {
+          db.prepare('INSERT OR REPLACE INTO account_progress_history (user_id, revision, snapshot, updated_at) VALUES (?, ?, ?, ?)').run(user.id, current.revision, JSON.stringify(current.snapshot), current.updatedAt);
+          db.prepare('DELETE FROM account_progress_history WHERE user_id = ? AND revision <= ?').run(user.id, current.revision - PROGRESS_HISTORY);
+        }
+        db.prepare('INSERT INTO account_progress (user_id, revision, snapshot, updated_at) VALUES (?, ?, ?, ?) ON CONFLICT(user_id) DO UPDATE SET revision = excluded.revision, snapshot = excluded.snapshot, updated_at = excluded.updated_at').run(user.id, revision, JSON.stringify(merged || snapshot), updatedAt);
+        return json(merged ? { revision, updatedAt, snapshot: merged, merged: true } : { revision, updatedAt });
       };
       // No await inside this transaction: read/version-check/write are indivisible.
       return transaction ? transaction(write) : write();
