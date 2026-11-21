@@ -49,14 +49,17 @@ test('server progress is authenticated, account-isolated, bounded and origin pro
   assert.deepEqual(await (await f.service.handle(f.request(undefined, other))).json(), { revision: 0, snapshot: null, updatedAt: null });
 });
 
-test('server CAS rejects stale snapshots and tolerates a lost successful response', async t => {
+test('a stale save is merged on the server instead of rejected, and a lost response is harmless', async t => {
   const f = fixture(t); const cookie = await f.login();
   assert.equal((await f.service.handle(f.request({ revision: 0, snapshot: snapshot(1) }, cookie))).status, 200);
   const stale = await f.service.handle(f.request({ revision: 0, snapshot: snapshot(2) }, cookie));
-  assert.equal(stale.status, 409);
-  assert.deepEqual((await stale.json()).snapshot, snapshot(1));
-  assert.equal((await f.service.handle(f.request({ revision: 0, snapshot: snapshot(1) }, cookie))).status, 200);
-  assert.equal((await (await f.service.handle(f.request(undefined, cookie))).json()).revision, 1);
+  assert.equal(stale.status, 200);
+  const body = await stale.json();
+  assert.equal(body.merged, true); assert.equal(body.revision, 2);
+  assert.equal(JSON.parse(body.snapshot[PROGRESS_KEYS[0]]).questions['q-1'].attempts, 2);
+  assert.equal(JSON.parse(body.snapshot[PROGRESS_KEYS[1]]).days['2026-10-10'], 10);
+  assert.equal((await f.service.handle(f.request({ revision: 0, snapshot: body.snapshot }, cookie))).status, 200);
+  assert.equal((await (await f.service.handle(f.request(undefined, cookie))).json()).revision, 2);
 });
 
 test('progress survives database restart and a fresh device restores all four keys', async t => {
@@ -107,29 +110,54 @@ test('an empty fresh device never writes over remote progress; offline fresh sta
   await assert.rejects(offline.initialize(), /offline/);
 });
 
-test('conflicting pending local progress is retained on cancel and recoverable when server is chosen', async t => {
-  const f = fixture(t); const cookie = await f.login(); const storage = local(snapshot(1));
-  const first = f.client(cookie, storage); await first.initialize(); first.stop();
-  await f.service.handle(f.request({ revision: 1, snapshot: snapshot(3) }, cookie));
-  storage.setItem(PROGRESS_KEYS[0], progress(2));
-  storage.setItem(SYNC_KEY, JSON.stringify({ revision: 1, dirty: true }));
-  let conflicts = 0;
-  const second = f.client(cookie, storage, { onConflict: async () => { conflicts++; return 'cancel'; } });
-  await second.initialize(); await second.refresh();
-  assert.equal(conflicts, 1); assert.equal(storage.getItem(PROGRESS_KEYS[0]), progress(2)); second.stop();
-  const third = f.client(cookie, storage, { onConflict: async () => 'server' });
-  await third.initialize();
-  assert.equal(storage.getItem(PROGRESS_KEYS[0]), progress(3));
-  assert.equal(JSON.parse(storage.getItem(RECOVERY_KEY))[PROGRESS_KEYS[0]], progress(2));
+test('two devices that both learned something keep everything, with no choice to make', async t => {
+  const f = fixture(t); const cookie = await f.login();
+  const phone = local(snapshot(1)); await f.client(cookie, phone).initialize();
+  const laptop = local(); await f.client(cookie, laptop).initialize();
+  // Each device learns something different before syncing again.
+  phone.setItem(PROGRESS_KEYS[0], JSON.stringify({ questions: { 'q-1': { correct: 4, attempts: 5, due: 300, interval: 2, lastCorrect: true } }, sessions: [{ at: 1, correct: 7, total: 7 }] }));
+  phone.setItem(PROGRESS_KEYS[1], JSON.stringify({ days: { '2026-10-10': 40 }, completed: ['basis:0'] }));
+  phone.setItem(SYNC_KEY, JSON.stringify({ revision: 1, dirty: true }));
+  laptop.setItem(PROGRESS_KEYS[0], JSON.stringify({ questions: { 'q-1': { correct: 1, attempts: 1, due: 100, interval: 1, lastCorrect: true }, 'q-2': { correct: 1, attempts: 1, due: 200, interval: 1, lastCorrect: true } }, sessions: [{ at: 2, correct: 6, total: 7 }] }));
+  laptop.setItem(PROGRESS_KEYS[1], JSON.stringify({ days: { '2026-10-11': 30 }, completed: ['borst:0'] }));
+  laptop.setItem(SYNC_KEY, JSON.stringify({ revision: 1, dirty: true }));
+  let asked = 0; const onConflict = async () => { asked++; return 'cancel'; };
+  await f.client(cookie, phone, { onConflict }).initialize();
+  await f.client(cookie, laptop, { onConflict }).initialize();
+  assert.equal(asked, 0);
+  const remote = (await (await f.service.handle(f.request(undefined, cookie))).json()).snapshot;
+  const learning = JSON.parse(remote[PROGRESS_KEYS[0]]); const game = JSON.parse(remote[PROGRESS_KEYS[1]]);
+  assert.equal(learning.questions['q-1'].attempts, 5); assert.ok(learning.questions['q-2']);
+  assert.equal(learning.sessions.length, 2);
+  assert.deepEqual(game.days, { '2026-10-10': 40, '2026-10-11': 30 });
+  assert.deepEqual(game.completed.sort(), ['basis:0', 'borst:0']);
+  assert.deepEqual(laptop.getItem(PROGRESS_KEYS[1]), remote[PROGRESS_KEYS[1]]);
 });
 
-test('explicit local choice replaces remote using its current revision', async t => {
+test('an empty device signing in first never wipes progress that only lives on an old phone', async t => {
   const f = fixture(t); const cookie = await f.login();
-  await f.client(cookie, local(snapshot(3))).initialize();
-  const storage = local(snapshot(2));
-  await f.client(cookie, storage, { onConflict: async () => 'local' }).initialize();
-  const remote = await (await f.service.handle(f.request(undefined, cookie))).json();
-  assert.equal(remote.revision, 2); assert.deepEqual(remote.snapshot, snapshot(2));
+  const empty = local(); await f.client(cookie, empty).initialize();
+  // A few answers on the new device, saved through the synced storage like the app does.
+  const newDevice = f.client(cookie, empty); await newDevice.initialize();
+  newDevice.storage.setItem(PROGRESS_KEYS[1], JSON.stringify({ days: { '2026-11-21': 5 }, completed: [] }));
+  await newDevice.flush(); newDevice.stop();
+  // The old phone still has 42 lessons that were never uploaded.
+  const phone = local(snapshot(3));
+  phone.setItem(PROGRESS_KEYS[1], JSON.stringify({ days: { '2026-11-17': 300 }, completed: ['basis:0', 'basis:1'] }));
+  await f.client(cookie, phone).initialize();
+  const game = JSON.parse((await (await f.service.handle(f.request(undefined, cookie))).json()).snapshot[PROGRESS_KEYS[1]]);
+  assert.deepEqual(game.completed.sort(), ['basis:0', 'basis:1']);
+  assert.equal(game.days['2026-11-17'], 300); assert.equal(game.days['2026-11-21'], 5);
+});
+
+test('the server keeps earlier copies so any save can be undone', async t => {
+  const f = fixture(t); const cookie = await f.login();
+  let revision = 0;
+  for (let i = 1; i <= 25; i++) revision = (await (await f.service.handle(f.request({ revision, snapshot: snapshot(i) }, cookie))).json()).revision;
+  const rows = f.db.prepare('SELECT revision, snapshot FROM account_progress_history ORDER BY revision').all();
+  assert.equal(rows.length, 20);
+  assert.equal(rows.at(-1).revision, 24);
+  assert.deepEqual(JSON.parse(rows.at(-1).snapshot), snapshot(24));
 });
 
 test('without Web Locks an answer saved during upload stays dirty and is sent next', async t => {
