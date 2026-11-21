@@ -71,6 +71,16 @@ export function createProgressSync({ storage, accountId, initialSnapshot = null,
     writeSnapshot(recovery);
     setMeta({ revision: current.revision, dirty: true });
   }
+  // Take the server copy, but keep anything this device has that the server lacks.
+  function adoptKeepingLocal(remote) {
+    const local = snapshotOf(storage);
+    if (!remote.snapshot || !meaningful(local) || JSON.stringify(local) === JSON.stringify(remote.snapshot)) return adopt(remote) ?? false;
+    let combined;
+    try { combined = mergeProgressSnapshots(remote.snapshot, local); } catch { return adopt(remote) ?? false; }
+    const pending = JSON.stringify(combined) !== JSON.stringify(remote.snapshot);
+    adopt({ revision: remote.revision, snapshot: combined }, pending);
+    return pending;
+  }
   async function upload() {
     if (conflictPaused) return false;
     recoverAdoption();
@@ -142,9 +152,10 @@ export function createProgressSync({ storage, accountId, initialSnapshot = null,
         initialized = true;
         try { await upload(); } catch { onStatus('offline'); }
       } else {
-        adopt(remote);
+        const pending = adoptKeepingLocal(remote);
         initialized = true;
-        onStatus('saved');
+        if (pending) { try { await upload(); } catch { onStatus('offline'); } }
+        else onStatus('saved');
       }
     });
   }
@@ -179,7 +190,11 @@ export function createProgressSync({ storage, accountId, initialSnapshot = null,
       if (meta()?.dirty) return upload();
       const remote = await request();
       if (meta()?.dirty) return upload();
-      if (remote.revision !== meta()?.revision) { adopt(remote); onReload(); }
+      if (remote.revision !== meta()?.revision) {
+        const pending = adoptKeepingLocal(remote);
+        onReload();
+        if (pending) return upload();
+      }
       onStatus('saved');
       return true;
     })).catch(() => { onStatus('offline'); return false; }).finally(() => { inFlight = null; });

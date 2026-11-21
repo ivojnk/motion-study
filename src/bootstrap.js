@@ -102,6 +102,9 @@ async function openApp(user, preferences = {}) {
       const backup = createProgressBackup(local);
       const keys = { progress: 'motionstudy.progress.v1', game: 'motionstudy.game.v2', drafts: 'motionstudy.drafts.v2', session: 'motionstudy.session.v2' };
       for (const [name, key] of Object.entries(keys)) if (!local.getItem(key)) local.setItem(key, JSON.stringify(backup.data[name]));
+      // Moved-over progress from the old version still has to reach the server.
+      const sync = JSON.parse(local.getItem('motionstudy.sync.v1') || 'null');
+      local.setItem('motionstudy.sync.v1', JSON.stringify({ revision: Number.isSafeInteger(sync?.revision) ? sync.revision : 0, dirty: true }));
     }
     let initialSnapshot = null;
     const selectionKey = 'motionstudy.recovery.selection.v1';
