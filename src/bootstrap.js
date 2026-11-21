@@ -21,6 +21,13 @@ setupLegalInfo({ document });
 const $ = selector => document.querySelector(selector);
 let currentUser = null;
 let entering = false;
+let rememberedUsername = '';
+let confirmedNewName = '';
+const typedUsername = () => $('#account-username').value.trim().toLowerCase();
+function hideNewName() {
+  $('#account-new-name').hidden = true;
+  $('#account-submit').hidden = false;
+}
 let progressSync = null;
 let appOpening = false;
 function syncStatus(state) {
@@ -81,7 +88,7 @@ const request = async (path, body) => {
   });
   if (!response.headers.get('content-type')?.includes('application/json')) throw new Error('Inloggen lukt niet. Probeer later opnieuw.');
   const data = await response.json();
-  if (!response.ok) throw new Error(data.error || 'Dat lukt niet. Probeer opnieuw.');
+  if (!response.ok) throw Object.assign(new Error(data.error || 'Dat lukt niet. Probeer opnieuw.'), { data });
   return data;
 };
 function broadcast(user) {
@@ -147,14 +154,23 @@ async function openApp(user, preferences = {}) {
 }
 async function checkSession() {
   try {
-    const { user, preferences } = await request('session');
+    const { user, preferences, remembered } = await request('session');
     if (currentUser && user?.id !== currentUser.id) { $('#main').hidden = true; location.reload(); return; }
     if (user && !currentUser) await openApp(user, preferences);
     else if (!user) {
+      const firstShow = $('#account-form').hidden;
       $('#account-loading').hidden = true;
       $('#account-form').hidden = false;
       $('.recovery-login-button').hidden = false;
-      $('#account-username').focus();
+      if (!firstShow) return;
+      // The server remembers the last name on this device, so returning is one tap.
+      rememberedUsername = remembered?.username || '';
+      if (rememberedUsername && !$('#account-username').value) {
+        $('#account-username').value = rememberedUsername;
+        $('#account-acknowledgement').checked = remembered.acknowledged === true;
+        $('#account-title').textContent = 'Welkom terug';
+        $('#account-submit').focus();
+      } else $('#account-username').focus();
     }
   } catch {
     $('#account-loading').hidden = true;
@@ -174,13 +190,39 @@ $('#account-form').addEventListener('submit', async event => {
   button.textContent = 'Inloggen…';
   $('#account-message').hidden = true;
   try {
-    const { user, preferences } = await request('enter', { username: $('#account-username').value, acknowledged: $('#account-acknowledgement').checked, noticeVersion: NOTICE_VERSION, analytics: $('#account-analytics').checked });
+    const username = typedUsername();
+    const { user, preferences } = await request('enter', { username, create: confirmedNewName === username, acknowledged: $('#account-acknowledgement').checked, noticeVersion: NOTICE_VERSION, analytics: $('#account-analytics').checked });
     broadcast(user);
     await openApp(user, preferences);
     $('#main').focus();
-  } catch (error) { showError(error.message === 'Failed to fetch' ? 'Verbinding mislukt. Probeer opnieuw.' : error.message); }
+  } catch (error) {
+    if (error.data?.unknownUsername) {
+      // Ask before making a new, empty account: usually it's a typo.
+      const name = error.data.username;
+      const earlier = rememberedUsername && rememberedUsername !== name ? ` Op dit apparaat gebruikte je eerder “${rememberedUsername}”.` : '';
+      $('#account-new-name-text').textContent = `“${name}” bestaat nog niet. Wil je een nieuw account maken? Je begint dan zonder voortgang.${earlier}`;
+      $('#account-new-name').hidden = false;
+      $('#account-submit').hidden = true;
+      $('#account-create').dataset.username = name;
+      $('#account-create').focus();
+    } else showError(error.message === 'Failed to fetch' ? 'Verbinding mislukt. Probeer opnieuw.' : error.message);
+  }
   finally { entering = false; button.disabled = false; button.textContent = 'Verder'; for (const recovery of document.querySelectorAll('[data-progress-recovery]')) recovery.disabled = false; }
 });
+$('#account-create').addEventListener('click', () => {
+  confirmedNewName = $('#account-create').dataset.username;
+  if (typedUsername() !== confirmedNewName) { hideNewName(); return; }
+  hideNewName();
+  $('#account-form').requestSubmit();
+});
+$('#account-other-name').addEventListener('click', () => {
+  hideNewName();
+  $('#account-title').textContent = 'Inloggen';
+  $('#account-username').value = rememberedUsername;
+  $('#account-username').focus();
+  $('#account-username').select();
+});
+$('#account-username').addEventListener('input', () => { if (!$('#account-new-name').hidden) hideNewName(); });
 $('#account-logout').addEventListener('click', async () => {
   const button = $('#account-logout');
   button.disabled = true;

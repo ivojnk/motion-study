@@ -15,7 +15,7 @@ function fixture(t, database) {
     method: 'POST', headers: { origin: requestOrigin, 'content-type': 'application/json', ...(cookie ? { cookie } : {}) }, body: JSON.stringify(body),
   }));
   const enter = async (analytics = false) => {
-    const response = await post('account/enter', { username: 'privacy-test', acknowledged: true, noticeVersion: NOTICE_VERSION, analytics });
+    const response = await post('account/enter', { username: 'privacy-test', acknowledged: true, noticeVersion: NOTICE_VERSION, create: true, analytics });
     assert.equal(response.status, 200);
     return { cookie: response.headers.get('set-cookie').split(';')[0], ...(await response.json()) };
   };
